@@ -131,9 +131,12 @@ def parse_monthly_prices(xlsx_bytes: bytes, sheet_name: str = "Monthly Prices") 
     )
 
     # データ先頭行を探す
+    # .astype(str).tolist() は pandas のバージョンによって元の型（float NaN など）が
+    # 漏れることがあるため、要素ごとに str() で強制変換する。
     data_start = None
-    for idx, v in enumerate(df_raw.iloc[:, 0].astype(str).tolist()):
-        if DATE_PATTERN.match(v.strip()):
+    for idx, v in enumerate(df_raw.iloc[:, 0].tolist()):
+        v_str = str(v) if v is not None else ""
+        if DATE_PATTERN.match(v_str.strip()):
             data_start = idx
             break
     if data_start is None:
@@ -143,16 +146,20 @@ def parse_monthly_prices(xlsx_bytes: bytes, sheet_name: str = "Monthly Prices") 
 
     # ヘッダ行の合成: データ先頭より手前の行から、最も意味のある行を品目ヘッダとする。
     # 典型: 直前 2 行目がカテゴリ、直前 1 行目が品目名。2 行を連結して列名を作る。
-    hdr_row_a = df_raw.iloc[max(0, data_start - 3)].astype(str).tolist()
-    hdr_row_b = df_raw.iloc[max(0, data_start - 2)].astype(str).tolist()
-    unit_row = df_raw.iloc[max(0, data_start - 1)].astype(str).tolist()
+    # astype(str) は tolist() で float NaN が漏れるケースがあるので、要素ごとに str() で強制。
+    def _row_as_strs(row) -> list[str]:
+        return [str(x) if x is not None else "" for x in row.tolist()]
+
+    hdr_row_a = _row_as_strs(df_raw.iloc[max(0, data_start - 3)])
+    hdr_row_b = _row_as_strs(df_raw.iloc[max(0, data_start - 2)])
+    unit_row = _row_as_strs(df_raw.iloc[max(0, data_start - 1)])
 
     # 前方埋め: カテゴリ行は結合セルだったことがあるので空欄を左から埋める
     def _ffill(seq: list[str]) -> list[str]:
         out: list[str] = []
         last = ""
         for s in seq:
-            s2 = s.strip()
+            s2 = str(s).strip()
             if s2 and s2.lower() != "nan":
                 last = s2
                 out.append(s2)
