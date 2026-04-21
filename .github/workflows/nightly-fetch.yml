@@ -66,4 +66,13 @@ jobs:
 
       - name: Commit & push if changed
         run: |
-          
+          git config user.name "eic-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            today=$(TZ=Asia/Tokyo date +%Y-%m-%d)
+            git commit -m "nightly: data update ${today}"
+            git push
+          fi
