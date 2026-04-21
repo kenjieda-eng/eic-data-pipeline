@@ -140,14 +140,17 @@ sources:
     series:
       - id: fuel-lng-jp-cif
         name: 日本向け LNG 輸入価格（CIF）
-        match: [Japan, LNG]
+        # Pink Sheet の実際の列名は "Liquefied natural gas, Japan"
+        match: [Liquefied, Japan]
         exclude: []
         region: jp
         unit: USD_per_mmbtu
       - id: fuel-ng-henryhub
         name: 天然ガス（米国, Henry Hub）
-        match: [Natural gas, U.S.]
-        exclude: [index]
+        # "U.S." ではなく "US"（ピリオドなし）が実際の表記。
+        # Natural gas 系列で Europe/Japan/Liquefied/index を除外すれば Henry Hub 列に一意特定。
+        match: [Natural gas, US]
+        exclude: [index, europe, japan, liquefied]
         region: us
         unit: USD_per_mmbtu
       - id: fuel-ng-europe-ttf
