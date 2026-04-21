@@ -1,11 +1,11 @@
 """
 JEPX スポット価格の取得スクリプト。
 
-方針:
-- 一次ソース: https://www.jepx.jp/electricpower/market-data/spot/
-  （HTML を取得して、そこに載っている spot_summary_YYYY.csv リンクを抽出）
-- URL は _download.php?timestamp=... という動的 URL なので、固定値では持たない
-- 抽出できた URL をログに出してから取得
+JEPX のダウンロードは POST フォーム方式:
+    POST https://www.jepx.jp/_download.php
+    body: dir=spot_summary&file=spot_summary_YYYY.csv
+
+ファイル名は年度ごとに決まっているので、年を総当たりして 200 が返ったものを採用する。
 
 出力:
 - data/raw/jepx/spot_summary_YYYY.csv         （生ファイル）
@@ -14,12 +14,12 @@ JEPX スポット価格の取得スクリプト。
 
 デフォルト動作:
     python scripts/fetch_jepx.py
-    → listing_url から見つかった CSV のうち、直近 N 年分（デフォルト 2）
+    → 直近 2 年分を取得
 
 オプション:
     --years N         直近 N 年分を取得（デフォルト 2）
     --year YYYY       特定の 1 年だけ取得
-    --all             listing_url にあるすべての年を取得
+    --all             2005 年以降の全年度を試す
 """
 
 from __future__ import annotations
@@ -27,12 +27,10 @@ from __future__ import annotations
 import argparse
 import io
 import logging
-import re
 import sys
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Iterable
-from urllib.parse import urljoin
 
 import pandas as pd
 import yaml
@@ -40,7 +38,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from scripts.common.http import get  # noqa: E402
+from scripts.common.http import post  # noqa: E402
 from scripts.common.io import (  # noqa: E402
     append_log,
     save_raw,
@@ -56,7 +54,6 @@ logger = logging.getLogger("fetch_jepx")
 SOURCE_KEY = "jepx-spot"
 
 # 元 CSV のエリア列 → 共通スキーマの region コード
-# JEPX の実際の列名に合わせるため、複数バリエーションを許容
 AREA_MAP = {
     "エリアプライス北海道(円/kWh)": "hokkaido",
     "エリアプライス東北(円/kWh)": "tohoku",
@@ -81,127 +78,52 @@ def load_source_map() -> dict:
         return yaml.safe_load(f)
 
 
-def _dump_html_diagnostics(html: str, raw_dir: Path) -> None:
-    """HTML の中身をログと raw ファイルに出す（デバッグ用）。"""
-    # raw ファイルとしても保存（後で Actions の Artifact から落とせるように）
-    diag_path = raw_dir / "_listing_debug.html"
-    raw_dir.mkdir(parents=True, exist_ok=True)
-    diag_path.write_text(html, encoding="utf-8")
-    logger.info("saved listing HTML to %s (%d bytes)", diag_path, len(html))
-
-    logger.info("--- HTML DIAGNOSTICS ---")
-    logger.info("total length: %d chars", len(html))
-
-    # 1) すべての href 値を列挙（最大 30 件）
-    hrefs = re.findall(r'href=["\']([^"\']+)["\']', html)
-    logger.info("found %d href attributes", len(hrefs))
-    for i, h in enumerate(hrefs[:30]):
-        logger.info("  href[%d]: %s", i, h)
-
-    # 2) "csv" を含む部分文字列の周辺 80 文字を抜き出し（最大 15 件）
-    csv_re = re.compile(r".{0,40}\.csv.{0,40}", re.IGNORECASE)
-    csv_hits = csv_re.findall(html)
-    logger.info("found %d occurrences of '.csv'", len(csv_hits))
-    for i, hit in enumerate(csv_hits[:15]):
-        logger.info("  csv[%d]: %s", i, hit.strip())
-
-    # 3) "spot" や "summary" を含む部分
-    for keyword in ("spot_summary", "_download", "summary"):
-        hits = re.findall(r".{0,30}" + keyword + r".{0,60}", html, re.IGNORECASE)
-        logger.info("keyword '%s': %d hits", keyword, len(hits))
-        for i, hit in enumerate(hits[:10]):
-            logger.info("  %s[%d]: %s", keyword, i, hit.strip())
-
-    # 4) <option> タグ（年度選択ドロップダウンがあるかも）
-    options = re.findall(r"<option[^>]*>[^<]*</option>", html, re.IGNORECASE)
-    logger.info("found %d <option> tags", len(options))
-    for i, opt in enumerate(options[:15]):
-        logger.info("  option[%d]: %s", i, opt)
-
-    logger.info("--- END DIAGNOSTICS ---")
-
-
-def extract_csv_links(
-    listing_url: str,
-    filename_pattern: str,
+def download_year(
+    post_url: str,
+    dir_name: str,
+    year: int,
     raw_dir: Path,
-) -> dict[int, str]:
+) -> pd.DataFrame:
     """
-    市場データページの HTML から CSV のダウンロードリンクを抽出する。
-
-    Returns:
-        {year: absolute_url} の dict
+    POST で 1 年分の CSV を取得する。失敗時は空の DataFrame。
     """
-    logger.info("fetching listing page: %s", listing_url)
-    resp = get(listing_url)
-    resp.raise_for_status()
+    filename = f"spot_summary_{year}.csv"
+    logger.info("POST %s dir=%s file=%s", post_url, dir_name, filename)
+    resp = post(post_url, data={"dir": dir_name, "file": filename})
 
-    # JEPX の HTML は UTF-8 が基本。念のため複数試す。
-    html: str | None = None
-    for encoding in ("utf-8", "cp932"):
-        try:
-            html = resp.content.decode(encoding)
-            break
-        except UnicodeDecodeError:
-            continue
-    if html is None:
-        html = resp.text  # 最終手段
-
-    # 1 次パターン: 「href="...spot_summary_YYYY.csv..."」
-    href_re = re.compile(
-        r'href=["\']([^"\']*' + filename_pattern + r'[^"\']*)["\']',
-        re.IGNORECASE,
-    )
-    # 2 次パターン: onclick や data-* などに埋め込まれているケースも拾う
-    generic_re = re.compile(
-        r'["\']([^"\']*' + filename_pattern + r'[^"\']*)["\']',
-        re.IGNORECASE,
-    )
-    year_re = re.compile(r"spot_summary_(\d{4})\.csv", re.IGNORECASE)
-
-    found: dict[int, str] = {}
-
-    def _harvest(regex: re.Pattern) -> None:
-        for m in regex.finditer(html):
-            raw_href = m.group(1)
-            ym = year_re.search(raw_href)
-            if not ym:
-                continue
-            year = int(ym.group(1))
-            found[year] = urljoin(listing_url, raw_href)
-
-    _harvest(href_re)
-    if not found:
-        # href で見つからなければ広域検索
-        _harvest(generic_re)
-
-    if not found:
-        logger.error("no CSV links matched on %s", listing_url)
-        _dump_html_diagnostics(html, raw_dir)
-    else:
-        logger.info(
-            "extracted %d CSV link(s): %s",
-            len(found),
-            ", ".join(f"{y}={u}" for y, u in sorted(found.items())),
+    if resp.status_code >= 400:
+        logger.warning(
+            "year=%d HTTP %d — skipping", year, resp.status_code
         )
-    return found
-
-
-def fetch_csv(url: str, year: int, raw_dir: Path) -> pd.DataFrame:
-    """指定 URL を取得して DataFrame で返す。raw も保存。"""
-    logger.info("fetching year=%d: %s", year, url)
-    resp = get(url)
-    if resp.status_code == 404:
-        logger.warning("year=%d not found (404)", year)
         return pd.DataFrame()
-    resp.raise_for_status()
 
-    save_raw(resp.content, raw_dir, f"spot_summary_{year}.csv")
+    # JEPX はエラー時 HTML を返してくることがあるので、Content-Type や先頭バイトで判定
+    ctype = resp.headers.get("Content-Type", "").lower()
+    head = resp.content[:200]
+    looks_like_html = (
+        b"<html" in head.lower() or b"<!doctype" in head.lower()
+        or "text/html" in ctype
+    )
+    if looks_like_html:
+        logger.warning(
+            "year=%d got HTML response (size=%d, ctype=%s) — treating as not found",
+            year, len(resp.content), ctype,
+        )
+        return pd.DataFrame()
+    if len(resp.content) < 200:
+        logger.warning("year=%d response too small (%d bytes) — skipping",
+                       year, len(resp.content))
+        return pd.DataFrame()
+
+    save_raw(resp.content, raw_dir, filename)
 
     for encoding in ("cp932", "utf-8-sig", "utf-8"):
         try:
             df = pd.read_csv(io.BytesIO(resp.content), encoding=encoding)
-            logger.info("parsed year=%d rows=%d encoding=%s", year, len(df), encoding)
+            logger.info(
+                "parsed year=%d rows=%d encoding=%s",
+                year, len(df), encoding,
+            )
             return df
         except UnicodeDecodeError:
             continue
@@ -267,26 +189,21 @@ def normalize(df: pd.DataFrame, source_url: str) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def pick_years(args: argparse.Namespace, available: Iterable[int]) -> list[int]:
-    available = sorted(set(available))
-    if not available:
-        return []
+def years_to_fetch(args: argparse.Namespace) -> list[int]:
+    now_jst = datetime.now(timezone.utc) + timedelta(hours=9)
+    this_year = now_jst.year
     if args.year:
-        return [args.year] if args.year in available else []
+        return [args.year]
     if args.all:
-        return list(available)
-    # 直近 N 年分
-    return available[-args.years:]
+        return list(range(2005, this_year + 1))
+    return list(range(this_year - args.years + 1, this_year + 1))
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Fetch JEPX spot prices")
-    parser.add_argument("--years", type=int, default=2,
-                        help="直近 N 年分を取得（デフォルト 2）")
-    parser.add_argument("--year", type=int, default=None,
-                        help="特定の 1 年だけ取得（--years より優先）")
-    parser.add_argument("--all", action="store_true",
-                        help="listing_url にあるすべての年を取得")
+    parser.add_argument("--years", type=int, default=2)
+    parser.add_argument("--year", type=int, default=None)
+    parser.add_argument("--all", action="store_true")
     args = parser.parse_args(argv)
 
     cfg = load_source_map()
@@ -296,30 +213,14 @@ def main(argv: list[str] | None = None) -> int:
         logger.error("source_map.yaml に %s が見つかりません", SOURCE_KEY)
         return 2
 
-    listing_url: str = source_cfg["listing_url"]
-    filename_pattern: str = source_cfg.get("filename_pattern", r"spot_summary_\d{4}\.csv")
+    post_url: str = source_cfg["post_url"]
+    dir_name: str = source_cfg["post_dir"]
 
     raw_dir = ROOT / "data" / "raw" / "jepx"
     processed_dir = ROOT / "data" / "processed" / "jepx"
     log_dir = ROOT / "data" / "_logs"
 
-    try:
-        year_to_url = extract_csv_links(listing_url, filename_pattern, raw_dir)
-    except Exception as e:
-        logger.exception("failed to extract CSV links: %s", e)
-        append_log(log_dir, "fetch_jepx", "FAIL", f"listing extraction error: {e}")
-        return 1
-
-    if not year_to_url:
-        append_log(log_dir, "fetch_jepx", "FAIL", "no CSV links found in listing page")
-        return 1
-
-    target_years = pick_years(args, year_to_url.keys())
-    if not target_years:
-        msg = f"no target years after filtering. available={sorted(year_to_url)}"
-        logger.error(msg)
-        append_log(log_dir, "fetch_jepx", "FAIL", msg)
-        return 1
+    target_years = years_to_fetch(args)
     logger.info("target years: %s", target_years)
 
     all_rows: list[pd.DataFrame] = []
@@ -327,9 +228,8 @@ def main(argv: list[str] | None = None) -> int:
     failed_years: list[int] = []
 
     for year in target_years:
-        url = year_to_url[year]
         try:
-            raw_df = fetch_csv(url, year, raw_dir)
+            raw_df = download_year(post_url, dir_name, year, raw_dir)
         except Exception as e:
             logger.exception("fetch failed year=%d: %s", year, e)
             failed_years.append(year)
@@ -338,7 +238,10 @@ def main(argv: list[str] | None = None) -> int:
             failed_years.append(year)
             continue
         try:
-            norm = normalize(raw_df, source_url=url)
+            source_url = (
+                f"{post_url}?dir={dir_name}&file=spot_summary_{year}.csv"
+            )
+            norm = normalize(raw_df, source_url=source_url)
         except Exception as e:
             logger.exception("normalize failed year=%d: %s", year, e)
             failed_years.append(year)
