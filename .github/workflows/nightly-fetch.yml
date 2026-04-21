@@ -57,15 +57,13 @@ jobs:
           fi
         continue-on-error: true
 
+      - name: Fetch World Bank fuel prices (monthly)
+        # 月次データだが、前月値の確定がズレるため毎日叩いて差分更新する。
+        # XLSX を 1 回 DL して 7 系列を一括処理するため所要時間は短い（1 分未満）。
+        run: |
+          python scripts/fetch_fuel.py
+        continue-on-error: true
+
       - name: Commit & push if changed
         run: |
-          git config user.name "eic-data-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add data/
-          if git diff --cached --quiet; then
-            echo "no changes"
-          else
-            today=$(TZ=Asia/Tokyo date +%Y-%m-%d)
-            git commit -m "nightly: data update ${today}"
-            git push
-          fi
+          

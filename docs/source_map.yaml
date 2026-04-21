@@ -118,3 +118,80 @@ sources:
       - `--all` 指定時は 2012-01 から現在まで。通常は直近 2 ヶ月分のみ取り直し（差分更新）。
       - 観測点コード（prec_no, block_no）は公式の「地点の情報」ページで確認済みのものを採用。初回ラン時にページ到達失敗が出たら修正する。
       - 当該年の CSV は年内更新型（追記される）ため、当該年と前年の 2 ファイルを取得すれば最新まで揃う。
+
+  wb-pink-sheet:
+    name: World Bank Commodity Prices (Pink Sheet) — 月次
+    publisher: The World Bank Group
+    publisher_url: https://www.worldbank.org/en/research/commodity-markets
+    # 単一の安定 XLSX URL（"CMO-Historical-Data-Monthly"）。
+    # World Bank は数年単位でこの URL を引っ越す履歴があるため fallback_urls を併記しておく。
+    xlsx_url: "https://thedocs.worldbank.org/en/doc/18675f1d1639c7a34d463f59263ba0a2-0050012025/related/CMO-Historical-Data-Monthly.xlsx"
+    fallback_urls:
+      - "https://pubdocs.worldbank.org/en/561011486076393416/CMO-Historical-Data-Monthly.xlsx"
+      - "https://thedocs.worldbank.org/en/doc/561011486076393416-0050022017/CMO-Historical-Data-Monthly"
+    sheet_name: "Monthly Prices"
+    license: |
+      World Bank Open Data: Creative Commons Attribution 4.0 International (CC BY 4.0)
+      出典明示を条件に自由利用可（再配布・商用可）。
+      参考: https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets
+    frequency: monthly
+    # 各系列は wide 形式の Excel 列を部分一致で引くためのキーワード定義。
+    # match: すべて含む AND 条件、exclude: いずれかに含まれたら除外。
+    series:
+      - id: fuel-lng-jp-cif
+        name: 日本向け LNG 輸入価格（CIF）
+        match: [Japan, LNG]
+        exclude: []
+        region: jp
+        unit: USD_per_mmbtu
+      - id: fuel-ng-henryhub
+        name: 天然ガス（米国, Henry Hub）
+        match: [Natural gas, U.S.]
+        exclude: [index]
+        region: us
+        unit: USD_per_mmbtu
+      - id: fuel-ng-europe-ttf
+        name: 天然ガス（欧州, TTF）
+        match: [Natural gas, Europe]
+        exclude: [index]
+        region: eu
+        unit: USD_per_mmbtu
+      - id: fuel-crude-brent
+        name: 原油（Brent）
+        match: [Crude oil, Brent]
+        exclude: []
+        region: eu
+        unit: USD_per_bbl
+      - id: fuel-crude-dubai
+        name: 原油（Dubai）
+        match: [Crude oil, Dubai]
+        exclude: []
+        region: me
+        unit: USD_per_bbl
+      - id: fuel-crude-wti
+        name: 原油（WTI）
+        match: [Crude oil, WTI]
+        exclude: []
+        region: us
+        unit: USD_per_bbl
+      - id: fuel-coal-au
+        name: 石炭（豪州）
+        match: [Coal, Australian]
+        exclude: []
+        region: au
+        unit: USD_per_mt
+    indicator_ids:
+      - fuel-lng-jp-cif
+      - fuel-ng-henryhub
+      - fuel-ng-europe-ttf
+      - fuel-crude-brent
+      - fuel-crude-dubai
+      - fuel-crude-wti
+      - fuel-coal-au
+    notes: |
+      - 月次データ、日付は「月初日（YYYY-MM-01）」で正規化。
+      - 1960-01 から現在まで。翌月上旬に前月値が確定（遅延約 1 ヶ月）。
+      - 列ヘッダは年度で表記が揺れるため、部分一致（match / exclude）で列を探す設計。
+        もし初回ランで series が見つからなければ、Excel を開いて実際の列名を確認し match を微調整する。
+      - シート名が "Monthly Prices" でないバージョンに当たった場合は sheet_name を更新する。
+      - 価格単位の混在: $/mmbtu（天然ガス）, $/bbl（原油）, $/mt（石炭）。indicator ごとに unit を持つ。

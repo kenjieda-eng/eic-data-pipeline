@@ -3,3 +3,4 @@ pandas>=2.0
 pyarrow>=14.0
 PyYAML>=6.0
 beautifulsoup4>=4.12
+openpyxl>=3.1
