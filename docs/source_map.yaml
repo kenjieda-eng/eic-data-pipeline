@@ -1,0 +1,46 @@
+# source_map.yaml
+# 指標 ID → 一次ソース URL の対応表（機械可読）
+#
+# 各エントリは fetch_*.py スクリプトから読まれる。
+# license フィールドは DATA_LICENSE.md の「一次ソース優先」原則の根拠資料。
+
+version: 1
+
+sources:
+  jepx-spot:
+    name: JEPX スポット価格（日次サマリ）
+    publisher: 一般社団法人 日本卸電力取引所 (JEPX)
+    publisher_url: https://www.jepx.jp/
+    # JEPX の年次サマリ CSV。年単位で 1 ファイルが提供される。
+    # ファイル名は年で切り替わる: spot_summary_YYYY.csv
+    url_template: https://www.jepx.jp/js/csv/spot_summary_{year}.csv
+    license: |
+      JEPX 公開データ。再配布・引用は出典明示を条件に可。
+      参考: https://www.jepx.jp/electricpower/index.html
+    frequency: daily
+    columns:
+      # 元 CSV の列構造（参考）
+      - 受渡日
+      - 時間コード (1-48)
+      - 売り入札量(kWh)
+      - 買い入札量(kWh)
+      - 約定総量(kWh)
+      - システムプライス(円/kWh)
+      - エリアプライス_北海道
+      - エリアプライス_東北
+      - エリアプライス_東京
+      - エリアプライス_中部
+      - エリアプライス_北陸
+      - エリアプライス_関西
+      - エリアプライス_中国
+      - エリアプライス_四国
+      - エリアプライス_九州
+    indicator_ids:
+      # このソースから派生する indicator_id 一覧
+      - jepx-spot-system        # システムプライス（日次平均、円/kWh）
+      - jepx-spot-tokyo         # 東京エリア日次平均
+      - jepx-spot-kansai        # 関西エリア日次平均
+      - jepx-spot-kyushu        # 九州エリア日次平均
+    notes: |
+      - 1 日 = 48 コマ（30 分単位）。日次平均は 48 コマの単純平均で算出。
+      - 当該年の CSV は年内更新型（追記される）ため、当該年と前年の 2 ファイルを取得すれば最新まで揃う。
