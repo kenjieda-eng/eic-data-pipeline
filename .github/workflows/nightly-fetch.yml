@@ -17,7 +17,8 @@ permissions:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # backfill 時は JMA が 9 地点 × 180 ヶ月 = 1,620 リクエストで 40 分強かかるため 90 分確保
+    timeout-minutes: 90
 
     steps:
       - name: Checkout
@@ -45,10 +46,16 @@ jobs:
           fi
         continue-on-error: true
 
-      # 今後ソースが増えたらここに step を追加する
-      # - name: Fetch JMA
-      #   run: python scripts/fetch_jma.py
-      #   continue-on-error: true
+      - name: Fetch JMA daily temperature
+        run: |
+          if [ "${{ inputs.backfill }}" = "true" ]; then
+            echo "backfill mode: fetching all months from 2012-01"
+            python scripts/fetch_jma.py --all
+          else
+            echo "normal mode: fetching last 2 months"
+            python scripts/fetch_jma.py
+          fi
+        continue-on-error: true
 
       - name: Commit & push if changed
         run: |

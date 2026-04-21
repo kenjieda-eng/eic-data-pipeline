@@ -48,4 +48,73 @@ sources:
       - jepx-spot-kyushu        # 九州エリア日次平均
     notes: |
       - 1 日 = 48 コマ（30 分単位）。日次平均は 48 コマの単純平均で算出。
+
+  jma-temp:
+    name: 気象庁 日次気温（9 エリア代表観測点）
+    publisher: 気象庁
+    publisher_url: https://www.data.jma.go.jp/
+    # 静的 HTML 月次ページ（候補 B）。
+    # 気象官署（daily_s1.php）系統のみ使用。アメダス専用点（daily_a1.php）は今回対象外。
+    page_url_template: "https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no={prec_no}&block_no={block_no}&year={year}&month={month}&day=&view="
+    encoding: shift_jis
+    table_class: data2_s
+    # テーブル内の列位置（0-indexed）。気象官署 日ごとの値 の標準レイアウトを想定。
+    # ヘッダ行が 2 段 merged なので、データ行の td インデックスで指定する。
+    columns:
+      day: 0
+      temp_avg: 6
+      temp_max: 7
+      temp_min: 8
+    stations:
+      hokkaido: { name: 札幌, prec_no: 14, block_no: 47412 }
+      tohoku:   { name: 仙台, prec_no: 34, block_no: 47590 }
+      tokyo:    { name: 東京, prec_no: 44, block_no: 47662 }
+      chubu:    { name: 名古屋, prec_no: 51, block_no: 47636 }
+      hokuriku: { name: 金沢, prec_no: 56, block_no: 47605 }
+      kansai:   { name: 大阪, prec_no: 62, block_no: 47772 }
+      chugoku:  { name: 広島, prec_no: 67, block_no: 47765 }
+      shikoku:  { name: 高松, prec_no: 72, block_no: 47891 }
+      kyushu:   { name: 福岡, prec_no: 82, block_no: 47807 }
+    items:
+      - { key: temp_avg, id_prefix: jma-temp-avg, ja: 日平均気温, unit: ℃ }
+      - { key: temp_max, id_prefix: jma-temp-max, ja: 日最高気温, unit: ℃ }
+      - { key: temp_min, id_prefix: jma-temp-min, ja: 日最低気温, unit: ℃ }
+    license: |
+      気象庁ホームページのコンテンツの利用について（https://www.jma.go.jp/jma/kishou/info/coment.html）
+      出典明示を条件に自由利用可。再配布時は出典と編集加工の有無を明示する。
+    frequency: daily
+    indicator_ids:
+      # 9 エリア × 3 項目 = 27 系列
+      - jma-temp-avg-hokkaido
+      - jma-temp-avg-tohoku
+      - jma-temp-avg-tokyo
+      - jma-temp-avg-chubu
+      - jma-temp-avg-hokuriku
+      - jma-temp-avg-kansai
+      - jma-temp-avg-chugoku
+      - jma-temp-avg-shikoku
+      - jma-temp-avg-kyushu
+      - jma-temp-max-hokkaido
+      - jma-temp-max-tohoku
+      - jma-temp-max-tokyo
+      - jma-temp-max-chubu
+      - jma-temp-max-hokuriku
+      - jma-temp-max-kansai
+      - jma-temp-max-chugoku
+      - jma-temp-max-shikoku
+      - jma-temp-max-kyushu
+      - jma-temp-min-hokkaido
+      - jma-temp-min-tohoku
+      - jma-temp-min-tokyo
+      - jma-temp-min-chubu
+      - jma-temp-min-hokuriku
+      - jma-temp-min-kansai
+      - jma-temp-min-chugoku
+      - jma-temp-min-shikoku
+      - jma-temp-min-kyushu
+    notes: |
+      - 月単位の HTML ページから日次テーブルを抽出する方式。
+      - 欠測記号 `///`, `--`, `)`, `×`, 空文字を NaN として扱う。
+      - `--all` 指定時は 2012-01 から現在まで。通常は直近 2 ヶ月分のみ取り直し（差分更新）。
+      - 観測点コード（prec_no, block_no）は公式の「地点の情報」ページで確認済みのものを採用。初回ラン時にページ到達失敗が出たら修正する。
       - 当該年の CSV は年内更新型（追記される）ため、当該年と前年の 2 ファイルを取得すれば最新まで揃う。
