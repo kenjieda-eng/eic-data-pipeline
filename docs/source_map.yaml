@@ -12,11 +12,12 @@ sources:
     publisher: 一般社団法人 日本卸電力取引所 (JEPX)
     publisher_url: https://www.jepx.jp/
     market_page: https://www.jepx.jp/electricpower/market-data/spot/
-    # JEPX のダウンロードは POST フォーム方式。
-    # action=/_download.php に POST で dir + file を送る。
+    # ダウンロードは POST フォーム方式。
+    # セッション Cookie + Referer + X-Requested-With が必要と推定。
     post_url: https://www.jepx.jp/_download.php
     post_dir: spot_summary
-    # 取得対象ファイル名の雛形
+    # ファイル名リストが定義されている JS
+    js_url: https://www.jepx.jp/js/spot_summary.js
     filename_template: 'spot_summary_{year}.csv'
     license: |
       JEPX 公開データ。再配布・引用は出典明示を条件に可。
