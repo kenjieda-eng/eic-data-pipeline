@@ -81,9 +81,50 @@ def load_source_map() -> dict:
         return yaml.safe_load(f)
 
 
+def _dump_html_diagnostics(html: str, raw_dir: Path) -> None:
+    """HTML の中身をログと raw ファイルに出す（デバッグ用）。"""
+    # raw ファイルとしても保存（後で Actions の Artifact から落とせるように）
+    diag_path = raw_dir / "_listing_debug.html"
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    diag_path.write_text(html, encoding="utf-8")
+    logger.info("saved listing HTML to %s (%d bytes)", diag_path, len(html))
+
+    logger.info("--- HTML DIAGNOSTICS ---")
+    logger.info("total length: %d chars", len(html))
+
+    # 1) すべての href 値を列挙（最大 30 件）
+    hrefs = re.findall(r'href=["\']([^"\']+)["\']', html)
+    logger.info("found %d href attributes", len(hrefs))
+    for i, h in enumerate(hrefs[:30]):
+        logger.info("  href[%d]: %s", i, h)
+
+    # 2) "csv" を含む部分文字列の周辺 80 文字を抜き出し（最大 15 件）
+    csv_re = re.compile(r".{0,40}\.csv.{0,40}", re.IGNORECASE)
+    csv_hits = csv_re.findall(html)
+    logger.info("found %d occurrences of '.csv'", len(csv_hits))
+    for i, hit in enumerate(csv_hits[:15]):
+        logger.info("  csv[%d]: %s", i, hit.strip())
+
+    # 3) "spot" や "summary" を含む部分
+    for keyword in ("spot_summary", "_download", "summary"):
+        hits = re.findall(r".{0,30}" + keyword + r".{0,60}", html, re.IGNORECASE)
+        logger.info("keyword '%s': %d hits", keyword, len(hits))
+        for i, hit in enumerate(hits[:10]):
+            logger.info("  %s[%d]: %s", keyword, i, hit.strip())
+
+    # 4) <option> タグ（年度選択ドロップダウンがあるかも）
+    options = re.findall(r"<option[^>]*>[^<]*</option>", html, re.IGNORECASE)
+    logger.info("found %d <option> tags", len(options))
+    for i, opt in enumerate(options[:15]):
+        logger.info("  option[%d]: %s", i, opt)
+
+    logger.info("--- END DIAGNOSTICS ---")
+
+
 def extract_csv_links(
     listing_url: str,
     filename_pattern: str,
+    raw_dir: Path,
 ) -> dict[int, str]:
     """
     市場データページの HTML から CSV のダウンロードリンクを抽出する。
@@ -106,27 +147,37 @@ def extract_csv_links(
     if html is None:
         html = resp.text  # 最終手段
 
-    # 「href="...spot_summary_YYYY.csv..."」を含むリンクを全部抽出
-    # _download.php?...file=spot_summary_YYYY.csv 形式と、直接リンク両対応
+    # 1 次パターン: 「href="...spot_summary_YYYY.csv..."」
     href_re = re.compile(
         r'href=["\']([^"\']*' + filename_pattern + r'[^"\']*)["\']',
+        re.IGNORECASE,
+    )
+    # 2 次パターン: onclick や data-* などに埋め込まれているケースも拾う
+    generic_re = re.compile(
+        r'["\']([^"\']*' + filename_pattern + r'[^"\']*)["\']',
         re.IGNORECASE,
     )
     year_re = re.compile(r"spot_summary_(\d{4})\.csv", re.IGNORECASE)
 
     found: dict[int, str] = {}
-    for m in href_re.finditer(html):
-        href = m.group(1)
-        ym = year_re.search(href)
-        if not ym:
-            continue
-        year = int(ym.group(1))
-        abs_url = urljoin(listing_url, href)
-        # 同じ年の URL が複数あったら最後を採用
-        found[year] = abs_url
+
+    def _harvest(regex: re.Pattern) -> None:
+        for m in regex.finditer(html):
+            raw_href = m.group(1)
+            ym = year_re.search(raw_href)
+            if not ym:
+                continue
+            year = int(ym.group(1))
+            found[year] = urljoin(listing_url, raw_href)
+
+    _harvest(href_re)
+    if not found:
+        # href で見つからなければ広域検索
+        _harvest(generic_re)
 
     if not found:
         logger.error("no CSV links matched on %s", listing_url)
+        _dump_html_diagnostics(html, raw_dir)
     else:
         logger.info(
             "extracted %d CSV link(s): %s",
@@ -253,7 +304,7 @@ def main(argv: list[str] | None = None) -> int:
     log_dir = ROOT / "data" / "_logs"
 
     try:
-        year_to_url = extract_csv_links(listing_url, filename_pattern)
+        year_to_url = extract_csv_links(listing_url, filename_pattern, raw_dir)
     except Exception as e:
         logger.exception("failed to extract CSV links: %s", e)
         append_log(log_dir, "fetch_jepx", "FAIL", f"listing extraction error: {e}")
