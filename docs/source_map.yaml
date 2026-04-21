@@ -12,8 +12,11 @@ sources:
     publisher: 一般社団法人 日本卸電力取引所 (JEPX)
     publisher_url: https://www.jepx.jp/
     # JEPX の年次サマリ CSV。年単位で 1 ファイルが提供される。
-    # ファイル名は年で切り替わる: spot_summary_YYYY.csv
-    url_template: https://www.jepx.jp/js/csv/spot_summary_{year}.csv
+    # URL は動的（_download.php に timestamp パラメータが付く）ので、
+    # 市場データページ HTML から CSV リンクを抽出して取得する。
+    listing_url: https://www.jepx.jp/electricpower/market-data/spot/
+    # 抽出対象のファイル名パターン
+    filename_pattern: 'spot_summary_\d{4}\.csv'
     license: |
       JEPX 公開データ。再配布・引用は出典明示を条件に可。
       参考: https://www.jepx.jp/electricpower/index.html
