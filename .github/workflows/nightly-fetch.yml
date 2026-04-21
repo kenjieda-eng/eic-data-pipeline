@@ -4,7 +4,12 @@ on:
   schedule:
     # JST 8:00 = UTC 23:00（前日）
     - cron: "0 23 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      backfill:
+        description: "Backfill: 取得可能な全年を取りに行く（通常は直近 2 年のみ）"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -30,7 +35,14 @@ jobs:
           pip install -r requirements.txt
 
       - name: Fetch JEPX spot prices
-        run: python scripts/fetch_jepx.py
+        run: |
+          if [ "${{ inputs.backfill }}" = "true" ]; then
+            echo "backfill mode: fetching all available years"
+            python scripts/fetch_jepx.py --all
+          else
+            echo "normal mode: fetching last 2 years"
+            python scripts/fetch_jepx.py
+          fi
         continue-on-error: true
 
       # 今後ソースが増えたらここに step を追加する

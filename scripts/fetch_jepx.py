@@ -21,11 +21,16 @@ import io
 import logging
 import re
 import sys
+import time
 from pathlib import Path
 from typing import Iterable
 
 import pandas as pd
 import yaml
+
+# 連続取得時、JEPX サーバに配慮して挟むスリープ秒数。
+# 通常の nightly は 2 年分だけなので影響ゼロ、--all の 20 年分で約 1 分追加。
+SLEEP_BETWEEN_YEARS = 3
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -290,7 +295,10 @@ def main(argv: list[str] | None = None) -> int:
     fetched_years: list[int] = []
     failed_years: list[int] = []
 
-    for year in target_years:
+    for i, year in enumerate(target_years):
+        if i > 0 and SLEEP_BETWEEN_YEARS > 0:
+            logger.info("sleeping %ds before next year (server courtesy)", SLEEP_BETWEEN_YEARS)
+            time.sleep(SLEEP_BETWEEN_YEARS)
         filename = year_to_file[year]
         try:
             raw_df = download_year(
