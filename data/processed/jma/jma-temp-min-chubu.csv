@@ -50,3 +50,4 @@ date,indicator_id,region,value,source_url
 2026-04-18,jma-temp-min-chubu,chubu,12.4,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
 2026-04-19,jma-temp-min-chubu,chubu,14.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
 2026-04-20,jma-temp-min-chubu,chubu,16.3,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
+2026-04-21,jma-temp-min-chubu,chubu,13.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
