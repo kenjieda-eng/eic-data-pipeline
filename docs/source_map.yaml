@@ -170,6 +170,9 @@ sources:
       temp_avg: 6
       temp_max: 7
       temp_min: 8
+      wind_avg: 11      # 風速 平均（m/s）
+      sunshine: 16      # 日照時間（h）
+      snow_max: 18      # 最深積雪（cm）
     stations:
       hokkaido: { name: 札幌, prec_no: 14, block_no: 47412 }
       tohoku:   { name: 仙台, prec_no: 34, block_no: 47590 }
@@ -185,6 +188,9 @@ sources:
       - { key: temp_max, id_prefix: jma-temp-max, ja: 日最高気温, unit: ℃, aggregation: daily_max }
       - { key: temp_min, id_prefix: jma-temp-min, ja: 日最低気温, unit: ℃, aggregation: daily_min }
       - { key: precip,   id_prefix: jma-precip,   ja: 日降水量合計, unit: mm, aggregation: daily_sum }
+      - { key: sunshine, id_prefix: jma-sunshine, ja: 日照時間, unit: h, aggregation: daily_sum }
+      - { key: wind_avg, id_prefix: jma-wind-avg, ja: 日平均風速, unit: "m/s", aggregation: daily_mean }
+      - { key: snow_max, id_prefix: jma-snow-max, ja: 最深積雪, unit: cm, aggregation: daily_max }
     license_text: |
       気象庁ホームページのコンテンツの利用について（https://www.jma.go.jp/jma/kishou/info/coment.html）
       出典明示を条件に自由利用可。再配布時は出典と編集加工の有無を明示する。
@@ -227,6 +233,34 @@ sources:
       - jma-precip-chugoku
       - jma-precip-shikoku
       - jma-precip-kyushu
+      # --- Phase 2-C 追加 27 系列（日照・風速・積雪） ---
+      - jma-sunshine-hokkaido
+      - jma-sunshine-tohoku
+      - jma-sunshine-tokyo
+      - jma-sunshine-chubu
+      - jma-sunshine-hokuriku
+      - jma-sunshine-kansai
+      - jma-sunshine-chugoku
+      - jma-sunshine-shikoku
+      - jma-sunshine-kyushu
+      - jma-wind-avg-hokkaido
+      - jma-wind-avg-tohoku
+      - jma-wind-avg-tokyo
+      - jma-wind-avg-chubu
+      - jma-wind-avg-hokuriku
+      - jma-wind-avg-kansai
+      - jma-wind-avg-chugoku
+      - jma-wind-avg-shikoku
+      - jma-wind-avg-kyushu
+      - jma-snow-max-hokkaido
+      - jma-snow-max-tohoku
+      - jma-snow-max-tokyo
+      - jma-snow-max-chubu
+      - jma-snow-max-hokuriku
+      - jma-snow-max-kansai
+      - jma-snow-max-chugoku
+      - jma-snow-max-shikoku
+      - jma-snow-max-kyushu
     # D-011 準拠の indicator 固有メタデータ（36 系列 = 9 地点 × 4 項目：平均/最高/最低 気温 + 降水量）
     indicators:
       # --- 日平均気温（9 地点）---
@@ -269,6 +303,36 @@ sources:
       jma-precip-chugoku:    { name: "広島 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 広島", depends_on: null }
       jma-precip-shikoku:    { name: "高松 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 高松", depends_on: null }
       jma-precip-kyushu:     { name: "福岡 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 福岡。九州北部豪雨の素材", depends_on: null }
+      # --- 日照時間（9 地点）---
+      jma-sunshine-hokkaido: { name: "札幌 日照時間",       domain: weather, unit: "h",  backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 札幌。太陽光発電の発電量の素材指標", depends_on: null }
+      jma-sunshine-tohoku:   { name: "仙台 日照時間",       domain: weather, unit: "h",  backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 仙台", depends_on: null }
+      jma-sunshine-tokyo:    { name: "東京 日照時間",       domain: weather, unit: "h",  backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 東京。首都圏太陽光の基準点", depends_on: null }
+      jma-sunshine-chubu:    { name: "名古屋 日照時間",     domain: weather, unit: "h",  backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 名古屋", depends_on: null }
+      jma-sunshine-hokuriku: { name: "金沢 日照時間",       domain: weather, unit: "h",  backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 金沢。冬季の雲量の逆指標", depends_on: null }
+      jma-sunshine-kansai:   { name: "大阪 日照時間",       domain: weather, unit: "h",  backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 大阪", depends_on: null }
+      jma-sunshine-chugoku:  { name: "広島 日照時間",       domain: weather, unit: "h",  backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 広島。中国地方の太陽光比率が高いエリアの基準", depends_on: null }
+      jma-sunshine-shikoku:  { name: "高松 日照時間",       domain: weather, unit: "h",  backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 高松。四国の太陽光適地", depends_on: null }
+      jma-sunshine-kyushu:   { name: "福岡 日照時間",       domain: weather, unit: "h",  backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 福岡。九州太陽光の基準", depends_on: null }
+      # --- 日平均風速（9 地点）---
+      jma-wind-avg-hokkaido: { name: "札幌 日平均風速",     domain: weather, unit: "m/s", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 札幌。洋上風力を含む北海道の風況の参考指標", depends_on: null }
+      jma-wind-avg-tohoku:   { name: "仙台 日平均風速",     domain: weather, unit: "m/s", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 仙台", depends_on: null }
+      jma-wind-avg-tokyo:    { name: "東京 日平均風速",     domain: weather, unit: "m/s", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 東京", depends_on: null }
+      jma-wind-avg-chubu:    { name: "名古屋 日平均風速",   domain: weather, unit: "m/s", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 名古屋", depends_on: null }
+      jma-wind-avg-hokuriku: { name: "金沢 日平均風速",     domain: weather, unit: "m/s", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 金沢。日本海側の冬の季節風の強度", depends_on: null }
+      jma-wind-avg-kansai:   { name: "大阪 日平均風速",     domain: weather, unit: "m/s", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 大阪", depends_on: null }
+      jma-wind-avg-chugoku:  { name: "広島 日平均風速",     domain: weather, unit: "m/s", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 広島", depends_on: null }
+      jma-wind-avg-shikoku:  { name: "高松 日平均風速",     domain: weather, unit: "m/s", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 高松", depends_on: null }
+      jma-wind-avg-kyushu:   { name: "福岡 日平均風速",     domain: weather, unit: "m/s", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 福岡", depends_on: null }
+      # --- 最深積雪（9 地点）---
+      jma-snow-max-hokkaido: { name: "札幌 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 札幌。冬季除雪コスト・暖房需要の素材", depends_on: null }
+      jma-snow-max-tohoku:   { name: "仙台 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 仙台", depends_on: null }
+      jma-snow-max-tokyo:    { name: "東京 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 東京。大雪時の首都圏交通麻痺イベント指標", depends_on: null }
+      jma-snow-max-chubu:    { name: "名古屋 最深積雪",     domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 名古屋", depends_on: null }
+      jma-snow-max-hokuriku: { name: "金沢 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 金沢。北陸の豪雪＝春先の水力発電の素材", depends_on: null }
+      jma-snow-max-kansai:   { name: "大阪 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 大阪。ほぼゼロだが寒波イベント記録用", depends_on: null }
+      jma-snow-max-chugoku:  { name: "広島 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 広島", depends_on: null }
+      jma-snow-max-shikoku:  { name: "高松 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 高松", depends_on: null }
+      jma-snow-max-kyushu:   { name: "福岡 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 福岡", depends_on: null }
     notes: |
       - 月単位の HTML ページから日次テーブルを抽出する方式。
       - 欠測記号 `///`, `--`, `)`, `×`, 空文字を NaN として扱う。
