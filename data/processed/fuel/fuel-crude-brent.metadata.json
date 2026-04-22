@@ -1,0 +1,21 @@
+{
+  "id": "fuel-crude-brent",
+  "name": "原油 Brent",
+  "domain": "fuel",
+  "frequency": "monthly",
+  "unit": "$/bbl",
+  "source_name": "World Bank Commodity Prices (Pink Sheet) — 月次",
+  "source_url": "https://www.worldbank.org/en/research/commodity-markets",
+  "license": "CC-BY-4.0",
+  "observation_cutoff": "2025-12-01",
+  "updated_at": "2026-04-22T18:39:29+09:00",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "license_notice": "",
+  "tz": "UTC",
+  "missing_policy": "forward_fill_within_month",
+  "backfill_start": "1960-01-01",
+  "publisher": "The World Bank Group",
+  "aggregation": "raw",
+  "notes": "Crude oil, Brent（Pink Sheet）",
+  "depends_on": null
+}

@@ -1,0 +1,21 @@
+{
+  "id": "jepx-spot-kansai",
+  "name": "JEPX スポット 関西エリアプライス",
+  "domain": "power",
+  "frequency": "daily",
+  "unit": "¥/kWh",
+  "source_name": "JEPX スポット価格（日次サマリ）",
+  "source_url": "https://www.jepx.jp/electricpower/market-data/spot/",
+  "license": "jepx-terms",
+  "observation_cutoff": "2026-04-23",
+  "updated_at": "2026-04-22T18:38:56+09:00",
+  "license_url": "https://www.jepx.jp/electricpower/index.html",
+  "license_notice": "",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2005-04-01",
+  "publisher": "一般社団法人 日本卸電力取引所 (JEPX)",
+  "aggregation": "daily_mean",
+  "notes": "関西電力管内の日次平均約定価格",
+  "depends_on": null
+}

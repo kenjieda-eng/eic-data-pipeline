@@ -1,0 +1,21 @@
+{
+  "id": "fx-usdjpy-monthly-end",
+  "name": "USD/JPY 月末値",
+  "domain": "finance",
+  "frequency": "monthly",
+  "unit": "¥/USD",
+  "source_name": "日本銀行 時系列統計データ（外国為替市況, FM08）",
+  "source_url": "https://www.stat-search.boj.or.jp/ssi/mtshtml/fm08_m_1_en.html",
+  "license": "boj-terms",
+  "observation_cutoff": "2026-03-01",
+  "updated_at": "2026-04-22T18:39:32+09:00",
+  "license_url": "https://www.stat-search.boj.or.jp/info/api_notice.pdf",
+  "license_notice": "本サービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。本サービスの内容は日本銀行によって保証されたものではありません。",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "1973-01-01",
+  "publisher": "日本銀行",
+  "aggregation": "monthly_end",
+  "notes": "BOJ FM08 / FXERM06。月末値（東京市場 17 時）",
+  "depends_on": null
+}
