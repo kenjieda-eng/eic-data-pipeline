@@ -1,0 +1,21 @@
+{
+  "id": "jma-snow-max-tokyo",
+  "name": "東京 最深積雪",
+  "domain": "weather",
+  "frequency": "daily",
+  "unit": "cm",
+  "source_name": "気象庁 日次気温（9 エリア代表観測点）",
+  "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
+  "license": "jma-terms",
+  "observation_cutoff": "2026-02-09",
+  "updated_at": "2026-04-22T22:41:21+09:00",
+  "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
+  "license_notice": "",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2012-01-01",
+  "publisher": "気象庁",
+  "aggregation": "daily_max",
+  "notes": "気象官署 東京。大雪時の首都圏交通麻痺イベント指標",
+  "depends_on": null
+}

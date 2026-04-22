@@ -1,0 +1,21 @@
+{
+  "id": "jma-sunshine-chugoku",
+  "name": "広島 日照時間",
+  "domain": "weather",
+  "frequency": "daily",
+  "unit": "h",
+  "source_name": "気象庁 日次気温（9 エリア代表観測点）",
+  "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
+  "license": "jma-terms",
+  "observation_cutoff": "2026-04-21",
+  "updated_at": "2026-04-22T22:41:22+09:00",
+  "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
+  "license_notice": "",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2012-01-01",
+  "publisher": "気象庁",
+  "aggregation": "daily_sum",
+  "notes": "気象官署 広島。中国地方の太陽光比率が高いエリアの基準",
+  "depends_on": null
+}

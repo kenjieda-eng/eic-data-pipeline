@@ -1,0 +1,21 @@
+{
+  "id": "jma-snow-max-kyushu",
+  "name": "福岡 最深積雪",
+  "domain": "weather",
+  "frequency": "daily",
+  "unit": "cm",
+  "source_name": "気象庁 日次気温（9 エリア代表観測点）",
+  "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
+  "license": "jma-terms",
+  "observation_cutoff": "2025-01-10",
+  "updated_at": "2026-04-22T22:41:22+09:00",
+  "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
+  "license_notice": "",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2012-01-01",
+  "publisher": "気象庁",
+  "aggregation": "daily_max",
+  "notes": "気象官署 福岡",
+  "depends_on": null
+}
