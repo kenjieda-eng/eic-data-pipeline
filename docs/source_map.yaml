@@ -4,13 +4,14 @@
 # 各エントリは fetch_*.py スクリプトから読まれる。
 # license フィールドは DATA_LICENSE.md の「一次ソース優先」原則の根拠資料。
 
-version: 1
+version: 2  # 2026-04-22: D-011 に従い indicators: dict とメタデータ共通項目を追加
 
 sources:
   jepx-spot:
     name: JEPX スポット価格（日次サマリ）
     publisher: 一般社団法人 日本卸電力取引所 (JEPX)
     publisher_url: https://www.jepx.jp/
+    source_url: https://www.jepx.jp/electricpower/market-data/spot/
     market_page: https://www.jepx.jp/electricpower/market-data/spot/
     # ダウンロードは POST フォーム方式。
     # セッション Cookie + Referer + X-Requested-With が必要と推定。
@@ -19,10 +20,17 @@ sources:
     # ファイル名リストが定義されている JS
     js_url: https://www.jepx.jp/js/spot_summary.js
     filename_template: 'spot_summary_{year}.csv'
-    license: |
+    # --- D-011 メタデータ共通項目 ---
+    license: jepx-terms                           # SPDX 非対応のため独自識別子
+    license_url: https://www.jepx.jp/electricpower/index.html
+    license_notice: ""
+    license_text: |
       JEPX 公開データ。再配布・引用は出典明示を条件に可。
       参考: https://www.jepx.jp/electricpower/index.html
     frequency: daily
+    tz: Asia/Tokyo
+    missing_policy: "null"                        # 欠損日はそのまま null（forward fill しない）
+    freshness_sla_days: 3                         # 平日 1 回更新、3 営業日以内を許容
     columns:
       # 元 CSV の列構造（参考）
       - 受渡日
@@ -41,11 +49,99 @@ sources:
       - エリアプライス_四国
       - エリアプライス_九州
     indicator_ids:
-      # このソースから派生する indicator_id 一覧
-      - jepx-spot-system        # システムプライス（日次平均、円/kWh）
-      - jepx-spot-tokyo         # 東京エリア日次平均
-      - jepx-spot-kansai        # 関西エリア日次平均
-      - jepx-spot-kyushu        # 九州エリア日次平均
+      # このソースから派生する indicator_id 一覧（互換のため保持、実際は indicators: dict を使う）
+      - jepx-spot-system
+      - jepx-spot-hokkaido
+      - jepx-spot-tohoku
+      - jepx-spot-tokyo
+      - jepx-spot-chubu
+      - jepx-spot-hokuriku
+      - jepx-spot-kansai
+      - jepx-spot-chugoku
+      - jepx-spot-shikoku
+      - jepx-spot-kyushu
+    # D-011 準拠の indicator 固有メタデータ（10 系列）
+    indicators:
+      jepx-spot-system:
+        name: JEPX スポット システムプライス
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2005-04-01"
+        aggregation: daily_mean
+        notes: "48 コマの単純平均。システム全体の指標価格"
+        depends_on: null
+      jepx-spot-hokkaido:
+        name: JEPX スポット 北海道エリアプライス
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2005-04-01"
+        aggregation: daily_mean
+        notes: "北海道電力管内の日次平均約定価格"
+        depends_on: null
+      jepx-spot-tohoku:
+        name: JEPX スポット 東北エリアプライス
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2005-04-01"
+        aggregation: daily_mean
+        notes: "東北電力管内の日次平均約定価格"
+        depends_on: null
+      jepx-spot-tokyo:
+        name: JEPX スポット 東京エリアプライス
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2005-04-01"
+        aggregation: daily_mean
+        notes: "東京電力 PG 管内の日次平均約定価格。首都圏の指標"
+        depends_on: null
+      jepx-spot-chubu:
+        name: JEPX スポット 中部エリアプライス
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2005-04-01"
+        aggregation: daily_mean
+        notes: "中部電力管内の日次平均約定価格"
+        depends_on: null
+      jepx-spot-hokuriku:
+        name: JEPX スポット 北陸エリアプライス
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2005-04-01"
+        aggregation: daily_mean
+        notes: "北陸電力管内の日次平均約定価格"
+        depends_on: null
+      jepx-spot-kansai:
+        name: JEPX スポット 関西エリアプライス
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2005-04-01"
+        aggregation: daily_mean
+        notes: "関西電力管内の日次平均約定価格"
+        depends_on: null
+      jepx-spot-chugoku:
+        name: JEPX スポット 中国エリアプライス
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2005-04-01"
+        aggregation: daily_mean
+        notes: "中国電力管内の日次平均約定価格"
+        depends_on: null
+      jepx-spot-shikoku:
+        name: JEPX スポット 四国エリアプライス
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2005-04-01"
+        aggregation: daily_mean
+        notes: "四国電力管内の日次平均約定価格"
+        depends_on: null
+      jepx-spot-kyushu:
+        name: JEPX スポット 九州エリアプライス
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2005-04-01"
+        aggregation: daily_mean
+        notes: "九州電力管内の日次平均約定価格"
+        depends_on: null
     notes: |
       - 1 日 = 48 コマ（30 分単位）。日次平均は 48 コマの単純平均で算出。
 
@@ -53,6 +149,14 @@ sources:
     name: 気象庁 日次気温（9 エリア代表観測点）
     publisher: 気象庁
     publisher_url: https://www.data.jma.go.jp/
+    source_url: https://www.data.jma.go.jp/obd/stats/etrn/index.php
+    # --- D-011 メタデータ共通項目 ---
+    license: jma-terms
+    license_url: https://www.jma.go.jp/jma/kishou/info/coment.html
+    license_notice: ""
+    tz: Asia/Tokyo
+    missing_policy: "null"            # 欠測記号はすべて NaN = null に正規化
+    freshness_sla_days: 3
     # 静的 HTML 月次ページ（候補 B）。
     # 気象官署（daily_s1.php）系統のみ使用。アメダス専用点（daily_a1.php）は今回対象外。
     page_url_template: "https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no={prec_no}&block_no={block_no}&year={year}&month={month}&day=&view="
@@ -76,10 +180,10 @@ sources:
       shikoku:  { name: 高松, prec_no: 72, block_no: 47891 }
       kyushu:   { name: 福岡, prec_no: 82, block_no: 47807 }
     items:
-      - { key: temp_avg, id_prefix: jma-temp-avg, ja: 日平均気温, unit: ℃ }
-      - { key: temp_max, id_prefix: jma-temp-max, ja: 日最高気温, unit: ℃ }
-      - { key: temp_min, id_prefix: jma-temp-min, ja: 日最低気温, unit: ℃ }
-    license: |
+      - { key: temp_avg, id_prefix: jma-temp-avg, ja: 日平均気温, unit: ℃, aggregation: daily_mean }
+      - { key: temp_max, id_prefix: jma-temp-max, ja: 日最高気温, unit: ℃, aggregation: daily_max }
+      - { key: temp_min, id_prefix: jma-temp-min, ja: 日最低気温, unit: ℃, aggregation: daily_min }
+    license_text: |
       気象庁ホームページのコンテンツの利用について（https://www.jma.go.jp/jma/kishou/info/coment.html）
       出典明示を条件に自由利用可。再配布時は出典と編集加工の有無を明示する。
     frequency: daily
@@ -112,6 +216,38 @@ sources:
       - jma-temp-min-chugoku
       - jma-temp-min-shikoku
       - jma-temp-min-kyushu
+    # D-011 準拠の indicator 固有メタデータ（27 系列 = 9 地点 × 3 項目）
+    indicators:
+      # --- 日平均気温（9 地点）---
+      jma-temp-avg-hokkaido: { name: "札幌 日平均気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 札幌（prec=14, block=47412）", depends_on: null }
+      jma-temp-avg-tohoku:   { name: "仙台 日平均気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 仙台（prec=34, block=47590）", depends_on: null }
+      jma-temp-avg-tokyo:    { name: "東京 日平均気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 東京（prec=44, block=47662）", depends_on: null }
+      jma-temp-avg-chubu:    { name: "名古屋 日平均気温",   domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 名古屋（prec=51, block=47636）", depends_on: null }
+      jma-temp-avg-hokuriku: { name: "金沢 日平均気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 金沢（prec=56, block=47605）", depends_on: null }
+      jma-temp-avg-kansai:   { name: "大阪 日平均気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 大阪（prec=62, block=47772）", depends_on: null }
+      jma-temp-avg-chugoku:  { name: "広島 日平均気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 広島（prec=67, block=47765）", depends_on: null }
+      jma-temp-avg-shikoku:  { name: "高松 日平均気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 高松（prec=72, block=47891）", depends_on: null }
+      jma-temp-avg-kyushu:   { name: "福岡 日平均気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 福岡（prec=82, block=47807）", depends_on: null }
+      # --- 日最高気温（9 地点）---
+      jma-temp-max-hokkaido: { name: "札幌 日最高気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 札幌。夏の冷房需要・冬日解析で使用", depends_on: null }
+      jma-temp-max-tohoku:   { name: "仙台 日最高気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 仙台", depends_on: null }
+      jma-temp-max-tokyo:    { name: "東京 日最高気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 東京。首都圏の夏季ピーク指標", depends_on: null }
+      jma-temp-max-chubu:    { name: "名古屋 日最高気温",   domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 名古屋", depends_on: null }
+      jma-temp-max-hokuriku: { name: "金沢 日最高気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 金沢", depends_on: null }
+      jma-temp-max-kansai:   { name: "大阪 日最高気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 大阪", depends_on: null }
+      jma-temp-max-chugoku:  { name: "広島 日最高気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 広島", depends_on: null }
+      jma-temp-max-shikoku:  { name: "高松 日最高気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 高松", depends_on: null }
+      jma-temp-max-kyushu:   { name: "福岡 日最高気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 福岡", depends_on: null }
+      # --- 日最低気温（9 地点）---
+      jma-temp-min-hokkaido: { name: "札幌 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 札幌。冬の暖房需要の指標", depends_on: null }
+      jma-temp-min-tohoku:   { name: "仙台 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 仙台", depends_on: null }
+      jma-temp-min-tokyo:    { name: "東京 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 東京", depends_on: null }
+      jma-temp-min-chubu:    { name: "名古屋 日最低気温",   domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 名古屋", depends_on: null }
+      jma-temp-min-hokuriku: { name: "金沢 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 金沢", depends_on: null }
+      jma-temp-min-kansai:   { name: "大阪 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 大阪", depends_on: null }
+      jma-temp-min-chugoku:  { name: "広島 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 広島", depends_on: null }
+      jma-temp-min-shikoku:  { name: "高松 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 高松", depends_on: null }
+      jma-temp-min-kyushu:   { name: "福岡 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 福岡", depends_on: null }
     notes: |
       - 月単位の HTML ページから日次テーブルを抽出する方式。
       - 欠測記号 `///`, `--`, `)`, `×`, 空文字を NaN として扱う。
@@ -123,6 +259,7 @@ sources:
     name: World Bank Commodity Prices (Pink Sheet) — 月次
     publisher: The World Bank Group
     publisher_url: https://www.worldbank.org/en/research/commodity-markets
+    source_url: https://www.worldbank.org/en/research/commodity-markets
     # 単一の安定 XLSX URL（"CMO-Historical-Data-Monthly"）。
     # World Bank は数年単位でこの URL を引っ越す履歴があるため fallback_urls を併記しておく。
     xlsx_url: "https://thedocs.worldbank.org/en/doc/18675f1d1639c7a34d463f59263ba0a2-0050012025/related/CMO-Historical-Data-Monthly.xlsx"
@@ -130,11 +267,18 @@ sources:
       - "https://pubdocs.worldbank.org/en/561011486076393416/CMO-Historical-Data-Monthly.xlsx"
       - "https://thedocs.worldbank.org/en/doc/561011486076393416-0050022017/CMO-Historical-Data-Monthly"
     sheet_name: "Monthly Prices"
-    license: |
+    # --- D-011 メタデータ共通項目 ---
+    license: CC-BY-4.0                # SPDX
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_notice: ""
+    license_text: |
       World Bank Open Data: Creative Commons Attribution 4.0 International (CC BY 4.0)
       出典明示を条件に自由利用可（再配布・商用可）。
       参考: https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets
     frequency: monthly
+    tz: UTC
+    missing_policy: forward_fill_within_month
+    freshness_sla_days: 45
     # 各系列は wide 形式の Excel 列を部分一致で引くためのキーワード定義。
     # match: すべて含む AND 条件、exclude: いずれかに含まれたら除外。
     series:
@@ -191,6 +335,64 @@ sources:
       - fuel-crude-dubai
       - fuel-crude-wti
       - fuel-coal-au
+    # D-011 準拠の indicator 固有メタデータ（7 系列）
+    indicators:
+      fuel-lng-jp-cif:
+        name: "日本 LNG 輸入価格（CIF）"
+        domain: fuel
+        unit: "$/MMBtu"
+        backfill_start: "1977-01-01"
+        aggregation: raw
+        notes: "日本の LNG 輸入 CIF 価格（月次）。Pink Sheet 収録で 1977-01 から"
+        depends_on: null
+      fuel-ng-henryhub:
+        name: "天然ガス Henry Hub（米国）"
+        domain: fuel
+        unit: "$/MMBtu"
+        backfill_start: "1960-01-01"
+        aggregation: raw
+        notes: "Natural gas, US 系列（Pink Sheet 列）"
+        depends_on: null
+      fuel-ng-europe-ttf:
+        name: "天然ガス TTF（欧州）"
+        domain: fuel
+        unit: "$/MMBtu"
+        backfill_start: "1992-08-01"
+        aggregation: raw
+        notes: "Natural gas, Europe 系列。TTF は 1990 年代以降の整備で早期は代替指標の継ぎ"
+        depends_on: null
+      fuel-crude-brent:
+        name: "原油 Brent"
+        domain: fuel
+        unit: "$/bbl"
+        backfill_start: "1960-01-01"
+        aggregation: raw
+        notes: "Crude oil, Brent（Pink Sheet）"
+        depends_on: null
+      fuel-crude-dubai:
+        name: "原油 Dubai"
+        domain: fuel
+        unit: "$/bbl"
+        backfill_start: "1960-01-01"
+        aggregation: raw
+        notes: "Crude oil, Dubai（Pink Sheet）"
+        depends_on: null
+      fuel-crude-wti:
+        name: "原油 WTI"
+        domain: fuel
+        unit: "$/bbl"
+        backfill_start: "1960-01-01"
+        aggregation: raw
+        notes: "Crude oil, WTI（Pink Sheet）"
+        depends_on: null
+      fuel-coal-au:
+        name: "石炭（豪州 Newcastle）"
+        domain: fuel
+        unit: "$/mt"
+        backfill_start: "1960-01-01"
+        aggregation: raw
+        notes: "Coal, Australian 系列（Pink Sheet）"
+        depends_on: null
     notes: |
       - 月次データ、日付は「月初日（YYYY-MM-01）」で正規化。
       - 1960-01 から現在まで。翌月上旬に前月値が確定（遅延約 1 ヶ月）。
@@ -203,6 +405,7 @@ sources:
     name: 日本銀行 時系列統計データ（外国為替市況, FM08）
     publisher: 日本銀行
     publisher_url: https://www.stat-search.boj.or.jp/
+    source_url: https://www.stat-search.boj.or.jp/ssi/mtshtml/fm08_m_1_en.html
     # getDataCode エンドポイント。複数系列をカンマ区切りで同時取得可能。
     # URL 例: https://www.stat-search.boj.or.jp/api/v1/getDataCode?format=csv&lang=en&db=FM08&code=FXERM07,FXERM06&startDate=197301&endDate=203012
     api_url: "https://www.stat-search.boj.or.jp/api/v1/getDataCode"
@@ -211,13 +414,20 @@ sources:
     start_date: "197301"
     # 終了側は十分先を指定しておけば API 側で収録終了期にクランプされる
     end_date_buffer_years: 5
-    license: |
+    # --- D-011 メタデータ共通項目 ---
+    license: boj-terms
+    license_url: https://www.stat-search.boj.or.jp/info/api_notice.pdf
+    license_notice: "本サービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。本サービスの内容は日本銀行によって保証されたものではありません。"
+    license_text: |
       日本銀行時系列統計データ検索サイト利用規約。
       必須掲載文言:
         「このサービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。
          サービスの内容は日本銀行によって保証されたものではありません。」
       API 機能利用時の留意点: https://www.stat-search.boj.or.jp/info/api_notice.pdf
     frequency: monthly
+    tz: Asia/Tokyo
+    missing_policy: "null"
+    freshness_sla_days: 45
     # 各系列は BOJ 側の系列コード 1 対 1。単位は「円/ドル」で共通。
     series:
       - id: fx-usdjpy-monthly-avg
@@ -245,6 +455,40 @@ sources:
       - fx-usdjpy-monthly-end
       - fx-usdjpy-monthly-high
       - fx-usdjpy-monthly-low
+    # D-011 準拠の indicator 固有メタデータ（4 系列）
+    indicators:
+      fx-usdjpy-monthly-avg:
+        name: "USD/JPY 月中平均"
+        domain: finance
+        unit: "¥/USD"
+        backfill_start: "1973-01-01"
+        aggregation: monthly_mean
+        notes: "BOJ FM08 / FXERM07。月中平均（東京市場 17 時）"
+        depends_on: null
+      fx-usdjpy-monthly-end:
+        name: "USD/JPY 月末値"
+        domain: finance
+        unit: "¥/USD"
+        backfill_start: "1973-01-01"
+        aggregation: monthly_end
+        notes: "BOJ FM08 / FXERM06。月末値（東京市場 17 時）"
+        depends_on: null
+      fx-usdjpy-monthly-high:
+        name: "USD/JPY 月内高値"
+        domain: finance
+        unit: "¥/USD"
+        backfill_start: "1992-08-01"
+        aggregation: monthly_high
+        notes: "BOJ FM08 / FXERM03。月内高値（東京市場）"
+        depends_on: null
+      fx-usdjpy-monthly-low:
+        name: "USD/JPY 月内安値"
+        domain: finance
+        unit: "¥/USD"
+        backfill_start: "1992-08-01"
+        aggregation: monthly_low
+        notes: "BOJ FM08 / FXERM05。月内安値（東京市場）"
+        depends_on: null
     notes: |
       - 月次データ、日付は「月初日（YYYY-MM-01）」で正規化。
       - FXERM07 / FXERM06 は 1973-01 から、FXERM03 / FXERM05 は 1992-08 から。

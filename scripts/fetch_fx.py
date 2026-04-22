@@ -46,6 +46,7 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.common.http import get  # noqa: E402
 from scripts.common.io import append_log, save_raw, write_processed  # noqa: E402
+from scripts.common.metadata import write_metadata_for_indicator  # noqa: E402
 
 logging.basicConfig(
     level=logging.INFO,
@@ -305,6 +306,8 @@ def main(argv: list[str] | None = None) -> int:
     total_rows = 0
     for indicator_id, df in per_id.items():
         write_processed(df, processed_dir, basename=indicator_id)
+        # D-011: 系列メタデータを {id}.metadata.json に書き出す
+        write_metadata_for_indicator(processed_dir, source_cfg, indicator_id, df)
         written.append(indicator_id)
         total_rows += len(df)
 

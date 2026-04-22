@@ -42,6 +42,7 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.common.http import make_session, session_get  # noqa: E402
 from scripts.common.io import append_log, save_raw, write_processed  # noqa: E402
+from scripts.common.metadata import write_metadata_for_indicator  # noqa: E402
 
 logging.basicConfig(
     level=logging.INFO,
@@ -344,6 +345,8 @@ def main(argv: list[str] | None = None) -> int:
         # indicator_id ごとに分割して書き出し（共通スキーマ、既存とマージ）
         for indicator_id, group in df.groupby("indicator_id"):
             write_processed(group, processed_dir, basename=str(indicator_id))
+            # D-011: 系列メタデータを {id}.metadata.json に書き出す
+            write_metadata_for_indicator(processed_dir, source_cfg, str(indicator_id), group)
             written_files.append(str(indicator_id))
             total_rows += len(group)
 
