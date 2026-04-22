@@ -71,6 +71,14 @@ jobs:
           python scripts/fetch_fx.py
         continue-on-error: true
 
+      - name: Fetch MOF JGB yields (daily)
+        # 財務省の国債金利情報 CSV（jgbcm_all.csv、Shift-JIS、和暦、全期間 1974-09 〜）を 1 発で取得。
+        # Phase 1 は 10 年新発のみ extract（source_map.yaml の term_to_id に定義）。
+        # 平日 17 時台に当日分が追記されるため、毎朝実行で 1 営業日遅れを追従。
+        run: |
+          python scripts/fetch_jgb.py
+        continue-on-error: true
+
       - name: Generate indicators catalog (D-011)
         # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を生成。
         # Required 10 欠落は exit 1（CI fail）、Recommended 欠落/鮮度超過は warning 止まり。

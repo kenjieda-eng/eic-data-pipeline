@@ -84,7 +84,7 @@ MISSING_POLICY_VALUES = {
     "null", "last_observation", "zero", "interpolate",
 }
 AGGREGATION_VALUES = {
-    "raw", "daily_mean", "daily_max", "daily_min",
+    "raw", "daily_sum", "daily_mean", "daily_max", "daily_min",
     "monthly_mean", "monthly_end", "monthly_high", "monthly_low",
     "area_average", "alias",
 }

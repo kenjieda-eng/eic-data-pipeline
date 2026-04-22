@@ -166,6 +166,7 @@ sources:
     # ヘッダ行が 2 段 merged なので、データ行の td インデックスで指定する。
     columns:
       day: 0
+      precip: 3
       temp_avg: 6
       temp_max: 7
       temp_min: 8
@@ -183,6 +184,7 @@ sources:
       - { key: temp_avg, id_prefix: jma-temp-avg, ja: 日平均気温, unit: ℃, aggregation: daily_mean }
       - { key: temp_max, id_prefix: jma-temp-max, ja: 日最高気温, unit: ℃, aggregation: daily_max }
       - { key: temp_min, id_prefix: jma-temp-min, ja: 日最低気温, unit: ℃, aggregation: daily_min }
+      - { key: precip,   id_prefix: jma-precip,   ja: 日降水量合計, unit: mm, aggregation: daily_sum }
     license_text: |
       気象庁ホームページのコンテンツの利用について（https://www.jma.go.jp/jma/kishou/info/coment.html）
       出典明示を条件に自由利用可。再配布時は出典と編集加工の有無を明示する。
@@ -216,7 +218,16 @@ sources:
       - jma-temp-min-chugoku
       - jma-temp-min-shikoku
       - jma-temp-min-kyushu
-    # D-011 準拠の indicator 固有メタデータ（27 系列 = 9 地点 × 3 項目）
+      - jma-precip-hokkaido
+      - jma-precip-tohoku
+      - jma-precip-tokyo
+      - jma-precip-chubu
+      - jma-precip-hokuriku
+      - jma-precip-kansai
+      - jma-precip-chugoku
+      - jma-precip-shikoku
+      - jma-precip-kyushu
+    # D-011 準拠の indicator 固有メタデータ（36 系列 = 9 地点 × 4 項目：平均/最高/最低 気温 + 降水量）
     indicators:
       # --- 日平均気温（9 地点）---
       jma-temp-avg-hokkaido: { name: "札幌 日平均気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 札幌（prec=14, block=47412）", depends_on: null }
@@ -248,6 +259,16 @@ sources:
       jma-temp-min-chugoku:  { name: "広島 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 広島", depends_on: null }
       jma-temp-min-shikoku:  { name: "高松 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 高松", depends_on: null }
       jma-temp-min-kyushu:   { name: "福岡 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 福岡", depends_on: null }
+      # --- 日降水量合計（9 地点）---
+      jma-precip-hokkaido:   { name: "札幌 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 札幌。水力発電ダム流入と雪・豪雨イベントの素材指標", depends_on: null }
+      jma-precip-tohoku:     { name: "仙台 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 仙台", depends_on: null }
+      jma-precip-tokyo:      { name: "東京 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 東京。首都圏の豪雨・梅雨指標", depends_on: null }
+      jma-precip-chubu:      { name: "名古屋 日降水量合計", domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 名古屋", depends_on: null }
+      jma-precip-hokuriku:   { name: "金沢 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 金沢。冬の豪雪＝水力貯水の素材", depends_on: null }
+      jma-precip-kansai:     { name: "大阪 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 大阪", depends_on: null }
+      jma-precip-chugoku:    { name: "広島 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 広島", depends_on: null }
+      jma-precip-shikoku:    { name: "高松 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 高松", depends_on: null }
+      jma-precip-kyushu:     { name: "福岡 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 福岡。九州北部豪雨の素材", depends_on: null }
     notes: |
       - 月単位の HTML ページから日次テーブルを抽出する方式。
       - 欠測記号 `///`, `--`, `)`, `×`, 空文字を NaN として扱う。
@@ -496,3 +517,66 @@ sources:
       - CSV レスポンスの先頭 11 行は STATUS/PARAMETER などのメタデータ。12 行目が列ヘッダ、以降がデータ。
       - 全系列を 1 リクエストで取得（カンマ区切り code=FXERM07,FXERM06,FXERM03,FXERM05）。
       - 日次系列（FXERD04 等）は startDate のパラメータ仕様に癖があるため、初版は月次のみ。
+
+  mof-jgb:
+    name: 財務省 国債金利情報（日次、各年限）
+    publisher: 財務省
+    publisher_url: https://www.mof.go.jp/
+    source_url: https://www.mof.go.jp/jgbs/reference/interest_rate/
+    # 単一 CSV（過去全期間: 1974-09-24 〜 最新営業日）。Shift-JIS、和暦日付、15 年限の wide 形式。
+    csv_url: "https://www.mof.go.jp/jgbs/reference/interest_rate/data/jgbcm_all.csv"
+    encoding: shift_jis
+    # 列ヘッダ（2 行目）: 基準日,1年,2年,3年,4年,5年,6年,7年,8年,9年,10年,15年,20年,25年,30年,40年
+    # 1 行目は単位注意書き。3 行目以降がデータ。欠損（新発がなかった期間）は "-"。
+    header_row: 2
+    # --- D-011 メタデータ共通項目 ---
+    license: public-domain                       # 財務省公表資料、自由利用可（国の著作物）
+    license_url: https://www.mof.go.jp/index.htm
+    license_notice: ""
+    license_text: |
+      財務省（国）が作成した公表資料。国の著作物は原則として自由利用可。
+      参考: 財務省ホームページ利用規約 https://www.mof.go.jp/index.htm
+    frequency: daily
+    tz: Asia/Tokyo
+    missing_policy: "null"                        # 金利が付かなかった日は "-" → null で保持
+    freshness_sla_days: 3
+    indicator_ids:
+      - jgb-10y-yield
+    # Phase 1 は 10 年のみ先に取る。Phase 2 以降で 2y/5y/20y/30y 等を昇格可能。
+    indicators:
+      jgb-10y-yield:
+        name: "JGB 10 年金利（新発）"
+        domain: finance
+        unit: "%"
+        backfill_start: "1974-09-24"
+        aggregation: raw
+        notes: "財務省 金利情報 jgbcm_all.csv、10 年新発国債の日次利回り。土日祝・入札なし日は '-' → null"
+        depends_on: null
+    # CSV 構造のメモ（fetch_jgb.py が読む）
+    columns_wide:
+      - 基準日
+      - "1年"
+      - "2年"
+      - "3年"
+      - "4年"
+      - "5年"
+      - "6年"
+      - "7年"
+      - "8年"
+      - "9年"
+      - "10年"
+      - "15年"
+      - "20年"
+      - "25年"
+      - "30年"
+      - "40年"
+    # 年限と indicator_id の対応（Phase 1 は 10 年のみ使う）
+    term_to_id:
+      "10年": jgb-10y-yield
+    notes: |
+      - 単一 CSV で 1974-09-24 〜 最新営業日までを取得。差分更新不要（常に全量差し替え）。
+      - 日付は和暦（例: S49.9.24 / H10.4.1 / R6.4.1）。fetch_jgb.py で西暦に変換。
+      - 元号マッピング: M=明治(1868)/T=大正(1912)/S=昭和(1926)/H=平成(1989)/R=令和(2019)。
+      - 新発がなかった年限は "-"。float 変換時は None に落とす（missing_policy: null）。
+      - 更新タイミング: 平日 17 時台に当日分が追記される。週末・祝日は行が増えない。
+      - Phase 2 で 2年 / 5年 / 20年 / 30年 を追加する際は term_to_id に 1 行足すだけで良い設計。
