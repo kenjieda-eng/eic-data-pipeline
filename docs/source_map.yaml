@@ -198,3 +198,57 @@ sources:
         もし初回ランで series が見つからなければ、Excel を開いて実際の列名を確認し match を微調整する。
       - シート名が "Monthly Prices" でないバージョンに当たった場合は sheet_name を更新する。
       - 価格単位の混在: $/mmbtu（天然ガス）, $/bbl（原油）, $/mt（石炭）。indicator ごとに unit を持つ。
+
+  boj-fx:
+    name: 日本銀行 時系列統計データ（外国為替市況, FM08）
+    publisher: 日本銀行
+    publisher_url: https://www.stat-search.boj.or.jp/
+    # getDataCode エンドポイント。複数系列をカンマ区切りで同時取得可能。
+    # URL 例: https://www.stat-search.boj.or.jp/api/v1/getDataCode?format=csv&lang=en&db=FM08&code=FXERM07,FXERM06&startDate=197301&endDate=203012
+    api_url: "https://www.stat-search.boj.or.jp/api/v1/getDataCode"
+    db: FM08
+    # 月次データの date 形式は YYYYMM。日次は FM08 内だがパラメータ仕様に癖があり、初版は月次のみ。
+    start_date: "197301"
+    # 終了側は十分先を指定しておけば API 側で収録終了期にクランプされる
+    end_date_buffer_years: 5
+    license: |
+      日本銀行時系列統計データ検索サイト利用規約。
+      必須掲載文言:
+        「このサービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。
+         サービスの内容は日本銀行によって保証されたものではありません。」
+      API 機能利用時の留意点: https://www.stat-search.boj.or.jp/info/api_notice.pdf
+    frequency: monthly
+    # 各系列は BOJ 側の系列コード 1 対 1。単位は「円/ドル」で共通。
+    series:
+      - id: fx-usdjpy-monthly-avg
+        name: 米ドル/円 月中平均（東京市場 17時）
+        code: FXERM07
+        region: jp
+        unit: JPY_per_USD
+      - id: fx-usdjpy-monthly-end
+        name: 米ドル/円 月末値（東京市場 17時）
+        code: FXERM06
+        region: jp
+        unit: JPY_per_USD
+      - id: fx-usdjpy-monthly-high
+        name: 米ドル/円 月内高値（東京市場）
+        code: FXERM03
+        region: jp
+        unit: JPY_per_USD
+      - id: fx-usdjpy-monthly-low
+        name: 米ドル/円 月内安値（東京市場）
+        code: FXERM05
+        region: jp
+        unit: JPY_per_USD
+    indicator_ids:
+      - fx-usdjpy-monthly-avg
+      - fx-usdjpy-monthly-end
+      - fx-usdjpy-monthly-high
+      - fx-usdjpy-monthly-low
+    notes: |
+      - 月次データ、日付は「月初日（YYYY-MM-01）」で正規化。
+      - FXERM07 / FXERM06 は 1973-01 から、FXERM03 / FXERM05 は 1992-08 から。
+      - 更新は平日 8:50 JST。月の値が確定するのは翌月初。
+      - CSV レスポンスの先頭 11 行は STATUS/PARAMETER などのメタデータ。12 行目が列ヘッダ、以降がデータ。
+      - 全系列を 1 リクエストで取得（カンマ区切り code=FXERM07,FXERM06,FXERM03,FXERM05）。
+      - 日次系列（FXERD04 等）は startDate のパラメータ仕様に癖があるため、初版は月次のみ。

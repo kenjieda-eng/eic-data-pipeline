@@ -64,6 +64,13 @@ jobs:
           python scripts/fetch_fuel.py
         continue-on-error: true
 
+      - name: Fetch BOJ FX rates (monthly)
+        # BOJ FM08 の USD/JPY 4 系列（月中平均/月末/月内高値/月内安値）を 1 リクエストで取得。
+        # 月次データ、翌月初に確定。毎日叩いてもほぼゼロ負荷（375KB 前後 × 1 req）。
+        run: |
+          python scripts/fetch_fx.py
+        continue-on-error: true
+
       - name: Commit & push if changed
         run: |
           git config user.name "eic-data-bot"
