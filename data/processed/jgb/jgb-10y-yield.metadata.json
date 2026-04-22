@@ -1,0 +1,21 @@
+{
+  "id": "jgb-10y-yield",
+  "name": "JGB 10 年金利（新発）",
+  "domain": "finance",
+  "frequency": "daily",
+  "unit": "%",
+  "source_name": "財務省 国債金利情報（日次、各年限）",
+  "source_url": "https://www.mof.go.jp/jgbs/reference/interest_rate/",
+  "license": "public-domain",
+  "observation_cutoff": "2026-03-31",
+  "updated_at": "2026-04-22T20:05:34+09:00",
+  "license_url": "https://www.mof.go.jp/index.htm",
+  "license_notice": "",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "1974-09-24",
+  "publisher": "財務省",
+  "aggregation": "raw",
+  "notes": "財務省 金利情報 jgbcm_all.csv、10 年新発国債の日次利回り。土日祝・入札なし日は '-' → null",
+  "depends_on": null
+}
