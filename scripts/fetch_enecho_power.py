@@ -64,6 +64,20 @@ from scripts.common.http import get  # noqa: E402
 from scripts.common.io import append_log, save_raw, write_processed  # noqa: E402
 from scripts.common.metadata import write_metadata_for_indicator  # noqa: E402
 
+# ----- Phase 2-A Day 5: Akamai Bot Manager 突破（2026-04-24 深夜） --------
+# METI（www.enecho.meti.go.jp）は Akamai Bot Manager で保護されており、
+# requests / urllib3 / .NET Invoke-WebRequest / curl.exe はすべて timeout する
+# （Chrome のみブラウザ JS challenge を通過できる）。
+# curl_cffi は Chrome/Firefox の TLS fingerprint を模倣するので、Akamai の
+# TLS チェック層を抜けられる。ローカル Windows で status=200 を確認済み。
+# 依存は本スクリプトからのみ。他の fetch_*.py は requests のままで問題なし。
+try:
+    from curl_cffi import requests as _curl_requests  # noqa: E402
+    _CURL_CFFI_AVAILABLE = True
+except ImportError:
+    _curl_requests = None
+    _CURL_CFFI_AVAILABLE = False
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s %(levelname)s %(name)s: %(message)s",
@@ -113,6 +127,38 @@ XLSX_HEADERS = {
         "application/octet-stream,*/*;q=0.8"
     ),
 }
+
+
+def _meti_get(url: str, *, timeout: int = 120, accept_xlsx: bool = False):
+    """METI 専用 GET。Akamai Bot Manager 回避のため curl_cffi で Chrome 120 を模倣。
+
+    Args:
+        url: 取得対象
+        timeout: 応答タイムアウト秒
+        accept_xlsx: XLSX 取得時は True（Accept ヘッダを調整）
+    Returns:
+        response object（r.status_code / r.text / r.content / r.raise_for_status()）
+    Raises:
+        RuntimeError: curl_cffi が未インストール
+    """
+    if not _CURL_CFFI_AVAILABLE:
+        raise RuntimeError(
+            "curl_cffi is required to fetch METI (Akamai Bot Manager bypass). "
+            "Install via: pip install curl_cffi"
+        )
+    headers = dict(XLSX_HEADERS if accept_xlsx else BROWSER_HEADERS)
+    # curl_cffi は User-Agent を impersonate プロファイルが自動で設定する。
+    # Accept / Accept-Language だけ明示的に上書きする。
+    r = _curl_requests.get(
+        url,
+        impersonate="chrome120",
+        timeout=timeout,
+        headers={
+            "Accept": headers["Accept"],
+            "Accept-Language": headers["Accept-Language"],
+        },
+    )
+    return r
 
 # ファイル名や link text から YYYY-MM を拾う正規表現（複数パターン、上から試す）
 # ※ 本スクリプトのメイン経路では filename は fiscal year 単位（YYYY / H{nn}）。
@@ -258,7 +304,7 @@ def list_xlsx_links(
     *,
     base_url: str,
     min_fiscal_year: int = 2016,
-    prefer_machine_readable: bool = True,
+    prefer_machine_readable: bool = False,
 ) -> list[dict]:
     """index ページの HTML から Phase 2-A 対象 XLSX のリンクを抽出する。
 
@@ -270,6 +316,9 @@ def list_xlsx_links(
         base_url: 相対 URL を絶対化するためのベース
         min_fiscal_year: このより古い年度は除外（Phase 2-A v1 は 2016 以降）
         prefer_machine_readable: True なら `*n.xlsx` 変種が存在すれば通常版より優先
+            （2026-04-24 Day 5: 機械判読版は列構成が通常版と違い parse 失敗するため
+             **デフォルト False** = 通常版優先。FY2025 の `2-1-2025n.xlsx` で総計が
+             57,785 GWh ではなく 3,927 GWh になる問題を確認済み）
 
     Returns:
         list of dict: [
@@ -319,19 +368,25 @@ def list_xlsx_links(
             "link_text": link_text,
         })
 
-    # prefer_machine_readable: 同じ (fiscal_year, table) で n 版があれば通常版を落とす
-    if prefer_machine_readable:
-        by_key: dict[tuple[int, str], dict] = {}
-        for c in candidates:
-            key = (c["fiscal_year"], c["table"])
-            existing = by_key.get(key)
-            if existing is None:
-                by_key[key] = c
-            else:
-                # n 版優先: どちらか片方のみ n なら n を残す
+    # 常に (fiscal_year, table) で dedup。prefer_machine_readable で選択基準を切替:
+    #   True  → n 版があれば n 版を残す（機械判読版優先）
+    #   False → 通常版があれば通常版を残す（Day 5 発見: n 版は列構成が違い parse 失敗）
+    by_key: dict[tuple[int, str], dict] = {}
+    for c in candidates:
+        key = (c["fiscal_year"], c["table"])
+        existing = by_key.get(key)
+        if existing is None:
+            by_key[key] = c
+        else:
+            if prefer_machine_readable:
+                # n 版優先
                 if c["is_machine_readable"] and not existing["is_machine_readable"]:
                     by_key[key] = c
-        candidates = list(by_key.values())
+            else:
+                # 通常版優先（Day 5 default）
+                if not c["is_machine_readable"] and existing["is_machine_readable"]:
+                    by_key[key] = c
+    candidates = list(by_key.values())
 
     # sort
     candidates.sort(key=lambda r: (r["fiscal_year"], r["table"]))
@@ -357,8 +412,8 @@ def fetch_index_pages(index_urls: list[str]) -> list[dict]:
     all_links: list[dict] = []
     seen_urls: set[str] = set()
     for url in index_urls:
-        logger.info("GET index page: %s", url)
-        r = get(url, timeout=120, headers=BROWSER_HEADERS)
+        logger.info("GET index page (via curl_cffi/chrome120): %s", url)
+        r = _meti_get(url, timeout=120)
         r.raise_for_status()
         links = list_xlsx_links(r.text, base_url=url)
         added = 0
@@ -389,10 +444,9 @@ def download_xlsx(url: str, dest_path: Path) -> bytes:
         logger.info("cache hit: %s (%d bytes)", dest_path, dest_path.stat().st_size)
         return dest_path.read_bytes()
 
-    logger.info("GET %s", url)
-    # METI 応答遅延 + 2 MB XLSX の DL 時間を考慮して 120 秒（Day 5 post-mortem 対応）
-    # XLSX 用の Accept ヘッダ + ブラウザ風 UA
-    r = get(url, timeout=120, headers=XLSX_HEADERS)
+    logger.info("GET (via curl_cffi/chrome120): %s", url)
+    # METI Akamai Bot Manager 回避のため curl_cffi。timeout 120 秒。
+    r = _meti_get(url, timeout=120, accept_xlsx=True)
     r.raise_for_status()
     content = r.content
     if len(content) < 10_000:
@@ -605,11 +659,284 @@ def _extract_monthly_values(
 # ---------------------------------------------------------------------------
 
 
+# ---------------------------------------------------------------------------
+# Day 5: 実 METI XLSX の構造に基づく parse（全面書き直し）
+# ---------------------------------------------------------------------------
+#
+# 実 XLSX を openpyxl で直接解析して判明した構造（2026-04-24 深夜、Day 5）:
+#
+# 【発電実績 2-1-{YYYY}.xlsx】
+#   - 各 fiscal year ファイルに **月次シートが 12 枚**（`2024.4`, `2024.5`, ..., `2025.3`）
+#   - 各月次シート内は「事業者 × 電源種別」のクロス表
+#   - ヘッダ: Row 2 (excel row 2) = 電源大分類、Row 3 (excel row 3) = 電源小分類
+#   - 合計行: c0 == '合計' （通常 r1611 付近、事業者数 1600+）
+#   - 合計行の列 index（単位: 千 kWh = MWh）:
+#       c10 = 水力計、c18 = 火力計、c19 = 原子力、
+#       c20 = 風力、c21 = 太陽光、c22 = 地熱、c23 = バイオマス、c28 = 総計
+#
+# 【電力需要 3-1-{YYYY}.xlsx】
+#   - 同じく月次シート 12 枚
+#   - 2 ブロック構造:
+#     Block 1: みなし小売電気事業者等（r28 付近「合  計」全角スペース）
+#       c12 = 電灯（自由料金）、c13 = 電力（自由料金）
+#       c15 = 電灯（経過措置料金）、c16 = 電力（経過措置料金）
+#     Block 2: みなし小売以外（r736 付近「合  計」）
+#     r744 付近: c13 = 需要合計（全電気事業者、単位 千kWh）
+#
+# 【単位変換】 千 kWh → GWh: 値を 1000 で割る
+#
+# 【Phase 2-A v1 の割り切り】
+#   需要の「電灯」「電力」はみなし小売のみ（r28 の c12+c15, c13+c16）。
+#   新電力側の電灯/電力区分はこのファイルでは取り切れないため Phase 2-B に後送り。
+#   「販売電力量合計」（meti-demand-total）は r744 の c13（真の全事業者合計）。
+# ---------------------------------------------------------------------------
+
+
+_SHEET_NAME_PATTERN = re.compile(r"^(\d{4})\.(\d{1,2})$")
+
+
+def _find_summary_row_by_label(
+    ws, labels: list[str], *, max_rows: int = 2000, max_cols: int = 4,
+) -> Optional[int]:
+    """ワークシート上で、A 列（or 先頭数列）に labels のいずれかが入っている
+    最初の行 index（0-based）を返す。
+
+    labels の文字列は strip 済みで完全一致 or 含有判定。METI XLSX では
+    '合計' / '合  計'（全角スペース 2 個）/ '需要合計' 等のバリアントがある。
+    """
+    normalized_labels = [lbl.strip() for lbl in labels]
+    for r_idx, row in enumerate(
+        ws.iter_rows(min_row=1, max_row=max_rows, max_col=max_cols, values_only=True)
+    ):
+        for c in range(max_cols):
+            if c >= len(row):
+                continue
+            v = row[c]
+            if v is None:
+                continue
+            s = str(v).strip()
+            if not s:
+                continue
+            for lbl in normalized_labels:
+                # 完全一致 or 先頭一致（「需要合計（電気事業者...）」のような長文対応）
+                if s == lbl or s.startswith(lbl):
+                    return r_idx
+    return None
+
+
+def _cell_at(ws, row_idx: int, col_idx: int):
+    """安全にセル値を取得（範囲外なら None）。row_idx / col_idx は 0-based。"""
+    try:
+        return ws.cell(row=row_idx + 1, column=col_idx + 1).value
+    except Exception:
+        return None
+
+
+def _to_gwh(v) -> Optional[float]:
+    """千 kWh（= MWh）から GWh に変換（÷1000）。不正な値は None。"""
+    f = _cell_to_float(v)
+    if f is None:
+        return None
+    return round(f / 1000.0, 3)
+
+
+def parse_generation_sheet(
+    xlsx_bytes: bytes,
+    cfg: dict,
+    fiscal_year: int,
+) -> list[dict]:
+    """発電実績 XLSX から 8 系列 × 最大 12 ヶ月の long 形式レコードを返す。
+
+    実装: 月次シート (`{YYYY}.{M}`) を順に走査 → 合計行を検出 → 列 index で値取得。
+    単位: 千 kWh → GWh（÷1000）。
+
+    Args:
+        xlsx_bytes: 2-1-{YYYY}.xlsx の bytes
+        cfg:        source_map.yaml の enecho-power セクション（今は未使用、将来の hook 用）
+        fiscal_year: 会計年度（参考情報、シート名に既に含まれる）
+    Returns:
+        list of {date, indicator_id, region, value} 形式
+    """
+    from openpyxl import load_workbook
+
+    try:
+        wb = load_workbook(BytesIO(xlsx_bytes), read_only=True, data_only=True)
+    except Exception as e:
+        logger.error("failed to open generation xlsx (FY%d): %s", fiscal_year, e)
+        return []
+
+    # 発電シートの合計行ラベル候補
+    total_labels = ["合計", "合  計", "総計"]
+    # 列 index（0-based）: 合計行からこの列を取る
+    col_map = {
+        "meti-gen-hydro":      10,  # 水力計
+        "meti-gen-thermal":    18,  # 火力計
+        "meti-gen-nuclear":    19,  # 原子力
+        "meti-gen-wind":       20,  # 風力
+        "meti-gen-solar":      21,  # 太陽光
+        "meti-gen-geothermal": 22,  # 地熱
+        "meti-gen-biomass":    23,  # バイオマス
+        "meti-gen-total":      28,  # 総計
+    }
+
+    rows: list[dict] = []
+    months_found = 0
+    for sheet_name in wb.sheetnames:
+        m = _SHEET_NAME_PATTERN.match(sheet_name)
+        if not m:
+            continue
+        year = int(m.group(1))
+        month = int(m.group(2))
+        if not (1 <= month <= 12):
+            continue
+
+        ws = wb[sheet_name]
+        summary_row = _find_summary_row_by_label(ws, total_labels, max_rows=2500)
+        if summary_row is None:
+            logger.warning(
+                "FY%d sheet='%s': 合計行が見つからず skip", fiscal_year, sheet_name,
+            )
+            continue
+
+        ymd = f"{year:04d}-{month:02d}-01"
+        extracted = 0
+        for ind_id, col_idx in col_map.items():
+            v = _cell_at(ws, summary_row, col_idx)
+            gwh = _to_gwh(v)
+            if gwh is None:
+                continue
+            rows.append({
+                "date": ymd,
+                "indicator_id": ind_id,
+                "region": "jp",
+                "value": gwh,
+            })
+            extracted += 1
+        if extracted > 0:
+            months_found += 1
+        logger.info(
+            "FY%d sheet='%s' 合計行 r%d → %d indicators, example total=%s GWh",
+            fiscal_year, sheet_name, summary_row, extracted,
+            next((r["value"] for r in rows[-extracted:] if r["indicator_id"] == "meti-gen-total"), None),
+        )
+    wb.close()
+    logger.info(
+        "parse_generation_sheet FY%d: %d months × up to 8 indicators = %d rows",
+        fiscal_year, months_found, len(rows),
+    )
+    return rows
+
+
+def parse_demand_sheet(
+    xlsx_bytes: bytes,
+    cfg: dict,
+    fiscal_year: int,
+) -> list[dict]:
+    """電力需要 XLSX から 3 系列 × 最大 12 ヶ月の long 形式レコードを返す。
+
+    実装:
+      - `meti-demand-total`: 最下部「需要合計（電気事業者の販売電力量＋電気事業者の特定供給・自家消費）」行の c13
+      - `meti-demand-lights`: みなし小売合計行（r28 付近の「合  計」全角スペース）の c12+c15
+      - `meti-demand-power`:  同合計行の c13+c16
+    単位: 千 kWh → GWh（÷1000）。
+    """
+    from openpyxl import load_workbook
+
+    try:
+        wb = load_workbook(BytesIO(xlsx_bytes), read_only=True, data_only=True)
+    except Exception as e:
+        logger.error("failed to open demand xlsx (FY%d): %s", fiscal_year, e)
+        return []
+
+    # 合計行ラベル候補
+    minashi_total_labels = ["合  計", "合計", "総計"]  # 全角スペース込みを優先
+    grand_total_labels = ["需要合計", "需要計", "電力需要合計"]
+
+    rows: list[dict] = []
+    months_found = 0
+    for sheet_name in wb.sheetnames:
+        m = _SHEET_NAME_PATTERN.match(sheet_name)
+        if not m:
+            continue
+        year = int(m.group(1))
+        month = int(m.group(2))
+        if not (1 <= month <= 12):
+            continue
+
+        ws = wb[sheet_name]
+        # みなし小売合計（ブロック 1 の小計、上の方にある）
+        minashi_row = _find_summary_row_by_label(ws, minashi_total_labels, max_rows=200)
+        # 真の需要合計（ファイル最下部付近）
+        grand_row = _find_summary_row_by_label(ws, grand_total_labels, max_rows=2000)
+
+        ymd = f"{year:04d}-{month:02d}-01"
+        extracted = 0
+
+        if minashi_row is not None:
+            # c12（電灯・自由）+ c15（電灯・経過措置）
+            lights = _to_gwh(_cell_at(ws, minashi_row, 12))
+            lights_extra = _to_gwh(_cell_at(ws, minashi_row, 15))
+            if lights is not None or lights_extra is not None:
+                total_lights = (lights or 0) + (lights_extra or 0)
+                rows.append({
+                    "date": ymd, "indicator_id": "meti-demand-lights",
+                    "region": "jp", "value": round(total_lights, 3),
+                })
+                extracted += 1
+            # c13（電力・自由）+ c16（電力・経過措置）
+            power = _to_gwh(_cell_at(ws, minashi_row, 13))
+            power_extra = _to_gwh(_cell_at(ws, minashi_row, 16))
+            if power is not None or power_extra is not None:
+                total_power = (power or 0) + (power_extra or 0)
+                rows.append({
+                    "date": ymd, "indicator_id": "meti-demand-power",
+                    "region": "jp", "value": round(total_power, 3),
+                })
+                extracted += 1
+
+        if grand_row is not None:
+            # 「需要合計」行の数値は c0 の下のラベル「合計」の行（r744）or 直後の行にある
+            # 実ファイルでは r744 に「需要合計」、r745 (index 744) の c13 に値
+            # ただし検出ロジックで grand_row が「需要合計」のラベル行を指している可能性。
+            # ラベル行 and 次行の両方で c13 を確認。
+            total_v = _to_gwh(_cell_at(ws, grand_row + 1, 13))
+            if total_v is None:
+                total_v = _to_gwh(_cell_at(ws, grand_row, 13))
+            if total_v is not None:
+                rows.append({
+                    "date": ymd, "indicator_id": "meti-demand-total",
+                    "region": "jp", "value": total_v,
+                })
+                extracted += 1
+
+        if extracted > 0:
+            months_found += 1
+        logger.info(
+            "FY%d sheet='%s' minashi_row=%s grand_row=%s → %d indicators",
+            fiscal_year, sheet_name,
+            str(minashi_row) if minashi_row is not None else "—",
+            str(grand_row) if grand_row is not None else "—",
+            extracted,
+        )
+    wb.close()
+    logger.info(
+        "parse_demand_sheet FY%d: %d months × up to 3 indicators = %d rows",
+        fiscal_year, months_found, len(rows),
+    )
+    return rows
+
+
+# ---------------------------------------------------------------------------
+# 旧シグネチャ（Day 2〜4 の wide 月ヘッダ前提）は使わなくなったが、
+# 既存テスト互換のため骨だけ残す（呼ばれない想定）
+# ---------------------------------------------------------------------------
+
+
 def _parse_sheet_monthly(
     xlsx_bytes: bytes,
     cfg: dict,
     *,
-    sheet_kind: str,  # "generation_total" or "demand_total"
+    sheet_kind: str,
     label_key_to_indicator: dict[str, str],
     fiscal_year: int,
 ) -> list[dict]:
@@ -710,55 +1037,9 @@ def _parse_sheet_monthly(
     return rows
 
 
-def parse_generation_sheet(
-    xlsx_bytes: bytes,
-    cfg: dict,
-    fiscal_year: int,
-) -> list[dict]:
-    """発電実績 XLSX から 8 系列 × 12 ヶ月の long 形式レコードを返す。
-
-    Args:
-        xlsx_bytes: 2-1-{YYYY}.xlsx の bytes
-        cfg:        source_map.yaml の enecho-power セクション
-        fiscal_year: 2016〜最新年度
-    Returns:
-        list of {date, indicator_id, region, value}
-    """
-    label_map = {
-        "gen_total":       "meti-gen-total",
-        "gen_thermal":     "meti-gen-thermal",
-        "gen_hydro":       "meti-gen-hydro",
-        "gen_nuclear":     "meti-gen-nuclear",
-        "gen_solar":       "meti-gen-solar",
-        "gen_wind":        "meti-gen-wind",
-        "gen_geothermal":  "meti-gen-geothermal",
-        "gen_biomass":     "meti-gen-biomass",
-    }
-    return _parse_sheet_monthly(
-        xlsx_bytes, cfg,
-        sheet_kind="generation_total",
-        label_key_to_indicator=label_map,
-        fiscal_year=fiscal_year,
-    )
-
-
-def parse_demand_sheet(
-    xlsx_bytes: bytes,
-    cfg: dict,
-    fiscal_year: int,
-) -> list[dict]:
-    """電力需要実績 XLSX から 3 系列 × 12 ヶ月の long 形式レコードを返す。"""
-    label_map = {
-        "demand_total":  "meti-demand-total",
-        "demand_lights": "meti-demand-lights",
-        "demand_power":  "meti-demand-power",
-    }
-    return _parse_sheet_monthly(
-        xlsx_bytes, cfg,
-        sheet_kind="demand_total",
-        label_key_to_indicator=label_map,
-        fiscal_year=fiscal_year,
-    )
+# 旧 _parse_sheet_monthly 経由の parse_generation_sheet / parse_demand_sheet は
+# Day 5 で新しい実装（line 734, 821 付近）に置き換えたのでここで削除。
+# 旧 _parse_sheet_monthly 本体（上記）は互換のため残置（未使用）。
 
 
 _GENERATION_KEYS = [

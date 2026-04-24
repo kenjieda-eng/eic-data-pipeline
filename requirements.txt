@@ -4,3 +4,6 @@ pyarrow>=14.0
 PyYAML>=6.0
 beautifulsoup4>=4.12
 openpyxl>=3.1
+# curl_cffi: Akamai Bot Manager (METI) 突破用。Chrome 120 TLS fingerprint 模倣。
+# fetch_enecho_power.py のみで使用。他の fetch_*.py は requests のまま。
+curl_cffi>=0.7
