@@ -317,12 +317,17 @@ def fetch_index_pages(index_urls: list[str]) -> list[dict]:
     """複数の index URL を順に叩いて、結果を union して返す。
 
     メイン entry: results.html（最新年度）+ results_archive.html（過去 10 年度）。
+
+    Note on timeouts (2026-04-24 Day 5 post-mortem):
+        METI サーバへの接続は GitHub Actions runner（US DC）→ Japan の経路で
+        応答が遅くなることがある。Run #24/#25 は 30s timeout で連続失敗。
+        timeout=120s に延長 + _retry_loop（5 回リトライ）で堅牢化する。
     """
     all_links: list[dict] = []
     seen_urls: set[str] = set()
     for url in index_urls:
         logger.info("GET index page: %s", url)
-        r = get(url, timeout=30)
+        r = get(url, timeout=120)  # METI 応答遅延対策（30s → 120s）
         r.raise_for_status()
         links = list_xlsx_links(r.text, base_url=url)
         added = 0
@@ -354,7 +359,8 @@ def download_xlsx(url: str, dest_path: Path) -> bytes:
         return dest_path.read_bytes()
 
     logger.info("GET %s", url)
-    r = get(url, timeout=60)
+    # METI 応答遅延 + 2 MB XLSX の DL 時間を考慮して 120 秒（Day 5 post-mortem 対応）
+    r = get(url, timeout=120)
     r.raise_for_status()
     content = r.content
     if len(content) < 10_000:
