@@ -22,10 +22,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        # 2026-04-24: Node.js 24 対応（期限 2026-06-02）で v4 → v5 へ
+        uses: actions/checkout@v5
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        # 2026-04-24: Node.js 24 対応で v5 → v6 へ
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
           cache: "pip"
@@ -77,6 +79,22 @@ jobs:
         # 平日 17 時台に当日分が追記されるため、毎朝実行で 1 営業日遅れを追従。
         run: |
           python scripts/fetch_jgb.py
+        continue-on-error: true
+
+      - name: Fetch METI 電力調査統計 (Phase 2-A, monthly, fiscal-year XLSX)
+        # 資源エネルギー庁 電力調査統計（ep002）の年度単位 XLSX から 12 系列を抽出。
+        # 発電 8 + 需要 3 + 派生 1（meti-renewables-share）。約 2 ヶ月遅延で公表される。
+        # バックフィル時は FY2016〜最新年度の 10 年度分（= 20 XLSX ≒ 60 MB）を走査。
+        # 通常モードは最新年度の XLSX 更新のみを確認（数 MB）。
+        # Phase 2-A Day 4 でメインループ有効化。現在は --dry-run 相当の空振り実装で CI 無害。
+        run: |
+          if [ "${{ inputs.backfill }}" = "true" ]; then
+            echo "backfill mode: fetching FY2016 onwards"
+            python scripts/fetch_enecho_power.py --backfill
+          else
+            echo "normal mode: fetching latest fiscal year only"
+            python scripts/fetch_enecho_power.py
+          fi
         continue-on-error: true
 
       - name: Generate indicators catalog (D-011)

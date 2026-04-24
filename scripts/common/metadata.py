@@ -85,8 +85,8 @@ MISSING_POLICY_VALUES = {
 }
 AGGREGATION_VALUES = {
     "raw", "daily_sum", "daily_mean", "daily_max", "daily_min",
-    "monthly_mean", "monthly_end", "monthly_high", "monthly_low",
-    "area_average", "alias",
+    "monthly_sum", "monthly_mean", "monthly_end", "monthly_high", "monthly_low",
+    "area_average", "alias", "derived",
 }
 
 # frequency 別デフォルトの鮮度 SLA（日数）。

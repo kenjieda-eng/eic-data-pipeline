@@ -644,3 +644,212 @@ sources:
       - 新発がなかった年限は "-"。float 変換時は None に落とす（missing_policy: null）。
       - 更新タイミング: 平日 17 時台に当日分が追記される。週末・祝日は行が増えない。
       - Phase 2 で 2年 / 5年 / 20年 / 30年 を追加する際は term_to_id に 1 行足すだけで良い設計。
+
+  enecho-power:
+    name: 資源エネルギー庁 電力調査統計
+    publisher: 資源エネルギー庁（METI）
+    publisher_url: https://www.enecho.meti.go.jp/
+    source_url: https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+    # ----- 2026-04-24 Day 3 実 HTML 疎通で確定した仕様 ------------------
+    # ファイルは **年度単位** で公開される（月次ファイルではない）。
+    # 1 XLSX に 4 月〜翌 3 月の 12 ヶ月分が格納される wide 形式。
+    # 年度によって filename / layout が変わる:
+    #   2019 年度〜2025 年度: `2-1-{YYYY}.xlsx` / `3-1-{YYYY}.xlsx`（西暦）
+    #   2016 年度〜2018 年度: `2-1-H{nn}.xlsx` / `3-1-H{nn}.xlsx`（和暦平成）
+    #   2015 年度以前:       `2-1-H{nn}.xls` + 表構造が根本的に異なる（2-1〜2-12 分割シート）
+    # Phase 2-A v1 のスコープは **2016 年度〜最新（2025 年度）** の 10 年分に限定。
+    # 2015 年度以前は Phase 2-B 以降で別ローダーを書く。
+    # --------------------------------------------------------------
+    # 最新年度トップページ（通常 1 年度分のリンクのみ）
+    index_url: https://www.enecho.meti.go.jp/statistics/electric_power/ep002/results.html
+    # 過去年度一覧（2014〜直近年度を 1 ページにまとめたアーカイブ）
+    archive_url: https://www.enecho.meti.go.jp/statistics/electric_power/ep002/results_archive.html
+    # どちらのページも同じ HTML 構造。list_xlsx_links は両方を順に走査して union を返す。
+    index_urls:
+      - https://www.enecho.meti.go.jp/statistics/electric_power/ep002/results.html
+      - https://www.enecho.meti.go.jp/statistics/electric_power/ep002/results_archive.html
+    # --- D-011 メタデータ共通項目 ---
+    license: meti-terms                           # 政府標準利用規約 2.0 互換（CC BY 4.0 互換相当）
+    license_url: https://www.meti.go.jp/main/rules.html
+    license_notice: |
+      出典: 資源エネルギー庁「電力調査統計」
+      政府標準利用規約 2.0 に従い、出典明示を条件に利用可。
+    license_text: |
+      経済産業省（METI）公表資料。政府標準利用規約 2.0（CC BY 4.0 互換）。
+      参考: https://www.meti.go.jp/main/rules.html
+    frequency: monthly
+    tz: Asia/Tokyo
+    missing_policy: "null"                        # 欠測月は null
+    freshness_sla_days: 75                        # 月次・約 2 ヶ月遅延のため広めに設定
+    # ----- 対象ファイル名パターン ---------------------------------------
+    # 発電実績テーブル: 2-1-{YEAR}.xlsx or 2-1-H{nn}.xlsx or 2-1-{YEAR}n.xlsx（機械判読版、2025 のみ）
+    # 需要実績テーブル: 3-1-{YEAR}.xlsx or 3-1-H{nn}.xlsx
+    # 正規表現で抽出する。`n.xlsx` 変種が存在すればそちらを優先（機械判読しやすい）。
+    target_patterns:
+      generation: "^2-1-(H\\d{2}|\\d{4})n?\\.xlsx$"
+      demand:     "^3-1-(H\\d{2}|\\d{4})n?\\.xlsx$"
+    # 和暦プレフィックス → 西暦オフセット（filename パース用）
+    era_offset:
+      H: 1988     # 平成（H28 → 2016）
+      R: 2018     # 令和（未使用、現状 filename は西暦直接）
+    # スコープ境界（この fiscal year 以降のみを対象に取得）
+    min_fiscal_year: 2016
+    # 対象シート名（XLSX 内部）。Day 4 で実 XLSX を確認して調整予定。
+    sheet_hints:
+      generation_total: "総括"                    # 電源別・月次・全国計
+      demand_total:     "総括"                    # 電灯・電力・月次・合計
+    # 代替シート名（旧レイアウト）
+    sheet_aliases:
+      generation_total: ["発電実績", "電源別", "発電端", "月別"]
+      demand_total:     ["販売", "電灯・電力", "用途別", "電力需要"]
+    # ラベル駆動で値を抽出（行ラベルの最初のマッチを採用）
+    row_labels:
+      gen_total:       ["発電電力量計", "総計", "合計", "発電電力量合計"]
+      gen_thermal:     ["火力計", "火力発電計", "火力"]
+      gen_hydro:       ["水力計", "水力発電計", "水力"]
+      gen_nuclear:     ["原子力"]
+      gen_solar:       ["太陽光", "太陽光発電"]
+      gen_wind:        ["風力", "風力発電"]
+      gen_geothermal:  ["地熱", "地熱発電"]
+      gen_biomass:     ["バイオマス", "バイオマス発電"]
+      demand_total:    ["販売電力量計", "合計", "総計", "販売電力量合計"]
+      demand_lights:   ["電灯"]
+      demand_power:    ["電力"]
+    # 単位の想定値（XLSX では「(百万 kWh)」「(GWh)」等の揺れあり、fetch 側で正規化）
+    unit_canonical: GWh
+    # 派生系列の定義（fetch 後に計算）
+    derived:
+      meti-renewables-share:
+        formula: "(solar + wind + geothermal + hydro + biomass) / total * 100"
+        numerator_ids:
+          - meti-gen-solar
+          - meti-gen-wind
+          - meti-gen-geothermal
+          - meti-gen-hydro
+          - meti-gen-biomass
+        denominator_id: meti-gen-total
+    indicator_ids:
+      - meti-gen-total
+      - meti-gen-thermal
+      - meti-gen-hydro
+      - meti-gen-nuclear
+      - meti-gen-solar
+      - meti-gen-wind
+      - meti-gen-geothermal
+      - meti-gen-biomass
+      - meti-demand-total
+      - meti-demand-lights
+      - meti-demand-power
+      - meti-renewables-share
+    # D-011 準拠の indicator 固有メタデータ（12 系列）
+    indicators:
+      meti-gen-total:
+        name: "総発電電力量（月次）"
+        domain: power
+        unit: "GWh"
+        backfill_start: "2012-01"
+        aggregation: monthly_sum
+        notes: "発電端ベース。一般送配電＋発電事業者の月合計"
+        depends_on: null
+      meti-gen-thermal:
+        name: "火力発電電力量（月次）"
+        domain: power
+        unit: "GWh"
+        backfill_start: "2012-01"
+        aggregation: monthly_sum
+        notes: "LNG・石炭・石油などの合計"
+        depends_on: null
+      meti-gen-hydro:
+        name: "水力発電電力量（月次）"
+        domain: power
+        unit: "GWh"
+        backfill_start: "2012-01"
+        aggregation: monthly_sum
+        notes: "一般水力＋揚水水力"
+        depends_on: null
+      meti-gen-nuclear:
+        name: "原子力発電電力量（月次）"
+        domain: power
+        unit: "GWh"
+        backfill_start: "2012-01"
+        aggregation: monthly_sum
+        notes: "再稼働状況と強く相関"
+        depends_on: null
+      meti-gen-solar:
+        name: "太陽光発電電力量（月次）"
+        domain: power
+        unit: "GWh"
+        backfill_start: "2012-01"
+        aggregation: monthly_sum
+        notes: "FIT/FIP 対象＋非対象"
+        depends_on: null
+      meti-gen-wind:
+        name: "風力発電電力量（月次）"
+        domain: power
+        unit: "GWh"
+        backfill_start: "2012-01"
+        aggregation: monthly_sum
+        notes: "陸上＋洋上"
+        depends_on: null
+      meti-gen-geothermal:
+        name: "地熱発電電力量（月次）"
+        domain: power
+        unit: "GWh"
+        backfill_start: "2012-01"
+        aggregation: monthly_sum
+        notes: "国内合計"
+        depends_on: null
+      meti-gen-biomass:
+        name: "バイオマス発電電力量（月次）"
+        domain: power
+        unit: "GWh"
+        backfill_start: "2012-01"
+        aggregation: monthly_sum
+        notes: "FIT/FIP 主体"
+        depends_on: null
+      meti-demand-total:
+        name: "販売電力量合計（月次）"
+        domain: power
+        unit: "GWh"
+        backfill_start: "2012-01"
+        aggregation: monthly_sum
+        notes: "電灯＋電力の合計"
+        depends_on: null
+      meti-demand-lights:
+        name: "電灯販売電力量（月次）"
+        domain: power
+        unit: "GWh"
+        backfill_start: "2012-01"
+        aggregation: monthly_sum
+        notes: "家庭用需要"
+        depends_on: null
+      meti-demand-power:
+        name: "電力販売電力量（月次）"
+        domain: power
+        unit: "GWh"
+        backfill_start: "2012-01"
+        aggregation: monthly_sum
+        notes: "業務・産業需要"
+        depends_on: null
+      meti-renewables-share:
+        name: "再エネ比率（発電ベース、月次）"
+        domain: power
+        unit: "%"
+        backfill_start: "2012-01"
+        aggregation: derived
+        notes: "(太陽光＋風力＋地熱＋水力＋バイオマス) / 総発電量 × 100"
+        depends_on:
+          - meti-gen-solar
+          - meti-gen-wind
+          - meti-gen-geothermal
+          - meti-gen-hydro
+          - meti-gen-biomass
+          - meti-gen-total
+    notes: |
+      - 月次公表、約 2 ヶ月遅延（例: 2026-04 時点で 2026-02 分まで）。
+      - XLSX ファイルはトップページ results.html から取得。年別・月別ファイルの切替あり。
+      - 2012 以前は XLS（旧形式）混在のため、Phase 2-A の backfill は 2012-01 以降のみ対象。
+      - ラベル列の揺れ（「火力計」「火力」「火力発電計」など）に対応するため、row_labels はリスト。
+      - 単位は「(百万 kWh)」= GWh に正規化（fetch_enecho_power.py で値変換）。
+      - meti-renewables-share は他系列から計算される派生指標。D-011 の depends_on を初めて非 null で埋める系列。
+      - ライセンス: 政府標準利用規約 2.0（CC BY 4.0 互換）。出典明示が必須。
