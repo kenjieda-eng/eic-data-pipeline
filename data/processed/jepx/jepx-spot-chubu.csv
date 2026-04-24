@@ -2947,7 +2947,7 @@ date,indicator_id,region,value,source_url
 2020-04-24,jepx-spot-chubu,chubu,4.530208333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-25,jepx-spot-chubu,chubu,3.154583333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-26,jepx-spot-chubu,chubu,2.806875,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
-2020-04-27,jepx-spot-chubu,chubu,3.6366666666666663,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
+2020-04-27,jepx-spot-chubu,chubu,3.6366666666666654,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-28,jepx-spot-chubu,chubu,3.863958333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-29,jepx-spot-chubu,chubu,3.2706250000000003,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-30,jepx-spot-chubu,chubu,3.5175,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
@@ -2981,7 +2981,7 @@ date,indicator_id,region,value,source_url
 2020-05-28,jepx-spot-chubu,chubu,3.834583333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-05-29,jepx-spot-chubu,chubu,4.460624999999999,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-05-30,jepx-spot-chubu,chubu,3.0714583333333336,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
-2020-05-31,jepx-spot-chubu,chubu,3.9604166666666663,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
+2020-05-31,jepx-spot-chubu,chubu,3.960416666666666,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-06-01,jepx-spot-chubu,chubu,4.212083333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-06-02,jepx-spot-chubu,chubu,3.407083333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-06-03,jepx-spot-chubu,chubu,4.340833333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
@@ -3614,7 +3614,7 @@ date,indicator_id,region,value,source_url
 2022-02-20,jepx-spot-chubu,chubu,17.00166666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-21,jepx-spot-chubu,chubu,23.225625,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-22,jepx-spot-chubu,chubu,24.346875,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
-2022-02-23,jepx-spot-chubu,chubu,24.028958333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
+2022-02-23,jepx-spot-chubu,chubu,24.02895833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-24,jepx-spot-chubu,chubu,24.35833333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-25,jepx-spot-chubu,chubu,20.53375,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-26,jepx-spot-chubu,chubu,17.08458333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
@@ -3755,7 +3755,7 @@ date,indicator_id,region,value,source_url
 2022-07-11,jepx-spot-chubu,chubu,25.707083333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-07-12,jepx-spot-chubu,chubu,28.63854166666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-07-13,jepx-spot-chubu,chubu,26.292916666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
-2022-07-14,jepx-spot-chubu,chubu,24.747708333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
+2022-07-14,jepx-spot-chubu,chubu,24.74770833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-07-15,jepx-spot-chubu,chubu,24.883333333333336,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-07-16,jepx-spot-chubu,chubu,20.5425,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-07-17,jepx-spot-chubu,chubu,15.317708333333334,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
@@ -3824,7 +3824,7 @@ date,indicator_id,region,value,source_url
 2022-09-18,jepx-spot-chubu,chubu,31.864166666666662,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-09-19,jepx-spot-chubu,chubu,33.04333333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-09-20,jepx-spot-chubu,chubu,25.31,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
-2022-09-21,jepx-spot-chubu,chubu,27.435208333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
+2022-09-21,jepx-spot-chubu,chubu,27.43520833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-09-22,jepx-spot-chubu,chubu,24.449791666666663,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-09-23,jepx-spot-chubu,chubu,10.829166666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-09-24,jepx-spot-chubu,chubu,11.619166666666668,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
