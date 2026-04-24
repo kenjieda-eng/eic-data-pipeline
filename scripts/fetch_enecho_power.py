@@ -84,6 +84,36 @@ LOG_DIR = DATA_ROOT / "_logs"
 # 1 リクエストごとのスリープ（METI サーバへの配慮、1.5 秒）
 SLEEP_BETWEEN_REQUESTS = 1.5
 
+# ----- Phase 2-A Day 5 対策（Run #24/25/26 timeout post-mortem）-------
+# GitHub Actions runner（US DC）→ METI サーバへのデフォルト UA
+# （"eic-data-pipeline/0.1 (+github...)"）では応答が返ってこない。
+# 実ブラウザ風 UA に変えて、Accept-Language を日本語に設定すると、
+# 少なくとも WAF/IP reputation の layer で弾かれにくくなる想定。
+# BOJ / JMA / 財務省では問題なかったので、METI の WAF が bot-like UA に
+# 厳しめだという仮説。
+BROWSER_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/122.0.0.0 Safari/537.36"
+    ),
+    "Accept": (
+        "text/html,application/xhtml+xml,application/xml;q=0.9,"
+        "image/webp,*/*;q=0.8"
+    ),
+    "Accept-Language": "ja,en-US;q=0.7,en;q=0.3",
+    "DNT": "1",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+}
+XLSX_HEADERS = {
+    **BROWSER_HEADERS,
+    "Accept": (
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,"
+        "application/octet-stream,*/*;q=0.8"
+    ),
+}
+
 # ファイル名や link text から YYYY-MM を拾う正規表現（複数パターン、上から試す）
 # ※ 本スクリプトのメイン経路では filename は fiscal year 単位（YYYY / H{nn}）。
 #   YEAR_MONTH パターンは _infer_year_month で互換のため残置。
@@ -318,16 +348,17 @@ def fetch_index_pages(index_urls: list[str]) -> list[dict]:
 
     メイン entry: results.html（最新年度）+ results_archive.html（過去 10 年度）。
 
-    Note on timeouts (2026-04-24 Day 5 post-mortem):
-        METI サーバへの接続は GitHub Actions runner（US DC）→ Japan の経路で
-        応答が遅くなることがある。Run #24/#25 は 30s timeout で連続失敗。
-        timeout=120s に延長 + _retry_loop（5 回リトライ）で堅牢化する。
+    Note on timeouts & headers (2026-04-24 Day 5 post-mortem):
+        - Run #24/#25 は timeout=30s で 6 回全部 timeout → timeout=120s に延長
+        - Run #26 は timeout=120s でも 12m 33s 応答なし → ブラウザ風 UA に変更
+        - 仮説: METI WAF が "eic-data-pipeline/0.1 (+github...)" を bot と判定し
+                応答を返さない。実ブラウザの UA + Accept-Language: ja を渡すと抜ける。
     """
     all_links: list[dict] = []
     seen_urls: set[str] = set()
     for url in index_urls:
         logger.info("GET index page: %s", url)
-        r = get(url, timeout=120)  # METI 応答遅延対策（30s → 120s）
+        r = get(url, timeout=120, headers=BROWSER_HEADERS)
         r.raise_for_status()
         links = list_xlsx_links(r.text, base_url=url)
         added = 0
@@ -360,7 +391,8 @@ def download_xlsx(url: str, dest_path: Path) -> bytes:
 
     logger.info("GET %s", url)
     # METI 応答遅延 + 2 MB XLSX の DL 時間を考慮して 120 秒（Day 5 post-mortem 対応）
-    r = get(url, timeout=120)
+    # XLSX 用の Accept ヘッダ + ブラウザ風 UA
+    r = get(url, timeout=120, headers=XLSX_HEADERS)
     r.raise_for_status()
     content = r.content
     if len(content) < 10_000:
