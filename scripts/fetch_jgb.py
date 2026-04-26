@@ -112,6 +112,31 @@ def parse_yield(s: str) -> float | None:
         return None
 
 
+def fetch_two_csvs(all_url: str, current_url: str | None) -> dict[str, bytes]:
+    """
+    アーカイブ版 (jgbcm_all.csv) と当年度版 (jgbcm.csv) を両方取得して dict で返す。
+    current_url が None の場合はアーカイブだけ。当年度版が 404 などで取れない場合も
+    アーカイブだけで継続する（後方互換、片方が落ちてもパイプラインは走る）。
+    """
+    out: dict[str, bytes] = {}
+    # 必須: アーカイブ版
+    logger.info("GET %s (archive)", all_url)
+    r = get(all_url)
+    r.raise_for_status()
+    out["all"] = r.content
+
+    # 任意: 当年度版（落ちてもアーカイブで動く）
+    if current_url:
+        try:
+            logger.info("GET %s (current year)", current_url)
+            r2 = get(current_url)
+            r2.raise_for_status()
+            out["current"] = r2.content
+        except Exception as e:
+            logger.warning("current_csv_url fetch failed (続行 with archive only): %s", e)
+    return out
+
+
 def fetch_csv(csv_url: str) -> bytes:
     """財務省サイトから CSV をそのまま取得してバイト列で返す。"""
     logger.info("GET %s", csv_url)
@@ -247,21 +272,38 @@ def main(argv: list[str] | None = None) -> int:
     now_jst = datetime.now(timezone.utc) + timedelta(hours=9)
     today_tag = now_jst.strftime("%Y%m%d")
 
-    # ダウンロード
+    # ダウンロード（アーカイブ + 当年度版を両方）
+    current_url = source_cfg.get("current_csv_url")  # source_map.yaml で追加した任意フィールド
     try:
-        raw_bytes = fetch_csv(csv_url)
+        bundle = fetch_two_csvs(csv_url, current_url)
     except Exception as e:
         logger.exception("download failed: %s", e)
         append_log(log_dir, "fetch_jgb", "FAIL", f"download failed: {e}")
         return 1
 
-    # 生ファイル保存
-    save_raw(raw_bytes, raw_dir, f"jgbcm_all_{today_tag}.csv")
+    # 生ファイル保存（両方）
+    save_raw(bundle["all"], raw_dir, f"jgbcm_all_{today_tag}.csv")
+    if "current" in bundle:
+        save_raw(bundle["current"], raw_dir, f"jgbcm_{today_tag}.csv")
 
-    # デコード + パース
+    # デコード + パース（アーカイブ + 当年度版）
     try:
-        text = decode_csv(raw_bytes, encoding=encoding)
-        df_raw = parse_jgb_csv(text, header_row_idx=header_row_idx)
+        text_all = decode_csv(bundle["all"], encoding=encoding)
+        df_all = parse_jgb_csv(text_all, header_row_idx=header_row_idx)
+        if "current" in bundle:
+            text_cur = decode_csv(bundle["current"], encoding=encoding)
+            df_cur = parse_jgb_csv(text_cur, header_row_idx=header_row_idx)
+            # jgbcm.csv は末尾に空行とキャッシュ注意書き行が付くので、
+            # 和暦パターンに合わない行をドロップしてから union する。
+            wareki_re = r"^[MTSHR]\d"
+            df_cur = df_cur[df_cur["基準日"].str.match(wareki_re, na=False)].reset_index(drop=True)
+            # 当年度版が後勝ち（同じ基準日があればこちらで上書き）
+            df_raw = pd.concat([df_all, df_cur], ignore_index=True)
+            df_raw = df_raw.drop_duplicates(subset=["基準日"], keep="last").reset_index(drop=True)
+            logger.info("merged: archive %d rows + current %d rows = %d rows after dedup",
+                        len(df_all), len(df_cur), len(df_raw))
+        else:
+            df_raw = df_all
     except Exception as e:
         logger.exception("parse failed: %s", e)
         append_log(log_dir, "fetch_jgb", "FAIL", f"parse failed: {e}")

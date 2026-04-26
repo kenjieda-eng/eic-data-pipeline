@@ -587,8 +587,13 @@ sources:
     publisher: 財務省
     publisher_url: https://www.mof.go.jp/
     source_url: https://www.mof.go.jp/jgbs/reference/interest_rate/
-    # 単一 CSV（過去全期間: 1974-09-24 〜 最新営業日）。Shift-JIS、和暦日付、15 年限の wide 形式。
+    # 単一 CSV（過去全期間: 1974-09-24 〜 前年度末）。Shift-JIS、和暦日付、15 年限の wide 形式。
+    # 年度切替時にまとめて前年度をアーカイブする運用。
     csv_url: "https://www.mof.go.jp/jgbs/reference/interest_rate/data/jgbcm_all.csv"
+    # 当年度の日次更新版 CSV（1974-09-24〜最新営業日まで取れない、当年度のみ）。
+    # 2026-04-25 の事故（observation_cutoff が 3/31 で止まる）を受けて Phase 2-A v2 で追加。
+    # 当年度版のキー = 同日付があればこちらが優先（fetch_jgb.py で union 時に当年度版が後勝ち）。
+    current_csv_url: "https://www.mof.go.jp/jgbs/reference/interest_rate/jgbcm.csv"
     encoding: shift_jis
     # 列ヘッダ（2 行目）: 基準日,1年,2年,3年,4年,5年,6年,7年,8年,9年,10年,15年,20年,25年,30年,40年
     # 1 行目は単位注意書き。3 行目以降がデータ。欠損（新発がなかった期間）は "-"。
