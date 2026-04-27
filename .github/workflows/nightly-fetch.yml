@@ -81,6 +81,19 @@ jobs:
           python scripts/fetch_jgb.py
         continue-on-error: true
 
+      - name: Fetch US Treasury daily yields (CMT, 4 series)
+        # 米国財務省の年別 CSV API（type=daily_treasury_yield_curve）から CMT 利回り 4 系列を取得。
+        # 通常モードは当年のみ、--backfill で 1990-当年まで全期間（4 系列 × 約 9,000 行）。
+        run: |
+          if [ "${{ inputs.backfill }}" = "true" ]; then
+            echo "backfill mode: fetching from 1990 onwards"
+            python scripts/fetch_us_treasury.py --backfill
+          else
+            echo "normal mode: fetching current year only"
+            python scripts/fetch_us_treasury.py
+          fi
+        continue-on-error: true
+
       - name: Fetch METI 電力調査統計 (Phase 2-A, monthly, fiscal-year XLSX)
         # 資源エネルギー庁 電力調査統計（ep002）の年度単位 XLSX から 12 系列を抽出。
         # 発電 8 + 需要 3 + 派生 1（meti-renewables-share）。約 2 ヶ月遅延で公表される。

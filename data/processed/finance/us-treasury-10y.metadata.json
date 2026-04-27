@@ -1,0 +1,21 @@
+{
+  "id": "us-treasury-10y",
+  "name": "米国国債 10 年金利",
+  "domain": "finance",
+  "frequency": "daily",
+  "unit": "%",
+  "source_name": "U.S. Department of the Treasury",
+  "source_url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
+  "license": "public-domain",
+  "observation_cutoff": "2026-04-24",
+  "updated_at": "2026-04-27T18:16:41+09:00",
+  "license_url": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
+  "license_notice": "",
+  "tz": "America/New_York",
+  "missing_policy": "null",
+  "backfill_start": "1990-01-01",
+  "publisher": "United States Department of the Treasury",
+  "aggregation": "raw",
+  "notes": "Constant Maturity Treasury (CMT) 利回り、世界の長期金利のベンチマーク",
+  "depends_on": null
+}

@@ -861,3 +861,75 @@ sources:
       - 単位は「(百万 kWh)」= GWh に正規化（fetch_enecho_power.py で値変換）。
       - meti-renewables-share は他系列から計算される派生指標。D-011 の depends_on を初めて非 null で埋める系列。
       - ライセンス: 政府標準利用規約 2.0（CC BY 4.0 互換）。出典明示が必須。
+
+  us-treasury:
+    name: U.S. Treasury Daily Yield Curve Rates (CMT)
+    base_url: "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv"
+    url_template: "{base_url}/{year}/all?type=daily_treasury_yield_curve&field_tdr_date_value={year}&page&_format=csv"
+    encoding: "utf-8"
+    date_column: "Date"
+    date_format: "%m/%d/%Y"
+    license: "public-domain"
+    license_url: "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics"
+    license_notice: ""
+    source_name: "U.S. Department of the Treasury"
+    source_url: "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve"
+    publisher: "United States Department of the Treasury"
+    tz: "America/New_York"
+    frequency: daily
+    freshness_sla_days: 5
+    missing_policy: "null"
+    backfill_start: "1990-01-01"
+    indicator_ids:
+      - us-treasury-2y
+      - us-treasury-5y
+      - us-treasury-10y
+      - us-treasury-30y
+    indicators:
+      us-treasury-2y:
+        name: "米国国債 2 年金利"
+        domain: finance
+        frequency: daily
+        unit: "%"
+        column: "2 Yr"
+        backfill_start: "1990-01-01"
+        aggregation: raw
+        notes: "Constant Maturity Treasury (CMT) 利回り、米連邦準備制度の指標金利の一つ"
+        depends_on: null
+      us-treasury-5y:
+        name: "米国国債 5 年金利"
+        domain: finance
+        frequency: daily
+        unit: "%"
+        column: "5 Yr"
+        backfill_start: "1990-01-01"
+        aggregation: raw
+        notes: "Constant Maturity Treasury (CMT) 利回り"
+        depends_on: null
+      us-treasury-10y:
+        name: "米国国債 10 年金利"
+        domain: finance
+        frequency: daily
+        unit: "%"
+        column: "10 Yr"
+        backfill_start: "1990-01-01"
+        aggregation: raw
+        notes: "Constant Maturity Treasury (CMT) 利回り、世界の長期金利のベンチマーク"
+        depends_on: null
+      us-treasury-30y:
+        name: "米国国債 30 年金利"
+        domain: finance
+        frequency: daily
+        unit: "%"
+        column: "30 Yr"
+        backfill_start: "1990-01-01"
+        aggregation: raw
+        notes: "Constant Maturity Treasury (CMT) 利回り、長期金利の代表"
+        depends_on: null
+    notes: |
+      - URL は {year} 単位で年別 CSV を返す（例: /2026/all?...）。
+      - 1990-01 から現在までを年ループで取得（37 年分 × 約 250 営業日 ≒ 9,250 行 × 4 系列）。
+      - 30 年金利は 2002-02-19 に廃止 → 2006-02-09 に再導入の空白期間あり（欠損は null）。
+      - 値は既に % 単位（0.01 が 1bp）で変換不要。
+      - 日付は MM/DD/YYYY（米国式）→ ISO YYYY-MM-DD に変換。
+      - ライセンス: 米国連邦政府公表データ、public domain（17 U.S.C. § 105）。
