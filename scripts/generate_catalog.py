@@ -31,14 +31,19 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
+import yaml
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from scripts.common.metadata import (  # noqa: E402
     DEFAULT_FRESHNESS_SLA_DAYS,
     REQUIRED_FIELDS,
+    freshness_sla_days as resolve_freshness_sla,
     validate_metadata,
 )
+
+SOURCE_MAP_PATH = ROOT / "docs" / "source_map.yaml"
 
 logging.basicConfig(
     level=logging.INFO,
@@ -62,6 +67,28 @@ def load_metadata(path: Path) -> dict[str, Any]:
     """metadata.json を読み込む。失敗時は例外を上げる。"""
     text = path.read_text(encoding="utf-8")
     return json.loads(text)
+
+
+def load_source_map() -> dict:
+    """docs/source_map.yaml を読み込む。"""
+    with SOURCE_MAP_PATH.open("r", encoding="utf-8") as f:
+        return yaml.safe_load(f) or {}
+
+
+def build_indicator_to_source_index(source_map: dict) -> dict[str, dict]:
+    """
+    indicator_id -> source_cfg のマップを構築する。
+    fetch_*.py が freshness_sla_days を metadata.json に書き込む実装が完了するまで、
+    catalog 生成側で source_map.yaml を参照して SLA を補填する暫定配線（D-011 phase 0 ギャップ）。
+    優先順位: indicators dict（D-011 v2 構造）→ indicator_ids リスト（互換）。
+    """
+    index: dict[str, dict] = {}
+    for source_cfg in (source_map.get("sources") or {}).values():
+        for ind_id in (source_cfg.get("indicators") or {}):
+            index[ind_id] = source_cfg
+        for ind_id in (source_cfg.get("indicator_ids") or []):
+            index.setdefault(ind_id, source_cfg)
+    return index
 
 
 # --- 鮮度チェック --------------------------------------------------------
@@ -162,6 +189,9 @@ def main() -> int:
         logger.error("no metadata.json files found under %s", args.processed_dir)
         return 1
 
+    source_map = load_source_map()
+    indicator_to_source = build_indicator_to_source_index(source_map)
+
     indicators: list[dict] = []
     total_errors: list[str] = []
     total_warnings: list[str] = []
@@ -179,7 +209,17 @@ def main() -> int:
         for warn in result["warnings"]:
             total_warnings.append(f"{path.name}: {warn}")
 
-        # 鮮度警告
+        # source_map.yaml に基づき freshness_sla_days を解決して meta に注入。
+        # fetch_*.py が metadata.json に直接書き込む実装が入るまでの暫定配線。
+        if "freshness_sla_days" not in meta:
+            ind_id = meta.get("id")
+            src_cfg = indicator_to_source.get(ind_id) if ind_id else None
+            if src_cfg is not None:
+                meta["freshness_sla_days"] = resolve_freshness_sla(
+                    src_cfg, meta.get("frequency"), ind_id
+                )
+
+        # 鮮度警告（注入された SLA を含めて評価）
         fw = freshness_warning(meta)
         if fw:
             total_warnings.append(f"{path.name}: {fw}")

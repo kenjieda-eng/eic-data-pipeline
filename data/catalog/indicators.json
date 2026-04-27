@@ -1,7 +1,7 @@
 {
   "version": 1,
   "schema": "D-011",
-  "generated_at": "2026-04-27T08:49:14+09:00",
+  "generated_at": "2026-04-27T10:56:18+09:00",
   "indicator_count": 97,
   "indicators": [
     {
@@ -23,7 +23,8 @@
       "publisher": "The World Bank Group",
       "aggregation": "raw",
       "notes": "Coal, Australian 系列（Pink Sheet）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 60
     },
     {
       "id": "fuel-crude-brent",
@@ -44,7 +45,8 @@
       "publisher": "The World Bank Group",
       "aggregation": "raw",
       "notes": "Crude oil, Brent（Pink Sheet）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 60
     },
     {
       "id": "fuel-crude-dubai",
@@ -65,7 +67,8 @@
       "publisher": "The World Bank Group",
       "aggregation": "raw",
       "notes": "Crude oil, Dubai（Pink Sheet）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 60
     },
     {
       "id": "fuel-crude-wti",
@@ -86,7 +89,8 @@
       "publisher": "The World Bank Group",
       "aggregation": "raw",
       "notes": "Crude oil, WTI（Pink Sheet）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 60
     },
     {
       "id": "fuel-lng-jp-cif",
@@ -107,7 +111,8 @@
       "publisher": "The World Bank Group",
       "aggregation": "raw",
       "notes": "日本の LNG 輸入 CIF 価格（月次）。Pink Sheet 収録で 1977-01 から",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 60
     },
     {
       "id": "fuel-ng-europe-ttf",
@@ -128,7 +133,8 @@
       "publisher": "The World Bank Group",
       "aggregation": "raw",
       "notes": "Natural gas, Europe 系列。TTF は 1990 年代以降の整備で早期は代替指標の継ぎ",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 60
     },
     {
       "id": "fuel-ng-henryhub",
@@ -149,7 +155,8 @@
       "publisher": "The World Bank Group",
       "aggregation": "raw",
       "notes": "Natural gas, US 系列（Pink Sheet 列）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 60
     },
     {
       "id": "fx-usdjpy-monthly-avg",
@@ -170,7 +177,8 @@
       "publisher": "日本銀行",
       "aggregation": "monthly_mean",
       "notes": "BOJ FM08 / FXERM07。月中平均（東京市場 17 時）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 45
     },
     {
       "id": "fx-usdjpy-monthly-end",
@@ -191,7 +199,8 @@
       "publisher": "日本銀行",
       "aggregation": "monthly_end",
       "notes": "BOJ FM08 / FXERM06。月末値（東京市場 17 時）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 45
     },
     {
       "id": "fx-usdjpy-monthly-high",
@@ -212,7 +221,8 @@
       "publisher": "日本銀行",
       "aggregation": "monthly_high",
       "notes": "BOJ FM08 / FXERM03。月内高値（東京市場）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 45
     },
     {
       "id": "fx-usdjpy-monthly-low",
@@ -233,7 +243,8 @@
       "publisher": "日本銀行",
       "aggregation": "monthly_low",
       "notes": "BOJ FM08 / FXERM05。月内安値（東京市場）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 45
     },
     {
       "id": "jepx-spot-chubu",
@@ -254,7 +265,8 @@
       "publisher": "一般社団法人 日本卸電力取引所 (JEPX)",
       "aggregation": "daily_mean",
       "notes": "中部電力管内の日次平均約定価格",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jepx-spot-chugoku",
@@ -275,7 +287,8 @@
       "publisher": "一般社団法人 日本卸電力取引所 (JEPX)",
       "aggregation": "daily_mean",
       "notes": "中国電力管内の日次平均約定価格",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jepx-spot-hokkaido",
@@ -296,7 +309,8 @@
       "publisher": "一般社団法人 日本卸電力取引所 (JEPX)",
       "aggregation": "daily_mean",
       "notes": "北海道電力管内の日次平均約定価格",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jepx-spot-hokuriku",
@@ -317,7 +331,8 @@
       "publisher": "一般社団法人 日本卸電力取引所 (JEPX)",
       "aggregation": "daily_mean",
       "notes": "北陸電力管内の日次平均約定価格",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jepx-spot-kansai",
@@ -338,7 +353,8 @@
       "publisher": "一般社団法人 日本卸電力取引所 (JEPX)",
       "aggregation": "daily_mean",
       "notes": "関西電力管内の日次平均約定価格",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jepx-spot-kyushu",
@@ -359,7 +375,8 @@
       "publisher": "一般社団法人 日本卸電力取引所 (JEPX)",
       "aggregation": "daily_mean",
       "notes": "九州電力管内の日次平均約定価格",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jepx-spot-shikoku",
@@ -380,7 +397,8 @@
       "publisher": "一般社団法人 日本卸電力取引所 (JEPX)",
       "aggregation": "daily_mean",
       "notes": "四国電力管内の日次平均約定価格",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jepx-spot-system",
@@ -401,7 +419,8 @@
       "publisher": "一般社団法人 日本卸電力取引所 (JEPX)",
       "aggregation": "daily_mean",
       "notes": "48 コマの単純平均。システム全体の指標価格",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jepx-spot-tohoku",
@@ -422,7 +441,8 @@
       "publisher": "一般社団法人 日本卸電力取引所 (JEPX)",
       "aggregation": "daily_mean",
       "notes": "東北電力管内の日次平均約定価格",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jepx-spot-tokyo",
@@ -443,7 +463,8 @@
       "publisher": "一般社団法人 日本卸電力取引所 (JEPX)",
       "aggregation": "daily_mean",
       "notes": "東京電力 PG 管内の日次平均約定価格。首都圏の指標",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jgb-10y-yield",
@@ -464,7 +485,8 @@
       "publisher": "財務省",
       "aggregation": "raw",
       "notes": "財務省 金利情報 jgbcm_all.csv、10 年新発国債の日次利回り。土日祝・入札なし日は '-' → null",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-precip-chubu",
@@ -485,7 +507,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 名古屋",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 7
     },
     {
       "id": "jma-precip-chugoku",
@@ -506,7 +529,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 広島",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 7
     },
     {
       "id": "jma-precip-hokkaido",
@@ -527,7 +551,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 札幌。水力発電ダム流入と雪・豪雨イベントの素材指標",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 7
     },
     {
       "id": "jma-precip-hokuriku",
@@ -548,7 +573,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 金沢。冬の豪雪＝水力貯水の素材",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 7
     },
     {
       "id": "jma-precip-kansai",
@@ -569,7 +595,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 大阪",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 7
     },
     {
       "id": "jma-precip-kyushu",
@@ -590,7 +617,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 福岡。九州北部豪雨の素材",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 7
     },
     {
       "id": "jma-precip-shikoku",
@@ -611,7 +639,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 高松",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 7
     },
     {
       "id": "jma-precip-tohoku",
@@ -632,7 +661,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 仙台",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 7
     },
     {
       "id": "jma-precip-tokyo",
@@ -653,7 +683,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 東京。首都圏の豪雨・梅雨指標",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 7
     },
     {
       "id": "jma-snow-max-chubu",
@@ -674,7 +705,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 名古屋",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 365
     },
     {
       "id": "jma-snow-max-chugoku",
@@ -695,7 +727,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 広島",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 365
     },
     {
       "id": "jma-snow-max-hokkaido",
@@ -716,7 +749,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 札幌。冬季除雪コスト・暖房需要の素材",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 365
     },
     {
       "id": "jma-snow-max-hokuriku",
@@ -737,7 +771,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 金沢。北陸の豪雪＝春先の水力発電の素材",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 365
     },
     {
       "id": "jma-snow-max-kansai",
@@ -758,7 +793,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 大阪。ほぼゼロだが寒波イベント記録用",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 365
     },
     {
       "id": "jma-snow-max-kyushu",
@@ -779,7 +815,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 福岡",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 365
     },
     {
       "id": "jma-snow-max-shikoku",
@@ -800,7 +837,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 高松",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 365
     },
     {
       "id": "jma-snow-max-tohoku",
@@ -821,7 +859,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 仙台",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 365
     },
     {
       "id": "jma-snow-max-tokyo",
@@ -842,7 +881,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 東京。大雪時の首都圏交通麻痺イベント指標",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 365
     },
     {
       "id": "jma-sunshine-chubu",
@@ -863,7 +903,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 名古屋",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-sunshine-chugoku",
@@ -884,7 +925,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 広島。中国地方の太陽光比率が高いエリアの基準",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-sunshine-hokkaido",
@@ -905,7 +947,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 札幌。太陽光発電の発電量の素材指標",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-sunshine-hokuriku",
@@ -926,7 +969,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 金沢。冬季の雲量の逆指標",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-sunshine-kansai",
@@ -947,7 +991,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 大阪",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-sunshine-kyushu",
@@ -968,7 +1013,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 福岡。九州太陽光の基準",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-sunshine-shikoku",
@@ -989,7 +1035,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 高松。四国の太陽光適地",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-sunshine-tohoku",
@@ -1010,7 +1057,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 仙台",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-sunshine-tokyo",
@@ -1031,7 +1079,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_sum",
       "notes": "気象官署 東京。首都圏太陽光の基準点",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-avg-chubu",
@@ -1052,7 +1101,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 名古屋（prec=51, block=47636）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-avg-chugoku",
@@ -1073,7 +1123,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 広島（prec=67, block=47765）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-avg-hokkaido",
@@ -1094,7 +1145,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 札幌（prec=14, block=47412）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-avg-hokuriku",
@@ -1115,7 +1167,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 金沢（prec=56, block=47605）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-avg-kansai",
@@ -1136,7 +1189,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 大阪（prec=62, block=47772）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-avg-kyushu",
@@ -1157,7 +1211,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 福岡（prec=82, block=47807）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-avg-shikoku",
@@ -1178,7 +1233,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 高松（prec=72, block=47891）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-avg-tohoku",
@@ -1199,7 +1255,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 仙台（prec=34, block=47590）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-avg-tokyo",
@@ -1220,7 +1277,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 東京（prec=44, block=47662）",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-max-chubu",
@@ -1241,7 +1299,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 名古屋",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-max-chugoku",
@@ -1262,7 +1321,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 広島",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-max-hokkaido",
@@ -1283,7 +1343,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 札幌。夏の冷房需要・冬日解析で使用",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-max-hokuriku",
@@ -1304,7 +1365,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 金沢",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-max-kansai",
@@ -1325,7 +1387,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 大阪",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-max-kyushu",
@@ -1346,7 +1409,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 福岡",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-max-shikoku",
@@ -1367,7 +1431,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 高松",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-max-tohoku",
@@ -1388,7 +1453,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 仙台",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-max-tokyo",
@@ -1409,7 +1475,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_max",
       "notes": "気象官署 東京。首都圏の夏季ピーク指標",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-min-chubu",
@@ -1430,7 +1497,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_min",
       "notes": "気象官署 名古屋",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-min-chugoku",
@@ -1451,7 +1519,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_min",
       "notes": "気象官署 広島",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-min-hokkaido",
@@ -1472,7 +1541,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_min",
       "notes": "気象官署 札幌。冬の暖房需要の指標",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-min-hokuriku",
@@ -1493,7 +1563,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_min",
       "notes": "気象官署 金沢",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-min-kansai",
@@ -1514,7 +1585,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_min",
       "notes": "気象官署 大阪",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-min-kyushu",
@@ -1535,7 +1607,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_min",
       "notes": "気象官署 福岡",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-min-shikoku",
@@ -1556,7 +1629,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_min",
       "notes": "気象官署 高松",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-min-tohoku",
@@ -1577,7 +1651,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_min",
       "notes": "気象官署 仙台",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-temp-min-tokyo",
@@ -1598,7 +1673,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_min",
       "notes": "気象官署 東京",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-wind-avg-chubu",
@@ -1619,7 +1695,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 名古屋",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-wind-avg-chugoku",
@@ -1640,7 +1717,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 広島",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-wind-avg-hokkaido",
@@ -1661,7 +1739,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 札幌。洋上風力を含む北海道の風況の参考指標",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-wind-avg-hokuriku",
@@ -1682,7 +1761,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 金沢。日本海側の冬の季節風の強度",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-wind-avg-kansai",
@@ -1703,7 +1783,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 大阪",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-wind-avg-kyushu",
@@ -1724,7 +1805,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 福岡",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-wind-avg-shikoku",
@@ -1745,7 +1827,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 高松",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-wind-avg-tohoku",
@@ -1766,7 +1849,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 仙台",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "jma-wind-avg-tokyo",
@@ -1787,7 +1871,8 @@
       "publisher": "気象庁",
       "aggregation": "daily_mean",
       "notes": "気象官署 東京",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 3
     },
     {
       "id": "meti-demand-lights",
@@ -1808,7 +1893,8 @@
       "publisher": "資源エネルギー庁（METI）",
       "aggregation": "monthly_sum",
       "notes": "家庭用需要",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 150
     },
     {
       "id": "meti-demand-power",
@@ -1829,7 +1915,8 @@
       "publisher": "資源エネルギー庁（METI）",
       "aggregation": "monthly_sum",
       "notes": "業務・産業需要",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 150
     },
     {
       "id": "meti-demand-total",
@@ -1850,7 +1937,8 @@
       "publisher": "資源エネルギー庁（METI）",
       "aggregation": "monthly_sum",
       "notes": "電灯＋電力の合計",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 150
     },
     {
       "id": "meti-gen-biomass",
@@ -1871,7 +1959,8 @@
       "publisher": "資源エネルギー庁（METI）",
       "aggregation": "monthly_sum",
       "notes": "FIT/FIP 主体",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 150
     },
     {
       "id": "meti-gen-geothermal",
@@ -1892,7 +1981,8 @@
       "publisher": "資源エネルギー庁（METI）",
       "aggregation": "monthly_sum",
       "notes": "国内合計",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 150
     },
     {
       "id": "meti-gen-hydro",
@@ -1913,7 +2003,8 @@
       "publisher": "資源エネルギー庁（METI）",
       "aggregation": "monthly_sum",
       "notes": "一般水力＋揚水水力",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 150
     },
     {
       "id": "meti-gen-nuclear",
@@ -1934,7 +2025,8 @@
       "publisher": "資源エネルギー庁（METI）",
       "aggregation": "monthly_sum",
       "notes": "再稼働状況と強く相関",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 150
     },
     {
       "id": "meti-gen-solar",
@@ -1955,7 +2047,8 @@
       "publisher": "資源エネルギー庁（METI）",
       "aggregation": "monthly_sum",
       "notes": "FIT/FIP 対象＋非対象",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 150
     },
     {
       "id": "meti-gen-thermal",
@@ -1976,7 +2069,8 @@
       "publisher": "資源エネルギー庁（METI）",
       "aggregation": "monthly_sum",
       "notes": "LNG・石炭・石油などの合計",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 150
     },
     {
       "id": "meti-gen-total",
@@ -1997,7 +2091,8 @@
       "publisher": "資源エネルギー庁（METI）",
       "aggregation": "monthly_sum",
       "notes": "発電端ベース。一般送配電＋発電事業者の月合計",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 150
     },
     {
       "id": "meti-gen-wind",
@@ -2018,7 +2113,8 @@
       "publisher": "資源エネルギー庁（METI）",
       "aggregation": "monthly_sum",
       "notes": "陸上＋洋上",
-      "depends_on": null
+      "depends_on": null,
+      "freshness_sla_days": 150
     },
     {
       "id": "meti-renewables-share",
@@ -2046,7 +2142,8 @@
         "meti-gen-hydro",
         "meti-gen-biomass",
         "meti-gen-total"
-      ]
+      ],
+      "freshness_sla_days": 150
     }
   ]
 }

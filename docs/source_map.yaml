@@ -294,15 +294,16 @@ sources:
       jma-temp-min-shikoku:  { name: "高松 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 高松", depends_on: null }
       jma-temp-min-kyushu:   { name: "福岡 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 福岡", depends_on: null }
       # --- 日降水量合計（9 地点）---
-      jma-precip-hokkaido:   { name: "札幌 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 札幌。水力発電ダム流入と雪・豪雨イベントの素材指標", depends_on: null }
-      jma-precip-tohoku:     { name: "仙台 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 仙台", depends_on: null }
-      jma-precip-tokyo:      { name: "東京 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 東京。首都圏の豪雨・梅雨指標", depends_on: null }
-      jma-precip-chubu:      { name: "名古屋 日降水量合計", domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 名古屋", depends_on: null }
-      jma-precip-hokuriku:   { name: "金沢 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 金沢。冬の豪雪＝水力貯水の素材", depends_on: null }
-      jma-precip-kansai:     { name: "大阪 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 大阪", depends_on: null }
-      jma-precip-chugoku:    { name: "広島 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 広島", depends_on: null }
-      jma-precip-shikoku:    { name: "高松 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 高松", depends_on: null }
-      jma-precip-kyushu:     { name: "福岡 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 福岡。九州北部豪雨の素材", depends_on: null }
+      # 観測所からの値到着が一時的にラグることがあるため、3 日 → 7 日に緩和して誤検知を減らす。
+      jma-precip-hokkaido:   { name: "札幌 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 札幌。水力発電ダム流入と雪・豪雨イベントの素材指標", depends_on: null, freshness_sla_days: 7 }
+      jma-precip-tohoku:     { name: "仙台 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 仙台", depends_on: null, freshness_sla_days: 7 }
+      jma-precip-tokyo:      { name: "東京 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 東京。首都圏の豪雨・梅雨指標", depends_on: null, freshness_sla_days: 7 }
+      jma-precip-chubu:      { name: "名古屋 日降水量合計", domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 名古屋", depends_on: null, freshness_sla_days: 7 }
+      jma-precip-hokuriku:   { name: "金沢 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 金沢。冬の豪雪＝水力貯水の素材", depends_on: null, freshness_sla_days: 7 }
+      jma-precip-kansai:     { name: "大阪 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 大阪", depends_on: null, freshness_sla_days: 7 }
+      jma-precip-chugoku:    { name: "広島 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 広島", depends_on: null, freshness_sla_days: 7 }
+      jma-precip-shikoku:    { name: "高松 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 高松", depends_on: null, freshness_sla_days: 7 }
+      jma-precip-kyushu:     { name: "福岡 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 福岡。九州北部豪雨の素材", depends_on: null, freshness_sla_days: 7 }
       # --- 日照時間（9 地点）---
       jma-sunshine-hokkaido: { name: "札幌 日照時間",       domain: weather, unit: "h",  backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 札幌。太陽光発電の発電量の素材指標", depends_on: null }
       jma-sunshine-tohoku:   { name: "仙台 日照時間",       domain: weather, unit: "h",  backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 仙台", depends_on: null }
@@ -324,15 +325,17 @@ sources:
       jma-wind-avg-shikoku:  { name: "高松 日平均風速",     domain: weather, unit: "m/s", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 高松", depends_on: null }
       jma-wind-avg-kyushu:   { name: "福岡 日平均風速",     domain: weather, unit: "m/s", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 福岡", depends_on: null }
       # --- 最深積雪（9 地点）---
-      jma-snow-max-hokkaido: { name: "札幌 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 札幌。冬季除雪コスト・暖房需要の素材", depends_on: null }
-      jma-snow-max-tohoku:   { name: "仙台 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 仙台", depends_on: null }
-      jma-snow-max-tokyo:    { name: "東京 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 東京。大雪時の首都圏交通麻痺イベント指標", depends_on: null }
-      jma-snow-max-chubu:    { name: "名古屋 最深積雪",     domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 名古屋", depends_on: null }
-      jma-snow-max-hokuriku: { name: "金沢 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 金沢。北陸の豪雪＝春先の水力発電の素材", depends_on: null }
-      jma-snow-max-kansai:   { name: "大阪 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 大阪。ほぼゼロだが寒波イベント記録用", depends_on: null }
-      jma-snow-max-chugoku:  { name: "広島 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 広島", depends_on: null }
-      jma-snow-max-shikoku:  { name: "高松 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 高松", depends_on: null }
-      jma-snow-max-kyushu:   { name: "福岡 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 福岡", depends_on: null }
+      # 雪が積もらない地点は冬の最後の積雪日で値が固定される（例: 大阪は 2021 年以来）。
+      # SLA を 365 日に緩めて季節データの自然な不在を SLA 違反扱いしない。
+      jma-snow-max-hokkaido: { name: "札幌 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 札幌。冬季除雪コスト・暖房需要の素材", depends_on: null, freshness_sla_days: 365 }
+      jma-snow-max-tohoku:   { name: "仙台 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 仙台", depends_on: null, freshness_sla_days: 365 }
+      jma-snow-max-tokyo:    { name: "東京 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 東京。大雪時の首都圏交通麻痺イベント指標", depends_on: null, freshness_sla_days: 365 }
+      jma-snow-max-chubu:    { name: "名古屋 最深積雪",     domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 名古屋", depends_on: null, freshness_sla_days: 365 }
+      jma-snow-max-hokuriku: { name: "金沢 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 金沢。北陸の豪雪＝春先の水力発電の素材", depends_on: null, freshness_sla_days: 365 }
+      jma-snow-max-kansai:   { name: "大阪 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 大阪。ほぼゼロだが寒波イベント記録用", depends_on: null, freshness_sla_days: 365 }
+      jma-snow-max-chugoku:  { name: "広島 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 広島", depends_on: null, freshness_sla_days: 365 }
+      jma-snow-max-shikoku:  { name: "高松 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 高松", depends_on: null, freshness_sla_days: 365 }
+      jma-snow-max-kyushu:   { name: "福岡 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 福岡", depends_on: null, freshness_sla_days: 365 }
     notes: |
       - 月単位の HTML ページから日次テーブルを抽出する方式。
       - 欠測記号 `///`, `--`, `)`, `×`, 空文字を NaN として扱う。
@@ -363,7 +366,7 @@ sources:
     frequency: monthly
     tz: UTC
     missing_policy: forward_fill_within_month
-    freshness_sla_days: 45
+    freshness_sla_days: 60                        # World Bank Pink Sheet は前月号が翌月上旬確定（約 1 ヶ月遅延 + 余裕）
     # 各系列は wide 形式の Excel 列を部分一致で引くためのキーワード定義。
     # match: すべて含む AND 条件、exclude: いずれかに含まれたら除外。
     series:
@@ -685,7 +688,7 @@ sources:
     frequency: monthly
     tz: Asia/Tokyo
     missing_policy: "null"                        # 欠測月は null
-    freshness_sla_days: 75                        # 月次・約 2 ヶ月遅延のため広めに設定
+    freshness_sla_days: 150                       # METI 電力調査統計は 4 ヶ月遅れ（FY2025 確定は 2026-07 頃）
     # ----- 対象ファイル名パターン ---------------------------------------
     # 発電実績テーブル: 2-1-{YEAR}.xlsx or 2-1-H{nn}.xlsx or 2-1-{YEAR}n.xlsx（機械判読版、2025 のみ）
     # 需要実績テーブル: 3-1-{YEAR}.xlsx or 3-1-H{nn}.xlsx
