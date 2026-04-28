@@ -3638,3 +3638,4 @@ date,indicator_id,region,value,source_url
 2026-04-16,jma-precip-tohoku,tohoku,7.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=34&block_no=47590&year=YYYY&month=MM&day=&view=
 2026-04-18,jma-precip-tohoku,tohoku,0.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=34&block_no=47590&year=YYYY&month=MM&day=&view=
 2026-04-21,jma-precip-tohoku,tohoku,0.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=34&block_no=47590&year=YYYY&month=MM&day=&view=
+2026-04-27,jma-precip-tohoku,tohoku,6.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=34&block_no=47590&year=YYYY&month=MM&day=&view=

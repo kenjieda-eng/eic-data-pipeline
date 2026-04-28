@@ -2949,3 +2949,4 @@ date,indicator_id,region,value,source_url
 2026-04-22,jma-precip-chugoku,chugoku,1.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
 2026-04-23,jma-precip-chugoku,chugoku,39.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
 2026-04-26,jma-precip-chugoku,chugoku,35.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
+2026-04-27,jma-precip-chugoku,chugoku,2.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
