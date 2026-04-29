@@ -515,7 +515,7 @@ sources:
     frequency: monthly
     tz: Asia/Tokyo
     missing_policy: "null"
-    freshness_sla_days: 45
+    freshness_sla_days: 60
     # 各系列は BOJ 側の系列コード 1 対 1。単位は「円/ドル」で共通。
     series:
       - id: fx-usdjpy-monthly-avg
@@ -611,7 +611,7 @@ sources:
     frequency: daily
     tz: Asia/Tokyo
     missing_policy: "null"                        # 金利が付かなかった日は "-" → null で保持
-    freshness_sla_days: 3
+    freshness_sla_days: 5
     indicator_ids:
       - jgb-10y-yield
     # Phase 1 は 10 年のみ先に取る。Phase 2 以降で 2y/5y/20y/30y 等を昇格可能。

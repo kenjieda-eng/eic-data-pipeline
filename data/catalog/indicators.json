@@ -1,7 +1,7 @@
 {
   "version": 1,
   "schema": "D-011",
-  "generated_at": "2026-04-29T09:02:04+09:00",
+  "generated_at": "2026-04-29T15:30:42+09:00",
   "indicator_count": 101,
   "indicators": [
     {
@@ -178,7 +178,7 @@
       "aggregation": "monthly_mean",
       "notes": "BOJ FM08 / FXERM07。月中平均（東京市場 17 時）",
       "depends_on": null,
-      "freshness_sla_days": 45
+      "freshness_sla_days": 60
     },
     {
       "id": "fx-usdjpy-monthly-end",
@@ -200,7 +200,7 @@
       "aggregation": "monthly_end",
       "notes": "BOJ FM08 / FXERM06。月末値（東京市場 17 時）",
       "depends_on": null,
-      "freshness_sla_days": 45
+      "freshness_sla_days": 60
     },
     {
       "id": "fx-usdjpy-monthly-high",
@@ -222,7 +222,7 @@
       "aggregation": "monthly_high",
       "notes": "BOJ FM08 / FXERM03。月内高値（東京市場）",
       "depends_on": null,
-      "freshness_sla_days": 45
+      "freshness_sla_days": 60
     },
     {
       "id": "fx-usdjpy-monthly-low",
@@ -244,7 +244,7 @@
       "aggregation": "monthly_low",
       "notes": "BOJ FM08 / FXERM05。月内安値（東京市場）",
       "depends_on": null,
-      "freshness_sla_days": 45
+      "freshness_sla_days": 60
     },
     {
       "id": "jepx-spot-chubu",
@@ -486,7 +486,7 @@
       "aggregation": "raw",
       "notes": "財務省 金利情報 jgbcm_all.csv、10 年新発国債の日次利回り。土日祝・入札なし日は '-' → null",
       "depends_on": null,
-      "freshness_sla_days": 3
+      "freshness_sla_days": 5
     },
     {
       "id": "jma-precip-chubu",
