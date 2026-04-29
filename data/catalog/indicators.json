@@ -1,7 +1,7 @@
 {
   "version": 1,
   "schema": "D-011",
-  "generated_at": "2026-04-29T15:30:42+09:00",
+  "generated_at": "2026-04-29T15:48:33+09:00",
   "indicator_count": 101,
   "indicators": [
     {
@@ -24,7 +24,7 @@
       "aggregation": "raw",
       "notes": "Coal, Australian 系列（Pink Sheet）",
       "depends_on": null,
-      "freshness_sla_days": 60
+      "freshness_sla_days": 150
     },
     {
       "id": "fuel-crude-brent",
@@ -46,7 +46,7 @@
       "aggregation": "raw",
       "notes": "Crude oil, Brent（Pink Sheet）",
       "depends_on": null,
-      "freshness_sla_days": 60
+      "freshness_sla_days": 150
     },
     {
       "id": "fuel-crude-dubai",
@@ -68,7 +68,7 @@
       "aggregation": "raw",
       "notes": "Crude oil, Dubai（Pink Sheet）",
       "depends_on": null,
-      "freshness_sla_days": 60
+      "freshness_sla_days": 150
     },
     {
       "id": "fuel-crude-wti",
@@ -90,7 +90,7 @@
       "aggregation": "raw",
       "notes": "Crude oil, WTI（Pink Sheet）",
       "depends_on": null,
-      "freshness_sla_days": 60
+      "freshness_sla_days": 150
     },
     {
       "id": "fuel-lng-jp-cif",
@@ -112,7 +112,7 @@
       "aggregation": "raw",
       "notes": "日本の LNG 輸入 CIF 価格（月次）。Pink Sheet 収録で 1977-01 から",
       "depends_on": null,
-      "freshness_sla_days": 60
+      "freshness_sla_days": 150
     },
     {
       "id": "fuel-ng-europe-ttf",
@@ -134,7 +134,7 @@
       "aggregation": "raw",
       "notes": "Natural gas, Europe 系列。TTF は 1990 年代以降の整備で早期は代替指標の継ぎ",
       "depends_on": null,
-      "freshness_sla_days": 60
+      "freshness_sla_days": 150
     },
     {
       "id": "fuel-ng-henryhub",
@@ -156,7 +156,7 @@
       "aggregation": "raw",
       "notes": "Natural gas, US 系列（Pink Sheet 列）",
       "depends_on": null,
-      "freshness_sla_days": 60
+      "freshness_sla_days": 150
     },
     {
       "id": "fx-usdjpy-monthly-avg",

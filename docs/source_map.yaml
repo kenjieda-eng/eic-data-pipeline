@@ -366,7 +366,11 @@ sources:
     frequency: monthly
     tz: UTC
     missing_policy: forward_fill_within_month
-    freshness_sla_days: 60                        # World Bank Pink Sheet は前月号が翌月上旬確定（約 1 ヶ月遅延 + 余裕）
+    # WB Historical Data Monthly XLSX の更新は Pink Sheet PDF より遅延サイクルが長く、
+    # 月次データは公開後 4〜6 ヶ月のラグがある実態（2026-04-29 確認: XLSX 取得日に
+    # かかわらず内部データは 2025M12 で停止）。SLA 150 日は 5 ヶ月の余裕を見たもの。
+    # D-011 v2 で publication_lag_months フィールドを正式導入予定。
+    freshness_sla_days: 150                       # WB XLSX は PDF より遅く、4〜6 ヶ月ラグが実態（Phase 0 v2-A Step 3-A）
     # 各系列は wide 形式の Excel 列を部分一致で引くためのキーワード定義。
     # match: すべて含む AND 条件、exclude: いずれかに含まれたら除外。
     series:
