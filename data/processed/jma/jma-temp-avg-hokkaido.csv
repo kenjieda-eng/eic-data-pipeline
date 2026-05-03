@@ -5235,3 +5235,4 @@ date,indicator_id,region,value,source_url
 2026-04-30,jma-temp-avg-hokkaido,hokkaido,12.2,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=14&block_no=47412&year=YYYY&month=MM&day=&view=
 2026-05-01,jma-temp-avg-hokkaido,hokkaido,12.9,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=14&block_no=47412&year=YYYY&month=MM&day=&view=
 2026-05-02,jma-temp-avg-hokkaido,hokkaido,10.8,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=14&block_no=47412&year=YYYY&month=MM&day=&view=
+2026-05-03,jma-temp-avg-hokkaido,hokkaido,11.7,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=14&block_no=47412&year=YYYY&month=MM&day=&view=
