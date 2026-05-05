@@ -5235,3 +5235,4 @@ date,indicator_id,region,value,source_url
 2026-05-02,jma-sunshine-tokyo,tokyo,10.6,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
 2026-05-03,jma-sunshine-tokyo,tokyo,3.2,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
 2026-05-04,jma-sunshine-tokyo,tokyo,4.6,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
+2026-05-05,jma-sunshine-tokyo,tokyo,12.7,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
