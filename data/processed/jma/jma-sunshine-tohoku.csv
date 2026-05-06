@@ -5238,3 +5238,4 @@ date,indicator_id,region,value,source_url
 2026-05-03,jma-sunshine-tohoku,tohoku,3.7,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=34&block_no=47590&year=YYYY&month=MM&day=&view=
 2026-05-04,jma-sunshine-tohoku,tohoku,3.7,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=34&block_no=47590&year=YYYY&month=MM&day=&view=
 2026-05-05,jma-sunshine-tohoku,tohoku,11.3,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=34&block_no=47590&year=YYYY&month=MM&day=&view=
+2026-05-06,jma-sunshine-tohoku,tohoku,11.6,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=34&block_no=47590&year=YYYY&month=MM&day=&view=
