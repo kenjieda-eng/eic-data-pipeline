@@ -618,7 +618,8 @@ sources:
     freshness_sla_days: 5
     indicator_ids:
       - jgb-10y-yield
-    # Phase 1 は 10 年のみ先に取る。Phase 2 以降で 2y/5y/20y/30y 等を昇格可能。
+      - jgb-30y-yield
+    # Phase 1 は 10 年、Phase 3-B で 30 年を追加。Phase 2 以降で 2y/5y/20y も昇格可能。
     indicators:
       jgb-10y-yield:
         name: "JGB 10 年金利（新発）"
@@ -627,6 +628,14 @@ sources:
         backfill_start: "1974-09-24"
         aggregation: raw
         notes: "財務省 金利情報 jgbcm_all.csv、10 年新発国債の日次利回り。土日祝・入札なし日は '-' → null"
+        depends_on: null
+      jgb-30y-yield:
+        name: "JGB 30 年金利（新発）"
+        domain: finance
+        unit: "%"
+        backfill_start: "1999-09-21"
+        aggregation: raw
+        notes: "財務省 金利情報 jgbcm_all.csv、30 年新発国債の日次利回り（1999-09 開始）。米 30 年金利との比較に使用"
         depends_on: null
     # CSV 構造のメモ（fetch_jgb.py が読む）
     columns_wide:
@@ -646,9 +655,10 @@ sources:
       - "25年"
       - "30年"
       - "40年"
-    # 年限と indicator_id の対応（Phase 1 は 10 年のみ使う）
+    # 年限と indicator_id の対応（Phase 1: 10 年、Phase 3-B: 30 年追加）
     term_to_id:
       "10年": jgb-10y-yield
+      "30年": jgb-30y-yield
     notes: |
       - 単一 CSV で 1974-09-24 〜 最新営業日までを取得。差分更新不要（常に全量差し替え）。
       - 日付は和暦（例: S49.9.24 / H10.4.1 / R6.4.1）。fetch_jgb.py で西暦に変換。
