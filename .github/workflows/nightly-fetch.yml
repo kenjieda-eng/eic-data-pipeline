@@ -94,6 +94,17 @@ jobs:
           fi
         continue-on-error: true
 
+      - name: Fetch US macro from FRED (Phase 3-B Round 2, 3 series)
+        # FRED API（無料・120 req/min）で米マクロ 3 系列を取得:
+        #   us-cpi-yoy（CPIAUCSL の 12 ヶ月前比 %）/ us-fed-funds-rate（FEDFUNDS）/ us-industrial-production（INDPRO）
+        # 月次データ、毎日叩いて差分更新（FRED 側で過去値の改定が入るため）。
+        # API キー未設定時は CSV 直 DL エンドポイントに自動フォールバック（fetch_us_macro.py 内）。
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: |
+          python scripts/fetch_us_macro.py
+        continue-on-error: true
+
       - name: Fetch METI 電力調査統計 (Phase 2-A, monthly, fiscal-year XLSX)
         # 資源エネルギー庁 電力調査統計（ep002）の年度単位 XLSX から 12 系列を抽出。
         # 発電 8 + 需要 3 + 派生 1（meti-renewables-share）。約 2 ヶ月遅延で公表される。
