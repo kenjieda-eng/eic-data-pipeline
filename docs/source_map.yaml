@@ -947,3 +947,87 @@ sources:
       - 値は既に % 単位（0.01 が 1bp）で変換不要。
       - 日付は MM/DD/YYYY（米国式）→ ISO YYYY-MM-DD に変換。
       - ライセンス: 米国連邦政府公表データ、public domain（17 U.S.C. § 105）。
+
+  fred-macro:
+    name: FRED Macro Series (CPI / Fed Funds Rate / Industrial Production)
+    publisher: Federal Reserve Bank of St. Louis
+    publisher_url: https://fred.stlouisfed.org/
+    source_url: https://fred.stlouisfed.org/
+    # FRED API（公式、API キー必須・無料、120 req/min）
+    api_base: "https://api.stlouisfed.org/fred/series/observations"
+    # 認証不要 CSV エンドポイント（API キー未設定時のフォールバック）
+    csv_base: "https://fred.stlouisfed.org/graph/fredgraph.csv"
+    # --- D-011 メタデータ共通項目 ---
+    license: "public-domain"                    # FRED 経由の連邦政府データは public domain
+    license_url: "https://fred.stlouisfed.org/legal/"
+    license_notice: |
+      出典: Federal Reserve Bank of St. Louis (FRED).
+      各系列の元データは BLS（CPIAUCSL）/ Federal Reserve Board（FEDFUNDS, INDPRO）が作成。
+      米連邦政府公表資料は public domain（17 U.S.C. § 105）。
+    license_text: |
+      U.S. Bureau of Labor Statistics / Board of Governors of the Federal Reserve System;
+      retrieved from FRED, Federal Reserve Bank of St. Louis (https://fred.stlouisfed.org/).
+    frequency: monthly
+    tz: America/New_York
+    missing_policy: "null"
+    freshness_sla_days: 45                      # 月次、翌月中旬公表 → 45 日マージン
+    indicator_ids:
+      - us-cpi-yoy
+      - us-fed-funds-rate
+      - us-industrial-production
+    # D-011 準拠の indicator 固有メタデータ（3 系列）
+    # fred_series_id: FRED 側の系列 ID
+    # transform: yoy_pct = 12 ヶ月前比 % 算出 / level = raw 値そのまま
+    indicators:
+      us-cpi-yoy:
+        name: "米国 CPI（前年比 %）"
+        domain: macro
+        frequency: monthly
+        unit: "%"
+        fred_series_id: "CPIAUCSL"
+        transform: "yoy_pct"
+        backfill_start: "1948-01-01"
+        aggregation: monthly_mean
+        notes: "CPIAUCSL（Consumer Price Index for All Urban Consumers, SA）の 12 ヶ月前比 % を算出。Insight #40「日米 CPI 差 → USD/JPY」で使用"
+        depends_on: null
+        citation_url: "https://fred.stlouisfed.org/series/CPIAUCSL"
+        publisher_detail: "U.S. Bureau of Labor Statistics"
+        # CPI は対象月の翌月中旬公表 + FRED 反映で典型 45-75 日遅延 → 90 で余裕（運用観察後に再評価）
+        freshness_sla_days: 90
+      us-fed-funds-rate:
+        name: "Fed Funds Rate（実効、月次平均）"
+        domain: macro
+        frequency: monthly
+        unit: "%"
+        fred_series_id: "FEDFUNDS"
+        transform: "level"
+        backfill_start: "1954-07-01"
+        aggregation: monthly_mean
+        notes: "FEDFUNDS（Federal Funds Effective Rate, 月内平均）。FOMC 決定値ではなく実効レート。Insight #41「Fed FF rate × JEPX」で使用"
+        depends_on: null
+        citation_url: "https://fred.stlouisfed.org/series/FEDFUNDS"
+        publisher_detail: "Board of Governors of the Federal Reserve System (US)"
+      us-industrial-production:
+        name: "米国鉱工業生産指数（Index 2017=100）"
+        domain: macro
+        frequency: monthly
+        unit: "index_2017_eq_100"
+        fred_series_id: "INDPRO"
+        transform: "level"
+        backfill_start: "1919-01-01"
+        aggregation: raw
+        notes: "INDPRO（Industrial Production Total Index, SA）。製造業＋鉱業＋公益事業の総合指数。Insight #42「米景気 × 日本電力需要」で使用"
+        depends_on: null
+        citation_url: "https://fred.stlouisfed.org/series/INDPRO"
+        publisher_detail: "Board of Governors of the Federal Reserve System (US)"
+        # INDPRO も CPI と同じく月次集計に時間がかかり 45-75 日遅延が典型 → 90 で余裕
+        freshness_sla_days: 90
+    notes: |
+      - FRED API キー（無料、120 req/min）を環境変数 FRED_API_KEY から読む。
+        ローカル: .env ファイルに `FRED_API_KEY=...` を記載 → python-dotenv が自動読込。
+        GitHub Actions: secrets.FRED_API_KEY を env: で渡す。
+      - キー未設定時は CSV 直 DL エンドポイント（fredgraph.csv?id=...）にフォールバック。
+      - 月次データ、日付は「月初日（YYYY-MM-01）」で正規化。
+      - 翌月中旬に確定。FRED 側で過去値の改定が入るため、毎日叩いて差分更新（write_processed が dedup）。
+      - us-cpi-yoy は CPIAUCSL の raw level を取得後、(this - 12mo_ago) / 12mo_ago * 100 で算出した派生系列。
+      - INDPRO は 1919-01 から、CPIAUCSL は 1947-01 から、FEDFUNDS は 1954-07 から取得可能。

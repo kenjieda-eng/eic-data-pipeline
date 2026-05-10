@@ -7,3 +7,6 @@ openpyxl>=3.1
 # curl_cffi: Akamai Bot Manager (METI) 突破用。Chrome 120 TLS fingerprint 模倣。
 # fetch_enecho_power.py のみで使用。他の fetch_*.py は requests のまま。
 curl_cffi>=0.7
+# python-dotenv: ローカル開発時に .env から FRED_API_KEY を読み込む。
+# fetch_us_macro.py で使用。GitHub Actions では env: で渡すため読み込みは no-op。
+python-dotenv>=1.0
