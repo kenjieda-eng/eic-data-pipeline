@@ -5242,3 +5242,4 @@ date,indicator_id,region,value,source_url
 2026-05-07,jma-temp-max-tokyo,tokyo,26.2,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
 2026-05-08,jma-temp-max-tokyo,tokyo,25.2,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
 2026-05-09,jma-temp-max-tokyo,tokyo,23.7,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
+2026-05-10,jma-temp-max-tokyo,tokyo,24.8,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
