@@ -937,3 +937,4 @@ date,indicator_id,region,value,source_url
 2026-01-01,us-cpi-yoy,us,2.8287,https://fred.stlouisfed.org/series/CPIAUCSL
 2026-02-01,us-cpi-yoy,us,2.6646,https://fred.stlouisfed.org/series/CPIAUCSL
 2026-03-01,us-cpi-yoy,us,3.3202,https://fred.stlouisfed.org/series/CPIAUCSL
+2026-04-01,us-cpi-yoy,us,3.947,https://fred.stlouisfed.org/series/CPIAUCSL
