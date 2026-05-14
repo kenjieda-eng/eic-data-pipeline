@@ -977,7 +977,9 @@ sources:
       - us-industrial-production
       - us-nonfarm-payrolls
       - us-unemployment-rate
-    # D-011 準拠の indicator 固有メタデータ（5 系列）
+      - us-cpi-food-yoy
+      - us-cpi-energy-yoy
+    # D-011 準拠の indicator 固有メタデータ（7 系列）
     # fred_series_id: FRED 側の系列 ID
     # transform: yoy_pct = 12 ヶ月前比 % 算出 / level = raw 値そのまま
     indicators:
@@ -1054,6 +1056,35 @@ sources:
         publisher_detail: "U.S. Bureau of Labor Statistics"
         # UNRATE も PAYEMS と同時公表 → 60 日 SLA
         freshness_sla_days: 60
+      us-cpi-food-yoy:
+        name: "米国 CPI 食品（前年比 %）"
+        domain: macro
+        frequency: monthly
+        unit: "%"
+        fred_series_id: "CPIUFDSL"
+        transform: "yoy_pct"
+        backfill_start: "1948-01-01"
+        aggregation: monthly_mean
+        notes: "CPIUFDSL（Consumer Price Index for All Urban Consumers: Food, SA）の 12 ヶ月前比 %。総合 CPI (CPIAUCSL) のうち食品セクター単独、商品サブ最大ウェイト。エネルギーと並んで「コア外」を構成し、Fed のインフレ判断で重視"
+        depends_on: null
+        citation_url: "https://fred.stlouisfed.org/series/CPIUFDSL"
+        publisher_detail: "U.S. Bureau of Labor Statistics"
+        # CPI 系列は対象月の翌月中旬公表 + FRED 反映で典型 45-75 日遅延 → 90 で余裕 (us-cpi-yoy 同様)
+        freshness_sla_days: 90
+      us-cpi-energy-yoy:
+        name: "米国 CPI エネルギー（前年比 %）"
+        domain: macro
+        frequency: monthly
+        unit: "%"
+        fred_series_id: "CPIENGSL"
+        transform: "yoy_pct"
+        backfill_start: "1957-01-01"
+        aggregation: monthly_mean
+        notes: "CPIENGSL（Consumer Price Index for All Urban Consumers: Energy, SA）の 12 ヶ月前比 %。ガソリン + 家庭用電気 + 暖房油などのエネルギー価格、原油価格の変動を直接反映するため CPI の中で最も変動が大きい"
+        depends_on: null
+        citation_url: "https://fred.stlouisfed.org/series/CPIENGSL"
+        publisher_detail: "U.S. Bureau of Labor Statistics"
+        freshness_sla_days: 90
     notes: |
       - FRED API キー（無料、120 req/min）を環境変数 FRED_API_KEY から読む。
         ローカル: .env ファイルに `FRED_API_KEY=...` を記載 → python-dotenv が自動読込。
