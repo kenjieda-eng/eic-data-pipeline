@@ -589,6 +589,101 @@ sources:
       - 全系列を 1 リクエストで取得（カンマ区切り code=FXERM07,FXERM06,FXERM03,FXERM05）。
       - 日次系列（FXERD04 等）は startDate のパラメータ仕様に癖があるため、初版は月次のみ。
 
+  boj-tankan:
+    name: 日本銀行 短観（業況判断 DI、四半期）
+    publisher: 日本銀行
+    publisher_url: https://www.boj.or.jp/statistics/tk/
+    source_url: https://www.stat-search.boj.or.jp/ssi/cgi-bin/famecgi2?cgi=$nme_a000_en&lstSelection=CO
+    # getDataCode エンドポイント（FM08 と同じ）。db=CO（Corporate Survey）、四半期 DI を取得。
+    # 系列コード仕様: TK99 + F(計算方法) + 1000/2000(製造業/非製造業) + 601(業況判断) + G(DI)
+    #                 + CQ(四半期) + 0(実績) + 1/3(大企業/中小企業) + 000(詳細項目)
+    # 参考: https://www.stat-search.boj.or.jp/info/tankan_code_en.html
+    api_url: "https://www.stat-search.boj.or.jp/api/v1/getDataCode"
+    db: CO
+    # 四半期データの startDate/endDate は仕様が掴めなかったため、本実装は全期間取得。
+    # SURVEY_DATES は "YYYYNN" 形式（NN=01..04）。NN 1..4 → 月 03/06/09/12 に正規化。
+    # --- D-011 メタデータ共通項目 ---
+    license: boj-terms
+    license_url: https://www.stat-search.boj.or.jp/info/api_notice.pdf
+    license_notice: "本サービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。本サービスの内容は日本銀行によって保証されたものではありません。"
+    license_text: |
+      日本銀行時系列統計データ検索サイト利用規約。
+      必須掲載文言:
+        「このサービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。
+         サービスの内容は日本銀行によって保証されたものではありません。」
+      API 機能利用時の留意点: https://www.stat-search.boj.or.jp/info/api_notice.pdf
+    frequency: quarterly
+    tz: Asia/Tokyo
+    missing_policy: "null"
+    freshness_sla_days: 150
+    # 4 系列（大企業 製造/非製造、中小企業 製造/非製造）
+    series:
+      - id: tankan-large-mfg-di
+        name: 短観 業況判断 DI 大企業・製造業（実績）
+        code: TK99F1000601GCQ01000
+        region: jp
+        unit: DI
+      - id: tankan-large-nonmfg-di
+        name: 短観 業況判断 DI 大企業・非製造業（実績）
+        code: TK99F2000601GCQ01000
+        region: jp
+        unit: DI
+      - id: tankan-sme-mfg-di
+        name: 短観 業況判断 DI 中小企業・製造業（実績）
+        code: TK99F1000601GCQ03000
+        region: jp
+        unit: DI
+      - id: tankan-sme-nonmfg-di
+        name: 短観 業況判断 DI 中小企業・非製造業（実績）
+        code: TK99F2000601GCQ03000
+        region: jp
+        unit: DI
+    indicator_ids:
+      - tankan-large-mfg-di
+      - tankan-large-nonmfg-di
+      - tankan-sme-mfg-di
+      - tankan-sme-nonmfg-di
+    indicators:
+      tankan-large-mfg-di:
+        name: "日銀短観 業況判断 DI 大企業・製造業"
+        domain: macro
+        unit: "DI"
+        backfill_start: "1974-06-01"
+        aggregation: raw
+        notes: "BOJ getDataCode db=CO / TK99F1000601GCQ01000。良い-悪い の差分（%pt）。Q1=Mar/Q2=Jun/Q3=Sep/Q4=Dec 実施分を月初日に正規化"
+        depends_on: null
+      tankan-large-nonmfg-di:
+        name: "日銀短観 業況判断 DI 大企業・非製造業"
+        domain: macro
+        unit: "DI"
+        backfill_start: "1983-06-01"
+        aggregation: raw
+        notes: "BOJ getDataCode db=CO / TK99F2000601GCQ01000。良い-悪い の差分（%pt）"
+        depends_on: null
+      tankan-sme-mfg-di:
+        name: "日銀短観 業況判断 DI 中小企業・製造業"
+        domain: macro
+        unit: "DI"
+        backfill_start: "1967-09-01"
+        aggregation: raw
+        notes: "BOJ getDataCode db=CO / TK99F1000601GCQ03000。良い-悪い の差分（%pt）"
+        depends_on: null
+      tankan-sme-nonmfg-di:
+        name: "日銀短観 業況判断 DI 中小企業・非製造業"
+        domain: macro
+        unit: "DI"
+        backfill_start: "1983-06-01"
+        aggregation: raw
+        notes: "BOJ getDataCode db=CO / TK99F2000601GCQ03000。良い-悪い の差分（%pt）"
+        depends_on: null
+    notes: |
+      - 四半期データ、日付は survey-month convention で月初日に正規化（Q1=YYYY-03-01, Q2=YYYY-06-01, Q3=YYYY-09-01, Q4=YYYY-12-01）。
+      - 系列開始は indicator により異なる（大企業製造業 1974Q2、中小企業製造業 1967Q3、非製造業 2 系列 1983Q2）。発表は年 4 回（4 月初/7 月初/10 月初/12 月中旬）。
+      - 全 4 系列を 1 リクエストで取得（カンマ区切り）。
+      - CSV レスポンス構造は FM08（boj-fx）と同一。先頭 11 行メタ、12 行目ヘッダ、13 行目以降データ。
+      - SURVEY_DATES は YYYYNN（NN=01..04）。NN を月 03/06/09/12 に変換。
+      - 四半期データの startDate/endDate パラメータ仕様が不明のため、本実装はパラメータを省略して全期間を取得する。
+
   mof-jgb:
     name: 財務省 国債金利情報（日次、各年限）
     publisher: 財務省

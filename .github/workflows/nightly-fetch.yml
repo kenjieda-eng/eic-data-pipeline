@@ -73,6 +73,13 @@ jobs:
           python scripts/fetch_fx.py
         continue-on-error: true
 
+      - name: Fetch BOJ Tankan DI (quarterly, 4 series)
+        # BOJ db=CO の業況判断 DI 4 系列（大企業/中小企業 × 製造業/非製造業、実績）。
+        # 四半期データ、各 Q の翌月（4/7/10/12 月）初に確定。毎日叩いてもほぼゼロ負荷（120KB × 1 req）。
+        run: |
+          python scripts/fetch_boj_tankan.py
+        continue-on-error: true
+
       - name: Fetch MOF JGB yields (daily)
         # 財務省の国債金利情報 CSV（jgbcm_all.csv、Shift-JIS、和暦、全期間 1974-09 〜）を 1 発で取得。
         # Phase 1 は 10 年新発のみ extract（source_map.yaml の term_to_id に定義）。

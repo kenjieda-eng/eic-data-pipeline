@@ -1,0 +1,21 @@
+{
+  "id": "tankan-sme-mfg-di",
+  "name": "日銀短観 業況判断 DI 中小企業・製造業",
+  "domain": "macro",
+  "frequency": "quarterly",
+  "unit": "DI",
+  "source_name": "日本銀行 短観（業況判断 DI、四半期）",
+  "source_url": "https://www.stat-search.boj.or.jp/ssi/cgi-bin/famecgi2?cgi=$nme_a000_en&lstSelection=CO",
+  "license": "boj-terms",
+  "observation_cutoff": "2026-03-01",
+  "updated_at": "2026-05-15T08:00:31+09:00",
+  "license_url": "https://www.stat-search.boj.or.jp/info/api_notice.pdf",
+  "license_notice": "本サービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。本サービスの内容は日本銀行によって保証されたものではありません。",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "1967-09-01",
+  "publisher": "日本銀行",
+  "aggregation": "raw",
+  "notes": "BOJ getDataCode db=CO / TK99F1000601GCQ03000。良い-悪い の差分（%pt）",
+  "depends_on": null
+}
