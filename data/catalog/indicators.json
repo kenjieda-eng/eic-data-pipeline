@@ -1,8 +1,8 @@
 {
   "version": 1,
   "schema": "D-011",
-  "generated_at": "2026-05-14T09:09:59+09:00",
-  "indicator_count": 105,
+  "generated_at": "2026-05-14T12:01:19+09:00",
+  "indicator_count": 107,
   "indicators": [
     {
       "id": "fuel-coal-au",
@@ -2234,6 +2234,28 @@
       "freshness_sla_days": 90
     },
     {
+      "id": "us-nonfarm-payrolls",
+      "name": "米国 非農業部門雇用者数（千人）",
+      "domain": "macro",
+      "frequency": "monthly",
+      "unit": "thousand_persons",
+      "source_name": "FRED Macro Series (CPI / Fed Funds Rate / Industrial Production)",
+      "source_url": "https://fred.stlouisfed.org/",
+      "license": "public-domain",
+      "observation_cutoff": "2026-04-01",
+      "updated_at": "2026-05-14T11:28:50+09:00",
+      "license_url": "https://fred.stlouisfed.org/legal/",
+      "license_notice": "出典: Federal Reserve Bank of St. Louis (FRED).\n各系列の元データは BLS（CPIAUCSL）/ Federal Reserve Board（FEDFUNDS, INDPRO）が作成。\n米連邦政府公表資料は public domain（17 U.S.C. § 105）。\n",
+      "tz": "America/New_York",
+      "missing_policy": "null",
+      "backfill_start": "1939-01-01",
+      "publisher": "Federal Reserve Bank of St. Louis",
+      "aggregation": "raw",
+      "notes": "PAYEMS（All Employees, Total Nonfarm, SA, Thousands of Persons）。月次雇用統計の主要指標、毎月第一金曜公表 (BLS Employment Situation)。前月比変化が市場の利下げ観測 + USD/JPY を動かす",
+      "depends_on": null,
+      "freshness_sla_days": 60
+    },
+    {
       "id": "us-treasury-10y",
       "name": "米国国債 10 年金利",
       "domain": "finance",
@@ -2320,6 +2342,28 @@
       "notes": "Constant Maturity Treasury (CMT) 利回り",
       "depends_on": null,
       "freshness_sla_days": 5
+    },
+    {
+      "id": "us-unemployment-rate",
+      "name": "米国 失業率（%）",
+      "domain": "macro",
+      "frequency": "monthly",
+      "unit": "%",
+      "source_name": "FRED Macro Series (CPI / Fed Funds Rate / Industrial Production)",
+      "source_url": "https://fred.stlouisfed.org/",
+      "license": "public-domain",
+      "observation_cutoff": "2026-04-01",
+      "updated_at": "2026-05-14T11:28:51+09:00",
+      "license_url": "https://fred.stlouisfed.org/legal/",
+      "license_notice": "出典: Federal Reserve Bank of St. Louis (FRED).\n各系列の元データは BLS（CPIAUCSL）/ Federal Reserve Board（FEDFUNDS, INDPRO）が作成。\n米連邦政府公表資料は public domain（17 U.S.C. § 105）。\n",
+      "tz": "America/New_York",
+      "missing_policy": "null",
+      "backfill_start": "1948-01-01",
+      "publisher": "Federal Reserve Bank of St. Louis",
+      "aggregation": "raw",
+      "notes": "UNRATE（Unemployment Rate, SA, %）。労働力人口に占める失業者の割合、PAYEMS と同時公表 (CPS = 家計調査ベース、PAYEMS は事業所調査)。FRB の二大マンデート (物価安定 + 雇用最大化) の一翼",
+      "depends_on": null,
+      "freshness_sla_days": 60
     }
   ]
 }
