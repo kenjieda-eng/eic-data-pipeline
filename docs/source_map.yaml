@@ -975,7 +975,9 @@ sources:
       - us-cpi-yoy
       - us-fed-funds-rate
       - us-industrial-production
-    # D-011 準拠の indicator 固有メタデータ（3 系列）
+      - us-nonfarm-payrolls
+      - us-unemployment-rate
+    # D-011 準拠の indicator 固有メタデータ（5 系列）
     # fred_series_id: FRED 側の系列 ID
     # transform: yoy_pct = 12 ヶ月前比 % 算出 / level = raw 値そのまま
     indicators:
@@ -1022,6 +1024,36 @@ sources:
         publisher_detail: "Board of Governors of the Federal Reserve System (US)"
         # INDPRO も CPI と同じく月次集計に時間がかかり 45-75 日遅延が典型 → 90 で余裕
         freshness_sla_days: 90
+      us-nonfarm-payrolls:
+        name: "米国 非農業部門雇用者数（千人）"
+        domain: macro
+        frequency: monthly
+        unit: "thousand_persons"
+        fred_series_id: "PAYEMS"
+        transform: "level"
+        backfill_start: "1939-01-01"
+        aggregation: raw
+        notes: "PAYEMS（All Employees, Total Nonfarm, SA, Thousands of Persons）。月次雇用統計の主要指標、毎月第一金曜公表 (BLS Employment Situation)。前月比変化が市場の利下げ観測 + USD/JPY を動かす"
+        depends_on: null
+        citation_url: "https://fred.stlouisfed.org/series/PAYEMS"
+        publisher_detail: "U.S. Bureau of Labor Statistics"
+        # PAYEMS は対象月の翌月第一金曜公表 → 7-14 日後に FRED 反映、改定も多い → 60 で余裕
+        freshness_sla_days: 60
+      us-unemployment-rate:
+        name: "米国 失業率（%）"
+        domain: macro
+        frequency: monthly
+        unit: "%"
+        fred_series_id: "UNRATE"
+        transform: "level"
+        backfill_start: "1948-01-01"
+        aggregation: raw
+        notes: "UNRATE（Unemployment Rate, SA, %）。労働力人口に占める失業者の割合、PAYEMS と同時公表 (CPS = 家計調査ベース、PAYEMS は事業所調査)。FRB の二大マンデート (物価安定 + 雇用最大化) の一翼"
+        depends_on: null
+        citation_url: "https://fred.stlouisfed.org/series/UNRATE"
+        publisher_detail: "U.S. Bureau of Labor Statistics"
+        # UNRATE も PAYEMS と同時公表 → 60 日 SLA
+        freshness_sla_days: 60
     notes: |
       - FRED API キー（無料、120 req/min）を環境変数 FRED_API_KEY から読む。
         ローカル: .env ファイルに `FRED_API_KEY=...` を記載 → python-dotenv が自動読込。
