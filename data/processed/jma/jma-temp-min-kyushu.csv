@@ -5246,3 +5246,4 @@ date,indicator_id,region,value,source_url
 2026-05-11,jma-temp-min-kyushu,kyushu,15.8,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
 2026-05-12,jma-temp-min-kyushu,kyushu,16.8,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
 2026-05-13,jma-temp-min-kyushu,kyushu,17.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
+2026-05-14,jma-temp-min-kyushu,kyushu,16.9,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
