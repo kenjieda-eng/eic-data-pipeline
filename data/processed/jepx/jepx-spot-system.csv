@@ -2946,7 +2946,7 @@ date,indicator_id,region,value,source_url
 2020-04-23,jepx-spot-system,jp,5.234166666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-24,jepx-spot-system,jp,5.33875,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-25,jepx-spot-system,jp,4.032291666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
-2020-04-26,jepx-spot-system,jp,3.7816666666666663,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
+2020-04-26,jepx-spot-system,jp,3.7816666666666654,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-27,jepx-spot-system,jp,4.930416666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-28,jepx-spot-system,jp,4.905,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-29,jepx-spot-system,jp,4.185833333333334,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
@@ -3035,7 +3035,7 @@ date,indicator_id,region,value,source_url
 2020-07-21,jepx-spot-system,jp,4.057916666666666,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-07-22,jepx-spot-system,jp,4.735833333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-07-23,jepx-spot-system,jp,3.985416666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
-2020-07-24,jepx-spot-system,jp,3.9960416666666663,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
+2020-07-24,jepx-spot-system,jp,3.9960416666666654,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-07-25,jepx-spot-system,jp,3.632708333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-07-26,jepx-spot-system,jp,3.582708333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-07-27,jepx-spot-system,jp,5.246041666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
@@ -3861,7 +3861,7 @@ date,indicator_id,region,value,source_url
 2022-10-25,jepx-spot-system,jp,24.5575,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-10-26,jepx-spot-system,jp,23.845416666666665,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-10-27,jepx-spot-system,jp,26.308333333333334,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
-2022-10-28,jepx-spot-system,jp,23.060208333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
+2022-10-28,jepx-spot-system,jp,23.06020833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-10-29,jepx-spot-system,jp,19.364791666666665,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-10-30,jepx-spot-system,jp,17.945625,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-10-31,jepx-spot-system,jp,24.3575,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
@@ -5157,3 +5157,4 @@ date,indicator_id,region,value,source_url
 2026-05-13,jepx-spot-system,jp,16.187291666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-05-14,jepx-spot-system,jp,16.973125,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-05-15,jepx-spot-system,jp,13.666666666666666,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
+2026-05-16,jepx-spot-system,jp,10.387291666666666,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv

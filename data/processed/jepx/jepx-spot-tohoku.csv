@@ -1221,7 +1221,7 @@ date,indicator_id,region,value,source_url
 2015-08-03,jepx-spot-tohoku,tohoku,19.038541666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
 2015-08-04,jepx-spot-tohoku,tohoku,20.308125,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
 2015-08-05,jepx-spot-tohoku,tohoku,23.94,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
-2015-08-06,jepx-spot-tohoku,tohoku,25.325833333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
+2015-08-06,jepx-spot-tohoku,tohoku,25.32583333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
 2015-08-07,jepx-spot-tohoku,tohoku,21.493125000000003,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
 2015-08-08,jepx-spot-tohoku,tohoku,11.835625,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
 2015-08-09,jepx-spot-tohoku,tohoku,11.076875,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
@@ -3614,14 +3614,14 @@ date,indicator_id,region,value,source_url
 2022-02-20,jepx-spot-tohoku,tohoku,17.136458333333334,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-21,jepx-spot-tohoku,tohoku,23.00583333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-22,jepx-spot-tohoku,tohoku,24.31395833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
-2022-02-23,jepx-spot-tohoku,tohoku,23.810208333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
+2022-02-23,jepx-spot-tohoku,tohoku,23.81020833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-24,jepx-spot-tohoku,tohoku,24.40083333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-25,jepx-spot-tohoku,tohoku,20.408125,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-26,jepx-spot-tohoku,tohoku,17.265,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-27,jepx-spot-tohoku,tohoku,14.997916666666669,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-28,jepx-spot-tohoku,tohoku,16.735625000000002,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-03-01,jepx-spot-tohoku,tohoku,22.30708333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
-2022-03-02,jepx-spot-tohoku,tohoku,22.138333333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
+2022-03-02,jepx-spot-tohoku,tohoku,22.13833333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-03-03,jepx-spot-tohoku,tohoku,21.521041666666665,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-03-04,jepx-spot-tohoku,tohoku,21.93645833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-03-05,jepx-spot-tohoku,tohoku,26.86854166666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
@@ -3634,7 +3634,7 @@ date,indicator_id,region,value,source_url
 2022-03-12,jepx-spot-tohoku,tohoku,24.366875,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-03-13,jepx-spot-tohoku,tohoku,26.221666666666668,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-03-14,jepx-spot-tohoku,tohoku,21.203958333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
-2022-03-15,jepx-spot-tohoku,tohoku,22.716458333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
+2022-03-15,jepx-spot-tohoku,tohoku,22.71645833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-03-16,jepx-spot-tohoku,tohoku,22.065,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-03-17,jepx-spot-tohoku,tohoku,21.6675,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-03-18,jepx-spot-tohoku,tohoku,69.295,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
@@ -3770,7 +3770,7 @@ date,indicator_id,region,value,source_url
 2022-07-26,jepx-spot-tohoku,tohoku,24.096875,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-07-27,jepx-spot-tohoku,tohoku,25.76020833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-07-28,jepx-spot-tohoku,tohoku,23.81395833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
-2022-07-29,jepx-spot-tohoku,tohoku,26.794583333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
+2022-07-29,jepx-spot-tohoku,tohoku,26.79458333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-07-30,jepx-spot-tohoku,tohoku,18.646666666666665,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-07-31,jepx-spot-tohoku,tohoku,16.406875,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-08-01,jepx-spot-tohoku,tohoku,40.310625,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
@@ -5157,3 +5157,4 @@ date,indicator_id,region,value,source_url
 2026-05-13,jepx-spot-tohoku,tohoku,16.682916666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-05-14,jepx-spot-tohoku,tohoku,16.576875,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-05-15,jepx-spot-tohoku,tohoku,12.135625,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
+2026-05-16,jepx-spot-tohoku,tohoku,8.406041666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
