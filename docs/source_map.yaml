@@ -160,7 +160,10 @@ sources:
     # 静的 HTML 月次ページ（候補 B）。
     # 気象官署（daily_s1.php）系統のみ使用。アメダス専用点（daily_a1.php）は今回対象外。
     page_url_template: "https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no={prec_no}&block_no={block_no}&year={year}&month={month}&day=&view="
-    encoding: shift_jis
+    # 2026-05-18: JMA daily_s1 は <meta charset="UTF-8"> で配信。過去 raw HTML（2014-）も全て UTF-8。
+    # 旧設定は shift_jis だが、数値は ASCII バイトで化けず気付かれなかった。
+    # 風向（漢字）追加に伴い UTF-8 へ修正。
+    encoding: utf-8
     table_class: data2_s
     # テーブル内の列位置（0-indexed）。気象官署 日ごとの値 の標準レイアウトを想定。
     # ヘッダ行が 2 段 merged なので、データ行の td インデックスで指定する。
@@ -171,6 +174,7 @@ sources:
       temp_max: 7
       temp_min: 8
       wind_avg: 11      # 風速 平均（m/s）
+      wind_dir: 13      # 最大風速時の風向（16 方位の漢字 → 度に変換）
       sunshine: 16      # 日照時間（h）
       snow_max: 18      # 最深積雪（cm）
     stations:
@@ -190,6 +194,7 @@ sources:
       - { key: precip,   id_prefix: jma-precip,   ja: 日降水量合計, unit: mm, aggregation: daily_sum }
       - { key: sunshine, id_prefix: jma-sunshine, ja: 日照時間, unit: h, aggregation: daily_sum }
       - { key: wind_avg, id_prefix: jma-wind-avg, ja: 日平均風速, unit: "m/s", aggregation: daily_mean }
+      - { key: wind_dir, id_prefix: jma-wind-dir, ja: 最大風速時風向, unit: deg, aggregation: raw }
       - { key: snow_max, id_prefix: jma-snow-max, ja: 最深積雪, unit: cm, aggregation: daily_max }
     license_text: |
       気象庁ホームページのコンテンツの利用について（https://www.jma.go.jp/jma/kishou/info/coment.html）
@@ -261,7 +266,17 @@ sources:
       - jma-snow-max-chugoku
       - jma-snow-max-shikoku
       - jma-snow-max-kyushu
-    # D-011 準拠の indicator 固有メタデータ（36 系列 = 9 地点 × 4 項目：平均/最高/最低 気温 + 降水量）
+      # --- 最大風速時風向 9 系列（16 方位 → 度、aggregation=raw） ---
+      - jma-wind-dir-hokkaido
+      - jma-wind-dir-tohoku
+      - jma-wind-dir-tokyo
+      - jma-wind-dir-chubu
+      - jma-wind-dir-hokuriku
+      - jma-wind-dir-kansai
+      - jma-wind-dir-chugoku
+      - jma-wind-dir-shikoku
+      - jma-wind-dir-kyushu
+    # D-011 準拠の indicator 固有メタデータ
     indicators:
       # --- 日平均気温（9 地点）---
       jma-temp-avg-hokkaido: { name: "札幌 日平均気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_mean, notes: "気象官署 札幌（prec=14, block=47412）", depends_on: null }
@@ -336,6 +351,17 @@ sources:
       jma-snow-max-chugoku:  { name: "広島 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 広島", depends_on: null, freshness_sla_days: 365 }
       jma-snow-max-shikoku:  { name: "高松 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 高松", depends_on: null, freshness_sla_days: 365 }
       jma-snow-max-kyushu:   { name: "福岡 最深積雪",       domain: weather, unit: "cm", backfill_start: "2012-01-01", aggregation: daily_max,  notes: "気象官署 福岡", depends_on: null, freshness_sla_days: 365 }
+      # --- 最大風速時風向（9 地点、16 方位 → 度に変換、0=北/90=東/180=南/270=西） ---
+      # 観測のたびに値があるとは限らない（静穏日は欠測）ため、SLA は precip 同様 7 日に緩める。
+      jma-wind-dir-hokkaido: { name: "札幌 最大風速時風向",   domain: weather, unit: "deg", backfill_start: "2012-01-01", aggregation: raw, notes: "気象官署 札幌。日次の最大風速観測時の風向（16 方位 → 度変換）", depends_on: null, freshness_sla_days: 7 }
+      jma-wind-dir-tohoku:   { name: "仙台 最大風速時風向",   domain: weather, unit: "deg", backfill_start: "2012-01-01", aggregation: raw, notes: "気象官署 仙台", depends_on: null, freshness_sla_days: 7 }
+      jma-wind-dir-tokyo:    { name: "東京 最大風速時風向",   domain: weather, unit: "deg", backfill_start: "2012-01-01", aggregation: raw, notes: "気象官署 東京", depends_on: null, freshness_sla_days: 7 }
+      jma-wind-dir-chubu:    { name: "名古屋 最大風速時風向", domain: weather, unit: "deg", backfill_start: "2012-01-01", aggregation: raw, notes: "気象官署 名古屋", depends_on: null, freshness_sla_days: 7 }
+      jma-wind-dir-hokuriku: { name: "金沢 最大風速時風向",   domain: weather, unit: "deg", backfill_start: "2012-01-01", aggregation: raw, notes: "気象官署 金沢。冬の北西季節風の方位指標", depends_on: null, freshness_sla_days: 7 }
+      jma-wind-dir-kansai:   { name: "大阪 最大風速時風向",   domain: weather, unit: "deg", backfill_start: "2012-01-01", aggregation: raw, notes: "気象官署 大阪", depends_on: null, freshness_sla_days: 7 }
+      jma-wind-dir-chugoku:  { name: "広島 最大風速時風向",   domain: weather, unit: "deg", backfill_start: "2012-01-01", aggregation: raw, notes: "気象官署 広島", depends_on: null, freshness_sla_days: 7 }
+      jma-wind-dir-shikoku:  { name: "高松 最大風速時風向",   domain: weather, unit: "deg", backfill_start: "2012-01-01", aggregation: raw, notes: "気象官署 高松", depends_on: null, freshness_sla_days: 7 }
+      jma-wind-dir-kyushu:   { name: "福岡 最大風速時風向",   domain: weather, unit: "deg", backfill_start: "2012-01-01", aggregation: raw, notes: "気象官署 福岡", depends_on: null, freshness_sla_days: 7 }
     notes: |
       - 月単位の HTML ページから日次テーブルを抽出する方式。
       - 欠測記号 `///`, `--`, `)`, `×`, 空文字を NaN として扱う。

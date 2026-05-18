@@ -8,8 +8,8 @@
     テーブル class="data2_s" に日次観測値が入っている。
 
 対象:
-    9 エリアの代表観測点（気象官署）× 3 項目（平均気温／最高気温／最低気温）
-    = 27 系列
+    9 エリアの代表観測点（気象官署）× 主な要素ビューの数値項目
+    （平均気温／最高気温／最低気温／降水量／日照時間／平均風速／最深積雪／最大風速時風向）
 
 出力:
     - data/raw/jma/daily_s1_{area}_{year}_{month:02d}.html   （生 HTML）
@@ -55,6 +55,27 @@ SOURCE_KEY = "jma-temp"
 # JMA の欠測・特殊記号。これらが含まれるセルは NaN に変換する。
 MISSING_MARKERS = ("///", "--", "×", ")", "*", "#", "")
 
+# 16 方位文字列 → 度（北=0, 東=90, 南=180, 西=270）。
+# daily_s1 の風向セルは「東北東」「南南西」等の漢字表記。「静穏」/「）」/「×」等は None。
+WIND_DIR_TO_DEGREES: dict[str, float] = {
+    "北": 0.0,
+    "北北東": 22.5,
+    "北東": 45.0,
+    "東北東": 67.5,
+    "東": 90.0,
+    "東南東": 112.5,
+    "南東": 135.0,
+    "南南東": 157.5,
+    "南": 180.0,
+    "南南西": 202.5,
+    "南西": 225.0,
+    "西南西": 247.5,
+    "西": 270.0,
+    "西北西": 292.5,
+    "北西": 315.0,
+    "北北西": 337.5,
+}
+
 
 def load_source_map() -> dict:
     path = ROOT / "docs" / "source_map.yaml"
@@ -78,6 +99,17 @@ def parse_numeric(text: str) -> float | None:
         return float(s)
     except ValueError:
         return None
+
+
+def parse_wind_direction(text: str) -> float | None:
+    """16 方位文字列を度に変換。「静穏」・欠測・未知方位は None。"""
+    if text is None:
+        return None
+    s = text.strip().replace("\xa0", "").replace(" ", "")
+    s = s.rstrip(")").rstrip("]").rstrip("*").rstrip("#")
+    if s in MISSING_MARKERS or s == "" or s == "静穏":
+        return None
+    return WIND_DIR_TO_DEGREES.get(s)
 
 
 def extract_daily_rows(
@@ -127,7 +159,10 @@ def extract_daily_rows(
             if key == "day":
                 continue
             cell_text = tds[idx].get_text(strip=True)
-            row[key] = parse_numeric(cell_text)
+            if key == "wind_dir":
+                row[key] = parse_wind_direction(cell_text)
+            else:
+                row[key] = parse_numeric(cell_text)
         rows_out.append(row)
 
     if not data_started:
