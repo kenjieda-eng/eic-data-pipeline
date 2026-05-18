@@ -63,6 +63,20 @@ def discover_metadata_files(processed_dir: Path) -> list[Path]:
     return files
 
 
+def derive_csv_path(meta_file: Path, processed_dir: Path) -> str:
+    """
+    metadata.json ファイルのパスから対応する CSV パスを導出 (D-017)。
+    例: data/processed/enecho-power/meti-gen-solar.metadata.json
+        → "data/processed/enecho-power/meti-gen-solar.csv"
+
+    返り値は repo ルートからの相対パス (POSIX 形式、Windows 環境でも `/` 区切り)。
+    """
+    # processed_dir.parent = repo root の "data" 階層、その親 (ROOT) からの相対パスにする
+    relative = meta_file.relative_to(processed_dir.parent.parent)
+    csv_rel = str(relative).replace(".metadata.json", ".csv")
+    return csv_rel.replace("\\", "/")
+
+
 def load_metadata(path: Path) -> dict[str, Any]:
     """metadata.json を読み込む。失敗時は例外を上げる。"""
     text = path.read_text(encoding="utf-8")
@@ -139,8 +153,8 @@ def build_catalog(indicators: list[dict]) -> dict[str, Any]:
     # id 昇順で並べる
     sorted_indicators = sorted(indicators, key=lambda m: m.get("id", ""))
     return {
-        "version": 1,
-        "schema": "D-011",
+        "version": 2,
+        "schema": "D-017",
         "generated_at": _now_jst().isoformat(timespec="seconds"),
         "indicator_count": len(sorted_indicators),
         "indicators": sorted_indicators,
@@ -202,6 +216,9 @@ def main() -> int:
         except Exception as e:
             total_errors.append(f"{path}: failed to load: {e}")
             continue
+
+        # D-017: csv_path を自動付与 (validate_metadata の REQUIRED_FIELDS チェック前に注入)
+        meta["csv_path"] = derive_csv_path(path, args.processed_dir)
 
         result = validate_metadata(meta)
         for err in result["errors"]:

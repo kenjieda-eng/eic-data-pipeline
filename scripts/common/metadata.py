@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 
 # --- D-011 定数 -----------------------------------------------------------
 
-# Required 10 フィールド（欠落は CI エラー）
+# Required 11 フィールド（欠落は CI エラー） — D-017 で csv_path 追加 (5/22 ACCEPTED 予定)
 REQUIRED_FIELDS: tuple[str, ...] = (
     "id",
     "name",
@@ -41,6 +41,7 @@ REQUIRED_FIELDS: tuple[str, ...] = (
     "license",
     "observation_cutoff",
     "updated_at",
+    "csv_path",
 )
 
 # Recommended 5 フィールド（欠落は CI 警告、ブロックしない）
@@ -61,7 +62,7 @@ OPTIONAL_FIELDS: tuple[str, ...] = (
 )
 
 ALL_FIELDS: tuple[str, ...] = REQUIRED_FIELDS + RECOMMENDED_FIELDS + OPTIONAL_FIELDS
-assert len(ALL_FIELDS) == 19, "D-011 のスキーマは 19 項目固定"
+assert len(ALL_FIELDS) == 20, "D-017 のスキーマは 20 項目固定 (D-011 v1 = 19 → v2 = 20、csv_path 追加)"
 
 # 値候補（CI smoke test で検証）
 DOMAIN_VALUES = {
