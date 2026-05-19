@@ -1,7 +1,7 @@
 {
-  "version": 1,
-  "schema": "D-011",
-  "generated_at": "2026-05-18T11:43:43+09:00",
+  "version": 2,
+  "schema": "D-017",
+  "generated_at": "2026-05-19T09:16:29+09:00",
   "indicator_count": 122,
   "indicators": [
     {
@@ -14,7 +14,7 @@
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
       "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-05-18T11:35:42+09:00",
+      "updated_at": "2026-05-19T09:14:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -24,6 +24,7 @@
       "aggregation": "raw",
       "notes": "Coal, Australian 系列（Pink Sheet）",
       "depends_on": null,
+      "csv_path": "data/processed/fuel/fuel-coal-au.csv",
       "freshness_sla_days": 180
     },
     {
@@ -36,7 +37,7 @@
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
       "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-05-18T11:35:42+09:00",
+      "updated_at": "2026-05-19T09:14:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -46,6 +47,7 @@
       "aggregation": "raw",
       "notes": "Crude oil, Brent（Pink Sheet）",
       "depends_on": null,
+      "csv_path": "data/processed/fuel/fuel-crude-brent.csv",
       "freshness_sla_days": 180
     },
     {
@@ -58,7 +60,7 @@
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
       "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-05-18T11:35:42+09:00",
+      "updated_at": "2026-05-19T09:14:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -68,6 +70,7 @@
       "aggregation": "raw",
       "notes": "Crude oil, Dubai（Pink Sheet）",
       "depends_on": null,
+      "csv_path": "data/processed/fuel/fuel-crude-dubai.csv",
       "freshness_sla_days": 180
     },
     {
@@ -80,7 +83,7 @@
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
       "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-05-18T11:35:42+09:00",
+      "updated_at": "2026-05-19T09:14:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -90,6 +93,7 @@
       "aggregation": "raw",
       "notes": "Crude oil, WTI（Pink Sheet）",
       "depends_on": null,
+      "csv_path": "data/processed/fuel/fuel-crude-wti.csv",
       "freshness_sla_days": 180
     },
     {
@@ -102,7 +106,7 @@
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
       "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-05-18T11:35:42+09:00",
+      "updated_at": "2026-05-19T09:14:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -112,6 +116,7 @@
       "aggregation": "raw",
       "notes": "日本の LNG 輸入 CIF 価格（月次）。Pink Sheet 収録で 1977-01 から",
       "depends_on": null,
+      "csv_path": "data/processed/fuel/fuel-lng-jp-cif.csv",
       "freshness_sla_days": 180
     },
     {
@@ -124,7 +129,7 @@
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
       "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-05-18T11:35:42+09:00",
+      "updated_at": "2026-05-19T09:14:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -134,6 +139,7 @@
       "aggregation": "raw",
       "notes": "Natural gas, Europe 系列。TTF は 1990 年代以降の整備で早期は代替指標の継ぎ",
       "depends_on": null,
+      "csv_path": "data/processed/fuel/fuel-ng-europe-ttf.csv",
       "freshness_sla_days": 180
     },
     {
@@ -146,7 +152,7 @@
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
       "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-05-18T11:35:42+09:00",
+      "updated_at": "2026-05-19T09:14:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -156,6 +162,7 @@
       "aggregation": "raw",
       "notes": "Natural gas, US 系列（Pink Sheet 列）",
       "depends_on": null,
+      "csv_path": "data/processed/fuel/fuel-ng-henryhub.csv",
       "freshness_sla_days": 180
     },
     {
@@ -168,7 +175,7 @@
       "source_url": "https://www.stat-search.boj.or.jp/ssi/mtshtml/fm08_m_1_en.html",
       "license": "boj-terms",
       "observation_cutoff": "2026-04-01",
-      "updated_at": "2026-05-18T11:35:44+09:00",
+      "updated_at": "2026-05-19T09:14:10+09:00",
       "license_url": "https://www.stat-search.boj.or.jp/info/api_notice.pdf",
       "license_notice": "本サービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。本サービスの内容は日本銀行によって保証されたものではありません。",
       "tz": "Asia/Tokyo",
@@ -178,6 +185,7 @@
       "aggregation": "monthly_mean",
       "notes": "BOJ FM08 / FXERM07。月中平均（東京市場 17 時）",
       "depends_on": null,
+      "csv_path": "data/processed/fx/fx-usdjpy-monthly-avg.csv",
       "freshness_sla_days": 60
     },
     {
@@ -190,7 +198,7 @@
       "source_url": "https://www.stat-search.boj.or.jp/ssi/mtshtml/fm08_m_1_en.html",
       "license": "boj-terms",
       "observation_cutoff": "2026-04-01",
-      "updated_at": "2026-05-18T11:35:44+09:00",
+      "updated_at": "2026-05-19T09:14:10+09:00",
       "license_url": "https://www.stat-search.boj.or.jp/info/api_notice.pdf",
       "license_notice": "本サービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。本サービスの内容は日本銀行によって保証されたものではありません。",
       "tz": "Asia/Tokyo",
@@ -200,6 +208,7 @@
       "aggregation": "monthly_end",
       "notes": "BOJ FM08 / FXERM06。月末値（東京市場 17 時）",
       "depends_on": null,
+      "csv_path": "data/processed/fx/fx-usdjpy-monthly-end.csv",
       "freshness_sla_days": 60
     },
     {
@@ -212,7 +221,7 @@
       "source_url": "https://www.stat-search.boj.or.jp/ssi/mtshtml/fm08_m_1_en.html",
       "license": "boj-terms",
       "observation_cutoff": "2026-04-01",
-      "updated_at": "2026-05-18T11:35:44+09:00",
+      "updated_at": "2026-05-19T09:14:10+09:00",
       "license_url": "https://www.stat-search.boj.or.jp/info/api_notice.pdf",
       "license_notice": "本サービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。本サービスの内容は日本銀行によって保証されたものではありません。",
       "tz": "Asia/Tokyo",
@@ -222,6 +231,7 @@
       "aggregation": "monthly_high",
       "notes": "BOJ FM08 / FXERM03。月内高値（東京市場）",
       "depends_on": null,
+      "csv_path": "data/processed/fx/fx-usdjpy-monthly-high.csv",
       "freshness_sla_days": 60
     },
     {
@@ -234,7 +244,7 @@
       "source_url": "https://www.stat-search.boj.or.jp/ssi/mtshtml/fm08_m_1_en.html",
       "license": "boj-terms",
       "observation_cutoff": "2026-04-01",
-      "updated_at": "2026-05-18T11:35:44+09:00",
+      "updated_at": "2026-05-19T09:14:10+09:00",
       "license_url": "https://www.stat-search.boj.or.jp/info/api_notice.pdf",
       "license_notice": "本サービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。本サービスの内容は日本銀行によって保証されたものではありません。",
       "tz": "Asia/Tokyo",
@@ -244,6 +254,7 @@
       "aggregation": "monthly_low",
       "notes": "BOJ FM08 / FXERM05。月内安値（東京市場）",
       "depends_on": null,
+      "csv_path": "data/processed/fx/fx-usdjpy-monthly-low.csv",
       "freshness_sla_days": 60
     },
     {
@@ -256,7 +267,7 @@
       "source_url": "https://www.jepx.jp/electricpower/market-data/spot/",
       "license": "jepx-terms",
       "observation_cutoff": "2026-05-19",
-      "updated_at": "2026-05-18T10:46:02+09:00",
+      "updated_at": "2026-05-19T09:13:32+09:00",
       "license_url": "https://www.jepx.jp/electricpower/index.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -266,6 +277,7 @@
       "aggregation": "daily_mean",
       "notes": "中部電力管内の日次平均約定価格",
       "depends_on": null,
+      "csv_path": "data/processed/jepx/jepx-spot-chubu.csv",
       "freshness_sla_days": 3
     },
     {
@@ -278,7 +290,7 @@
       "source_url": "https://www.jepx.jp/electricpower/market-data/spot/",
       "license": "jepx-terms",
       "observation_cutoff": "2026-05-19",
-      "updated_at": "2026-05-18T10:46:02+09:00",
+      "updated_at": "2026-05-19T09:13:32+09:00",
       "license_url": "https://www.jepx.jp/electricpower/index.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -288,6 +300,7 @@
       "aggregation": "daily_mean",
       "notes": "中国電力管内の日次平均約定価格",
       "depends_on": null,
+      "csv_path": "data/processed/jepx/jepx-spot-chugoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -300,7 +313,7 @@
       "source_url": "https://www.jepx.jp/electricpower/market-data/spot/",
       "license": "jepx-terms",
       "observation_cutoff": "2026-05-19",
-      "updated_at": "2026-05-18T10:46:02+09:00",
+      "updated_at": "2026-05-19T09:13:32+09:00",
       "license_url": "https://www.jepx.jp/electricpower/index.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -310,6 +323,7 @@
       "aggregation": "daily_mean",
       "notes": "北海道電力管内の日次平均約定価格",
       "depends_on": null,
+      "csv_path": "data/processed/jepx/jepx-spot-hokkaido.csv",
       "freshness_sla_days": 3
     },
     {
@@ -322,7 +336,7 @@
       "source_url": "https://www.jepx.jp/electricpower/market-data/spot/",
       "license": "jepx-terms",
       "observation_cutoff": "2026-05-19",
-      "updated_at": "2026-05-18T10:46:02+09:00",
+      "updated_at": "2026-05-19T09:13:32+09:00",
       "license_url": "https://www.jepx.jp/electricpower/index.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -332,6 +346,7 @@
       "aggregation": "daily_mean",
       "notes": "北陸電力管内の日次平均約定価格",
       "depends_on": null,
+      "csv_path": "data/processed/jepx/jepx-spot-hokuriku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -344,7 +359,7 @@
       "source_url": "https://www.jepx.jp/electricpower/market-data/spot/",
       "license": "jepx-terms",
       "observation_cutoff": "2026-05-19",
-      "updated_at": "2026-05-18T10:46:02+09:00",
+      "updated_at": "2026-05-19T09:13:32+09:00",
       "license_url": "https://www.jepx.jp/electricpower/index.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -354,6 +369,7 @@
       "aggregation": "daily_mean",
       "notes": "関西電力管内の日次平均約定価格",
       "depends_on": null,
+      "csv_path": "data/processed/jepx/jepx-spot-kansai.csv",
       "freshness_sla_days": 3
     },
     {
@@ -366,7 +382,7 @@
       "source_url": "https://www.jepx.jp/electricpower/market-data/spot/",
       "license": "jepx-terms",
       "observation_cutoff": "2026-05-19",
-      "updated_at": "2026-05-18T10:46:02+09:00",
+      "updated_at": "2026-05-19T09:13:32+09:00",
       "license_url": "https://www.jepx.jp/electricpower/index.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -376,6 +392,7 @@
       "aggregation": "daily_mean",
       "notes": "九州電力管内の日次平均約定価格",
       "depends_on": null,
+      "csv_path": "data/processed/jepx/jepx-spot-kyushu.csv",
       "freshness_sla_days": 3
     },
     {
@@ -388,7 +405,7 @@
       "source_url": "https://www.jepx.jp/electricpower/market-data/spot/",
       "license": "jepx-terms",
       "observation_cutoff": "2026-05-19",
-      "updated_at": "2026-05-18T10:46:02+09:00",
+      "updated_at": "2026-05-19T09:13:32+09:00",
       "license_url": "https://www.jepx.jp/electricpower/index.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -398,6 +415,7 @@
       "aggregation": "daily_mean",
       "notes": "四国電力管内の日次平均約定価格",
       "depends_on": null,
+      "csv_path": "data/processed/jepx/jepx-spot-shikoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -410,7 +428,7 @@
       "source_url": "https://www.jepx.jp/electricpower/market-data/spot/",
       "license": "jepx-terms",
       "observation_cutoff": "2026-05-19",
-      "updated_at": "2026-05-18T10:46:02+09:00",
+      "updated_at": "2026-05-19T09:13:32+09:00",
       "license_url": "https://www.jepx.jp/electricpower/index.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -420,6 +438,7 @@
       "aggregation": "daily_mean",
       "notes": "48 コマの単純平均。システム全体の指標価格",
       "depends_on": null,
+      "csv_path": "data/processed/jepx/jepx-spot-system.csv",
       "freshness_sla_days": 3
     },
     {
@@ -432,7 +451,7 @@
       "source_url": "https://www.jepx.jp/electricpower/market-data/spot/",
       "license": "jepx-terms",
       "observation_cutoff": "2026-05-19",
-      "updated_at": "2026-05-18T10:46:02+09:00",
+      "updated_at": "2026-05-19T09:13:32+09:00",
       "license_url": "https://www.jepx.jp/electricpower/index.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -442,6 +461,7 @@
       "aggregation": "daily_mean",
       "notes": "東北電力管内の日次平均約定価格",
       "depends_on": null,
+      "csv_path": "data/processed/jepx/jepx-spot-tohoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -454,7 +474,7 @@
       "source_url": "https://www.jepx.jp/electricpower/market-data/spot/",
       "license": "jepx-terms",
       "observation_cutoff": "2026-05-19",
-      "updated_at": "2026-05-18T10:46:02+09:00",
+      "updated_at": "2026-05-19T09:13:32+09:00",
       "license_url": "https://www.jepx.jp/electricpower/index.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -464,6 +484,7 @@
       "aggregation": "daily_mean",
       "notes": "東京電力 PG 管内の日次平均約定価格。首都圏の指標",
       "depends_on": null,
+      "csv_path": "data/processed/jepx/jepx-spot-tokyo.csv",
       "freshness_sla_days": 3
     },
     {
@@ -476,7 +497,7 @@
       "source_url": "https://www.mof.go.jp/jgbs/reference/interest_rate/",
       "license": "public-domain",
       "observation_cutoff": "2026-05-15",
-      "updated_at": "2026-05-18T11:35:49+09:00",
+      "updated_at": "2026-05-19T09:14:15+09:00",
       "license_url": "https://www.mof.go.jp/index.htm",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -486,6 +507,7 @@
       "aggregation": "raw",
       "notes": "財務省 金利情報 jgbcm_all.csv、10 年新発国債の日次利回り。土日祝・入札なし日は '-' → null",
       "depends_on": null,
+      "csv_path": "data/processed/jgb/jgb-10y-yield.csv",
       "freshness_sla_days": 5
     },
     {
@@ -498,7 +520,7 @@
       "source_url": "https://www.mof.go.jp/jgbs/reference/interest_rate/",
       "license": "public-domain",
       "observation_cutoff": "2026-05-15",
-      "updated_at": "2026-05-18T11:35:49+09:00",
+      "updated_at": "2026-05-19T09:14:15+09:00",
       "license_url": "https://www.mof.go.jp/index.htm",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -508,6 +530,7 @@
       "aggregation": "raw",
       "notes": "財務省 金利情報 jgbcm_all.csv、30 年新発国債の日次利回り（1999-09 開始）。米 30 年金利との比較に使用",
       "depends_on": null,
+      "csv_path": "data/processed/jgb/jgb-30y-yield.csv",
       "freshness_sla_days": 5
     },
     {
@@ -520,7 +543,7 @@
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
       "observation_cutoff": "2026-05-14",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -530,6 +553,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 名古屋",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-precip-chubu.csv",
       "freshness_sla_days": 7
     },
     {
@@ -542,7 +566,7 @@
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
       "observation_cutoff": "2026-05-14",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -552,6 +576,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 広島",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-precip-chugoku.csv",
       "freshness_sla_days": 7
     },
     {
@@ -563,8 +588,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -574,6 +599,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 札幌。水力発電ダム流入と雪・豪雨イベントの素材指標",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-precip-hokkaido.csv",
       "freshness_sla_days": 7
     },
     {
@@ -586,7 +612,7 @@
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
       "observation_cutoff": "2026-05-09",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -596,6 +622,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 金沢。冬の豪雪＝水力貯水の素材",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-precip-hokuriku.csv",
       "freshness_sla_days": 7
     },
     {
@@ -608,7 +635,7 @@
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
       "observation_cutoff": "2026-05-13",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -618,6 +645,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 大阪",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-precip-kansai.csv",
       "freshness_sla_days": 7
     },
     {
@@ -630,7 +658,7 @@
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
       "observation_cutoff": "2026-05-12",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -640,6 +668,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 福岡。九州北部豪雨の素材",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-precip-kyushu.csv",
       "freshness_sla_days": 7
     },
     {
@@ -652,7 +681,7 @@
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
       "observation_cutoff": "2026-05-04",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -662,6 +691,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 高松",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-precip-shikoku.csv",
       "freshness_sla_days": 7
     },
     {
@@ -674,7 +704,7 @@
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
       "observation_cutoff": "2026-05-14",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -684,6 +714,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 仙台",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-precip-tohoku.csv",
       "freshness_sla_days": 7
     },
     {
@@ -696,7 +727,7 @@
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
       "observation_cutoff": "2026-05-14",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -706,6 +737,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 東京。首都圏の豪雨・梅雨指標",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-precip-tokyo.csv",
       "freshness_sla_days": 7
     },
     {
@@ -728,6 +760,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 名古屋",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-snow-max-chubu.csv",
       "freshness_sla_days": 365
     },
     {
@@ -750,6 +783,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 広島",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-snow-max-chugoku.csv",
       "freshness_sla_days": 365
     },
     {
@@ -772,6 +806,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 札幌。冬季除雪コスト・暖房需要の素材",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-snow-max-hokkaido.csv",
       "freshness_sla_days": 365
     },
     {
@@ -794,6 +829,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 金沢。北陸の豪雪＝春先の水力発電の素材",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-snow-max-hokuriku.csv",
       "freshness_sla_days": 365
     },
     {
@@ -816,6 +852,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 大阪。ほぼゼロだが寒波イベント記録用",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-snow-max-kansai.csv",
       "freshness_sla_days": 365
     },
     {
@@ -838,6 +875,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 福岡",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-snow-max-kyushu.csv",
       "freshness_sla_days": 365
     },
     {
@@ -860,6 +898,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 高松",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-snow-max-shikoku.csv",
       "freshness_sla_days": 365
     },
     {
@@ -882,6 +921,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 仙台",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-snow-max-tohoku.csv",
       "freshness_sla_days": 365
     },
     {
@@ -904,6 +944,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 東京。大雪時の首都圏交通麻痺イベント指標",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-snow-max-tokyo.csv",
       "freshness_sla_days": 365
     },
     {
@@ -915,8 +956,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -926,6 +967,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 名古屋",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-sunshine-chubu.csv",
       "freshness_sla_days": 3
     },
     {
@@ -937,8 +979,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -948,6 +990,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 広島。中国地方の太陽光比率が高いエリアの基準",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-sunshine-chugoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -959,8 +1002,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -970,6 +1013,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 札幌。太陽光発電の発電量の素材指標",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-sunshine-hokkaido.csv",
       "freshness_sla_days": 3
     },
     {
@@ -981,8 +1025,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -992,6 +1036,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 金沢。冬季の雲量の逆指標",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-sunshine-hokuriku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1003,8 +1048,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1014,6 +1059,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 大阪",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-sunshine-kansai.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1025,8 +1071,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:06+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1036,6 +1082,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 福岡。九州太陽光の基準",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-sunshine-kyushu.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1047,8 +1094,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1058,6 +1105,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 高松。四国の太陽光適地",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-sunshine-shikoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1069,8 +1117,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1080,6 +1128,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 仙台",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-sunshine-tohoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1091,8 +1140,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1102,6 +1151,7 @@
       "aggregation": "daily_sum",
       "notes": "気象官署 東京。首都圏太陽光の基準点",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-sunshine-tokyo.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1113,8 +1163,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1124,6 +1174,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 名古屋（prec=51, block=47636）",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-avg-chubu.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1135,8 +1186,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1146,6 +1197,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 広島（prec=67, block=47765）",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-avg-chugoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1157,8 +1209,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1168,6 +1220,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 札幌（prec=14, block=47412）",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-avg-hokkaido.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1179,8 +1232,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1190,6 +1243,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 金沢（prec=56, block=47605）",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-avg-hokuriku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1201,8 +1255,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1212,6 +1266,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 大阪（prec=62, block=47772）",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-avg-kansai.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1223,8 +1278,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:06+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1234,6 +1289,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 福岡（prec=82, block=47807）",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-avg-kyushu.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1245,8 +1301,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1256,6 +1312,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 高松（prec=72, block=47891）",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-avg-shikoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1267,8 +1324,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1278,6 +1335,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 仙台（prec=34, block=47590）",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-avg-tohoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1289,8 +1347,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1300,6 +1358,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 東京（prec=44, block=47662）",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-avg-tokyo.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1311,8 +1370,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1322,6 +1381,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 名古屋",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-max-chubu.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1333,8 +1393,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1344,6 +1404,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 広島",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-max-chugoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1355,8 +1416,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1366,6 +1427,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 札幌。夏の冷房需要・冬日解析で使用",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-max-hokkaido.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1377,8 +1439,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1388,6 +1450,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 金沢",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-max-hokuriku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1399,8 +1462,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1410,6 +1473,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 大阪",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-max-kansai.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1421,8 +1485,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:06+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1432,6 +1496,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 福岡",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-max-kyushu.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1443,8 +1508,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1454,6 +1519,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 高松",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-max-shikoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1465,8 +1531,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1476,6 +1542,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 仙台",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-max-tohoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1487,8 +1554,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1498,6 +1565,7 @@
       "aggregation": "daily_max",
       "notes": "気象官署 東京。首都圏の夏季ピーク指標",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-max-tokyo.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1509,8 +1577,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1520,6 +1588,7 @@
       "aggregation": "daily_min",
       "notes": "気象官署 名古屋",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-min-chubu.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1531,8 +1600,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1542,6 +1611,7 @@
       "aggregation": "daily_min",
       "notes": "気象官署 広島",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-min-chugoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1553,8 +1623,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1564,6 +1634,7 @@
       "aggregation": "daily_min",
       "notes": "気象官署 札幌。冬の暖房需要の指標",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-min-hokkaido.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1575,8 +1646,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1586,6 +1657,7 @@
       "aggregation": "daily_min",
       "notes": "気象官署 金沢",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-min-hokuriku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1597,8 +1669,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1608,6 +1680,7 @@
       "aggregation": "daily_min",
       "notes": "気象官署 大阪",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-min-kansai.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1619,8 +1692,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:06+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1630,6 +1703,7 @@
       "aggregation": "daily_min",
       "notes": "気象官署 福岡",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-min-kyushu.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1641,8 +1715,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1652,6 +1726,7 @@
       "aggregation": "daily_min",
       "notes": "気象官署 高松",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-min-shikoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1663,8 +1738,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1674,6 +1749,7 @@
       "aggregation": "daily_min",
       "notes": "気象官署 仙台",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-min-tohoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1685,8 +1761,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1696,6 +1772,7 @@
       "aggregation": "daily_min",
       "notes": "気象官署 東京",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-temp-min-tokyo.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1707,8 +1784,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1718,6 +1795,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 名古屋",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-avg-chubu.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1729,8 +1807,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1740,6 +1818,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 広島",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-avg-chugoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1751,8 +1830,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1762,6 +1841,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 札幌。洋上風力を含む北海道の風況の参考指標",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-avg-hokkaido.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1773,8 +1853,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1784,6 +1864,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 金沢。日本海側の冬の季節風の強度",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-avg-hokuriku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1795,8 +1876,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1806,6 +1887,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 大阪",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-avg-kansai.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1817,8 +1899,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:06+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1828,6 +1910,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 福岡",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-avg-kyushu.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1839,8 +1922,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1850,6 +1933,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 高松",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-avg-shikoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1861,8 +1945,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1872,6 +1956,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 仙台",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-avg-tohoku.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1883,8 +1968,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1894,6 +1979,7 @@
       "aggregation": "daily_mean",
       "notes": "気象官署 東京",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-avg-tokyo.csv",
       "freshness_sla_days": 3
     },
     {
@@ -1905,8 +1991,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1916,6 +2002,7 @@
       "aggregation": "raw",
       "notes": "気象官署 名古屋",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-dir-chubu.csv",
       "freshness_sla_days": 7
     },
     {
@@ -1927,8 +2014,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1938,6 +2025,7 @@
       "aggregation": "raw",
       "notes": "気象官署 広島",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-dir-chugoku.csv",
       "freshness_sla_days": 7
     },
     {
@@ -1949,8 +2037,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1960,6 +2048,7 @@
       "aggregation": "raw",
       "notes": "気象官署 札幌。日次の最大風速観測時の風向（16 方位 → 度変換）",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-dir-hokkaido.csv",
       "freshness_sla_days": 7
     },
     {
@@ -1971,8 +2060,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -1982,6 +2071,7 @@
       "aggregation": "raw",
       "notes": "気象官署 金沢。冬の北西季節風の方位指標",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-dir-hokuriku.csv",
       "freshness_sla_days": 7
     },
     {
@@ -1993,8 +2083,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:39+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -2004,6 +2094,7 @@
       "aggregation": "raw",
       "notes": "気象官署 大阪",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-dir-kansai.csv",
       "freshness_sla_days": 7
     },
     {
@@ -2015,8 +2106,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:06+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -2026,6 +2117,7 @@
       "aggregation": "raw",
       "notes": "気象官署 福岡",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-dir-kyushu.csv",
       "freshness_sla_days": 7
     },
     {
@@ -2037,8 +2129,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:05+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -2048,6 +2140,7 @@
       "aggregation": "raw",
       "notes": "気象官署 高松",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-dir-shikoku.csv",
       "freshness_sla_days": 7
     },
     {
@@ -2059,8 +2152,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -2070,6 +2163,7 @@
       "aggregation": "raw",
       "notes": "気象官署 仙台",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-dir-tohoku.csv",
       "freshness_sla_days": 7
     },
     {
@@ -2081,8 +2175,8 @@
       "source_name": "気象庁 日次気温（9 エリア代表観測点）",
       "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
       "license": "jma-terms",
-      "observation_cutoff": "2026-05-17",
-      "updated_at": "2026-05-18T11:35:38+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:04+09:00",
       "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
       "license_notice": "",
       "tz": "Asia/Tokyo",
@@ -2092,6 +2186,7 @@
       "aggregation": "raw",
       "notes": "気象官署 東京",
       "depends_on": null,
+      "csv_path": "data/processed/jma/jma-wind-dir-tokyo.csv",
       "freshness_sla_days": 7
     },
     {
@@ -2114,6 +2209,7 @@
       "aggregation": "monthly_sum",
       "notes": "家庭用需要",
       "depends_on": null,
+      "csv_path": "data/processed/enecho-power/meti-demand-lights.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2136,6 +2232,7 @@
       "aggregation": "monthly_sum",
       "notes": "業務・産業需要",
       "depends_on": null,
+      "csv_path": "data/processed/enecho-power/meti-demand-power.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2158,6 +2255,7 @@
       "aggregation": "monthly_sum",
       "notes": "電灯＋電力の合計",
       "depends_on": null,
+      "csv_path": "data/processed/enecho-power/meti-demand-total.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2180,6 +2278,7 @@
       "aggregation": "monthly_sum",
       "notes": "FIT/FIP 主体",
       "depends_on": null,
+      "csv_path": "data/processed/enecho-power/meti-gen-biomass.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2202,6 +2301,7 @@
       "aggregation": "monthly_sum",
       "notes": "国内合計",
       "depends_on": null,
+      "csv_path": "data/processed/enecho-power/meti-gen-geothermal.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2224,6 +2324,7 @@
       "aggregation": "monthly_sum",
       "notes": "一般水力＋揚水水力",
       "depends_on": null,
+      "csv_path": "data/processed/enecho-power/meti-gen-hydro.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2246,6 +2347,7 @@
       "aggregation": "monthly_sum",
       "notes": "再稼働状況と強く相関",
       "depends_on": null,
+      "csv_path": "data/processed/enecho-power/meti-gen-nuclear.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2268,6 +2370,7 @@
       "aggregation": "monthly_sum",
       "notes": "FIT/FIP 対象＋非対象",
       "depends_on": null,
+      "csv_path": "data/processed/enecho-power/meti-gen-solar.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2290,6 +2393,7 @@
       "aggregation": "monthly_sum",
       "notes": "LNG・石炭・石油などの合計",
       "depends_on": null,
+      "csv_path": "data/processed/enecho-power/meti-gen-thermal.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2312,6 +2416,7 @@
       "aggregation": "monthly_sum",
       "notes": "発電端ベース。一般送配電＋発電事業者の月合計",
       "depends_on": null,
+      "csv_path": "data/processed/enecho-power/meti-gen-total.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2334,6 +2439,7 @@
       "aggregation": "monthly_sum",
       "notes": "陸上＋洋上",
       "depends_on": null,
+      "csv_path": "data/processed/enecho-power/meti-gen-wind.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2363,6 +2469,7 @@
         "meti-gen-biomass",
         "meti-gen-total"
       ],
+      "csv_path": "data/processed/enecho-power/meti-renewables-share.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2375,7 +2482,7 @@
       "source_url": "https://www.stat-search.boj.or.jp/ssi/cgi-bin/famecgi2?cgi=$nme_a000_en&lstSelection=CO",
       "license": "boj-terms",
       "observation_cutoff": "2026-03-01",
-      "updated_at": "2026-05-18T11:35:45+09:00",
+      "updated_at": "2026-05-19T09:14:12+09:00",
       "license_url": "https://www.stat-search.boj.or.jp/info/api_notice.pdf",
       "license_notice": "本サービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。本サービスの内容は日本銀行によって保証されたものではありません。",
       "tz": "Asia/Tokyo",
@@ -2385,6 +2492,7 @@
       "aggregation": "raw",
       "notes": "BOJ getDataCode db=CO / TK99F1000601GCQ01000。良い-悪い の差分（%pt）。Q1=Mar/Q2=Jun/Q3=Sep/Q4=Dec 実施分を月初日に正規化",
       "depends_on": null,
+      "csv_path": "data/processed/tankan/tankan-large-mfg-di.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2397,7 +2505,7 @@
       "source_url": "https://www.stat-search.boj.or.jp/ssi/cgi-bin/famecgi2?cgi=$nme_a000_en&lstSelection=CO",
       "license": "boj-terms",
       "observation_cutoff": "2026-03-01",
-      "updated_at": "2026-05-18T11:35:45+09:00",
+      "updated_at": "2026-05-19T09:14:12+09:00",
       "license_url": "https://www.stat-search.boj.or.jp/info/api_notice.pdf",
       "license_notice": "本サービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。本サービスの内容は日本銀行によって保証されたものではありません。",
       "tz": "Asia/Tokyo",
@@ -2407,6 +2515,7 @@
       "aggregation": "raw",
       "notes": "BOJ getDataCode db=CO / TK99F2000601GCQ01000。良い-悪い の差分（%pt）",
       "depends_on": null,
+      "csv_path": "data/processed/tankan/tankan-large-nonmfg-di.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2419,7 +2528,7 @@
       "source_url": "https://www.stat-search.boj.or.jp/ssi/cgi-bin/famecgi2?cgi=$nme_a000_en&lstSelection=CO",
       "license": "boj-terms",
       "observation_cutoff": "2026-03-01",
-      "updated_at": "2026-05-18T11:35:45+09:00",
+      "updated_at": "2026-05-19T09:14:12+09:00",
       "license_url": "https://www.stat-search.boj.or.jp/info/api_notice.pdf",
       "license_notice": "本サービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。本サービスの内容は日本銀行によって保証されたものではありません。",
       "tz": "Asia/Tokyo",
@@ -2429,6 +2538,7 @@
       "aggregation": "raw",
       "notes": "BOJ getDataCode db=CO / TK99F1000601GCQ03000。良い-悪い の差分（%pt）",
       "depends_on": null,
+      "csv_path": "data/processed/tankan/tankan-sme-mfg-di.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2441,7 +2551,7 @@
       "source_url": "https://www.stat-search.boj.or.jp/ssi/cgi-bin/famecgi2?cgi=$nme_a000_en&lstSelection=CO",
       "license": "boj-terms",
       "observation_cutoff": "2026-03-01",
-      "updated_at": "2026-05-18T11:35:45+09:00",
+      "updated_at": "2026-05-19T09:14:12+09:00",
       "license_url": "https://www.stat-search.boj.or.jp/info/api_notice.pdf",
       "license_notice": "本サービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。本サービスの内容は日本銀行によって保証されたものではありません。",
       "tz": "Asia/Tokyo",
@@ -2451,6 +2561,7 @@
       "aggregation": "raw",
       "notes": "BOJ getDataCode db=CO / TK99F2000601GCQ03000。良い-悪い の差分（%pt）",
       "depends_on": null,
+      "csv_path": "data/processed/tankan/tankan-sme-nonmfg-di.csv",
       "freshness_sla_days": 150
     },
     {
@@ -2463,7 +2574,7 @@
       "source_url": "https://fred.stlouisfed.org/",
       "license": "public-domain",
       "observation_cutoff": "2026-04-01",
-      "updated_at": "2026-05-18T11:41:42+09:00",
+      "updated_at": "2026-05-19T09:14:28+09:00",
       "license_url": "https://fred.stlouisfed.org/legal/",
       "license_notice": "出典: Federal Reserve Bank of St. Louis (FRED).\n各系列の元データは BLS（CPIAUCSL）/ Federal Reserve Board（FEDFUNDS, INDPRO）が作成。\n米連邦政府公表資料は public domain（17 U.S.C. § 105）。\n",
       "tz": "America/New_York",
@@ -2473,6 +2584,7 @@
       "aggregation": "monthly_mean",
       "notes": "CPIENGSL（Consumer Price Index for All Urban Consumers: Energy, SA）の 12 ヶ月前比 %。ガソリン + 家庭用電気 + 暖房油などのエネルギー価格、原油価格の変動を直接反映するため CPI の中で最も変動が大きい",
       "depends_on": null,
+      "csv_path": "data/processed/macro/us-cpi-energy-yoy.csv",
       "freshness_sla_days": 90
     },
     {
@@ -2485,7 +2597,7 @@
       "source_url": "https://fred.stlouisfed.org/",
       "license": "public-domain",
       "observation_cutoff": "2026-04-01",
-      "updated_at": "2026-05-18T11:41:42+09:00",
+      "updated_at": "2026-05-19T09:14:28+09:00",
       "license_url": "https://fred.stlouisfed.org/legal/",
       "license_notice": "出典: Federal Reserve Bank of St. Louis (FRED).\n各系列の元データは BLS（CPIAUCSL）/ Federal Reserve Board（FEDFUNDS, INDPRO）が作成。\n米連邦政府公表資料は public domain（17 U.S.C. § 105）。\n",
       "tz": "America/New_York",
@@ -2495,6 +2607,7 @@
       "aggregation": "monthly_mean",
       "notes": "CPIUFDSL（Consumer Price Index for All Urban Consumers: Food, SA）の 12 ヶ月前比 %。総合 CPI (CPIAUCSL) のうち食品セクター単独、商品サブ最大ウェイト。エネルギーと並んで「コア外」を構成し、Fed のインフレ判断で重視",
       "depends_on": null,
+      "csv_path": "data/processed/macro/us-cpi-food-yoy.csv",
       "freshness_sla_days": 90
     },
     {
@@ -2507,7 +2620,7 @@
       "source_url": "https://fred.stlouisfed.org/",
       "license": "public-domain",
       "observation_cutoff": "2026-04-01",
-      "updated_at": "2026-05-18T11:41:41+09:00",
+      "updated_at": "2026-05-19T09:14:27+09:00",
       "license_url": "https://fred.stlouisfed.org/legal/",
       "license_notice": "出典: Federal Reserve Bank of St. Louis (FRED).\n各系列の元データは BLS（CPIAUCSL）/ Federal Reserve Board（FEDFUNDS, INDPRO）が作成。\n米連邦政府公表資料は public domain（17 U.S.C. § 105）。\n",
       "tz": "America/New_York",
@@ -2517,6 +2630,7 @@
       "aggregation": "monthly_mean",
       "notes": "CPIAUCSL（Consumer Price Index for All Urban Consumers, SA）の 12 ヶ月前比 % を算出。Insight #40「日米 CPI 差 → USD/JPY」で使用",
       "depends_on": null,
+      "csv_path": "data/processed/macro/us-cpi-yoy.csv",
       "freshness_sla_days": 90
     },
     {
@@ -2529,7 +2643,7 @@
       "source_url": "https://fred.stlouisfed.org/",
       "license": "public-domain",
       "observation_cutoff": "2026-04-01",
-      "updated_at": "2026-05-18T11:41:41+09:00",
+      "updated_at": "2026-05-19T09:14:28+09:00",
       "license_url": "https://fred.stlouisfed.org/legal/",
       "license_notice": "出典: Federal Reserve Bank of St. Louis (FRED).\n各系列の元データは BLS（CPIAUCSL）/ Federal Reserve Board（FEDFUNDS, INDPRO）が作成。\n米連邦政府公表資料は public domain（17 U.S.C. § 105）。\n",
       "tz": "America/New_York",
@@ -2539,6 +2653,7 @@
       "aggregation": "monthly_mean",
       "notes": "FEDFUNDS（Federal Funds Effective Rate, 月内平均）。FOMC 決定値ではなく実効レート。Insight #41「Fed FF rate × JEPX」で使用",
       "depends_on": null,
+      "csv_path": "data/processed/macro/us-fed-funds-rate.csv",
       "freshness_sla_days": 45
     },
     {
@@ -2551,7 +2666,7 @@
       "source_url": "https://fred.stlouisfed.org/",
       "license": "public-domain",
       "observation_cutoff": "2026-04-01",
-      "updated_at": "2026-05-18T11:41:41+09:00",
+      "updated_at": "2026-05-19T09:14:28+09:00",
       "license_url": "https://fred.stlouisfed.org/legal/",
       "license_notice": "出典: Federal Reserve Bank of St. Louis (FRED).\n各系列の元データは BLS（CPIAUCSL）/ Federal Reserve Board（FEDFUNDS, INDPRO）が作成。\n米連邦政府公表資料は public domain（17 U.S.C. § 105）。\n",
       "tz": "America/New_York",
@@ -2561,6 +2676,7 @@
       "aggregation": "raw",
       "notes": "INDPRO（Industrial Production Total Index, SA）。製造業＋鉱業＋公益事業の総合指数。Insight #42「米景気 × 日本電力需要」で使用",
       "depends_on": null,
+      "csv_path": "data/processed/macro/us-industrial-production.csv",
       "freshness_sla_days": 90
     },
     {
@@ -2573,7 +2689,7 @@
       "source_url": "https://fred.stlouisfed.org/",
       "license": "public-domain",
       "observation_cutoff": "2026-04-01",
-      "updated_at": "2026-05-18T11:41:41+09:00",
+      "updated_at": "2026-05-19T09:14:28+09:00",
       "license_url": "https://fred.stlouisfed.org/legal/",
       "license_notice": "出典: Federal Reserve Bank of St. Louis (FRED).\n各系列の元データは BLS（CPIAUCSL）/ Federal Reserve Board（FEDFUNDS, INDPRO）が作成。\n米連邦政府公表資料は public domain（17 U.S.C. § 105）。\n",
       "tz": "America/New_York",
@@ -2583,6 +2699,7 @@
       "aggregation": "raw",
       "notes": "PAYEMS（All Employees, Total Nonfarm, SA, Thousands of Persons）。月次雇用統計の主要指標、毎月第一金曜公表 (BLS Employment Situation)。前月比変化が市場の利下げ観測 + USD/JPY を動かす",
       "depends_on": null,
+      "csv_path": "data/processed/macro/us-nonfarm-payrolls.csv",
       "freshness_sla_days": 60
     },
     {
@@ -2594,8 +2711,8 @@
       "source_name": "U.S. Department of the Treasury",
       "source_url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
       "license": "public-domain",
-      "observation_cutoff": "2026-05-15",
-      "updated_at": "2026-05-18T11:41:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:26+09:00",
       "license_url": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
       "license_notice": "",
       "tz": "America/New_York",
@@ -2605,6 +2722,7 @@
       "aggregation": "raw",
       "notes": "Constant Maturity Treasury (CMT) 利回り、世界の長期金利のベンチマーク",
       "depends_on": null,
+      "csv_path": "data/processed/finance/us-treasury-10y.csv",
       "freshness_sla_days": 5
     },
     {
@@ -2616,8 +2734,8 @@
       "source_name": "U.S. Department of the Treasury",
       "source_url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
       "license": "public-domain",
-      "observation_cutoff": "2026-05-15",
-      "updated_at": "2026-05-18T11:41:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:26+09:00",
       "license_url": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
       "license_notice": "",
       "tz": "America/New_York",
@@ -2627,6 +2745,7 @@
       "aggregation": "raw",
       "notes": "Constant Maturity Treasury (CMT) 利回り、米連邦準備制度の指標金利の一つ",
       "depends_on": null,
+      "csv_path": "data/processed/finance/us-treasury-2y.csv",
       "freshness_sla_days": 5
     },
     {
@@ -2638,8 +2757,8 @@
       "source_name": "U.S. Department of the Treasury",
       "source_url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
       "license": "public-domain",
-      "observation_cutoff": "2026-05-15",
-      "updated_at": "2026-05-18T11:41:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:27+09:00",
       "license_url": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
       "license_notice": "",
       "tz": "America/New_York",
@@ -2649,6 +2768,7 @@
       "aggregation": "raw",
       "notes": "Constant Maturity Treasury (CMT) 利回り、長期金利の代表",
       "depends_on": null,
+      "csv_path": "data/processed/finance/us-treasury-30y.csv",
       "freshness_sla_days": 5
     },
     {
@@ -2660,8 +2780,8 @@
       "source_name": "U.S. Department of the Treasury",
       "source_url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
       "license": "public-domain",
-      "observation_cutoff": "2026-05-15",
-      "updated_at": "2026-05-18T11:41:40+09:00",
+      "observation_cutoff": "2026-05-18",
+      "updated_at": "2026-05-19T09:14:26+09:00",
       "license_url": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
       "license_notice": "",
       "tz": "America/New_York",
@@ -2671,6 +2791,7 @@
       "aggregation": "raw",
       "notes": "Constant Maturity Treasury (CMT) 利回り",
       "depends_on": null,
+      "csv_path": "data/processed/finance/us-treasury-5y.csv",
       "freshness_sla_days": 5
     },
     {
@@ -2683,7 +2804,7 @@
       "source_url": "https://fred.stlouisfed.org/",
       "license": "public-domain",
       "observation_cutoff": "2026-04-01",
-      "updated_at": "2026-05-18T11:41:41+09:00",
+      "updated_at": "2026-05-19T09:14:28+09:00",
       "license_url": "https://fred.stlouisfed.org/legal/",
       "license_notice": "出典: Federal Reserve Bank of St. Louis (FRED).\n各系列の元データは BLS（CPIAUCSL）/ Federal Reserve Board（FEDFUNDS, INDPRO）が作成。\n米連邦政府公表資料は public domain（17 U.S.C. § 105）。\n",
       "tz": "America/New_York",
@@ -2693,6 +2814,7 @@
       "aggregation": "raw",
       "notes": "UNRATE（Unemployment Rate, SA, %）。労働力人口に占める失業者の割合、PAYEMS と同時公表 (CPS = 家計調査ベース、PAYEMS は事業所調査)。FRB の二大マンデート (物価安定 + 雇用最大化) の一翼",
       "depends_on": null,
+      "csv_path": "data/processed/macro/us-unemployment-rate.csv",
       "freshness_sla_days": 60
     }
   ]

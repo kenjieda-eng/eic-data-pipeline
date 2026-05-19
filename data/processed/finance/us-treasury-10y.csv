@@ -9098,3 +9098,4 @@ date,indicator_id,region,value,source_url
 2026-05-13,us-treasury-10y,us,4.46,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
 2026-05-14,us-treasury-10y,us,4.47,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
 2026-05-15,us-treasury-10y,us,4.59,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
+2026-05-18,us-treasury-10y,us,4.61,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
