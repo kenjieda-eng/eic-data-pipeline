@@ -997,6 +997,150 @@ sources:
       - meti-renewables-share は他系列から計算される派生指標。D-011 の depends_on を初めて非 null で埋める系列。
       - ライセンス: 政府標準利用規約 2.0（CC BY 4.0 互換）。出典明示が必須。
 
+  occto-capacity:
+    name: OCCTO 容量市場 メインオークション約定結果
+    publisher: 電力広域的運営推進機関 (OCCTO)
+    publisher_url: https://www.occto.or.jp/
+    source_url: https://www.occto.or.jp/market-board/market/main-auction/
+    # ----- Phase D 第 1 期 Day 1 (2026-05-20) 初期登録 ---------------------
+    # 容量市場 = 4 年後の供給力 (kW 価値) を取引する市場、OCCTO が運営。
+    # 2020 年 7 月にメインオークション初回開催 (2024 年度実需給対象)、以降毎年 1 回開催。
+    # 公開データは PDF/Excel 混在。Day 2 (5/21) で Backfill 実装、Day 1 は scaffold のみ。
+    # --------------------------------------------------------------
+    # トップページ (約定結果一覧へのリンクが年度別に並ぶ)
+    index_url: https://www.occto.or.jp/market-board/market/main-auction/
+    # オークション ID は実需給年度 (FY) ベース。2020 年実施 → FY2024 対象、以降毎年。
+    # ファイル名パターンは year-by-year で変動 (PDF + Excel 混在)、fetch 時に動的解決。
+    # --- D-011 メタデータ共通項目 ---
+    license: occto-terms                          # OCCTO 利用規約 (出典明示で再配布可)
+    license_url: https://www.occto.or.jp/info/disclaimer.html
+    license_notice: |
+      出典: 電力広域的運営推進機関 (OCCTO)「容量市場 メインオークション約定結果」
+      OCCTO 利用規約に従い、出典明示を条件に利用可。
+    license_text: |
+      OCCTO 公開データ。再配布・引用は出典明示を条件に可。
+      参考: https://www.occto.or.jp/info/disclaimer.html
+    frequency: annual
+    tz: Asia/Tokyo
+    missing_policy: "null"                        # 未開催年は null
+    freshness_sla_days: 365                       # 年 1 回オークションのため
+    # ----- スコープ境界 ---------------------------------------------------
+    # 第 1 回オークション = 2020 年実施 (FY2024 実需給対象)
+    # 第 5 回オークション = 2024 年実施 (FY2028 実需給対象) [2026 年現在の最新]
+    min_auction_year: 2020
+    # 単位 (約定価格 = ¥/kW・年、約定容量 = kW)
+    unit_price: "¥/kW"
+    unit_volume: "kW"
+    indicator_ids:
+      - capacity-main-auction-price-national
+      - capacity-main-auction-price-hokkaido
+      - capacity-main-auction-price-tohoku
+      - capacity-main-auction-price-tokyo
+      - capacity-main-auction-price-chubu
+      - capacity-main-auction-price-hokuriku
+      - capacity-main-auction-price-kansai
+      - capacity-main-auction-price-chugoku
+      - capacity-main-auction-price-shikoku
+      - capacity-main-auction-price-kyushu
+      - capacity-main-auction-volume-total
+    # D-011 準拠の indicator 固有メタデータ (11 系列)
+    indicators:
+      capacity-main-auction-price-national:
+        name: "容量市場 メインオークション 全国約定価格 (年次)"
+        domain: power
+        unit: "¥/kW"
+        backfill_start: "2020-07-01"
+        aggregation: annual_auction
+        notes: "全国平均約定価格。年 1 回開催のメインオークション結果"
+        depends_on: null
+      capacity-main-auction-price-hokkaido:
+        name: "容量市場 メインオークション 北海道エリア約定価格 (年次)"
+        domain: power
+        unit: "¥/kW"
+        backfill_start: "2020-07-01"
+        aggregation: annual_auction
+        notes: "北海道エリアの約定価格 (全国価格と差が出る場合のみ計上)"
+        depends_on: null
+      capacity-main-auction-price-tohoku:
+        name: "容量市場 メインオークション 東北エリア約定価格 (年次)"
+        domain: power
+        unit: "¥/kW"
+        backfill_start: "2020-07-01"
+        aggregation: annual_auction
+        notes: "東北エリアの約定価格"
+        depends_on: null
+      capacity-main-auction-price-tokyo:
+        name: "容量市場 メインオークション 東京エリア約定価格 (年次)"
+        domain: power
+        unit: "¥/kW"
+        backfill_start: "2020-07-01"
+        aggregation: annual_auction
+        notes: "東京エリアの約定価格"
+        depends_on: null
+      capacity-main-auction-price-chubu:
+        name: "容量市場 メインオークション 中部エリア約定価格 (年次)"
+        domain: power
+        unit: "¥/kW"
+        backfill_start: "2020-07-01"
+        aggregation: annual_auction
+        notes: "中部エリアの約定価格"
+        depends_on: null
+      capacity-main-auction-price-hokuriku:
+        name: "容量市場 メインオークション 北陸エリア約定価格 (年次)"
+        domain: power
+        unit: "¥/kW"
+        backfill_start: "2020-07-01"
+        aggregation: annual_auction
+        notes: "北陸エリアの約定価格"
+        depends_on: null
+      capacity-main-auction-price-kansai:
+        name: "容量市場 メインオークション 関西エリア約定価格 (年次)"
+        domain: power
+        unit: "¥/kW"
+        backfill_start: "2020-07-01"
+        aggregation: annual_auction
+        notes: "関西エリアの約定価格"
+        depends_on: null
+      capacity-main-auction-price-chugoku:
+        name: "容量市場 メインオークション 中国エリア約定価格 (年次)"
+        domain: power
+        unit: "¥/kW"
+        backfill_start: "2020-07-01"
+        aggregation: annual_auction
+        notes: "中国エリアの約定価格"
+        depends_on: null
+      capacity-main-auction-price-shikoku:
+        name: "容量市場 メインオークション 四国エリア約定価格 (年次)"
+        domain: power
+        unit: "¥/kW"
+        backfill_start: "2020-07-01"
+        aggregation: annual_auction
+        notes: "四国エリアの約定価格"
+        depends_on: null
+      capacity-main-auction-price-kyushu:
+        name: "容量市場 メインオークション 九州エリア約定価格 (年次)"
+        domain: power
+        unit: "¥/kW"
+        backfill_start: "2020-07-01"
+        aggregation: annual_auction
+        notes: "九州エリアの約定価格"
+        depends_on: null
+      capacity-main-auction-volume-total:
+        name: "容量市場 メインオークション 約定容量合計 (年次)"
+        domain: power
+        unit: "kW"
+        backfill_start: "2020-07-01"
+        aggregation: annual_auction
+        notes: "全国の約定容量合計。4 年後の供給力を kW で表示"
+        depends_on: null
+    notes: |
+      - 年 1 回開催 (毎年 7-9 月頃にメインオークション実施、結果公開は実施直後)。
+      - 約定価格の単位は ¥/kW・年 (kW 価値の年額)、約定容量は kW。
+      - 第 1 回 (2020 年実施) は FY2024 (2024 年度) 実需給対象、以降毎年 1 年ずつ前進。
+      - エリア別価格は全国一律になる年と差が出る年があり、欠測月は null 扱い。
+      - Phase D 第 1 期 Day 1 (5/20) で fetcher scaffold 配置、Day 2 (5/21) で Backfill 実 CSV 配置。
+      - ライセンス: OCCTO 利用規約 (出典明示で再配布可)。
+
   us-treasury:
     name: U.S. Treasury Daily Yield Curve Rates (CMT)
     base_url: "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv"
