@@ -1001,16 +1001,54 @@ sources:
     name: OCCTO 容量市場 メインオークション約定結果
     publisher: 電力広域的運営推進機関 (OCCTO)
     publisher_url: https://www.occto.or.jp/
-    source_url: https://www.occto.or.jp/market-board/market/main-auction/
-    # ----- Phase D 第 1 期 Day 1 (2026-05-20) 初期登録 ---------------------
-    # 容量市場 = 4 年後の供給力 (kW 価値) を取引する市場、OCCTO が運営。
-    # 2020 年 7 月にメインオークション初回開催 (2024 年度実需給対象)、以降毎年 1 回開催。
-    # 公開データは PDF/Excel 混在。Day 2 (5/21) で Backfill 実装、Day 1 は scaffold のみ。
+    source_url: https://www.occto.or.jp/capacity-market/yoryoshijyo/main/data/
+    # ----- Phase D 第 1 期 Day 2 (2026-05-20 午後) 全面書き直し -----------
+    # Day 1 (5/20 朝) の scaffold は 6 件のドリフトが発覚し全面修正:
+    #   1. index_url: /market-board/market/main-auction/ (404) →
+    #                 /capacity-market/yoryoshijyo/main/data/ (正)
+    #   2. ファイル形式: PDF/Excel 単一 → ZIP に CSV 1 枚 格納
+    #   3. ファイル名: main_auction_YYYY.xlsx → {delivery_fy}_yakujoukekka_csv.zip
+    #   4. 主軸: auction_year (オークション開催年) → delivery_fy (実需給年度)
+    #   5. スコープ: 2020-2024 メイン 5 回 → FY2024-FY2029 メイン 6 回
+    #   6. parse 関数名: parse_auction_excel/_pdf 廃止 → parse_auction_zip_csv 新規
+    # 上記は 5/20 午後の probe (FY2024 + FY2028 ZIP) で実構造を完全把握した結果。
+    # 詳細: L-061 候補 (scaffold 起草時の実 URL HTTP リーチ確認不足を体系化予定)。
     # --------------------------------------------------------------
-    # トップページ (約定結果一覧へのリンクが年度別に並ぶ)
-    index_url: https://www.occto.or.jp/market-board/market/main-auction/
-    # オークション ID は実需給年度 (FY) ベース。2020 年実施 → FY2024 対象、以降毎年。
-    # ファイル名パターンは year-by-year で変動 (PDF + Excel 混在)、fetch 時に動的解決。
+    # 容量市場 = 4 年後の供給力 (kW 価値) を取引する市場、OCCTO が運営。
+    # 2020 年 7 月にメインオークション初回開催 (FY2024 実需給対象)、以降毎年 1 回開催。
+    # 公開データは ZIP に格納された 1 枚の CSV (エリア毎の詳細)。
+    # トップページ (実需給年度ごとのファイルリンクが並ぶ統合ページ)
+    index_url: https://www.occto.or.jp/capacity-market/yoryoshijyo/main/data/
+    # メインオークション約定結果 ZIP の URL テンプレート (実 URL 検証済、FY2024/FY2028 で確認)
+    # 注: FY2028 のみ ".../2028_main_yakujoukekka_csv.zip" (中央に "main" が入る)、
+    # それ以外 (FY2024/FY2025/FY2026/FY2027/FY2029) は "{fy}_yakujoukekka_csv.zip"。
+    # FY2029 だけ別パスに置かれる: .../assets/capacity-market/yoryoshijyo/main/data/index/{fy}_yakujoukekka_csv.zip
+    # 動的解決は index_url の HTML を fetch して a[href] を走査することで対応。
+    file_url_base: https://www.occto.or.jp/capacity-market/wp-content/themes/occto/documents/
+    # ZIP 内 CSV は cp932 (Shift_JIS) エンコード、列構造は以下に固定 (FY2024 + FY2028 で実測):
+    #   1. 対象実需給年度          (int, e.g. 2024)
+    #   2. エリア                  (str, 北海道/東北/東京/中部/北陸/関西/中国/四国/九州)
+    #   3. 約定価格[円/kW]         (int, e.g. 14137)
+    #   4. エリア毎の約定容量[kW]  (int, e.g. 5931674)
+    #   5. エリア毎の約定総額（経過措置控除後）[円]  (int)
+    csv_encoding: cp932
+    csv_columns:
+      - 対象実需給年度
+      - エリア
+      - 約定価格[円/kW]
+      - エリア毎の約定容量[kW]
+      - エリア毎の約定総額（経過措置控除後）[円]
+    # エリア日本語名 → indicator_id サフィックス (英数小文字) の mapping
+    area_map:
+      北海道: hokkaido
+      東北: tohoku
+      東京: tokyo
+      中部: chubu
+      北陸: hokuriku
+      関西: kansai
+      中国: chugoku
+      四国: shikoku
+      九州: kyushu
     # --- D-011 メタデータ共通項目 ---
     license: occto-terms                          # OCCTO 利用規約 (出典明示で再配布可)
     license_url: https://www.occto.or.jp/info/disclaimer.html
@@ -1022,12 +1060,12 @@ sources:
       参考: https://www.occto.or.jp/info/disclaimer.html
     frequency: annual
     tz: Asia/Tokyo
-    missing_policy: "null"                        # 未開催年は null
+    missing_policy: "null"                        # 未開催年度は null
     freshness_sla_days: 365                       # 年 1 回オークションのため
-    # ----- スコープ境界 ---------------------------------------------------
-    # 第 1 回オークション = 2020 年実施 (FY2024 実需給対象)
-    # 第 5 回オークション = 2024 年実施 (FY2028 実需給対象) [2026 年現在の最新]
-    min_auction_year: 2020
+    # ----- スコープ境界 (実需給年度ベース) --------------------------------
+    # FY2024 (第 1 回オークション、2020 年実施) ～ FY2029 (第 6 回、2025 年実施) = 6 年分
+    # FY2028 は ZIP 名が "{fy}_main_yakujoukekka_csv.zip" と異なるので filename pattern は柔軟に
+    min_delivery_fy: 2024
     # 単位 (約定価格 = ¥/kW・年、約定容量 = kW)
     unit_price: "¥/kW"
     unit_volume: "kW"
@@ -1044,28 +1082,39 @@ sources:
       - capacity-main-auction-price-kyushu
       - capacity-main-auction-volume-total
     # D-011 準拠の indicator 固有メタデータ (11 系列)
+    # date 軸 = 実需給年度の 4 月 1 日 (例: FY2024 → 2024-04-01)
     indicators:
       capacity-main-auction-price-national:
-        name: "容量市場 メインオークション 全国約定価格 (年次)"
+        name: "容量市場 メインオークション 全国加重平均約定価格 (年次)"
         domain: power
         unit: "¥/kW"
-        backfill_start: "2020-07-01"
+        backfill_start: "2024-04-01"
         aggregation: annual_auction
-        notes: "全国平均約定価格。年 1 回開催のメインオークション結果"
-        depends_on: null
+        notes: "Σ(エリア価格 × エリア容量) / Σ(エリア容量) で加重平均。全エリア一律の年はその値"
+        depends_on:
+          - capacity-main-auction-price-hokkaido
+          - capacity-main-auction-price-tohoku
+          - capacity-main-auction-price-tokyo
+          - capacity-main-auction-price-chubu
+          - capacity-main-auction-price-hokuriku
+          - capacity-main-auction-price-kansai
+          - capacity-main-auction-price-chugoku
+          - capacity-main-auction-price-shikoku
+          - capacity-main-auction-price-kyushu
+          - capacity-main-auction-volume-total
       capacity-main-auction-price-hokkaido:
         name: "容量市場 メインオークション 北海道エリア約定価格 (年次)"
         domain: power
         unit: "¥/kW"
-        backfill_start: "2020-07-01"
+        backfill_start: "2024-04-01"
         aggregation: annual_auction
-        notes: "北海道エリアの約定価格 (全国価格と差が出る場合のみ計上)"
+        notes: "北海道エリアの約定価格"
         depends_on: null
       capacity-main-auction-price-tohoku:
         name: "容量市場 メインオークション 東北エリア約定価格 (年次)"
         domain: power
         unit: "¥/kW"
-        backfill_start: "2020-07-01"
+        backfill_start: "2024-04-01"
         aggregation: annual_auction
         notes: "東北エリアの約定価格"
         depends_on: null
@@ -1073,7 +1122,7 @@ sources:
         name: "容量市場 メインオークション 東京エリア約定価格 (年次)"
         domain: power
         unit: "¥/kW"
-        backfill_start: "2020-07-01"
+        backfill_start: "2024-04-01"
         aggregation: annual_auction
         notes: "東京エリアの約定価格"
         depends_on: null
@@ -1081,7 +1130,7 @@ sources:
         name: "容量市場 メインオークション 中部エリア約定価格 (年次)"
         domain: power
         unit: "¥/kW"
-        backfill_start: "2020-07-01"
+        backfill_start: "2024-04-01"
         aggregation: annual_auction
         notes: "中部エリアの約定価格"
         depends_on: null
@@ -1089,7 +1138,7 @@ sources:
         name: "容量市場 メインオークション 北陸エリア約定価格 (年次)"
         domain: power
         unit: "¥/kW"
-        backfill_start: "2020-07-01"
+        backfill_start: "2024-04-01"
         aggregation: annual_auction
         notes: "北陸エリアの約定価格"
         depends_on: null
@@ -1097,7 +1146,7 @@ sources:
         name: "容量市場 メインオークション 関西エリア約定価格 (年次)"
         domain: power
         unit: "¥/kW"
-        backfill_start: "2020-07-01"
+        backfill_start: "2024-04-01"
         aggregation: annual_auction
         notes: "関西エリアの約定価格"
         depends_on: null
@@ -1105,7 +1154,7 @@ sources:
         name: "容量市場 メインオークション 中国エリア約定価格 (年次)"
         domain: power
         unit: "¥/kW"
-        backfill_start: "2020-07-01"
+        backfill_start: "2024-04-01"
         aggregation: annual_auction
         notes: "中国エリアの約定価格"
         depends_on: null
@@ -1113,7 +1162,7 @@ sources:
         name: "容量市場 メインオークション 四国エリア約定価格 (年次)"
         domain: power
         unit: "¥/kW"
-        backfill_start: "2020-07-01"
+        backfill_start: "2024-04-01"
         aggregation: annual_auction
         notes: "四国エリアの約定価格"
         depends_on: null
@@ -1121,7 +1170,7 @@ sources:
         name: "容量市場 メインオークション 九州エリア約定価格 (年次)"
         domain: power
         unit: "¥/kW"
-        backfill_start: "2020-07-01"
+        backfill_start: "2024-04-01"
         aggregation: annual_auction
         notes: "九州エリアの約定価格"
         depends_on: null
@@ -1129,16 +1178,20 @@ sources:
         name: "容量市場 メインオークション 約定容量合計 (年次)"
         domain: power
         unit: "kW"
-        backfill_start: "2020-07-01"
+        backfill_start: "2024-04-01"
         aggregation: annual_auction
-        notes: "全国の約定容量合計。4 年後の供給力を kW で表示"
+        notes: "Σ(9 エリア容量) = 全国の約定容量合計。4 年後の供給力を kW で表示"
         depends_on: null
     notes: |
-      - 年 1 回開催 (毎年 7-9 月頃にメインオークション実施、結果公開は実施直後)。
-      - 約定価格の単位は ¥/kW・年 (kW 価値の年額)、約定容量は kW。
+      - 年 1 回開催 (毎年 7-9 月頃にメインオークション実施)。
+      - 公開データは ZIP に格納された 1 枚の CSV (エリア毎の詳細)、cp932 エンコード。
+      - 約定価格の単位は ¥/kW・年 (kW 価値の年額)、約定容量は kW、約定総額は ¥。
       - 第 1 回 (2020 年実施) は FY2024 (2024 年度) 実需給対象、以降毎年 1 年ずつ前進。
-      - エリア別価格は全国一律になる年と差が出る年があり、欠測月は null 扱い。
-      - Phase D 第 1 期 Day 1 (5/20) で fetcher scaffold 配置、Day 2 (5/21) で Backfill 実 CSV 配置。
+      - FY2024-FY2027 は全エリア一律価格、FY2028 以降はエリア別価格 (需給逼迫反映)。
+      - 全国加重平均価格は depends_on で 9 エリア価格と容量合計から計算する派生系列。
+      - date 軸 = 実需給年度の 4 月 1 日 (FY2024 → 2024-04-01)、オークション実施日とは別。
+      - 追加オークションは別途 indicator (現スコープ外、Phase D 第 2 期以降で検討)。
+      - 検証レポート PDF/XLSX も別途公開 (current 系列とは別ファイル、参照のみ)。
       - ライセンス: OCCTO 利用規約 (出典明示で再配布可)。
 
   us-treasury:
