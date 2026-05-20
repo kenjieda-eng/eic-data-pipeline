@@ -1,0 +1,7 @@
+date,indicator_id,region,value,source_url
+2024-04-01,capacity-main-auction-price-chubu,chubu,14137.0,https://www.occto.or.jp/capacity-market/yoryoshijyo/main/data/
+2025-04-01,capacity-main-auction-price-chubu,chubu,3495.0,https://www.occto.or.jp/capacity-market/yoryoshijyo/main/data/
+2026-04-01,capacity-main-auction-price-chubu,chubu,5832.0,https://www.occto.or.jp/capacity-market/yoryoshijyo/main/data/
+2027-04-01,capacity-main-auction-price-chubu,chubu,7823.0,https://www.occto.or.jp/capacity-market/yoryoshijyo/main/data/
+2028-04-01,capacity-main-auction-price-chubu,chubu,10280.0,https://www.occto.or.jp/capacity-market/yoryoshijyo/main/data/
+2029-04-01,capacity-main-auction-price-chubu,chubu,12388.0,https://www.occto.or.jp/capacity-market/yoryoshijyo/main/data/

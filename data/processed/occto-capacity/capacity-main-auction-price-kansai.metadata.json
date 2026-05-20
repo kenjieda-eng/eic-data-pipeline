@@ -1,0 +1,21 @@
+{
+  "id": "capacity-main-auction-price-kansai",
+  "name": "容量市場 メインオークション 関西エリア約定価格 (年次)",
+  "domain": "power",
+  "frequency": "annual",
+  "unit": "¥/kW",
+  "source_name": "OCCTO 容量市場 メインオークション約定結果",
+  "source_url": "https://www.occto.or.jp/capacity-market/yoryoshijyo/main/data/",
+  "license": "occto-terms",
+  "observation_cutoff": "2029-04-01",
+  "updated_at": "2026-05-20T14:27:03+09:00",
+  "license_url": "https://www.occto.or.jp/info/disclaimer.html",
+  "license_notice": "出典: 電力広域的運営推進機関 (OCCTO)「容量市場 メインオークション約定結果」\nOCCTO 利用規約に従い、出典明示を条件に利用可。\n",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2024-04-01",
+  "publisher": "電力広域的運営推進機関 (OCCTO)",
+  "aggregation": "annual_auction",
+  "notes": "関西エリアの約定価格",
+  "depends_on": null
+}

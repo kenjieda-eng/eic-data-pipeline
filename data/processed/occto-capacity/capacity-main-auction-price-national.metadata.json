@@ -1,0 +1,32 @@
+{
+  "id": "capacity-main-auction-price-national",
+  "name": "容量市場 メインオークション 全国加重平均約定価格 (年次)",
+  "domain": "power",
+  "frequency": "annual",
+  "unit": "¥/kW",
+  "source_name": "OCCTO 容量市場 メインオークション約定結果",
+  "source_url": "https://www.occto.or.jp/capacity-market/yoryoshijyo/main/data/",
+  "license": "occto-terms",
+  "observation_cutoff": "2029-04-01",
+  "updated_at": "2026-05-20T14:27:03+09:00",
+  "license_url": "https://www.occto.or.jp/info/disclaimer.html",
+  "license_notice": "出典: 電力広域的運営推進機関 (OCCTO)「容量市場 メインオークション約定結果」\nOCCTO 利用規約に従い、出典明示を条件に利用可。\n",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2024-04-01",
+  "publisher": "電力広域的運営推進機関 (OCCTO)",
+  "aggregation": "annual_auction",
+  "notes": "Σ(エリア価格 × エリア容量) / Σ(エリア容量) で加重平均。全エリア一律の年はその値",
+  "depends_on": [
+    "capacity-main-auction-price-hokkaido",
+    "capacity-main-auction-price-tohoku",
+    "capacity-main-auction-price-tokyo",
+    "capacity-main-auction-price-chubu",
+    "capacity-main-auction-price-hokuriku",
+    "capacity-main-auction-price-kansai",
+    "capacity-main-auction-price-chugoku",
+    "capacity-main-auction-price-shikoku",
+    "capacity-main-auction-price-kyushu",
+    "capacity-main-auction-volume-total"
+  ]
+}
