@@ -1221,7 +1221,7 @@ date,indicator_id,region,value,source_url
 2015-08-03,jepx-spot-tokyo,tokyo,19.038541666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
 2015-08-04,jepx-spot-tokyo,tokyo,20.308125,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
 2015-08-05,jepx-spot-tokyo,tokyo,23.94,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
-2015-08-06,jepx-spot-tokyo,tokyo,25.325833333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
+2015-08-06,jepx-spot-tokyo,tokyo,25.32583333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
 2015-08-07,jepx-spot-tokyo,tokyo,21.493125000000003,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
 2015-08-08,jepx-spot-tokyo,tokyo,11.835625,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
 2015-08-09,jepx-spot-tokyo,tokyo,11.076875,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2015.csv
@@ -3614,7 +3614,7 @@ date,indicator_id,region,value,source_url
 2022-02-20,jepx-spot-tokyo,tokyo,17.266458333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-21,jepx-spot-tokyo,tokyo,23.1675,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-22,jepx-spot-tokyo,tokyo,24.31395833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
-2022-02-23,jepx-spot-tokyo,tokyo,24.028958333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
+2022-02-23,jepx-spot-tokyo,tokyo,24.02895833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-24,jepx-spot-tokyo,tokyo,24.40083333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-25,jepx-spot-tokyo,tokyo,20.512916666666666,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-26,jepx-spot-tokyo,tokyo,17.277916666666666,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
@@ -3634,7 +3634,7 @@ date,indicator_id,region,value,source_url
 2022-03-12,jepx-spot-tokyo,tokyo,24.463541666666668,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-03-13,jepx-spot-tokyo,tokyo,26.221666666666668,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-03-14,jepx-spot-tokyo,tokyo,21.735208333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
-2022-03-15,jepx-spot-tokyo,tokyo,22.716458333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
+2022-03-15,jepx-spot-tokyo,tokyo,22.71645833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-03-16,jepx-spot-tokyo,tokyo,22.065,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-03-17,jepx-spot-tokyo,tokyo,21.6675,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-03-18,jepx-spot-tokyo,tokyo,71.89770833333334,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
@@ -3836,7 +3836,7 @@ date,indicator_id,region,value,source_url
 2022-09-30,jepx-spot-tokyo,tokyo,17.406875,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-10-01,jepx-spot-tokyo,tokyo,18.906666666666663,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-10-02,jepx-spot-tokyo,tokyo,15.42375,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
-2022-10-03,jepx-spot-tokyo,tokyo,30.685208333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
+2022-10-03,jepx-spot-tokyo,tokyo,30.68520833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-10-04,jepx-spot-tokyo,tokyo,31.63520833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-10-05,jepx-spot-tokyo,tokyo,29.08333333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
 2022-10-06,jepx-spot-tokyo,tokyo,29.53833333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2022.csv
@@ -5161,3 +5161,4 @@ date,indicator_id,region,value,source_url
 2026-05-17,jepx-spot-tokyo,tokyo,13.42125,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-05-18,jepx-spot-tokyo,tokyo,19.1575,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-05-19,jepx-spot-tokyo,tokyo,19.765,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
+2026-05-20,jepx-spot-tokyo,tokyo,20.864166666666666,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv

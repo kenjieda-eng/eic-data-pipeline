@@ -2947,7 +2947,7 @@ date,indicator_id,region,value,source_url
 2020-04-24,jepx-spot-kansai,kansai,4.530208333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-25,jepx-spot-kansai,kansai,3.154583333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-26,jepx-spot-kansai,kansai,2.806875,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
-2020-04-27,jepx-spot-kansai,kansai,3.6366666666666663,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
+2020-04-27,jepx-spot-kansai,kansai,3.6366666666666654,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-28,jepx-spot-kansai,kansai,3.863958333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-29,jepx-spot-kansai,kansai,3.2706250000000003,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-04-30,jepx-spot-kansai,kansai,3.5175,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
@@ -2973,7 +2973,7 @@ date,indicator_id,region,value,source_url
 2020-05-20,jepx-spot-kansai,kansai,3.8679166666666656,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-05-21,jepx-spot-kansai,kansai,4.258541666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-05-22,jepx-spot-kansai,kansai,4.61,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
-2020-05-23,jepx-spot-kansai,kansai,3.6341666666666663,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
+2020-05-23,jepx-spot-kansai,kansai,3.6341666666666654,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-05-24,jepx-spot-kansai,kansai,2.439791666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-05-25,jepx-spot-kansai,kansai,4.685833333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-05-26,jepx-spot-kansai,kansai,5.338958333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
@@ -2981,7 +2981,7 @@ date,indicator_id,region,value,source_url
 2020-05-28,jepx-spot-kansai,kansai,3.796458333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-05-29,jepx-spot-kansai,kansai,4.447708333333334,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-05-30,jepx-spot-kansai,kansai,3.0714583333333336,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
-2020-05-31,jepx-spot-kansai,kansai,3.9604166666666663,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
+2020-05-31,jepx-spot-kansai,kansai,3.960416666666666,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-06-01,jepx-spot-kansai,kansai,4.212083333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-06-02,jepx-spot-kansai,kansai,3.407083333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-06-03,jepx-spot-kansai,kansai,4.340833333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
@@ -3614,7 +3614,7 @@ date,indicator_id,region,value,source_url
 2022-02-20,jepx-spot-kansai,kansai,16.934583333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-21,jepx-spot-kansai,kansai,23.225625,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-22,jepx-spot-kansai,kansai,24.331041666666668,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
-2022-02-23,jepx-spot-kansai,kansai,24.028958333333332,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
+2022-02-23,jepx-spot-kansai,kansai,24.02895833333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-24,jepx-spot-kansai,kansai,24.35833333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-25,jepx-spot-kansai,kansai,20.53375,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
 2022-02-26,jepx-spot-kansai,kansai,17.08458333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2021.csv
@@ -5161,3 +5161,4 @@ date,indicator_id,region,value,source_url
 2026-05-17,jepx-spot-kansai,kansai,8.837291666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-05-18,jepx-spot-kansai,kansai,15.951875000000001,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-05-19,jepx-spot-kansai,kansai,18.04625,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
+2026-05-20,jepx-spot-kansai,kansai,20.395416666666666,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv

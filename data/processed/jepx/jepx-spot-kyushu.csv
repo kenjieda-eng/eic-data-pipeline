@@ -2900,7 +2900,7 @@ date,indicator_id,region,value,source_url
 2020-03-08,jepx-spot-kyushu,kyushu,3.356666666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2019.csv
 2020-03-09,jepx-spot-kyushu,kyushu,4.904583333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2019.csv
 2020-03-10,jepx-spot-kyushu,kyushu,5.131458333333334,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2019.csv
-2020-03-11,jepx-spot-kyushu,kyushu,3.7747916666666663,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2019.csv
+2020-03-11,jepx-spot-kyushu,kyushu,3.7747916666666654,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2019.csv
 2020-03-12,jepx-spot-kyushu,kyushu,4.235,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2019.csv
 2020-03-13,jepx-spot-kyushu,kyushu,5.140208333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2019.csv
 2020-03-14,jepx-spot-kyushu,kyushu,3.8991666666666656,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2019.csv
@@ -2981,7 +2981,7 @@ date,indicator_id,region,value,source_url
 2020-05-28,jepx-spot-kyushu,kyushu,3.4985416666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-05-29,jepx-spot-kyushu,kyushu,4.0616666666666665,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-05-30,jepx-spot-kyushu,kyushu,3.049166666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
-2020-05-31,jepx-spot-kyushu,kyushu,3.9604166666666663,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
+2020-05-31,jepx-spot-kyushu,kyushu,3.960416666666666,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-06-01,jepx-spot-kyushu,kyushu,4.212083333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-06-02,jepx-spot-kyushu,kyushu,3.387708333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
 2020-06-03,jepx-spot-kyushu,kyushu,4.340833333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2020.csv
@@ -4085,7 +4085,7 @@ date,indicator_id,region,value,source_url
 2023-06-06,jepx-spot-kyushu,kyushu,7.445833333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2023.csv
 2023-06-07,jepx-spot-kyushu,kyushu,3.0725,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2023.csv
 2023-06-08,jepx-spot-kyushu,kyushu,7.47375,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2023.csv
-2023-06-09,jepx-spot-kyushu,kyushu,3.9447916666666663,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2023.csv
+2023-06-09,jepx-spot-kyushu,kyushu,3.944791666666666,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2023.csv
 2023-06-10,jepx-spot-kyushu,kyushu,3.5814583333333334,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2023.csv
 2023-06-11,jepx-spot-kyushu,kyushu,2.896041666666666,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2023.csv
 2023-06-12,jepx-spot-kyushu,kyushu,7.212083333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2023.csv
@@ -5161,3 +5161,4 @@ date,indicator_id,region,value,source_url
 2026-05-17,jepx-spot-kyushu,kyushu,7.023958333333333,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-05-18,jepx-spot-kyushu,kyushu,8.35375,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-05-19,jepx-spot-kyushu,kyushu,9.036875,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
+2026-05-20,jepx-spot-kyushu,kyushu,12.921041666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
