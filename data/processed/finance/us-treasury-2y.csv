@@ -9100,3 +9100,4 @@ date,indicator_id,region,value,source_url
 2026-05-15,us-treasury-2y,us,4.09,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
 2026-05-18,us-treasury-2y,us,4.07,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
 2026-05-19,us-treasury-2y,us,4.13,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
+2026-05-20,us-treasury-2y,us,4.04,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
