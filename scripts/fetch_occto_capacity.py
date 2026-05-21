@@ -365,6 +365,14 @@ def parse_auction_zip_csv(
             "value": float(price),
         })
 
+        # エリア別約定容量レコード追加 (catalog 133→142、ユウ Q6 要望)
+        rows.append({
+            "date": date_str,
+            "indicator_id": f"capacity-main-auction-volume-{area_code}",
+            "region": area_code,
+            "value": float(volume),
+        })
+
         total_volume += volume
         weighted_price_sum += price * volume
         n_areas_found += 1

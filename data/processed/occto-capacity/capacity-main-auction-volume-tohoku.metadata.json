@@ -1,9 +1,9 @@
 {
-  "id": "capacity-main-auction-price-shikoku",
-  "name": "容量市場 メインオークション 四国エリア約定価格 (年次)",
+  "id": "capacity-main-auction-volume-tohoku",
+  "name": "容量市場 メインオークション 約定容量 東北エリア (年次)",
   "domain": "power",
   "frequency": "annual",
-  "unit": "¥/kW",
+  "unit": "kW",
   "source_name": "OCCTO 容量市場 メインオークション約定結果",
   "source_url": "https://www.occto.or.jp/capacity-market/yoryoshijyo/main/data/",
   "license": "occto-terms",
@@ -16,6 +16,6 @@
   "backfill_start": "2024-04-01",
   "publisher": "電力広域的運営推進機関 (OCCTO)",
   "aggregation": "annual_auction",
-  "notes": "四国エリアの約定価格",
+  "notes": "東北の約定容量 (kW)、ソース CSV「エリア毎の約定容量[kW]」列を転記",
   "depends_on": null
 }

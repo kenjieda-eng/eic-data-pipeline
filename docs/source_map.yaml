@@ -1081,7 +1081,16 @@ sources:
       - capacity-main-auction-price-shikoku
       - capacity-main-auction-price-kyushu
       - capacity-main-auction-volume-total
-    # D-011 準拠の indicator 固有メタデータ (11 系列)
+      - capacity-main-auction-volume-hokkaido
+      - capacity-main-auction-volume-tohoku
+      - capacity-main-auction-volume-tokyo
+      - capacity-main-auction-volume-chubu
+      - capacity-main-auction-volume-hokuriku
+      - capacity-main-auction-volume-kansai
+      - capacity-main-auction-volume-chugoku
+      - capacity-main-auction-volume-shikoku
+      - capacity-main-auction-volume-kyushu
+    # D-011 準拠の indicator 固有メタデータ (20 系列)
     # date 軸 = 実需給年度の 4 月 1 日 (例: FY2024 → 2024-04-01)
     indicators:
       capacity-main-auction-price-national:
@@ -1182,6 +1191,69 @@ sources:
         aggregation: annual_auction
         notes: "Σ(9 エリア容量) = 全国の約定容量合計。4 年後の供給力を kW で表示"
         depends_on: null
+      capacity-main-auction-volume-hokkaido:
+        name: "容量市場 メインオークション 約定容量 北海道エリア (年次)"
+        domain: power
+        unit: "kW"
+        backfill_start: "2024-04-01"
+        aggregation: annual_auction
+        notes: "北海道の約定容量 (kW)、ソース CSV「エリア毎の約定容量[kW]」列を転記"
+      capacity-main-auction-volume-tohoku:
+        name: "容量市場 メインオークション 約定容量 東北エリア (年次)"
+        domain: power
+        unit: "kW"
+        backfill_start: "2024-04-01"
+        aggregation: annual_auction
+        notes: "東北の約定容量 (kW)、ソース CSV「エリア毎の約定容量[kW]」列を転記"
+      capacity-main-auction-volume-tokyo:
+        name: "容量市場 メインオークション 約定容量 東京エリア (年次)"
+        domain: power
+        unit: "kW"
+        backfill_start: "2024-04-01"
+        aggregation: annual_auction
+        notes: "東京の約定容量 (kW)、ソース CSV「エリア毎の約定容量[kW]」列を転記"
+      capacity-main-auction-volume-chubu:
+        name: "容量市場 メインオークション 約定容量 中部エリア (年次)"
+        domain: power
+        unit: "kW"
+        backfill_start: "2024-04-01"
+        aggregation: annual_auction
+        notes: "中部の約定容量 (kW)、ソース CSV「エリア毎の約定容量[kW]」列を転記"
+      capacity-main-auction-volume-hokuriku:
+        name: "容量市場 メインオークション 約定容量 北陸エリア (年次)"
+        domain: power
+        unit: "kW"
+        backfill_start: "2024-04-01"
+        aggregation: annual_auction
+        notes: "北陸の約定容量 (kW)、ソース CSV「エリア毎の約定容量[kW]」列を転記"
+      capacity-main-auction-volume-kansai:
+        name: "容量市場 メインオークション 約定容量 関西エリア (年次)"
+        domain: power
+        unit: "kW"
+        backfill_start: "2024-04-01"
+        aggregation: annual_auction
+        notes: "関西の約定容量 (kW)、ソース CSV「エリア毎の約定容量[kW]」列を転記"
+      capacity-main-auction-volume-chugoku:
+        name: "容量市場 メインオークション 約定容量 中国エリア (年次)"
+        domain: power
+        unit: "kW"
+        backfill_start: "2024-04-01"
+        aggregation: annual_auction
+        notes: "中国の約定容量 (kW)、ソース CSV「エリア毎の約定容量[kW]」列を転記"
+      capacity-main-auction-volume-shikoku:
+        name: "容量市場 メインオークション 約定容量 四国エリア (年次)"
+        domain: power
+        unit: "kW"
+        backfill_start: "2024-04-01"
+        aggregation: annual_auction
+        notes: "四国の約定容量 (kW)、ソース CSV「エリア毎の約定容量[kW]」列を転記"
+      capacity-main-auction-volume-kyushu:
+        name: "容量市場 メインオークション 約定容量 九州エリア (年次)"
+        domain: power
+        unit: "kW"
+        backfill_start: "2024-04-01"
+        aggregation: annual_auction
+        notes: "九州の約定容量 (kW)、ソース CSV「エリア毎の約定容量[kW]」列を転記"
     notes: |
       - 年 1 回開催 (毎年 7-9 月頃にメインオークション実施)。
       - 公開データは ZIP に格納された 1 枚の CSV (エリア毎の詳細)、cp932 エンコード。
