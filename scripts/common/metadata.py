@@ -78,7 +78,7 @@ LICENSE_VALUES = {
     "CC-BY-4.0", "CC0-1.0", "MIT", "Apache-2.0", "public-domain",
     # カスタム
     "boj-terms", "jepx-terms", "jma-terms", "meti-terms",
-    "mlit-terms", "occto-terms", "proprietary",
+    "mlit-terms", "occto-terms", "eprx-terms", "proprietary",
 }
 MISSING_POLICY_VALUES = {
     "raw", "forward_fill", "forward_fill_within_month",
@@ -89,6 +89,7 @@ AGGREGATION_VALUES = {
     "monthly_sum", "monthly_mean", "monthly_end", "monthly_high", "monthly_low",
     "area_average", "alias", "derived",
     "annual_auction",  # Phase D 第 1 期 Day 1 (2026-05-20): OCCTO 容量市場 年 1 回オークション
+    "annual_mean",  # Phase D (2026-05-23, D-018): EPRX 需給調整 商品別 年間平均落札単価
 }
 
 # frequency 別デフォルトの鮮度 SLA（日数）。

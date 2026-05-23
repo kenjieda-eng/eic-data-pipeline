@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2022-04-01,balancing-price-tertiary-1,jp,4.78,https://www.eprx.or.jp/information/summary.php
+2023-04-01,balancing-price-tertiary-1,jp,6.71,https://www.eprx.or.jp/information/summary.php
+2024-04-01,balancing-price-tertiary-1,jp,2.69,https://www.eprx.or.jp/information/summary.php
+2025-04-01,balancing-price-tertiary-1,jp,2.66,https://www.eprx.or.jp/information/summary.php
