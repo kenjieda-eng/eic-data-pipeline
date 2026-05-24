@@ -1,0 +1,21 @@
+{
+  "id": "balancing-shortage-composite",
+  "name": "需給調整市場 複合商品 年間不足率 (年次)",
+  "domain": "power",
+  "frequency": "annual",
+  "unit": "%",
+  "source_name": "電力需給調整力取引所 取引実績の取りまとめ結果",
+  "source_url": "https://www.eprx.or.jp/information/summary.php",
+  "license": "eprx-terms",
+  "observation_cutoff": "2025-04-01",
+  "updated_at": "2026-05-24T15:10:02+09:00",
+  "license_url": "https://www.eprx.or.jp/terms/",
+  "license_notice": "出典: 一般社団法人 電力需給調整力取引所「取引実績の取りまとめ結果」\nEPRX 利用規約 §4 に従い、非商用・出典明示で利用可。年次 PDF より転記・編集（加工した旨を明記）。商用利用は事前契約、自動的な大量取得は事前承諾が必要。\n",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2024-04-01",
+  "publisher": "一般社団法人 電力需給調整力取引所 (EPRX)",
+  "aggregation": "raw",
+  "notes": "EPRX 年次取りまとめ PDF の商品別「不足率（年間）」を手動転記。不足率＝調達不足量÷募集量（過剰落札除外）。定義が 2023→2024 で不連続（2023 以前は「追加調達後の未達率」で別定義）のため FY2024 以降のみ収録。2025-04-01 は FY2025 上期（4〜9月）暫定値。",
+  "depends_on": null
+}
