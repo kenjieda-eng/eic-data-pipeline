@@ -1,0 +1,21 @@
+{
+  "id": "balancing-price-tertiary-2-vpp",
+  "name": "需給調整市場 三次調整力② VPP（DR等） 年平均落札単価 (年次)",
+  "domain": "power",
+  "frequency": "annual",
+  "unit": "円/ΔkW・30分",
+  "source_name": "電力需給調整力取引所 取引実績の取りまとめ結果",
+  "source_url": "https://www.eprx.or.jp/information/summary.php",
+  "license": "eprx-terms",
+  "observation_cutoff": "2025-04-01",
+  "updated_at": "2026-05-25T12:17:08+09:00",
+  "license_url": "https://www.eprx.or.jp/terms/",
+  "license_notice": "出典: 一般社団法人 電力需給調整力取引所「取引実績の取りまとめ結果」\nEPRX 利用規約 §4 に従い、非商用・出典明示で利用可。年次 PDF より転記・編集（加工した旨を明記）。商用利用は事前契約、自動的な大量取得は事前承諾が必要。\n",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2024-04-01",
+  "publisher": "一般社団法人 電力需給調整力取引所 (EPRX)",
+  "aggregation": "annual_mean",
+  "notes": "電源種別別 月次落札単価（VPP（DR等））の年平均（約定月のみ: FY2024 11ヶ月 / FY2025上期 6ヶ月）。⚠️ 単純平均で volume-weighted ではない（高値は小ボリュームに乗るため市場寄与とは異なる）。電源種別別公表が始まった FY2024 以降のみ。2025-04-01 は FY2025 上期（4〜9月）暫定。出典: 電力需給調整力取引所 年次取りまとめ PDF より転記・編集。",
+  "depends_on": null
+}
