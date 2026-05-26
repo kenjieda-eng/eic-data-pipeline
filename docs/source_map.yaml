@@ -1688,3 +1688,62 @@ sources:
       - 米国は Area 列で "United States of America"。"United States" は存在しないため注意。
       - 通常モードでも全期間 (1999-01 ~ 最新月) を 1 リクエストで取得 → write_processed が key_cols で dedup。
       - 観測は概ね月次データ確定後 2-3 ヶ月遅延で更新される (freshness_sla_days=90 マージン)。
+
+  estat:
+    name: 政府統計の総合窓口（e-Stat）API
+    publisher: 総務省統計局
+    publisher_url: https://www.e-stat.go.jp/
+    source_url: https://www.e-stat.go.jp/
+    # 認証必須（無料登録で appId 発行）。コードからは os.environ["ESTAT_APP_ID"] で読む。
+    api_base: "https://api.e-stat.go.jp/rest/3.0/app/json"
+    # --- D-011 メタデータ共通項目 ---
+    license: estat-terms
+    license_url: https://www.e-stat.go.jp/terms-of-use
+    license_notice: "出典: 政府統計の総合窓口（e-Stat）。"
+    license_text: |
+      e-Stat 利用規約。出典明示を条件に再利用可（政府標準利用規約 2.0 互換）。
+      参考: https://www.e-stat.go.jp/terms-of-use
+    frequency: monthly
+    tz: Asia/Tokyo
+    missing_policy: "null"
+    # CPI は翌月下旬・IIP は速報が翌々月末。2020 基準時系列データは半年〜年単位で再公開されるため
+    # 半年マージンに設定。
+    freshness_sla_days: 180
+    # 2026-05-27 実 API 探索（getStatsList + getMetaInfo）で確定した統計表 ID と分類コード。
+    # ハードコード推測ではなく、L-062 に従い実 API で検証してから採用。
+    indicator_ids:
+      - jpn-cpi-yoy
+      - jpn-industrial-production
+    indicators:
+      jpn-cpi-yoy:
+        name: "日本 消費者物価指数 総合 前年同月比"
+        domain: economy
+        unit: "%"
+        backfill_start: "1971-01-01"
+        aggregation: raw
+        notes: "e-Stat 統計表 0003427113（2020 年基準消費者物価指数）から tab=3 (前年同月比) / cat01=0001 (総合) / area=00000 (全国) を抽出。総務省統計局が翌月下旬に確報を公表"
+        depends_on: null
+        # e-Stat API パラメータ
+        stats_data_id: "0003427113"
+        cd_tab: "3"
+        cd_cat01: "0001"
+        cd_area: "00000"
+      jpn-industrial-production:
+        name: "日本 鉱工業生産指数（2020=100）"
+        domain: economy
+        unit: "index (2020=100)"
+        backfill_start: "2018-01-01"
+        aggregation: raw
+        notes: "e-Stat 統計表 0004015804（鉱工業生産・出荷・在庫指数 2020 年基準時系列データ 業種別原指数【月次】 付加価値額生産）から cat01=0001000 (鉱工業計、業種別の親項目) を抽出。原指数（非季節調整）。経産省 METI が速報・確報を翌々月に公表、e-Stat 時系列表は半年〜1 年単位で再公開される（直近スナップは open=2025-04-30、データ末端は 2025-02）"
+        depends_on: null
+        stats_data_id: "0004015804"
+        cd_cat01: "0001000"
+        # 2020 基準時系列データは monthly 公開ではなく年単位アーカイブ。約 18 ヶ月マージン
+        freshness_sla_days: 540
+    notes: |
+      - getStatsData JSON で 1 系列ずつ取得（複数系列の同時取得は不可、別 cdCat01 同一表は可）。
+      - 認証必須。ESTAT_APP_ID 未設定時はログのみ吐いて他系列を止めない（continue-on-error 互換）。
+      - CPI 表 0003427113 は 1970-01 から（2020 年基準は遡及計算済）。IIP 0004015804 は 2018-01 から。
+      - 時間軸コードは name に "YYYYMM"（6 桁数字）の月次値、"YYYY年度" の年度集計、"付加生産ウエイト" などのウエイト値が混在する。月次抽出時は name が YYYYMM 6 桁数字の値のみを採用。
+      - 数値文字列の特殊値: "-" / "..." / "" / "X" 等は NaN として扱う。
+      - L-062 検証 (2026-05-27): CPI 直近 2026M04=1.4%, 2026M03=1.5% / IIP 直近 2025M02=97.3, 2024M12=104.1（妥当帯）。
