@@ -445,6 +445,13 @@ sources:
         exclude: []
         region: au
         unit: USD_per_mt
+      - id: commodity-iron-ore
+        name: 鉄鉱石（cfr spot, 中国輸入指標）
+        # Pink Sheet 実列名: "Iron ore, cfr spot"（単位: $/dmtu = USD per dry metric ton unit）
+        match: [Iron ore]
+        exclude: []
+        region: global
+        unit: USD_per_dmtu
     indicator_ids:
       - fuel-lng-jp-cif
       - fuel-ng-henryhub
@@ -453,7 +460,8 @@ sources:
       - fuel-crude-dubai
       - fuel-crude-wti
       - fuel-coal-au
-    # D-011 準拠の indicator 固有メタデータ（7 系列）
+      - commodity-iron-ore
+    # D-011 準拠の indicator 固有メタデータ（8 系列）
     indicators:
       fuel-lng-jp-cif:
         name: "日本 LNG 輸入価格（CIF）"
@@ -511,13 +519,21 @@ sources:
         aggregation: raw
         notes: "Coal, Australian 系列（Pink Sheet）"
         depends_on: null
+      commodity-iron-ore:
+        name: "鉄鉱石 cfr spot（中国輸入指標）"
+        domain: fuel
+        unit: "$/dmtu"
+        backfill_start: "1960-01-01"
+        aggregation: raw
+        notes: "Iron ore, cfr spot 系列（Pink Sheet）。$/dmtu = USD per dry metric ton unit。iron-ore-vs-thermal-power Insight で参照"
+        depends_on: null
     notes: |
       - 月次データ、日付は「月初日（YYYY-MM-01）」で正規化。
       - 1960-01 から現在まで。翌月上旬に前月値が確定（遅延約 1 ヶ月）。
       - 列ヘッダは年度で表記が揺れるため、部分一致（match / exclude）で列を探す設計。
         もし初回ランで series が見つからなければ、Excel を開いて実際の列名を確認し match を微調整する。
       - シート名が "Monthly Prices" でないバージョンに当たった場合は sheet_name を更新する。
-      - 価格単位の混在: $/mmbtu（天然ガス）, $/bbl（原油）, $/mt（石炭）。indicator ごとに unit を持つ。
+      - 価格単位の混在: $/mmbtu（天然ガス）, $/bbl（原油）, $/mt（石炭）, $/dmtu（鉄鉱石）。indicator ごとに unit を持つ。
 
   boj-fx:
     name: 日本銀行 時系列統計データ（外国為替市況, FM08）
