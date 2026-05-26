@@ -162,6 +162,15 @@ jobs:
           python scripts/fetch_estat.py
         continue-on-error: true
 
+      - name: Fetch NBS Manufacturing PMI (Phase 2 international, 1 series)
+        # 中国 国家統計局 英語版 PressRelease から月次 Manufacturing PMI を抽出。
+        # 認証不要。index ページの "Purchasing Managers' Index" アンカーから最新リリースを動的に解決。
+        # 各リリースに直近 13 ヶ月のテーブルが同梱 → write_processed が key_cols dedup で安全に append。
+        # Caixin PMI は S&P Global proprietary のため不採用 (L-063, 2026-05-27)。
+        run: |
+          python scripts/fetch_nbs_pmi.py
+        continue-on-error: true
+
       - name: Generate indicators catalog (D-011)
         # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を生成。
         # Required 10 欠落は exit 1（CI fail）、Recommended 欠落/鮮度超過は warning 止まり。

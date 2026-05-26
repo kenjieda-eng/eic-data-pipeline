@@ -79,7 +79,7 @@ LICENSE_VALUES = {
     # カスタム
     "boj-terms", "jepx-terms", "jma-terms", "meti-terms",
     "mlit-terms", "occto-terms", "eprx-terms", "proprietary",
-    "ecb-terms", "estat-terms",
+    "ecb-terms", "estat-terms", "nbs-terms",
 }
 MISSING_POLICY_VALUES = {
     "raw", "forward_fill", "forward_fill_within_month",

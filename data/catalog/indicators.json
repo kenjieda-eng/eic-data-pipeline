@@ -1,8 +1,8 @@
 {
   "version": 2,
   "schema": "D-017",
-  "generated_at": "2026-05-27T05:55:00+09:00",
-  "indicator_count": 204,
+  "generated_at": "2026-05-27T08:25:04+09:00",
+  "indicator_count": 205,
   "indicators": [
     {
       "id": "balancing-price-composite",
@@ -1332,6 +1332,29 @@
       "depends_on": null,
       "csv_path": "data/processed/occto-capacity/capacity-main-auction-volume-total.csv",
       "freshness_sla_days": 365
+    },
+    {
+      "id": "china-nbs-mfg-pmi",
+      "name": "中国 製造業 PMI（NBS 官製、季節調整済）",
+      "domain": "international",
+      "frequency": "monthly",
+      "unit": "index",
+      "source_name": "中国 国家統計局 製造業 PMI（NBS 官製）",
+      "source_url": "https://www.stats.gov.cn/english/",
+      "license": "nbs-terms",
+      "observation_cutoff": "2026-04-01",
+      "updated_at": "2026-05-27T08:24:42+09:00",
+      "license_url": "https://www.stats.gov.cn/english/",
+      "license_notice": "Source: National Bureau of Statistics of China (NBS) / CFLP. Reuse permitted with citation.",
+      "tz": "Asia/Shanghai",
+      "missing_policy": "null",
+      "backfill_start": "2025-04-01",
+      "publisher": "National Bureau of Statistics of China (NBS) / China Federation of Logistics & Purchasing (CFLP)",
+      "aggregation": "raw",
+      "notes": "stats.gov.cn 英語版 Purchasing Managers' Index 月次リリース Table 1 の PMI 列。50 を境界に >50=拡張 / <50=収縮。Caixin PMI は S&P Global proprietary のため不採用 (L-063, 2026-05-27)。FRED に NBS PMI 直系列は存在せず、NBS 英語版プレスリリースから直接抽出。各リリースに過去 13 ヶ月のテーブルが同梱され、月次運用で過去分は dedup で安定化",
+      "depends_on": null,
+      "csv_path": "data/processed/international/china-nbs-mfg-pmi.csv",
+      "freshness_sla_days": 45
     },
     {
       "id": "commodity-iron-ore",
