@@ -1747,3 +1747,48 @@ sources:
       - 時間軸コードは name に "YYYYMM"（6 桁数字）の月次値、"YYYY年度" の年度集計、"付加生産ウエイト" などのウエイト値が混在する。月次抽出時は name が YYYYMM 6 桁数字の値のみを採用。
       - 数値文字列の特殊値: "-" / "..." / "" / "X" 等は NaN として扱う。
       - L-062 検証 (2026-05-27): CPI 直近 2026M04=1.4%, 2026M03=1.5% / IIP 直近 2025M02=97.3, 2024M12=104.1（妥当帯）。
+
+  nbs-pmi:
+    name: 中国 国家統計局 製造業 PMI（NBS 官製）
+    publisher: National Bureau of Statistics of China (NBS) / China Federation of Logistics & Purchasing (CFLP)
+    publisher_url: https://www.stats.gov.cn/english/
+    # 月次の Purchasing Managers' Index 英語版プレスリリースのインデックス。
+    # スクリプトはこのページからアンカー名 "Purchasing Managers' Index" のリンクを引き当て、
+    # 各リリース内 Table 1 (China's Manufacturing PMI and Sub-indexes) の 13 ヶ月分を抽出する。
+    index_url: "https://www.stats.gov.cn/english/PressRelease/"
+    # --- D-011 メタデータ共通項目 ---
+    license: nbs-terms
+    license_url: https://www.stats.gov.cn/english/
+    license_notice: "Source: National Bureau of Statistics of China (NBS) / CFLP. Reuse permitted with citation."
+    license_text: |
+      中国国家統計局の英語版プレスリリース。再利用は出典明示を条件に可。
+      参考: https://www.stats.gov.cn/english/
+    frequency: monthly
+    tz: Asia/Shanghai
+    missing_policy: "null"
+    # 翌月 1 日朝（北京時間 09:30）に前月分を公表。最新リリースに過去 13 ヶ月の表が同梱されるため、
+    # 通常運用では毎月初に 1 回叩けば直近値が更新される。45 日マージン。
+    freshness_sla_days: 45
+    indicator_ids:
+      - china-nbs-mfg-pmi
+    indicators:
+      china-nbs-mfg-pmi:
+        name: "中国 製造業 PMI（NBS 官製、季節調整済）"
+        domain: international
+        unit: "index"
+        backfill_start: "2025-04-01"
+        aggregation: raw
+        notes: "stats.gov.cn 英語版 Purchasing Managers' Index 月次リリース Table 1 の PMI 列。50 を境界に >50=拡張 / <50=収縮。Caixin PMI は S&P Global proprietary のため不採用 (L-063, 2026-05-27)。FRED に NBS PMI 直系列は存在せず、NBS 英語版プレスリリースから直接抽出。各リリースに過去 13 ヶ月のテーブルが同梱され、月次運用で過去分は dedup で安定化"
+        depends_on: null
+    notes: |
+      - 英語版 PressRelease トップから anchor text に "Purchasing Managers' Index" を含むリンクを最新 1 件引いてフォロー。
+      - リリース URL は /english/PressRelease/{YYYYMM}/t{YYYYMMDD}_{ID}.html 形式だが ID は予測不能なため index 経由で動的解決。
+      - 各リリース本文 Table 1 (China's Manufacturing PMI and Sub-indexes, Seasonally Adjusted) は直近 13 ヶ月分を含む。
+        年マーカー "YYYY-MonthName" 行があり、以降は MonthName のみ繰り返す。次の "YYYY-MonthName" が次年。
+      - 列順: PMI / Production Index / New Order Index / Raw Materials Inventory Index / Employment Index / Supplier Delivery Time Index。
+        headline PMI は month label の直後の 1 つ目の数値。
+      - 過去 13 ヶ月を超える backfill には過去のプレスリリースを別途辿る必要があるが、月次運用で自然に時系列が伸びる。
+      - ディレクトリリスト (/PressRelease/202604/ 等) は 403 で取れないため、index ページの "Purchasing Managers' Index" アンカー経由が唯一の発見手段。
+      - L-063 判断 (2026-05-27): FRED API series_search で "China Manufacturing PMI" / "China PMI" / "NBS Manufacturing" を全件確認、NBS 製造業 PMI の公開系列なし
+        （OECD Business Tendency Surveys composite indicator は方法論が異なり PMI ではない）。NBS 直スクレイプを採用。
+      - L-062 smoke (2026-05-27): 2026-04 PMI = 50.3、2026-03 = 50.4、2025-04 = 49.0 で >50 拡張/<50 収縮の妥当帯。
