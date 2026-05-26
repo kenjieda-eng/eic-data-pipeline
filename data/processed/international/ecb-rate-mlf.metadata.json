@@ -1,0 +1,21 @@
+{
+  "id": "ecb-rate-mlf",
+  "name": "ECB Marginal Lending Facility Rate",
+  "domain": "international",
+  "frequency": "monthly",
+  "unit": "%",
+  "source_name": "欧州中央銀行 政策金利 + 参照為替レート (SDMX API)",
+  "source_url": "https://data.ecb.europa.eu/",
+  "license": "ecb-terms",
+  "observation_cutoff": "2026-05-01",
+  "updated_at": "2026-05-26T13:36:43+09:00",
+  "license_url": "https://www.ecb.europa.eu/services/disclaimer/html/index.en.html",
+  "license_notice": "Source: European Central Bank. Reuse permitted with attribution.",
+  "tz": "UTC",
+  "missing_policy": "forward_fill",
+  "backfill_start": "1999-01-01",
+  "publisher": "European Central Bank (ECB)",
+  "aggregation": "monthly_end",
+  "notes": "ECB FM/D.U2.EUR.4F.KR.MLFR.LEV。限界貸付ファシリティ金利。回廊金利の上限",
+  "depends_on": null
+}

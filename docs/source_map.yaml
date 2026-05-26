@@ -1484,3 +1484,191 @@ sources:
       - 翌月中旬に確定。FRED 側で過去値の改定が入るため、毎日叩いて差分更新（write_processed が dedup）。
       - us-cpi-yoy は CPIAUCSL の raw level を取得後、(this - 12mo_ago) / 12mo_ago * 100 で算出した派生系列。
       - INDPRO は 1919-01 から、CPIAUCSL は 1947-01 から、FEDFUNDS は 1954-07 から取得可能。
+
+  ecb:
+    name: 欧州中央銀行 政策金利 + 参照為替レート (SDMX API)
+    publisher: European Central Bank (ECB)
+    publisher_url: https://www.ecb.europa.eu/
+    source_url: https://data.ecb.europa.eu/
+    # SDMX REST API base URL. flowRef と key を URL パスに繋げる:
+    #   {base_url}/{flow_ref}/{key}?startPeriod=YYYY-MM&endPeriod=YYYY-MM
+    base_url: "https://data-api.ecb.europa.eu/service/data"
+    # --- D-011 メタデータ共通項目 ---
+    license: ecb-terms
+    license_url: https://www.ecb.europa.eu/services/disclaimer/html/index.en.html
+    license_notice: "Source: European Central Bank. Reuse permitted with attribution."
+    license_text: |
+      ECB のオープンデータ。再利用は出典明示を条件に可。
+      参考: https://www.ecb.europa.eu/services/disclaimer/html/index.en.html
+    frequency: monthly
+    tz: UTC
+    missing_policy: forward_fill
+    freshness_sla_days: 45                        # 政策金利は月内変化、月末値で集約
+    # 5 系列定義 (政策金利 3 + 為替 2)
+    series:
+      - id: ecb-rate-dfr
+        flow_ref: FM
+        key: "D.U2.EUR.4F.KR.DFR.LEV"
+        region: eu
+        # 日次データだが「政策金利変更日のみ tick」型 → 日次 ffill → 月末値で月次化
+        daily_to_monthly: true
+      - id: ecb-rate-mrr
+        flow_ref: FM
+        key: "D.U2.EUR.4F.KR.MRR_FR.LEV"
+        region: eu
+        daily_to_monthly: true
+      - id: ecb-rate-mlf
+        flow_ref: FM
+        key: "D.U2.EUR.4F.KR.MLFR.LEV"
+        region: eu
+        daily_to_monthly: true
+      - id: fx-eurusd-monthly-avg
+        flow_ref: EXR
+        key: "M.USD.EUR.SP00.A"
+        region: eu
+        daily_to_monthly: false
+      - id: fx-eurjpy-monthly-avg
+        flow_ref: EXR
+        key: "M.JPY.EUR.SP00.A"
+        region: eu
+        daily_to_monthly: false
+    indicator_ids:
+      - ecb-rate-dfr
+      - ecb-rate-mrr
+      - ecb-rate-mlf
+      - fx-eurusd-monthly-avg
+      - fx-eurjpy-monthly-avg
+    # D-011 準拠の indicator 固有メタデータ (5 系列)
+    indicators:
+      ecb-rate-dfr:
+        name: "ECB Deposit Facility Rate"
+        domain: international
+        unit: "%"
+        backfill_start: "1999-01-01"
+        aggregation: monthly_end
+        notes: "ECB FM/D.U2.EUR.4F.KR.DFR.LEV。中銀預金ファシリティ金利。政策金利変更日に tick、日次 ffill → 月末値で月次化"
+        depends_on: null
+      ecb-rate-mrr:
+        name: "ECB Main Refinancing Operations Rate"
+        domain: international
+        unit: "%"
+        backfill_start: "1999-01-01"
+        aggregation: monthly_end
+        notes: "ECB FM/D.U2.EUR.4F.KR.MRR_FR.LEV。主要リファイナンス・オペ金利 (fixed rate tenders)。MROフィックスドレート、ユーロ圏短期金利の基準"
+        depends_on: null
+      ecb-rate-mlf:
+        name: "ECB Marginal Lending Facility Rate"
+        domain: international
+        unit: "%"
+        backfill_start: "1999-01-01"
+        aggregation: monthly_end
+        notes: "ECB FM/D.U2.EUR.4F.KR.MLFR.LEV。限界貸付ファシリティ金利。回廊金利の上限"
+        depends_on: null
+      fx-eurusd-monthly-avg:
+        name: "EUR/USD ECB Reference Rate 月平均"
+        domain: international
+        unit: "USD/EUR"
+        backfill_start: "1999-01-01"
+        aggregation: monthly_mean
+        notes: "ECB EXR/M.USD.EUR.SP00.A。ECB 公表 14:15 CET 参照レート、月平均。USD per 1 EUR"
+        depends_on: null
+      fx-eurjpy-monthly-avg:
+        name: "EUR/JPY ECB Reference Rate 月平均"
+        domain: international
+        unit: "JPY/EUR"
+        backfill_start: "1999-01-01"
+        aggregation: monthly_mean
+        notes: "ECB EXR/M.JPY.EUR.SP00.A。ECB 公表 14:15 CET 参照レート、月平均。JPY per 1 EUR。Phase 0 で BOJ FM08 に EUR/JPY 系列が無いことを実 API で確認し、ECB 一次ソースに切替"
+        depends_on: null
+    notes: |
+      - SDMX REST API。flowRef はパスに、各次元 (FREQ/REF_AREA/CURRENCY/...) は key に "." 区切りで指定。
+      - 政策金利 3 系列 (DFR/MRR/MLF) は dataflow FM、FREQ=D、観測は政策金利変更日のみ存在 ("date of changes (raw data)")。
+        日次 ffill → 月末値で月次化することで monthly 系列として保存。月次集約版 (FM/M.*.LEV) は ECB API 上 404 で存在しない。
+      - 為替 2 系列 (EUR/USD, EUR/JPY) は dataflow EXR、FREQ=M で月平均レートが直接取得できる。
+      - MRR は "MRR_FR" (fixed rate tenders) を採用。MRR_RT/MRR_MBR は別概念で歴史的役割が異なる。
+      - L-063 (2026-05-26): 仕様書の (B) BOJ FM08 EUR/JPY は FM08 に該当系列が無いことを実 API で確認 → ECB EXR JPY/EUR に切替。
+
+  ember:
+    name: Ember Monthly Electricity Data (グローバル月次電力統計)
+    publisher: Ember
+    publisher_url: https://ember-energy.org/
+    source_url: https://ember-energy.org/data/monthly-electricity-data/
+    # long-format CSV を 1 発で取得 (約 70 MB、全国全変数を 1999-01 から)。
+    csv_url: "https://files.ember-energy.org/public-downloads/monthly_full_release_long_format.csv"
+    # --- D-011 メタデータ共通項目 ---
+    license: CC-BY-4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_notice: "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0."
+    license_text: |
+      Creative Commons Attribution 4.0 International (CC BY 4.0)。
+      出典明示を条件に再配布・商用利用可。
+    frequency: monthly
+    tz: UTC
+    missing_policy: "null"
+    freshness_sla_days: 90                        # Ember は概ね 2-3 ヶ月遅延で公表
+    # 抽出対象国 (5 ヶ国)。area_name は Ember CSV の Area 列の値と一致させること
+    countries:
+      - { area_name: "Japan",                    region: jp }
+      - { area_name: "United States of America", region: us }
+      - { area_name: "China",                    region: cn }
+      - { area_name: "Germany",                  region: de }
+      - { area_name: "United Kingdom",           region: gb }
+    # 抽出対象指標テンプレ (3 種)。id_template の {cc} に region 値が入る
+    indicator_templates:
+      - id_template: "ember-demand-{cc}"
+        category: "Electricity demand"
+        subcategory: "Demand"
+        variable: "Demand"
+        unit: "TWh"
+        aggregation: monthly_sum
+      - id_template: "ember-generation-{cc}"
+        category: "Electricity generation"
+        subcategory: "Total"
+        variable: "Total Generation"
+        unit: "TWh"
+        aggregation: monthly_sum
+      - id_template: "ember-co2-intensity-{cc}"
+        category: "Power sector emissions"
+        subcategory: "CO2 intensity"
+        variable: "CO2 intensity"
+        unit: "gCO2/kWh"
+        aggregation: monthly_mean
+    indicator_ids:
+      - ember-demand-jp
+      - ember-demand-us
+      - ember-demand-cn
+      - ember-demand-de
+      - ember-demand-gb
+      - ember-generation-jp
+      - ember-generation-us
+      - ember-generation-cn
+      - ember-generation-de
+      - ember-generation-gb
+      - ember-co2-intensity-jp
+      - ember-co2-intensity-us
+      - ember-co2-intensity-cn
+      - ember-co2-intensity-de
+      - ember-co2-intensity-gb
+    # D-011 準拠の indicator 固有メタデータ (15 系列)
+    indicators:
+      ember-demand-jp:        { name: "日本 月次電力需要",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: Japan, Electricity demand / Demand / Demand", depends_on: null }
+      ember-demand-us:        { name: "米国 月次電力需要",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: United States of America, Electricity demand / Demand / Demand", depends_on: null }
+      ember-demand-cn:        { name: "中国 月次電力需要",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: China, Electricity demand / Demand / Demand", depends_on: null }
+      ember-demand-de:        { name: "ドイツ 月次電力需要",   domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: Germany, Electricity demand / Demand / Demand", depends_on: null }
+      ember-demand-gb:        { name: "英国 月次電力需要",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: United Kingdom, Electricity demand / Demand / Demand", depends_on: null }
+      ember-generation-jp:    { name: "日本 月次総発電量",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: Japan, Electricity generation / Total / Total Generation", depends_on: null }
+      ember-generation-us:    { name: "米国 月次総発電量",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: United States of America, Electricity generation / Total / Total Generation", depends_on: null }
+      ember-generation-cn:    { name: "中国 月次総発電量",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: China, Electricity generation / Total / Total Generation", depends_on: null }
+      ember-generation-de:    { name: "ドイツ 月次総発電量",   domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: Germany, Electricity generation / Total / Total Generation", depends_on: null }
+      ember-generation-gb:    { name: "英国 月次総発電量",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: United Kingdom, Electricity generation / Total / Total Generation", depends_on: null }
+      ember-co2-intensity-jp: { name: "日本 電力部門 CO2 排出強度",   domain: international, unit: "gCO2/kWh", backfill_start: "1999-01-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Power sector emissions / CO2 intensity / CO2 intensity", depends_on: null }
+      ember-co2-intensity-us: { name: "米国 電力部門 CO2 排出強度",   domain: international, unit: "gCO2/kWh", backfill_start: "1999-01-01", aggregation: monthly_mean, notes: "Ember monthly: USA, Power sector emissions / CO2 intensity / CO2 intensity", depends_on: null }
+      ember-co2-intensity-cn: { name: "中国 電力部門 CO2 排出強度",   domain: international, unit: "gCO2/kWh", backfill_start: "1999-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Power sector emissions / CO2 intensity / CO2 intensity", depends_on: null }
+      ember-co2-intensity-de: { name: "ドイツ 電力部門 CO2 排出強度", domain: international, unit: "gCO2/kWh", backfill_start: "1999-01-01", aggregation: monthly_mean, notes: "Ember monthly: Germany, Power sector emissions / CO2 intensity / CO2 intensity", depends_on: null }
+      ember-co2-intensity-gb: { name: "英国 電力部門 CO2 排出強度",   domain: international, unit: "gCO2/kWh", backfill_start: "1999-01-01", aggregation: monthly_mean, notes: "Ember monthly: United Kingdom, Power sector emissions / CO2 intensity / CO2 intensity", depends_on: null }
+    notes: |
+      - long-format CSV 1 本で全国全変数を取得。Area type='Country or economy' で国別を絞る。
+      - 主要 5 ヶ国 (日/米/中/独/英) × 3 指標 (demand, total generation, CO2 intensity) = 15 系列。
+      - 米国は Area 列で "United States of America"。"United States" は存在しないため注意。
+      - 通常モードでも全期間 (1999-01 ~ 最新月) を 1 リクエストで取得 → write_processed が key_cols で dedup。
+      - 観測は概ね月次データ確定後 2-3 ヶ月遅延で更新される (freshness_sla_days=90 マージン)。

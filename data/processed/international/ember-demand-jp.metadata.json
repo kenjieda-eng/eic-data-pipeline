@@ -1,0 +1,21 @@
+{
+  "id": "ember-demand-jp",
+  "name": "日本 月次電力需要",
+  "domain": "international",
+  "frequency": "monthly",
+  "unit": "TWh",
+  "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
+  "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
+  "license": "CC-BY-4.0",
+  "observation_cutoff": "2026-02-01",
+  "updated_at": "2026-05-26T13:37:12+09:00",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
+  "tz": "UTC",
+  "missing_policy": "null",
+  "backfill_start": "1999-01-01",
+  "publisher": "Ember",
+  "aggregation": "monthly_sum",
+  "notes": "Ember monthly: Japan, Electricity demand / Demand / Demand",
+  "depends_on": null
+}

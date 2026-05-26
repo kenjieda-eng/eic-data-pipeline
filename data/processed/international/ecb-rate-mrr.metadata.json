@@ -1,0 +1,21 @@
+{
+  "id": "ecb-rate-mrr",
+  "name": "ECB Main Refinancing Operations Rate",
+  "domain": "international",
+  "frequency": "monthly",
+  "unit": "%",
+  "source_name": "欧州中央銀行 政策金利 + 参照為替レート (SDMX API)",
+  "source_url": "https://data.ecb.europa.eu/",
+  "license": "ecb-terms",
+  "observation_cutoff": "2026-05-01",
+  "updated_at": "2026-05-26T13:36:41+09:00",
+  "license_url": "https://www.ecb.europa.eu/services/disclaimer/html/index.en.html",
+  "license_notice": "Source: European Central Bank. Reuse permitted with attribution.",
+  "tz": "UTC",
+  "missing_policy": "forward_fill",
+  "backfill_start": "1999-01-01",
+  "publisher": "European Central Bank (ECB)",
+  "aggregation": "monthly_end",
+  "notes": "ECB FM/D.U2.EUR.4F.KR.MRR_FR.LEV。主要リファイナンス・オペ金利 (fixed rate tenders)。MROフィックスドレート、ユーロ圏短期金利の基準",
+  "depends_on": null
+}

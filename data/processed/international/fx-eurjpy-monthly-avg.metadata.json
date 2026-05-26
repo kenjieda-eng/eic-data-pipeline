@@ -1,0 +1,21 @@
+{
+  "id": "fx-eurjpy-monthly-avg",
+  "name": "EUR/JPY ECB Reference Rate 月平均",
+  "domain": "international",
+  "frequency": "monthly",
+  "unit": "JPY/EUR",
+  "source_name": "欧州中央銀行 政策金利 + 参照為替レート (SDMX API)",
+  "source_url": "https://data.ecb.europa.eu/",
+  "license": "ecb-terms",
+  "observation_cutoff": "2026-04-01",
+  "updated_at": "2026-05-26T13:36:49+09:00",
+  "license_url": "https://www.ecb.europa.eu/services/disclaimer/html/index.en.html",
+  "license_notice": "Source: European Central Bank. Reuse permitted with attribution.",
+  "tz": "UTC",
+  "missing_policy": "forward_fill",
+  "backfill_start": "1999-01-01",
+  "publisher": "European Central Bank (ECB)",
+  "aggregation": "monthly_mean",
+  "notes": "ECB EXR/M.JPY.EUR.SP00.A。ECB 公表 14:15 CET 参照レート、月平均。JPY per 1 EUR。Phase 0 で BOJ FM08 に EUR/JPY 系列が無いことを実 API で確認し、ECB 一次ソースに切替",
+  "depends_on": null
+}
