@@ -1,0 +1,21 @@
+{
+  "id": "jpn-industrial-production",
+  "name": "日本 鉱工業生産指数（2020=100）",
+  "domain": "economy",
+  "frequency": "monthly",
+  "unit": "index (2020=100)",
+  "source_name": "政府統計の総合窓口（e-Stat）API",
+  "source_url": "https://www.e-stat.go.jp/",
+  "license": "estat-terms",
+  "observation_cutoff": "2025-02-01",
+  "updated_at": "2026-05-27T05:53:44+09:00",
+  "license_url": "https://www.e-stat.go.jp/terms-of-use",
+  "license_notice": "出典: 政府統計の総合窓口（e-Stat）。",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2018-01-01",
+  "publisher": "総務省統計局",
+  "aggregation": "raw",
+  "notes": "e-Stat 統計表 0004015804（鉱工業生産・出荷・在庫指数 2020 年基準時系列データ 業種別原指数【月次】 付加価値額生産）から cat01=0001000 (鉱工業計、業種別の親項目) を抽出。原指数（非季節調整）。経産省 METI が速報・確報を翌々月に公表、e-Stat 時系列表は半年単位で更新される",
+  "depends_on": null
+}

@@ -150,6 +150,18 @@ jobs:
           python scripts/fetch_ember.py
         continue-on-error: true
 
+      - name: Fetch e-Stat Japan macro (Phase 2 international, CPI/IIP, 2 series)
+        # 政府統計の総合窓口 e-Stat API（appId 必須、無料登録）で日本マクロ 2 系列を取得:
+        #   jpn-cpi-yoy（2020 年基準 CPI 総合 全国 前年同月比、1971-01〜）
+        #   jpn-industrial-production（2020 年基準 鉱工業生産指数 業種別原指数 月次、2018-01〜）
+        # 認証必須。secrets.ESTAT_APP_ID 未設定時は fetch_estat.py が WARN ログを吐いて exit 1 するが
+        # continue-on-error で他系列を止めない（既存 macro/economy 系列はキャッシュから再取得不要）。
+        env:
+          ESTAT_APP_ID: ${{ secrets.ESTAT_APP_ID }}
+        run: |
+          python scripts/fetch_estat.py
+        continue-on-error: true
+
       - name: Generate indicators catalog (D-011)
         # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を生成。
         # Required 10 欠落は exit 1（CI fail）、Recommended 欠落/鮮度超過は warning 止まり。
