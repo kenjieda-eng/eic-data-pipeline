@@ -128,6 +128,28 @@ jobs:
           fi
         continue-on-error: true
 
+      - name: Fetch ECB rates & FX (Phase 2 international, 5 series)
+        # ECB SDMX API で政策金利 3 (DFR/MRR/MLF) + 為替 2 (EUR/USD, EUR/JPY) を取得。
+        # 政策金利は日次変化点を月末値で月次化。月次データ、毎日叩いても 5 リクエストで終わる。
+        # backfill 引数で 1999-01 から、通常モードは直近 3 年分。
+        run: |
+          if [ "${{ inputs.backfill }}" = "true" ]; then
+            echo "backfill mode: fetching from 1999-01"
+            python scripts/fetch_ecb.py --backfill
+          else
+            echo "normal mode: fetching last 3 years"
+            python scripts/fetch_ecb.py
+          fi
+        continue-on-error: true
+
+      - name: Fetch Ember monthly electricity (Phase 2 international, 15 series)
+        # Ember の long-format CSV (約 70 MB) を 1 リクエストで取得し、
+        # 主要 5 ヶ国 (日/米/中/独/英) × 3 指標 (demand/generation/CO2 intensity) を抽出。
+        # CSV は常に全期間 (1999-01〜) を返すため通常/backfill の差は無い。
+        run: |
+          python scripts/fetch_ember.py
+        continue-on-error: true
+
       - name: Generate indicators catalog (D-011)
         # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を生成。
         # Required 10 欠落は exit 1（CI fail）、Recommended 欠落/鮮度超過は warning 止まり。
