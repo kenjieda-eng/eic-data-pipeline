@@ -142,9 +142,12 @@ jobs:
           fi
         continue-on-error: true
 
-      - name: Fetch Ember monthly electricity (Phase 2 international, 15 series)
+      - name: Fetch Ember monthly electricity (Phase 2 international, 50 series)
         # Ember の long-format CSV (約 70 MB) を 1 リクエストで取得し、
-        # 主要 5 ヶ国 (日/米/中/独/英) × 3 指標 (demand/generation/CO2 intensity) を抽出。
+        # 主要 5 ヶ国 (日/米/中/独/英) × 10 指標を抽出:
+        #   demand / generation / CO2 intensity (3) + 電源種別 share% × 7 fuel
+        #   (coal/gas/nuclear/solar/wind/hydro/bioenergy) = 計 50 系列。
+        # 電源構成 share は #67 CO2 強度の「なぜ＝電源構成」を示す主要国電源構成比較 Insight の素材。
         # CSV は常に全期間 (1999-01〜) を返すため通常/backfill の差は無い。
         run: |
           python scripts/fetch_ember.py

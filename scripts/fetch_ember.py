@@ -1,12 +1,15 @@
 """
-Ember Monthly Electricity Data (long format CSV) から国際 15 系列を取得するスクリプト。
+Ember Monthly Electricity Data (long format CSV) から国際 50 系列を取得するスクリプト。
 
-対象 (5 ヶ国 × 3 指標 = 15 系列, 月次):
+対象 (5 ヶ国 × 10 指標 = 50 系列, 月次):
     国: 日本 (jp), 米国 (us), 中国 (cn), ドイツ (de), 英国 (gb)
     指標:
         - ember-demand-{cc}        : 電力需要合計 (TWh)
         - ember-generation-{cc}    : 発電量合計   (TWh)
         - ember-co2-intensity-{cc} : 電力部門 CO2 排出強度 (gCO2/kWh)
+        - ember-share-{fuel}-{cc}  : 電源種別 share of generation (%)
+            fuel ∈ {coal, gas, nuclear, solar, wind, hydro, bioenergy} (7 種)
+            #67 CO2 強度の「なぜ＝電源構成」を見せる主要国 電源構成比較 Insight の素材。
 
 方式:
     GET https://files.ember-energy.org/public-downloads/monthly_full_release_long_format.csv
@@ -20,6 +23,8 @@ Ember Monthly Electricity Data (long format CSV) から国際 15 系列を取得
         ('Electricity demand', 'Demand', 'Demand')             → TWh
         ('Electricity generation', 'Total', 'Total Generation')→ TWh
         ('Power sector emissions', 'CO2 intensity', 'CO2 intensity') → gCO2/kWh
+        ('Electricity generation', 'Fuel', <FuelName>) Unit='%' → 電源種別 share% (Coal/Gas/Nuclear/Solar/Wind/Hydro/Bioenergy)
+            ※ 同じ Variable で Unit='TWh' と Unit='%' が両方存在するため Unit による絞り込み必須。
 
 ライセンス:
     CC BY 4.0 (Creative Commons Attribution 4.0 International)
@@ -105,9 +110,13 @@ def extract_series(
     indicator_id: str,
     region: str,
     source_url: str,
+    unit: str | None = None,
 ) -> pd.DataFrame:
     """
     1 国 × 1 指標を抽出 → 共通スキーマ (date,indicator_id,region,value,source_url)。
+
+    unit を指定すると Unit 列でも絞り込む（Electricity generation / Fuel は
+    同じ Variable に Unit='TWh' と Unit='%' の両方が存在するため、share% 系列で必須）。
     """
     mask = (
         (df["Area"] == area_name)
@@ -116,6 +125,8 @@ def extract_series(
         & (df["Subcategory"] == subcategory)
         & (df["Variable"] == variable)
     )
+    if unit is not None:
+        mask = mask & (df["Unit"] == unit)
     sub = df.loc[mask].copy()
     if sub.empty:
         logger.warning(
@@ -216,6 +227,7 @@ def main(argv: list[str] | None = None) -> int:
                 indicator_id=indicator_id,
                 region=region,
                 source_url=source_url,
+                unit=ind.get("unit"),
             )
             if long_df.empty:
                 continue
