@@ -8110,3 +8110,4 @@ date,indicator_id,region,value,source_url
 2026-05-21,us-treasury-30y,us,5.1,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
 2026-05-22,us-treasury-30y,us,5.07,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
 2026-05-26,us-treasury-30y,us,5.03,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
+2026-05-27,us-treasury-30y,us,5.01,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
