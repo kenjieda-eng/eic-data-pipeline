@@ -1,0 +1,21 @@
+{
+  "id": "ember-share-nuclear-jp",
+  "name": "日本 発電量シェア 原子力 (%)",
+  "domain": "international",
+  "frequency": "monthly",
+  "unit": "%",
+  "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
+  "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
+  "license": "CC-BY-4.0",
+  "observation_cutoff": "2026-02-01",
+  "updated_at": "2026-05-28T10:55:12+09:00",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
+  "tz": "UTC",
+  "missing_policy": "null",
+  "backfill_start": "2018-04-01",
+  "publisher": "Ember",
+  "aggregation": "monthly_mean",
+  "notes": "Ember monthly: Japan, Electricity generation / Fuel / Nuclear (%)",
+  "depends_on": null
+}

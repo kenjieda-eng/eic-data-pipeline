@@ -1,0 +1,21 @@
+{
+  "id": "ember-share-coal-cn",
+  "name": "中国 発電量シェア 石炭 (%)",
+  "domain": "international",
+  "frequency": "monthly",
+  "unit": "%",
+  "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
+  "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
+  "license": "CC-BY-4.0",
+  "observation_cutoff": "2026-04-01",
+  "updated_at": "2026-05-28T10:55:14+09:00",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
+  "tz": "UTC",
+  "missing_policy": "null",
+  "backfill_start": "2015-01-01",
+  "publisher": "Ember",
+  "aggregation": "monthly_mean",
+  "notes": "Ember monthly: China, Electricity generation / Fuel / Coal (%)",
+  "depends_on": null
+}
