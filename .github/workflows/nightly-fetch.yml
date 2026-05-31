@@ -174,6 +174,18 @@ jobs:
           python scripts/fetch_nbs_pmi.py
         continue-on-error: true
 
+      - name: Fetch EU ETS verified emissions (annual, ESG)
+        # EU 排出量取引制度（EUTL / European Environment Agency）の検証排出量を取得し ESG ドメインを seed。
+        # datahub.io ミラー（安定 r-link、ODC-PDDL-1.0）から CSV 2 本を 1 リクエストずつ取得:
+        #   Family A: eu-ets-sector-emissions.csv → EU 全体 部門別 8 系列（aggregation=raw, region=EU-ETS）
+        #   Family B: eu-ets.csv（約 8MB）→ 加盟国別 合計検証排出量 31 系列（aggregation=annual_sum, region=ISO2）
+        # Family B は citl_information=="2.1 EU-ETS Verified Emission" / 4 桁年 / main_activity_code 非 -99（rollup 除外）
+        #   / country_code=ISO2(非 XI) でフィルタし国×年で合計 → ÷1e6 で Mt 化。
+        # CSV は常に全期間（2005-2025、航空のみ 2012-）を返すため backfill フラグ不要。認証不要。
+        run: |
+          python scripts/fetch_eu_ets.py
+        continue-on-error: true
+
       - name: Generate indicators catalog (D-011)
         # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を生成。
         # Required 10 欠落は exit 1（CI fail）、Recommended 欠落/鮮度超過は warning 止まり。

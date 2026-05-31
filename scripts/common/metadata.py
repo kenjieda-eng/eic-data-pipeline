@@ -69,6 +69,7 @@ DOMAIN_VALUES = {
     "power", "fuel", "weather", "finance", "macro",
     "regulation", "tech", "geopolitics", "economy",
     "population", "corp_ir", "international",
+    "esg",  # 2026-06-01 北極星 12 ドメイン 唯一未 seed の ESG を seed（EU ETS 検証排出量）
 }
 FREQUENCY_VALUES = {
     "30min", "daily", "weekly", "monthly", "quarterly", "annual",
@@ -80,6 +81,7 @@ LICENSE_VALUES = {
     "boj-terms", "jepx-terms", "jma-terms", "meti-terms",
     "mlit-terms", "occto-terms", "eprx-terms", "proprietary",
     "ecb-terms", "estat-terms", "nbs-terms",
+    "eea-terms",  # 2026-06-01 EU ETS（EEA/EUTL 再利用ポリシー: 出典明記で商用可 + datahub 加工 PDDL）
 }
 MISSING_POLICY_VALUES = {
     "raw", "forward_fill", "forward_fill_within_month",
@@ -91,6 +93,7 @@ AGGREGATION_VALUES = {
     "area_average", "alias", "derived",
     "annual_auction",  # Phase D 第 1 期 Day 1 (2026-05-20): OCCTO 容量市場 年 1 回オークション
     "annual_mean",  # Phase D (2026-05-23, D-018): EPRX 需給調整 商品別 年間平均落札単価
+    "annual_sum",  # 2026-06-01 EU ETS 国別合計（Family B: leaf 部門の国 × 年 合計）
 }
 
 # frequency 別デフォルトの鮮度 SLA（日数）。

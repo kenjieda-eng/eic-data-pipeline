@@ -1,0 +1,407 @@
+"""
+EU ETS（EU 排出量取引制度）検証排出量データ（EUTL / European Environment Agency）から
+ESG ドメインを seed するスクリプト（北極星 12 ドメイン唯一の未 seed を解消）。
+
+ソース（datahub.io ミラー、安定 r-link、ODC-PDDL-1.0）:
+    Family A: eu-ets-sector-emissions.csv   (sector, year, emissions_mt)  — EU 集計・部門別・Mt 単位・重複排除済み
+    Family B: eu-ets.csv                     (country_code, main_activity_code, main_activity_name,
+                                              citl_information, year, value) — 国 × 部門 × metric の原票（約 8MB）
+
+系列設計（2 ファミリ・密度版）:
+    Family A — EU 全体 部門別 検証排出量
+        - CSV に存在する全部門に 1 系列。ID = eu-ets-emissions-{slug}。
+        - slug は source_map.yaml の sector_slug_map（activity code → slug）。未マップ部門は
+          name から kebab slug を導出してログ出力（L-013: 部門数は実データで確定）。
+        - long: date=YYYY-01-01, region="EU-ETS", value=emissions_mt, source_url。
+        - aggregation=raw, unit="Mt-CO2e", domain=esg, frequency=annual。
+
+    Family B — 加盟国別 合計検証排出量
+        フィルタ:
+            - citl_information == "2.1 EU-ETS Verified Emission"
+            - year が ^\\d{4}$（trading-period 文字列を除外）
+            - main_activity_code が "-99" で終わらない（rollup 二重計上を除外）
+            - country_code が ISO2（^[A-Z]{2}$）かつ特殊コード（XI 等）を除外
+        集計:
+            - 国 × 年で value を合計 → ÷ 1e6 で Mt 化。
+            - ID = eu-ets-emissions-country-{cc}（cc=ISO2 小文字）。
+            - long: date=YYYY-01-01, region=ISO2 大文字, value(Mt), source_url。
+            - aggregation=annual_sum, unit="Mt-CO2e", domain=esg, frequency=annual。
+
+二重計上の検証（必須）:
+    実行ログに「Family B 全国合計（最新共通年）」と「Family A 固定設備部門合計（同年, 航空除く）」
+    を print し、概ね一致を確認（航空は別枠なので固定設備分で照合）。大乖離なら rollup 混入を疑う。
+
+ライセンス:
+    EEA 再利用ポリシー（出典明記で商用再利用可）+ datahub 追加加工は ODC-PDDL-1.0。
+    license: eea-terms
+
+出力:
+    - data/raw/eu-ets/eu_ets_sector_{YYYYMMDD}.csv  (Family A 生 CSV)
+    - data/raw/eu-ets/eu_ets_full_{YYYYMMDD}.csv     (Family B 生 CSV)
+    - data/processed/esg/{indicator_id}.csv / .parquet / .metadata.json
+"""
+
+from __future__ import annotations
+
+import argparse
+import io
+import logging
+import re
+import sys
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+
+import pandas as pd
+import yaml
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from scripts.common.http import get  # noqa: E402
+from scripts.common.io import append_log, save_raw, write_processed  # noqa: E402
+from scripts.common.metadata import write_metadata_for_indicator  # noqa: E402
+
+# Windows コンソール（cp932）でも日本語の二重計上検証 print が化けないように。
+try:
+    sys.stdout.reconfigure(encoding="utf-8")  # type: ignore[attr-defined]
+except Exception:
+    pass
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+)
+logger = logging.getLogger("fetch_eu_ets")
+
+SOURCE_KEY = "eu-ets"
+
+VERIFIED_EMISSION_LABEL = "2.1 EU-ETS Verified Emission"
+YEAR_RE = re.compile(r"^\d{4}$")
+ISO2_RE = re.compile(r"^[A-Z]{2}$")
+
+
+def load_source_map() -> dict:
+    path = ROOT / "docs" / "source_map.yaml"
+    with path.open("r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+
+def fetch_csv(csv_url: str, *, min_bytes: int) -> bytes:
+    """CSV を 1 リクエストで取得。サイズが極端に小さい場合は失敗扱い。"""
+    logger.info("GET %s", csv_url)
+    r = get(csv_url, timeout=180)
+    r.raise_for_status()
+    if len(r.content) < min_bytes:
+        raise RuntimeError(
+            f"CSV is suspiciously small ({len(r.content)} bytes < {min_bytes}); "
+            f"preview={r.content[:300]!r}"
+        )
+    logger.info("downloaded %d bytes from %s", len(r.content), csv_url)
+    return r.content
+
+
+# --- Family A: EU 全体 部門別 ------------------------------------------------
+
+
+def parse_sector_csv(csv_bytes: bytes) -> pd.DataFrame:
+    df = pd.read_csv(io.BytesIO(csv_bytes), dtype=str)
+    required = {"sector", "year", "emissions_mt"}
+    missing = required - set(df.columns)
+    if missing:
+        raise RuntimeError(f"sector CSV missing columns: {missing}. Got: {list(df.columns)}")
+    df["emissions_mt"] = pd.to_numeric(df["emissions_mt"], errors="coerce")
+    return df
+
+
+def kebab(text: str) -> str:
+    """name から kebab slug を導出（未マップ部門のフォールバック）。"""
+    s = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+    return s or "unknown"
+
+
+def slug_for_sector(sector_str: str, slug_map: dict) -> tuple[str, str, bool]:
+    """
+    sector 文字列（例 '20 Combustion of fuels'）から (code, slug, unmapped) を返す。
+    先頭の数字を activity code として slug_map を引き、無ければ name から kebab 導出。
+    """
+    m = re.match(r"^\s*(\d+)", sector_str)
+    code = m.group(1) if m else ""
+    if code and code in slug_map:
+        return code, str(slug_map[code]), False
+    # 未マップ: 先頭コードを除いた name 部分から kebab
+    name_part = re.sub(r"^\s*\d+\s*", "", sector_str).strip()
+    return code, kebab(name_part or sector_str), True
+
+
+def process_family_a(
+    df: pd.DataFrame,
+    source_cfg: dict,
+    source_url: str,
+    processed_dir: Path,
+    wanted: set[str] | None,
+) -> tuple[list[str], int, list[str]]:
+    """Family A（部門別）を処理。戻り値: (written_ids, total_rows, unmapped_logs)。"""
+    slug_map = source_cfg.get("sector_slug_map") or {}
+    # YAML で int キーになった場合に備えて str 正規化
+    slug_map = {str(k): v for k, v in slug_map.items()}
+
+    written: list[str] = []
+    total_rows = 0
+    unmapped_logs: list[str] = []
+
+    for sector in sorted(df["sector"].dropna().unique()):
+        code, slug, unmapped = slug_for_sector(sector, slug_map)
+        if unmapped:
+            msg = f"unmapped sector {sector!r} (code={code!r}) -> derived slug {slug!r}"
+            logger.warning("Family A: %s", msg)
+            unmapped_logs.append(msg)
+
+        indicator_id = f"eu-ets-emissions-{slug}"
+        if wanted is not None and indicator_id not in wanted:
+            continue
+
+        sub = df[df["sector"] == sector].copy()
+        sub = sub.dropna(subset=["emissions_mt"])
+        sub = sub[sub["year"].str.match(YEAR_RE, na=False)]
+        if sub.empty:
+            logger.warning("Family A: %s produced 0 rows", indicator_id)
+            continue
+
+        long_df = pd.DataFrame({
+            "date": sub["year"].astype(str) + "-01-01",
+            "indicator_id": indicator_id,
+            "region": "EU-ETS",
+            "value": sub["emissions_mt"].values,
+            "source_url": source_url,
+        })
+        long_df = long_df.drop_duplicates(subset=["date", "indicator_id", "region"], keep="last")
+        long_df = long_df.sort_values("date").reset_index(drop=True)
+
+        write_processed(long_df, processed_dir, basename=indicator_id)
+        write_metadata_for_indicator(processed_dir, source_cfg, indicator_id, long_df)
+        written.append(indicator_id)
+        total_rows += len(long_df)
+        logger.info(
+            "Family A: %s: %d rows (%s..%s) [code=%s]",
+            indicator_id, len(long_df), long_df["date"].min(), long_df["date"].max(), code,
+        )
+
+    return written, total_rows, unmapped_logs
+
+
+# --- Family B: 加盟国別 合計 -------------------------------------------------
+
+
+def parse_full_csv(csv_bytes: bytes) -> pd.DataFrame:
+    df = pd.read_csv(io.BytesIO(csv_bytes), dtype=str)
+    required = {"country_code", "main_activity_code", "citl_information", "year", "value"}
+    missing = required - set(df.columns)
+    if missing:
+        raise RuntimeError(f"full CSV missing columns: {missing}. Got: {list(df.columns)}")
+    df["value"] = pd.to_numeric(df["value"], errors="coerce")
+    return df
+
+
+def filter_verified_leaf(df: pd.DataFrame, exclude_countries: set[str]) -> pd.DataFrame:
+    """
+    検証排出量の leaf 行のみ抽出:
+        - citl_information == 検証排出量ラベル
+        - year が 4 桁年
+        - main_activity_code が "-99"（rollup）で終わらない
+        - country_code が ISO2 かつ特殊コード除外
+    """
+    mask = (
+        (df["citl_information"] == VERIFIED_EMISSION_LABEL)
+        & df["year"].str.match(YEAR_RE, na=False)
+        & ~df["main_activity_code"].fillna("").str.endswith("-99")
+        & df["country_code"].fillna("").str.match(ISO2_RE)
+        & ~df["country_code"].isin(exclude_countries)
+    )
+    out = df.loc[mask].copy()
+    out = out.dropna(subset=["value"])
+    return out
+
+
+def process_family_b(
+    ve: pd.DataFrame,
+    source_cfg: dict,
+    source_url: str,
+    processed_dir: Path,
+    wanted: set[str] | None,
+) -> tuple[list[str], int, list[str]]:
+    """Family B（国別合計）を処理。戻り値: (written_ids, total_rows, unnamed_logs)。"""
+    country_names = source_cfg.get("country_names") or {}
+
+    grp = (
+        ve.groupby(["country_code", "year"], as_index=False)["value"].sum()
+    )
+    grp["value_mt"] = grp["value"] / 1e6
+
+    written: list[str] = []
+    total_rows = 0
+    unnamed_logs: list[str] = []
+
+    for cc in sorted(grp["country_code"].unique()):
+        indicator_id = f"eu-ets-emissions-country-{cc.lower()}"
+        if wanted is not None and indicator_id not in wanted:
+            continue
+        if cc not in country_names:
+            msg = f"country_code {cc!r} has no Japanese name in source_map (name falls back to id)"
+            logger.warning("Family B: %s", msg)
+            unnamed_logs.append(msg)
+
+        sub = grp[grp["country_code"] == cc].copy()
+        long_df = pd.DataFrame({
+            "date": sub["year"].astype(str) + "-01-01",
+            "indicator_id": indicator_id,
+            "region": cc,
+            "value": sub["value_mt"].values,
+            "source_url": source_url,
+        })
+        long_df = long_df.drop_duplicates(subset=["date", "indicator_id", "region"], keep="last")
+        long_df = long_df.sort_values("date").reset_index(drop=True)
+
+        write_processed(long_df, processed_dir, basename=indicator_id)
+        write_metadata_for_indicator(processed_dir, source_cfg, indicator_id, long_df)
+        written.append(indicator_id)
+        total_rows += len(long_df)
+        logger.info(
+            "Family B: %s: %d rows (%s..%s)",
+            indicator_id, len(long_df), long_df["date"].min(), long_df["date"].max(),
+        )
+
+    return written, total_rows, unnamed_logs
+
+
+# --- 二重計上の検証 ----------------------------------------------------------
+
+
+def double_count_check(df_sector: pd.DataFrame, ve: pd.DataFrame) -> None:
+    """
+    Family B 全国合計（航空除く / 全活動）と Family A 固定設備部門合計（航空除く）を
+    最新共通年で照合し print する。航空（code 10）は別枠なので固定設備分で比較。
+    rollup 混入があれば B が約 2 倍に跳ねるため検知できる。
+    """
+    df_sector = df_sector.copy()
+    df_sector["code"] = df_sector["sector"].str.extract(r"^(\d+)")
+    years_a = set(df_sector.loc[df_sector["year"].str.match(YEAR_RE, na=False), "year"])
+    years_b = set(ve["year"])
+    common = sorted(years_a & years_b)
+    if not common:
+        logger.warning("二重計上検証: Family A/B に共通年が無くスキップ")
+        return
+    latest = common[-1]
+
+    b_all = ve.loc[ve["year"] == latest, "value"].sum() / 1e6
+    b_excl_av = ve.loc[(ve["year"] == latest) & (ve["main_activity_code"] != "10"), "value"].sum() / 1e6
+    n_country = ve.loc[ve["year"] == latest, "country_code"].nunique()
+
+    a_year = df_sector[df_sector["year"] == latest]
+    a_all = a_year["emissions_mt"].sum()
+    a_stationary = a_year.loc[a_year["code"] != "10", "emissions_mt"].sum()
+
+    ratio = (b_excl_av / a_stationary) if a_stationary else float("nan")
+
+    print("=" * 72)
+    print(f"[二重計上の検証] 最新共通年 = {latest}")
+    print(f"  Family B 全国合計（全活動, {n_country} か国, 航空込み）  : {b_all:9.1f} Mt-CO2e")
+    print(f"  Family B 全国合計（航空除く=固定設備合計）              : {b_excl_av:9.1f} Mt-CO2e")
+    print(f"  Family A 8 部門合計（航空込み）                        : {a_all:9.1f} Mt-CO2e")
+    print(f"  Family A 固定設備部門合計（航空除く）                  : {a_stationary:9.1f} Mt-CO2e")
+    print(f"  比 = Family B(航空除く) / Family A(航空除く)           : {ratio:9.3f}")
+    print(f"  判定: B は全固定設備活動を含み A は主要 7 部門のみのため B ≳ A が正常。")
+    print(f"        比が ~2.0 付近なら rollup(-99) 混入を疑う。今回 = {ratio:.3f}")
+    print("=" * 72)
+    logger.info(
+        "double-count check: latest=%s B_excl_av=%.1f A_stationary=%.1f ratio=%.3f",
+        latest, b_excl_av, a_stationary, ratio,
+    )
+
+
+# --- メイン ------------------------------------------------------------------
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Fetch EU ETS verified emissions (ESG seed)")
+    parser.add_argument(
+        "--series", type=str, default=None,
+        help="カンマ区切りで indicator_id を絞る（任意）",
+    )
+    args = parser.parse_args(argv)
+
+    cfg = load_source_map()
+    try:
+        source_cfg = cfg["sources"][SOURCE_KEY]
+    except KeyError:
+        logger.error("source_map.yaml に %s が見つかりません", SOURCE_KEY)
+        return 2
+
+    csv_url_sector = source_cfg["csv_url_sector"]
+    csv_url_full = source_cfg["csv_url_full"]
+    source_url = source_cfg.get("source_url", csv_url_sector)
+    exclude_countries = set(source_cfg.get("country_exclude") or [])
+
+    raw_dir = ROOT / "data" / "raw" / "eu-ets"
+    processed_dir = ROOT / "data" / "processed" / "esg"
+    log_dir = ROOT / "data" / "_logs"
+
+    now_jst = datetime.now(timezone.utc) + timedelta(hours=9)
+    today_tag = now_jst.strftime("%Y%m%d")
+
+    wanted: set[str] | None = None
+    if args.series:
+        wanted = {s.strip() for s in args.series.split(",") if s.strip()}
+
+    # --- 取得 ---
+    try:
+        sector_bytes = fetch_csv(csv_url_sector, min_bytes=1_000)
+        full_bytes = fetch_csv(csv_url_full, min_bytes=1_000_000)
+    except Exception as e:
+        logger.exception("download failed: %s", e)
+        append_log(log_dir, "fetch_eu_ets", "FAIL", f"download failed: {e}")
+        return 1
+
+    save_raw(sector_bytes, raw_dir, f"eu_ets_sector_{today_tag}.csv")
+    save_raw(full_bytes, raw_dir, f"eu_ets_full_{today_tag}.csv")
+
+    # --- パース ---
+    try:
+        df_sector = parse_sector_csv(sector_bytes)
+        df_full = parse_full_csv(full_bytes)
+    except Exception as e:
+        logger.exception("parse failed: %s", e)
+        append_log(log_dir, "fetch_eu_ets", "FAIL", f"parse failed: {e}")
+        return 1
+
+    ve = filter_verified_leaf(df_full, exclude_countries)
+    logger.info(
+        "Family B verified-leaf rows: %d (countries=%d, codes=%d)",
+        len(ve), ve["country_code"].nunique(), ve["main_activity_code"].nunique(),
+    )
+
+    # --- Family A / B 処理 ---
+    a_ids, a_rows, unmapped = process_family_a(df_sector, source_cfg, source_url, processed_dir, wanted)
+    b_ids, b_rows, unnamed = process_family_b(ve, source_cfg, source_url, processed_dir, wanted)
+
+    written = a_ids + b_ids
+    if not written:
+        logger.error("no series produced any rows")
+        append_log(log_dir, "fetch_eu_ets", "FAIL", "no series produced rows")
+        return 1
+
+    # --- 二重計上の検証（print） ---
+    double_count_check(df_sector, ve)
+
+    summary = (
+        f"Family A={len(a_ids)} series ({a_rows} rows), "
+        f"Family B={len(b_ids)} series ({b_rows} rows), "
+        f"total={len(written)} series, "
+        f"unmapped_sectors={len(unmapped)}, unnamed_countries={len(unnamed)}"
+    )
+    logger.info("done: %s", summary)
+    append_log(log_dir, "fetch_eu_ets", "OK", summary)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
