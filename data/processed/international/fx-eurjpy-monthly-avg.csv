@@ -35,3 +35,4 @@ date,indicator_id,region,value,source_url
 2026-02-01,fx-eurjpy-monthly-avg,eu,183.45150000000004,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
 2026-03-01,fx-eurjpy-monthly-avg,eu,183.3990909090909,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
 2026-04-01,fx-eurjpy-monthly-avg,eu,186.206,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
+2026-05-01,fx-eurjpy-monthly-avg,eu,184.7095,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
