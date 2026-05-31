@@ -1,0 +1,15 @@
+date,indicator_id,region,value,source_url
+2012-01-01,eu-ets-emissions-aviation,EU-ETS,84.03,https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0
+2013-01-01,eu-ets-emissions-aviation,EU-ETS,53.49,https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0
+2014-01-01,eu-ets-emissions-aviation,EU-ETS,54.83,https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0
+2015-01-01,eu-ets-emissions-aviation,EU-ETS,57.11,https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0
+2016-01-01,eu-ets-emissions-aviation,EU-ETS,61.47,https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0
+2017-01-01,eu-ets-emissions-aviation,EU-ETS,64.42,https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0
+2018-01-01,eu-ets-emissions-aviation,EU-ETS,67.49,https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0
+2019-01-01,eu-ets-emissions-aviation,EU-ETS,68.18,https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0
+2020-01-01,eu-ets-emissions-aviation,EU-ETS,24.96,https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0
+2021-01-01,eu-ets-emissions-aviation,EU-ETS,27.68,https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0
+2022-01-01,eu-ets-emissions-aviation,EU-ETS,48.72,https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0
+2023-01-01,eu-ets-emissions-aviation,EU-ETS,53.46,https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0
+2024-01-01,eu-ets-emissions-aviation,EU-ETS,61.51,https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0
+2025-01-01,eu-ets-emissions-aviation,EU-ETS,57.23,https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0
