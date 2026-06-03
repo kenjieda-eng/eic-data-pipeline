@@ -1,0 +1,21 @@
+{
+  "id": "jpn-pop-total-06",
+  "name": "山形県 総人口",
+  "domain": "population",
+  "frequency": "annual",
+  "unit": "千人",
+  "source_name": "政府統計の総合窓口（e-Stat）API 人口推計 都道府県別",
+  "source_url": "https://www.e-stat.go.jp/",
+  "license": "estat-terms",
+  "observation_cutoff": "2024-10-01",
+  "updated_at": "2026-06-03T11:43:08+09:00",
+  "license_url": "https://www.e-stat.go.jp/terms-of-use",
+  "license_notice": "出典: 政府統計の総合窓口（e-Stat）。",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2016-10-01",
+  "publisher": "総務省統計局",
+  "aggregation": "raw",
+  "notes": "人口推計 都道府県別 年齢（3区分）男女別人口（総人口・男女計・各年10月1日現在・単位=千人）。\n統計表 0004021110（2016-2020）+ 0003448225（2021-2024）を結合し 2016-2024 の年次系列を構成。\n分類コード（getMetaInfo 検証 2026-06-03）: 男女計=000 / 総人口=001 /\n年齢3区分 総数=000・15～64歳=002・65歳以上=003。area={cc}000（cc=JIS 都道府県コード 01-47）。\nL-062: cdCatNN の位置は表で cat02↔cat03 が入れ替わるため分類名で次元解決し取り違いを防ぐ。\n",
+  "depends_on": null
+}

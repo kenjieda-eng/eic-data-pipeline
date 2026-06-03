@@ -1867,6 +1867,896 @@ sources:
       - 数値文字列の特殊値: "-" / "..." / "" / "X" 等は NaN として扱う。
       - L-062 検証 (2026-05-27): CPI 直近 2026M04=1.4%, 2026M03=1.5% / IIP 直近 2025M02=97.3, 2024M12=104.1（妥当帯）。
 
+  estat-population:
+    name: 政府統計の総合窓口（e-Stat）API 人口推計 都道府県別
+    publisher: 総務省統計局
+    publisher_url: https://www.e-stat.go.jp/
+    source_url: https://www.e-stat.go.jp/
+    api_base: "https://api.e-stat.go.jp/rest/3.0/app/json"
+    # --- D-011 メタデータ共通項目 ---
+    license: estat-terms
+    license_url: https://www.e-stat.go.jp/terms-of-use
+    license_notice: "出典: 政府統計の総合窓口（e-Stat）。"
+    license_text: |
+      e-Stat 利用規約。出典明示を条件に再利用可（政府標準利用規約 2.0 互換）。
+      参考: https://www.e-stat.go.jp/terms-of-use
+    domain: population
+    frequency: annual
+    unit: "千人"
+    tz: Asia/Tokyo
+    missing_policy: "null"
+    aggregation: raw
+    backfill_start: "2016-10-01"
+    # 人口推計 都道府県 年齢3区分表は 2024 年版が最新（各年10月1日現在）。約 13 ヶ月マージン。
+    freshness_sla_days: 400
+    # 採用コード（getMetaInfo 検証 2026-06-03、L-062）。男女計=000 / 総人口=001（外国人含む）。
+    sex_code: "000"
+    poptype_code: "001"
+    # 人口推計 都道府県別「各年10月1日現在」統計表。cat02/cat03 の割当が表で入れ替わるため
+    # fetch_estat.py は実行時に分類名で次元 @id を解決する（cdCatNN 位置をハードコードしない）。
+    tables:
+      - stats_data_id: "0004021110"   # 2016-2020（cat02=人口 / cat03=年齢3区分）
+      - stats_data_id: "0003448225"   # 2021-2024（cat02=年齢3区分 / cat03=人口）
+    # 年齢3区分 → 指標。total=000 総数 / working=002 15～64歳 / 65over=003 65歳以上。
+    metrics:
+      total:   { age_code: "000", name_ja: "総人口",                 id_suffix: total }
+      working: { age_code: "002", name_ja: "生産年齢人口（15-64歳）", id_suffix: working }
+      "65over": { age_code: "003", name_ja: "65歳以上人口",           id_suffix: 65over }
+    notes: |
+      人口推計 都道府県別 年齢（3区分）男女別人口（総人口・男女計・各年10月1日現在・単位=千人）。
+      統計表 0004021110（2016-2020）+ 0003448225（2021-2024）を結合し 2016-2024 の年次系列を構成。
+      分類コード（getMetaInfo 検証 2026-06-03）: 男女計=000 / 総人口=001 /
+      年齢3区分 総数=000・15～64歳=002・65歳以上=003。area={cc}000（cc=JIS 都道府県コード 01-47）。
+      L-062: cdCatNN の位置は表で cat02↔cat03 が入れ替わるため分類名で次元解決し取り違いを防ぐ。
+    indicator_ids:
+      - jpn-pop-total-01
+      - jpn-pop-working-01
+      - jpn-pop-65over-01
+      - jpn-pop-total-02
+      - jpn-pop-working-02
+      - jpn-pop-65over-02
+      - jpn-pop-total-03
+      - jpn-pop-working-03
+      - jpn-pop-65over-03
+      - jpn-pop-total-04
+      - jpn-pop-working-04
+      - jpn-pop-65over-04
+      - jpn-pop-total-05
+      - jpn-pop-working-05
+      - jpn-pop-65over-05
+      - jpn-pop-total-06
+      - jpn-pop-working-06
+      - jpn-pop-65over-06
+      - jpn-pop-total-07
+      - jpn-pop-working-07
+      - jpn-pop-65over-07
+      - jpn-pop-total-08
+      - jpn-pop-working-08
+      - jpn-pop-65over-08
+      - jpn-pop-total-09
+      - jpn-pop-working-09
+      - jpn-pop-65over-09
+      - jpn-pop-total-10
+      - jpn-pop-working-10
+      - jpn-pop-65over-10
+      - jpn-pop-total-11
+      - jpn-pop-working-11
+      - jpn-pop-65over-11
+      - jpn-pop-total-12
+      - jpn-pop-working-12
+      - jpn-pop-65over-12
+      - jpn-pop-total-13
+      - jpn-pop-working-13
+      - jpn-pop-65over-13
+      - jpn-pop-total-14
+      - jpn-pop-working-14
+      - jpn-pop-65over-14
+      - jpn-pop-total-15
+      - jpn-pop-working-15
+      - jpn-pop-65over-15
+      - jpn-pop-total-16
+      - jpn-pop-working-16
+      - jpn-pop-65over-16
+      - jpn-pop-total-17
+      - jpn-pop-working-17
+      - jpn-pop-65over-17
+      - jpn-pop-total-18
+      - jpn-pop-working-18
+      - jpn-pop-65over-18
+      - jpn-pop-total-19
+      - jpn-pop-working-19
+      - jpn-pop-65over-19
+      - jpn-pop-total-20
+      - jpn-pop-working-20
+      - jpn-pop-65over-20
+      - jpn-pop-total-21
+      - jpn-pop-working-21
+      - jpn-pop-65over-21
+      - jpn-pop-total-22
+      - jpn-pop-working-22
+      - jpn-pop-65over-22
+      - jpn-pop-total-23
+      - jpn-pop-working-23
+      - jpn-pop-65over-23
+      - jpn-pop-total-24
+      - jpn-pop-working-24
+      - jpn-pop-65over-24
+      - jpn-pop-total-25
+      - jpn-pop-working-25
+      - jpn-pop-65over-25
+      - jpn-pop-total-26
+      - jpn-pop-working-26
+      - jpn-pop-65over-26
+      - jpn-pop-total-27
+      - jpn-pop-working-27
+      - jpn-pop-65over-27
+      - jpn-pop-total-28
+      - jpn-pop-working-28
+      - jpn-pop-65over-28
+      - jpn-pop-total-29
+      - jpn-pop-working-29
+      - jpn-pop-65over-29
+      - jpn-pop-total-30
+      - jpn-pop-working-30
+      - jpn-pop-65over-30
+      - jpn-pop-total-31
+      - jpn-pop-working-31
+      - jpn-pop-65over-31
+      - jpn-pop-total-32
+      - jpn-pop-working-32
+      - jpn-pop-65over-32
+      - jpn-pop-total-33
+      - jpn-pop-working-33
+      - jpn-pop-65over-33
+      - jpn-pop-total-34
+      - jpn-pop-working-34
+      - jpn-pop-65over-34
+      - jpn-pop-total-35
+      - jpn-pop-working-35
+      - jpn-pop-65over-35
+      - jpn-pop-total-36
+      - jpn-pop-working-36
+      - jpn-pop-65over-36
+      - jpn-pop-total-37
+      - jpn-pop-working-37
+      - jpn-pop-65over-37
+      - jpn-pop-total-38
+      - jpn-pop-working-38
+      - jpn-pop-65over-38
+      - jpn-pop-total-39
+      - jpn-pop-working-39
+      - jpn-pop-65over-39
+      - jpn-pop-total-40
+      - jpn-pop-working-40
+      - jpn-pop-65over-40
+      - jpn-pop-total-41
+      - jpn-pop-working-41
+      - jpn-pop-65over-41
+      - jpn-pop-total-42
+      - jpn-pop-working-42
+      - jpn-pop-65over-42
+      - jpn-pop-total-43
+      - jpn-pop-working-43
+      - jpn-pop-65over-43
+      - jpn-pop-total-44
+      - jpn-pop-working-44
+      - jpn-pop-65over-44
+      - jpn-pop-total-45
+      - jpn-pop-working-45
+      - jpn-pop-65over-45
+      - jpn-pop-total-46
+      - jpn-pop-working-46
+      - jpn-pop-65over-46
+      - jpn-pop-total-47
+      - jpn-pop-working-47
+      - jpn-pop-65over-47
+    indicators:
+      jpn-pop-total-01:
+        name: "北海道 総人口"
+        region: 北海道
+        area_code: "01000"
+        metric: total
+      jpn-pop-working-01:
+        name: "北海道 生産年齢人口（15-64歳）"
+        region: 北海道
+        area_code: "01000"
+        metric: working
+      jpn-pop-65over-01:
+        name: "北海道 65歳以上人口"
+        region: 北海道
+        area_code: "01000"
+        metric: 65over
+      jpn-pop-total-02:
+        name: "青森県 総人口"
+        region: 青森県
+        area_code: "02000"
+        metric: total
+      jpn-pop-working-02:
+        name: "青森県 生産年齢人口（15-64歳）"
+        region: 青森県
+        area_code: "02000"
+        metric: working
+      jpn-pop-65over-02:
+        name: "青森県 65歳以上人口"
+        region: 青森県
+        area_code: "02000"
+        metric: 65over
+      jpn-pop-total-03:
+        name: "岩手県 総人口"
+        region: 岩手県
+        area_code: "03000"
+        metric: total
+      jpn-pop-working-03:
+        name: "岩手県 生産年齢人口（15-64歳）"
+        region: 岩手県
+        area_code: "03000"
+        metric: working
+      jpn-pop-65over-03:
+        name: "岩手県 65歳以上人口"
+        region: 岩手県
+        area_code: "03000"
+        metric: 65over
+      jpn-pop-total-04:
+        name: "宮城県 総人口"
+        region: 宮城県
+        area_code: "04000"
+        metric: total
+      jpn-pop-working-04:
+        name: "宮城県 生産年齢人口（15-64歳）"
+        region: 宮城県
+        area_code: "04000"
+        metric: working
+      jpn-pop-65over-04:
+        name: "宮城県 65歳以上人口"
+        region: 宮城県
+        area_code: "04000"
+        metric: 65over
+      jpn-pop-total-05:
+        name: "秋田県 総人口"
+        region: 秋田県
+        area_code: "05000"
+        metric: total
+      jpn-pop-working-05:
+        name: "秋田県 生産年齢人口（15-64歳）"
+        region: 秋田県
+        area_code: "05000"
+        metric: working
+      jpn-pop-65over-05:
+        name: "秋田県 65歳以上人口"
+        region: 秋田県
+        area_code: "05000"
+        metric: 65over
+      jpn-pop-total-06:
+        name: "山形県 総人口"
+        region: 山形県
+        area_code: "06000"
+        metric: total
+      jpn-pop-working-06:
+        name: "山形県 生産年齢人口（15-64歳）"
+        region: 山形県
+        area_code: "06000"
+        metric: working
+      jpn-pop-65over-06:
+        name: "山形県 65歳以上人口"
+        region: 山形県
+        area_code: "06000"
+        metric: 65over
+      jpn-pop-total-07:
+        name: "福島県 総人口"
+        region: 福島県
+        area_code: "07000"
+        metric: total
+      jpn-pop-working-07:
+        name: "福島県 生産年齢人口（15-64歳）"
+        region: 福島県
+        area_code: "07000"
+        metric: working
+      jpn-pop-65over-07:
+        name: "福島県 65歳以上人口"
+        region: 福島県
+        area_code: "07000"
+        metric: 65over
+      jpn-pop-total-08:
+        name: "茨城県 総人口"
+        region: 茨城県
+        area_code: "08000"
+        metric: total
+      jpn-pop-working-08:
+        name: "茨城県 生産年齢人口（15-64歳）"
+        region: 茨城県
+        area_code: "08000"
+        metric: working
+      jpn-pop-65over-08:
+        name: "茨城県 65歳以上人口"
+        region: 茨城県
+        area_code: "08000"
+        metric: 65over
+      jpn-pop-total-09:
+        name: "栃木県 総人口"
+        region: 栃木県
+        area_code: "09000"
+        metric: total
+      jpn-pop-working-09:
+        name: "栃木県 生産年齢人口（15-64歳）"
+        region: 栃木県
+        area_code: "09000"
+        metric: working
+      jpn-pop-65over-09:
+        name: "栃木県 65歳以上人口"
+        region: 栃木県
+        area_code: "09000"
+        metric: 65over
+      jpn-pop-total-10:
+        name: "群馬県 総人口"
+        region: 群馬県
+        area_code: "10000"
+        metric: total
+      jpn-pop-working-10:
+        name: "群馬県 生産年齢人口（15-64歳）"
+        region: 群馬県
+        area_code: "10000"
+        metric: working
+      jpn-pop-65over-10:
+        name: "群馬県 65歳以上人口"
+        region: 群馬県
+        area_code: "10000"
+        metric: 65over
+      jpn-pop-total-11:
+        name: "埼玉県 総人口"
+        region: 埼玉県
+        area_code: "11000"
+        metric: total
+      jpn-pop-working-11:
+        name: "埼玉県 生産年齢人口（15-64歳）"
+        region: 埼玉県
+        area_code: "11000"
+        metric: working
+      jpn-pop-65over-11:
+        name: "埼玉県 65歳以上人口"
+        region: 埼玉県
+        area_code: "11000"
+        metric: 65over
+      jpn-pop-total-12:
+        name: "千葉県 総人口"
+        region: 千葉県
+        area_code: "12000"
+        metric: total
+      jpn-pop-working-12:
+        name: "千葉県 生産年齢人口（15-64歳）"
+        region: 千葉県
+        area_code: "12000"
+        metric: working
+      jpn-pop-65over-12:
+        name: "千葉県 65歳以上人口"
+        region: 千葉県
+        area_code: "12000"
+        metric: 65over
+      jpn-pop-total-13:
+        name: "東京都 総人口"
+        region: 東京都
+        area_code: "13000"
+        metric: total
+      jpn-pop-working-13:
+        name: "東京都 生産年齢人口（15-64歳）"
+        region: 東京都
+        area_code: "13000"
+        metric: working
+      jpn-pop-65over-13:
+        name: "東京都 65歳以上人口"
+        region: 東京都
+        area_code: "13000"
+        metric: 65over
+      jpn-pop-total-14:
+        name: "神奈川県 総人口"
+        region: 神奈川県
+        area_code: "14000"
+        metric: total
+      jpn-pop-working-14:
+        name: "神奈川県 生産年齢人口（15-64歳）"
+        region: 神奈川県
+        area_code: "14000"
+        metric: working
+      jpn-pop-65over-14:
+        name: "神奈川県 65歳以上人口"
+        region: 神奈川県
+        area_code: "14000"
+        metric: 65over
+      jpn-pop-total-15:
+        name: "新潟県 総人口"
+        region: 新潟県
+        area_code: "15000"
+        metric: total
+      jpn-pop-working-15:
+        name: "新潟県 生産年齢人口（15-64歳）"
+        region: 新潟県
+        area_code: "15000"
+        metric: working
+      jpn-pop-65over-15:
+        name: "新潟県 65歳以上人口"
+        region: 新潟県
+        area_code: "15000"
+        metric: 65over
+      jpn-pop-total-16:
+        name: "富山県 総人口"
+        region: 富山県
+        area_code: "16000"
+        metric: total
+      jpn-pop-working-16:
+        name: "富山県 生産年齢人口（15-64歳）"
+        region: 富山県
+        area_code: "16000"
+        metric: working
+      jpn-pop-65over-16:
+        name: "富山県 65歳以上人口"
+        region: 富山県
+        area_code: "16000"
+        metric: 65over
+      jpn-pop-total-17:
+        name: "石川県 総人口"
+        region: 石川県
+        area_code: "17000"
+        metric: total
+      jpn-pop-working-17:
+        name: "石川県 生産年齢人口（15-64歳）"
+        region: 石川県
+        area_code: "17000"
+        metric: working
+      jpn-pop-65over-17:
+        name: "石川県 65歳以上人口"
+        region: 石川県
+        area_code: "17000"
+        metric: 65over
+      jpn-pop-total-18:
+        name: "福井県 総人口"
+        region: 福井県
+        area_code: "18000"
+        metric: total
+      jpn-pop-working-18:
+        name: "福井県 生産年齢人口（15-64歳）"
+        region: 福井県
+        area_code: "18000"
+        metric: working
+      jpn-pop-65over-18:
+        name: "福井県 65歳以上人口"
+        region: 福井県
+        area_code: "18000"
+        metric: 65over
+      jpn-pop-total-19:
+        name: "山梨県 総人口"
+        region: 山梨県
+        area_code: "19000"
+        metric: total
+      jpn-pop-working-19:
+        name: "山梨県 生産年齢人口（15-64歳）"
+        region: 山梨県
+        area_code: "19000"
+        metric: working
+      jpn-pop-65over-19:
+        name: "山梨県 65歳以上人口"
+        region: 山梨県
+        area_code: "19000"
+        metric: 65over
+      jpn-pop-total-20:
+        name: "長野県 総人口"
+        region: 長野県
+        area_code: "20000"
+        metric: total
+      jpn-pop-working-20:
+        name: "長野県 生産年齢人口（15-64歳）"
+        region: 長野県
+        area_code: "20000"
+        metric: working
+      jpn-pop-65over-20:
+        name: "長野県 65歳以上人口"
+        region: 長野県
+        area_code: "20000"
+        metric: 65over
+      jpn-pop-total-21:
+        name: "岐阜県 総人口"
+        region: 岐阜県
+        area_code: "21000"
+        metric: total
+      jpn-pop-working-21:
+        name: "岐阜県 生産年齢人口（15-64歳）"
+        region: 岐阜県
+        area_code: "21000"
+        metric: working
+      jpn-pop-65over-21:
+        name: "岐阜県 65歳以上人口"
+        region: 岐阜県
+        area_code: "21000"
+        metric: 65over
+      jpn-pop-total-22:
+        name: "静岡県 総人口"
+        region: 静岡県
+        area_code: "22000"
+        metric: total
+      jpn-pop-working-22:
+        name: "静岡県 生産年齢人口（15-64歳）"
+        region: 静岡県
+        area_code: "22000"
+        metric: working
+      jpn-pop-65over-22:
+        name: "静岡県 65歳以上人口"
+        region: 静岡県
+        area_code: "22000"
+        metric: 65over
+      jpn-pop-total-23:
+        name: "愛知県 総人口"
+        region: 愛知県
+        area_code: "23000"
+        metric: total
+      jpn-pop-working-23:
+        name: "愛知県 生産年齢人口（15-64歳）"
+        region: 愛知県
+        area_code: "23000"
+        metric: working
+      jpn-pop-65over-23:
+        name: "愛知県 65歳以上人口"
+        region: 愛知県
+        area_code: "23000"
+        metric: 65over
+      jpn-pop-total-24:
+        name: "三重県 総人口"
+        region: 三重県
+        area_code: "24000"
+        metric: total
+      jpn-pop-working-24:
+        name: "三重県 生産年齢人口（15-64歳）"
+        region: 三重県
+        area_code: "24000"
+        metric: working
+      jpn-pop-65over-24:
+        name: "三重県 65歳以上人口"
+        region: 三重県
+        area_code: "24000"
+        metric: 65over
+      jpn-pop-total-25:
+        name: "滋賀県 総人口"
+        region: 滋賀県
+        area_code: "25000"
+        metric: total
+      jpn-pop-working-25:
+        name: "滋賀県 生産年齢人口（15-64歳）"
+        region: 滋賀県
+        area_code: "25000"
+        metric: working
+      jpn-pop-65over-25:
+        name: "滋賀県 65歳以上人口"
+        region: 滋賀県
+        area_code: "25000"
+        metric: 65over
+      jpn-pop-total-26:
+        name: "京都府 総人口"
+        region: 京都府
+        area_code: "26000"
+        metric: total
+      jpn-pop-working-26:
+        name: "京都府 生産年齢人口（15-64歳）"
+        region: 京都府
+        area_code: "26000"
+        metric: working
+      jpn-pop-65over-26:
+        name: "京都府 65歳以上人口"
+        region: 京都府
+        area_code: "26000"
+        metric: 65over
+      jpn-pop-total-27:
+        name: "大阪府 総人口"
+        region: 大阪府
+        area_code: "27000"
+        metric: total
+      jpn-pop-working-27:
+        name: "大阪府 生産年齢人口（15-64歳）"
+        region: 大阪府
+        area_code: "27000"
+        metric: working
+      jpn-pop-65over-27:
+        name: "大阪府 65歳以上人口"
+        region: 大阪府
+        area_code: "27000"
+        metric: 65over
+      jpn-pop-total-28:
+        name: "兵庫県 総人口"
+        region: 兵庫県
+        area_code: "28000"
+        metric: total
+      jpn-pop-working-28:
+        name: "兵庫県 生産年齢人口（15-64歳）"
+        region: 兵庫県
+        area_code: "28000"
+        metric: working
+      jpn-pop-65over-28:
+        name: "兵庫県 65歳以上人口"
+        region: 兵庫県
+        area_code: "28000"
+        metric: 65over
+      jpn-pop-total-29:
+        name: "奈良県 総人口"
+        region: 奈良県
+        area_code: "29000"
+        metric: total
+      jpn-pop-working-29:
+        name: "奈良県 生産年齢人口（15-64歳）"
+        region: 奈良県
+        area_code: "29000"
+        metric: working
+      jpn-pop-65over-29:
+        name: "奈良県 65歳以上人口"
+        region: 奈良県
+        area_code: "29000"
+        metric: 65over
+      jpn-pop-total-30:
+        name: "和歌山県 総人口"
+        region: 和歌山県
+        area_code: "30000"
+        metric: total
+      jpn-pop-working-30:
+        name: "和歌山県 生産年齢人口（15-64歳）"
+        region: 和歌山県
+        area_code: "30000"
+        metric: working
+      jpn-pop-65over-30:
+        name: "和歌山県 65歳以上人口"
+        region: 和歌山県
+        area_code: "30000"
+        metric: 65over
+      jpn-pop-total-31:
+        name: "鳥取県 総人口"
+        region: 鳥取県
+        area_code: "31000"
+        metric: total
+      jpn-pop-working-31:
+        name: "鳥取県 生産年齢人口（15-64歳）"
+        region: 鳥取県
+        area_code: "31000"
+        metric: working
+      jpn-pop-65over-31:
+        name: "鳥取県 65歳以上人口"
+        region: 鳥取県
+        area_code: "31000"
+        metric: 65over
+      jpn-pop-total-32:
+        name: "島根県 総人口"
+        region: 島根県
+        area_code: "32000"
+        metric: total
+      jpn-pop-working-32:
+        name: "島根県 生産年齢人口（15-64歳）"
+        region: 島根県
+        area_code: "32000"
+        metric: working
+      jpn-pop-65over-32:
+        name: "島根県 65歳以上人口"
+        region: 島根県
+        area_code: "32000"
+        metric: 65over
+      jpn-pop-total-33:
+        name: "岡山県 総人口"
+        region: 岡山県
+        area_code: "33000"
+        metric: total
+      jpn-pop-working-33:
+        name: "岡山県 生産年齢人口（15-64歳）"
+        region: 岡山県
+        area_code: "33000"
+        metric: working
+      jpn-pop-65over-33:
+        name: "岡山県 65歳以上人口"
+        region: 岡山県
+        area_code: "33000"
+        metric: 65over
+      jpn-pop-total-34:
+        name: "広島県 総人口"
+        region: 広島県
+        area_code: "34000"
+        metric: total
+      jpn-pop-working-34:
+        name: "広島県 生産年齢人口（15-64歳）"
+        region: 広島県
+        area_code: "34000"
+        metric: working
+      jpn-pop-65over-34:
+        name: "広島県 65歳以上人口"
+        region: 広島県
+        area_code: "34000"
+        metric: 65over
+      jpn-pop-total-35:
+        name: "山口県 総人口"
+        region: 山口県
+        area_code: "35000"
+        metric: total
+      jpn-pop-working-35:
+        name: "山口県 生産年齢人口（15-64歳）"
+        region: 山口県
+        area_code: "35000"
+        metric: working
+      jpn-pop-65over-35:
+        name: "山口県 65歳以上人口"
+        region: 山口県
+        area_code: "35000"
+        metric: 65over
+      jpn-pop-total-36:
+        name: "徳島県 総人口"
+        region: 徳島県
+        area_code: "36000"
+        metric: total
+      jpn-pop-working-36:
+        name: "徳島県 生産年齢人口（15-64歳）"
+        region: 徳島県
+        area_code: "36000"
+        metric: working
+      jpn-pop-65over-36:
+        name: "徳島県 65歳以上人口"
+        region: 徳島県
+        area_code: "36000"
+        metric: 65over
+      jpn-pop-total-37:
+        name: "香川県 総人口"
+        region: 香川県
+        area_code: "37000"
+        metric: total
+      jpn-pop-working-37:
+        name: "香川県 生産年齢人口（15-64歳）"
+        region: 香川県
+        area_code: "37000"
+        metric: working
+      jpn-pop-65over-37:
+        name: "香川県 65歳以上人口"
+        region: 香川県
+        area_code: "37000"
+        metric: 65over
+      jpn-pop-total-38:
+        name: "愛媛県 総人口"
+        region: 愛媛県
+        area_code: "38000"
+        metric: total
+      jpn-pop-working-38:
+        name: "愛媛県 生産年齢人口（15-64歳）"
+        region: 愛媛県
+        area_code: "38000"
+        metric: working
+      jpn-pop-65over-38:
+        name: "愛媛県 65歳以上人口"
+        region: 愛媛県
+        area_code: "38000"
+        metric: 65over
+      jpn-pop-total-39:
+        name: "高知県 総人口"
+        region: 高知県
+        area_code: "39000"
+        metric: total
+      jpn-pop-working-39:
+        name: "高知県 生産年齢人口（15-64歳）"
+        region: 高知県
+        area_code: "39000"
+        metric: working
+      jpn-pop-65over-39:
+        name: "高知県 65歳以上人口"
+        region: 高知県
+        area_code: "39000"
+        metric: 65over
+      jpn-pop-total-40:
+        name: "福岡県 総人口"
+        region: 福岡県
+        area_code: "40000"
+        metric: total
+      jpn-pop-working-40:
+        name: "福岡県 生産年齢人口（15-64歳）"
+        region: 福岡県
+        area_code: "40000"
+        metric: working
+      jpn-pop-65over-40:
+        name: "福岡県 65歳以上人口"
+        region: 福岡県
+        area_code: "40000"
+        metric: 65over
+      jpn-pop-total-41:
+        name: "佐賀県 総人口"
+        region: 佐賀県
+        area_code: "41000"
+        metric: total
+      jpn-pop-working-41:
+        name: "佐賀県 生産年齢人口（15-64歳）"
+        region: 佐賀県
+        area_code: "41000"
+        metric: working
+      jpn-pop-65over-41:
+        name: "佐賀県 65歳以上人口"
+        region: 佐賀県
+        area_code: "41000"
+        metric: 65over
+      jpn-pop-total-42:
+        name: "長崎県 総人口"
+        region: 長崎県
+        area_code: "42000"
+        metric: total
+      jpn-pop-working-42:
+        name: "長崎県 生産年齢人口（15-64歳）"
+        region: 長崎県
+        area_code: "42000"
+        metric: working
+      jpn-pop-65over-42:
+        name: "長崎県 65歳以上人口"
+        region: 長崎県
+        area_code: "42000"
+        metric: 65over
+      jpn-pop-total-43:
+        name: "熊本県 総人口"
+        region: 熊本県
+        area_code: "43000"
+        metric: total
+      jpn-pop-working-43:
+        name: "熊本県 生産年齢人口（15-64歳）"
+        region: 熊本県
+        area_code: "43000"
+        metric: working
+      jpn-pop-65over-43:
+        name: "熊本県 65歳以上人口"
+        region: 熊本県
+        area_code: "43000"
+        metric: 65over
+      jpn-pop-total-44:
+        name: "大分県 総人口"
+        region: 大分県
+        area_code: "44000"
+        metric: total
+      jpn-pop-working-44:
+        name: "大分県 生産年齢人口（15-64歳）"
+        region: 大分県
+        area_code: "44000"
+        metric: working
+      jpn-pop-65over-44:
+        name: "大分県 65歳以上人口"
+        region: 大分県
+        area_code: "44000"
+        metric: 65over
+      jpn-pop-total-45:
+        name: "宮崎県 総人口"
+        region: 宮崎県
+        area_code: "45000"
+        metric: total
+      jpn-pop-working-45:
+        name: "宮崎県 生産年齢人口（15-64歳）"
+        region: 宮崎県
+        area_code: "45000"
+        metric: working
+      jpn-pop-65over-45:
+        name: "宮崎県 65歳以上人口"
+        region: 宮崎県
+        area_code: "45000"
+        metric: 65over
+      jpn-pop-total-46:
+        name: "鹿児島県 総人口"
+        region: 鹿児島県
+        area_code: "46000"
+        metric: total
+      jpn-pop-working-46:
+        name: "鹿児島県 生産年齢人口（15-64歳）"
+        region: 鹿児島県
+        area_code: "46000"
+        metric: working
+      jpn-pop-65over-46:
+        name: "鹿児島県 65歳以上人口"
+        region: 鹿児島県
+        area_code: "46000"
+        metric: 65over
+      jpn-pop-total-47:
+        name: "沖縄県 総人口"
+        region: 沖縄県
+        area_code: "47000"
+        metric: total
+      jpn-pop-working-47:
+        name: "沖縄県 生産年齢人口（15-64歳）"
+        region: 沖縄県
+        area_code: "47000"
+        metric: working
+      jpn-pop-65over-47:
+        name: "沖縄県 65歳以上人口"
+        region: 沖縄県
+        area_code: "47000"
+        metric: 65over
+
   nbs-pmi:
     name: 中国 国家統計局 製造業 PMI（NBS 官製）
     publisher: National Bureau of Statistics of China (NBS) / China Federation of Logistics & Purchasing (CFLP)
