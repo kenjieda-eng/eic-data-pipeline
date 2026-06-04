@@ -2818,3 +2818,4 @@ date,indicator_id,region,value,source_url
 2026-05-28,jma-precip-shikoku,shikoku,0.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
 2026-06-01,jma-precip-shikoku,shikoku,2.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
 2026-06-02,jma-precip-shikoku,shikoku,69.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
+2026-06-03,jma-precip-shikoku,shikoku,57.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
