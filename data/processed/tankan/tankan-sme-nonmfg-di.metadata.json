@@ -8,7 +8,7 @@
   "source_url": "https://www.stat-search.boj.or.jp/ssi/cgi-bin/famecgi2?cgi=$nme_a000_en&lstSelection=CO",
   "license": "boj-terms",
   "observation_cutoff": "2026-03-01",
-  "updated_at": "2026-06-04T10:45:45+09:00",
+  "updated_at": "2026-06-05T09:15:44+09:00",
   "license_url": "https://www.stat-search.boj.or.jp/info/api_notice.pdf",
   "license_notice": "本サービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。本サービスの内容は日本銀行によって保証されたものではありません。",
   "tz": "Asia/Tokyo",
