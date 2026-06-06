@@ -5262,3 +5262,4 @@ date,indicator_id,region,value,source_url
 2026-06-02,jma-sunshine-chugoku,chugoku,0.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
 2026-06-03,jma-sunshine-chugoku,chugoku,9.2,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
 2026-06-04,jma-sunshine-chugoku,chugoku,0.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
+2026-06-05,jma-sunshine-chugoku,chugoku,1.6,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
