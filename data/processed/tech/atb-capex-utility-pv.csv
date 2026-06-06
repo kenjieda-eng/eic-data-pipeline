@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-capex-utility-pv,US,1391.159235,https://atb.nrel.gov/
+2022-01-01,atb-capex-utility-pv,US,1333.262285,https://atb.nrel.gov/
+2023-01-01,atb-capex-utility-pv,US,1290.806268,https://atb.nrel.gov/
+2024-01-01,atb-capex-utility-pv,US,1482.68328,https://atb.nrel.gov/

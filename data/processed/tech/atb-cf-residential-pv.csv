@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-cf-residential-pv,US,15.178700000000001,https://atb.nrel.gov/
+2022-01-01,atb-cf-residential-pv,US,15.2022,https://atb.nrel.gov/
+2023-01-01,atb-cf-residential-pv,US,15.211,https://atb.nrel.gov/
+2024-01-01,atb-cf-residential-pv,US,15.227099999999998,https://atb.nrel.gov/

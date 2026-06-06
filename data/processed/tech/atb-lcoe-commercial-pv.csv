@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-lcoe-commercial-pv,US,76.971812,https://atb.nrel.gov/
+2022-01-01,atb-lcoe-commercial-pv,US,74.920746,https://atb.nrel.gov/
+2023-01-01,atb-lcoe-commercial-pv,US,82.620753,https://atb.nrel.gov/
+2024-01-01,atb-lcoe-commercial-pv,US,95.144779,https://atb.nrel.gov/

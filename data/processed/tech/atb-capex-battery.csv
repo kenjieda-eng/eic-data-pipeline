@@ -1,0 +1,4 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-capex-battery,US,1434.2856,https://atb.nrel.gov/
+2022-01-01,atb-capex-battery,US,1727.234445,https://atb.nrel.gov/
+2024-01-01,atb-capex-battery,US,2100.778231,https://atb.nrel.gov/

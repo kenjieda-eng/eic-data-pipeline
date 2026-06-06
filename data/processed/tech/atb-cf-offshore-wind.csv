@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-cf-offshore-wind,US,44.1509,https://atb.nrel.gov/
+2022-01-01,atb-cf-offshore-wind,US,44.772400000000005,https://atb.nrel.gov/
+2023-01-01,atb-cf-offshore-wind,US,45.5134,https://atb.nrel.gov/
+2024-01-01,atb-cf-offshore-wind,US,45.29,https://atb.nrel.gov/

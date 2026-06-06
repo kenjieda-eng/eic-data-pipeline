@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-lcoe-residential-pv,US,118.073224,https://atb.nrel.gov/
+2022-01-01,atb-lcoe-residential-pv,US,118.263675,https://atb.nrel.gov/
+2023-01-01,atb-lcoe-residential-pv,US,138.231531,https://atb.nrel.gov/
+2024-01-01,atb-lcoe-residential-pv,US,152.013143,https://atb.nrel.gov/

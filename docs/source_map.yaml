@@ -1853,19 +1853,24 @@ sources:
         unit: "index (2020=100)"
         backfill_start: "2018-01-01"
         aggregation: raw
-        notes: "e-Stat 統計表 0004015804（鉱工業生産・出荷・在庫指数 2020 年基準時系列データ 業種別原指数【月次】 付加価値額生産）から cat01=0001000 (鉱工業計、業種別の親項目) を抽出。原指数（非季節調整）。経産省 METI が速報・確報を翌々月に公表、e-Stat 時系列表は半年〜1 年単位で再公開される（直近スナップは open=2025-04-30、データ末端は 2025-02）"
+        notes: "e-Stat 統計表 0004052181（鉱工業生産・出荷・在庫指数 業種別原指数【月次】 付加価値額生産（2020＝100.0））から cat01=0001000 (鉱工業計、業種別の親項目) を抽出。原指数（非季節調整）。経産省 METI が速報・確報を翌々月に公表、e-Stat 時系列表は survey 年単位で再公開され表 ID がローテーションする（直近スナップ id=0004052181, open=2026-05-19, survey=2025、データ末端は 2026-03）。旧 ID 0004015804 は 2026-06 に STATUS=300 で消滅、getStatsList で後継を再特定（L-062、2026-06-06）"
         depends_on: null
-        stats_data_id: "0004015804"
+        # 2026-06-06: 旧 0004015804 が STATUS=300 で消滅 → getStatsList（searchWord 鉱工業 生産 業種別 月次）で
+        # 後継 0004052181（業種別原指数【月次】付加価値額生産 2020＝100.0）を再特定。cat01=0001000（鉱工業）は新表でも不変（L-062）。
+        stats_data_id: "0004052181"
         cd_cat01: "0001000"
         # 2020 基準時系列データは monthly 公開ではなく年単位アーカイブ。約 18 ヶ月マージン
         freshness_sla_days: 540
     notes: |
       - getStatsData JSON で 1 系列ずつ取得（複数系列の同時取得は不可、別 cdCat01 同一表は可）。
       - 認証必須。ESTAT_APP_ID 未設定時はログのみ吐いて他系列を止めない（continue-on-error 互換）。
-      - CPI 表 0003427113 は 1970-01 から（2020 年基準は遡及計算済）。IIP 0004015804 は 2018-01 から。
+      - CPI 表 0003427113 は 1970-01 から（2020 年基準は遡及計算済）。IIP 0004052181 は 2018-01 から。
+      - IIP 表 ID はローテーションする（survey 年単位で再公開→旧 ID 消滅 STATUS=300）。消滅時は getStatsList
+        （searchWord「鉱工業 生産 業種別 月次」）で「業種別原指数【月次】付加価値額生産（2020＝100.0）」の最新 open 版を再特定する。
       - 時間軸コードは name に "YYYYMM"（6 桁数字）の月次値、"YYYY年度" の年度集計、"付加生産ウエイト" などのウエイト値が混在する。月次抽出時は name が YYYYMM 6 桁数字の値のみを採用。
       - 数値文字列の特殊値: "-" / "..." / "" / "X" 等は NaN として扱う。
-      - L-062 検証 (2026-05-27): CPI 直近 2026M04=1.4%, 2026M03=1.5% / IIP 直近 2025M02=97.3, 2024M12=104.1（妥当帯）。
+      - L-062 検証 (2026-05-27): CPI 直近 2026M04=1.4%, 2026M03=1.5%。
+      - L-062 再検証 (2026-06-06): 旧 IIP 0004015804=STATUS=300 消滅 → 後継 0004052181 採用。IIP 直近 2026M03=112.6, 2026M02=97.9, 2026M01=95.0（妥当帯）。
 
   estat-population:
     name: 政府統計の総合窓口（e-Stat）API 人口推計 都道府県別
@@ -2935,3 +2940,124 @@ sources:
       - 単位は Mt-CO2e、頻度は annual、期間 2005-2025（航空のみ 2012-）。
       - 系列数は実 CSV から確定（L-013）。本セクションの indicators は Family A 8 + Family B 31 = 39 を想定。
       - CSV は常に全期間を返すため backfill フラグ不要（write_processed が key_cols で dedup）。
+  nrel-atb:
+    name: NREL Annual Technology Baseline (ATB) Electricity
+    publisher: National Renewable Energy Laboratory (NREL)
+    publisher_url: https://atb.nrel.gov/
+    source_url: https://atb.nrel.gov/
+    # OEDI Data Lake（S3 公開、no-sign-request）。HTTPS 直 URL で年版別 CSV を取得。
+    # aws cli 不要。L-062 実査（2026-06-06）: csv/{YYYY}/ATBe.csv（2024 のみ v3.0.0 サブディレクトリ）。
+    s3_base: "https://oedi-data-lake.s3.amazonaws.com/ATB/electricity/csv"
+    editions:
+      # edition_year: S3 相対パス（実在確認済み 2026-06-06）。2019/2020 は別タクソノミ・別シナリオ命名のため不採用。
+      "2021": "2021/ATBe.csv"
+      "2022": "2022/ATBe.csv"
+      "2023": "2023/ATBe.csv"
+      "2024": "2024/v3.0.0/ATBe.csv"
+    # 固定フィルタ（L-062 実 CSV 検証 2026-06-06）。実列名で抽出する。
+    filter_scenario: "Moderate"
+    filter_case: "Market"
+    # metric -> ATB 実パラメータ / 単位 / 値スケール / CRP フィルタ（LCOE のみ財務指標で CRP 依存）。
+    metrics:
+      lcoe:  { param: "LCOE",  unit: "$/MWh", scale: 1,   crpyears: "20" }
+      capex: { param: "CAPEX", unit: "$/kW",  scale: 1,   crpyears: null }
+      cf:    { param: "CF",    unit: "%",     scale: 100, crpyears: null }   # ATB の CF は分数（0-1）→ ×100 で %
+    # --- D-011 メタデータ共通項目 ---
+    license: CC-BY-4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_notice: "Source: NREL Annual Technology Baseline (ATB), Open Energy Data Initiative (OEDI), CC BY 4.0."
+    license_text: |
+      Creative Commons Attribution 4.0 International (CC BY 4.0)。
+      出典明示を条件に再配布・商用利用可。OEDI submission に明記（例 2023 版 DOI 10.25984/1987306）。
+    frequency: annual
+    tz: UTC
+    region: US
+    domain: tech
+    aggregation: raw
+    missing_policy: "null"
+    backfill_start: "2021-01-01"
+    # 年 1 回の年版更新 + OEDI 反映ラグ。最新 OEDI 版は 2024（2026-06-06 確認、2025 版は未配信）。
+    # ~2.7 年で初めて警告 = 複数年版スキップ（ソース異常）の検知用。通常は新年版で cutoff が更新され充足。
+    freshness_sla_days: 1000
+    indicator_ids:
+      - atb-lcoe-onshore-wind
+      - atb-capex-onshore-wind
+      - atb-cf-onshore-wind
+      - atb-lcoe-offshore-wind
+      - atb-capex-offshore-wind
+      - atb-cf-offshore-wind
+      - atb-lcoe-utility-pv
+      - atb-capex-utility-pv
+      - atb-cf-utility-pv
+      - atb-lcoe-commercial-pv
+      - atb-capex-commercial-pv
+      - atb-cf-commercial-pv
+      - atb-lcoe-residential-pv
+      - atb-capex-residential-pv
+      - atb-cf-residential-pv
+      - atb-lcoe-csp
+      - atb-capex-csp
+      - atb-cf-csp
+      - atb-lcoe-geothermal
+      - atb-capex-geothermal
+      - atb-cf-geothermal
+      - atb-lcoe-hydro
+      - atb-capex-hydro
+      - atb-cf-hydro
+      - atb-lcoe-biopower
+      - atb-capex-biopower
+      - atb-cf-biopower
+      - atb-lcoe-nuclear
+      - atb-capex-nuclear
+      - atb-cf-nuclear
+      - atb-capex-battery
+    # D-011 準拠 indicator メタデータ（31 系列）。抽出ヒント atb_technology / atb_techdetail を内包。
+    indicators:
+      atb-lcoe-onshore-wind: { name: "陸上風力 LCOE（米 NREL ATB）", domain: tech, unit: "$/MWh", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "LandbasedWind", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=LandbasedWind / techdetail=ATB既定区分（Class4） / scenario=Moderate / case=Market / CRP=20年。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-capex-onshore-wind: { name: "陸上風力 CAPEX（米 NREL ATB）", domain: tech, unit: "$/kW", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "LandbasedWind", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=LandbasedWind / techdetail=ATB既定区分（Class4） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-cf-onshore-wind: { name: "陸上風力 設備利用率（米 NREL ATB）", domain: tech, unit: "%", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "LandbasedWind", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=LandbasedWind / techdetail=ATB既定区分（Class4） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-lcoe-offshore-wind: { name: "洋上風力 LCOE（米 NREL ATB）", domain: tech, unit: "$/MWh", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "OffShoreWind", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=OffShoreWind / techdetail=ATB既定区分（Class3） / scenario=Moderate / case=Market / CRP=20年。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-capex-offshore-wind: { name: "洋上風力 CAPEX（米 NREL ATB）", domain: tech, unit: "$/kW", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "OffShoreWind", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=OffShoreWind / techdetail=ATB既定区分（Class3） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-cf-offshore-wind: { name: "洋上風力 設備利用率（米 NREL ATB）", domain: tech, unit: "%", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "OffShoreWind", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=OffShoreWind / techdetail=ATB既定区分（Class3） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-lcoe-utility-pv: { name: "太陽光 ユーティリティ規模 LCOE（米 NREL ATB）", domain: tech, unit: "$/MWh", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "UtilityPV", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=UtilityPV / techdetail=ATB既定区分（Class5） / scenario=Moderate / case=Market / CRP=20年。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-capex-utility-pv: { name: "太陽光 ユーティリティ規模 CAPEX（米 NREL ATB）", domain: tech, unit: "$/kW", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "UtilityPV", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=UtilityPV / techdetail=ATB既定区分（Class5） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-cf-utility-pv: { name: "太陽光 ユーティリティ規模 設備利用率（米 NREL ATB）", domain: tech, unit: "%", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "UtilityPV", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=UtilityPV / techdetail=ATB既定区分（Class5） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-lcoe-commercial-pv: { name: "太陽光 商業用 LCOE（米 NREL ATB）", domain: tech, unit: "$/MWh", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "CommPV", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=CommPV / techdetail=ATB既定区分（Class5） / scenario=Moderate / case=Market / CRP=20年。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-capex-commercial-pv: { name: "太陽光 商業用 CAPEX（米 NREL ATB）", domain: tech, unit: "$/kW", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "CommPV", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=CommPV / techdetail=ATB既定区分（Class5） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-cf-commercial-pv: { name: "太陽光 商業用 設備利用率（米 NREL ATB）", domain: tech, unit: "%", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "CommPV", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=CommPV / techdetail=ATB既定区分（Class5） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-lcoe-residential-pv: { name: "太陽光 住宅用 LCOE（米 NREL ATB）", domain: tech, unit: "$/MWh", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "ResPV", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=ResPV / techdetail=ATB既定区分（Class5） / scenario=Moderate / case=Market / CRP=20年。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-capex-residential-pv: { name: "太陽光 住宅用 CAPEX（米 NREL ATB）", domain: tech, unit: "$/kW", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "ResPV", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=ResPV / techdetail=ATB既定区分（Class5） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-cf-residential-pv: { name: "太陽光 住宅用 設備利用率（米 NREL ATB）", domain: tech, unit: "%", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "ResPV", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=ResPV / techdetail=ATB既定区分（Class5） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-lcoe-csp: { name: "集光型太陽熱発電（CSP） LCOE（米 NREL ATB）", domain: tech, unit: "$/MWh", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "CSP", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=CSP / techdetail=ATB既定区分（Class2） / scenario=Moderate / case=Market / CRP=20年。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-capex-csp: { name: "集光型太陽熱発電（CSP） CAPEX（米 NREL ATB）", domain: tech, unit: "$/kW", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "CSP", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=CSP / techdetail=ATB既定区分（Class2） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-cf-csp: { name: "集光型太陽熱発電（CSP） 設備利用率（米 NREL ATB）", domain: tech, unit: "%", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "CSP", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=CSP / techdetail=ATB既定区分（Class2） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-lcoe-geothermal: { name: "地熱 LCOE（米 NREL ATB）", domain: tech, unit: "$/MWh", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "Geothermal", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=Geothermal / techdetail=ATB既定区分（HydroFlash） / scenario=Moderate / case=Market / CRP=20年。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-capex-geothermal: { name: "地熱 CAPEX（米 NREL ATB）", domain: tech, unit: "$/kW", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "Geothermal", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=Geothermal / techdetail=ATB既定区分（HydroFlash） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-cf-geothermal: { name: "地熱 設備利用率（米 NREL ATB）", domain: tech, unit: "%", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "Geothermal", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=Geothermal / techdetail=ATB既定区分（HydroFlash） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-lcoe-hydro: { name: "水力 LCOE（米 NREL ATB）", domain: tech, unit: "$/MWh", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "Hydropower", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=Hydropower / techdetail=ATB既定区分（NPD1） / scenario=Moderate / case=Market / CRP=20年。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-capex-hydro: { name: "水力 CAPEX（米 NREL ATB）", domain: tech, unit: "$/kW", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "Hydropower", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=Hydropower / techdetail=ATB既定区分（NPD1） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-cf-hydro: { name: "水力 設備利用率（米 NREL ATB）", domain: tech, unit: "%", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "Hydropower", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=Hydropower / techdetail=ATB既定区分（NPD1） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-lcoe-biopower: { name: "バイオマス発電 LCOE（米 NREL ATB）", domain: tech, unit: "$/MWh", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "Biopower", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=Biopower / techdetail=ATB既定区分（Dedicated） / scenario=Moderate / case=Market / CRP=20年。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-capex-biopower: { name: "バイオマス発電 CAPEX（米 NREL ATB）", domain: tech, unit: "$/kW", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "Biopower", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=Biopower / techdetail=ATB既定区分（Dedicated） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-cf-biopower: { name: "バイオマス発電 設備利用率（米 NREL ATB）", domain: tech, unit: "%", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "Biopower", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=Biopower / techdetail=ATB既定区分（Dedicated） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-lcoe-nuclear: { name: "原子力 LCOE（米 NREL ATB）", domain: tech, unit: "$/MWh", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "Nuclear", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=Nuclear / techdetail=ATB既定区分（Nuclear（新設大型、2024年版は将来年のみのため 2021-2023）） / scenario=Moderate / case=Market / CRP=20年。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-capex-nuclear: { name: "原子力 CAPEX（米 NREL ATB）", domain: tech, unit: "$/kW", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "Nuclear", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=Nuclear / techdetail=ATB既定区分（Nuclear（新設大型、2024年版は将来年のみのため 2021-2023）） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-cf-nuclear: { name: "原子力 設備利用率（米 NREL ATB）", domain: tech, unit: "%", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "Nuclear", atb_techdetail: "default", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=Nuclear / techdetail=ATB既定区分（Nuclear（新設大型、2024年版は将来年のみのため 2021-2023）） / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+      atb-capex-battery: { name: "蓄電池（4時間 ユーティリティ規模） CAPEX（米 NREL ATB）", domain: tech, unit: "$/kW", backfill_start: "2021-01-01", aggregation: raw, atb_technology: "Utility-Scale Battery Storage", atb_techdetail: "4Hr Battery Storage", notes: "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=Utility-Scale Battery Storage / techdetail=4Hr Battery Storage / scenario=Moderate / case=Market。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。", depends_on: null }
+    notes: |
+      - 技術（tech）ドメイン seed。NREL ATB 電力版、OEDI Data Lake（CC BY 4.0、L-063 確定）。
+      - ⚠️ 編集方針（リク監修）: EIC Data は未来予測値を公開しない。ATB は 2050 までの将来射影を含むが、
+        各年版（edition）の base year（当年）コスト推計値のみを収載し、将来年（base year 超）の行は取り込まない。
+        → 「NREL が各年版で推計した現在コスト」の近年系列。横軸（date）は年版公表年（2021-2024）。
+      - L-062 実査（2026-06-06、実 CSV 6 版を S3 から取得）で確定した採用範囲:
+          採用 = 2021/2022/2023/2024 版（base year はそれぞれ 2019/2020/2021/2022）。
+          除外 = 2019 版（base year LCOE が Moderate でなく Constant/Low/Mid シナリオのみ）/
+                 2020 版（techdetail が LTRG・地名タクソノミで Class 系と非互換、default フラグ無し）。
+      - techdetail 選定: ATB の default フラグ（=1、2021/2022 は "1.0"・2023/2024 は "1" で正規化）で
+        各技術の代表区分を採用（全版で一貫: 陸上風力 Class4 / 洋上風力 Class3 / PV Class5 / CSP Class2 /
+        地熱 HydroFlash / 水力 NPD1 / バイオ Dedicated / 原子力 Nuclear）。蓄電池のみ明示 techdetail="4Hr Battery Storage"。
+      - 指標 3 種 × 技術: LCOE($/MWh) / CAPEX($/kW) / CF(設備利用率 %)。CF は ATB 分数値を ×100。
+      - 化石（NaturalGas_FE / Coal_FE）は FE 表再編で LCOE・CF を持たず CAPEX も年版で techdetail 命名が
+        不安定（2023 は "*" のみ）のため今回は不採用。蓄電池は storage のため LCOE 非定義、CAPEX のみ採用（#74 連携）。
+      - 原子力は 2024 版で新設炉が 2030 年初出（base year 2022 に値が無い）ため 2021-2023 の 3 点。
+      - 取得: HTTPS 直 URL（aws cli 不要）。raw は data/raw/nrel-atb/atbe_{edition}.csv（不変版のためサイズ一致で再利用）。

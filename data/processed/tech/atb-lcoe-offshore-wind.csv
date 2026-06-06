@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-lcoe-offshore-wind,US,81.793065,https://atb.nrel.gov/
+2022-01-01,atb-lcoe-offshore-wind,US,75.864414,https://atb.nrel.gov/
+2023-01-01,atb-lcoe-offshore-wind,US,79.151174,https://atb.nrel.gov/
+2024-01-01,atb-lcoe-offshore-wind,US,112.200645,https://atb.nrel.gov/

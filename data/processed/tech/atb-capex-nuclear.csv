@@ -1,0 +1,4 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-capex-nuclear,US,7388.074363,https://atb.nrel.gov/
+2022-01-01,atb-capex-nuclear,US,7441.522677,https://atb.nrel.gov/
+2023-01-01,atb-capex-nuclear,US,9440.13774,https://atb.nrel.gov/

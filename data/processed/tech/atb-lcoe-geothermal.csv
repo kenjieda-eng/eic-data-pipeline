@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-lcoe-geothermal,US,59.913317,https://atb.nrel.gov/
+2022-01-01,atb-lcoe-geothermal,US,57.44013,https://atb.nrel.gov/
+2023-01-01,atb-lcoe-geothermal,US,66.11533,https://atb.nrel.gov/
+2024-01-01,atb-lcoe-geothermal,US,70.184552,https://atb.nrel.gov/

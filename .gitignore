@@ -206,5 +206,10 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# push �p�̒��p bundle
+# push 用の中間 bundle
 *.bundle
+
+# NREL ATB 年版 raw CSV（各 27-98MB、計 ~265MB）。各版は不変かつ安定した公開 S3 URL から
+# 再取得可能（fetch_nrel_atb.py がサイズ一致で再利用/再 DL）。リポジトリ肥大化回避のため raw は非追跡。
+# 成果物は data/processed/tech/ と data/catalog/。
+data/raw/nrel-atb/

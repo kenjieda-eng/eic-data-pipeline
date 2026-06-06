@@ -189,6 +189,17 @@ jobs:
           python scripts/fetch_eu_ets.py
         continue-on-error: true
 
+      - name: Fetch NREL ATB tech-cost (annual, tech domain, 31 series)
+        # NREL Annual Technology Baseline（ATB）電力版を OEDI Data Lake（S3 公開、CC BY 4.0）から
+        # HTTPS 直 URL で取得し、技術（tech）ドメインを seed:
+        #   10 技術 × {LCOE($/MWh), CAPEX($/kW), CF(%)} + 蓄電池 4hr CAPEX = 31 系列。
+        # ⚠️ 編集方針（リク監修）: 未来予測値は非収載。各年版の base year（当年）コスト推計のみ採用
+        #   （2021-2024 版、横軸=年版公表年）。techdetail は ATB default フラグで代表区分を選定。
+        # 年 1 回の年版更新のため通常は no-op（各版 CSV は不変、サイズ一致で再利用）。aws cli 不要。
+        run: |
+          python scripts/fetch_nrel_atb.py
+        continue-on-error: true
+
       - name: Generate indicators catalog (D-011)
         # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を生成。
         # Required 10 欠落は exit 1（CI fail）、Recommended 欠落/鮮度超過は warning 止まり。
