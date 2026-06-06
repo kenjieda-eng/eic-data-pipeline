@@ -1,0 +1,4 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-lcoe-nuclear,US,96.238071,https://atb.nrel.gov/
+2022-01-01,atb-lcoe-nuclear,US,97.122135,https://atb.nrel.gov/
+2023-01-01,atb-lcoe-nuclear,US,126.586223,https://atb.nrel.gov/

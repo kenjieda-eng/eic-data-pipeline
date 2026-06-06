@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-capex-csp,US,6781.007774,https://atb.nrel.gov/
+2022-01-01,atb-capex-csp,US,6504.848705,https://atb.nrel.gov/
+2023-01-01,atb-capex-csp,US,7253.783159,https://atb.nrel.gov/
+2024-01-01,atb-capex-csp,US,7912.019603,https://atb.nrel.gov/

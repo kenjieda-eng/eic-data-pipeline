@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-capex-residential-pv,US,2773.343622,https://atb.nrel.gov/
+2022-01-01,atb-capex-residential-pv,US,2743.333,https://atb.nrel.gov/
+2023-01-01,atb-capex-residential-pv,US,2858.729435,https://atb.nrel.gov/
+2024-01-01,atb-capex-residential-pv,US,3182.995731,https://atb.nrel.gov/

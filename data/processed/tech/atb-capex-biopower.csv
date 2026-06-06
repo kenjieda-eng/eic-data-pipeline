@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-capex-biopower,US,4345.950247,https://atb.nrel.gov/
+2022-01-01,atb-capex-biopower,US,4416.158655,https://atb.nrel.gov/
+2023-01-01,atb-capex-biopower,US,5390.578347,https://atb.nrel.gov/
+2024-01-01,atb-capex-biopower,US,5528.187827,https://atb.nrel.gov/

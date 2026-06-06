@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-lcoe-biopower,US,132.332785,https://atb.nrel.gov/
+2022-01-01,atb-lcoe-biopower,US,157.502377,https://atb.nrel.gov/
+2023-01-01,atb-lcoe-biopower,US,183.425942,https://atb.nrel.gov/
+2024-01-01,atb-lcoe-biopower,US,195.529792,https://atb.nrel.gov/

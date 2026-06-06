@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-cf-biopower,US,62.5,https://atb.nrel.gov/
+2022-01-01,atb-cf-biopower,US,63.5,https://atb.nrel.gov/
+2023-01-01,atb-cf-biopower,US,63.5,https://atb.nrel.gov/
+2024-01-01,atb-cf-biopower,US,60.0,https://atb.nrel.gov/

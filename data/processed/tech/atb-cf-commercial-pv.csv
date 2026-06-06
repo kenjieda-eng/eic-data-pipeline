@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-cf-commercial-pv,US,15.3588,https://atb.nrel.gov/
+2022-01-01,atb-cf-commercial-pv,US,15.5245,https://atb.nrel.gov/
+2023-01-01,atb-cf-commercial-pv,US,15.515799999999999,https://atb.nrel.gov/
+2024-01-01,atb-cf-commercial-pv,US,15.5944,https://atb.nrel.gov/

@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-capex-onshore-wind,US,1436.0,https://atb.nrel.gov/
+2022-01-01,atb-capex-onshore-wind,US,1462.0,https://atb.nrel.gov/
+2023-01-01,atb-capex-onshore-wind,US,1363.0,https://atb.nrel.gov/
+2024-01-01,atb-capex-onshore-wind,US,1665.786583,https://atb.nrel.gov/

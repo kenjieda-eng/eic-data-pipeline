@@ -1,0 +1,5 @@
+date,indicator_id,region,value,source_url
+2021-01-01,atb-capex-geothermal,US,6662.416822,https://atb.nrel.gov/
+2022-01-01,atb-capex-geothermal,US,6753.318388,https://atb.nrel.gov/
+2023-01-01,atb-capex-geothermal,US,6750.07284,https://atb.nrel.gov/
+2024-01-01,atb-capex-geothermal,US,7213.472139,https://atb.nrel.gov/
