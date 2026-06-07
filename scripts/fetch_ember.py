@@ -101,6 +101,29 @@ def parse_ember_csv(csv_bytes: bytes) -> pd.DataFrame:
     return df
 
 
+def parse_ember_dates(date_series: pd.Series) -> pd.Series:
+    """
+    Ember の Date 列を datetime に変換する。
+
+    Ember は 2026-06 頃に Date フォーマットを ISO ``YYYY-MM-DD`` から
+    ``DD/MM/YYYY`` (例 ``01/04/2018`` = 2018-04-01) へ変更した。月次データは
+    常に月初なので日は ``01``、スラッシュ形式では先頭が「日」。
+
+    pandas のデフォルト (``dayfirst=False``) はスラッシュ形式を ``MM/DD/YYYY`` と
+    誤読し、月を「日」に取り違える (``01/04/2018`` → ``2018-01-04``)。これが
+    2026-06-05 nightly での日付破損 (各月値が ``YYYY-01-<月>`` に化けて重複) の原因。
+
+    逆に ``dayfirst=True`` を ISO 形式にかけると ``YYYY-DD-MM`` と誤読されるため、
+    一律 dayfirst は使えない。区切り文字でフォーマットを判定して変換する。
+    """
+    sample = date_series.dropna().astype(str)
+    if not sample.empty and sample.iloc[0].count("/"):
+        # スラッシュ形式 = DD/MM/YYYY (Ember 2026-06 以降)
+        return pd.to_datetime(date_series, format="%d/%m/%Y", errors="coerce")
+    # ISO 形式 = YYYY-MM-DD (従来) もしくは未知 → pandas の ISO 解釈に任せる
+    return pd.to_datetime(date_series, errors="coerce")
+
+
 def extract_series(
     df: pd.DataFrame,
     area_name: str,
@@ -136,8 +159,18 @@ def extract_series(
         return pd.DataFrame(columns=["date", "indicator_id", "region", "value", "source_url"])
 
     sub = sub.dropna(subset=["Value"])
-    sub["date_dt"] = pd.to_datetime(sub["Date"], errors="coerce")
+    sub["date_dt"] = parse_ember_dates(sub["Date"])
     sub = sub.dropna(subset=["date_dt"])
+    # 月次データは必ず月初。日が 01 でない行が出たら日付フォーマットの想定外変化
+    # (= 破損の兆候) なので警告して気づけるようにする。
+    non_month_start = int((sub["date_dt"].dt.day != 1).sum())
+    if non_month_start:
+        logger.warning(
+            "%s: %d rows have day != 01 after date parsing — Date フォーマット変化の疑い "
+            "(sample raw=%r)",
+            indicator_id, non_month_start,
+            sub.loc[sub["date_dt"].dt.day != 1, "Date"].head(3).tolist(),
+        )
     sub["date"] = sub["date_dt"].dt.strftime("%Y-%m-%d")
     out = pd.DataFrame({
         "date": sub["date"].values,
