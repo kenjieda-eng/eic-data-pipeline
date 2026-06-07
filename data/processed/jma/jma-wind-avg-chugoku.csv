@@ -5269,3 +5269,4 @@ date,indicator_id,region,value,source_url
 2026-06-03,jma-wind-avg-chugoku,chugoku,5.1,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
 2026-06-04,jma-wind-avg-chugoku,chugoku,2.3,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
 2026-06-05,jma-wind-avg-chugoku,chugoku,2.1,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
+2026-06-06,jma-wind-avg-chugoku,chugoku,1.9,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
