@@ -27,6 +27,20 @@ ESG ドメインを seed するスクリプト（北極星 12 ドメイン唯一
             - long: date=YYYY-01-01, region=ISO2 大文字, value(Mt), source_url。
             - aggregation=annual_sum, unit="Mt-CO2e", domain=esg, frequency=annual。
 
+    Family C — EU 全体 供給側（無償割当・オークション売却、年次）
+        eu-ets.csv の供給側 metric を EU 全体・年次で 2 系列追加（2026-06-08）。
+        フィルタ:
+            - citl_information == ALLOWANCE_METRICS のラベル（1.1 無償割当 / 1.3 オークション）
+            - year が ^\\d{4}$、country_code が ISO2 非 XI
+            - main_activity_code in (10 航空, 20-99 全固定設備 rollup)
+              ※供給側は leaf 部門別に按分されず、特にオークションは 10/20-99 の 2 コードのみ。
+                leaf 合計（-99 除外）だと航空分のみに化けるため rollup 必須（L-062 実データ確認）。
+        集計:
+            - 年で value を合計 → ÷ 1e6 で「百万 EUA」化（1 EUA = 1 tCO2e）。
+            - ID = eu-ets-allowances-allocated / eu-ets-allowances-auctioned。
+            - long: date=YYYY-01-01, region="EU-ETS", value(百万 EUA), source_url。
+            - aggregation=annual_sum, unit="百万 EUA", domain=esg, frequency=annual。
+
 二重計上の検証（必須）:
     実行ログに「Family B 全国合計（最新共通年）」と「Family A 固定設備部門合計（同年, 航空除く）」
     を print し、概ね一致を確認（航空は別枠なので固定設備分で照合）。大乖離なら rollup 混入を疑う。
@@ -78,6 +92,19 @@ SOURCE_KEY = "eu-ets"
 VERIFIED_EMISSION_LABEL = "2.1 EU-ETS Verified Emission"
 YEAR_RE = re.compile(r"^\d{4}$")
 ISO2_RE = re.compile(r"^[A-Z]{2}$")
+
+# Family C: EU 全体 供給側（無償割当・オークション売却）。
+#   citl_information の正確な文字列は実 CSV で確認（L-062、推測しない）。オークションは
+#   末尾 "(EUAs and EUAAs)" 付きが正。indicator_id -> citl_information ラベル。
+ALLOWANCE_METRICS: dict[str, str] = {
+    "eu-ets-allowances-allocated": "1.1 Freely allocated allowances",
+    "eu-ets-allowances-auctioned": "1.3 Allowances auctioned or sold (EUAs and EUAAs)",
+}
+# 供給側 metric は leaf 部門別に按分されない（特にオークションは 10 航空 と 20-99 全固定
+# 設備 rollup の 2 コードのみ）。EU 全体合計 = 有効国の 10(航空) + 20-99(全固定設備 rollup)。
+# emissions/無償割当では leaf 合計と完全年で一致することを実データで検証済み（手法整合）。
+# leaf 合計（-99 除外）だとオークションが航空分のみに化ける（実測 1/100 以下）ため rollup 必須。
+ALLOWANCE_ROLLUP_CODES = ("10", "20-99")
 
 
 def load_source_map() -> dict:
@@ -273,6 +300,73 @@ def process_family_b(
     return written, total_rows, unnamed_logs
 
 
+# --- Family C: EU 全体 供給側（無償割当・オークション） ----------------------
+
+
+def process_family_c(
+    df_full: pd.DataFrame,
+    source_cfg: dict,
+    source_url: str,
+    processed_dir: Path,
+    wanted: set[str] | None,
+    exclude_countries: set[str],
+) -> tuple[list[str], int, list[tuple[str, str, float]]]:
+    """
+    供給側 metric（無償割当・オークション売却）を EU 全体・年次で書き出す。
+    集計: 有効国（ISO2 非 XI）の rollup コード（10 航空 + 20-99 全固定設備）を年で合計 →
+          ÷1e6 で「百万 EUA」化（1 EUA = 1 tCO2e）。region="EU-ETS"。
+    戻り値: (written_ids, total_rows, latest_values[(id, year, value)])。
+    """
+    written: list[str] = []
+    total_rows = 0
+    latest: list[tuple[str, str, float]] = []
+
+    for indicator_id, label in ALLOWANCE_METRICS.items():
+        if wanted is not None and indicator_id not in wanted:
+            continue
+
+        mask = (
+            (df_full["citl_information"] == label)
+            & df_full["year"].str.match(YEAR_RE, na=False)
+            & df_full["country_code"].fillna("").str.match(ISO2_RE)
+            & ~df_full["country_code"].isin(exclude_countries)
+            & df_full["main_activity_code"].isin(ALLOWANCE_ROLLUP_CODES)
+        )
+        sub = df_full.loc[mask].dropna(subset=["value"])
+        if sub.empty:
+            logger.warning("Family C: %s produced 0 rows (label=%r)", indicator_id, label)
+            continue
+
+        grp = sub.groupby("year", as_index=False)["value"].sum()
+        grp["value_m"] = grp["value"] / 1e6
+
+        long_df = pd.DataFrame({
+            "date": grp["year"].astype(str) + "-01-01",
+            "indicator_id": indicator_id,
+            "region": "EU-ETS",
+            "value": grp["value_m"].values,
+            "source_url": source_url,
+        })
+        long_df = long_df.drop_duplicates(subset=["date", "indicator_id", "region"], keep="last")
+        long_df = long_df.sort_values("date").reset_index(drop=True)
+
+        write_processed(long_df, processed_dir, basename=indicator_id)
+        write_metadata_for_indicator(processed_dir, source_cfg, indicator_id, long_df)
+        written.append(indicator_id)
+        total_rows += len(long_df)
+
+        last_row = long_df.iloc[-1]
+        last_year = str(last_row["date"])[:4]
+        latest.append((indicator_id, last_year, float(last_row["value"])))
+        logger.info(
+            "Family C: %s: %d rows (%s..%s) latest %s=%.3f 百万EUA [label=%r]",
+            indicator_id, len(long_df), long_df["date"].min(), long_df["date"].max(),
+            last_year, float(last_row["value"]), label,
+        )
+
+    return written, total_rows, latest
+
+
 # --- 二重計上の検証 ----------------------------------------------------------
 
 
@@ -379,11 +473,14 @@ def main(argv: list[str] | None = None) -> int:
         len(ve), ve["country_code"].nunique(), ve["main_activity_code"].nunique(),
     )
 
-    # --- Family A / B 処理 ---
+    # --- Family A / B / C 処理 ---
     a_ids, a_rows, unmapped = process_family_a(df_sector, source_cfg, source_url, processed_dir, wanted)
     b_ids, b_rows, unnamed = process_family_b(ve, source_cfg, source_url, processed_dir, wanted)
+    c_ids, c_rows, c_latest = process_family_c(
+        df_full, source_cfg, source_url, processed_dir, wanted, exclude_countries
+    )
 
-    written = a_ids + b_ids
+    written = a_ids + b_ids + c_ids
     if not written:
         logger.error("no series produced any rows")
         append_log(log_dir, "fetch_eu_ets", "FAIL", "no series produced rows")
@@ -395,6 +492,7 @@ def main(argv: list[str] | None = None) -> int:
     summary = (
         f"Family A={len(a_ids)} series ({a_rows} rows), "
         f"Family B={len(b_ids)} series ({b_rows} rows), "
+        f"Family C={len(c_ids)} series ({c_rows} rows), "
         f"total={len(written)} series, "
         f"unmapped_sectors={len(unmapped)}, unnamed_countries={len(unnamed)}"
     )
