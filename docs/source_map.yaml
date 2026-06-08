@@ -2882,7 +2882,7 @@ sources:
       SE: スウェーデン
       SI: スロベニア
       SK: スロバキア
-    # D-011 準拠の indicator 固有メタデータ（Family A 8 + Family B 31 = 39 系列）。
+    # D-011 準拠の indicator 固有メタデータ（Family A 8 + Family B 31 + Family C 2 = 41 系列）。
     # 系列数・件数はハードコードではなく実データから確定する（L-013）。本 dict は name と
     # 個別 override の出典であり、実際に書き出す系列は fetch_eu_ets.py が実 CSV から決定する。
     indicators:
@@ -2927,18 +2927,28 @@ sources:
       eu-ets-emissions-country-se: { name: "スウェーデン EU ETS 検証排出量（全部門合計）",   domain: esg, unit: "Mt-CO2e", backfill_start: "2005-01-01", aggregation: annual_sum, notes: "eu-ets.csv 2.1 EU-ETS Verified Emission を国×年で合計（rollup -99 除外、leaf 部門合計）。country=SE", depends_on: null }
       eu-ets-emissions-country-si: { name: "スロベニア EU ETS 検証排出量（全部門合計）",     domain: esg, unit: "Mt-CO2e", backfill_start: "2005-01-01", aggregation: annual_sum, notes: "eu-ets.csv 2.1 EU-ETS Verified Emission を国×年で合計（rollup -99 除外、leaf 部門合計）。country=SI", depends_on: null }
       eu-ets-emissions-country-sk: { name: "スロバキア EU ETS 検証排出量（全部門合計）",     domain: esg, unit: "Mt-CO2e", backfill_start: "2005-01-01", aggregation: annual_sum, notes: "eu-ets.csv 2.1 EU-ETS Verified Emission を国×年で合計（rollup -99 除外、leaf 部門合計）。country=SK", depends_on: null }
+      # --- Family C: EU 全体 供給側（無償割当・オークション売却、aggregation=annual_sum, region=EU-ETS, unit=百万 EUA）---
+      #   供給側は leaf 部門按分が無く、特にオークションは 10 航空 + 20-99 全固定設備 rollup の 2 コードのみ。
+      #   EU 全体合計 = 有効国（ISO2 非 XI）の 10+20-99 を年で合計 → ÷1e6 で百万 EUA 化（1 EUA=1 tCO2e）。
+      eu-ets-allowances-allocated: { name: "EU ETS 無償割当（EU 全体）",         domain: esg, unit: "百万 EUA", backfill_start: "2005-01-01", aggregation: annual_sum, notes: "eu-ets.csv '1.1 Freely allocated allowances' を EU 全体×年で合計（10 航空 + 20-99 全固定設備 rollup、÷1e6 で百万 EUA 化）。供給側=市場へ無償投入された割当量。1 EUA=1 tCO2e。auctioning 拡大に伴い 2013- 大幅減。", depends_on: null }
+      eu-ets-allowances-auctioned: { name: "EU ETS オークション売却量（EU 全体）", domain: esg, unit: "百万 EUA", backfill_start: "2005-01-01", aggregation: annual_sum, notes: "eu-ets.csv '1.3 Allowances auctioned or sold (EUAs and EUAAs)' を EU 全体×年で合計（10 航空 + 20-99 全固定設備 rollup、÷1e6 で百万 EUA 化）。供給側=オークション/売却で市場へ投入された量。leaf 按分が無く 20-99 rollup 必須（L-062）。Phase3(2013-)で急増。", depends_on: null }
     notes: |
       - ESG ドメイン seed（北極星 12 ドメイン唯一の未 seed を解消、2026-06-01）。出典 = EU ETS data from EUTL（EEA/DG-CLIMA）、datahub.io ミラー。
-      - 2 ファミリ構成:
+      - 3 ファミリ構成:
           Family A（部門別、aggregation=raw, region=EU-ETS）: eu-ets-sector-emissions.csv の全部門に 1 系列。
             slug は sector_slug_map（10=aviation/20=combustion/21=refining/24=iron-steel/29=cement/30=lime/36=paper/42=chemicals）。
           Family B（国別合計、aggregation=annual_sum, region=ISO2）: eu-ets.csv を
             citl_information=="2.1 EU-ETS Verified Emission" / year=^\d{4}$ / main_activity_code 非 -99 / country_code=ISO2(非 XI)
             でフィルタし、国×年で value を合計 → ÷1e6 で Mt 化。
-      - 二重計上回避: main_activity_code の "-99"（20-99=全固定設備, 21-99=産業計）は leaf 部門の rollup のため除外必須。
+          Family C（EU 全体 供給側、aggregation=annual_sum, region=EU-ETS, unit=百万 EUA, 2026-06-08 追加）: eu-ets.csv の
+            供給側 metric（1.1 無償割当 / 1.3 オークション売却）を EU 全体×年で合計。供給側は leaf 部門按分が無く、
+            特にオークションは 10 航空 + 20-99 全固定設備 rollup の 2 コードのみ（leaf 合計だと航空分のみに化けるため
+            rollup 必須、L-062 実データ確認）。有効国（ISO2 非 XI）の 10+20-99 を年で合計 → ÷1e6 で百万 EUA 化（1 EUA=1 tCO2e）。
+      - 二重計上回避: main_activity_code の "-99"（20-99=全固定設備, 21-99=産業計）は leaf 部門の rollup のため
+        Family B（排出量）では除外必須。一方 Family C（供給側）は leaf 按分が無いため 20-99 rollup を採用する（按分有無の違い）。
         fetch_eu_ets.py が「Family B 全国合計（航空除く）」と「Family A 固定設備部門合計（航空除く）」を最新共通年で print 照合する。
-      - 単位は Mt-CO2e、頻度は annual、期間 2005-2025（航空のみ 2012-）。
-      - 系列数は実 CSV から確定（L-013）。本セクションの indicators は Family A 8 + Family B 31 = 39 を想定。
+      - 単位: Family A/B = Mt-CO2e、Family C = 百万 EUA。頻度は annual、期間 2005-2025（航空のみ 2012-）。
+      - 系列数は実 CSV から確定（L-013）。本セクションの indicators は Family A 8 + Family B 31 + Family C 2 = 41 を想定。
       - CSV は常に全期間を返すため backfill フラグ不要（write_processed が key_cols で dedup）。
   nrel-atb:
     name: NREL Annual Technology Baseline (ATB) Electricity
