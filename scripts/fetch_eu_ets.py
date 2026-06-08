@@ -41,6 +41,21 @@ ESG ドメインを seed するスクリプト（北極星 12 ドメイン唯一
             - long: date=YYYY-01-01, region="EU-ETS", value(百万 EUA), source_url。
             - aggregation=annual_sum, unit="百万 EUA", domain=esg, frequency=annual。
 
+    Family D — 加盟国別 無償割当（年次）
+        Family B（国別検証排出量）と対になる参照系列。Family C（供給側）の citl フィルタを
+        Family B の国別 groupby で分解（2026-06-09 追加）。
+        フィルタ:
+            - citl_information == "1.1 Freely allocated allowances"
+            - year が ^\\d{4}$、country_code が ISO2 非 XI
+            - main_activity_code in (10 航空, 20-99 全固定設備 rollup)
+              ※供給側は leaf 部門別に按分されないため Family C と同じく rollup 必須（L-062）。
+        集計:
+            - 国 × 年で value を合計 → ÷ 1e6 で「百万 EUA」化（1 EUA = 1 tCO2e）。
+            - ID = eu-ets-allowances-allocated-country-{cc}（cc=ISO2 小文字）。
+            - long: date=YYYY-01-01, region=ISO2 大文字, value(百万 EUA), source_url。
+            - aggregation=annual_sum, unit="百万 EUA", domain=esg, frequency=annual。
+            - 全国合計 == Family C eu-ets-allowances-allocated（同手法・国分解のため完全一致）。
+
 二重計上の検証（必須）:
     実行ログに「Family B 全国合計（最新共通年）」と「Family A 固定設備部門合計（同年, 航空除く）」
     を print し、概ね一致を確認（航空は別枠なので固定設備分で照合）。大乖離なら rollup 混入を疑う。
@@ -367,6 +382,89 @@ def process_family_c(
     return written, total_rows, latest
 
 
+# --- Family D: 加盟国別 無償割当 --------------------------------------------
+
+
+def process_family_d(
+    df_full: pd.DataFrame,
+    source_cfg: dict,
+    source_url: str,
+    processed_dir: Path,
+    wanted: set[str] | None,
+    exclude_countries: set[str],
+) -> tuple[list[str], int, list[str]]:
+    """
+    無償割当（1.1 Freely allocated allowances）を国 × 年で書き出す（Family B と対の参照系列）。
+    Family C（供給側）の citl フィルタ + Family B（国別 groupby）の合成:
+        - citl_information == ALLOWANCE_METRICS["eu-ets-allowances-allocated"]
+        - year が 4 桁年 / country_code が ISO2（非 XI）/ main_activity_code が rollup（10 航空 + 20-99 全固定設備）
+        - 国 × 年で value を合計 → ÷1e6 で「百万 EUA」化（1 EUA = 1 tCO2e）。
+    供給側は leaf 部門按分が無いため rollup 必須（Family C と同手法。L-062）。
+    ID = eu-ets-allowances-allocated-country-{cc}（cc=ISO2 小文字）、region = cc。
+    戻り値: (written_ids, total_rows, unnamed_logs)。
+    """
+    country_names = source_cfg.get("country_names") or {}
+    label = ALLOWANCE_METRICS["eu-ets-allowances-allocated"]
+
+    mask = (
+        (df_full["citl_information"] == label)
+        & df_full["year"].str.match(YEAR_RE, na=False)
+        & df_full["country_code"].fillna("").str.match(ISO2_RE)
+        & ~df_full["country_code"].isin(exclude_countries)
+        & df_full["main_activity_code"].isin(ALLOWANCE_ROLLUP_CODES)
+    )
+    sub_all = df_full.loc[mask].dropna(subset=["value"])
+
+    grp = sub_all.groupby(["country_code", "year"], as_index=False)["value"].sum()
+    grp["value_m"] = grp["value"] / 1e6
+
+    written: list[str] = []
+    total_rows = 0
+    unnamed_logs: list[str] = []
+    data_ccs = set(grp["country_code"].unique())
+
+    for cc in sorted(data_ccs):
+        indicator_id = f"eu-ets-allowances-allocated-country-{cc.lower()}"
+        if wanted is not None and indicator_id not in wanted:
+            continue
+        if cc not in country_names:
+            msg = f"country_code {cc!r} has no Japanese name in source_map (name falls back to id)"
+            logger.warning("Family D: %s", msg)
+            unnamed_logs.append(msg)
+
+        sub = grp[grp["country_code"] == cc].copy()
+        if sub.empty:
+            logger.warning("Family D: %s produced 0 rows; skipped", indicator_id)
+            continue
+
+        long_df = pd.DataFrame({
+            "date": sub["year"].astype(str) + "-01-01",
+            "indicator_id": indicator_id,
+            "region": cc,
+            "value": sub["value_m"].values,
+            "source_url": source_url,
+        })
+        long_df = long_df.drop_duplicates(subset=["date", "indicator_id", "region"], keep="last")
+        long_df = long_df.sort_values("date").reset_index(drop=True)
+
+        write_processed(long_df, processed_dir, basename=indicator_id)
+        write_metadata_for_indicator(processed_dir, source_cfg, indicator_id, long_df)
+        written.append(indicator_id)
+        total_rows += len(long_df)
+        logger.info(
+            "Family D: %s: %d rows (%s..%s)",
+            indicator_id, len(long_df), long_df["date"].min(), long_df["date"].max(),
+        )
+
+    # 0 行国（無償割当データなし）を可視化（L-013: 国集合は実データから確定）。
+    for cc in sorted(set(country_names) - data_ccs):
+        logger.warning(
+            "Family D: country %s has no '1.1 Freely allocated allowances' rows; no series", cc
+        )
+
+    return written, total_rows, unnamed_logs
+
+
 # --- 二重計上の検証 ----------------------------------------------------------
 
 
@@ -473,14 +571,17 @@ def main(argv: list[str] | None = None) -> int:
         len(ve), ve["country_code"].nunique(), ve["main_activity_code"].nunique(),
     )
 
-    # --- Family A / B / C 処理 ---
+    # --- Family A / B / C / D 処理 ---
     a_ids, a_rows, unmapped = process_family_a(df_sector, source_cfg, source_url, processed_dir, wanted)
     b_ids, b_rows, unnamed = process_family_b(ve, source_cfg, source_url, processed_dir, wanted)
     c_ids, c_rows, c_latest = process_family_c(
         df_full, source_cfg, source_url, processed_dir, wanted, exclude_countries
     )
+    d_ids, d_rows, d_unnamed = process_family_d(
+        df_full, source_cfg, source_url, processed_dir, wanted, exclude_countries
+    )
 
-    written = a_ids + b_ids + c_ids
+    written = a_ids + b_ids + c_ids + d_ids
     if not written:
         logger.error("no series produced any rows")
         append_log(log_dir, "fetch_eu_ets", "FAIL", "no series produced rows")
@@ -493,8 +594,9 @@ def main(argv: list[str] | None = None) -> int:
         f"Family A={len(a_ids)} series ({a_rows} rows), "
         f"Family B={len(b_ids)} series ({b_rows} rows), "
         f"Family C={len(c_ids)} series ({c_rows} rows), "
+        f"Family D={len(d_ids)} series ({d_rows} rows), "
         f"total={len(written)} series, "
-        f"unmapped_sectors={len(unmapped)}, unnamed_countries={len(unnamed)}"
+        f"unmapped_sectors={len(unmapped)}, unnamed_countries={len(unnamed) + len(d_unnamed)}"
     )
     logger.info("done: %s", summary)
     append_log(log_dir, "fetch_eu_ets", "OK", summary)
