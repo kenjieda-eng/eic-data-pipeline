@@ -82,6 +82,7 @@ LICENSE_VALUES = {
     "mlit-terms", "occto-terms", "eprx-terms", "proprietary",
     "ecb-terms", "estat-terms", "nbs-terms",
     "eea-terms",  # 2026-06-01 EU ETS（EEA/EUTL 再利用ポリシー: 出典明記で商用可 + datahub 加工 PDDL）
+    "edinet-terms",  # 2026-06-10 EDINET（金融庁、公共データ利用規約 PDL1.0: 営利含む二次利用可・出典明記。L-063 GO）
 }
 MISSING_POLICY_VALUES = {
     "raw", "forward_fill", "forward_fill_within_month",

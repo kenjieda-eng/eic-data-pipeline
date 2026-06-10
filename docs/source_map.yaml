@@ -3107,3 +3107,105 @@ sources:
         不安定（2023 は "*" のみ）のため今回は不採用。蓄電池は storage のため LCOE 非定義、CAPEX のみ採用（#74 連携）。
       - 原子力は 2024 版で新設炉が 2030 年初出（base year 2022 に値が無い）ため 2021-2023 の 3 点。
       - 取得: HTTPS 直 URL（aws cli 不要）。raw は data/raw/nrel-atb/atbe_{edition}.csv（不変版のためサイズ一致で再利用）。
+
+  edinet:
+    name: 金融庁 EDINET 有価証券報告書（企業財務）
+    source_name: 金融庁 EDINET（有価証券報告書 XBRL/CSV, EDINET API v2）
+    publisher: 金融庁 EDINET
+    publisher_url: https://disclosure2.edinet-fsa.go.jp/
+    source_url: https://disclosure2.edinet-fsa.go.jp/
+    # EDINET API v2。2 本立て:
+    #   Document List API: {api_base}/documents.json?date=YYYY-MM-DD&type=2 で docID 特定
+    #   Document Acquisition API: {api_base}/documents/{docID}?type=5 で CSV(ZIP, TSV/UTF-16) 取得
+    # API キーは .env の EDINET_API_KEY（Subscription-Key パラメータ）。CSV/metadata には保存しない。
+    api_base: https://api.edinet-fsa.go.jp/api/v2
+    doc_type_code: "120"      # 有価証券報告書
+    submission_month: 6       # 3 月期決算 → 6 月提出（fetch_edinet.py が当月の各日を新しい順に走査）
+    # --- D-011 メタデータ共通項目 ---
+    license: edinet-terms
+    license_url: https://disclosure2.edinet-fsa.go.jp/
+    license_notice: "出典: 金融庁 EDINET、公共データ利用規約 第1.0版"
+    license_text: |
+      金融庁 EDINET 公開データ。公共データ利用規約（第1.0版, PDL1.0）準拠。
+      平成27年改訂で営利目的を含む二次利用が可能（出典明記が条件）。
+      L-063 (2026-06-09): 公表元 金融庁 EDINET、出典明記で商用再利用可、EDINET API v2 で
+      自動取得可（API キー必須）を確認済（GO）。
+    frequency: annual
+    domain: corp_ir
+    unit: "百万円"
+    tz: Asia/Tokyo
+    missing_policy: "null"
+    # 年次（有報）。観測日 = 会計期末（例 2025-03-31）だが、翌年度有報の公表は ~6 月（FYE+約15ヶ月）。
+    # この自然な空白期間（期末→次回公表 ≈ 451 日）を SLA 違反扱いしないよう 500 日に設定。
+    freshness_sla_days: 500
+    backfill_start: "2025-03-31"   # PoC は当期 1 点のみ（backfill は Phase 2）
+    # 提出者（PoC は東京電力HD 1 社）。edinetCode / secCode は実データで確認（L-062, probe 2026-06-10）。
+    #   secCode は EDINET 5 桁（証券コード 9501 + チェック 0 = 95010）。
+    filers:
+      tepco:
+        edinet_code: E04498
+        sec_code: "95010"
+        name_ja: 東京電力ホールディングス株式会社
+    # 主要 5 指標の (element_id, context_id) マップ。
+    # 実 CSV（docID=S100W4QX, 東京電力HD 第101期 2024/04/01-2025/03/31）で要素IDを確認済（L-062, 推測禁止）。
+    # 連結 = base context（_NonConsolidatedMember でない方）。XBRL 単位=円 → fetch script が ÷1e6 で「百万円」化。
+    # element_id/context_id は本リポジトリ拡張フィールド（D-011 スキーマ外、fetch_edinet.py のみが参照）。
+    indicators:
+      edinet-tepco-revenue:
+        name: 東京電力HD 営業収益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingRevenueELE
+        context_id: CurrentYearDuration
+        backfill_start: "2025-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業収益（jppfs_cor:OperatingRevenueELE @ CurrentYearDuration, 連結）。電気事業会計の連結損益計算書トップライン。NetSales/経営指標等と同値。XBRL 単位=円 → ÷1e6 で百万円。docTypeCode=120, filer=E04498"
+        depends_on: null
+      edinet-tepco-operating-income:
+        name: 東京電力HD 営業利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingIncome
+        context_id: CurrentYearDuration
+        backfill_start: "2025-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業利益又は営業損失（jppfs_cor:OperatingIncome @ CurrentYearDuration, 連結）。主要な経営指標表には無いため P/L 要素を採用。XBRL 単位=円 → ÷1e6 で百万円。filer=E04498"
+        depends_on: null
+      edinet-tepco-ordinary-income:
+        name: 東京電力HD 経常利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OrdinaryIncome
+        context_id: CurrentYearDuration
+        backfill_start: "2025-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 経常利益又は経常損失（jppfs_cor:OrdinaryIncome @ CurrentYearDuration, 連結）。JGAAP 経常利益。XBRL 単位=円 → ÷1e6 で百万円。filer=E04498"
+        depends_on: null
+      edinet-tepco-net-income:
+        name: 東京電力HD 当期純利益（親会社株主帰属・連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:ProfitLossAttributableToOwnersOfParent
+        context_id: CurrentYearDuration
+        backfill_start: "2025-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 親会社株主に帰属する当期純利益（jppfs_cor:ProfitLossAttributableToOwnersOfParent @ CurrentYearDuration, 連結）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04498"
+        depends_on: null
+      edinet-tepco-total-assets:
+        name: 東京電力HD 総資産（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:Assets
+        context_id: CurrentYearInstant
+        backfill_start: "2025-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 B/S 資産合計（jppfs_cor:Assets @ CurrentYearInstant, 連結, 期末時点）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04498"
+        depends_on: null
+    notes: |
+      - PoC（docs/edinet-scoping-2026-06-09.md Phase 1）: 東京電力HD 1 社 × 主要 5 指標（連結・当期 1 点）。
+      - docID は年次ローテーション。fetch_edinet.py が documents.json を submission_month の各日（新しい順）
+        で走査して動的特定（ハードコードしない, L-062）。当年に有報が無ければ前年へフォールバック。
+      - 値は XBRL CSV の「値」列（単位=円）を ÷1e6 して百万円で格納。date=会計期末（periodEnd）、region=JP。
+      - 経常利益が無い IFRS 適用会社へ拡張する場合は tax-before（jppfs_cor:IncomeBeforeIncomeTaxes 等）への
+        フォールバックを Phase 2 で indicators 側に持たせる（東京電力HD は JGAAP で経常利益あり）。
+      - Phase 2: 9 一般電気事業者 × 主要指標へ展開（corp_ir ドメイン本 seed）。backfill は有報電子化が揃う範囲。
