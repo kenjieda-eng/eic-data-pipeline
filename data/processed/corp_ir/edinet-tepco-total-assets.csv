@@ -1,0 +1,2 @@
+date,indicator_id,region,value,source_url
+2025-03-31,edinet-tepco-total-assets,JP,14986993,https://api.edinet-fsa.go.jp/api/v2/documents/S100W4QX?type=5
