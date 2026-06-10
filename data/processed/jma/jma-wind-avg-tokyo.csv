@@ -5272,3 +5272,4 @@ date,indicator_id,region,value,source_url
 2026-06-06,jma-wind-avg-tokyo,tokyo,2.7,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
 2026-06-07,jma-wind-avg-tokyo,tokyo,1.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
 2026-06-08,jma-wind-avg-tokyo,tokyo,2.2,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
+2026-06-09,jma-wind-avg-tokyo,tokyo,2.4,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
