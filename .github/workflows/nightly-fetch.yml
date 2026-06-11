@@ -168,6 +168,19 @@ jobs:
           python scripts/fetch_estat.py
         continue-on-error: true
 
+      - name: Fetch e-Stat trade (geopolitics エネルギー輸入 源国別 23 series)
+        # 財務省 普通貿易統計「品別国別表（輸入）」を e-Stat API で取得し geopolitics ドメインを seed:
+        #   原油 / LNG / 石炭 の輸入相手国別 年間金額（千円、年次）。中東依存度・源国集中の素材。
+        #   jp-import-value-{crude|lng|coal}-{cc}（相手国別、region=ISO2）+ -total（全相手国合算、region=WORLD）。
+        # 統計表 0003313966(2016-2020)+0003425294(2021-2025確々報) を結合。各燃料の HS は見出し prefix
+        #   （原油=2709/LNG=271111/石炭=2701）で getMetaInfo から実行時導出（HS 改正耐性、L-062）。
+        # 認証必須（fetch_estat.py と同一 secrets.ESTAT_APP_ID）。continue-on-error で他系列を止めない。
+        env:
+          ESTAT_APP_ID: ${{ secrets.ESTAT_APP_ID }}
+        run: |
+          python scripts/fetch_estat_trade.py
+        continue-on-error: true
+
       - name: Fetch NBS Manufacturing PMI (Phase 2 international, 1 series)
         # 中国 国家統計局 英語版 PressRelease から月次 Manufacturing PMI を抽出。
         # 認証不要。index ページの "Purchasing Managers' Index" アンカーから最新リリースを動的に解決。

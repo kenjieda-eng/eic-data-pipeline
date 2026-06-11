@@ -1,0 +1,10 @@
+date,indicator_id,region,value,source_url
+2017-01-01,jp-import-value-lng-us,US,63828555.0,https://www.e-stat.go.jp/
+2018-01-01,jp-import-value-lng-us,US,151661374.0,https://www.e-stat.go.jp/
+2019-01-01,jp-import-value-lng-us,US,196835711.0,https://www.e-stat.go.jp/
+2020-01-01,jp-import-value-lng-us,US,222359632.0,https://www.e-stat.go.jp/
+2021-01-01,jp-import-value-lng-us,US,472345914.0,https://www.e-stat.go.jp/
+2022-01-01,jp-import-value-lng-us,US,573656822.0,https://www.e-stat.go.jp/
+2023-01-01,jp-import-value-lng-us,US,472527144.0,https://www.e-stat.go.jp/
+2024-01-01,jp-import-value-lng-us,US,542941554.0,https://www.e-stat.go.jp/
+2025-01-01,jp-import-value-lng-us,US,402677515.0,https://www.e-stat.go.jp/

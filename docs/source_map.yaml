@@ -2762,6 +2762,100 @@ sources:
         area_code: "47000"
         metric: 65over
 
+  estat-trade:
+    name: 政府統計の総合窓口（e-Stat）API 普通貿易統計 品別国別表（輸入）
+    publisher: 財務省
+    publisher_url: https://www.customs.go.jp/toukei/info/index.htm
+    source_url: https://www.e-stat.go.jp/
+    api_base: "https://api.e-stat.go.jp/rest/3.0/app/json"
+    # --- D-011 メタデータ共通項目 ---
+    license: estat-terms
+    license_url: https://www.e-stat.go.jp/terms-of-use
+    license_notice: "出典: 財務省 貿易統計（政府統計の総合窓口 e-Stat）。"
+    license_text: |
+      財務省 貿易統計（普通貿易統計）。政府統計＝政府標準利用規約 2.0 互換、
+      出典明示を条件に商用含む再利用可。e-Stat API 経由で取得。
+      参考: https://www.e-stat.go.jp/terms-of-use
+    domain: geopolitics
+    frequency: annual
+    unit: "千円"
+    tz: Asia/Tokyo
+    missing_policy: "null"
+    aggregation: annual_sum
+    backfill_start: "2016-01-01"
+    # 年次確定は対象年の翌年11月頃、確々報はそれ以前に公表。値は YYYY-01-01 に格納するため
+    # 鮮度は publication lag を見込み約25ヶ月（直近2年が欠落した場合のみ警告）に設定。
+    freshness_sla_days: 760
+    # cat02=140（合計_金額、単位=千円）= 年間合計金額を抽出。
+    value_cat02_code: "140"
+    # 「確定/確速 品別国別表（輸入）」年次統計表。各表の HS コードは prefix で実行時解決（L-062、HS 改正耐性）。
+    # 2026-06-11 実 API（getStatsList searchWord「貿易統計 品別国別 輸入」）で特定・検証。
+    tables:
+      - stats_data_id: "0003313966"   # 確定 品別国別表(輸入) 2016年～2020年
+      - stats_data_id: "0003425294"   # 確速 品別国別表(輸入) 2021-2024確定 + 2025確々報
+    # 燃料 → HS 見出し prefix。2026-06-11 getMetaInfo で実コードを確認:
+    #   原油 2709 = 270900100/270900900、LNG 271111 = 271111000、
+    #   石炭 2701 = 270111000(無煙炭)/270112*(瀝青炭)/270119*(その他)/270120000(練炭等)。
+    fuels:
+      crude: { hs_prefixes: ["2709"],   name_ja: "原油" }
+      lng:   { hs_prefixes: ["271111"], name_ja: "LNG（液化天然ガス）" }
+      coal:  { hs_prefixes: ["2701"],   name_ja: "石炭" }
+    # 相手国 area コード（getMetaInfo 検証 2026-06-11）→ region 用 ISO2 大文字。
+    country_codes:
+      "50137": SA   # サウジアラビア
+      "50147": AE   # アラブ首長国連邦
+      "50138": KW   # クウェート
+      "50140": QA   # カタール
+      "50141": OM   # オマーン
+      "50304": US   # アメリカ合衆国
+      "50601": AU   # オーストラリア
+      "50113": MY   # マレーシア
+      "50224": RU   # ロシア
+      "50118": ID   # インドネシア
+      "50602": PG   # パプアニューギニア
+      "50116": BN   # ブルネイ
+      "50302": CA   # カナダ
+      "50551": ZA   # 南アフリカ共和国
+    # 燃料別 対象相手国（area コード）。2025年確々報の輸入額シェア上位の主要源国を採用。
+    # total 系列は全相手国合算（region=WORLD）で、源国集中・中東依存度の分母に使う。
+    fuel_countries:
+      crude: ["50147", "50137", "50138", "50140", "50141", "50304"]
+      lng:   ["50601", "50113", "50224", "50304", "50118", "50140", "50602", "50116"]
+      coal:  ["50601", "50118", "50304", "50302", "50551", "50224"]
+    notes: |
+      日本のエネルギー輸入 源国別 金額（原油/LNG/石炭、年次、単位=千円）。geopolitics seed。
+      普通貿易統計「確定/確速 品別国別表（輸入）」を 0003313966(2016-2020)+0003425294(2021-2025)で結合。
+      各燃料の輸入額は HS 見出し配下の全 9 桁コードを合算（原油=2709、LNG=271111、石炭=2701）。
+      系列は jp-import-value-{crude|lng|coal}-{cc}（相手国別、region=ISO2）+ -total（全相手国合算、region=WORLD）。
+      L-062: HS コード・国コードは getStatsList/getMetaInfo で実確認（推測禁止、2026-06-11）。
+      L-063: 財務省 貿易統計＝政府標準利用規約、出典明記で商用含む再利用可（GO）。
+      検証(2026-06-11): 2025年 原油 計≈9.62兆円(UAE43%/サウジ40%)、LNG 計≈5.70兆円(豪40%)、石炭 計≈3.34兆円(豪67%)。
+      2025年は確々報（後日確定値に改定され得る）。確定値は翌年11月頃に再公表。
+    indicator_ids:
+      - jp-import-value-crude-ae
+      - jp-import-value-crude-sa
+      - jp-import-value-crude-kw
+      - jp-import-value-crude-qa
+      - jp-import-value-crude-om
+      - jp-import-value-crude-us
+      - jp-import-value-crude-total
+      - jp-import-value-lng-au
+      - jp-import-value-lng-my
+      - jp-import-value-lng-ru
+      - jp-import-value-lng-us
+      - jp-import-value-lng-id
+      - jp-import-value-lng-qa
+      - jp-import-value-lng-pg
+      - jp-import-value-lng-bn
+      - jp-import-value-lng-total
+      - jp-import-value-coal-au
+      - jp-import-value-coal-id
+      - jp-import-value-coal-us
+      - jp-import-value-coal-ca
+      - jp-import-value-coal-za
+      - jp-import-value-coal-ru
+      - jp-import-value-coal-total
+
   nbs-pmi:
     name: 中国 国家統計局 製造業 PMI（NBS 官製）
     publisher: National Bureau of Statistics of China (NBS) / China Federation of Logistics & Purchasing (CFLP)
