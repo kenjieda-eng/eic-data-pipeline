@@ -303,3 +303,4 @@ date,indicator_id,region,value,source_url
 2026-02-01,ember-demand-us,us,349.19,https://ember-energy.org/data/monthly-electricity-data/
 2026-03-01,ember-demand-us,us,357.99,https://ember-energy.org/data/monthly-electricity-data/
 2026-04-01,ember-demand-us,us,336.53,https://ember-energy.org/data/monthly-electricity-data/
+2026-05-01,ember-demand-us,us,356.88,https://ember-energy.org/data/monthly-electricity-data/

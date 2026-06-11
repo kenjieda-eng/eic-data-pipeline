@@ -5273,3 +5273,4 @@ date,indicator_id,region,value,source_url
 2026-06-07,jma-wind-dir-chubu,chubu,135.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
 2026-06-08,jma-wind-dir-chubu,chubu,315.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
 2026-06-09,jma-wind-dir-chubu,chubu,292.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
+2026-06-10,jma-wind-dir-chubu,chubu,292.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
