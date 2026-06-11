@@ -1,0 +1,11 @@
+date,indicator_id,region,value,source_url
+2016-01-01,jp-import-value-coal-us,US,49954536.0,https://www.e-stat.go.jp/
+2017-01-01,jp-import-value-coal-us,US,129250496.0,https://www.e-stat.go.jp/
+2018-01-01,jp-import-value-coal-us,US,195751388.0,https://www.e-stat.go.jp/
+2019-01-01,jp-import-value-coal-us,US,215761127.0,https://www.e-stat.go.jp/
+2020-01-01,jp-import-value-coal-us,US,110266251.0,https://www.e-stat.go.jp/
+2021-01-01,jp-import-value-coal-us,US,133628964.0,https://www.e-stat.go.jp/
+2022-01-01,jp-import-value-coal-us,US,347003426.0,https://www.e-stat.go.jp/
+2023-01-01,jp-import-value-coal-us,US,420588349.0,https://www.e-stat.go.jp/
+2024-01-01,jp-import-value-coal-us,US,363616360.0,https://www.e-stat.go.jp/
+2025-01-01,jp-import-value-coal-us,US,225693324.0,https://www.e-stat.go.jp/

@@ -1,0 +1,11 @@
+date,indicator_id,region,value,source_url
+2016-01-01,jp-import-value-crude-om,OM,69806641.0,https://www.e-stat.go.jp/
+2017-01-01,jp-import-value-crude-om,OM,66976979.0,https://www.e-stat.go.jp/
+2018-01-01,jp-import-value-crude-om,OM,152120767.0,https://www.e-stat.go.jp/
+2019-01-01,jp-import-value-crude-om,OM,146466645.0,https://www.e-stat.go.jp/
+2020-01-01,jp-import-value-crude-om,OM,34795758.0,https://www.e-stat.go.jp/
+2021-01-01,jp-import-value-crude-om,OM,34411001.0,https://www.e-stat.go.jp/
+2022-01-01,jp-import-value-crude-om,OM,157886329.0,https://www.e-stat.go.jp/
+2023-01-01,jp-import-value-crude-om,OM,131408362.0,https://www.e-stat.go.jp/
+2024-01-01,jp-import-value-crude-om,OM,56492077.0,https://www.e-stat.go.jp/
+2025-01-01,jp-import-value-crude-om,OM,100585014.0,https://www.e-stat.go.jp/
