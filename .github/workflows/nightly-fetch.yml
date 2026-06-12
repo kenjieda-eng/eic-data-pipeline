@@ -213,6 +213,17 @@ jobs:
           python scripts/fetch_nrel_atb.py
         continue-on-error: true
 
+      - name: Fetch FIT 調達価格 (annual, regulation domain, 5 series)
+        # 資源エネルギー庁「なっとく！再生可能エネルギー」FIT 買取価格ページ（HTML 表）から
+        # 電源別×年度の調達価格（円/kWh）を取得し、regulation ドメイン（12 ドメイン最後）を seed:
+        #   太陽光(事業用)/陸上風力/地熱/一般木質バイオマス/中小水力 の 5 系列、2012-2026 年度。
+        # METI は Akamai Bot Manager 保護のため curl_cffi/chrome120 で TLS fingerprint を模倣（enecho-power 流用）。
+        # 年度で列構成が激変するため <table> を colspan/rowspan 展開し、列見出しキーワードで代表区分を抽出。
+        # 年 1 回（年度末告示）の更新のため通常は no-op（write_processed が key_cols dedup で安全に append）。認証不要。
+        run: |
+          python scripts/fetch_fit_price.py
+        continue-on-error: true
+
       - name: Generate indicators catalog (D-011)
         # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を生成。
         # Required 10 欠落は exit 1（CI fail）、Recommended 欠落/鮮度超過は warning 止まり。

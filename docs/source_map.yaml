@@ -2856,6 +2856,97 @@ sources:
       - jp-import-value-coal-ru
       - jp-import-value-coal-total
 
+  fit:
+    name: 資源エネルギー庁「なっとく！再生可能エネルギー」FIT 買取価格
+    publisher: 資源エネルギー庁（METI）
+    publisher_url: https://www.enecho.meti.go.jp/
+    # 過去（2012-2025 年度）と現行（2026 年度以降）の 2 ページから HTML 表を抽出。
+    # source_url は過去ページ（2012-2025 の大半の出典）。2026 は fit_kakaku.html。
+    source_url: https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/kakaku.html
+    past_url: https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/kakaku.html
+    current_url: https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/fit_kakaku.html
+    # --- D-011 メタデータ共通項目 ---
+    license: meti-terms                            # 政府標準利用規約 2.0 互換（enecho-power と同じ）
+    license_url: https://www.meti.go.jp/main/rules.html
+    license_notice: "出典: 資源エネルギー庁「なっとく！再生可能エネルギー」FIT・FIP制度 買取価格。政府標準利用規約 2.0 に従い、出典明示を条件に利用可。"
+    license_text: |
+      経済産業省（METI）資源エネルギー庁 公表資料。政府標準利用規約 2.0（CC BY 4.0 互換）。
+      出典明示を条件に商用含む再利用可。L-063 = GO。
+      参考: https://www.meti.go.jp/main/rules.html
+    domain: regulation
+    frequency: annual
+    unit: "円/kWh"
+    tz: Asia/Tokyo
+    missing_policy: "null"
+    aggregation: raw
+    backfill_start: "2012-04-01"
+    # 翌年度の価格は調達価格等算定委員会を経て年度末に告示。年次更新のため SLA は約 18 ヶ月。
+    freshness_sla_days: 540
+    # ----- 抽出方式（fetch_fit_price.py） --------------------------------
+    # ページは UTF-8 の HTML 表。h3「YYYY年度の価格表」(平成/令和は西暦換算) で年度ブロックを区切り、
+    # 各電源の <table> を colspan/rowspan 展開した grid 上で「列見出しキーワード + 除外 + pick」により
+    # 代表区分の調達価格（円/kWh）を抽出する（L-062: 価格はハードコードせず live HTML から取得）。
+    # 列構成が年度で激変するため、年により異なる規模区分（例: 太陽光 10kW以上 / 10kW以上50kW未満）を
+    # キーワード優先順で吸収する。2026 の地熱・中小水力 等の「出力に応じて連続的に変化」区分や
+    # 入札区分（クリーンな単価なし）は取得対象外（無理に値を作らない）。
+    notes: |
+      日本の再エネ FIT 制度 電源別 調達価格（円/kWh、年度別、date=YYYY-04-01）。regulation seed（12 ドメイン最後）。
+      過去ページ kakaku.html（2012-2025）+ 現行ページ fit_kakaku.html（2026）。
+      系列は fit-price-{solar-business|wind-onshore|geothermal|biomass-wood|hydro-small}。
+      代表区分: 事業用太陽光 10kW以上(非入札) / 陸上風力(非入札・非リプレース) / 地熱 15,000kW未満新設 /
+      一般木質バイオマス(入札対象外) / 中小水力 200kW未満新設。原則税抜（事業用調達価格）。
+      地熱 2026 は 1,000-15,000kW が連続価格化したため未取得（14 年分）。他 4 系列は 2012-2026（15 年分）。
+      検証(2026-06-12): 事業用太陽光 40円(2012)→10円(2025)→9.9円(2026)、陸上風力 22→13→14、地熱 40 固定、
+      一般木質バイオマス 24 固定、中小水力 34 固定。FIT 履歴と整合（大幅削減は太陽光/風力のみ）。
+      L-063: 政府標準利用規約、出典明記で商用含む再利用可（GO、license=meti-terms）。
+    indicator_ids:
+      - fit-price-solar-business
+      - fit-price-wind-onshore
+      - fit-price-geothermal
+      - fit-price-biomass-wood
+      - fit-price-hydro-small
+    indicators:
+      fit-price-solar-business:
+        name: "FIT 調達価格 事業用太陽光（10kW以上・非入札）"
+        domain: regulation
+        unit: "円/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: raw
+        notes: "事業用太陽光の非入札・非屋根の代表区分（年により 10kW以上 / 10kW以上50kW未満 等）。上期(4-9月)額。原則税抜。"
+        depends_on: null
+      fit-price-wind-onshore:
+        name: "FIT 調達価格 陸上風力（非入札・非リプレース）"
+        domain: regulation
+        unit: "円/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: raw
+        notes: "陸上風力の非入札・非リプレースの代表区分（年により 20kW以上 / 陸上風力 / 陸上風力50kW未満）。大規模は近年入札移行のため非入札区分。"
+        depends_on: null
+      fit-price-geothermal:
+        name: "FIT 調達価格 地熱（15,000kW未満・新設）"
+        domain: regulation
+        unit: "円/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: raw
+        notes: "地熱 15,000kW未満・新設（リプレース除く）。2026 は連続価格化のため未取得。原則税抜。"
+        depends_on: null
+      fit-price-biomass-wood:
+        name: "FIT 調達価格 一般木質バイオマス（入札対象外）"
+        domain: regulation
+        unit: "円/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: raw
+        notes: "一般木質バイオマス（固体燃料）の入札対象外の代表区分。近年は 10,000kW未満（10,000kW以上は入札）。原則税抜。"
+        depends_on: null
+      fit-price-hydro-small:
+        name: "FIT 調達価格 中小水力（200kW未満・新設）"
+        domain: regulation
+        unit: "円/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: raw
+        notes: "中小水力 200kW未満・新設（既設導水路活用＝リプレース除く）。原則税抜。"
+        depends_on: null
+
   nbs-pmi:
     name: 中国 国家統計局 製造業 PMI（NBS 官製）
     publisher: National Bureau of Statistics of China (NBS) / China Federation of Logistics & Purchasing (CFLP)
