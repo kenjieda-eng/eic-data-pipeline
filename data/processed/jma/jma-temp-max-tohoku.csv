@@ -5274,3 +5274,4 @@ date,indicator_id,region,value,source_url
 2026-06-08,jma-temp-max-tohoku,tohoku,20.2,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=34&block_no=47590&year=YYYY&month=MM&day=&view=
 2026-06-09,jma-temp-max-tohoku,tohoku,24.4,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=34&block_no=47590&year=YYYY&month=MM&day=&view=
 2026-06-10,jma-temp-max-tohoku,tohoku,23.8,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=34&block_no=47590&year=YYYY&month=MM&day=&view=
+2026-06-11,jma-temp-max-tohoku,tohoku,23.1,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=34&block_no=47590&year=YYYY&month=MM&day=&view=
