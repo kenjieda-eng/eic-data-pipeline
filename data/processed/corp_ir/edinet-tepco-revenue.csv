@@ -1,2 +1,11 @@
 date,indicator_id,region,value,source_url
+2016-03-31,edinet-tepco-revenue,JP,6069928,https://api.edinet-fsa.go.jp/api/v2/documents/S10080P8?type=5
+2017-03-31,edinet-tepco-revenue,JP,5357734,https://api.edinet-fsa.go.jp/api/v2/documents/S100AP4S?type=5
+2018-03-31,edinet-tepco-revenue,JP,5850939,https://api.edinet-fsa.go.jp/api/v2/documents/S100DGU4?type=5
+2019-03-31,edinet-tepco-revenue,JP,6338490,https://api.edinet-fsa.go.jp/api/v2/documents/S100GAZW?type=5
+2020-03-31,edinet-tepco-revenue,JP,6241422,https://api.edinet-fsa.go.jp/api/v2/documents/S100IZPG?type=5
+2021-03-31,edinet-tepco-revenue,JP,5866824,https://api.edinet-fsa.go.jp/api/v2/documents/S100LV6U?type=5
+2022-03-31,edinet-tepco-revenue,JP,5309924,https://api.edinet-fsa.go.jp/api/v2/documents/S100OKB1?type=5
+2023-03-31,edinet-tepco-revenue,JP,7798696,https://api.edinet-fsa.go.jp/api/v2/documents/S100R8P3?type=5
+2024-03-31,edinet-tepco-revenue,JP,6918389,https://api.edinet-fsa.go.jp/api/v2/documents/S100TVQJ?type=5
 2025-03-31,edinet-tepco-revenue,JP,6810391,https://api.edinet-fsa.go.jp/api/v2/documents/S100W4QX?type=5

@@ -1,0 +1,11 @@
+date,indicator_id,region,value,source_url
+2016-03-31,edinet-hepco-net-income,JP,21276,https://api.edinet-fsa.go.jp/api/v2/documents/S10080IU?type=5
+2017-03-31,edinet-hepco-net-income,JP,8793,https://api.edinet-fsa.go.jp/api/v2/documents/S100AIPW?type=5
+2018-03-31,edinet-hepco-net-income,JP,16549,https://api.edinet-fsa.go.jp/api/v2/documents/S100DANS?type=5
+2019-03-31,edinet-hepco-net-income,JP,22357,https://api.edinet-fsa.go.jp/api/v2/documents/S100G5CT?type=5
+2020-03-31,edinet-hepco-net-income,JP,26720,https://api.edinet-fsa.go.jp/api/v2/documents/S100IUL3?type=5
+2021-03-31,edinet-hepco-net-income,JP,36155,https://api.edinet-fsa.go.jp/api/v2/documents/S100LLTR?type=5
+2022-03-31,edinet-hepco-net-income,JP,6864,https://api.edinet-fsa.go.jp/api/v2/documents/S100ODPW?type=5
+2023-03-31,edinet-hepco-net-income,JP,-22193,https://api.edinet-fsa.go.jp/api/v2/documents/S100R1IZ?type=5
+2024-03-31,edinet-hepco-net-income,JP,66201,https://api.edinet-fsa.go.jp/api/v2/documents/S100TT39?type=5
+2025-03-31,edinet-hepco-net-income,JP,64218,https://api.edinet-fsa.go.jp/api/v2/documents/S100W0BE?type=5

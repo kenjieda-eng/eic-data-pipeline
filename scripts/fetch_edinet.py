@@ -1,38 +1,44 @@
 """
-金融庁 EDINET API v2 から企業 IR（corp_ir）ドメインを seed するスクリプト（PoC）。
+金融庁 EDINET API v2 から企業 IR（corp_ir）ドメインを seed するスクリプト。
 
-PoC スコープ（docs/edinet-scoping-2026-06-09.md Phase 1）:
-    東京電力ホールディングス 1 社 × 主要 5 財務指標（連結・当期）を
-    有価証券報告書（docTypeCode=120）から取得し catalog に載せる end-to-end 検証。
+スコープ（docs/edinet-scoping-2026-06-09.md）:
+    Phase 1 (PoC, PR #18): 東京電力HD 1 社 × 主要 5 指標（連結・当期 1 点）。
+    Phase 2 (本 seed):     9 一般電気事業者 × 主要 5 指標（連結）を直近 ~10 年度 backfill。
+        9 社 = tepco/chuden/kepco/energia/rikuden/tohoku/yonden/kyuden/hepco
+        （edinetCode は EDINET コードリスト Edinetcode.zip で確定, L-062）。
 
 手法（2 本立て、軽量 CSV 経路）:
     1. Document List API: documents.json?date=YYYY-MM-DD&type=2
-       → 提出者（edinetCode/secCode）× 有報（docTypeCode=120）で docID を動的特定。
-         docID は年次でローテーションするためハードコードしない（L-062）。3 月期決算は
-         6 月提出のため submission_month=6 の各日を新しい順に走査し、最新提出分を採用。
+       → 提出年（submission_month=6 の各日を新しい順）を 1 パス走査し、対象 9 社の
+         有報（docTypeCode=120）docID をまとめて動的特定（build_year_index）。
+         docID は年次ローテーションするためハードコードしない（L-062）。
     2. Document Acquisition API: documents/{docID}?type=5
        → CSV（ZIP, TSV/UTF-16, Arelle 不要で軽量）を取得・解凍。
          メイン有報 CSV（XBRL_TO_CSV/jpcrp...asr...csv）を (要素ID, コンテキストID) で索引。
+         各有報の CurrentYear コンテキストを採用 → 1 有報 = 1 会計年度分の値。
 
-指標マップ（source_map.yaml edinet.indicators の element_id / context_id）:
-    実 CSV（docID=S100W4QX, 東京電力HD 第101期 2024/04/01-2025/03/31）で要素IDを確認済（L-062）。
+指標マップ（source_map.yaml edinet.indicators の element_id / context_id / fallback_element_ids）:
+    全 9 社・全年度 JGAAP・連結ベースで同一要素を probe 確認済（2026-06-13, L-062）。
     連結 = base context（_NonConsolidatedMember でない方）。XBRL 単位=円 → ÷1e6 で「百万円」化。
-        edinet-tepco-revenue          jppfs_cor:OperatingRevenueELE              CurrentYearDuration
-        edinet-tepco-operating-income jppfs_cor:OperatingIncome                  CurrentYearDuration
-        edinet-tepco-ordinary-income  jppfs_cor:OrdinaryIncome                   CurrentYearDuration
-        edinet-tepco-net-income       jppfs_cor:ProfitLossAttributableToOwnersOfParent  CurrentYearDuration
-        edinet-tepco-total-assets     jppfs_cor:Assets                           CurrentYearInstant
+        *-revenue          jppfs_cor:OperatingRevenueELE              CurrentYearDuration
+        *-operating-income jppfs_cor:OperatingIncome                  CurrentYearDuration
+        *-ordinary-income  jppfs_cor:OrdinaryIncome                   CurrentYearDuration
+                           （IFRS 適用時 → jppfs_cor:IncomeBeforeIncomeTaxes へ fallback）
+        *-net-income       jppfs_cor:ProfitLossAttributableToOwnersOfParent  CurrentYearDuration
+        *-total-assets     jppfs_cor:Assets                           CurrentYearInstant
 
 出力:
-    - data/raw/edinet/{docID}_type5.zip       （取得した生 ZIP）
+    - data/raw/edinet/{docID}_type5.zip       （取得した生 ZIP, 再実行時はキャッシュ）
     - data/processed/corp_ir/{indicator_id}.csv / .parquet / .metadata.json
-    long CSV: date=会計期末(periodEnd), indicator_id, region=JP, value(百万円), source_url。
+    long CSV: date=会計期末(periodEnd) を年度ごとに 1 行, indicator_id, region=JP, value(百万円), source_url。
+    write_processed は append-safe（date×indicator×region でユニーク化）なので増分 backfill 可。
 
 API キー:
     .env の EDINET_API_KEY（python-dotenv で読み込み、無ければ os.environ）。
     Subscription-Key パラメータに渡す。キーは CSV/metadata に保存しない。
 
-詰まったら（docID 不明・要素ID 欠落・API エラー）勝手に値を作らず停止し調査結果を報告（PoC 方針）。
+詰まったら（docID 不明・要素ID 欠落・API エラー）勝手に値を作らず、取れた社数/年度で報告。
+backfill では (社×年度×指標) 単位の欠落は skip+ログし、取得できた分を書き出して継続する。
 """
 
 from __future__ import annotations
@@ -43,6 +49,7 @@ import logging
 import os
 import sys
 import zipfile
+from collections import defaultdict
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -130,9 +137,10 @@ def find_asr_doc(
     max_years: int = 2,
 ) -> dict | None:
     """
-    対象提出者の有価証券報告書（docTypeCode=doc_type_code）の最新 docID を特定する。
+    単一提出者の有価証券報告書（docTypeCode=doc_type_code）の最新 docID を特定する。
     submission_month（既定 6）の各日を新しい順に走査し、最初にヒットした日（=最新提出日）の
     提出者有報を返す。未来日はスキップ。当年に無ければ前年へフォールバック（max_years）。
+    （単一社・最新 1 点用。複数社 backfill は build_year_index を使う。）
     """
     for y in range(today.year, today.year - max_years, -1):
         same_day_hits: list[dict] = []
@@ -164,6 +172,46 @@ def find_asr_doc(
     return None
 
 
+def build_year_index(
+    api_base: str,
+    key: str,
+    target_codes: set[str],
+    *,
+    year: int,
+    submission_month: int,
+    doc_type_code: str,
+    today: date,
+) -> dict[str, dict]:
+    """
+    指定提出年（submission_month の各日）を新しい順に 1 パス走査し、対象 edinetCode 集合の
+    有報（docTypeCode）を {edinetCode: doc} でまとめて返す。複数社 backfill 用に
+    documents.json の呼び出しを年単位で共有する（社ごと走査だと 9 倍叩いてしまうため）。
+    同一社が複数日に出す場合は新しい日（先にヒットした日）を採用。全社揃ったら早期終了。
+    """
+    idx: dict[str, dict] = {}
+    for d in range(31, 0, -1):
+        try:
+            day = date(year, submission_month, d)
+        except ValueError:
+            continue
+        if day > today:
+            continue
+        try:
+            results = list_documents(api_base, day, key)
+        except Exception as e:
+            logger.warning("documents.json %s 取得失敗: %s（スキップ）", day, e)
+            continue
+        for doc in results:
+            if doc.get("docTypeCode") != doc_type_code:
+                continue
+            ec = (doc.get("edinetCode") or "").strip()
+            if ec in target_codes and ec not in idx:
+                idx[ec] = doc
+        if len(idx) == len(target_codes):
+            break
+    return idx
+
+
 # --- Document Acquisition API: type=5 CSV(ZIP) 取得・索引 --------------------
 
 
@@ -177,6 +225,17 @@ def fetch_doc_zip(api_base: str, doc_id: str, key: str) -> bytes:
             f"CSV ZIP が小さすぎます（{len(r.content)} bytes）: preview={r.content[:200]!r}"
         )
     return r.content
+
+
+def get_doc_zip_cached(api_base: str, doc_id: str, key: str, raw_dir: Path) -> bytes:
+    """raw_dir に {doc_id}_type5.zip があれば再利用、無ければ取得して保存。"""
+    cache = raw_dir / f"{doc_id}_type5.zip"
+    if cache.exists() and cache.stat().st_size >= 1000:
+        logger.info("cache hit: %s", cache.name)
+        return cache.read_bytes()
+    zip_bytes = fetch_doc_zip(api_base, doc_id, key)
+    save_raw(zip_bytes, raw_dir, f"{doc_id}_type5.zip")
+    return zip_bytes
 
 
 def main_report_tsv(zip_bytes: bytes) -> pd.DataFrame:
@@ -231,15 +290,73 @@ def lookup_value(df: pd.DataFrame, element_id: str, context_id: str) -> float | 
     return vals[0]
 
 
+def lookup_value_chain(
+    df: pd.DataFrame, element_id: str, context_id: str, fallbacks: list[str]
+) -> tuple[float | None, str | None]:
+    """
+    まず primary element_id を引き、None なら fallback_element_ids を順に試す。
+    （IFRS 適用社の経常利益→税引前当期純利益フォールバック等。当 9 社は全年度 JGAAP で未発火想定）。
+    戻り値: (値[円] or None, 実際に採用した element_id or None)。
+    """
+    v = lookup_value(df, element_id, context_id)
+    if v is not None:
+        return v, element_id
+    for fb in fallbacks:
+        v = lookup_value(df, fb, context_id)
+        if v is not None:
+            return v, fb
+    return None, None
+
+
+# --- 指標マップ構築 ----------------------------------------------------------
+
+
+def build_ind_map(
+    indicators_cfg: dict, alias: str, wanted: set[str] | None
+) -> dict[str, tuple[str, str, list[str]]]:
+    """
+    filer alias 向け指標 {ind_id: (element_id, context_id, fallback_element_ids)} を返す。
+    ind_id は edinet-{alias}-{metric} 命名（element_id/context_id を持つもののみ）。
+    """
+    prefix = f"edinet-{alias}-"
+    m: dict[str, tuple[str, str, list[str]]] = {}
+    for ind_id, meta in indicators_cfg.items():
+        if not ind_id.startswith(prefix):
+            continue
+        if not isinstance(meta, dict) or "element_id" not in meta or "context_id" not in meta:
+            continue
+        if wanted is not None and ind_id not in wanted:
+            continue
+        fb = meta.get("fallback_element_ids") or []
+        m[ind_id] = (str(meta["element_id"]), str(meta["context_id"]), [str(x) for x in fb])
+    return m
+
+
+def to_value_mn(raw_yen: float) -> float | int:
+    """円 → 百万円。整数になるなら int で返す（CSV を綺麗に）。"""
+    value_mn = raw_yen / 1_000_000
+    return int(value_mn) if value_mn == int(value_mn) else value_mn
+
+
+def period_end_from_df(df: pd.DataFrame) -> str | None:
+    """docs から periodEnd が取れない場合に DEI の会計期末を補完。"""
+    sub = df[df["要素ID"] == "jpdei_cor:CurrentFiscalYearEndDateDEI"]
+    if len(sub):
+        s = str(sub.iloc[0]["値"]).strip()
+        if s and s not in NIL_TOKENS:
+            return s
+    return None
+
+
 # --- メイン ------------------------------------------------------------------
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Fetch EDINET 有報 financials (corp_ir PoC seed)")
-    parser.add_argument("--filer", default="tepco", help="source_map edinet.filers のキー（既定 tepco）")
-    parser.add_argument("--doc-id", default=None, help="docID を明示指定（探索をスキップ）")
-    parser.add_argument("--max-years", type=int, default=2, help="有報探索のフォールバック年数")
+    parser = argparse.ArgumentParser(description="Fetch EDINET 有報 financials (corp_ir seed, Phase 2 = 9電力)")
+    parser.add_argument("--filer", default="all", help="'all'（既定）または edinet.filers のキーをカンマ区切り（例 tepco,kepco）")
+    parser.add_argument("--backfill-years", type=int, default=10, help="さかのぼる提出年数（既定 10。当年は未提出で空でも可）")
     parser.add_argument("--series", default=None, help="カンマ区切りで indicator_id を絞る（任意）")
+    parser.add_argument("--doc-id", default=None, help="単一 docID を明示指定（単一 filer・デバッグ用、backfill しない）")
     args = parser.parse_args(argv)
 
     cfg = load_source_map()
@@ -252,26 +369,26 @@ def main(argv: list[str] | None = None) -> int:
     api_base = source_cfg["api_base"].rstrip("/")
     doc_type_code = str(source_cfg.get("doc_type_code", "120"))
     submission_month = int(source_cfg.get("submission_month", 6))
-
     filers = source_cfg.get("filers") or {}
-    filer = filers.get(args.filer)
-    if not filer:
-        logger.error("filer %r が source_map edinet.filers にありません: %s", args.filer, list(filers))
-        return 2
-    edinet_code = str(filer["edinet_code"])
-    sec_code = str(filer.get("sec_code") or "") or None
-
     indicators_cfg = source_cfg.get("indicators") or {}
-    # この filer 向け指標（element_id/context_id を持つもの）。--series で更に絞る。
+
+    # --- 対象 filer の解決 ---
+    if args.filer.strip().lower() == "all":
+        aliases = list(filers)
+    else:
+        aliases = [a.strip() for a in args.filer.split(",") if a.strip()]
+    bad = [a for a in aliases if a not in filers]
+    if bad:
+        logger.error("未知の filer: %s（既知: %s）", bad, list(filers))
+        return 2
+    if not aliases:
+        logger.error("対象 filer が 0 件")
+        return 2
+
     wanted = {s.strip() for s in args.series.split(",")} if args.series else None
-    ind_map: dict[str, tuple[str, str]] = {}
-    for ind_id, meta in indicators_cfg.items():
-        if "element_id" not in meta or "context_id" not in meta:
-            continue
-        if wanted is not None and ind_id not in wanted:
-            continue
-        ind_map[ind_id] = (str(meta["element_id"]), str(meta["context_id"]))
-    if not ind_map:
+    ind_maps = {a: build_ind_map(indicators_cfg, a, wanted) for a in aliases}
+    aliases = [a for a in aliases if ind_maps[a]]  # 指標が無い filer は除外
+    if not aliases:
         logger.error("対象指標が 0 件（element_id/context_id 付き indicator が無い）")
         return 2
 
@@ -288,93 +405,120 @@ def main(argv: list[str] | None = None) -> int:
     now_jst = datetime.now(timezone.utc) + timedelta(hours=9)
     today = now_jst.date()
 
-    # --- docID 特定 ---
-    if args.doc_id:
-        doc = {"docID": args.doc_id, "periodEnd": None, "filerName": filer.get("name_ja")}
-        logger.info("docID 明示指定: %s", args.doc_id)
-    else:
-        doc = find_asr_doc(
-            api_base, key,
-            edinet_code=edinet_code, sec_code=sec_code,
-            doc_type_code=doc_type_code, submission_month=submission_month,
-            today=today, max_years=args.max_years,
-        )
-    if not doc:
-        msg = f"有報 docID を特定できず（filer={args.filer}/{edinet_code}, type={doc_type_code}）"
-        logger.error(msg)
-        append_log(log_dir, "fetch_edinet", "FAIL", msg)
-        return 1
+    code_to_alias = {filers[a]["edinet_code"]: a for a in aliases}
+    target_codes = set(code_to_alias)
 
-    doc_id = doc["docID"]
-    period_end = doc.get("periodEnd")
-    source_url = f"{api_base}/documents/{doc_id}?type=5"
-
-    # --- 取得・解凍・索引 ---
-    try:
-        zip_bytes = fetch_doc_zip(api_base, doc_id, key)
-        save_raw(zip_bytes, raw_dir, f"{doc_id}_type5.zip")
-        df = main_report_tsv(zip_bytes)
-    except Exception as e:
-        logger.exception("取得/解凍失敗: %s", e)
-        append_log(log_dir, "fetch_edinet", "FAIL", f"fetch/parse failed: {e}")
-        return 1
-
-    # periodEnd が docs から取れない場合は CSV の会計期末（DEI）文字列から補完
-    if not period_end:
-        sub = df[df["要素ID"] == "jpdei_cor:CurrentFiscalYearEndDateDEI"]
-        if len(sub):
-            period_end = str(sub.iloc[0]["値"]).strip()
-    if not period_end:
-        msg = "会計期末（periodEnd）を特定できず、date を確定不能。停止。"
-        logger.error(msg)
-        append_log(log_dir, "fetch_edinet", "FAIL", msg)
-        return 1
-
-    # --- 5 指標抽出・書き出し ---
-    written: list[str] = []
-    results: list[tuple[str, float]] = []
+    rows_by_ind: dict[str, list[dict]] = defaultdict(list)
+    coverage: dict[str, list[str]] = defaultdict(list)   # alias -> [period_end...]
     missing: list[str] = []
+    fallbacks_used: list[str] = []
+    docs_processed = 0
 
-    for ind_id, (element_id, context_id) in sorted(ind_map.items()):
-        raw_yen = lookup_value(df, element_id, context_id)
-        if raw_yen is None:
-            missing.append(f"{ind_id} ({element_id} @ {context_id})")
-            logger.error("値なし: %s (%s @ %s)", ind_id, element_id, context_id)
-            continue
-        value_mn = raw_yen / 1_000_000  # 円 → 百万円
-        value_out = int(value_mn) if value_mn == int(value_mn) else value_mn
+    # --- 単一 docID デバッグ経路（backfill しない） ---
+    if args.doc_id:
+        if len(aliases) != 1:
+            logger.error("--doc-id は単一 filer 指定時のみ（--filer に 1 社を指定）")
+            return 2
+        alias = aliases[0]
+        index = {filers[alias]["edinet_code"]: {"docID": args.doc_id, "periodEnd": None}}
+        scan_plan = [("(explicit)", index)]
+    else:
+        # 提出年を新しい順に走査（当年は未提出で空でも可。backfill_years+1 年窓で ~N 完全年度を確保）。
+        scan_plan = []
+        for year in range(today.year, today.year - args.backfill_years - 1, -1):
+            idx = build_year_index(
+                api_base, key, target_codes,
+                year=year, submission_month=submission_month,
+                doc_type_code=doc_type_code, today=today,
+            )
+            logger.info("提出年 %d: 有報 %d/%d 社ヒット", year, len(idx), len(target_codes))
+            if idx:
+                scan_plan.append((str(year), idx))
 
-        long_df = pd.DataFrame({
-            "date": [period_end],
-            "indicator_id": [ind_id],
-            "region": ["JP"],
-            "value": [value_out],
-            "source_url": [source_url],
-        })
+    # --- 各有報を取得・抽出 ---
+    for label, idx in scan_plan:
+        for ec, doc in idx.items():
+            alias = code_to_alias.get(ec)
+            if alias is None:
+                continue
+            doc_id = doc["docID"]
+            period_end = doc.get("periodEnd")
+            source_url = f"{api_base}/documents/{doc_id}?type=5"
+            try:
+                zip_bytes = get_doc_zip_cached(api_base, doc_id, key, raw_dir)
+                df = main_report_tsv(zip_bytes)
+            except Exception as e:
+                logger.error("取得/解凍失敗 alias=%s year=%s doc=%s: %s（スキップ）", alias, label, doc_id, e)
+                continue
+            if not period_end:
+                period_end = period_end_from_df(df)
+            if not period_end:
+                logger.error("会計期末不明 alias=%s doc=%s（スキップ）", alias, doc_id)
+                continue
+
+            n_ok = 0
+            for ind_id, (element_id, context_id, fb) in ind_maps[alias].items():
+                try:
+                    raw_yen, used_el = lookup_value_chain(df, element_id, context_id, fb)
+                except Exception as e:
+                    logger.error("値矛盾 %s @ %s (%s): %s（スキップ）", ind_id, period_end, doc_id, e)
+                    missing.append(f"{ind_id}@{period_end}(conflict)")
+                    continue
+                if raw_yen is None:
+                    missing.append(f"{ind_id}@{period_end}")
+                    continue
+                if used_el != element_id:
+                    fallbacks_used.append(f"{ind_id}@{period_end}->{used_el}")
+                    logger.info("fallback 採用: %s @ %s -> %s", ind_id, period_end, used_el)
+                rows_by_ind[ind_id].append({
+                    "date": period_end,
+                    "indicator_id": ind_id,
+                    "region": "JP",
+                    "value": to_value_mn(raw_yen),
+                    "source_url": source_url,
+                })
+                n_ok += 1
+            coverage[alias].append(period_end)
+            docs_processed += 1
+            logger.info("alias=%s year=%s doc=%s 期末=%s 指標=%d/%d",
+                        alias, label, doc_id, period_end, n_ok, len(ind_maps[alias]))
+
+    if not rows_by_ind:
+        msg = f"書き出す系列が 0 件（filer={aliases}, backfill_years={args.backfill_years}）"
+        logger.error(msg)
+        append_log(log_dir, "fetch_edinet", "FAIL", msg)
+        return 1
+
+    # --- 指標ごとに 1 ファイルへ書き出し（複数年度を 1 long CSV に） ---
+    written: list[str] = []
+    for ind_id in sorted(rows_by_ind):
+        long_df = pd.DataFrame(rows_by_ind[ind_id])
         write_processed(long_df, processed_dir, basename=ind_id)
         write_metadata_for_indicator(processed_dir, source_cfg, ind_id, long_df)
         written.append(ind_id)
-        results.append((ind_id, float(value_out)))
-        logger.info("%s = %s 百万円 (raw=%s 円, %s @ %s)", ind_id, f"{value_out:,}", f"{int(raw_yen):,}", element_id, context_id)
-
-    if missing:
-        msg = f"要素 {len(missing)} 件欠落のため停止（値を作らない）: {missing}"
-        logger.error(msg)
-        append_log(log_dir, "fetch_edinet", "FAIL", msg)
-        return 1
-    if not written:
-        logger.error("書き出した系列が 0 件")
-        append_log(log_dir, "fetch_edinet", "FAIL", "no series written")
-        return 1
 
     # --- サマリ表示（桁の目視確認用） ---
-    print("=" * 64)
-    print(f"[EDINET PoC] filer={args.filer} docID={doc_id} 期末={period_end} region=JP 単位=百万円")
-    for ind_id, v in results:
-        print(f"  {ind_id:<32} {v:>16,.0f} 百万円")
-    print("=" * 64)
+    print("=" * 78)
+    print(f"[EDINET Phase 2] filers={len(aliases)} docs={docs_processed} series_written={len(written)} 単位=百万円")
+    for alias in aliases:
+        ends = sorted(set(coverage.get(alias, [])))
+        rng = f"{ends[0]}..{ends[-1]} ({len(ends)}期)" if ends else "なし"
+        rev_id = f"edinet-{alias}-revenue"
+        rev_latest = None
+        if rows_by_ind.get(rev_id):
+            latest = max(rows_by_ind[rev_id], key=lambda r: r["date"])
+            rev_latest = (latest["date"], latest["value"])
+        name = filers[alias].get("name_ja", alias)
+        rev_str = f"  最新営業収益 {rev_latest[1]:>12,.0f}百万円 ({rev_latest[0]})" if rev_latest else ""
+        print(f"  {alias:8s} {name:20s} 年度 {rng}{rev_str}")
+    print("=" * 78)
+    if fallbacks_used:
+        print(f"fallback 採用 {len(fallbacks_used)} 件: {fallbacks_used[:10]}{' ...' if len(fallbacks_used)>10 else ''}")
+    if missing:
+        print(f"欠落（値なし）{len(missing)} 件（書き出しからは除外, 値は作らない）: {missing[:20]}{' ...' if len(missing)>20 else ''}")
 
-    summary = f"filer={args.filer} docID={doc_id} period_end={period_end} series={len(written)}"
+    summary = (f"filers={len(aliases)} docs={docs_processed} series={len(written)} "
+               f"missing={len(missing)} fallback={len(fallbacks_used)}")
     logger.info("done: %s", summary)
     append_log(log_dir, "fetch_edinet", "OK", summary)
     return 0

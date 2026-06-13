@@ -1,2 +1,11 @@
 date,indicator_id,region,value,source_url
+2016-03-31,edinet-tepco-total-assets,JP,13659769,https://api.edinet-fsa.go.jp/api/v2/documents/S10080P8?type=5
+2017-03-31,edinet-tepco-total-assets,JP,12277600,https://api.edinet-fsa.go.jp/api/v2/documents/S100AP4S?type=5
+2018-03-31,edinet-tepco-total-assets,JP,12591823,https://api.edinet-fsa.go.jp/api/v2/documents/S100DGU4?type=5
+2019-03-31,edinet-tepco-total-assets,JP,12757467,https://api.edinet-fsa.go.jp/api/v2/documents/S100GAZW?type=5
+2020-03-31,edinet-tepco-total-assets,JP,11957846,https://api.edinet-fsa.go.jp/api/v2/documents/S100IZPG?type=5
+2021-03-31,edinet-tepco-total-assets,JP,12093155,https://api.edinet-fsa.go.jp/api/v2/documents/S100LV6U?type=5
+2022-03-31,edinet-tepco-total-assets,JP,12853505,https://api.edinet-fsa.go.jp/api/v2/documents/S100OKB1?type=5
+2023-03-31,edinet-tepco-total-assets,JP,13563085,https://api.edinet-fsa.go.jp/api/v2/documents/S100R8P3?type=5
+2024-03-31,edinet-tepco-total-assets,JP,14595480,https://api.edinet-fsa.go.jp/api/v2/documents/S100TVQJ?type=5
 2025-03-31,edinet-tepco-total-assets,JP,14986993,https://api.edinet-fsa.go.jp/api/v2/documents/S100W4QX?type=5

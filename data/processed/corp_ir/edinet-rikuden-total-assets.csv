@@ -1,0 +1,11 @@
+date,indicator_id,region,value,source_url
+2016-03-31,edinet-rikuden-total-assets,JP,1509393,https://api.edinet-fsa.go.jp/api/v2/documents/S1007YPQ?type=5
+2017-03-31,edinet-rikuden-total-assets,JP,1518076,https://api.edinet-fsa.go.jp/api/v2/documents/S100AO9Y?type=5
+2018-03-31,edinet-rikuden-total-assets,JP,1588757,https://api.edinet-fsa.go.jp/api/v2/documents/S100DDPQ?type=5
+2019-03-31,edinet-rikuden-total-assets,JP,1573127,https://api.edinet-fsa.go.jp/api/v2/documents/S100G7OV?type=5
+2020-03-31,edinet-rikuden-total-assets,JP,1592933,https://api.edinet-fsa.go.jp/api/v2/documents/S100IXJ3?type=5
+2021-03-31,edinet-rikuden-total-assets,JP,1595626,https://api.edinet-fsa.go.jp/api/v2/documents/S100LNU4?type=5
+2022-03-31,edinet-rikuden-total-assets,JP,1656664,https://api.edinet-fsa.go.jp/api/v2/documents/S100OE6E?type=5
+2023-03-31,edinet-rikuden-total-assets,JP,1805318,https://api.edinet-fsa.go.jp/api/v2/documents/S100R6NI?type=5
+2024-03-31,edinet-rikuden-total-assets,JP,1855435,https://api.edinet-fsa.go.jp/api/v2/documents/S100TTLG?type=5
+2025-03-31,edinet-rikuden-total-assets,JP,1859830,https://api.edinet-fsa.go.jp/api/v2/documents/S100W61P?type=5

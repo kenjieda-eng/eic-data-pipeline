@@ -1,0 +1,21 @@
+{
+  "id": "edinet-chuden-operating-income",
+  "name": "中部電力 営業利益（連結）",
+  "domain": "corp_ir",
+  "frequency": "annual",
+  "unit": "百万円",
+  "source_name": "金融庁 EDINET（有価証券報告書 XBRL/CSV, EDINET API v2）",
+  "source_url": "https://disclosure2.edinet-fsa.go.jp/",
+  "license": "edinet-terms",
+  "observation_cutoff": "2025-03-31",
+  "updated_at": "2026-06-13T10:22:03+09:00",
+  "license_url": "https://disclosure2.edinet-fsa.go.jp/",
+  "license_notice": "出典: 金融庁 EDINET、公共データ利用規約 第1.0版",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2016-03-31",
+  "publisher": "金融庁 EDINET",
+  "aggregation": "raw",
+  "notes": "EDINET 有報 連結 P/L 営業利益又は営業損失（jppfs_cor:OperatingIncome @ CurrentYearDuration, 連結）。主要な経営指標表には無いため P/L 要素を採用。XBRL 単位=円 → ÷1e6 で百万円。filer=E04502",
+  "depends_on": null
+}

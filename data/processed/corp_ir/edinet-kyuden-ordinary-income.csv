@@ -1,0 +1,11 @@
+date,indicator_id,region,value,source_url
+2016-03-31,edinet-kyuden-ordinary-income,JP,90916,https://api.edinet-fsa.go.jp/api/v2/documents/S1007MCL?type=5
+2017-03-31,edinet-kyuden-ordinary-income,JP,94234,https://api.edinet-fsa.go.jp/api/v2/documents/S100ANWS?type=5
+2018-03-31,edinet-kyuden-ordinary-income,JP,73678,https://api.edinet-fsa.go.jp/api/v2/documents/S100DGTM?type=5
+2019-03-31,edinet-kyuden-ordinary-income,JP,52544,https://api.edinet-fsa.go.jp/api/v2/documents/S100G9N2?type=5
+2020-03-31,edinet-kyuden-ordinary-income,JP,40052,https://api.edinet-fsa.go.jp/api/v2/documents/S100IY0C?type=5
+2021-03-31,edinet-kyuden-ordinary-income,JP,55683,https://api.edinet-fsa.go.jp/api/v2/documents/S100LRPH?type=5
+2022-03-31,edinet-kyuden-ordinary-income,JP,32384,https://api.edinet-fsa.go.jp/api/v2/documents/S100OL50?type=5
+2023-03-31,edinet-kyuden-ordinary-income,JP,-86634,https://api.edinet-fsa.go.jp/api/v2/documents/S100R7AV?type=5
+2024-03-31,edinet-kyuden-ordinary-income,JP,238161,https://api.edinet-fsa.go.jp/api/v2/documents/S100TTZH?type=5
+2025-03-31,edinet-kyuden-ordinary-income,JP,194669,https://api.edinet-fsa.go.jp/api/v2/documents/S100W361?type=5
