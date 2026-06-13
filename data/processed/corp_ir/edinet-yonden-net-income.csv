@@ -1,0 +1,11 @@
+date,indicator_id,region,value,source_url
+2016-03-31,edinet-yonden-net-income,JP,11147,https://api.edinet-fsa.go.jp/api/v2/documents/S1007Z93?type=5
+2017-03-31,edinet-yonden-net-income,JP,11349,https://api.edinet-fsa.go.jp/api/v2/documents/S100ANUF?type=5
+2018-03-31,edinet-yonden-net-income,JP,19675,https://api.edinet-fsa.go.jp/api/v2/documents/S100DECA?type=5
+2019-03-31,edinet-yonden-net-income,JP,16995,https://api.edinet-fsa.go.jp/api/v2/documents/S100GAU8?type=5
+2020-03-31,edinet-yonden-net-income,JP,18092,https://api.edinet-fsa.go.jp/api/v2/documents/S100IYYT?type=5
+2021-03-31,edinet-yonden-net-income,JP,2999,https://api.edinet-fsa.go.jp/api/v2/documents/S100LPY7?type=5
+2022-03-31,edinet-yonden-net-income,JP,-6262,https://api.edinet-fsa.go.jp/api/v2/documents/S100OIKZ?type=5
+2023-03-31,edinet-yonden-net-income,JP,-22871,https://api.edinet-fsa.go.jp/api/v2/documents/S100R7M9?type=5
+2024-03-31,edinet-yonden-net-income,JP,60515,https://api.edinet-fsa.go.jp/api/v2/documents/S100TSET?type=5
+2025-03-31,edinet-yonden-net-income,JP,68324,https://api.edinet-fsa.go.jp/api/v2/documents/S100W2ML?type=5

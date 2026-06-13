@@ -1,0 +1,11 @@
+date,indicator_id,region,value,source_url
+2016-03-31,edinet-tohoku-operating-income,JP,189759,https://api.edinet-fsa.go.jp/api/v2/documents/S1007PLJ?type=5
+2017-03-31,edinet-tohoku-operating-income,JP,130422,https://api.edinet-fsa.go.jp/api/v2/documents/S100AKZ1?type=5
+2018-03-31,edinet-tohoku-operating-income,JP,107665,https://api.edinet-fsa.go.jp/api/v2/documents/S100DBEZ?type=5
+2019-03-31,edinet-tohoku-operating-income,JP,83633,https://api.edinet-fsa.go.jp/api/v2/documents/S100G3MC?type=5
+2020-03-31,edinet-tohoku-operating-income,JP,116350,https://api.edinet-fsa.go.jp/api/v2/documents/S100IU9N?type=5
+2021-03-31,edinet-tohoku-operating-income,JP,87919,https://api.edinet-fsa.go.jp/api/v2/documents/S100LMLL?type=5
+2022-03-31,edinet-tohoku-operating-income,JP,-28737,https://api.edinet-fsa.go.jp/api/v2/documents/S100OIEE?type=5
+2023-03-31,edinet-tohoku-operating-income,JP,-180054,https://api.edinet-fsa.go.jp/api/v2/documents/S100R42K?type=5
+2024-03-31,edinet-tohoku-operating-income,JP,322263,https://api.edinet-fsa.go.jp/api/v2/documents/S100TOO5?type=5
+2025-03-31,edinet-tohoku-operating-income,JP,280332,https://api.edinet-fsa.go.jp/api/v2/documents/S100W1ER?type=5

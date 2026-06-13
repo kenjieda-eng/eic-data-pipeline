@@ -1,0 +1,11 @@
+date,indicator_id,region,value,source_url
+2016-03-31,edinet-kyuden-revenue,JP,1835692,https://api.edinet-fsa.go.jp/api/v2/documents/S1007MCL?type=5
+2017-03-31,edinet-kyuden-revenue,JP,1827524,https://api.edinet-fsa.go.jp/api/v2/documents/S100ANWS?type=5
+2018-03-31,edinet-kyuden-revenue,JP,1960359,https://api.edinet-fsa.go.jp/api/v2/documents/S100DGTM?type=5
+2019-03-31,edinet-kyuden-revenue,JP,2017181,https://api.edinet-fsa.go.jp/api/v2/documents/S100G9N2?type=5
+2020-03-31,edinet-kyuden-revenue,JP,2013050,https://api.edinet-fsa.go.jp/api/v2/documents/S100IY0C?type=5
+2021-03-31,edinet-kyuden-revenue,JP,2131799,https://api.edinet-fsa.go.jp/api/v2/documents/S100LRPH?type=5
+2022-03-31,edinet-kyuden-revenue,JP,1743310,https://api.edinet-fsa.go.jp/api/v2/documents/S100OL50?type=5
+2023-03-31,edinet-kyuden-revenue,JP,2221300,https://api.edinet-fsa.go.jp/api/v2/documents/S100R7AV?type=5
+2024-03-31,edinet-kyuden-revenue,JP,2139447,https://api.edinet-fsa.go.jp/api/v2/documents/S100TTZH?type=5
+2025-03-31,edinet-kyuden-revenue,JP,2356833,https://api.edinet-fsa.go.jp/api/v2/documents/S100W361?type=5

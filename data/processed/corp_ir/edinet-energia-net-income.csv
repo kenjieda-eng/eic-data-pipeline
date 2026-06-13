@@ -1,0 +1,11 @@
+date,indicator_id,region,value,source_url
+2016-03-31,edinet-energia-net-income,JP,27113,https://api.edinet-fsa.go.jp/api/v2/documents/S1007TJ1?type=5
+2017-03-31,edinet-energia-net-income,JP,11341,https://api.edinet-fsa.go.jp/api/v2/documents/S100AERV?type=5
+2018-03-31,edinet-energia-net-income,JP,20707,https://api.edinet-fsa.go.jp/api/v2/documents/S100DCRT?type=5
+2019-03-31,edinet-energia-net-income,JP,11446,https://api.edinet-fsa.go.jp/api/v2/documents/S100GBCM?type=5
+2020-03-31,edinet-energia-net-income,JP,90056,https://api.edinet-fsa.go.jp/api/v2/documents/S100IVOC?type=5
+2021-03-31,edinet-energia-net-income,JP,14564,https://api.edinet-fsa.go.jp/api/v2/documents/S100LS1G?type=5
+2022-03-31,edinet-energia-net-income,JP,-39705,https://api.edinet-fsa.go.jp/api/v2/documents/S100OI9E?type=5
+2023-03-31,edinet-energia-net-income,JP,-155378,https://api.edinet-fsa.go.jp/api/v2/documents/S100R8QI?type=5
+2024-03-31,edinet-energia-net-income,JP,133501,https://api.edinet-fsa.go.jp/api/v2/documents/S100TVNH?type=5
+2025-03-31,edinet-energia-net-income,JP,98474,https://api.edinet-fsa.go.jp/api/v2/documents/S100W1TM?type=5

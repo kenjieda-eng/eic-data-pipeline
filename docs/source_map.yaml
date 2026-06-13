@@ -3323,18 +3323,49 @@ sources:
     # 年次（有報）。観測日 = 会計期末（例 2025-03-31）だが、翌年度有報の公表は ~6 月（FYE+約15ヶ月）。
     # この自然な空白期間（期末→次回公表 ≈ 451 日）を SLA 違反扱いしないよう 500 日に設定。
     freshness_sla_days: 500
-    backfill_start: "2025-03-31"   # PoC は当期 1 点のみ（backfill は Phase 2）
-    # 提出者（PoC は東京電力HD 1 社）。edinetCode / secCode は実データで確認（L-062, probe 2026-06-10）。
-    #   secCode は EDINET 5 桁（証券コード 9501 + チェック 0 = 95010）。
+    backfill_start: "2016-03-31"   # Phase 2: 直近10年度 backfill（FY2015〜, submission 2016〜）
+    # 提出者 = 9 一般電気事業者。edinetCode / secCode は EDINET コードリスト（Edinetcode.zip）で確定（L-062, 2026-06-13）。
+    #   secCode は EDINET 5 桁（証券コード 4 桁 + チェック 0）。全社 3 月期決算 → 6 月有報提出。
     filers:
       tepco:
         edinet_code: E04498
         sec_code: "95010"
         name_ja: 東京電力ホールディングス株式会社
-    # 主要 5 指標の (element_id, context_id) マップ。
-    # 実 CSV（docID=S100W4QX, 東京電力HD 第101期 2024/04/01-2025/03/31）で要素IDを確認済（L-062, 推測禁止）。
-    # 連結 = base context（_NonConsolidatedMember でない方）。XBRL 単位=円 → fetch script が ÷1e6 で「百万円」化。
-    # element_id/context_id は本リポジトリ拡張フィールド（D-011 スキーマ外、fetch_edinet.py のみが参照）。
+      chuden:
+        edinet_code: E04502
+        sec_code: "95020"
+        name_ja: 中部電力株式会社
+      kepco:
+        edinet_code: E04499
+        sec_code: "95030"
+        name_ja: 関西電力株式会社
+      energia:
+        edinet_code: E04504
+        sec_code: "95040"
+        name_ja: 中国電力株式会社
+      rikuden:
+        edinet_code: E04503
+        sec_code: "95050"
+        name_ja: 北陸電力株式会社
+      tohoku:
+        edinet_code: E04501
+        sec_code: "95060"
+        name_ja: 東北電力株式会社
+      yonden:
+        edinet_code: E04505
+        sec_code: "95070"
+        name_ja: 四国電力株式会社
+      kyuden:
+        edinet_code: E04506
+        sec_code: "95080"
+        name_ja: 九州電力株式会社
+      hepco:
+        edinet_code: E04500
+        sec_code: "95090"
+        name_ja: 北海道電力株式会社
+    # 主要 5 指標の (element_id, context_id) マップ。全 9 社 JGAAP・連結ベース（probe 2026-06-13 で全社×2016/2019/2022/2025 同一要素を確認）。
+    # 連結 = base context（_NonConsolidatedMember でない方）。XBRL 単位=円 → fetch_edinet.py が ÷1e6 で百万円化。
+    # element_id/context_id/fallback_element_ids は本リポジトリ拡張フィールド（D-011 スキーマ外、fetch_edinet.py のみ参照）。
     indicators:
       edinet-tepco-revenue:
         name: 東京電力HD 営業収益（連結）
@@ -3342,9 +3373,9 @@ sources:
         unit: 百万円
         element_id: jppfs_cor:OperatingRevenueELE
         context_id: CurrentYearDuration
-        backfill_start: "2025-03-31"
+        backfill_start: "2016-03-31"
         aggregation: raw
-        notes: "EDINET 有報 連結 P/L 営業収益（jppfs_cor:OperatingRevenueELE @ CurrentYearDuration, 連結）。電気事業会計の連結損益計算書トップライン。NetSales/経営指標等と同値。XBRL 単位=円 → ÷1e6 で百万円。docTypeCode=120, filer=E04498"
+        notes: "EDINET 有報 連結 P/L 営業収益（jppfs_cor:OperatingRevenueELE @ CurrentYearDuration, 連結）。電気事業会計の連結損益計算書トップライン。XBRL 単位=円 → ÷1e6 で百万円。docTypeCode=120, filer=E04498"
         depends_on: null
       edinet-tepco-operating-income:
         name: 東京電力HD 営業利益（連結）
@@ -3352,7 +3383,7 @@ sources:
         unit: 百万円
         element_id: jppfs_cor:OperatingIncome
         context_id: CurrentYearDuration
-        backfill_start: "2025-03-31"
+        backfill_start: "2016-03-31"
         aggregation: raw
         notes: "EDINET 有報 連結 P/L 営業利益又は営業損失（jppfs_cor:OperatingIncome @ CurrentYearDuration, 連結）。主要な経営指標表には無いため P/L 要素を採用。XBRL 単位=円 → ÷1e6 で百万円。filer=E04498"
         depends_on: null
@@ -3362,9 +3393,10 @@ sources:
         unit: 百万円
         element_id: jppfs_cor:OrdinaryIncome
         context_id: CurrentYearDuration
-        backfill_start: "2025-03-31"
+        fallback_element_ids: [jppfs_cor:IncomeBeforeIncomeTaxes]
+        backfill_start: "2016-03-31"
         aggregation: raw
-        notes: "EDINET 有報 連結 P/L 経常利益又は経常損失（jppfs_cor:OrdinaryIncome @ CurrentYearDuration, 連結）。JGAAP 経常利益。XBRL 単位=円 → ÷1e6 で百万円。filer=E04498"
+        notes: "EDINET 有報 連結 P/L 経常利益又は経常損失（jppfs_cor:OrdinaryIncome @ CurrentYearDuration, 連結, JGAAP）。IFRS 適用時は税引前当期純利益（jppfs_cor:IncomeBeforeIncomeTaxes）へフォールバック（当 9 社は全年度 JGAAP で未使用）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04498"
         depends_on: null
       edinet-tepco-net-income:
         name: 東京電力HD 当期純利益（親会社株主帰属・連結）
@@ -3372,7 +3404,7 @@ sources:
         unit: 百万円
         element_id: jppfs_cor:ProfitLossAttributableToOwnersOfParent
         context_id: CurrentYearDuration
-        backfill_start: "2025-03-31"
+        backfill_start: "2016-03-31"
         aggregation: raw
         notes: "EDINET 有報 連結 親会社株主に帰属する当期純利益（jppfs_cor:ProfitLossAttributableToOwnersOfParent @ CurrentYearDuration, 連結）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04498"
         depends_on: null
@@ -3382,15 +3414,425 @@ sources:
         unit: 百万円
         element_id: jppfs_cor:Assets
         context_id: CurrentYearInstant
-        backfill_start: "2025-03-31"
+        backfill_start: "2016-03-31"
         aggregation: raw
         notes: "EDINET 有報 連結 B/S 資産合計（jppfs_cor:Assets @ CurrentYearInstant, 連結, 期末時点）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04498"
         depends_on: null
+      edinet-chuden-revenue:
+        name: 中部電力 営業収益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingRevenueELE
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業収益（jppfs_cor:OperatingRevenueELE @ CurrentYearDuration, 連結）。電気事業会計の連結損益計算書トップライン。XBRL 単位=円 → ÷1e6 で百万円。docTypeCode=120, filer=E04502"
+        depends_on: null
+      edinet-chuden-operating-income:
+        name: 中部電力 営業利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingIncome
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業利益又は営業損失（jppfs_cor:OperatingIncome @ CurrentYearDuration, 連結）。主要な経営指標表には無いため P/L 要素を採用。XBRL 単位=円 → ÷1e6 で百万円。filer=E04502"
+        depends_on: null
+      edinet-chuden-ordinary-income:
+        name: 中部電力 経常利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OrdinaryIncome
+        context_id: CurrentYearDuration
+        fallback_element_ids: [jppfs_cor:IncomeBeforeIncomeTaxes]
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 経常利益又は経常損失（jppfs_cor:OrdinaryIncome @ CurrentYearDuration, 連結, JGAAP）。IFRS 適用時は税引前当期純利益（jppfs_cor:IncomeBeforeIncomeTaxes）へフォールバック（当 9 社は全年度 JGAAP で未使用）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04502"
+        depends_on: null
+      edinet-chuden-net-income:
+        name: 中部電力 当期純利益（親会社株主帰属・連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:ProfitLossAttributableToOwnersOfParent
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 親会社株主に帰属する当期純利益（jppfs_cor:ProfitLossAttributableToOwnersOfParent @ CurrentYearDuration, 連結）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04502"
+        depends_on: null
+      edinet-chuden-total-assets:
+        name: 中部電力 総資産（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:Assets
+        context_id: CurrentYearInstant
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 B/S 資産合計（jppfs_cor:Assets @ CurrentYearInstant, 連結, 期末時点）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04502"
+        depends_on: null
+      edinet-kepco-revenue:
+        name: 関西電力 営業収益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingRevenueELE
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業収益（jppfs_cor:OperatingRevenueELE @ CurrentYearDuration, 連結）。電気事業会計の連結損益計算書トップライン。XBRL 単位=円 → ÷1e6 で百万円。docTypeCode=120, filer=E04499"
+        depends_on: null
+      edinet-kepco-operating-income:
+        name: 関西電力 営業利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingIncome
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業利益又は営業損失（jppfs_cor:OperatingIncome @ CurrentYearDuration, 連結）。主要な経営指標表には無いため P/L 要素を採用。XBRL 単位=円 → ÷1e6 で百万円。filer=E04499"
+        depends_on: null
+      edinet-kepco-ordinary-income:
+        name: 関西電力 経常利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OrdinaryIncome
+        context_id: CurrentYearDuration
+        fallback_element_ids: [jppfs_cor:IncomeBeforeIncomeTaxes]
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 経常利益又は経常損失（jppfs_cor:OrdinaryIncome @ CurrentYearDuration, 連結, JGAAP）。IFRS 適用時は税引前当期純利益（jppfs_cor:IncomeBeforeIncomeTaxes）へフォールバック（当 9 社は全年度 JGAAP で未使用）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04499"
+        depends_on: null
+      edinet-kepco-net-income:
+        name: 関西電力 当期純利益（親会社株主帰属・連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:ProfitLossAttributableToOwnersOfParent
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 親会社株主に帰属する当期純利益（jppfs_cor:ProfitLossAttributableToOwnersOfParent @ CurrentYearDuration, 連結）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04499"
+        depends_on: null
+      edinet-kepco-total-assets:
+        name: 関西電力 総資産（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:Assets
+        context_id: CurrentYearInstant
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 B/S 資産合計（jppfs_cor:Assets @ CurrentYearInstant, 連結, 期末時点）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04499"
+        depends_on: null
+      edinet-energia-revenue:
+        name: 中国電力 営業収益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingRevenueELE
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業収益（jppfs_cor:OperatingRevenueELE @ CurrentYearDuration, 連結）。電気事業会計の連結損益計算書トップライン。XBRL 単位=円 → ÷1e6 で百万円。docTypeCode=120, filer=E04504"
+        depends_on: null
+      edinet-energia-operating-income:
+        name: 中国電力 営業利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingIncome
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業利益又は営業損失（jppfs_cor:OperatingIncome @ CurrentYearDuration, 連結）。主要な経営指標表には無いため P/L 要素を採用。XBRL 単位=円 → ÷1e6 で百万円。filer=E04504"
+        depends_on: null
+      edinet-energia-ordinary-income:
+        name: 中国電力 経常利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OrdinaryIncome
+        context_id: CurrentYearDuration
+        fallback_element_ids: [jppfs_cor:IncomeBeforeIncomeTaxes]
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 経常利益又は経常損失（jppfs_cor:OrdinaryIncome @ CurrentYearDuration, 連結, JGAAP）。IFRS 適用時は税引前当期純利益（jppfs_cor:IncomeBeforeIncomeTaxes）へフォールバック（当 9 社は全年度 JGAAP で未使用）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04504"
+        depends_on: null
+      edinet-energia-net-income:
+        name: 中国電力 当期純利益（親会社株主帰属・連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:ProfitLossAttributableToOwnersOfParent
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 親会社株主に帰属する当期純利益（jppfs_cor:ProfitLossAttributableToOwnersOfParent @ CurrentYearDuration, 連結）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04504"
+        depends_on: null
+      edinet-energia-total-assets:
+        name: 中国電力 総資産（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:Assets
+        context_id: CurrentYearInstant
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 B/S 資産合計（jppfs_cor:Assets @ CurrentYearInstant, 連結, 期末時点）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04504"
+        depends_on: null
+      edinet-rikuden-revenue:
+        name: 北陸電力 営業収益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingRevenueELE
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業収益（jppfs_cor:OperatingRevenueELE @ CurrentYearDuration, 連結）。電気事業会計の連結損益計算書トップライン。XBRL 単位=円 → ÷1e6 で百万円。docTypeCode=120, filer=E04503"
+        depends_on: null
+      edinet-rikuden-operating-income:
+        name: 北陸電力 営業利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingIncome
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業利益又は営業損失（jppfs_cor:OperatingIncome @ CurrentYearDuration, 連結）。主要な経営指標表には無いため P/L 要素を採用。XBRL 単位=円 → ÷1e6 で百万円。filer=E04503"
+        depends_on: null
+      edinet-rikuden-ordinary-income:
+        name: 北陸電力 経常利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OrdinaryIncome
+        context_id: CurrentYearDuration
+        fallback_element_ids: [jppfs_cor:IncomeBeforeIncomeTaxes]
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 経常利益又は経常損失（jppfs_cor:OrdinaryIncome @ CurrentYearDuration, 連結, JGAAP）。IFRS 適用時は税引前当期純利益（jppfs_cor:IncomeBeforeIncomeTaxes）へフォールバック（当 9 社は全年度 JGAAP で未使用）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04503"
+        depends_on: null
+      edinet-rikuden-net-income:
+        name: 北陸電力 当期純利益（親会社株主帰属・連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:ProfitLossAttributableToOwnersOfParent
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 親会社株主に帰属する当期純利益（jppfs_cor:ProfitLossAttributableToOwnersOfParent @ CurrentYearDuration, 連結）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04503"
+        depends_on: null
+      edinet-rikuden-total-assets:
+        name: 北陸電力 総資産（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:Assets
+        context_id: CurrentYearInstant
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 B/S 資産合計（jppfs_cor:Assets @ CurrentYearInstant, 連結, 期末時点）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04503"
+        depends_on: null
+      edinet-tohoku-revenue:
+        name: 東北電力 営業収益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingRevenueELE
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業収益（jppfs_cor:OperatingRevenueELE @ CurrentYearDuration, 連結）。電気事業会計の連結損益計算書トップライン。XBRL 単位=円 → ÷1e6 で百万円。docTypeCode=120, filer=E04501"
+        depends_on: null
+      edinet-tohoku-operating-income:
+        name: 東北電力 営業利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingIncome
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業利益又は営業損失（jppfs_cor:OperatingIncome @ CurrentYearDuration, 連結）。主要な経営指標表には無いため P/L 要素を採用。XBRL 単位=円 → ÷1e6 で百万円。filer=E04501"
+        depends_on: null
+      edinet-tohoku-ordinary-income:
+        name: 東北電力 経常利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OrdinaryIncome
+        context_id: CurrentYearDuration
+        fallback_element_ids: [jppfs_cor:IncomeBeforeIncomeTaxes]
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 経常利益又は経常損失（jppfs_cor:OrdinaryIncome @ CurrentYearDuration, 連結, JGAAP）。IFRS 適用時は税引前当期純利益（jppfs_cor:IncomeBeforeIncomeTaxes）へフォールバック（当 9 社は全年度 JGAAP で未使用）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04501"
+        depends_on: null
+      edinet-tohoku-net-income:
+        name: 東北電力 当期純利益（親会社株主帰属・連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:ProfitLossAttributableToOwnersOfParent
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 親会社株主に帰属する当期純利益（jppfs_cor:ProfitLossAttributableToOwnersOfParent @ CurrentYearDuration, 連結）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04501"
+        depends_on: null
+      edinet-tohoku-total-assets:
+        name: 東北電力 総資産（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:Assets
+        context_id: CurrentYearInstant
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 B/S 資産合計（jppfs_cor:Assets @ CurrentYearInstant, 連結, 期末時点）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04501"
+        depends_on: null
+      edinet-yonden-revenue:
+        name: 四国電力 営業収益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingRevenueELE
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業収益（jppfs_cor:OperatingRevenueELE @ CurrentYearDuration, 連結）。電気事業会計の連結損益計算書トップライン。XBRL 単位=円 → ÷1e6 で百万円。docTypeCode=120, filer=E04505"
+        depends_on: null
+      edinet-yonden-operating-income:
+        name: 四国電力 営業利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingIncome
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業利益又は営業損失（jppfs_cor:OperatingIncome @ CurrentYearDuration, 連結）。主要な経営指標表には無いため P/L 要素を採用。XBRL 単位=円 → ÷1e6 で百万円。filer=E04505"
+        depends_on: null
+      edinet-yonden-ordinary-income:
+        name: 四国電力 経常利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OrdinaryIncome
+        context_id: CurrentYearDuration
+        fallback_element_ids: [jppfs_cor:IncomeBeforeIncomeTaxes]
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 経常利益又は経常損失（jppfs_cor:OrdinaryIncome @ CurrentYearDuration, 連結, JGAAP）。IFRS 適用時は税引前当期純利益（jppfs_cor:IncomeBeforeIncomeTaxes）へフォールバック（当 9 社は全年度 JGAAP で未使用）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04505"
+        depends_on: null
+      edinet-yonden-net-income:
+        name: 四国電力 当期純利益（親会社株主帰属・連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:ProfitLossAttributableToOwnersOfParent
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 親会社株主に帰属する当期純利益（jppfs_cor:ProfitLossAttributableToOwnersOfParent @ CurrentYearDuration, 連結）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04505"
+        depends_on: null
+      edinet-yonden-total-assets:
+        name: 四国電力 総資産（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:Assets
+        context_id: CurrentYearInstant
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 B/S 資産合計（jppfs_cor:Assets @ CurrentYearInstant, 連結, 期末時点）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04505"
+        depends_on: null
+      edinet-kyuden-revenue:
+        name: 九州電力 営業収益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingRevenueELE
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業収益（jppfs_cor:OperatingRevenueELE @ CurrentYearDuration, 連結）。電気事業会計の連結損益計算書トップライン。XBRL 単位=円 → ÷1e6 で百万円。docTypeCode=120, filer=E04506"
+        depends_on: null
+      edinet-kyuden-operating-income:
+        name: 九州電力 営業利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingIncome
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業利益又は営業損失（jppfs_cor:OperatingIncome @ CurrentYearDuration, 連結）。主要な経営指標表には無いため P/L 要素を採用。XBRL 単位=円 → ÷1e6 で百万円。filer=E04506"
+        depends_on: null
+      edinet-kyuden-ordinary-income:
+        name: 九州電力 経常利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OrdinaryIncome
+        context_id: CurrentYearDuration
+        fallback_element_ids: [jppfs_cor:IncomeBeforeIncomeTaxes]
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 経常利益又は経常損失（jppfs_cor:OrdinaryIncome @ CurrentYearDuration, 連結, JGAAP）。IFRS 適用時は税引前当期純利益（jppfs_cor:IncomeBeforeIncomeTaxes）へフォールバック（当 9 社は全年度 JGAAP で未使用）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04506"
+        depends_on: null
+      edinet-kyuden-net-income:
+        name: 九州電力 当期純利益（親会社株主帰属・連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:ProfitLossAttributableToOwnersOfParent
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 親会社株主に帰属する当期純利益（jppfs_cor:ProfitLossAttributableToOwnersOfParent @ CurrentYearDuration, 連結）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04506"
+        depends_on: null
+      edinet-kyuden-total-assets:
+        name: 九州電力 総資産（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:Assets
+        context_id: CurrentYearInstant
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 B/S 資産合計（jppfs_cor:Assets @ CurrentYearInstant, 連結, 期末時点）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04506"
+        depends_on: null
+      edinet-hepco-revenue:
+        name: 北海道電力 営業収益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingRevenueELE
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業収益（jppfs_cor:OperatingRevenueELE @ CurrentYearDuration, 連結）。電気事業会計の連結損益計算書トップライン。XBRL 単位=円 → ÷1e6 で百万円。docTypeCode=120, filer=E04500"
+        depends_on: null
+      edinet-hepco-operating-income:
+        name: 北海道電力 営業利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OperatingIncome
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 営業利益又は営業損失（jppfs_cor:OperatingIncome @ CurrentYearDuration, 連結）。主要な経営指標表には無いため P/L 要素を採用。XBRL 単位=円 → ÷1e6 で百万円。filer=E04500"
+        depends_on: null
+      edinet-hepco-ordinary-income:
+        name: 北海道電力 経常利益（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:OrdinaryIncome
+        context_id: CurrentYearDuration
+        fallback_element_ids: [jppfs_cor:IncomeBeforeIncomeTaxes]
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 P/L 経常利益又は経常損失（jppfs_cor:OrdinaryIncome @ CurrentYearDuration, 連結, JGAAP）。IFRS 適用時は税引前当期純利益（jppfs_cor:IncomeBeforeIncomeTaxes）へフォールバック（当 9 社は全年度 JGAAP で未使用）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04500"
+        depends_on: null
+      edinet-hepco-net-income:
+        name: 北海道電力 当期純利益（親会社株主帰属・連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:ProfitLossAttributableToOwnersOfParent
+        context_id: CurrentYearDuration
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 親会社株主に帰属する当期純利益（jppfs_cor:ProfitLossAttributableToOwnersOfParent @ CurrentYearDuration, 連結）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04500"
+        depends_on: null
+      edinet-hepco-total-assets:
+        name: 北海道電力 総資産（連結）
+        domain: corp_ir
+        unit: 百万円
+        element_id: jppfs_cor:Assets
+        context_id: CurrentYearInstant
+        backfill_start: "2016-03-31"
+        aggregation: raw
+        notes: "EDINET 有報 連結 B/S 資産合計（jppfs_cor:Assets @ CurrentYearInstant, 連結, 期末時点）。XBRL 単位=円 → ÷1e6 で百万円。filer=E04500"
+        depends_on: null
     notes: |
-      - PoC（docs/edinet-scoping-2026-06-09.md Phase 1）: 東京電力HD 1 社 × 主要 5 指標（連結・当期 1 点）。
-      - docID は年次ローテーション。fetch_edinet.py が documents.json を submission_month の各日（新しい順）
-        で走査して動的特定（ハードコードしない, L-062）。当年に有報が無ければ前年へフォールバック。
-      - 値は XBRL CSV の「値」列（単位=円）を ÷1e6 して百万円で格納。date=会計期末（periodEnd）、region=JP。
-      - 経常利益が無い IFRS 適用会社へ拡張する場合は tax-before（jppfs_cor:IncomeBeforeIncomeTaxes 等）への
-        フォールバックを Phase 2 で indicators 側に持たせる（東京電力HD は JGAAP で経常利益あり）。
-      - Phase 2: 9 一般電気事業者 × 主要指標へ展開（corp_ir ドメイン本 seed）。backfill は有報電子化が揃う範囲。
+      - Phase 2（docs/edinet-scoping-2026-06-09.md §3）: 9 一般電気事業者 × 主要 5 指標（連結）。corp_ir ドメイン本 seed。
+      - 提出者 9 社（alias=edinetCode）: tepco=E04498 / chuden=E04502 / kepco=E04499 / energia=E04504 /
+        rikuden=E04503 / tohoku=E04501 / yonden=E04505 / kyuden=E04506 / hepco=E04500（Edinetcode.zip で確定, L-062）。
+      - docID は年次ローテーション。fetch_edinet.py が documents.json を submission_month の各日（新しい順）で
+        走査し、提出年ごとに全社の有報 docID を 1 パスで動的特定（ハードコードしない, L-062）。
+      - backfill: 提出年 2016〜2025（FY2015〜FY2024, 直近10年度）。値は XBRL CSV の「値」列（単位=円）を
+        ÷1e6 して百万円で格納。各有報の CurrentYear コンテキストを採用。date=会計期末（periodEnd）、region=JP。
+      - 全 9 社・全年度 JGAAP（経常利益あり）。IFRS 適用へ拡張する場合のみ経常利益が税引前当期純利益へ
+        フォールバック（fallback_element_ids, 当 9 社では未発火）。

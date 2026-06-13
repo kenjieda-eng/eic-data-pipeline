@@ -1,0 +1,11 @@
+date,indicator_id,region,value,source_url
+2016-03-31,edinet-kepco-total-assets,JP,7412472,https://api.edinet-fsa.go.jp/api/v2/documents/S1007ZVB?type=5
+2017-03-31,edinet-kepco-total-assets,JP,6853182,https://api.edinet-fsa.go.jp/api/v2/documents/S100AO9E?type=5
+2018-03-31,edinet-kepco-total-assets,JP,6985088,https://api.edinet-fsa.go.jp/api/v2/documents/S100DCR7?type=5
+2019-03-31,edinet-kepco-total-assets,JP,7257363,https://api.edinet-fsa.go.jp/api/v2/documents/S100G17T?type=5
+2020-03-31,edinet-kepco-total-assets,JP,7612729,https://api.edinet-fsa.go.jp/api/v2/documents/S100IRRA?type=5
+2021-03-31,edinet-kepco-total-assets,JP,8075755,https://api.edinet-fsa.go.jp/api/v2/documents/S100LKRF?type=5
+2022-03-31,edinet-kepco-total-assets,JP,8656430,https://api.edinet-fsa.go.jp/api/v2/documents/S100OJ76?type=5
+2023-03-31,edinet-kepco-total-assets,JP,8774425,https://api.edinet-fsa.go.jp/api/v2/documents/S100R4SI?type=5
+2024-03-31,edinet-kepco-total-assets,JP,9032917,https://api.edinet-fsa.go.jp/api/v2/documents/S100TUNQ?type=5
+2025-03-31,edinet-kepco-total-assets,JP,9652655,https://api.edinet-fsa.go.jp/api/v2/documents/S100W38I?type=5
