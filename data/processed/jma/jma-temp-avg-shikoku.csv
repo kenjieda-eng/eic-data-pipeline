@@ -5278,3 +5278,4 @@ date,indicator_id,region,value,source_url
 2026-06-12,jma-temp-avg-shikoku,shikoku,25.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
 2026-06-13,jma-temp-avg-shikoku,shikoku,24.6,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
 2026-06-14,jma-temp-avg-shikoku,shikoku,23.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
+2026-06-15,jma-temp-avg-shikoku,shikoku,24.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
