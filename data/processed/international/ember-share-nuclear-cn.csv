@@ -123,8 +123,8 @@ date,indicator_id,region,value,source_url
 2025-02-01,ember-share-nuclear-cn,cn,4.73,https://ember-energy.org/data/monthly-electricity-data/
 2025-03-01,ember-share-nuclear-cn,cn,5.15,https://ember-energy.org/data/monthly-electricity-data/
 2025-04-01,ember-share-nuclear-cn,cn,5.3,https://ember-energy.org/data/monthly-electricity-data/
-2025-05-01,ember-share-nuclear-cn,cn,4.77,https://ember-energy.org/data/monthly-electricity-data/
-2025-06-01,ember-share-nuclear-cn,cn,4.53,https://ember-energy.org/data/monthly-electricity-data/
+2025-05-01,ember-share-nuclear-cn,cn,4.75,https://ember-energy.org/data/monthly-electricity-data/
+2025-06-01,ember-share-nuclear-cn,cn,4.54,https://ember-energy.org/data/monthly-electricity-data/
 2025-07-01,ember-share-nuclear-cn,cn,4.28,https://ember-energy.org/data/monthly-electricity-data/
 2025-08-01,ember-share-nuclear-cn,cn,4.22,https://ember-energy.org/data/monthly-electricity-data/
 2025-09-01,ember-share-nuclear-cn,cn,4.07,https://ember-energy.org/data/monthly-electricity-data/
@@ -132,6 +132,7 @@ date,indicator_id,region,value,source_url
 2025-11-01,ember-share-nuclear-cn,cn,4.77,https://ember-energy.org/data/monthly-electricity-data/
 2025-12-01,ember-share-nuclear-cn,cn,4.9,https://ember-energy.org/data/monthly-electricity-data/
 2026-01-01,ember-share-nuclear-cn,cn,4.5,https://ember-energy.org/data/monthly-electricity-data/
-2026-02-01,ember-share-nuclear-cn,cn,4.53,https://ember-energy.org/data/monthly-electricity-data/
+2026-02-01,ember-share-nuclear-cn,cn,4.52,https://ember-energy.org/data/monthly-electricity-data/
 2026-03-01,ember-share-nuclear-cn,cn,4.44,https://ember-energy.org/data/monthly-electricity-data/
-2026-04-01,ember-share-nuclear-cn,cn,4.57,https://ember-energy.org/data/monthly-electricity-data/
+2026-04-01,ember-share-nuclear-cn,cn,4.64,https://ember-energy.org/data/monthly-electricity-data/
+2026-05-01,ember-share-nuclear-cn,cn,4.68,https://ember-energy.org/data/monthly-electricity-data/

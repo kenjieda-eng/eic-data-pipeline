@@ -122,7 +122,7 @@ date,indicator_id,region,value,source_url
 2025-01-01,ember-share-wind-cn,cn,12.15,https://ember-energy.org/data/monthly-electricity-data/
 2025-02-01,ember-share-wind-cn,cn,12.05,https://ember-energy.org/data/monthly-electricity-data/
 2025-03-01,ember-share-wind-cn,cn,13.55,https://ember-energy.org/data/monthly-electricity-data/
-2025-04-01,ember-share-wind-cn,cn,13.56,https://ember-energy.org/data/monthly-electricity-data/
+2025-04-01,ember-share-wind-cn,cn,13.57,https://ember-energy.org/data/monthly-electricity-data/
 2025-05-01,ember-share-wind-cn,cn,12.27,https://ember-energy.org/data/monthly-electricity-data/
 2025-06-01,ember-share-wind-cn,cn,9.18,https://ember-energy.org/data/monthly-electricity-data/
 2025-07-01,ember-share-wind-cn,cn,8.0,https://ember-energy.org/data/monthly-electricity-data/
@@ -134,4 +134,5 @@ date,indicator_id,region,value,source_url
 2026-01-01,ember-share-wind-cn,cn,12.57,https://ember-energy.org/data/monthly-electricity-data/
 2026-02-01,ember-share-wind-cn,cn,12.39,https://ember-energy.org/data/monthly-electricity-data/
 2026-03-01,ember-share-wind-cn,cn,11.21,https://ember-energy.org/data/monthly-electricity-data/
-2026-04-01,ember-share-wind-cn,cn,12.79,https://ember-energy.org/data/monthly-electricity-data/
+2026-04-01,ember-share-wind-cn,cn,12.75,https://ember-energy.org/data/monthly-electricity-data/
+2026-05-01,ember-share-wind-cn,cn,11.94,https://ember-energy.org/data/monthly-electricity-data/

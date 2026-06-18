@@ -122,10 +122,10 @@ date,indicator_id,region,value,source_url
 2025-01-01,ember-share-coal-cn,cn,59.37,https://ember-energy.org/data/monthly-electricity-data/
 2025-02-01,ember-share-coal-cn,cn,59.5,https://ember-energy.org/data/monthly-electricity-data/
 2025-03-01,ember-share-coal-cn,cn,56.41,https://ember-energy.org/data/monthly-electricity-data/
-2025-04-01,ember-share-coal-cn,cn,53.33,https://ember-energy.org/data/monthly-electricity-data/
-2025-05-01,ember-share-coal-cn,cn,52.57,https://ember-energy.org/data/monthly-electricity-data/
-2025-06-01,ember-share-coal-cn,cn,52.19,https://ember-energy.org/data/monthly-electricity-data/
-2025-07-01,ember-share-coal-cn,cn,54.91,https://ember-energy.org/data/monthly-electricity-data/
+2025-04-01,ember-share-coal-cn,cn,53.32,https://ember-energy.org/data/monthly-electricity-data/
+2025-05-01,ember-share-coal-cn,cn,52.59,https://ember-energy.org/data/monthly-electricity-data/
+2025-06-01,ember-share-coal-cn,cn,52.21,https://ember-energy.org/data/monthly-electricity-data/
+2025-07-01,ember-share-coal-cn,cn,54.92,https://ember-energy.org/data/monthly-electricity-data/
 2025-08-01,ember-share-coal-cn,cn,56.99,https://ember-energy.org/data/monthly-electricity-data/
 2025-09-01,ember-share-coal-cn,cn,53.41,https://ember-energy.org/data/monthly-electricity-data/
 2025-10-01,ember-share-coal-cn,cn,55.27,https://ember-energy.org/data/monthly-electricity-data/
@@ -134,4 +134,5 @@ date,indicator_id,region,value,source_url
 2026-01-01,ember-share-coal-cn,cn,57.91,https://ember-energy.org/data/monthly-electricity-data/
 2026-02-01,ember-share-coal-cn,cn,58.2,https://ember-energy.org/data/monthly-electricity-data/
 2026-03-01,ember-share-coal-cn,cn,57.35,https://ember-energy.org/data/monthly-electricity-data/
-2026-04-01,ember-share-coal-cn,cn,51.79,https://ember-energy.org/data/monthly-electricity-data/
+2026-04-01,ember-share-coal-cn,cn,52.6,https://ember-energy.org/data/monthly-electricity-data/
+2026-05-01,ember-share-coal-cn,cn,50.38,https://ember-energy.org/data/monthly-electricity-data/
