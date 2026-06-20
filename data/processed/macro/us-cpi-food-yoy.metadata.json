@@ -8,7 +8,7 @@
   "source_url": "https://fred.stlouisfed.org/",
   "license": "public-domain",
   "observation_cutoff": "2026-05-01",
-  "updated_at": "2026-06-19T10:47:44+09:00",
+  "updated_at": "2026-06-20T09:15:47+09:00",
   "license_url": "https://fred.stlouisfed.org/legal/",
   "license_notice": "出典: Federal Reserve Bank of St. Louis (FRED).\n各系列の元データは BLS（CPIAUCSL）/ Federal Reserve Board（FEDFUNDS, INDPRO）が作成。\n米連邦政府公表資料は public domain（17 U.S.C. § 105）。\n",
   "tz": "America/New_York",
