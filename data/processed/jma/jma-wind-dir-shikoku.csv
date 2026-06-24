@@ -5286,3 +5286,4 @@ date,indicator_id,region,value,source_url
 2026-06-20,jma-wind-dir-shikoku,shikoku,337.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
 2026-06-21,jma-wind-dir-shikoku,shikoku,270.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
 2026-06-22,jma-wind-dir-shikoku,shikoku,270.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
+2026-06-23,jma-wind-dir-shikoku,shikoku,90.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
