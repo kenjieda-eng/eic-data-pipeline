@@ -2982,3 +2982,4 @@ date,indicator_id,region,value,source_url
 2026-06-22,jma-precip-chugoku,chugoku,6.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
 2026-06-23,jma-precip-chugoku,chugoku,0.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
 2026-06-24,jma-precip-chugoku,chugoku,78.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
+2026-06-25,jma-precip-chugoku,chugoku,122.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=

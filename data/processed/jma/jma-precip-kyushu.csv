@@ -3149,3 +3149,4 @@ date,indicator_id,region,value,source_url
 2026-06-22,jma-precip-kyushu,kyushu,5.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
 2026-06-23,jma-precip-kyushu,kyushu,64.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
 2026-06-24,jma-precip-kyushu,kyushu,56.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
+2026-06-25,jma-precip-kyushu,kyushu,73.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
