@@ -5292,3 +5292,4 @@ date,indicator_id,region,value,source_url
 2026-06-26,jma-sunshine-kansai,kansai,0.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=62&block_no=47772&year=YYYY&month=MM&day=&view=
 2026-06-27,jma-sunshine-kansai,kansai,0.6,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=62&block_no=47772&year=YYYY&month=MM&day=&view=
 2026-06-28,jma-sunshine-kansai,kansai,3.1,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=62&block_no=47772&year=YYYY&month=MM&day=&view=
+2026-06-29,jma-sunshine-kansai,kansai,9.9,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=62&block_no=47772&year=YYYY&month=MM&day=&view=
