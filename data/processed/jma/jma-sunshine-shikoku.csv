@@ -5293,3 +5293,4 @@ date,indicator_id,region,value,source_url
 2026-06-27,jma-sunshine-shikoku,shikoku,0.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
 2026-06-28,jma-sunshine-shikoku,shikoku,0.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
 2026-06-29,jma-sunshine-shikoku,shikoku,13.2,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
+2026-06-30,jma-sunshine-shikoku,shikoku,3.6,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=72&block_no=47891&year=YYYY&month=MM&day=&view=
