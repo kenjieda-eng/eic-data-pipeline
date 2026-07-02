@@ -37,3 +37,4 @@ date,indicator_id,region,value,source_url
 2026-04-01,ecb-rate-mrr,eu,2.15,https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.MRR_FR.LEV
 2026-05-01,ecb-rate-mrr,eu,2.15,https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.MRR_FR.LEV
 2026-06-01,ecb-rate-mrr,eu,2.4,https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.MRR_FR.LEV
+2026-07-01,ecb-rate-mrr,eu,2.4,https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.MRR_FR.LEV

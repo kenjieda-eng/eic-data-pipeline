@@ -234,3 +234,4 @@ date,indicator_id,region,value,source_url
 2025-09-01,tankan-sme-mfg-di,jp,1.0,"https://www.stat-search.boj.or.jp/api/v1/getDataCode?db=CO&code=TK99F1000601GCQ01000,TK99F2000601GCQ01000,TK99F1000601GCQ03000,TK99F2000601GCQ03000"
 2025-12-01,tankan-sme-mfg-di,jp,6.0,"https://www.stat-search.boj.or.jp/api/v1/getDataCode?db=CO&code=TK99F1000601GCQ01000,TK99F2000601GCQ01000,TK99F1000601GCQ03000,TK99F2000601GCQ03000"
 2026-03-01,tankan-sme-mfg-di,jp,7.0,"https://www.stat-search.boj.or.jp/api/v1/getDataCode?db=CO&code=TK99F1000601GCQ01000,TK99F2000601GCQ01000,TK99F1000601GCQ03000,TK99F2000601GCQ03000"
+2026-06-01,tankan-sme-mfg-di,jp,9.0,"https://www.stat-search.boj.or.jp/api/v1/getDataCode?db=CO&code=TK99F1000601GCQ01000,TK99F2000601GCQ01000,TK99F1000601GCQ03000,TK99F2000601GCQ03000"
