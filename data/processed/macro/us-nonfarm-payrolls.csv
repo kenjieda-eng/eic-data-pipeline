@@ -1046,5 +1046,6 @@ date,indicator_id,region,value,source_url
 2026-01-01,us-nonfarm-payrolls,us,158592.0,https://fred.stlouisfed.org/series/PAYEMS
 2026-02-01,us-nonfarm-payrolls,us,158436.0,https://fred.stlouisfed.org/series/PAYEMS
 2026-03-01,us-nonfarm-payrolls,us,158650.0,https://fred.stlouisfed.org/series/PAYEMS
-2026-04-01,us-nonfarm-payrolls,us,158829.0,https://fred.stlouisfed.org/series/PAYEMS
-2026-05-01,us-nonfarm-payrolls,us,159001.0,https://fred.stlouisfed.org/series/PAYEMS
+2026-04-01,us-nonfarm-payrolls,us,158798.0,https://fred.stlouisfed.org/series/PAYEMS
+2026-05-01,us-nonfarm-payrolls,us,158927.0,https://fred.stlouisfed.org/series/PAYEMS
+2026-06-01,us-nonfarm-payrolls,us,158984.0,https://fred.stlouisfed.org/series/PAYEMS

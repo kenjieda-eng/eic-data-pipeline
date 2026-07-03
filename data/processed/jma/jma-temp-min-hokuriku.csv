@@ -5295,3 +5295,4 @@ date,indicator_id,region,value,source_url
 2026-06-29,jma-temp-min-hokuriku,hokuriku,20.6,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=56&block_no=47605&year=YYYY&month=MM&day=&view=
 2026-06-30,jma-temp-min-hokuriku,hokuriku,21.6,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=56&block_no=47605&year=YYYY&month=MM&day=&view=
 2026-07-01,jma-temp-min-hokuriku,hokuriku,21.6,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=56&block_no=47605&year=YYYY&month=MM&day=&view=
+2026-07-02,jma-temp-min-hokuriku,hokuriku,20.8,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=56&block_no=47605&year=YYYY&month=MM&day=&view=
