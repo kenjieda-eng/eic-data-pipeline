@@ -231,6 +231,12 @@ jobs:
         run: |
           python scripts/generate_catalog.py
 
+      - name: Generate today morning summary (data/today)
+        # 朝刊サマリー JSON（/today 復活 A 案・pipeline 側）。catalog を入力に
+        # data/today/{latest.json, archive/{date}.json, index.json} を生成。
+        # web 側は latest.json を起動時に fetch する。lines 0 件のみ exit 1（他は継続）。
+        run: python scripts/generate_today_summary.py
+
       - name: Commit & push if changed
         run: |
           git config user.name "eic-data-bot"
