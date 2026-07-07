@@ -1,0 +1,97 @@
+{
+  "schema": "today-v1",
+  "date": "2026-07-07",
+  "weekday": "火",
+  "weekend": false,
+  "generatedAt": "2026-07-07T09:52:58+09:00",
+  "lines": [
+    {
+      "indicatorId": "derived:jepx-9-region-avg",
+      "label": "JEPX 全国平均",
+      "unit": "¥/kWh",
+      "dataDate": "2026-07-07",
+      "value": 12.6,
+      "prevDate": "2026-07-06",
+      "prevValue": 12.48,
+      "diff": 0.12,
+      "diffPct": 0.9,
+      "periodLabel": "前日比",
+      "rangePosPct": 51.87,
+      "editor": "haru",
+      "explanation": "2026-07-07 のJEPX 全国平均は 12.60¥/kWh（前日比 +0.12¥/kWh・+0.9%）。直近30日のレンジでは中位圏にある。9エリアの最高は東京 13.75、最低は四国 10.10。"
+    },
+    {
+      "indicatorId": "jepx-spot-tokyo",
+      "label": "JEPX 東京",
+      "unit": "¥/kWh",
+      "dataDate": "2026-07-07",
+      "value": 13.75,
+      "prevDate": "2026-07-06",
+      "prevValue": 15.56,
+      "diff": -1.81,
+      "diffPct": -11.6,
+      "periodLabel": "前日比",
+      "rangePosPct": 10.1,
+      "editor": "haru",
+      "explanation": "2026-07-07 のJEPX 東京は 13.75¥/kWh（前日比 -1.81¥/kWh・-11.6%）。直近30日のレンジでは下位圏にある。"
+    },
+    {
+      "indicatorId": "fuel-lng-jp-cif",
+      "label": "LNG 日本着 (CIF)",
+      "unit": "$/MMBtu",
+      "dataDate": "2025-12-01",
+      "value": 11.06,
+      "prevDate": "2025-11-01",
+      "prevValue": 11.15,
+      "diff": -0.09,
+      "diffPct": -0.8,
+      "periodLabel": "前月比",
+      "rangePosPct": 0.0,
+      "editor": "haru",
+      "explanation": "最新月（2025-12）のLNG 日本着 (CIF)は 11.06$/MMBtu（前月比 -0.8%）。直近12ヶ月のレンジでは下位圏にある。"
+    },
+    {
+      "indicatorId": "fx-usdjpy-monthly-avg",
+      "label": "USD/JPY (月中平均)",
+      "unit": "¥/USD",
+      "dataDate": "2026-06-01",
+      "value": 160.69,
+      "prevDate": "2026-05-01",
+      "prevValue": 158.34,
+      "diff": 2.35,
+      "diffPct": 1.5,
+      "periodLabel": "前月比",
+      "rangePosPct": 100.0,
+      "editor": "makoto",
+      "explanation": "最新月（2026-06）のUSD/JPY (月中平均)は 160.69¥/USD（前月比 +1.5%）。直近12ヶ月のレンジでは上位圏にある。"
+    },
+    {
+      "indicatorId": "jgb-10y-yield",
+      "label": "JGB 10年利回り",
+      "unit": "%",
+      "dataDate": "2026-07-03",
+      "value": 2.77,
+      "prevDate": "2026-07-02",
+      "prevValue": 2.78,
+      "diff": -0.01,
+      "diffPct": -0.4,
+      "periodLabel": "前日比",
+      "rangePosPct": 95.02,
+      "editor": "makoto",
+      "explanation": "2026-07-03 のJGB 10年利回りは 2.77%（前日比 -0.01%・-0.4%）。直近30日のレンジでは上位圏にある。"
+    }
+  ],
+  "alerts": [
+    {
+      "indicatorId": "jepx-spot-tokyo",
+      "label": "JEPX 東京",
+      "diffPct": -11.6,
+      "message": "JEPX 東京 が前日比 -11.6% の変動"
+    }
+  ],
+  "relatedInsights": [
+    "jp-power-markets-three-layers",
+    "electricity-bill-structure",
+    "fuel-cost-adjustment"
+  ]
+}
