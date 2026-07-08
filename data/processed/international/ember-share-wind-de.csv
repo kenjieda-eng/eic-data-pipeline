@@ -135,4 +135,5 @@ date,indicator_id,region,value,source_url
 2026-02-01,ember-share-wind-de,de,33.42,https://ember-energy.org/data/monthly-electricity-data/
 2026-03-01,ember-share-wind-de,de,26.62,https://ember-energy.org/data/monthly-electricity-data/
 2026-04-01,ember-share-wind-de,de,24.55,https://ember-energy.org/data/monthly-electricity-data/
-2026-05-01,ember-share-wind-de,de,18.77,https://ember-energy.org/data/monthly-electricity-data/
+2026-05-01,ember-share-wind-de,de,18.42,https://ember-energy.org/data/monthly-electricity-data/
+2026-06-01,ember-share-wind-de,de,20.31,https://ember-energy.org/data/monthly-electricity-data/

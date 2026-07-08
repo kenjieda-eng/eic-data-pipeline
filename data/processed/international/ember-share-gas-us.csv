@@ -302,5 +302,6 @@ date,indicator_id,region,value,source_url
 2026-01-01,ember-share-gas-us,us,37.41,https://ember-energy.org/data/monthly-electricity-data/
 2026-02-01,ember-share-gas-us,us,37.84,https://ember-energy.org/data/monthly-electricity-data/
 2026-03-01,ember-share-gas-us,us,35.62,https://ember-energy.org/data/monthly-electricity-data/
-2026-04-01,ember-share-gas-us,us,36.5,https://ember-energy.org/data/monthly-electricity-data/
-2026-05-01,ember-share-gas-us,us,37.13,https://ember-energy.org/data/monthly-electricity-data/
+2026-04-01,ember-share-gas-us,us,36.57,https://ember-energy.org/data/monthly-electricity-data/
+2026-05-01,ember-share-gas-us,us,37.14,https://ember-energy.org/data/monthly-electricity-data/
+2026-06-01,ember-share-gas-us,us,39.26,https://ember-energy.org/data/monthly-electricity-data/
