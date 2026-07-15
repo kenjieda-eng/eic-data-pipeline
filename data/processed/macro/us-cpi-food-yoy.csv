@@ -939,3 +939,4 @@ date,indicator_id,region,value,source_url
 2026-03-01,us-cpi-food-yoy,us,3.1357,https://fred.stlouisfed.org/series/CPIUFDSL
 2026-04-01,us-cpi-food-yoy,us,3.2662,https://fred.stlouisfed.org/series/CPIUFDSL
 2026-05-01,us-cpi-food-yoy,us,3.3776,https://fred.stlouisfed.org/series/CPIUFDSL
+2026-06-01,us-cpi-food-yoy,us,3.2898,https://fred.stlouisfed.org/series/CPIUFDSL

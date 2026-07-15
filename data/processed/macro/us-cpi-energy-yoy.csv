@@ -819,3 +819,4 @@ date,indicator_id,region,value,source_url
 2026-03-01,us-cpi-energy-yoy,us,11.3164,https://fred.stlouisfed.org/series/CPIENGSL
 2026-04-01,us-cpi-energy-yoy,us,16.8774,https://fred.stlouisfed.org/series/CPIENGSL
 2026-05-01,us-cpi-energy-yoy,us,22.1012,https://fred.stlouisfed.org/series/CPIENGSL
+2026-06-01,us-cpi-energy-yoy,us,15.9465,https://fred.stlouisfed.org/series/CPIENGSL
