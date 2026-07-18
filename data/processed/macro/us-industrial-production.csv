@@ -1283,8 +1283,9 @@ date,indicator_id,region,value,source_url
 2025-10-01,us-industrial-production,us,101.2195,https://fred.stlouisfed.org/series/INDPRO
 2025-11-01,us-industrial-production,us,101.0344,https://fred.stlouisfed.org/series/INDPRO
 2025-12-01,us-industrial-production,us,101.4941,https://fred.stlouisfed.org/series/INDPRO
-2026-01-01,us-industrial-production,us,101.1235,https://fred.stlouisfed.org/series/INDPRO
-2026-02-01,us-industrial-production,us,101.9493,https://fred.stlouisfed.org/series/INDPRO
-2026-03-01,us-industrial-production,us,101.6273,https://fred.stlouisfed.org/series/INDPRO
-2026-04-01,us-industrial-production,us,102.509,https://fred.stlouisfed.org/series/INDPRO
-2026-05-01,us-industrial-production,us,102.6475,https://fred.stlouisfed.org/series/INDPRO
+2026-01-01,us-industrial-production,us,101.0388,https://fred.stlouisfed.org/series/INDPRO
+2026-02-01,us-industrial-production,us,101.9263,https://fred.stlouisfed.org/series/INDPRO
+2026-03-01,us-industrial-production,us,101.6172,https://fred.stlouisfed.org/series/INDPRO
+2026-04-01,us-industrial-production,us,102.4196,https://fred.stlouisfed.org/series/INDPRO
+2026-05-01,us-industrial-production,us,102.5606,https://fred.stlouisfed.org/series/INDPRO
+2026-06-01,us-industrial-production,us,102.6395,https://fred.stlouisfed.org/series/INDPRO
