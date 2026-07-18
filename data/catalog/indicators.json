@@ -1,7 +1,7 @@
 {
   "version": 2,
   "schema": "D-017",
-  "generated_at": "2026-07-18T09:00:43+09:00",
+  "generated_at": "2026-07-18T13:27:33+09:00",
   "indicator_count": 557,
   "indicators": [
     {
@@ -2078,8 +2078,8 @@
       "source_name": "World Bank Commodity Prices (Pink Sheet) — 月次",
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-07-18T08:57:34+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-07-18T13:14:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -2090,7 +2090,7 @@
       "notes": "Iron ore, cfr spot 系列（Pink Sheet）。$/dmtu = USD per dry metric ton unit。iron-ore-vs-thermal-power Insight で参照",
       "depends_on": null,
       "csv_path": "data/processed/fuel/commodity-iron-ore.csv",
-      "freshness_sla_days": 180
+      "freshness_sla_days": 90
     },
     {
       "id": "ecb-rate-dfr",
@@ -6126,8 +6126,8 @@
       "source_name": "World Bank Commodity Prices (Pink Sheet) — 月次",
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-07-18T08:57:34+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-07-18T13:14:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -6138,7 +6138,7 @@
       "notes": "Coal, Australian 系列（Pink Sheet）",
       "depends_on": null,
       "csv_path": "data/processed/fuel/fuel-coal-au.csv",
-      "freshness_sla_days": 180
+      "freshness_sla_days": 90
     },
     {
       "id": "fuel-crude-brent",
@@ -6149,8 +6149,8 @@
       "source_name": "World Bank Commodity Prices (Pink Sheet) — 月次",
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-07-18T08:57:34+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-07-18T13:14:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -6161,7 +6161,7 @@
       "notes": "Crude oil, Brent（Pink Sheet）",
       "depends_on": null,
       "csv_path": "data/processed/fuel/fuel-crude-brent.csv",
-      "freshness_sla_days": 180
+      "freshness_sla_days": 90
     },
     {
       "id": "fuel-crude-dubai",
@@ -6172,8 +6172,8 @@
       "source_name": "World Bank Commodity Prices (Pink Sheet) — 月次",
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-07-18T08:57:34+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-07-18T13:14:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -6184,7 +6184,7 @@
       "notes": "Crude oil, Dubai（Pink Sheet）",
       "depends_on": null,
       "csv_path": "data/processed/fuel/fuel-crude-dubai.csv",
-      "freshness_sla_days": 180
+      "freshness_sla_days": 90
     },
     {
       "id": "fuel-crude-wti",
@@ -6195,8 +6195,8 @@
       "source_name": "World Bank Commodity Prices (Pink Sheet) — 月次",
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-07-18T08:57:34+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-07-18T13:14:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -6207,7 +6207,7 @@
       "notes": "Crude oil, WTI（Pink Sheet）",
       "depends_on": null,
       "csv_path": "data/processed/fuel/fuel-crude-wti.csv",
-      "freshness_sla_days": 180
+      "freshness_sla_days": 90
     },
     {
       "id": "fuel-lng-jp-cif",
@@ -6218,8 +6218,8 @@
       "source_name": "World Bank Commodity Prices (Pink Sheet) — 月次",
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-07-18T08:57:34+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-07-18T13:14:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -6230,7 +6230,7 @@
       "notes": "日本の LNG 輸入 CIF 価格（月次）。Pink Sheet 収録で 1977-01 から",
       "depends_on": null,
       "csv_path": "data/processed/fuel/fuel-lng-jp-cif.csv",
-      "freshness_sla_days": 180
+      "freshness_sla_days": 90
     },
     {
       "id": "fuel-ng-europe-ttf",
@@ -6241,8 +6241,8 @@
       "source_name": "World Bank Commodity Prices (Pink Sheet) — 月次",
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-07-18T08:57:34+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-07-18T13:14:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -6253,7 +6253,7 @@
       "notes": "Natural gas, Europe 系列。TTF は 1990 年代以降の整備で早期は代替指標の継ぎ",
       "depends_on": null,
       "csv_path": "data/processed/fuel/fuel-ng-europe-ttf.csv",
-      "freshness_sla_days": 180
+      "freshness_sla_days": 90
     },
     {
       "id": "fuel-ng-henryhub",
@@ -6264,8 +6264,8 @@
       "source_name": "World Bank Commodity Prices (Pink Sheet) — 月次",
       "source_url": "https://www.worldbank.org/en/research/commodity-markets",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2025-12-01",
-      "updated_at": "2026-07-18T08:57:34+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-07-18T13:14:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "",
       "tz": "UTC",
@@ -6276,7 +6276,7 @@
       "notes": "Natural gas, US 系列（Pink Sheet 列）",
       "depends_on": null,
       "csv_path": "data/processed/fuel/fuel-ng-henryhub.csv",
-      "freshness_sla_days": 180
+      "freshness_sla_days": 90
     },
     {
       "id": "fx-eurjpy-monthly-avg",

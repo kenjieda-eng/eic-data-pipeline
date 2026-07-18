@@ -375,9 +375,14 @@ sources:
     publisher_url: https://www.worldbank.org/en/research/commodity-markets
     source_url: https://www.worldbank.org/en/research/commodity-markets
     # 単一の安定 XLSX URL（"CMO-Historical-Data-Monthly"）。
-    # World Bank は数年単位でこの URL を引っ越す履歴があるため fallback_urls を併記しておく。
-    xlsx_url: "https://thedocs.worldbank.org/en/doc/18675f1d1639c7a34d463f59263ba0a2-0050012025/related/CMO-Historical-Data-Monthly.xlsx"
+    # World Bank は毎年この文書 URL をローテーションする（0050012025 → 0050012026）。年次で要更新。
+    # 旧年版 URL は失効しても暫くは応答するが内部データが古い月で止まる（サイレント停滞）ため、
+    # 新年版が出たら xlsx_url を差し替え、旧 URL は fallback_urls の先頭に降格して保持する。
+    # 再発防止ゲートは staleness check（scripts/check_staleness.py / nightly の Staleness hard check）を参照。
+    # World Bank は数年単位で URL 体系ごと引っ越す履歴もあるため、更に古い fallback も併記しておく。
+    xlsx_url: "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx"
     fallback_urls:
+      - "https://thedocs.worldbank.org/en/doc/18675f1d1639c7a34d463f59263ba0a2-0050012025/related/CMO-Historical-Data-Monthly.xlsx"
       - "https://pubdocs.worldbank.org/en/561011486076393416/CMO-Historical-Data-Monthly.xlsx"
       - "https://thedocs.worldbank.org/en/doc/561011486076393416-0050022017/CMO-Historical-Data-Monthly"
     sheet_name: "Monthly Prices"
@@ -392,11 +397,16 @@ sources:
     frequency: monthly
     tz: UTC
     missing_policy: forward_fill_within_month
-    # WB Historical Data Monthly XLSX の更新は Pink Sheet PDF より遅延サイクルが長く、
-    # 月次データは公開後 4〜6 ヶ月のラグがある実態（2026-04-29 確認: XLSX 取得日に
-    # かかわらず内部データは 2025M12 で停止）。SLA 180 日は 6 ヶ月の余裕を見たもの（Phase A スプリント期間中の安定運用を優先）。
+    # WB Pink Sheet Historical Data Monthly XLSX は前月値が翌月上旬に確定する
+    # （例: 2026-07-02 版に 2026M06 まで収録）。健全時の想定鮮度は「月次 + 公表ラグ 1〜2 ヶ月 = 90 日」。
+    #
+    # 【履歴 / 反省】2026-04-29 に「XLSX 取得日にかかわらず内部データが 2025M12 で停止」と観測された際、
+    # 原因を publication lag と誤診し、SLA を 90→180 に緩めて鮮度警告を黙らせてしまった（サイレント停滞の温床）。
+    # 真因は xlsx_url が旧年版（...0050012025...）のまま固定され、内部データが凍結していたこと。
+    # 2026-07-18 に URL を 2026 年版へ更新して 8 系列が 2026M06 まで復旧。SLA を本来の 90 に是正する。
+    # 再発防止は staleness hard check（scripts/check_staleness.py, 2×SLA=180 日で赤くなる）に委譲。
     # D-011 v2 で publication_lag_months フィールドを正式導入予定。
-    freshness_sla_days: 180                       # 半年マージン（Phase 0 v2-A Step 3-A revision、Phase A 期間中の安定優先）
+    freshness_sla_days: 90                        # 月次 + 公表ラグ 1〜2 ヶ月。2026-07-18 に 180 から是正（旧値は停滞黙殺のため緩められていた）
     # 各系列は wide 形式の Excel 列を部分一致で引くためのキーワード定義。
     # match: すべて含む AND 条件、exclude: いずれかに含まれたら除外。
     series:
