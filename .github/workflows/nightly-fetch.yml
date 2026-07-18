@@ -249,3 +249,19 @@ jobs:
             git commit -m "nightly: data update ${today}"
             git push
           fi
+
+      - name: Staleness hard check
+        # サイレント停滞（silent stall）の再発防止ハードチェック。
+        # data/catalog/indicators.json の各系列について age（今日−observation_cutoff）が
+        # freshness_sla_days の 2 倍を超え、かつ KNOWN_STALE allowlist に無い系列が
+        # 1 件でもあれば exit 1（ラン失敗）。
+        #
+        # ★ commit & push の「後」に continue-on-error 無しで置くのが肝:
+        #   - データ commit は既に完了しているので、停滞を検知してランを赤くしてもデータは着地済み。
+        #   - generate_catalog の soft warning（1×SLA）は緑のまま流れて見落とされる（＝今回の
+        #     Pink Sheet URL 未更新による燃料 8 系列 7 ヶ月停止の温床）。
+        #   - ここで 2×SLA 超えの停滞はランを赤くして人間に気付かせる（loud failure）。
+        # 構造的に更新が来ない系列（Brexit 後の EU ETS 英国、降雪の稀な地点の最深積雪 等）は
+        # check_staleness.py の KNOWN_STALE allowlist で除外している。
+        run: |
+          python scripts/check_staleness.py

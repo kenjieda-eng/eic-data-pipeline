@@ -1,0 +1,200 @@
+#!/usr/bin/env python3
+"""
+scripts/check_staleness.py — サイレント停滞（silent stall）の再発防止ハードチェック。
+
+data/catalog/indicators.json を読み、各系列について
+    age = 今日(JST) − observation_cutoff
+が freshness_sla_days の 2 倍を超える系列を「停滞（stale）」として列挙する。
+ただし KNOWN_STALE allowlist に載る「更新が来ないのが正常」な系列は対象外。
+停滞が 1 件でもあれば exit 1、無ければ exit 0。
+
+背景（なぜ 2× なのか）:
+    generate_catalog.py は 1×SLA で soft warning を出すが、warning 止まりのため
+    ラン自体は緑のまま流れ、見落とされる（＝サイレント停滞。今回の Pink Sheet 2026
+    URL 未更新による燃料 8 系列の 7 ヶ月停止がまさにこれ。しかも当時は原因を publication
+    lag と誤診して SLA 自体を緩め、警告を黙らせてしまっていた）。
+    本スクリプトは「1×=要注意」より一段厳しい 2×SLA を「もう明らかに壊れている」
+    ハード閾値とし、nightly の commit & push 後に continue-on-error なしで走らせる。
+    データ commit は先に完了しているので、失敗してもデータは着地しつつ、ラン結果が
+    赤くなって人間が気付ける（loud failure）設計。
+    例: wb-pink-sheet は SLA=90 日 → 2×90=180 日。今回型の停止は約 6 ヶ月で赤くなる。
+
+allowlist（KNOWN_STALE）:
+    構造的に更新が来ない系列（例: Brexit で EU ETS を離脱した英国、降雪が稀な地点の
+    最深積雪）は、閾値を超えても「異常」ではない。これらを一律に赤くすると gate が
+    万年赤 = 赤疲れで無視される（＝サイレント停滞と同じ失敗モード）ため allowlist で除外する。
+    逆に allowlist に無い系列が閾値超過したら「予期しない停滞」= 本当に気付くべきサイン。
+
+使い方:
+    python scripts/check_staleness.py            # 通常（違反あれば exit 1、無ければ exit 0）
+    python scripts/check_staleness.py --list     # 違反一覧のみを 1 行 1 系列で出力
+    python scripts/check_staleness.py --catalog PATH       # 対象カタログを差し替え（テスト用）
+    python scripts/check_staleness.py --multiplier N       # 閾値倍率（既定 2）
+
+freshness_sla_days の解決:
+    catalog の各エントリには generate_catalog.py が source_map.yaml 由来の
+    freshness_sla_days を注入済み。欠落していた場合は frequency 別デフォルト
+    （scripts/common/metadata.DEFAULT_FRESHNESS_SLA_DAYS）にフォールバックする。
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from scripts.common.metadata import DEFAULT_FRESHNESS_SLA_DAYS  # noqa: E402
+
+DEFAULT_CATALOG = ROOT / "data" / "catalog" / "indicators.json"
+STALE_MULTIPLIER = 2  # freshness_sla_days の何倍で「停滞」と判定するか（1×=soft warning より厳しく）
+
+# 既知の「停滞は許容」系列（allowlist）。id -> 理由（+登録日）。
+# ここに載る系列は staleness check の対象外（構造的に更新が来ない = 停滞が異常ではない）。
+# 追加するときは必ず「なぜ許容か」と「登録日」をコメント/理由文字列に残すこと。
+# 将来この系列が復活・更新再開したら、ここから外して通常監視に戻す。
+KNOWN_STALE: dict[str, str] = {
+    # --- EU ETS 英国: Brexit で EU ETS を離脱、検証排出データは 2020 年で終端（構造的死系列） ---
+    "eu-ets-emissions-country-gb": "UK left EU ETS post-Brexit; data ends 2020 (registered 2026-07-18)",
+    "eu-ets-allowances-allocated-country-gb": "UK left EU ETS post-Brexit; data ends 2020 (registered 2026-07-18)",
+    # --- EU ETS リヒテンシュタイン: 近年の検証排出データが存在しない（構造的死系列） ---
+    "eu-ets-emissions-country-li": "Liechtenstein has no recent verified-emissions data (registered 2026-07-18)",
+    "eu-ets-allowances-allocated-country-li": "Liechtenstein has no recent verified-emissions data (registered 2026-07-18)",
+    # --- JMA 最深積雪: 積雪が稀な地点。降雪イベントが無い＝値が更新されないのが正常（SLA は既に 365 に緩和済み） ---
+    "jma-snow-max-kansai": "seasonal: no snowfall since 2021-01; absence is expected (registered 2026-07-18)",
+    "jma-snow-max-shikoku": "seasonal: no snowfall since 2022-02; absence is expected (registered 2026-07-18)",
+}
+
+
+def _now_jst() -> datetime:
+    return datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=9)))
+
+
+def resolve_sla(entry: dict) -> int:
+    """catalog エントリから freshness_sla_days を解決（欠落時は frequency デフォルト）。"""
+    v = entry.get("freshness_sla_days")
+    if isinstance(v, (int, float)) and v > 0:
+        return int(v)
+    freq = entry.get("frequency") or "daily"
+    return DEFAULT_FRESHNESS_SLA_DAYS.get(freq, 3)
+
+
+def find_stale(indicators: list[dict], multiplier: int, today) -> tuple[list[dict], int]:
+    """
+    age > freshness_sla_days × multiplier を満たす系列を列挙（KNOWN_STALE は除外）。
+    戻り値は (停滞系列リスト[age 降順], allowlist で除外した停滞件数)。
+    observation_cutoff が無い / 不正な系列は age を測れないので対象外（skip）。
+    """
+    stale: list[dict] = []
+    allowlisted_hits = 0
+    for entry in indicators:
+        cutoff = entry.get("observation_cutoff")
+        if not cutoff:
+            continue
+        try:
+            cutoff_date = datetime.strptime(cutoff, "%Y-%m-%d").date()
+        except (ValueError, TypeError):
+            continue
+        age_days = (today - cutoff_date).days
+        sla = resolve_sla(entry)
+        threshold = sla * multiplier
+        if age_days <= threshold:
+            continue
+        ind_id = entry.get("id", "?")
+        if ind_id in KNOWN_STALE:
+            # 既知の許容停滞。除外してカウントだけ残す。
+            allowlisted_hits += 1
+            continue
+        stale.append(
+            {
+                "id": ind_id,
+                "domain": entry.get("domain", "?"),
+                "frequency": entry.get("frequency", "?"),
+                "observation_cutoff": cutoff,
+                "age_days": age_days,
+                "sla_days": sla,
+                "threshold_days": threshold,
+            }
+        )
+    stale.sort(key=lambda s: s["age_days"], reverse=True)
+    return stale, allowlisted_hits
+
+
+def format_line(s: dict, multiplier: int) -> str:
+    return (
+        f"{s['id']}  (domain={s['domain']}, freq={s['frequency']}) "
+        f"cutoff={s['observation_cutoff']} age={s['age_days']}d "
+        f"> {multiplier}×SLA({s['sla_days']}d)={s['threshold_days']}d"
+    )
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Staleness hard check (age > 2×SLA → exit 1)")
+    parser.add_argument(
+        "--catalog",
+        type=Path,
+        default=DEFAULT_CATALOG,
+        help="対象カタログ JSON（既定: data/catalog/indicators.json）",
+    )
+    parser.add_argument(
+        "--list",
+        action="store_true",
+        help="違反一覧のみを 1 行 1 系列で出力（サマリ行を省く）",
+    )
+    parser.add_argument(
+        "--multiplier",
+        type=int,
+        default=STALE_MULTIPLIER,
+        help=f"閾値倍率（既定 {STALE_MULTIPLIER}）",
+    )
+    args = parser.parse_args(argv)
+
+    if not args.catalog.exists():
+        print(f"ERROR: catalog not found: {args.catalog}", file=sys.stderr)
+        return 2
+    try:
+        catalog = json.loads(args.catalog.read_text(encoding="utf-8"))
+    except Exception as e:  # noqa: BLE001
+        print(f"ERROR: failed to parse {args.catalog}: {e}", file=sys.stderr)
+        return 2
+
+    indicators = catalog.get("indicators") or []
+    today = _now_jst().date()
+    stale, allowlisted_hits = find_stale(indicators, args.multiplier, today)
+
+    if args.list:
+        # 一覧のみ。停滞ゼロなら何も出さない。
+        for s in stale:
+            print(format_line(s, args.multiplier))
+    else:
+        print(
+            f"staleness check: catalog={args.catalog.name} "
+            f"indicators={len(indicators)} today(JST)={today} "
+            f"threshold={args.multiplier}×SLA "
+            f"(allowlist={len(KNOWN_STALE)}, allowlisted-stale-skipped={allowlisted_hits})"
+        )
+        if stale:
+            print(f"STALE ({len(stale)} series exceed {args.multiplier}×SLA):")
+            for s in stale:
+                print(f"  - {format_line(s, args.multiplier)}")
+        else:
+            print("OK: no unexpected series exceeds the staleness threshold.")
+
+    if stale:
+        # 停滞ありは exit 1（nightly ではデータ commit 後に走るので、ランが赤くなる）。
+        # --list は「違反一覧のみ表示」なのでサマリ行は出さず、exit code だけで結果を伝える。
+        if not args.list:
+            print(
+                f"FAIL: {len(stale)} unexpected stale series (age > {args.multiplier}×SLA).",
+                file=sys.stderr,
+            )
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
