@@ -3,7 +3,7 @@
   "date": "2026-07-19",
   "weekday": "日",
   "weekend": true,
-  "generatedAt": "2026-07-19T09:02:35+09:00",
+  "generatedAt": "2026-07-19T14:39:05+09:00",
   "lines": [
     {
       "indicatorId": "derived:jepx-9-region-avg",
@@ -34,6 +34,21 @@
       "rangePosPct": 66.5,
       "editor": "haru",
       "explanation": "2026-07-19 のJEPX 東京は 18.60¥/kWh（前日比 -1.96¥/kWh・-9.5%）。直近30日のレンジでは中位圏にある。"
+    },
+    {
+      "indicatorId": "jepx-spot-kyushu",
+      "label": "JEPX 九州",
+      "unit": "¥/kWh",
+      "dataDate": "2026-07-19",
+      "value": 14.67,
+      "prevDate": "2026-07-18",
+      "prevValue": 14.29,
+      "diff": 0.38,
+      "diffPct": 2.7,
+      "periodLabel": "前日比",
+      "rangePosPct": 72.44,
+      "editor": "haru",
+      "explanation": "2026-07-19 のJEPX 九州は 14.67¥/kWh（前日比 +0.38¥/kWh・+2.7%）。直近30日のレンジでは中位圏にある。"
     },
     {
       "indicatorId": "fuel-lng-jp-cif",
