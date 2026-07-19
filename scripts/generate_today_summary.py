@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """朝刊サマリー JSON 生成（/today 復活 A 案・pipeline 側）。
 
-data/catalog/indicators.json の csv_path から対象 5 行分の系列を読み込み、
+data/catalog/indicators.json の csv_path から対象 6 行分の系列を読み込み、
 data/today/{latest.json, archive/{date}.json, index.json} を決定的に生成する。
 
 - 標準ライブラリのみ（csv / json / argparse / pathlib / datetime / zoneinfo / statistics）。
@@ -42,12 +42,14 @@ RELATED_INSIGHTS = [
     "fuel-cost-adjustment",
 ]
 
-# 対象 5 行（この順で出力）。
+# 対象 6 行（この順で出力）。
 ROWS = [
     {"kind": "jepx-avg", "indicatorId": "derived:jepx-9-region-avg",
      "label": "JEPX 全国平均", "freq": "daily", "editor": "haru", "unit": "¥/kWh"},
     {"kind": "series", "indicatorId": "jepx-spot-tokyo",
      "label": "JEPX 東京", "freq": "daily", "editor": "haru"},
+    {"kind": "series", "indicatorId": "jepx-spot-kyushu",
+     "label": "JEPX 九州", "freq": "daily", "editor": "haru"},
     {"kind": "series", "indicatorId": "fuel-lng-jp-cif",
      "label": "LNG 日本着 (CIF)", "freq": "monthly", "editor": "haru"},
     {"kind": "series", "indicatorId": "fx-usdjpy-monthly-avg",
