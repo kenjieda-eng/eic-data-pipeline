@@ -5311,3 +5311,4 @@ date,indicator_id,region,value,source_url
 2026-07-15,jma-temp-max-chugoku,chugoku,33.1,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
 2026-07-16,jma-temp-max-chugoku,chugoku,35.2,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
 2026-07-17,jma-temp-max-chugoku,chugoku,34.4,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=
+2026-07-18,jma-temp-max-chugoku,chugoku,35.2,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=67&block_no=47765&year=YYYY&month=MM&day=&view=

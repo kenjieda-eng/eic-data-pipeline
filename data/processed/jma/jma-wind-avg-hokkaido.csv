@@ -5311,3 +5311,4 @@ date,indicator_id,region,value,source_url
 2026-07-15,jma-wind-avg-hokkaido,hokkaido,5.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=14&block_no=47412&year=YYYY&month=MM&day=&view=
 2026-07-16,jma-wind-avg-hokkaido,hokkaido,3.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=14&block_no=47412&year=YYYY&month=MM&day=&view=
 2026-07-17,jma-wind-avg-hokkaido,hokkaido,3.7,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=14&block_no=47412&year=YYYY&month=MM&day=&view=
+2026-07-18,jma-wind-avg-hokkaido,hokkaido,5.3,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=14&block_no=47412&year=YYYY&month=MM&day=&view=

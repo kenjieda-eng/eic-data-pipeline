@@ -5221,3 +5221,4 @@ date,indicator_id,region,value,source_url
 2026-07-16,jepx-spot-tokyo,tokyo,21.35291666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-07-17,jepx-spot-tokyo,tokyo,20.921041666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-07-18,jepx-spot-tokyo,tokyo,20.5575,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
+2026-07-19,jepx-spot-tokyo,tokyo,18.59875,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
