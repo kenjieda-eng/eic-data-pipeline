@@ -5225,3 +5225,4 @@ date,indicator_id,region,value,source_url
 2026-07-20,jepx-spot-system,jp,20.068749999999998,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-07-21,jepx-spot-system,jp,21.569791666666664,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-07-22,jepx-spot-system,jp,22.130625,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
+2026-07-23,jepx-spot-system,jp,24.784375,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
