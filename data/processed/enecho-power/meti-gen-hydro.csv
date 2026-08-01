@@ -59,3 +59,4 @@ date,indicator_id,region,value,source_url
 2025-10-01,meti-gen-hydro,jp,5272.929,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2025-11-01,meti-gen-hydro,jp,4593.389,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2025-12-01,meti-gen-hydro,jp,5125.571,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-04-01,meti-gen-hydro,jp,8620.523,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
