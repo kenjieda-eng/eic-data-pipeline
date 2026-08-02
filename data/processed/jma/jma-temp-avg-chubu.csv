@@ -5325,3 +5325,4 @@ date,indicator_id,region,value,source_url
 2026-07-29,jma-temp-avg-chubu,chubu,29.2,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
 2026-07-30,jma-temp-avg-chubu,chubu,31.3,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
 2026-07-31,jma-temp-avg-chubu,chubu,31.4,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
+2026-08-01,jma-temp-avg-chubu,chubu,32.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
