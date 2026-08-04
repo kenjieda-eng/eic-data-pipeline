@@ -9150,3 +9150,4 @@ date,indicator_id,region,value,source_url
 2026-07-29,us-treasury-10y,us,4.67,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
 2026-07-30,us-treasury-10y,us,4.68,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
 2026-07-31,us-treasury-10y,us,4.75,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
+2026-08-03,us-treasury-10y,us,4.7,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
