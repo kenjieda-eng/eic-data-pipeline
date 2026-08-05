@@ -1631,7 +1631,18 @@ sources:
     frequency: monthly
     tz: UTC
     missing_policy: "null"
-    freshness_sla_days: 90                        # Ember は概ね 2-3 ヶ月遅延で公表
+    # ソース既定 = 速報ティア (US / DE / GB) 実績に合わせる。JP / CN は下の indicators で個別 override。
+    # ここを一律に緩めてはいけない: US/DE/GB こそが「CSV URL 凍結 / パーサ破損」の canary であり、
+    # 90 日 (hard gate 180 日) を維持することで L-064 型のサイレント停滞を検知し続ける。
+    freshness_sla_days: 90
+    # --- L-064 (2026-08-05): Ember の国別 publication lag は 3 ティアに分かれる ---
+    # 2026-08-05 実測 (monthly_full_release_long_format.csv, 87 ヶ国):
+    #   最大月 2026-06 = 34 ヶ国 / 2026-05 = 19 / 2026-04 = 12 / 2026-03 = 9 (以下 tail)
+    #   対象 5 ヶ国: US=2026-06 DE=2026-06 GB=2026-06 CN=2026-05 JP=2026-03
+    # 日本が 2026-03 で止まるのは取得失敗でも URL 失効でもなく Ember 側の日本ラグ。
+    # 同じ 2026-03 ティアに Singapore / Viet Nam / South Africa / Pakistan 等 9 ヶ国が並ぶ。
+    # ファイル自体は生きている (HTTP 200 / 70.3 MB / 全体最大月 2026-06) ため URL 更新は不要。
+    # → 国別に実測ラグ + 余裕で SLA を設定する (JP=180 / CN=120 / その他=90)。
     # 抽出対象国 (5 ヶ国)。area_name は Ember CSV の Area 列の値と一致させること
     countries:
       - { area_name: "Japan",                    region: jp }
@@ -1757,55 +1768,55 @@ sources:
       - ember-share-bioenergy-gb
     # D-011 準拠の indicator 固有メタデータ (15 + 35 = 50 系列)
     indicators:
-      ember-demand-jp:        { name: "日本 月次電力需要",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: Japan, Electricity demand / Demand / Demand", depends_on: null }
+      ember-demand-jp:        { name: "日本 月次電力需要",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: Japan, Electricity demand / Demand / Demand", depends_on: null, freshness_sla_days: 180 }
       ember-demand-us:        { name: "米国 月次電力需要",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: United States of America, Electricity demand / Demand / Demand", depends_on: null }
-      ember-demand-cn:        { name: "中国 月次電力需要",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: China, Electricity demand / Demand / Demand", depends_on: null }
+      ember-demand-cn:        { name: "中国 月次電力需要",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: China, Electricity demand / Demand / Demand", depends_on: null, freshness_sla_days: 120 }
       ember-demand-de:        { name: "ドイツ 月次電力需要",   domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: Germany, Electricity demand / Demand / Demand", depends_on: null }
       ember-demand-gb:        { name: "英国 月次電力需要",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: United Kingdom, Electricity demand / Demand / Demand", depends_on: null }
-      ember-generation-jp:    { name: "日本 月次総発電量",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: Japan, Electricity generation / Total / Total Generation", depends_on: null }
+      ember-generation-jp:    { name: "日本 月次総発電量",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: Japan, Electricity generation / Total / Total Generation", depends_on: null, freshness_sla_days: 180 }
       ember-generation-us:    { name: "米国 月次総発電量",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: United States of America, Electricity generation / Total / Total Generation", depends_on: null }
-      ember-generation-cn:    { name: "中国 月次総発電量",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: China, Electricity generation / Total / Total Generation", depends_on: null }
+      ember-generation-cn:    { name: "中国 月次総発電量",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: China, Electricity generation / Total / Total Generation", depends_on: null, freshness_sla_days: 120 }
       ember-generation-de:    { name: "ドイツ 月次総発電量",   domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: Germany, Electricity generation / Total / Total Generation", depends_on: null }
       ember-generation-gb:    { name: "英国 月次総発電量",     domain: international, unit: "TWh",      backfill_start: "1999-01-01", aggregation: monthly_sum,  notes: "Ember monthly: United Kingdom, Electricity generation / Total / Total Generation", depends_on: null }
-      ember-co2-intensity-jp: { name: "日本 電力部門 CO2 排出強度",   domain: international, unit: "gCO2/kWh", backfill_start: "1999-01-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Power sector emissions / CO2 intensity / CO2 intensity", depends_on: null }
+      ember-co2-intensity-jp: { name: "日本 電力部門 CO2 排出強度",   domain: international, unit: "gCO2/kWh", backfill_start: "1999-01-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Power sector emissions / CO2 intensity / CO2 intensity", depends_on: null, freshness_sla_days: 180 }
       ember-co2-intensity-us: { name: "米国 電力部門 CO2 排出強度",   domain: international, unit: "gCO2/kWh", backfill_start: "1999-01-01", aggregation: monthly_mean, notes: "Ember monthly: USA, Power sector emissions / CO2 intensity / CO2 intensity", depends_on: null }
-      ember-co2-intensity-cn: { name: "中国 電力部門 CO2 排出強度",   domain: international, unit: "gCO2/kWh", backfill_start: "1999-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Power sector emissions / CO2 intensity / CO2 intensity", depends_on: null }
+      ember-co2-intensity-cn: { name: "中国 電力部門 CO2 排出強度",   domain: international, unit: "gCO2/kWh", backfill_start: "1999-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Power sector emissions / CO2 intensity / CO2 intensity", depends_on: null, freshness_sla_days: 120 }
       ember-co2-intensity-de: { name: "ドイツ 電力部門 CO2 排出強度", domain: international, unit: "gCO2/kWh", backfill_start: "1999-01-01", aggregation: monthly_mean, notes: "Ember monthly: Germany, Power sector emissions / CO2 intensity / CO2 intensity", depends_on: null }
       ember-co2-intensity-gb: { name: "英国 電力部門 CO2 排出強度",   domain: international, unit: "gCO2/kWh", backfill_start: "1999-01-01", aggregation: monthly_mean, notes: "Ember monthly: United Kingdom, Power sector emissions / CO2 intensity / CO2 intensity", depends_on: null }
       # --- 電源種別 share of generation (%) 35 系列 ---
-      ember-share-coal-jp:        { name: "日本 発電量シェア 石炭 (%)",     domain: international, unit: "%", backfill_start: "2018-04-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Electricity generation / Fuel / Coal (%)", depends_on: null }
+      ember-share-coal-jp:        { name: "日本 発電量シェア 石炭 (%)",     domain: international, unit: "%", backfill_start: "2018-04-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Electricity generation / Fuel / Coal (%)", depends_on: null, freshness_sla_days: 180 }
       ember-share-coal-us:        { name: "米国 発電量シェア 石炭 (%)",     domain: international, unit: "%", backfill_start: "2001-01-01", aggregation: monthly_mean, notes: "Ember monthly: United States of America, Electricity generation / Fuel / Coal (%)", depends_on: null }
-      ember-share-coal-cn:        { name: "中国 発電量シェア 石炭 (%)",     domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Electricity generation / Fuel / Coal (%)", depends_on: null }
+      ember-share-coal-cn:        { name: "中国 発電量シェア 石炭 (%)",     domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Electricity generation / Fuel / Coal (%)", depends_on: null, freshness_sla_days: 120 }
       ember-share-coal-de:        { name: "ドイツ 発電量シェア 石炭 (%)",   domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: Germany, Electricity generation / Fuel / Coal (%)", depends_on: null }
       ember-share-coal-gb:        { name: "英国 発電量シェア 石炭 (%)",     domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: United Kingdom, Electricity generation / Fuel / Coal (%)", depends_on: null }
-      ember-share-gas-jp:         { name: "日本 発電量シェア ガス (%)",     domain: international, unit: "%", backfill_start: "2018-04-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Electricity generation / Fuel / Gas (%)", depends_on: null }
+      ember-share-gas-jp:         { name: "日本 発電量シェア ガス (%)",     domain: international, unit: "%", backfill_start: "2018-04-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Electricity generation / Fuel / Gas (%)", depends_on: null, freshness_sla_days: 180 }
       ember-share-gas-us:         { name: "米国 発電量シェア ガス (%)",     domain: international, unit: "%", backfill_start: "2001-01-01", aggregation: monthly_mean, notes: "Ember monthly: United States of America, Electricity generation / Fuel / Gas (%)", depends_on: null }
-      ember-share-gas-cn:         { name: "中国 発電量シェア ガス (%)",     domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Electricity generation / Fuel / Gas (%)", depends_on: null }
+      ember-share-gas-cn:         { name: "中国 発電量シェア ガス (%)",     domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Electricity generation / Fuel / Gas (%)", depends_on: null, freshness_sla_days: 120 }
       ember-share-gas-de:         { name: "ドイツ 発電量シェア ガス (%)",   domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: Germany, Electricity generation / Fuel / Gas (%)", depends_on: null }
       ember-share-gas-gb:         { name: "英国 発電量シェア ガス (%)",     domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: United Kingdom, Electricity generation / Fuel / Gas (%)", depends_on: null }
-      ember-share-nuclear-jp:     { name: "日本 発電量シェア 原子力 (%)",   domain: international, unit: "%", backfill_start: "2018-04-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Electricity generation / Fuel / Nuclear (%)", depends_on: null }
+      ember-share-nuclear-jp:     { name: "日本 発電量シェア 原子力 (%)",   domain: international, unit: "%", backfill_start: "2018-04-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Electricity generation / Fuel / Nuclear (%)", depends_on: null, freshness_sla_days: 180 }
       ember-share-nuclear-us:     { name: "米国 発電量シェア 原子力 (%)",   domain: international, unit: "%", backfill_start: "2001-01-01", aggregation: monthly_mean, notes: "Ember monthly: United States of America, Electricity generation / Fuel / Nuclear (%)", depends_on: null }
-      ember-share-nuclear-cn:     { name: "中国 発電量シェア 原子力 (%)",   domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Electricity generation / Fuel / Nuclear (%)", depends_on: null }
+      ember-share-nuclear-cn:     { name: "中国 発電量シェア 原子力 (%)",   domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Electricity generation / Fuel / Nuclear (%)", depends_on: null, freshness_sla_days: 120 }
       ember-share-nuclear-de:     { name: "ドイツ 発電量シェア 原子力 (%)", domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: Germany, Electricity generation / Fuel / Nuclear (%)", depends_on: null }
       ember-share-nuclear-gb:     { name: "英国 発電量シェア 原子力 (%)",   domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: United Kingdom, Electricity generation / Fuel / Nuclear (%)", depends_on: null }
-      ember-share-solar-jp:       { name: "日本 発電量シェア 太陽光 (%)",   domain: international, unit: "%", backfill_start: "2018-04-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Electricity generation / Fuel / Solar (%)", depends_on: null }
+      ember-share-solar-jp:       { name: "日本 発電量シェア 太陽光 (%)",   domain: international, unit: "%", backfill_start: "2018-04-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Electricity generation / Fuel / Solar (%)", depends_on: null, freshness_sla_days: 180 }
       ember-share-solar-us:       { name: "米国 発電量シェア 太陽光 (%)",   domain: international, unit: "%", backfill_start: "2003-01-01", aggregation: monthly_mean, notes: "Ember monthly: United States of America, Electricity generation / Fuel / Solar (%)", depends_on: null }
-      ember-share-solar-cn:       { name: "中国 発電量シェア 太陽光 (%)",   domain: international, unit: "%", backfill_start: "2016-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Electricity generation / Fuel / Solar (%)", depends_on: null }
+      ember-share-solar-cn:       { name: "中国 発電量シェア 太陽光 (%)",   domain: international, unit: "%", backfill_start: "2016-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Electricity generation / Fuel / Solar (%)", depends_on: null, freshness_sla_days: 120 }
       ember-share-solar-de:       { name: "ドイツ 発電量シェア 太陽光 (%)", domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: Germany, Electricity generation / Fuel / Solar (%)", depends_on: null }
       ember-share-solar-gb:       { name: "英国 発電量シェア 太陽光 (%)",   domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: United Kingdom, Electricity generation / Fuel / Solar (%)", depends_on: null }
-      ember-share-wind-jp:        { name: "日本 発電量シェア 風力 (%)",     domain: international, unit: "%", backfill_start: "2018-04-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Electricity generation / Fuel / Wind (%)", depends_on: null }
+      ember-share-wind-jp:        { name: "日本 発電量シェア 風力 (%)",     domain: international, unit: "%", backfill_start: "2018-04-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Electricity generation / Fuel / Wind (%)", depends_on: null, freshness_sla_days: 180 }
       ember-share-wind-us:        { name: "米国 発電量シェア 風力 (%)",     domain: international, unit: "%", backfill_start: "2001-01-01", aggregation: monthly_mean, notes: "Ember monthly: United States of America, Electricity generation / Fuel / Wind (%)", depends_on: null }
-      ember-share-wind-cn:        { name: "中国 発電量シェア 風力 (%)",     domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Electricity generation / Fuel / Wind (%)", depends_on: null }
+      ember-share-wind-cn:        { name: "中国 発電量シェア 風力 (%)",     domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Electricity generation / Fuel / Wind (%)", depends_on: null, freshness_sla_days: 120 }
       ember-share-wind-de:        { name: "ドイツ 発電量シェア 風力 (%)",   domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: Germany, Electricity generation / Fuel / Wind (%)", depends_on: null }
       ember-share-wind-gb:        { name: "英国 発電量シェア 風力 (%)",     domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: United Kingdom, Electricity generation / Fuel / Wind (%)", depends_on: null }
-      ember-share-hydro-jp:       { name: "日本 発電量シェア 水力 (%)",     domain: international, unit: "%", backfill_start: "2018-04-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Electricity generation / Fuel / Hydro (%)", depends_on: null }
+      ember-share-hydro-jp:       { name: "日本 発電量シェア 水力 (%)",     domain: international, unit: "%", backfill_start: "2018-04-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Electricity generation / Fuel / Hydro (%)", depends_on: null, freshness_sla_days: 180 }
       ember-share-hydro-us:       { name: "米国 発電量シェア 水力 (%)",     domain: international, unit: "%", backfill_start: "2001-01-01", aggregation: monthly_mean, notes: "Ember monthly: United States of America, Electricity generation / Fuel / Hydro (%)", depends_on: null }
-      ember-share-hydro-cn:       { name: "中国 発電量シェア 水力 (%)",     domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Electricity generation / Fuel / Hydro (%)", depends_on: null }
+      ember-share-hydro-cn:       { name: "中国 発電量シェア 水力 (%)",     domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Electricity generation / Fuel / Hydro (%)", depends_on: null, freshness_sla_days: 120 }
       ember-share-hydro-de:       { name: "ドイツ 発電量シェア 水力 (%)",   domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: Germany, Electricity generation / Fuel / Hydro (%)", depends_on: null }
       ember-share-hydro-gb:       { name: "英国 発電量シェア 水力 (%)",     domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: United Kingdom, Electricity generation / Fuel / Hydro (%)", depends_on: null }
-      ember-share-bioenergy-jp:   { name: "日本 発電量シェア バイオ (%)",   domain: international, unit: "%", backfill_start: "2018-04-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Electricity generation / Fuel / Bioenergy (%)", depends_on: null }
+      ember-share-bioenergy-jp:   { name: "日本 発電量シェア バイオ (%)",   domain: international, unit: "%", backfill_start: "2018-04-01", aggregation: monthly_mean, notes: "Ember monthly: Japan, Electricity generation / Fuel / Bioenergy (%)", depends_on: null, freshness_sla_days: 180 }
       ember-share-bioenergy-us:   { name: "米国 発電量シェア バイオ (%)",   domain: international, unit: "%", backfill_start: "2001-01-01", aggregation: monthly_mean, notes: "Ember monthly: United States of America, Electricity generation / Fuel / Bioenergy (%)", depends_on: null }
-      ember-share-bioenergy-cn:   { name: "中国 発電量シェア バイオ (%)",   domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Electricity generation / Fuel / Bioenergy (%)", depends_on: null }
+      ember-share-bioenergy-cn:   { name: "中国 発電量シェア バイオ (%)",   domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: China, Electricity generation / Fuel / Bioenergy (%)", depends_on: null, freshness_sla_days: 120 }
       ember-share-bioenergy-de:   { name: "ドイツ 発電量シェア バイオ (%)", domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: Germany, Electricity generation / Fuel / Bioenergy (%)", depends_on: null }
       ember-share-bioenergy-gb:   { name: "英国 発電量シェア バイオ (%)",   domain: international, unit: "%", backfill_start: "2015-01-01", aggregation: monthly_mean, notes: "Ember monthly: United Kingdom, Electricity generation / Fuel / Bioenergy (%)", depends_on: null }
     notes: |
@@ -1903,12 +1914,21 @@ sources:
     aggregation: raw
     backfill_start: "2016-10-01"
     # 人口推計 都道府県 年齢3区分表は 2024 年版が最新（各年10月1日現在）。約 13 ヶ月マージン。
+    # L-065 (2026-08-05): 2025-10-01 は「人口推計」ではなく令和7年国勢調査の基準日のため、
+    # このセクションからは 2025 年値が永久に出ない（下の notes 参照）。それでも SLA は 400 のまま
+    # 据え置く。2×400=800 日 → hard gate は 2026-12-10 に赤化するが、後継データ（国勢調査
+    # 人口等基本集計）の公表予定は 2026-09 末であり、gate 赤化はその 2 ヶ月超過を示す
+    # 「正しい発火」になる。ここを緩めると L-064 (Pink Sheet) と同じ「警告を黙らせる」誤りになる。
     freshness_sla_days: 400
     # 採用コード（getMetaInfo 検証 2026-06-03、L-062）。男女計=000 / 総人口=001（外国人含む）。
     sex_code: "000"
     poptype_code: "001"
     # 人口推計 都道府県別「各年10月1日現在」統計表。cat02/cat03 の割当が表で入れ替わるため
     # fetch_estat.py は実行時に分類名で次元 @id を解決する（cdCatNN 位置をハードコードしない）。
+    # 表は国勢調査サイクル (5 年) 単位でローテーションし、センサス年 (2015 / 2020 / 2025) は
+    # 「推計」ではなく国勢調査そのものが値を持つため、人口推計側には現れない。
+    #   0004021110 = 2016-2020（2015 センサス後の推計 5 年分）
+    #   0003448225 = 2021-2024（2025 センサス直前まで。2025 は入らない = 4 年分で確定）
     tables:
       - stats_data_id: "0004021110"   # 2016-2020（cat02=人口 / cat03=年齢3区分）
       - stats_data_id: "0003448225"   # 2021-2024（cat02=年齢3区分 / cat03=人口）
@@ -1923,6 +1943,26 @@ sources:
       分類コード（getMetaInfo 検証 2026-06-03）: 男女計=000 / 総人口=001 /
       年齢3区分 総数=000・15～64歳=002・65歳以上=003。area={cc}000（cc=JIS 都道府県コード 01-47）。
       L-062: cdCatNN の位置は表で cat02↔cat03 が入れ替わるため分類名で次元解決し取り違いを防ぐ。
+
+      L-065 (2026-08-05) 2025-10-01 値がこのセクションから出ない理由と後継の入口:
+        2025-10-01 は令和7年国勢調査の調査基準日。人口推計は国勢調査の「間」を埋める推計なので、
+        センサス年の 10/1 現在人口は推計ではなく国勢調査が確定値を持つ。したがって
+        本セクションの都道府県×年齢3区分は 2024-10-01 が構造上の終端であり、待っても伸びない。
+        実測（2026-08-05, getStatsList/getMetaInfo）:
+          - 人口推計 (statsCode=00200524) の「都道府県」を含む統計表 244 本を getMetaInfo で全走査し、
+            time 次元に 2025 を持つ表は 0 本。既存 0003448225 も time = 2021..2024 の 4 値のみ
+            (UPDATED_DATE=2025-10-03)。表 ID ローテーションでもなく、単に 2025 が存在しない。
+          - 令和7年国勢調査 (statsCode=00200521) で 2025 年を持つ表は 2 本のみ (2026-05-29 公表の
+            人口速報集計)。うち 0004050397 は次元が tab/男女/area/time だけで年齢区分を持たず、
+            全国 2025-10-01 総数 = 123,049,524 人。3 区分別の内訳は速報集計には無い。
+        後継の入口（次に 2025-10-01 行を足すときはここから）:
+          令和7年国勢調査「人口等基本集計」(年齢別・男女別を含む) — 公表予定 2026-09 末
+          (出典: https://www.stat.go.jp/data/kokusei/2025/kekka.html)。公表後に
+          statsCode=00200521 / surveyYears=202510 で 都道府県×年齢3区分 の統計表 ID を再特定し、
+          tables に追加する。人口推計とは統計・次元名が異なるため resolve_pop_dims の
+          名前解決キーワード（「男女」「人口」「年齢」「都道府県」）の適合を必ず実 API で確認すること。
+          なお国勢調査は全数調査、人口推計は推計であり、2025-10-01 で系列の出所が切り替わる点に注意
+          (全国 2025-10-01: 国勢調査速報 123,050 千人 vs 人口推計 月次確定値 123,219 千人、差 ≈ 169 千人)。
     indicator_ids:
       - jpn-pop-total-01
       - jpn-pop-working-01

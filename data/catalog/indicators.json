@@ -1,7 +1,7 @@
 {
   "version": 2,
   "schema": "D-017",
-  "generated_at": "2026-08-05T09:13:46+09:00",
+  "generated_at": "2026-08-05T13:51:50+09:00",
   "indicator_count": 557,
   "indicators": [
     {
@@ -3217,7 +3217,7 @@
       "notes": "Ember monthly: China, Power sector emissions / CO2 intensity / CO2 intensity",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-co2-intensity-cn.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 120
     },
     {
       "id": "ember-co2-intensity-de",
@@ -3286,7 +3286,7 @@
       "notes": "Ember monthly: Japan, Power sector emissions / CO2 intensity / CO2 intensity",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-co2-intensity-jp.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 180
     },
     {
       "id": "ember-co2-intensity-us",
@@ -3332,7 +3332,7 @@
       "notes": "Ember monthly: China, Electricity demand / Demand / Demand",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-demand-cn.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 120
     },
     {
       "id": "ember-demand-de",
@@ -3401,7 +3401,7 @@
       "notes": "Ember monthly: Japan, Electricity demand / Demand / Demand",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-demand-jp.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 180
     },
     {
       "id": "ember-demand-us",
@@ -3447,7 +3447,7 @@
       "notes": "Ember monthly: China, Electricity generation / Total / Total Generation",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-generation-cn.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 120
     },
     {
       "id": "ember-generation-de",
@@ -3516,7 +3516,7 @@
       "notes": "Ember monthly: Japan, Electricity generation / Total / Total Generation",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-generation-jp.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 180
     },
     {
       "id": "ember-generation-us",
@@ -3562,7 +3562,7 @@
       "notes": "Ember monthly: China, Electricity generation / Fuel / Bioenergy (%)",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-share-bioenergy-cn.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 120
     },
     {
       "id": "ember-share-bioenergy-de",
@@ -3631,7 +3631,7 @@
       "notes": "Ember monthly: Japan, Electricity generation / Fuel / Bioenergy (%)",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-share-bioenergy-jp.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 180
     },
     {
       "id": "ember-share-bioenergy-us",
@@ -3677,7 +3677,7 @@
       "notes": "Ember monthly: China, Electricity generation / Fuel / Coal (%)",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-share-coal-cn.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 120
     },
     {
       "id": "ember-share-coal-de",
@@ -3746,7 +3746,7 @@
       "notes": "Ember monthly: Japan, Electricity generation / Fuel / Coal (%)",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-share-coal-jp.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 180
     },
     {
       "id": "ember-share-coal-us",
@@ -3792,7 +3792,7 @@
       "notes": "Ember monthly: China, Electricity generation / Fuel / Gas (%)",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-share-gas-cn.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 120
     },
     {
       "id": "ember-share-gas-de",
@@ -3861,7 +3861,7 @@
       "notes": "Ember monthly: Japan, Electricity generation / Fuel / Gas (%)",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-share-gas-jp.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 180
     },
     {
       "id": "ember-share-gas-us",
@@ -3907,7 +3907,7 @@
       "notes": "Ember monthly: China, Electricity generation / Fuel / Hydro (%)",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-share-hydro-cn.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 120
     },
     {
       "id": "ember-share-hydro-de",
@@ -3976,7 +3976,7 @@
       "notes": "Ember monthly: Japan, Electricity generation / Fuel / Hydro (%)",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-share-hydro-jp.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 180
     },
     {
       "id": "ember-share-hydro-us",
@@ -4022,7 +4022,7 @@
       "notes": "Ember monthly: China, Electricity generation / Fuel / Nuclear (%)",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-share-nuclear-cn.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 120
     },
     {
       "id": "ember-share-nuclear-de",
@@ -4091,7 +4091,7 @@
       "notes": "Ember monthly: Japan, Electricity generation / Fuel / Nuclear (%)",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-share-nuclear-jp.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 180
     },
     {
       "id": "ember-share-nuclear-us",
@@ -4137,7 +4137,7 @@
       "notes": "Ember monthly: China, Electricity generation / Fuel / Solar (%)",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-share-solar-cn.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 120
     },
     {
       "id": "ember-share-solar-de",
@@ -4206,7 +4206,7 @@
       "notes": "Ember monthly: Japan, Electricity generation / Fuel / Solar (%)",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-share-solar-jp.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 180
     },
     {
       "id": "ember-share-solar-us",
@@ -4252,7 +4252,7 @@
       "notes": "Ember monthly: China, Electricity generation / Fuel / Wind (%)",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-share-wind-cn.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 120
     },
     {
       "id": "ember-share-wind-de",
@@ -4321,7 +4321,7 @@
       "notes": "Ember monthly: Japan, Electricity generation / Fuel / Wind (%)",
       "depends_on": null,
       "csv_path": "data/processed/international/ember-share-wind-jp.csv",
-      "freshness_sla_days": 90
+      "freshness_sla_days": 180
     },
     {
       "id": "ember-share-wind-us",
