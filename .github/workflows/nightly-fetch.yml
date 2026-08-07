@@ -224,6 +224,27 @@ jobs:
           python scripts/fetch_fit_price.py
         continue-on-error: true
 
+      - name: Fetch JEPX 非化石証書 約定価格・約定量 (quarterly, regulation domain, 6 series)
+        # JEPX 非化石価値取引市場のオークション結果から 3 類型 ×（約定価格, 約定総量）を取得:
+        #   FIT / 非FIT(再エネ指定) / 非FIT(再エネ指定なし) の 6 系列、FY2017-最新年度。
+        # 取得範囲は年度レンジ API (get_graph_year.php?dir=nf_summary) の応答から決める。
+        # 年度をハードコードしないので、年度ローテーションを公式レスポンスで検知できる
+        # （＝ Pink Sheet 型サイレント停滞の予防）。認証不要。
+        # 年 4 回オークション（8月/11月/2月/5月）のため通常は no-op
+        # （write_processed の key_cols dedup で安全に再実行できる）。
+        # 書き出し前に価格の想定枠（source_map.yaml の sanity_min/max）を検査し、
+        # 列取り違え型のパースバグではゴミを着地させずに落とす。
+        run: |
+          if [ "${{ inputs.backfill }}" = "true" ]; then
+            echo "backfill mode: fetching all fiscal years from the year-range API"
+            python scripts/fetch_nonfossil.py --all
+          else
+            echo "normal mode: fetching last 2 fiscal years"
+            python scripts/fetch_nonfossil.py
+          fi
+        # 年 4 回更新のため通常 no-op。JEPX 一時障害で他ソースの commit まで巻き込まないよう他 fetch と同様に true。停滞検知は commit 後の Staleness hard check が担う（L-064）。
+        continue-on-error: true
+
       - name: Generate indicators catalog (D-011)
         # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を生成。
         # Required 10 欠落は exit 1（CI fail）、Recommended 欠落/鮮度超過は warning 止まり。

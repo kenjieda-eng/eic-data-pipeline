@@ -1,0 +1,21 @@
+{
+  "id": "nonfossil-cert-nonfit-price",
+  "name": "非化石証書 約定価格 非FIT（再エネ指定なし）",
+  "domain": "regulation",
+  "frequency": "quarterly",
+  "unit": "円/kWh",
+  "source_name": "JEPX 非化石価値取引市場 オークション結果",
+  "source_url": "https://www.jepx.jp/nonfossil/market-data/",
+  "license": "jepx-terms",
+  "observation_cutoff": "2026-05-20",
+  "updated_at": "2026-08-07T21:40:03+09:00",
+  "license_url": "https://www.jepx.jp/disclaimer/",
+  "license_notice": "出典: 一般社団法人 日本卸電力取引所 (JEPX) 非化石価値取引市場 オークション結果。JEPX 免責事項・著作権「当ウェブサイトに掲載されている内容に関する著作権は本所にあります」「出所を明示した上でご利用下さい」に従い、出所明示を条件に利用。",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2020-04-01",
+  "publisher": "一般社団法人 日本卸電力取引所 (JEPX)",
+  "aggregation": "raw",
+  "notes": "非FIT 再エネ指定なしの回次約定価格。FY2020 第2回が初回（FY2017-2019 と FY2020 第1回は未開催）。全観測が 0.6〜1.3 円のレンジ内。",
+  "depends_on": null
+}
