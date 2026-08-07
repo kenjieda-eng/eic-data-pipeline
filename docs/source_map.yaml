@@ -2997,6 +2997,140 @@ sources:
         notes: "中小水力 200kW未満・新設（既設導水路活用＝リプレース除く）。原則税抜。"
         depends_on: null
 
+  jepx-nonfossil:
+    name: JEPX 非化石価値取引市場 オークション結果
+    publisher: 一般社団法人 日本卸電力取引所 (JEPX)
+    publisher_url: https://www.jepx.jp/
+    source_url: https://www.jepx.jp/nonfossil/market-data/
+    market_page: https://www.jepx.jp/nonfossil/market-data/
+    # ----- 取得エンドポイント（L-063 レポート §A-1 §1 で実測特定）------------
+    # 市場ページの JS (js/nonfossil-market-data.js) が叩いている 2 本をそのまま使う。
+    # spot と違い POST(_download.php) ではなく GET で CSV が返る。
+    #   1) 収録年度レンジ: 応答本文 "2025,2017"（最新年度, 最古年度）
+    #   2) 年度別オークション結果 CSV
+    # ★ 取得範囲は 1) の応答から決める（年度をハードコードしない）。
+    #   年度ローテーションを公式レスポンスで検知できる = Pink Sheet 型サイレント停滞の予防。
+    year_range_url: https://www.jepx.jp/js/get_graph_year.php?dir=nf_summary
+    csv_url_template: https://www.jepx.jp/js/csv_read.php?dir=nf_summary&file=nf_summary_{fy}.csv
+    post_dir: nf_summary
+    # --- D-011 メタデータ共通項目 ---
+    license: jepx-terms                            # 既存識別子。新規追加不要（jepx-spot 10 系列と同条件）
+    license_url: https://www.jepx.jp/disclaimer/
+    license_notice: "出典: 一般社団法人 日本卸電力取引所 (JEPX) 非化石価値取引市場 オークション結果。JEPX 免責事項・著作権「当ウェブサイトに掲載されている内容に関する著作権は本所にあります」「出所を明示した上でご利用下さい」に従い、出所明示を条件に利用。"
+    license_text: |
+      JEPX 公開データ。免責事項・著作権ページ（https://www.jepx.jp/disclaimer/）に
+      「当ウェブサイトに掲載されている内容に関する著作権は本所にあります」
+      「出所を明示した上でご利用下さい」
+      「ご利用条件および公開されている情報の変更・削除は原則として予告なしに行います」とある。
+      政府標準利用規約でも CC BY でもない JEPX 独自条件。出所明示を条件に利用。
+      L-063 = GO（jepx-spot 10 系列と完全に同一条件のため新規ライセンスリスクなし）。
+    domain: regulation
+    frequency: quarterly
+    tz: Asia/Tokyo
+    missing_policy: "null"                         # 未開催回は行を作らない（"-" は観測なし）
+    aggregation: raw
+    # 年 4 回オークション（間隔 約 92 日）。L-063 レポート推奨値。
+    # check_staleness.py の 2x ハードゲート = 240 日 ≒ 約定 2 回分の欠落で赤くなる。
+    freshness_sla_days: 120
+    # ----- サニティ枠（fetch_nonfossil.check_sanity_bands が書き出し前に検査）-----
+    # 目的は「約定量(1e8 オーダー)を価格として書き込む」類の列取り違えを、
+    # ゴミが data/processed に着地する前に落とすこと。
+    # **最新観測** が枠外なら書き出し中止 + exit 1。過去観測の枠外は warning のみ
+    # （下限/上限は制度改正で動いており、現行の枠を過去に遡って当てるのは誤り）。
+    # 制度改正で枠が動いてもコード修正なしで追随できるよう yaml 側に持つ。
+    columns:
+      # 元 CSV の列構造（全 FY2017-2025 の 9 ファイルで同一と確認, L-062）
+      - 年度
+      - 開催回          # {1,2,3,4}。ただし FY2017 のみ "通年"
+      - 商品            # FIT / 非FIT(再エネ指定) / 非FIT(再エネ指定なし) の 3 種で固定
+      - 約定日          # "YYYY/M/D"。未開催回は "-"
+      - 約定総量(kWh)
+      - 約定価格(円/kWh)
+      - 約定最高価格(円/kWh)
+      - 約定最低価格(円/kWh)
+      - 入札会員数
+      - 約定会員数
+      - 売り入札量(kWh)
+      - 買い入札量(kWh)
+    notes: |
+      日本の非化石証書 3 類型 × (約定価格, 約定総量) の四半期系列。regulation ドメイン拡充（5 → 11 系列）。
+      L-063 事前確認: energy-data-platform/docs/l063-check-energy-gx-2026-08-07.md §A-1 = 🟢 GO。
+      date は「約定日」をそのまま使う。同一開催回でも商品ごとに約定日が 1 日ずつずれる
+      （例 FY2025 第4回: 非FIT指定なし 5/20 / 非FIT指定 5/21 / FIT 5/22）ため系列間で日付は揃わない。
+      実データ調査（全 9 年度走査, L-062）で確定した仕様:
+        - ヘッダ・商品名は 9 年度すべて同一。表記ゆれなし。
+        - 未開催セルは空文字ではなく "-"。行自体は存在し全列が "-" になる → 約定日が "-" の行はスキップ。
+        - 非FIT 2 種は FY2020 第 2 回が初回（FY2017-2019 + FY2020 第 1 回は全て "-"）。
+        - FY2017 のみ開催回が "通年"（年 1 回開催）。数値前提のパースにしない。
+        - **FY2021 第 1 回だけ FIT が "-"** → 欠落は系列先頭だけでなく途中にも出る。行単位で判定する。
+      価格の推移（実測）: FIT 1.3円(FY2017-2020) → 0.3円台(FY2021-2022) → 0.4円台(FY2023-2025)。
+      非FIT 2 種は全観測が 0.6〜1.3 円のレンジ内。直近は上下限に張り付く回が多く、
+      記事化では「需給で動く市場価格」ではなく「制度上下限の中での約定」として扱うこと。
+      レポートが密度版として挙げた入札倍率（買い入札量÷約定総量）は不採用:
+      FIT は 買い入札量 == 約定総量 が恒常成立し倍率が常に 1.000 の定数系列になるため。
+    indicator_ids:
+      - nonfossil-cert-fit-price
+      - nonfossil-cert-nonfit-re-price
+      - nonfossil-cert-nonfit-price
+      - nonfossil-cert-fit-volume
+      - nonfossil-cert-nonfit-re-volume
+      - nonfossil-cert-nonfit-volume
+    indicators:
+      nonfossil-cert-fit-price:
+        name: 非化石証書 約定価格 FIT
+        domain: regulation
+        unit: "円/kWh"
+        backfill_start: "2017-04-01"
+        aggregation: raw
+        sanity_min: 0.4                            # 現行の最低価格
+        sanity_max: 4                              # 現行の上限価格
+        notes: "FIT 非化石証書の回次約定価格。FY2017 は通年 1 回のみ、FY2021 第1回は未開催。最低価格は制度改正で 1.3→0.3→0.4 円と変遷しており、FY2021-2022 の 0.3 円台は当時の下限（現行枠 0.4 円の枠外だが正しい実績値）。"
+        depends_on: null
+      nonfossil-cert-nonfit-re-price:
+        name: 非化石証書 約定価格 非FIT（再エネ指定）
+        domain: regulation
+        unit: "円/kWh"
+        backfill_start: "2020-04-01"
+        aggregation: raw
+        sanity_min: 0.6
+        sanity_max: 1.3
+        notes: "非FIT 再エネ指定の回次約定価格。FY2020 第2回が初回（FY2017-2019 と FY2020 第1回は未開催）。全観測が 0.6〜1.3 円のレンジ内。"
+        depends_on: null
+      nonfossil-cert-nonfit-price:
+        name: 非化石証書 約定価格 非FIT（再エネ指定なし）
+        domain: regulation
+        unit: "円/kWh"
+        backfill_start: "2020-04-01"
+        aggregation: raw
+        sanity_min: 0.6
+        sanity_max: 1.3
+        notes: "非FIT 再エネ指定なしの回次約定価格。FY2020 第2回が初回（FY2017-2019 と FY2020 第1回は未開催）。全観測が 0.6〜1.3 円のレンジ内。"
+        depends_on: null
+      nonfossil-cert-fit-volume:
+        name: 非化石証書 約定総量 FIT
+        domain: regulation
+        unit: kWh
+        backfill_start: "2017-04-01"
+        aggregation: raw
+        notes: "FIT 非化石証書の回次約定総量。FIT は売り超過が恒常的で、買い入札量が全量約定する（買い入札量 == 約定総量）。"
+        depends_on: null
+      nonfossil-cert-nonfit-re-volume:
+        name: 非化石証書 約定総量 非FIT（再エネ指定）
+        domain: regulation
+        unit: kWh
+        backfill_start: "2020-04-01"
+        aggregation: raw
+        notes: "非FIT 再エネ指定の回次約定総量。FY2020 第2回が初回。"
+        depends_on: null
+      nonfossil-cert-nonfit-volume:
+        name: 非化石証書 約定総量 非FIT（再エネ指定なし）
+        domain: regulation
+        unit: kWh
+        backfill_start: "2020-04-01"
+        aggregation: raw
+        notes: "非FIT 再エネ指定なしの回次約定総量。FY2020 第2回が初回。"
+        depends_on: null
+
   nbs-pmi:
     name: 中国 国家統計局 製造業 PMI（NBS 官製）
     publisher: National Bureau of Statistics of China (NBS) / China Federation of Logistics & Purchasing (CFLP)
