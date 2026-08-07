@@ -234,10 +234,6 @@ jobs:
         # （write_processed の key_cols dedup で安全に再実行できる）。
         # 書き出し前に価格の想定枠（source_map.yaml の sanity_min/max）を検査し、
         # 列取り違え型のパースバグではゴミを着地させずに落とす。
-        #
-        # ★ continue-on-error なし（L-064 以降の方針）。他の fetch ステップと違い、
-        #   このステップが落ちるとカタログ生成と commit まで到達せず、その夜の
-        #   全ソースのデータが commit されない点に注意（挙動の差分としてレビュー対象）。
         run: |
           if [ "${{ inputs.backfill }}" = "true" ]; then
             echo "backfill mode: fetching all fiscal years from the year-range API"
@@ -246,6 +242,8 @@ jobs:
             echo "normal mode: fetching last 2 fiscal years"
             python scripts/fetch_nonfossil.py
           fi
+        # 年 4 回更新のため通常 no-op。JEPX 一時障害で他ソースの commit まで巻き込まないよう他 fetch と同様に true。停滞検知は commit 後の Staleness hard check が担う（L-064）。
+        continue-on-error: true
 
       - name: Generate indicators catalog (D-011)
         # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を生成。
