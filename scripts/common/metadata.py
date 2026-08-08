@@ -83,6 +83,14 @@ LICENSE_VALUES = {
     "ecb-terms", "estat-terms", "nbs-terms",
     "eea-terms",  # 2026-06-01 EU ETS（EEA/EUTL 再利用ポリシー: 出典明記で商用可 + datahub 加工 PDDL）
     "edinet-terms",  # 2026-06-10 EDINET（金融庁、公共データ利用規約 PDL1.0: 営利含む二次利用可・出典明記。L-063 GO）
+    # 2026-08-08 GIO 温室効果ガス排出量データ（国立環境研究所 温室効果ガスインベントリオフィス）。
+    # サイト全体の一般著作権条項（複製・頒布に事前許諾が必要）とは別に、
+    # 「温室効果ガス排出量データの利用規約」という独立した節があり、そちらが適用される:
+    # 無改変の第三者頒布・派生物の作成公表・商用利用すべて明示許諾。ただし
+    #   (a) 頒布先へ 3 点（原頒布元 URL / 本規約適用 / 随時更新される旨）を通知する義務
+    #   (b) 頒布物にも本規約が引き継がれる（share-alike 的条項 → CC BY 4.0 への再ライセンス不可）
+    # があるため CC-BY-4.0 でも政府標準利用規約でもない GIO 独自条件。L-063 = 🟡 条件付き GO。
+    "gio-terms",
 }
 MISSING_POLICY_VALUES = {
     "raw", "forward_fill", "forward_fill_within_month",

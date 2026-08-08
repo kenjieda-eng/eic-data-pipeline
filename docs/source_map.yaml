@@ -4020,3 +4020,304 @@ sources:
         ÷1e6 して百万円で格納。各有報の CurrentYear コンテキストを採用。date=会計期末（periodEnd）、region=JP。
       - 全 9 社・全年度 JGAAP（経常利益あり）。IFRS 適用へ拡張する場合のみ経常利益が税引前当期純利益へ
         フォールバック（fallback_element_ids, 当 9 社では未発火）。
+
+  gio:
+    name: 日本の温室効果ガス排出量（国立環境研究所 GIO インベントリ）
+    source_name: 国立環境研究所 温室効果ガスインベントリオフィス (GIO) / 監修 環境省
+    publisher: 国立研究開発法人 国立環境研究所 地球システム領域 地球環境研究センター 温室効果ガスインベントリオフィス (GIO)
+    publisher_url: https://www.nies.go.jp/gio/
+    source_url: https://www.nies.go.jp/gio/archive/ghgdata/index.html
+    # ----- 取得経路（L-063 レポート §S-1 §1・§4）--------------------------
+    # ★ xlsx の直 URL は絶対にハードコードしない。理由が 2 つ重なっている:
+    #   (a) GIO サイトポリシーに「データファイル(PDF、エクセル、ZIP等)への直接リンクは
+    #       ご遠慮ください」とある（規約の精神に反する）。
+    #   (b) 実 URL の `-att/` 直前のディレクトリ ID が公表年ごとにローテートする:
+    #         2026 年版 k6efli000007q2e2 / 2025 年版 jqjm1000000ie8om / 2024 年版 pi5dm3000010bn3l
+    #       決め打ちすると Pink Sheet 型のサイレント停滞（200 応答のまま内部凍結）になる。
+    # → fetch_gio.py は毎回この index ページをパースして最新版 xlsx を解決する。
+    #   選定は「最新データブロック(latestBlock)」と「ファイル名の公表年が最大」の
+    #   2 系統で突き合わせ、食い違ったら warning を出す。速報値(preliminary)は常に除外
+    #   （FY2020 分を最後にアーカイブ上に存在せず、確報値と混ぜてはいけない）。
+    index_url: https://www.nies.go.jp/gio/archive/ghgdata/index.html
+    # robots.txt = "User-agent: * / Allow: /"（制限なし）。規約に自動取得・大量アクセス禁止条項なし。
+    robots_txt: https://www.nies.go.jp/robots.txt
+    # ----- D-011 メタデータ共通項目 ---------------------------------------
+    license: gio-terms                             # ★ 新規識別子（scripts/common/metadata.py に追加）
+    license_url: https://www.nies.go.jp/gio/copyright/index.html
+    # ★ 規約が課す 3 つの通知義務をそのまま書き込む（これが license_notice の存在理由）:
+    #   1. 原頒布元 URL   2. 本利用規約のもとで提供されていること   3. 随時更新されていること
+    license_notice: "出典: 国立環境研究所 温室効果ガスインベントリオフィス (GIO)「日本の温室効果ガス排出量データ」（環境省監修）。本データの原頒布元は http://www.nies.go.jp/gio/archive/index.html であり、GIO「温室効果ガス排出量データの利用規約」のもとで提供されています。また GIO データは GIO によって随時更新されます。本系列は GIO データをもとに作成した派生物であり、GIO は本派生物の内容について何ら保証を与えるものではありません。"
+    license_text: |
+      GIO サイトポリシー（https://www.nies.go.jp/gio/copyright/index.html）は二層構造。
+      (a) サイト全体の一般著作権条項: 「私的使用、引用等の著作権法上認められた行為を除き、
+          複製、転載、改変、頒布等の行為には、あらかじめGIOの許諾が必要です。」
+      (b) 同ページ下部の独立した節「温室効果ガス排出量データの利用規約」 ← 本データに適用されるのはこちら
+          - 対象: 日本の温室効果ガス排出量データ、附属書I国の温室効果ガス排出量データ
+          - 許諾の範囲: 「利用者は、GIOデータの内容を改変することなく第三者に頒布すること、および、
+            GIOデータをもとにして新たに知的生産物（以下、派生物）を作成して公表することができます。
+            商用利用も可能です。」
+          - 頒布の条件: 「頒布されたGIOデータや派生物にも本利用規約が適用されます。利用者は、頒布により
+            GIOデータや派生物を受け取る者に対し、原頒布元のURL
+            （http://www.nies.go.jp/gio/archive/index.html）、GIOデータが本利用規約のもとで
+            提供されていること、および、GIOデータはGIOによって随時更新されていることを
+            通知しなければなりません。」→ license_notice の 3 点はこの義務そのもの。
+          - 最新版の利用の推奨: 「公開日の異なる版を組み合わせての使用は避けてください
+            （例 GIOデータの最新版とそれ以前の版を組み合わせて時系列を作成すること）。」
+            → fetch_gio.py が追記型ではなく**毎回全置換**で書き出す根拠。
+          - 出典の明記 / 無保証及び免責の条項あり。
+      判定: CC BY 4.0 でも政府標準利用規約 2.0 でもない GIO 独自条件。頒布物にも本規約が
+      引き継がれる（share-alike 的）ため CC BY 4.0 への再ライセンスは不可 →
+      LICENSE_VALUES に `gio-terms` を新設。サイトの「編集物は CC BY 4.0、個別系列は原ライセンス表示」
+      という既存運用（estat-terms / meti-terms / edinet-terms と同じ）にそのまま収まる。
+      L-063 (2026-08-07) = 🟡 条件付き GO（条件はすべて実装で吸収済み）。
+    domain: esg
+    frequency: annual
+    unit: "Mt-CO2e"
+    tz: Asia/Tokyo
+    missing_policy: "null"
+    aggregation: raw
+    # 年 1 回・4 月中旬〜下旬の公表（確報値）。実績: FY2018→2020-04-14 / FY2019→2021-04-13 /
+    # FY2020→2022-04-15 / FY2021→2023-04-21 / FY2022→2024-04-12 / FY2023→2025-04-25 / FY2024→2026-04-14。
+    # ＝ 対象年度末（3/31）から約 12.5 ヶ月遅れ。
+    # 観測日の規約は**年度末**（FY2024 → 2025-03-31）なので最新点の最大滞留は
+    # 次年度版が出る 2027-04 頃 − 2025-03-31 ≒ 750 日 → SLA 800（レポート推奨値）。
+    # check_staleness.py の 2× ハードゲート = 1600 日。
+    # ⚠️ 速報値は FY2020 分（2021-12-10 公表）を最後にアーカイブ上に存在しない。SLA で速報値を当てにしない。
+    freshness_sla_days: 800
+    backfill_start: "1991-03-31"                   # FY1990 の年度末
+    # ----- パース仕様（実データで確認, L-062/L-013）------------------------
+    # openpyxl は埋め込みドーナツグラフの holeSize=0 で ValueError: Min value is 1 を出して落ちる
+    # （read_only=True でも iter_rows が空）。→ zipfile + xml.etree で sheet XML を直パースする。
+    # sharedStrings にルビ（<rPh>）が入っており、全 <t> を素朴に連結するとフリガナが混入する
+    # （「製造業セイゾウギョウ」）。<si> 直下の <t> と <r><t> のみを拾うこと。
+    # ★ 行番号は決め打ちにしない。ブロック見出し「■…」→ 年ヘッダ行 → 行ラベルで引き当てる。
+    #   下記 sheets/blocks は「どこを見ているか」を人間が追うためのドキュメント。
+    sheets:
+      sector: "3.Allocated_CO2-sector"             # 電気・熱配分後の部門別 CO2（政策議論の標準はこちら）
+      summary: "1.Summary"                         # ガス別 GHG と 排出・吸収量
+    blocks:
+      sector: "■排出量　[Mt CO2]"                  # レポート実測では行 140 見出し / 141 年ヘッダ / 142-151 データ
+      gas: "■排出量　[百万トンCO2換算]"            # レポート実測では行 3 見出し / 4 年ヘッダ / 5-15 データ
+      net: "■排出・吸収量　[百万トンCO2換算]"      # レポート実測では行 64 見出し / 65 年ヘッダ / 66-68 データ
+    # ----- 書き出し前に検査する恒等式（fetch_gio.check_integrity）----------
+    # 1 本でも破れたらシート/行/列の取り違えなので **何も書かずに exit 1**。
+    reconciliations:
+      - "Allocated CO2 合計 = 電気熱配分誤差 + 8 部門"
+      - "CO2 = エネルギー起源 + 非エネルギー起源"
+      - "代替フロン等4ガス = HFCs + PFCs + SF6 + NF3"
+      - "GHG 計 = CO2 + CH4 + N2O + 代替フロン等4ガス"
+      - "排出・吸収量（計）= 排出量 + 森林等吸収量（負値）"
+      - "3.Allocated 部門合計 == 1.Summary CO2（シート跨ぎ）"
+      - "1.Summary 排出量ブロック == ガス別ブロックの計"
+      # 下 2 本は合計同士の突合より強い。合計が合っていても部門の行が 1 つずれていれば破れるため、
+      # 2 シート間で行の対応が取れていることの証拠になる（全 35 年度で 1e-12 Mt 精度で成立）。
+      - "エネルギー起源 CO2 == 5 部門（エネ転換/産業/運輸/業務他/家庭）+ 電気熱配分統計誤差（シート跨ぎ）"
+      - "非エネルギー起源 CO2 == 工業プロセス + 廃棄物 + その他（シート跨ぎ）"
+    notes: |
+      日本の温室効果ガスインベントリ（UNFCCC 提出値）から 18 系列。esg ドメインの日本充実。
+      L-063 事前確認: energy-data-platform/docs/l063-check-energy-gx-2026-08-07.md §S-1 = 🟡 条件付き GO。
+      既存 esg 72 系列は全て EU ETS（欧州）で、日本の系列はゼロだった。catalog 重複チェックも
+      ghg/carbon = 0 件、co2 = ember-co2-intensity-*（発電の原単位 gCO2/kWh で別物）、
+      emission = eu-ets-*（欧州）で重複なし。
+
+      ★ 本ソースは「追記」ではなく**毎回全置換**で書き出す（write_processed(replace=True)）。
+        規約が「公開日の異なる版を組み合わせての使用は避けてください」と定めており、かつ
+        インベントリは毎年の再計算で 1990 年度まで遡って改定されるため、追記マージだと
+        旧版と新版が混ざった時系列になってしまう。全置換が唯一正しい。
+        全置換は「取れなかった系列の既存データを削る」危険と裏表なので、fetch_gio.py は
+        18 系列すべてが揃い、上記 reconciliations が全て通ったときにだけ書き出す。
+
+      観測日の規約は**年度末**（FY2024 → 2025-03-31）。EDINET 系列と同じ年度末規約。
+      FY 開始日で日付する規約（fit-price 型）にすると最大滞留が約 1108 日になり SLA 800 と
+      2 倍近くズレるので、規約と SLA はセットで動かすこと。
+
+      系列の構成:
+        A 群 9 系列（3.Allocated_CO2-sector, unit=Mt-CO2）… 電気・熱配分後の部門別 CO2。
+          2.CO2-sector は配分前（直接排出）版。日本の政策議論は配分後が標準なので 3.Allocated を採る。
+          「エネルギー転換部門（電気熱配分誤差）」= 統計誤差行は系列化しない（合計突合にのみ使う）。
+        B 群 7 系列（1.Summary, unit=Mt-CO2e）… ガス別。HFC/PFC/SF6/NF3 の内訳 4 本は不採用（密度版 +4）。
+        C 群 2 系列（1.Summary, unit=Mt-CO2e）… 森林等吸収量とネット。**2014 年度〜**（1990-2013 は空セル）。
+
+      ⚠️ 命名: `jp-ghg-industry` ではなく `jp-ghg-co2-industry`。GIO の部門別内訳は CO2 のみで、
+        CH4/N2O/フロンの同形の部門別は存在しない。CO2 を明示しないと「全ガスの産業部門」と誤読される。
+      ⚠️ jp-ghg-co2-total（A 群の部門合計）と jp-ghg-co2（B 群のガス別 CO2）は**定義上同じ値**になる。
+        レポート §8 の 18 系列案は両方を採る。冗長ではあるが由来シートが異なるので、
+        両者の一致を check_integrity の恒等式（シート跨ぎ突合）として利用している。
+      単位表記は既存 esg 72 系列（EU ETS）の house style に揃えて `Mt-CO2e` とした
+      （レポートの表記は "Mt CO2 eq"）。純 CO2 の A 群のみ `Mt-CO2`。
+      実測（2026 年版, FY2024）: 総排出量 1,046.406 Mt-CO2e / 森林等吸収量 -52.341 / ネット 994.066。
+      環境省・国立環境研究所の 2026-04-14 報道発表「約9億9,400万トン」「吸収量 約5,230万トン」
+      「代替フロン等4ガス 約3,220万トン」と一致。
+    indicator_ids:
+      - jp-ghg-co2-energy-conversion
+      - jp-ghg-co2-industry
+      - jp-ghg-co2-transport
+      - jp-ghg-co2-commercial
+      - jp-ghg-co2-household
+      - jp-ghg-co2-industrial-process
+      - jp-ghg-co2-waste
+      - jp-ghg-co2-other
+      - jp-ghg-co2-total
+      - jp-ghg-total
+      - jp-ghg-co2
+      - jp-ghg-co2-energy-origin
+      - jp-ghg-co2-nonenergy-origin
+      - jp-ghg-ch4
+      - jp-ghg-n2o
+      - jp-ghg-fgas
+      - jp-ghg-lulucf-removal
+      - jp-ghg-net
+    indicators:
+      # --- A 群: 電気・熱配分後の部門別 CO2（3.Allocated_CO2-sector, 1990-最新年度）---
+      jp-ghg-co2-energy-conversion:
+        name: 日本 CO2 排出量 エネルギー転換部門（電気・熱配分後）
+        domain: esg
+        unit: "Mt-CO2"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        notes: "発電所・製油所等。電気熱配分統計誤差を除いた値（統計誤差行は別行で、本系列には含まない）。"
+        depends_on: null
+      jp-ghg-co2-industry:
+        name: 日本 CO2 排出量 産業部門（電気・熱配分後）
+        domain: esg
+        unit: "Mt-CO2"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        notes: "製造業・建設業・鉱業・農林水産業。部門別 CO2 の最大部門。"
+        depends_on: null
+      jp-ghg-co2-transport:
+        name: 日本 CO2 排出量 運輸部門（電気・熱配分後）
+        domain: esg
+        unit: "Mt-CO2"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        notes: "自動車・船舶・航空・鉄道。"
+        depends_on: null
+      jp-ghg-co2-commercial:
+        name: 日本 CO2 排出量 業務他部門（電気・熱配分後）
+        domain: esg
+        unit: "Mt-CO2"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        notes: "事務所・ビル、商業・サービス・事業所等。1990 年度比で増加している数少ない部門。"
+        depends_on: null
+      jp-ghg-co2-household:
+        name: 日本 CO2 排出量 家庭部門（電気・熱配分後）
+        domain: esg
+        unit: "Mt-CO2"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        notes: "家庭。電気・熱配分後なので電源構成の脱炭素化がそのまま効く。"
+        depends_on: null
+      jp-ghg-co2-industrial-process:
+        name: 日本 CO2 排出量 工業プロセス及び製品の使用
+        domain: esg
+        unit: "Mt-CO2"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        notes: "セメント製造時の石灰石脱炭酸など、燃料燃焼由来ではない CO2。"
+        depends_on: null
+      jp-ghg-co2-waste:
+        name: 日本 CO2 排出量 廃棄物
+        domain: esg
+        unit: "Mt-CO2"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        notes: "廃棄物の焼却・埋立等に伴う CO2。"
+        depends_on: null
+      jp-ghg-co2-other:
+        name: 日本 CO2 排出量 その他（間接CO2等）
+        domain: esg
+        unit: "Mt-CO2"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        notes: "間接 CO2 等。"
+        depends_on: null
+      jp-ghg-co2-total:
+        name: 日本 CO2 排出量 合計（電気・熱配分後 部門計）
+        domain: esg
+        unit: "Mt-CO2"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        sanity_min: 700                            # 単位・シート取り違えの検出枠（最新観測のみ検査）
+        sanity_max: 1400
+        notes: "3.Allocated_CO2-sector の部門合計。定義上 jp-ghg-co2（1.Summary のガス別 CO2）と同値で、両者の一致を書き出し前のシート跨ぎ突合に使っている。"
+        depends_on: null
+      # --- B 群: ガス別 GHG（1.Summary, 1990-最新年度）---
+      jp-ghg-total:
+        name: 日本 温室効果ガス総排出量
+        domain: esg
+        unit: "Mt-CO2e"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        sanity_min: 800                            # FY2024 実績 1,046.4。単位取り違え（千トン/トン）なら必ず外れる
+        sanity_max: 1500
+        notes: "CO2 + CH4 + N2O + 代替フロン等4ガスの合計（吸収量控除前）。報道でいう「排出量」。GWP は AR5。"
+        depends_on: null
+      jp-ghg-co2:
+        name: 日本 温室効果ガス排出量 二酸化炭素（CO2）
+        domain: esg
+        unit: "Mt-CO2e"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        notes: "総排出量の約 93%（FY2024）。定義上 jp-ghg-co2-total と同値（由来シートが異なる）。"
+        depends_on: null
+      jp-ghg-co2-energy-origin:
+        name: 日本 CO2 排出量 エネルギー起源
+        domain: esg
+        unit: "Mt-CO2e"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        notes: "燃料の燃焼に伴う CO2。CO2 の内訳（エネルギー起源 + 非エネルギー起源 = CO2）。"
+        depends_on: null
+      jp-ghg-co2-nonenergy-origin:
+        name: 日本 CO2 排出量 非エネルギー起源
+        domain: esg
+        unit: "Mt-CO2e"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        notes: "工業プロセス・廃棄物等、燃料燃焼以外に由来する CO2。"
+        depends_on: null
+      jp-ghg-ch4:
+        name: 日本 温室効果ガス排出量 メタン（CH4）
+        domain: esg
+        unit: "Mt-CO2e"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        notes: "GWP=28（AR5）で CO2 換算。稲作・家畜・廃棄物埋立等。"
+        depends_on: null
+      jp-ghg-n2o:
+        name: 日本 温室効果ガス排出量 一酸化二窒素（N2O）
+        domain: esg
+        unit: "Mt-CO2e"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        notes: "GWP=265（AR5）で CO2 換算。農地土壌・燃料燃焼・工業プロセス等。"
+        depends_on: null
+      jp-ghg-fgas:
+        name: 日本 温室効果ガス排出量 代替フロン等4ガス（HFCs/PFCs/SF6/NF3）
+        domain: esg
+        unit: "Mt-CO2e"
+        backfill_start: "1991-03-31"
+        aggregation: raw
+        notes: "HFCs + PFCs + SF6 + NF3。2009 年以降増加していたが 2021 年に減少へ転じた。内訳 4 本は系列化していない（合計の突合にのみ使用）。"
+        depends_on: null
+      # --- C 群: 吸収量・ネット（1.Summary, **2014 年度〜**）---
+      jp-ghg-lulucf-removal:
+        name: 日本 森林等の吸収源対策による吸収量
+        domain: esg
+        unit: "Mt-CO2e"
+        backfill_start: "2015-03-31"               # FY2014 の年度末。1990-2013 年度は元ファイルが空セル
+        aggregation: raw
+        notes: "**負値**（吸収）。元ファイルに値があるのは FY2014 以降のみで、それ以前は空セル（欠測ではなく未掲載）。ブルーカーボンを含む。"
+        depends_on: null
+      jp-ghg-net:
+        name: 日本 温室効果ガス 排出・吸収量（ネット）
+        domain: esg
+        unit: "Mt-CO2e"
+        backfill_start: "2015-03-31"               # FY2014 の年度末
+        aggregation: raw
+        sanity_min: 700
+        sanity_max: 1400
+        notes: "総排出量 + 森林等吸収量。報道発表の見出し数字はこちら（FY2024 = 約9億9,400万トン）。NDC の進捗はこの系列で見る。元ファイルに値があるのは FY2014 以降のみ。"
+        depends_on: null

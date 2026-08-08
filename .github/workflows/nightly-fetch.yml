@@ -245,6 +245,24 @@ jobs:
         # 年 4 回更新のため通常 no-op。JEPX 一時障害で他ソースの commit まで巻き込まないよう他 fetch と同様に true。停滞検知は commit 後の Staleness hard check が担う（L-064）。
         continue-on-error: true
 
+      - name: Fetch GIO 日本の温室効果ガス排出量 (annual, esg domain, 18 series)
+        # 国立環境研究所 温室効果ガスインベントリオフィス (GIO) のインベントリから 18 系列:
+        #   部門別 CO2 9（電気・熱配分後）/ ガス別 GHG 7 / 吸収量・ネット 2、1990-最新年度。
+        # ★ xlsx の直 URL はハードコードせず、毎回 index ページをパースして最新版を解決する。
+        #   規約の「データファイルへの直接リンクはご遠慮ください」に沿うため、かつ
+        #   URL 中の att ディレクトリ ID が公表年ごとにローテートするため
+        #   （決め打ちすると Pink Sheet 型サイレント停滞になる）。
+        # ★ 規約の「公開日の異なる版を組み合わせての使用は避けてください」条項と、
+        #   毎年の再計算で過去年も遡及改定される実態から、追記ではなく**全置換**で書き出す。
+        #   全置換は取得漏れが既存データの欠損に直結するので、fetch_gio.py は 18 系列が揃い
+        #   元ファイル内部の恒等式（部門合計・ガス内訳・シート跨ぎ）が全て通ったときにのみ書く。
+        # 年 1 回（4 月中旬〜下旬）公表のため通常は no-op（同一版なら CSV は md5 一致）。
+        run: |
+          python scripts/fetch_gio.py
+        # GIO 側の一時障害で他ソースの commit まで巻き込まないよう他 fetch と同様に true。
+        # 停滞検知は commit 後の Staleness hard check が担う（L-064）。SLA 800 → 2×=1600 日。
+        continue-on-error: true
+
       - name: Generate indicators catalog (D-011)
         # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を生成。
         # Required 10 欠落は exit 1（CI fail）、Recommended 欠落/鮮度超過は warning 止まり。
