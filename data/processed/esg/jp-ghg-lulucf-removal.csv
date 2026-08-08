@@ -1,0 +1,12 @@
+date,indicator_id,region,value,source_url
+2015-03-31,jp-ghg-lulucf-removal,jp,-69.3041579753391,https://www.nies.go.jp/gio/archive/ghgdata/k6efli000007q2e2-att/L5-7gas_2026_gioweb_ver1.0.xlsx
+2016-03-31,jp-ghg-lulucf-removal,jp,-65.98215737744246,https://www.nies.go.jp/gio/archive/ghgdata/k6efli000007q2e2-att/L5-7gas_2026_gioweb_ver1.0.xlsx
+2017-03-31,jp-ghg-lulucf-removal,jp,-64.59286493552504,https://www.nies.go.jp/gio/archive/ghgdata/k6efli000007q2e2-att/L5-7gas_2026_gioweb_ver1.0.xlsx
+2018-03-31,jp-ghg-lulucf-removal,jp,-64.20811848884786,https://www.nies.go.jp/gio/archive/ghgdata/k6efli000007q2e2-att/L5-7gas_2026_gioweb_ver1.0.xlsx
+2019-03-31,jp-ghg-lulucf-removal,jp,-62.82561222727553,https://www.nies.go.jp/gio/archive/ghgdata/k6efli000007q2e2-att/L5-7gas_2026_gioweb_ver1.0.xlsx
+2020-03-31,jp-ghg-lulucf-removal,jp,-58.805678364515344,https://www.nies.go.jp/gio/archive/ghgdata/k6efli000007q2e2-att/L5-7gas_2026_gioweb_ver1.0.xlsx
+2021-03-31,jp-ghg-lulucf-removal,jp,-56.44062656690509,https://www.nies.go.jp/gio/archive/ghgdata/k6efli000007q2e2-att/L5-7gas_2026_gioweb_ver1.0.xlsx
+2022-03-31,jp-ghg-lulucf-removal,jp,-57.09782649460828,https://www.nies.go.jp/gio/archive/ghgdata/k6efli000007q2e2-att/L5-7gas_2026_gioweb_ver1.0.xlsx
+2023-03-31,jp-ghg-lulucf-removal,jp,-54.154637477347705,https://www.nies.go.jp/gio/archive/ghgdata/k6efli000007q2e2-att/L5-7gas_2026_gioweb_ver1.0.xlsx
+2024-03-31,jp-ghg-lulucf-removal,jp,-53.87807810079508,https://www.nies.go.jp/gio/archive/ghgdata/k6efli000007q2e2-att/L5-7gas_2026_gioweb_ver1.0.xlsx
+2025-03-31,jp-ghg-lulucf-removal,jp,-52.34059462679478,https://www.nies.go.jp/gio/archive/ghgdata/k6efli000007q2e2-att/L5-7gas_2026_gioweb_ver1.0.xlsx

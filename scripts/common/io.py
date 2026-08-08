@@ -61,10 +61,23 @@ def write_processed(
     basename: str,
     *,
     key_cols: Iterable[str] = ("date", "indicator_id", "region"),
+    replace: bool = False,
 ) -> tuple[Path, Path]:
     """
     処理済みデータを CSV と Parquet で書き出す。
     既存ファイルがあれば読み込んでから `key_cols` でユニーク化してマージする（append-safe）。
+
+    Args:
+        replace: True なら既存ファイルとマージせず `df` だけで**全置換**する。
+            既定 False（＝従来どおりの追記マージ）。
+
+            全置換が必要なのは「1 ファイルに全期間が入っており、かつ新版が過去分も
+            遡及改定するソース」。追記マージだと旧版の値が残って新旧混在の時系列に
+            なってしまう。GIO 温室効果ガス（fetch_gio.py）は利用規約自体が
+            「公開日の異なる版を組み合わせての使用は避けてください」と定めているため
+            全置換が唯一正しい書き方になる。
+            ★ 呼び出し側は「書き出す前に全系列そろっているか」を検証すること。
+              部分的な取得結果で replace=True すると既存データを削ってしまう。
 
     Returns:
         (csv_path, parquet_path)
@@ -78,8 +91,8 @@ def write_processed(
     csv_path = dest_dir / f"{basename}.csv"
     parquet_path = dest_dir / f"{basename}.parquet"
 
-    # 既存があればマージ
-    if csv_path.exists():
+    # 既存があればマージ（replace=True のときは既存を読まずに丸ごと差し替える）
+    if csv_path.exists() and not replace:
         existing = pd.read_csv(csv_path, dtype={"date": str})
         validate_schema(existing)
         merged = pd.concat([existing, df], ignore_index=True)
@@ -97,7 +110,8 @@ def write_processed(
         logger.warning("parquet write failed (%s) — CSV only", e)
 
     logger.info(
-        "wrote processed: %s (%d rows, range=%s..%s)",
+        "wrote processed%s: %s (%d rows, range=%s..%s)",
+        " (replace)" if replace else "",
         csv_path, len(merged),
         merged["date"].min() if len(merged) else "-",
         merged["date"].max() if len(merged) else "-",
