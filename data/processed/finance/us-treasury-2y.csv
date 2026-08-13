@@ -9158,3 +9158,4 @@ date,indicator_id,region,value,source_url
 2026-08-10,us-treasury-2y,us,4.25,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
 2026-08-11,us-treasury-2y,us,4.22,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
 2026-08-12,us-treasury-2y,us,4.2,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
+2026-08-13,us-treasury-2y,us,4.15,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
