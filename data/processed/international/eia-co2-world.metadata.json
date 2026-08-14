@@ -1,0 +1,21 @@
+{
+  "id": "eia-co2-world",
+  "name": "世界のCO2排出量（EIA・エネルギー起源）",
+  "domain": "international",
+  "frequency": "annual",
+  "unit": "Mt-CO2",
+  "source_name": "米国エネルギー情報局（EIA）International Energy Statistics",
+  "source_url": "https://www.eia.gov/international/data/world",
+  "license": "public-domain",
+  "observation_cutoff": "2024-01-01",
+  "updated_at": "2026-08-14T14:51:03+09:00",
+  "license_url": "https://www.eia.gov/about/copyrights_reuse.php",
+  "license_notice": "米国連邦政府著作物としてパブリックドメイン。EIA は出典表記を推奨（例: Source: U.S. Energy Information Administration）",
+  "tz": "UTC",
+  "missing_policy": "null",
+  "backfill_start": "1949-01-01",
+  "publisher": "U.S. Energy Information Administration (EIA)",
+  "aggregation": "raw",
+  "notes": "productId 4008 = CO2 emissions（総計）。EIA独自のエネルギー収支×排出係数による暦年値（エネルギー起源CO2のみ）。UNFCCCインベントリ（GIO・年度）とは方法論・期間定義が異なり数値は一致しない（日本2024年: EIA 941.0 / GIO エネルギー起源 906.6 Mt-CO2）。CH4・N2O・フロン類・LULUCFを含まない。countryRegionId=WORL（type=r/Region）。",
+  "depends_on": null
+}

@@ -263,6 +263,33 @@ jobs:
         # 停滞検知は commit 後の Staleness hard check が担う（L-064）。SLA 800 → 2×=1600 日。
         continue-on-error: true
 
+      - name: Fetch EIA international CO2 (annual, international domain, 9 series)
+        # 米国エネルギー情報局 (EIA) International Energy Statistics API v2 から
+        # 国際 CO2 排出量 9 系列: 地域別合計 6 (WORL/JPN/CHN/USA/EU27/OECD) + 日本の燃料別内訳 3。
+        # international ドメインの「経済全体・国際横断・共通方法論の CO2」を埋める
+        # (既存 jp-ghg-* は日本のみ・年度・UNFCCC、ember-co2-intensity-* は電力部門のみで重複なし)。
+        # ★ facet 一覧エンドポイント (/v2/international/facet/{id}) は使わない。
+        #   2026-08-14 実測で一覧は石油系サブセットしか返さず、activityId=8(Emissions) も
+        #   unit=MMTCD も列挙されない。一覧を信じると CO2 の存在自体に気づけないため、
+        #   facet 値は source_map.yaml のハードコードを明示指定する。
+        # ★ countryRegionId には WP17(name="Japan", type=r) 等 JPN と同値の重複コードが存在する。
+        #   ピン留めせず集計すると二重計上になるので、要求値と完全一致しない行は検証ゲートで弾く。
+        # ★ 検証ゲート a(facet 一致) / b(加算整合 |jp-(coal+oil+gas)|<=0.05) / c(行数下限・正値)
+        #   が 1 本でも破れたら CSV を 1 行も書かずに exit 1。
+        # 認証必須。secrets.EIA_API_KEY 未設定時は WARN ログを吐いて exit 1 するが、
+        # continue-on-error で他系列を止めない（fetch_estat.py と同一規約）。
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+        run: |
+          python scripts/fetch_eia_intl.py
+        # 年 1 回更新のため通常 no-op。EIA 側の一時障害で他ソースの commit まで巻き込まないよう
+        # 他 fetch と同様に true。停滞検知は commit 後の Staleness hard check が担う（L-064）。
+        # SLA 1300 → 2× ハードゲート = 2600 日。★ annual 既定の 540 ではない:
+        # EIA は年 Y の値を ~Y+2 年央に公表し、観測日を暦年 1/1 に置くため初出時点で
+        # age≈950 日になる。540 だと初日から warning かつ 2026-12-16 に CI が赤になる
+        # （観測日規約と SLA はセットで動かすこと）。
+        continue-on-error: true
+
       - name: Generate indicators catalog (D-011)
         # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を生成。
         # Required 10 欠落は exit 1（CI fail）、Recommended 欠落/鮮度超過は warning 止まり。
