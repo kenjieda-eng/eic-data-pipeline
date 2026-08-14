@@ -4321,3 +4321,211 @@ sources:
         sanity_max: 1400
         notes: "総排出量 + 森林等吸収量。報道発表の見出し数字はこちら（FY2024 = 約9億9,400万トン）。NDC の進捗はこの系列で見る。元ファイルに値があるのは FY2014 以降のみ。"
         depends_on: null
+
+  # ==========================================================================
+  # EIA International Energy Statistics — 国際 CO2 排出量 9 系列（2026-08-14 追加）
+  # ==========================================================================
+  eia-intl:
+    name: 米国エネルギー情報局（EIA）International Energy Statistics
+    source_name: 米国エネルギー情報局（EIA）International Energy Statistics
+    publisher: U.S. Energy Information Administration (EIA)
+    publisher_url: https://www.eia.gov/
+    source_url: https://www.eia.gov/international/data/world
+    # ----- 取得経路 --------------------------------------------------------
+    # REST API v2。API キー必須（無料登録、https://www.eia.gov/opendata/register.php）。
+    # キーは環境変数 EIA_API_KEY からのみ読む。★ yaml にもコードにも絶対に書かない。
+    api_base: https://api.eia.gov/v2/international/data/
+    # ★★ facet 一覧エンドポイント（/v2/international/facet/{id}）は使ってはいけない ★★
+    #   2026-08-14 実測: 一覧が返す値は石油系サブセットのみで、実データに存在する値を取りこぼす。
+    #     activityId: 一覧 4 件（1,2,3,5）      ← 実データには 14 件（8=Emissions を含む）
+    #     unit      : 一覧 3 件（MBBL,MT,TBPD） ← 実データには 17 件（MMTCD を含む）
+    #     productId : 一覧 18 件（石油＋輸入元別のみ） ← 実データには石炭/ガス/電力/CO2 が存在
+    #   ルート説明文は "petroleum, natural gas, electricity, etc." と書いているのに
+    #   一覧は石油だけ、という矛盾から発覚。facet 一覧を信じて実装すると
+    #   **CO2 の存在自体に気づけない**。→ facet 値は下記のとおりハードコードで明示指定する。
+    activity_id: "8"          # Emissions
+    unit_filter: "MMTCD"      # million metric tonnes carbon dioxide
+    # ----- D-011 メタデータ共通項目 ---------------------------------------
+    license: public-domain
+    license_url: https://www.eia.gov/about/copyrights_reuse.php
+    license_notice: "米国連邦政府著作物としてパブリックドメイン。EIA は出典表記を推奨（例: Source: U.S. Energy Information Administration）"
+    license_text: |
+      EIA の Copyright & Reuse ページ: EIA が作成した情報は米国政府の著作物であり、
+      合衆国内において著作権保護の対象外（17 U.S.C. § 105）。許諾なく自由に複製・再配布・
+      改変・商用利用が可能。出典表記は義務ではなく推奨
+      （EIA requests that you cite the U.S. Energy Information Administration as the source）。
+      → SPDX 相当は public-domain。既存の us-treasury / fred-macro（連邦政府データ）と同じ扱い。
+    domain: international
+    frequency: annual
+    unit: "Mt-CO2"
+    tz: UTC
+    missing_policy: "null"
+    aggregation: raw
+    # 年次更新。2026-08-14 実測で最新 period = 2024（約 19-20 ヶ月遅れ）。
+    # 同じ /international でも石油消費（activityId=2）は 2025 まで存在し、
+    # CO2（activityId=8）だけがさらに 1 年遅い階層である点に注意（activity 別に鮮度が違う）。
+    # 観測日の規約は**暦年の 1/1**（2024 年 → 2024-01-01）。既存の暦年年次系列
+    # （nrel-atb 2021-01-01 / eu-ets 2005-01-01 / estat-trade 2016-01-01）と同じ規約。
+    # GIO の年度末規約（FY2024 → 2025-03-31）とは別物。
+    # ----- SLA の根拠（★ 観測日規約と SLA は必ずセットで動かすこと）---------
+    # EIA は年 Y の CO2 を ~Y+2 年央に公表する（2024 年値が 2026-08 時点で最新）。
+    # 観測日を暦年 1/1 に置くため、**初出の瞬間から age ≈ 950 日**になる構造。
+    #   2026-08-14 実測: cutoff=2024-01-01 → age=956d
+    # 最大滞留は次版（2025 年値, ~2027 年央）が出る直前:
+    #   2027-06 − 2024-01-01 ≈ 1250 日
+    # → SLA 1300（余裕込み）。check_staleness.py の 2× ハードゲート = 2600 日。
+    # ⚠️ frequency=annual の既定値 540 を採ると初日から warning、かつ 2026-12-16 に
+    #   ハードゲート（2×540=1080d）を突破して nightly CI が赤になる。
+    #   540 が妥当なのは「観測日が公表日に近い」年次系列だけで、本ソースは当てはまらない。
+    freshness_sla_days: 1300
+    backfill_start: "1980-01-01"
+    # ----- 地域コード（2026-08-14 実測で存在を確認したもののみ）------------
+    # ★★ WP15 / WP17 / WP27 という重複コードが存在する ★★
+    #   WP17 は name="Japan"・countryRegionTypeId="r"(Region) で、値は JPN（type="c"/Country）と
+    #   完全一致（2024 = 941.0 で同値）。WP15=China / WP27=United States も同様。
+    #   countryRegionId を明示ピン留めせず全行を走査して集計すると**日本が二重計上**される。
+    #   → fetch_eia_intl.py は要求した countryRegionId と完全一致する行以外を検証ゲートで弾く。
+    # ----- productId の正式定義（実測）------------------------------------
+    #   4008 = CO2 emissions（総計）
+    #   4002 = Coal and coke（石炭・コークス）
+    #   4006 = Petroleum and other liquids（石油・その他液体）
+    #   4010 = Consumed natural gas（消費天然ガス）
+    #   4 地域すべてで 4008 == 4002 + 4006 + 4010 が差分 0.00 で成立することを実測確認済み。
+    #   （GIO の「5 部門単純合算は合計にならない」問題とは異なり、単純加算が成立する）
+    #   なお productId 1 / 5 / 3002 も MMTCD を持つ旧コード系のため、
+    #   unit=MMTCD だけで一括取得すると同様に二重計上になる。productId も必ず明示指定する。
+    notes: |
+      EIA International Energy Statistics から国際 CO2 排出量 9 系列。international ドメインの
+      「経済全体・国際横断・共通方法論の CO2」を新規に埋める。
+
+      既存系列との重複なし（2026-08-14 catalog 581 系列で確認）:
+        - jp-ghg-*（18 系列, esg）= GIO・**日本のみ**・UNFCCC インベントリ・**年度**
+        - ember-co2-intensity-*（5 系列, international）= **電力部門のみ**・gCO2/kWh・月次
+      いずれも「複数国の経済全体 CO2 を共通方法論で比較する」用途は満たしておらず、本 9 系列が初。
+
+      ★ 定義差の警告（サイト表示時に必ず出すこと）:
+        EIA 日本 2024（暦年）= 941.0 Mt-CO2 に対し、GIO エネルギー起源 CO2 FY2024 = 906.6、
+        GIO 全 CO2 FY2024 = 971.5、GIO 全 GHG FY2024 = 1,046.4 Mt-CO2e。
+        EIA 値は GIO のエネルギー起源と全 CO2 の**中間**に落ちる（エネルギー起源比 +3.8%）。
+        要因: (a) 暦年 vs 年度 (b) EIA 独自のエネルギー収支×排出係数 vs UNFCCC インベントリ方法論
+        (c) バンカー燃料の扱い。→ jp-ghg-* と同一チャートに重ねてはいけない。
+
+      系列の構成:
+        地域別合計 6 系列（WORL / JPN / CHN / USA / EU27 / OECD × productId 4008）
+        日本の燃料別内訳 3 系列（JPN × 4002 石炭 / 4006 石油等 / 4010 天然ガス）
+          → 他ソースにない差別化要素。加算整合が検証済みなのでスタック表示に耐える。
+
+      実測 period 範囲（2026-08-14）:
+        JPN / CHN / EU27 = 1980-2024（45 点）、USA / WORL / OECD = 1949-2024（76 点）
+    indicator_ids:
+      - eia-co2-world
+      - eia-co2-jp
+      - eia-co2-cn
+      - eia-co2-us
+      - eia-co2-eu27
+      - eia-co2-oecd
+      - eia-co2-jp-coal
+      - eia-co2-jp-oil
+      - eia-co2-jp-gas
+    indicators:
+      # --- 地域別合計 6 系列（productId 4008 = CO2 emissions）---
+      eia-co2-world:
+        name: 世界のCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "Mt-CO2"
+        region: world
+        country_region_id: WORL
+        product_id: "4008"
+        backfill_start: "1949-01-01"
+        aggregation: raw
+        notes: "productId 4008 = CO2 emissions（総計）。EIA独自のエネルギー収支×排出係数による暦年値（エネルギー起源CO2のみ）。UNFCCCインベントリ（GIO・年度）とは方法論・期間定義が異なり数値は一致しない（日本2024年: EIA 941.0 / GIO エネルギー起源 906.6 Mt-CO2）。CH4・N2O・フロン類・LULUCFを含まない。countryRegionId=WORL（type=r/Region）。"
+        depends_on: null
+      eia-co2-jp:
+        name: 日本のCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "Mt-CO2"
+        region: jp
+        country_region_id: JPN
+        product_id: "4008"
+        backfill_start: "1980-01-01"
+        aggregation: raw
+        notes: "productId 4008 = CO2 emissions（総計）。EIA独自のエネルギー収支×排出係数による暦年値（エネルギー起源CO2のみ）。UNFCCCインベントリ（GIO・年度）とは方法論・期間定義が異なり数値は一致しない（日本2024年: EIA 941.0 / GIO エネルギー起源 906.6 Mt-CO2）。CH4・N2O・フロン類・LULUCFを含まない。countryRegionId=JPN（type=c/Country）。同名の WP17（type=r）は同値の重複コードなので使わない。"
+        depends_on: null
+      eia-co2-cn:
+        name: 中国のCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "Mt-CO2"
+        region: cn
+        country_region_id: CHN
+        product_id: "4008"
+        backfill_start: "1980-01-01"
+        aggregation: raw
+        notes: "productId 4008 = CO2 emissions（総計）。EIA独自のエネルギー収支×排出係数による暦年値（エネルギー起源CO2のみ）。UNFCCCインベントリ（GIO・年度）とは方法論・期間定義が異なり数値は一致しない（日本2024年: EIA 941.0 / GIO エネルギー起源 906.6 Mt-CO2）。CH4・N2O・フロン類・LULUCFを含まない。countryRegionId=CHN（type=c/Country）。同名の WP15（type=r）は同値の重複コードなので使わない。"
+        depends_on: null
+      eia-co2-us:
+        name: 米国のCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "Mt-CO2"
+        region: us
+        country_region_id: USA
+        product_id: "4008"
+        backfill_start: "1949-01-01"
+        aggregation: raw
+        notes: "productId 4008 = CO2 emissions（総計）。EIA独自のエネルギー収支×排出係数による暦年値（エネルギー起源CO2のみ）。UNFCCCインベントリ（GIO・年度）とは方法論・期間定義が異なり数値は一致しない（日本2024年: EIA 941.0 / GIO エネルギー起源 906.6 Mt-CO2）。CH4・N2O・フロン類・LULUCFを含まない。countryRegionId=USA（type=c/Country）。同名の WP27（type=r）は同値の重複コードなので使わない。"
+        depends_on: null
+      eia-co2-eu27:
+        name: EU27のCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "Mt-CO2"
+        region: eu27
+        country_region_id: EU27
+        product_id: "4008"
+        backfill_start: "1980-01-01"
+        aggregation: raw
+        notes: "productId 4008 = CO2 emissions（総計）。EIA独自のエネルギー収支×排出係数による暦年値（エネルギー起源CO2のみ）。UNFCCCインベントリ（GIO・年度）とは方法論・期間定義が異なり数値は一致しない（日本2024年: EIA 941.0 / GIO エネルギー起源 906.6 Mt-CO2）。CH4・N2O・フロン類・LULUCFを含まない。countryRegionId=EU27（type=r/Region）。region 値は既存 ECB 系列の eu（ユーロ圏）と概念が異なるため eu27 とした。"
+        depends_on: null
+      eia-co2-oecd:
+        name: OECDのCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "Mt-CO2"
+        region: oecd
+        country_region_id: OECD
+        product_id: "4008"
+        backfill_start: "1949-01-01"
+        aggregation: raw
+        notes: "productId 4008 = CO2 emissions（総計）。EIA独自のエネルギー収支×排出係数による暦年値（エネルギー起源CO2のみ）。UNFCCCインベントリ（GIO・年度）とは方法論・期間定義が異なり数値は一致しない（日本2024年: EIA 941.0 / GIO エネルギー起源 906.6 Mt-CO2）。CH4・N2O・フロン類・LULUCFを含まない。countryRegionId=OECD（type=r/Region）。"
+        depends_on: null
+      # --- 日本の燃料別内訳 3 系列（合計 = eia-co2-jp）---
+      eia-co2-jp-coal:
+        name: 日本のCO2排出量・石炭起源（EIA）
+        domain: international
+        unit: "Mt-CO2"
+        region: jp
+        country_region_id: JPN
+        product_id: "4002"
+        backfill_start: "1980-01-01"
+        aggregation: raw
+        notes: "productId 4002 = Coal and coke（石炭・コークス）。EIA独自のエネルギー収支×排出係数による暦年値（エネルギー起源CO2のみ）。UNFCCCインベントリ（GIO・年度）とは方法論・期間定義が異なり数値は一致しない（日本2024年: EIA 941.0 / GIO エネルギー起源 906.6 Mt-CO2）。CH4・N2O・フロン類・LULUCFを含まない。内訳3系列（石炭・石油等・天然ガス）の合計は eia-co2-jp と一致する（取得時に加算整合を検証）。"
+        depends_on: null
+      eia-co2-jp-oil:
+        name: 日本のCO2排出量・石油等起源（EIA）
+        domain: international
+        unit: "Mt-CO2"
+        region: jp
+        country_region_id: JPN
+        product_id: "4006"
+        backfill_start: "1980-01-01"
+        aggregation: raw
+        notes: "productId 4006 = Petroleum and other liquids（石油・その他液体）。EIA独自のエネルギー収支×排出係数による暦年値（エネルギー起源CO2のみ）。UNFCCCインベントリ（GIO・年度）とは方法論・期間定義が異なり数値は一致しない（日本2024年: EIA 941.0 / GIO エネルギー起源 906.6 Mt-CO2）。CH4・N2O・フロン類・LULUCFを含まない。内訳3系列（石炭・石油等・天然ガス）の合計は eia-co2-jp と一致する（取得時に加算整合を検証）。"
+        depends_on: null
+      eia-co2-jp-gas:
+        name: 日本のCO2排出量・天然ガス起源（EIA）
+        domain: international
+        unit: "Mt-CO2"
+        region: jp
+        country_region_id: JPN
+        product_id: "4010"
+        backfill_start: "1980-01-01"
+        aggregation: raw
+        notes: "productId 4010 = Consumed natural gas（消費天然ガス）。EIA独自のエネルギー収支×排出係数による暦年値（エネルギー起源CO2のみ）。UNFCCCインベントリ（GIO・年度）とは方法論・期間定義が異なり数値は一致しない（日本2024年: EIA 941.0 / GIO エネルギー起源 906.6 Mt-CO2）。CH4・N2O・フロン類・LULUCFを含まない。内訳3系列（石炭・石油等・天然ガス）の合計は eia-co2-jp と一致する（取得時に加算整合を検証）。"
+        depends_on: null
