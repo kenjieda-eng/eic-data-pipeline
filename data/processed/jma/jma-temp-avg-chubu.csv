@@ -5338,3 +5338,4 @@ date,indicator_id,region,value,source_url
 2026-08-11,jma-temp-avg-chubu,chubu,28.1,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
 2026-08-12,jma-temp-avg-chubu,chubu,26.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
 2026-08-13,jma-temp-avg-chubu,chubu,26.8,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=
+2026-08-14,jma-temp-avg-chubu,chubu,28.2,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=51&block_no=47636&year=YYYY&month=MM&day=&view=

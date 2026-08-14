@@ -5338,3 +5338,4 @@ date,indicator_id,region,value,source_url
 2026-08-11,jma-sunshine-hokuriku,hokuriku,7.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=56&block_no=47605&year=YYYY&month=MM&day=&view=
 2026-08-12,jma-sunshine-hokuriku,hokuriku,5.1,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=56&block_no=47605&year=YYYY&month=MM&day=&view=
 2026-08-13,jma-sunshine-hokuriku,hokuriku,3.9,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=56&block_no=47605&year=YYYY&month=MM&day=&view=
+2026-08-14,jma-sunshine-hokuriku,hokuriku,10.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=56&block_no=47605&year=YYYY&month=MM&day=&view=
