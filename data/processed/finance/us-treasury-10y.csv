@@ -9160,3 +9160,4 @@ date,indicator_id,region,value,source_url
 2026-08-12,us-treasury-10y,us,4.68,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
 2026-08-13,us-treasury-10y,us,4.63,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
 2026-08-14,us-treasury-10y,us,4.68,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
+2026-08-17,us-treasury-10y,us,4.72,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
