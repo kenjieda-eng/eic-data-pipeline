@@ -4394,6 +4394,62 @@ sources:
     #   （GIO の「5 部門単純合算は合計にならない」問題とは異なり、単純加算が成立する）
     #   なお productId 1 / 5 / 3002 も MMTCD を持つ旧コード系のため、
     #   unit=MMTCD だけで一括取得すると同様に二重計上になる。productId も必ず明示指定する。
+    # ----- 派生 12 系列の分母（★ 分母自体は系列化しない = materialize しない）------
+    #   2026-08-20 実測（EIA API v2 /international）。facet 一覧は使わず実データ行から導出。
+    #   ★★ activityId だけで絞ってはいけない ★★
+    #     activityId=33（Population）には productId=4702（Population, unit=THP）のほかに
+    #     productId=47（Energy intensity, unit=MBTUPP = million Btu per person）が**同居**する。
+    #     activityId=34（GDP）も同様に productId=4701（GDP, unit=BDOLPPP）と
+    #     productId=47（Energy intensity, unit=TBTUUSDPP）が同居する。
+    #     activityId だけで取得すると「エネルギー原単位」を人口・GDP として取り込む。
+    #     → productId と unit を必ず明示指定し、取得後も完全一致を検証する（ゲート a / c）。
+    #   ★★ WP15 / WP17 / WP27 の重複コードは人口・GDP にも存在する ★★
+    #     2026-08-20 実測: WP17（name="Japan", type="r"）の 2024 年値は
+    #     人口 123,753 千人 / GDP 5,311.332（JPN と完全同値）。CO2 と同じ規律で弾く（ゲート b）。
+    #   ★ GDP の定義（実測で確定、2026-08-20）:
+    #     - PPP か市場為替か → **PPP**（unit 名 "billion dollars at purchasing power parities"）
+    #     - 実質か名目か     → **実質**。USA の前年比が実質 GDP 成長率と一致する
+    #                          （2020 −2.08% / 2021 +6.15% / 2022 +2.52% / 2023 +2.93% / 2024 +2.79%）。
+    #                          名目なら 2021 は +10% 台になるはずで、そうなっていない。
+    #     - 基準年           → **2015**。米国は PPP の numeraire（換算 = 1）なので系列 = 米実質 GDP。
+    #                          EIA の USA 2015 = 18,295.000 は BEA 米名目 GDP 2015 = 18,295.019
+    #                          十億ドルと一致する（基準年では実質 = 名目）。他年は一致しない
+    #                          （2010 = 16,339.1 / 2012 = 16,974.6 / 2017 = 19,085.7 / 2019 = 20,159.6）。
+    #     - 出所             → 履歴値は Oxford Economics（EIA IEO の記述 "real 2015 purchasing
+    #                          power parity (PPP) adjusted U.S. dollars"）。
+    #     ⚠️ 基準年は unit 文字列（BDOLPPP）に含まれない。EIA が基準年をサイレント変更しても
+    #        unit は変わらないため、下記 gdp_base_year_canary で毎回検証する（ゲート f）。
+    #   ★ 分母が正しいことの独立した裏付け（2026-08-20 実測）:
+    #     EIA 自身のエネルギー原単位を 2 経路で復元すると完全一致する。
+    #       126.578 MBtu/人 × 123,753 千人 = 15.66442 quad
+    #       2.94924 kBtu/$ × 5,311.332 十億$ = 15.66442 quad   （差 0.0000%、2020/2023/2024 で確認）
+    #     → EIA 自身が productId 4702 / 4701 を分母に使っている。同じ分母を使うのが正しい。
+    derived:
+      denominators:
+        population:
+          activity_id: "33"       # Population
+          product_id: "4702"      # Population（★ 47 = Energy intensity と同居）
+          unit: "THP"             # people in thousands（千人）
+        gdp:
+          activity_id: "34"       # GDP
+          product_id: "4701"      # Gross domestic product（★ 47 = Energy intensity と同居）
+          unit: "BDOLPPP"         # billion dollars at purchasing power parities（十億2015年PPPドル）
+      # ゲート f: 基準年カナリア。米国は PPP numeraire なので基準年では実質 = 名目。
+      gdp_base_year_canary:
+        country_region_id: "USA"
+        base_year: "2015"
+        reference_nominal_bdol: 18295.019   # BEA 米名目 GDP 2015（十億ドル）
+        # 許容 1%: BEA の年次改定（10 年前の名目水準では通常 ±0.3% 以内）は通し、
+        # 基準年の変更（2015→2017 で +2.9%、2015→2020 で +9.5%）は確実に弾く幅。
+        tolerance_pct: 1.0
+      # ゲート e: 派生値のレンジ。1980-2024 の実測レンジは
+      #   per_capita 1.59〜20.97 t/人、per_gdp 124.2〜2353.9 t/百万$。
+      range_gates:
+        per_capita: [0.5, 30.0]
+        per_gdp: [50.0, 3000.0]
+      # ゲート c: 行数下限（実測 45 点 = 1980-2024。分母が 1980 始まりなので CO2 が
+      # 1949 始まりの USA / WORL / OECD でも 1980 が律速）。
+      min_rows: 40
     notes: |
       EIA International Energy Statistics から国際 CO2 排出量 9 系列。international ドメインの
       「経済全体・国際横断・共通方法論の CO2」を新規に埋める。
@@ -4417,6 +4473,24 @@ sources:
 
       実測 period 範囲（2026-08-14）:
         JPN / CHN / EU27 = 1980-2024（45 点）、USA / WORL / OECD = 1949-2024（76 点）
+
+      ---- 派生 12 系列（2026-08-20 追加、catalog 590 → 602）----
+      一人当たり CO2 6 系列 + GDP 当たり CO2 6 系列。分子は上記 eia-co2-*（暦年・エネルギー起源）、
+      分母は EIA が同じ /international に持つ人口（productId 4702）と実質 GDP（productId 4701）。
+      **分母自体は系列化しない**（生の人口・GDP は materialize しない）。理由:
+        - 生の人口は既存の e-Stat 人口推計（都道府県別・各年 10/1 基準）と競合し、
+          「日本の人口が 2 本ある」問題を生む。EIA 2024 = 123,753 千人 に対し
+          e-Stat 47 都道府県合計 2024-10-01 = 123,803 千人（差 50 千人 = 0.04%）。
+        - 2015 年 PPP ドル建て実質 GDP は円建て国内 GDP と並べられず、単体では読まれない。
+      EIA 側に「計算済みの一人当たり CO2 / 炭素集約度」は**存在しない**（2026-08-20 実測）:
+        - 全 267 country/region × activityId=8（2023 年、1,841 行）の unit は MMTCD のみ、
+          product は 7 種（1/5/3002/4002/4006/4008/4010）のみ。
+        - activityId 10,11,13-22,24-32,35-50 を一括 probe → total = 0。
+          実在する activity は 1-9, 12, 23, 33, 34 の 13 種のみ。
+        → 自前計算しか道がない。ただし ③ の通り EIA 自身の原単位算出と同一の分母を使う。
+      鮮度: 分母（人口・GDP）は最新 2025 で CO2（2024）より 1 年進んでいる。派生は分子で律速
+      されるため最新 = 2024。ゲート d で「CO2 に無い period は出力しない」ことを強制する。
+      freshness_sla_days は CO2 と同一（1300）でよい。
     indicator_ids:
       - eia-co2-world
       - eia-co2-jp
@@ -4427,6 +4501,19 @@ sources:
       - eia-co2-jp-coal
       - eia-co2-jp-oil
       - eia-co2-jp-gas
+      # --- 派生 12 系列（一人当たり 6 / GDP 当たり 6）---
+      - eia-co2-per-capita-world
+      - eia-co2-per-capita-jp
+      - eia-co2-per-capita-cn
+      - eia-co2-per-capita-us
+      - eia-co2-per-capita-eu27
+      - eia-co2-per-capita-oecd
+      - eia-co2-per-gdp-world
+      - eia-co2-per-gdp-jp
+      - eia-co2-per-gdp-cn
+      - eia-co2-per-gdp-us
+      - eia-co2-per-gdp-eu27
+      - eia-co2-per-gdp-oecd
     indicators:
       # --- 地域別合計 6 系列（productId 4008 = CO2 emissions）---
       eia-co2-world:
@@ -4529,3 +4616,164 @@ sources:
         aggregation: raw
         notes: "productId 4010 = Consumed natural gas（消費天然ガス）。EIA独自のエネルギー収支×排出係数による暦年値（エネルギー起源CO2のみ）。UNFCCCインベントリ（GIO・年度）とは方法論・期間定義が異なり数値は一致しない（日本2024年: EIA 941.0 / GIO エネルギー起源 906.6 Mt-CO2）。CH4・N2O・フロン類・LULUCFを含まない。内訳3系列（石炭・石油等・天然ガス）の合計は eia-co2-jp と一致する（取得時に加算整合を検証）。"
         depends_on: null
+      # --- 派生 6 系列: 一人当たり CO2（分母 = 人口 productId 4702 / THP 千人）---
+      eia-co2-per-capita-world:
+        name: 世界の一人当たりCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "t-CO2/人"
+        region: world
+        country_region_id: WORL
+        derived_kind: per_capita
+        numerator_id: eia-co2-world
+        backfill_start: "1980-01-01"
+        aggregation: derived
+        notes: "一人当たりCO2 = eia-co2-world ÷ 人口。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。日本の人口は総務省 人口推計（各年10月1日基準、当サイト収載は都道府県別）とは基準日・出所が異なる（2024年で差 0.04%）。国際比較の分母としての値である。countryRegionId=WORL（type=r/Region）。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 4.650 t-CO2/人。"
+        depends_on:
+          - eia-co2-world
+      eia-co2-per-capita-jp:
+        name: 日本の一人当たりCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "t-CO2/人"
+        region: jp
+        country_region_id: JPN
+        derived_kind: per_capita
+        numerator_id: eia-co2-jp
+        backfill_start: "1980-01-01"
+        aggregation: derived
+        notes: "一人当たりCO2 = eia-co2-jp ÷ 人口。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。日本の人口は総務省 人口推計（各年10月1日基準、当サイト収載は都道府県別）とは基準日・出所が異なる（2024年で差 0.04%）。国際比較の分母としての値である。countryRegionId=JPN（type=c/Country）。同名の WP17（type=r）は人口・GDP でも同値の重複コードなので使わない。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 7.604 t-CO2/人。"
+        depends_on:
+          - eia-co2-jp
+      eia-co2-per-capita-cn:
+        name: 中国の一人当たりCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "t-CO2/人"
+        region: cn
+        country_region_id: CHN
+        derived_kind: per_capita
+        numerator_id: eia-co2-cn
+        backfill_start: "1980-01-01"
+        aggregation: derived
+        notes: "一人当たりCO2 = eia-co2-cn ÷ 人口。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。日本の人口は総務省 人口推計（各年10月1日基準、当サイト収載は都道府県別）とは基準日・出所が異なる（2024年で差 0.04%）。国際比較の分母としての値である。countryRegionId=CHN（type=c/Country）。同名の WP15（type=r）は人口・GDP でも同値の重複コードなので使わない。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 8.959 t-CO2/人。"
+        depends_on:
+          - eia-co2-cn
+      eia-co2-per-capita-us:
+        name: 米国の一人当たりCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "t-CO2/人"
+        region: us
+        country_region_id: USA
+        derived_kind: per_capita
+        numerator_id: eia-co2-us
+        backfill_start: "1980-01-01"
+        aggregation: derived
+        notes: "一人当たりCO2 = eia-co2-us ÷ 人口。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。日本の人口は総務省 人口推計（各年10月1日基準、当サイト収載は都道府県別）とは基準日・出所が異なる（2024年で差 0.04%）。国際比較の分母としての値である。countryRegionId=USA（type=c/Country）。同名の WP27（type=r）は人口・GDP でも同値の重複コードなので使わない。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 14.084 t-CO2/人。"
+        depends_on:
+          - eia-co2-us
+      eia-co2-per-capita-eu27:
+        name: EU27の一人当たりCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "t-CO2/人"
+        region: eu27
+        country_region_id: EU27
+        derived_kind: per_capita
+        numerator_id: eia-co2-eu27
+        backfill_start: "1980-01-01"
+        aggregation: derived
+        notes: "一人当たりCO2 = eia-co2-eu27 ÷ 人口。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。日本の人口は総務省 人口推計（各年10月1日基準、当サイト収載は都道府県別）とは基準日・出所が異なる（2024年で差 0.04%）。国際比較の分母としての値である。countryRegionId=EU27（type=r/Region）。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 5.704 t-CO2/人。"
+        depends_on:
+          - eia-co2-eu27
+      eia-co2-per-capita-oecd:
+        name: OECDの一人当たりCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "t-CO2/人"
+        region: oecd
+        country_region_id: OECD
+        derived_kind: per_capita
+        numerator_id: eia-co2-oecd
+        backfill_start: "1980-01-01"
+        aggregation: derived
+        notes: "一人当たりCO2 = eia-co2-oecd ÷ 人口。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。日本の人口は総務省 人口推計（各年10月1日基準、当サイト収載は都道府県別）とは基準日・出所が異なる（2024年で差 0.04%）。国際比較の分母としての値である。countryRegionId=OECD（type=r/Region）。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 8.127 t-CO2/人。"
+        depends_on:
+          - eia-co2-oecd
+      # --- 派生 6 系列: GDP 当たり CO2（分母 = 実質GDP productId 4701 / BDOLPPP）---
+      #   ★ 命名を intensity ではなく per-gdp とした理由:
+      #     既存の ember-co2-intensity-*（電力部門の排出強度、gCO2/kWh）と概念が全く異なる。
+      #     名前で混同させないため per-gdp を採用した。
+      eia-co2-per-gdp-world:
+        name: 世界のGDP当たりCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "t-CO2/百万2015年PPPドル"
+        region: world
+        country_region_id: WORL
+        derived_kind: per_gdp
+        numerator_id: eia-co2-world
+        backfill_start: "1980-01-01"
+        aggregation: derived
+        notes: "GDP当たりCO2 = eia-co2-world ÷ 実質GDP。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。電力部門の排出強度（ember-co2-intensity-*、gCO2/kWh）とは分子・分母とも異なる別概念。countryRegionId=WORL（type=r/Region）。基準年は unit 文字列 BDOLPPP に含まれないため、取得時に基準年カナリア（USA の基準年で実質=名目が成立するか）を検証している。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 255.4 t-CO2/百万2015年PPPドル。"
+        depends_on:
+          - eia-co2-world
+      eia-co2-per-gdp-jp:
+        name: 日本のGDP当たりCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "t-CO2/百万2015年PPPドル"
+        region: jp
+        country_region_id: JPN
+        derived_kind: per_gdp
+        numerator_id: eia-co2-jp
+        backfill_start: "1980-01-01"
+        aggregation: derived
+        notes: "GDP当たりCO2 = eia-co2-jp ÷ 実質GDP。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。電力部門の排出強度（ember-co2-intensity-*、gCO2/kWh）とは分子・分母とも異なる別概念。countryRegionId=JPN（type=c/Country）。同名の WP17（type=r）は人口・GDP でも同値の重複コードなので使わない。基準年は unit 文字列 BDOLPPP に含まれないため、取得時に基準年カナリア（USA の基準年で実質=名目が成立するか）を検証している。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 177.2 t-CO2/百万2015年PPPドル。"
+        depends_on:
+          - eia-co2-jp
+      eia-co2-per-gdp-cn:
+        name: 中国のGDP当たりCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "t-CO2/百万2015年PPPドル"
+        region: cn
+        country_region_id: CHN
+        derived_kind: per_gdp
+        numerator_id: eia-co2-cn
+        backfill_start: "1980-01-01"
+        aggregation: derived
+        notes: "GDP当たりCO2 = eia-co2-cn ÷ 実質GDP。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。電力部門の排出強度（ember-co2-intensity-*、gCO2/kWh）とは分子・分母とも異なる別概念。countryRegionId=CHN（type=c/Country）。同名の WP15（type=r）は人口・GDP でも同値の重複コードなので使わない。基準年は unit 文字列 BDOLPPP に含まれないため、取得時に基準年カナリア（USA の基準年で実質=名目が成立するか）を検証している。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 434.6 t-CO2/百万2015年PPPドル。"
+        depends_on:
+          - eia-co2-cn
+      eia-co2-per-gdp-us:
+        name: 米国のGDP当たりCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "t-CO2/百万2015年PPPドル"
+        region: us
+        country_region_id: USA
+        derived_kind: per_gdp
+        numerator_id: eia-co2-us
+        backfill_start: "1980-01-01"
+        aggregation: derived
+        notes: "GDP当たりCO2 = eia-co2-us ÷ 実質GDP。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。電力部門の排出強度（ember-co2-intensity-*、gCO2/kWh）とは分子・分母とも異なる別概念。countryRegionId=USA（type=c/Country）。同名の WP27（type=r）は人口・GDP でも同値の重複コードなので使わない。基準年は unit 文字列 BDOLPPP に含まれないため、取得時に基準年カナリア（USA の基準年で実質=名目が成立するか）を検証している。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 210.4 t-CO2/百万2015年PPPドル。"
+        depends_on:
+          - eia-co2-us
+      eia-co2-per-gdp-eu27:
+        name: EU27のGDP当たりCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "t-CO2/百万2015年PPPドル"
+        region: eu27
+        country_region_id: EU27
+        derived_kind: per_gdp
+        numerator_id: eia-co2-eu27
+        backfill_start: "1980-01-01"
+        aggregation: derived
+        notes: "GDP当たりCO2 = eia-co2-eu27 ÷ 実質GDP。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。電力部門の排出強度（ember-co2-intensity-*、gCO2/kWh）とは分子・分母とも異なる別概念。countryRegionId=EU27（type=r/Region）。基準年は unit 文字列 BDOLPPP に含まれないため、取得時に基準年カナリア（USA の基準年で実質=名目が成立するか）を検証している。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 124.2 t-CO2/百万2015年PPPドル。"
+        depends_on:
+          - eia-co2-eu27
+      eia-co2-per-gdp-oecd:
+        name: OECDのGDP当たりCO2排出量（EIA・エネルギー起源）
+        domain: international
+        unit: "t-CO2/百万2015年PPPドル"
+        region: oecd
+        country_region_id: OECD
+        derived_kind: per_gdp
+        numerator_id: eia-co2-oecd
+        backfill_start: "1980-01-01"
+        aggregation: derived
+        notes: "GDP当たりCO2 = eia-co2-oecd ÷ 実質GDP。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。電力部門の排出強度（ember-co2-intensity-*、gCO2/kWh）とは分子・分母とも異なる別概念。countryRegionId=OECD（type=r/Region）。基準年は unit 文字列 BDOLPPP に含まれないため、取得時に基準年カナリア（USA の基準年で実質=名目が成立するか）を検証している。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 173.5 t-CO2/百万2015年PPPドル。"
+        depends_on:
+          - eia-co2-oecd
