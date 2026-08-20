@@ -13,6 +13,12 @@ EIA International Energy Statistics から国際 CO2 排出量 9 系列を取得
         - eia-co2-jp-coal : productId 4002（Coal and coke）
         - eia-co2-jp-oil  : productId 4006（Petroleum and other liquids）
         - eia-co2-jp-gas  : productId 4010（Consumed natural gas）
+    派生 12 系列（2026-08-20 追加、catalog 590 → 602）
+        - eia-co2-per-capita-{world,jp,cn,us,eu27,oecd} : t-CO2/人
+        - eia-co2-per-gdp-{world,jp,cn,us,eu27,oecd}    : t-CO2/百万2015年PPPドル
+          分母は EIA の人口（activityId 33 / productId 4702 / THP）と
+          実質 GDP（activityId 34 / productId 4701 / BDOLPPP）。
+          ★ 分母自体は系列化しない（materialize しない）。生値は data/raw の生レスに残る。
 
 方式:
     GET https://api.eia.gov/v2/international/data/
@@ -21,9 +27,11 @@ EIA International Energy Statistics から国際 CO2 排出量 9 系列を取得
         &facets[productId][]=...
         &facets[countryRegionId][]=...
         &facets[unit][]=MMTCD              (million metric tonnes carbon dioxide)
-    呼び出しは 2 回のみ:
+    呼び出しは 4 回のみ:
         ① 6 地域 × productId 4008
         ② JPN × productId (4002, 4006, 4010)
+        ③ 6 地域 × activityId 33 / productId 4702 / unit THP      （人口・分母）
+        ④ 6 地域 × activityId 34 / productId 4701 / unit BDOLPPP  （実質GDP・分母）
     length=5000 上限 + offset ページング（response.total 超過時のみ継続）。
 
 ★★ facet 一覧エンドポイントは使わない ★★
@@ -42,11 +50,33 @@ EIA International Energy Statistics から国際 CO2 排出量 9 系列を取得
     JPN（type="c"/Country）と完全同値（2024 = 941.0）。WP15=China / WP27=United States も同様。
     countryRegionId をピン留めせず走査・集計すると日本が二重計上される。
     → check_gates() で「要求した countryRegionId と完全一致する行以外は弾く」ハード検証を行う。
+    ★ 2026-08-20 実測: この重複コードは人口・GDP にも存在する（WP17 の 2024 年値は
+      人口 123,753 千人 / GDP 5,311.332 で JPN と完全同値）。分母側も同じ規律で弾く。
+
+★★ activityId 33 / 34 には productId 47（Energy intensity）が同居する ★★
+    activityId=33（Population）… productId 4702 = Population (THP)
+                                  productId 47   = Energy intensity (MBTUPP = million Btu per person)
+    activityId=34（GDP）       … productId 4701 = Gross domestic product (BDOLPPP)
+                                  productId 47   = Energy intensity (TBTUUSDPP = thousand Btu per USD PPP)
+    activityId だけで絞ると「エネルギー原単位」を人口・GDP として取り込んでしまう。
+    → productId / unit を明示指定し、取得後も完全一致を検証する（分母ゲート a / c）。
 
 ハード検証ゲート（1 本でも破れたら CSV を 1 行も書かずに exit 1）:
+  CO2 側:
     a. 全行 unit == MMTCD、countryRegionId が要求値と完全一致
     b. 全共通年で |eia-co2-jp − (coal + oil + gas)| <= 0.05（加算整合）
     c. 行数下限 jp/cn/eu27 >= 40、us/world/oecd >= 70、全値 > 0
+  派生（分母）側:
+    a. productId 完全一致（4702 / 4701）★ 47 = Energy intensity の混入を弾く
+    b. countryRegionId 完全一致（WP15 / WP17 / WP27 型の重複コードを弾く）
+    c. unit 完全一致（THP / BDOLPPP）、コード別の行数下限
+    d. 年の突合 — CO2 に存在しない period（分母だけが持つ 2025 年など）は出力しない
+    e. レンジゲート — 一人当たり 0.5〜30 t/人、GDP 当たり 50〜3000 t/百万$
+    f. 基準年カナリア — GDP の基準年が 2015 のままかを毎回検証。
+       米国は PPP の numeraire（換算 = 1）なので、基準年では実質 = 名目が成立する。
+       EIA の USA 2015 = 18,295.000 は BEA 米名目 GDP 2015 = 18,295.019 十億ドルと一致する。
+       ★ 基準年は unit 文字列（BDOLPPP）に含まれないため、EIA がサイレントに
+         リベースしてもゲート c では気づけない。このカナリアでしか検知できない。
 
 認証:
     環境変数 EIA_API_KEY（python-dotenv 経由で .env からも読む）。
@@ -123,6 +153,33 @@ MIN_ROWS = {
 # 日本の燃料別内訳（加算整合ゲート b で eia-co2-jp と突き合わせる）
 JP_BREAKDOWN = ("eia-co2-jp-coal", "eia-co2-jp-oil", "eia-co2-jp-gas")
 JP_TOTAL = "eia-co2-jp"
+
+# --- 派生 12 系列 --------------------------------------------------------
+# ★★ 命名を intensity ではなく per-gdp にした理由 ★★
+#   既存の ember-co2-intensity-*（5 系列, international）は「電力部門の排出強度」で
+#   分子 = 発電由来 CO2・分母 = 発電量（gCO2/kWh）。本系列は「経済規模あたりの排出」で
+#   分子 = 経済全体のエネルギー起源 CO2・分母 = 実質 GDP と、分子・分母とも別物である。
+#   英語ではどちらも carbon intensity と呼ばれるため、系列 ID の時点で混同させないよう
+#   intensity を避けて per-gdp を採用した（2026-08-20 リン判断）。
+DERIVED_PER_CAPITA = "per_capita"
+DERIVED_PER_GDP = "per_gdp"
+
+# derived_kind → source_map の derived.denominators のキー
+DERIVED_DENOM_KEY = {
+    DERIVED_PER_CAPITA: "population",
+    DERIVED_PER_GDP: "gdp",
+}
+
+# 単位換算スケール（分子 CO2 は Mt = 1e6 t 固定）:
+#   per_capita: Mt ÷ 千人      = (v * 1e6 t) / (d * 1e3 人)   → t-CO2/人      … × 1e3
+#   per_gdp   : Mt ÷ 十億ドル  = (v * 1e6 t) / (d * 1e3 百万$) → t-CO2/百万$   … × 1e3
+DERIVED_SCALE = {
+    DERIVED_PER_CAPITA: 1e3,
+    DERIVED_PER_GDP: 1e3,
+}
+
+# 派生値の丸め桁（浮動小数のノイズを CSV に残さない）
+DERIVED_ROUND = 6
 
 
 def load_source_map() -> dict:
@@ -351,6 +408,213 @@ def check_gates(
     return problems
 
 
+def denominator_rows_to_map(
+    rows: list[dict],
+    requested_country_ids: set[str],
+) -> dict[str, dict[str, float]]:
+    """
+    分母（人口 / GDP）の API 行を {countryRegionId: {period: value}} に畳む。
+
+    要求外の countryRegionId（WP15 / WP17 / WP27 型の重複コード）はここで捨てるが、
+    「捨てた」こと自体は check_denominator_gates() が exit 1 にする。
+    黙って捨てると重複コードの混入に気づけないため、検知と破棄は必ず分けること。
+    """
+    out: dict[str, dict[str, float]] = defaultdict(dict)
+    for row in rows:
+        cid = str(row.get("countryRegionId") or "")
+        if cid not in requested_country_ids:
+            continue
+        v = row.get("value")
+        if v is None or v == "":
+            continue
+        try:
+            val = float(v)
+        except (TypeError, ValueError):
+            continue
+        period = str(row.get("period") or "").strip()
+        if not period:
+            continue
+        out[cid][period] = val
+    return dict(out)
+
+
+def check_denominator_gates(
+    label: str,
+    rows: list[dict],
+    denom_cfg: dict,
+    denom_map: dict[str, dict[str, float]],
+    requested_country_ids: set[str],
+    min_rows: int,
+) -> list[str]:
+    """
+    分母側のハード検証ゲート a / b / c。破れた項目の説明文リストを返す（空なら合格）。
+
+    a: productId 完全一致 — ★ activityId 33 / 34 には productId 47（Energy intensity）が
+       同居するため、これが無いと「エネルギー原単位」を人口・GDP として取り込む。
+    b: countryRegionId 完全一致 — WP15 / WP17 / WP27 型の重複コードを弾く。
+    c: unit 完全一致 + コード別の行数下限 + 全値 > 0。
+    """
+    problems: list[str] = []
+    want_pid = str(denom_cfg["product_id"])
+    want_unit = str(denom_cfg["unit"])
+
+    # --- ゲート a: productId 完全一致 -------------------------------------
+    bad_pid = sorted({
+        f"{r.get('productId')}({r.get('productName')})"
+        for r in rows if str(r.get("productId")) != want_pid
+    })
+    if bad_pid:
+        problems.append(
+            f"[a] {label}: productId != {want_pid} の行が混入"
+            f"（47 = Energy intensity の取り込みの疑い）: {bad_pid}"
+        )
+
+    # --- ゲート b: countryRegionId 完全一致 -------------------------------
+    seen_ids = {str(r.get("countryRegionId") or "") for r in rows}
+    extra_ids = sorted(seen_ids - requested_country_ids)
+    if extra_ids:
+        problems.append(
+            f"[b] {label}: 要求外の countryRegionId が混入"
+            f"（WP15 / WP17 / WP27 型の重複コードの疑い）: {extra_ids}"
+        )
+
+    # --- ゲート c: unit 完全一致 / 行数下限 / 正値 ------------------------
+    bad_unit = sorted({
+        str(r.get("unit")) for r in rows if str(r.get("unit")) != want_unit
+    })
+    if bad_unit:
+        problems.append(f"[c] {label}: unit != {want_unit} の行が存在: {bad_unit}")
+
+    for cid in sorted(requested_country_ids):
+        pts = denom_map.get(cid) or {}
+        if len(pts) < min_rows:
+            problems.append(f"[c] {label}: {cid} の行数 {len(pts)} < 下限 {min_rows}")
+        nonpos = sorted(pr for pr, v in pts.items() if not (v > 0))
+        if nonpos:
+            problems.append(f"[c] {label}: {cid} に非正値 {len(nonpos)} 件 (例 {nonpos[:3]})")
+
+    return problems
+
+
+def check_gdp_base_year_canary(
+    gdp_map: dict[str, dict[str, float]],
+    canary_cfg: dict,
+) -> list[str]:
+    """
+    ゲート f: GDP の基準年が変わっていないかのカナリア。
+
+    米国は購買力平価の numeraire（PPP 換算 = 1）なので、EIA の USA 系列は
+    「米実質 GDP を基準年ドルで表したもの」に等しい。実質値は基準年においてのみ
+    名目値と一致するため、USA の基準年の値が BEA 名目 GDP と一致するかを見れば
+    基準年が保たれているかを判定できる。
+
+    ★ 基準年は unit 文字列（BDOLPPP = billion dollars at purchasing power parities）に
+      含まれない。EIA がサイレントにリベースしても unit ゲートでは検知できず、
+      公開している単位表記「t-CO2/百万2015年PPPドル」だけが黙って嘘になる。
+      2015 → 2017 で約 +2.9%、2015 → 2020 で約 +9.5% 水準がずれるので、
+      許容 1%（BEA の年次改定は 10 年前の名目水準では通常 ±0.3% 以内）で弾ける。
+    """
+    cid = str(canary_cfg["country_region_id"])
+    base_year = str(canary_cfg["base_year"])
+    ref = float(canary_cfg["reference_nominal_bdol"])
+    tol = float(canary_cfg["tolerance_pct"])
+
+    value = (gdp_map.get(cid) or {}).get(base_year)
+    if value is None:
+        return [f"[f] 基準年カナリア: {cid} の {base_year} 年 GDP が取得できず検証不能"]
+    dev = abs(value - ref) / ref * 100.0
+    if dev > tol:
+        return [
+            f"[f] 基準年カナリア破れ: {cid} {base_year} = {value:,.3f} が "
+            f"BEA 名目 GDP {ref:,.3f} 十億ドルから {dev:.2f}% 乖離（許容 {tol}%）。"
+            f"EIA が GDP の基準年を {base_year} 以外へ変更した疑いが濃い。"
+            f"unit（BDOLPPP）は基準年を含まないためこのカナリアでしか検知できない。"
+            f"→ source_map.yaml の derived.gdp_base_year_canary と、"
+            f"eia-co2-per-gdp-* 6 系列の単位表記を実測し直すこと。"
+        ]
+    logger.info(
+        "[f] 基準年カナリア OK: %s %s = %.3f（BEA 名目 %.3f 十億ドルとの乖離 %.3f%% <= %.1f%%）"
+        " → GDP は 2015 年基準・PPP のまま",
+        cid, base_year, value, ref, dev, tol,
+    )
+    return []
+
+
+def build_derived_series(
+    indicators: dict,
+    derived_ids: list[str],
+    co2_series: dict[str, list[tuple[str, float]]],
+    denom_maps: dict[str, dict[str, dict[str, float]]],
+    range_gates: dict,
+    min_rows: int,
+) -> tuple[dict[str, list[tuple[str, float]]], list[str]]:
+    """
+    派生 12 系列を計算する。戻り値は (series, problems)。
+
+    ゲート d: 年の突合。分母（人口・GDP）は分子（CO2）より 1 年進んでおり
+        （2026-08-20 実測: 分母 1980-2025 / CO2 1980-2024）、CO2 に無い period を
+        出力すると分子の無い年が混ざる。**分子に存在する period だけ**を採る。
+    ゲート e: 派生値のレンジ検証（source_map の derived.range_gates）。
+    """
+    series: dict[str, list[tuple[str, float]]] = {}
+    problems: list[str] = []
+
+    for ind_id in derived_ids:
+        cfg = indicators[ind_id]
+        kind = str(cfg["derived_kind"])
+        if kind not in DERIVED_SCALE:
+            problems.append(f"[d] {ind_id}: 未知の derived_kind={kind}")
+            continue
+        num_id = str(cfg["numerator_id"])
+        cid = str(cfg["country_region_id"])
+        numerator = dict(co2_series.get(num_id) or [])
+        denominator = (denom_maps[DERIVED_DENOM_KEY[kind]] or {}).get(cid) or {}
+        if not numerator:
+            problems.append(f"[d] {ind_id}: 分子 {num_id} が空")
+            continue
+        if not denominator:
+            problems.append(f"[d] {ind_id}: 分母（{DERIVED_DENOM_KEY[kind]} / {cid}）が空")
+            continue
+
+        scale = DERIVED_SCALE[kind]
+        lo, hi = (float(x) for x in range_gates[kind])
+
+        # ★ ゲート d: 分子（CO2）に存在する period のみ。分母だけが持つ年は捨てる。
+        common = sorted(set(numerator) & set(denominator))
+        dropped = sorted(set(denominator) - set(numerator))
+        if dropped:
+            logger.info(
+                "[d] %-26s 分母のみが持つ %d 年を出力しない: %s",
+                ind_id, len(dropped), ",".join(dropped[-3:]),
+            )
+
+        points: list[tuple[str, float]] = []
+        out_of_range: list[tuple[str, float]] = []
+        for period in common:
+            den = denominator[period]
+            if not (den > 0):
+                problems.append(f"[d] {ind_id}: {period} の分母が非正値 ({den})")
+                continue
+            value = numerator[period] / den * scale
+            if not (lo <= value <= hi):
+                out_of_range.append((period, round(value, 4)))
+            points.append((period, round(value, DERIVED_ROUND)))
+
+        # --- ゲート e: レンジ ------------------------------------------------
+        if out_of_range:
+            problems.append(
+                f"[e] {ind_id}: レンジ外 {len(out_of_range)} 件 "
+                f"(許容 {lo}〜{hi}, 例 {out_of_range[:3]})"
+            )
+        # --- 行数下限 ---------------------------------------------------------
+        if len(points) < min_rows:
+            problems.append(f"[e] {ind_id}: 行数 {len(points)} < 下限 {min_rows}")
+
+        series[ind_id] = points
+
+    return series, problems
+
+
 def build_df(ind_id: str, points: list[tuple[str, float]], region: str, source_url: str) -> pd.DataFrame:
     """
     共通スキーマ long 形式へ。
@@ -407,9 +671,22 @@ def main(argv: list[str] | None = None) -> int:
     activity_id = str(source_cfg["activity_id"])
     unit_filter = str(source_cfg["unit_filter"])
 
+    # 系列を「API から直接取る CO2 9 本」と「そこから計算する派生 12 本」に分ける。
+    # 派生側は derived_kind（per_capita / per_gdp）を持つことで識別する。
+    co2_ids = [i for i in indicator_ids if not indicators[i].get("derived_kind")]
+    derived_ids = [i for i in indicator_ids if indicators[i].get("derived_kind")]
+
     # 呼び出し ①: 6 地域 × productId 4008 / ②: JPN × (4002, 4006, 4010)
-    total_ids = [i for i in indicator_ids if str(indicators[i]["product_id"]) == "4008"]
-    breakdown_ids = [i for i in indicator_ids if i in JP_BREAKDOWN]
+    total_ids = [i for i in co2_ids if str(indicators[i].get("product_id")) == "4008"]
+    breakdown_ids = [i for i in co2_ids if i in JP_BREAKDOWN]
+
+    # 呼び出し ③④: 派生の分母（人口 / 実質GDP）。★ 分母自体は系列化しない。
+    derived_cfg = source_cfg["derived"]
+    denom_cfgs = derived_cfg["denominators"]
+    derived_min_rows = int(derived_cfg["min_rows"])
+    denom_country_ids = sorted({
+        str(indicators[i]["country_region_id"]) for i in derived_ids
+    })
 
     call1_countries = [str(indicators[i]["country_region_id"]) for i in total_ids]
     call2_products = [str(indicators[i]["product_id"]) for i in breakdown_ids]
@@ -432,6 +709,20 @@ def main(argv: list[str] | None = None) -> int:
             unit_filter=unit_filter,
             raw_dir=raw_dir, today_tag=today_tag, slug="jp_breakdown",
         )
+        # ★ activityId だけで絞らず productId / unit も必ず明示指定する。
+        #   activityId 33 / 34 には productId 47（Energy intensity）が同居しており、
+        #   activityId 単独では「エネルギー原単位」を人口・GDP として取り込んでしまう。
+        denom_rows: dict[str, list[dict]] = {}
+        for denom_key in ("population", "gdp"):
+            dc = denom_cfgs[denom_key]
+            denom_rows[denom_key] = fetch_all(
+                api_base, api_key,
+                activity_id=str(dc["activity_id"]),
+                product_ids=[str(dc["product_id"])],
+                country_region_ids=denom_country_ids,
+                unit_filter=str(dc["unit"]),
+                raw_dir=raw_dir, today_tag=today_tag, slug=denom_key,
+            )
     except Exception as e:
         msg = _redact(str(e), api_key)
         logger.error("fetch failed: %s", msg)
@@ -441,10 +732,30 @@ def main(argv: list[str] | None = None) -> int:
     rows = rows1 + rows2
     logger.info("fetched %d rows total (%d + %d)", len(rows), len(rows1), len(rows2))
 
-    series, unknown = rows_to_series(rows, indicators, indicator_ids)
-    requested_country_ids = {str(indicators[i]["country_region_id"]) for i in indicator_ids}
+    series, unknown = rows_to_series(rows, indicators, co2_ids)
+    requested_country_ids = {str(indicators[i]["country_region_id"]) for i in co2_ids}
 
     problems = check_gates(rows, series, unknown, unit_filter, requested_country_ids)
+
+    # --- 派生側: 分母のゲート a / b / c → 基準年カナリア f → 計算（ゲート d / e）---
+    denom_country_set = set(denom_country_ids)
+    denom_maps: dict[str, dict[str, dict[str, float]]] = {}
+    for denom_key in ("population", "gdp"):
+        dm = denominator_rows_to_map(denom_rows[denom_key], denom_country_set)
+        denom_maps[denom_key] = dm
+        problems += check_denominator_gates(
+            denom_key, denom_rows[denom_key], denom_cfgs[denom_key],
+            dm, denom_country_set, derived_min_rows,
+        )
+    problems += check_gdp_base_year_canary(
+        denom_maps["gdp"], derived_cfg["gdp_base_year_canary"]
+    )
+
+    derived_series, derived_problems = build_derived_series(
+        indicators, derived_ids, series, denom_maps,
+        derived_cfg["range_gates"], derived_min_rows,
+    )
+    problems += derived_problems
     if problems:
         # ★ 1 本でも破れたら CSV を 1 行も書かずに落とす。
         for p in problems:
@@ -454,14 +765,23 @@ def main(argv: list[str] | None = None) -> int:
             f"validation gates failed ({len(problems)}): {problems[0][:160]}",
         )
         return 1
-    logger.info("all validation gates passed (a: facet 一致 / b: 加算整合 / c: 行数・正値)")
+    # ★ CO2 側のゲートが全部通ってから派生をマージする。
+    #   分母が 1 本でも欠けた状態で書き出すと、派生 CSV に歯抜けの年が残る。
+    series.update(derived_series)
+    logger.info(
+        "all validation gates passed "
+        "(CO2 a: facet 一致 / b: 加算整合 / c: 行数・正値 | "
+        "派生 a: productId / b: countryRegionId / c: unit・行数 / "
+        "d: 年の突合 / e: レンジ / f: 基準年カナリア)"
+    )
 
     if args.dry_run:
         for ind_id in indicator_ids:
             pts = sorted(series[ind_id])
             logger.info(
-                "[dry-run] %-18s n=%-3d %s..%s latest=%.1f",
+                "[dry-run] %-26s n=%-3d %s..%s latest=%.3f %s",
                 ind_id, len(pts), pts[0][0], pts[-1][0], pts[-1][1],
+                indicators[ind_id].get("unit", ""),
             )
         append_log(log_dir, "fetch_eia_intl", "OK", f"dry-run series={len(indicator_ids)}")
         return 0
@@ -477,11 +797,15 @@ def main(argv: list[str] | None = None) -> int:
         written.append(ind_id)
         total_rows += len(df)
         logger.info(
-            "%-18s n=%-3d %s..%s latest=%.1f Mt-CO2",
-            ind_id, len(df), df["date"].iloc[0], df["date"].iloc[-1], df["value"].iloc[-1],
+            "%-26s n=%-3d %s..%s latest=%.3f %s",
+            ind_id, len(df), df["date"].iloc[0], df["date"].iloc[-1],
+            df["value"].iloc[-1], ind_cfg.get("unit", ""),
         )
 
-    summary = f"series={len(written)} rows={total_rows}"
+    summary = (
+        f"series={len(written)} (CO2 {len(co2_ids)} + derived {len(derived_ids)}) "
+        f"rows={total_rows}"
+    )
     logger.info("done: %s", summary)
     append_log(log_dir, "fetch_eia_intl", "OK", summary)
     return 0

@@ -1,0 +1,23 @@
+{
+  "id": "eia-co2-per-capita-world",
+  "name": "世界の一人当たりCO2排出量（EIA・エネルギー起源）",
+  "domain": "international",
+  "frequency": "annual",
+  "unit": "t-CO2/人",
+  "source_name": "米国エネルギー情報局（EIA）International Energy Statistics",
+  "source_url": "https://www.eia.gov/international/data/world",
+  "license": "public-domain",
+  "observation_cutoff": "2024-01-01",
+  "updated_at": "2026-08-20T23:03:32+09:00",
+  "license_url": "https://www.eia.gov/about/copyrights_reuse.php",
+  "license_notice": "米国連邦政府著作物としてパブリックドメイン。EIA は出典表記を推奨（例: Source: U.S. Energy Information Administration）",
+  "tz": "UTC",
+  "missing_policy": "null",
+  "backfill_start": "1980-01-01",
+  "publisher": "U.S. Energy Information Administration (EIA)",
+  "aggregation": "derived",
+  "notes": "一人当たりCO2 = eia-co2-world ÷ 人口。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。日本の人口は総務省 人口推計（各年10月1日基準、当サイト収載は都道府県別）とは基準日・出所が異なる（2024年で差 0.04%）。国際比較の分母としての値である。countryRegionId=WORL（type=r/Region）。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 4.650 t-CO2/人。",
+  "depends_on": [
+    "eia-co2-world"
+  ]
+}

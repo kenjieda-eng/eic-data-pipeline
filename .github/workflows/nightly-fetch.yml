@@ -263,9 +263,14 @@ jobs:
         # 停滞検知は commit 後の Staleness hard check が担う（L-064）。SLA 800 → 2×=1600 日。
         continue-on-error: true
 
-      - name: Fetch EIA international CO2 (annual, international domain, 9 series)
+      - name: Fetch EIA international CO2 (annual, international domain, 21 series)
         # 米国エネルギー情報局 (EIA) International Energy Statistics API v2 から
         # 国際 CO2 排出量 9 系列: 地域別合計 6 (WORL/JPN/CHN/USA/EU27/OECD) + 日本の燃料別内訳 3。
+        # + 派生 12 系列 (2026-08-20 追加): 一人当たり CO2 6 (t-CO2/人) と
+        #   GDP 当たり CO2 6 (t-CO2/百万2015年PPPドル)。同じスクリプト内で完結するため
+        #   ステップの追加は不要（実行コマンドは python scripts/fetch_eia_intl.py のまま）。
+        #   分母の人口 (activityId 33/productId 4702/THP) と実質 GDP (34/4701/BDOLPPP) は
+        #   取得するが **系列化しない**（生の人口は e-Stat 人口推計と競合するため）。
         # international ドメインの「経済全体・国際横断・共通方法論の CO2」を埋める
         # (既存 jp-ghg-* は日本のみ・年度・UNFCCC、ember-co2-intensity-* は電力部門のみで重複なし)。
         # ★ facet 一覧エンドポイント (/v2/international/facet/{id}) は使わない。
@@ -274,8 +279,14 @@ jobs:
         #   facet 値は source_map.yaml のハードコードを明示指定する。
         # ★ countryRegionId には WP17(name="Japan", type=r) 等 JPN と同値の重複コードが存在する。
         #   ピン留めせず集計すると二重計上になるので、要求値と完全一致しない行は検証ゲートで弾く。
-        # ★ 検証ゲート a(facet 一致) / b(加算整合 |jp-(coal+oil+gas)|<=0.05) / c(行数下限・正値)
-        #   が 1 本でも破れたら CSV を 1 行も書かずに exit 1。
+        # ★ activityId 33/34 には productId 47 (Energy intensity) が同居する。activityId だけで
+        #   絞るとエネルギー原単位を人口・GDP として取り込むため productId/unit も明示指定する。
+        # ★ 検証ゲート — 1 本でも破れたら CSV を 1 行も書かずに exit 1。
+        #   CO2 側: a(facet 一致) / b(加算整合 |jp-(coal+oil+gas)|<=0.05) / c(行数下限・正値)
+        #   派生側: a(productId 完全一致) / b(countryRegionId 完全一致) / c(unit・行数) /
+        #           d(年の突合: CO2 に無い period=2025 は出力しない) / e(レンジ) /
+        #           f(基準年カナリア: GDP が 2015 年基準のままか。unit BDOLPPP は基準年を
+        #             含まないため、EIA のサイレントなリベースはこれでしか検知できない)
         # 認証必須。secrets.EIA_API_KEY 未設定時は WARN ログを吐いて exit 1 するが、
         # continue-on-error で他系列を止めない（fetch_estat.py と同一規約）。
         env:
