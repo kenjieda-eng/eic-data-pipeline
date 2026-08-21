@@ -2891,3 +2891,4 @@ date,indicator_id,region,value,source_url
 2026-08-17,jma-precip-tokyo,tokyo,0.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
 2026-08-19,jma-precip-tokyo,tokyo,0.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
 2026-08-20,jma-precip-tokyo,tokyo,0.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
+2026-08-21,jma-precip-tokyo,tokyo,0.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year=YYYY&month=MM&day=&view=
