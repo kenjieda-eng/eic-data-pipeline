@@ -9,3 +9,4 @@ date,indicator_id,region,value,source_url
 2023-03-31,edinet-yonden-total-assets,JP,1612025,https://api.edinet-fsa.go.jp/api/v2/documents/S100R7M9?type=5
 2024-03-31,edinet-yonden-total-assets,JP,1629054,https://api.edinet-fsa.go.jp/api/v2/documents/S100TSET?type=5
 2025-03-31,edinet-yonden-total-assets,JP,1687484,https://api.edinet-fsa.go.jp/api/v2/documents/S100W2ML?type=5
+2026-03-31,edinet-yonden-total-assets,JP,1734358,https://api.edinet-fsa.go.jp/api/v2/documents/S100YH23?type=5

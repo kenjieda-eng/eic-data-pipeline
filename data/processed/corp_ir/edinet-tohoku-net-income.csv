@@ -9,3 +9,4 @@ date,indicator_id,region,value,source_url
 2023-03-31,edinet-tohoku-net-income,JP,-127562,https://api.edinet-fsa.go.jp/api/v2/documents/S100R42K?type=5
 2024-03-31,edinet-tohoku-net-income,JP,226102,https://api.edinet-fsa.go.jp/api/v2/documents/S100TOO5?type=5
 2025-03-31,edinet-tohoku-net-income,JP,182807,https://api.edinet-fsa.go.jp/api/v2/documents/S100W1ER?type=5
+2026-03-31,edinet-tohoku-net-income,JP,84975,https://api.edinet-fsa.go.jp/api/v2/documents/S100YEK2?type=5

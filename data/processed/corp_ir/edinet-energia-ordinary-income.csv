@@ -9,3 +9,4 @@ date,indicator_id,region,value,source_url
 2023-03-31,edinet-energia-ordinary-income,JP,-106780,https://api.edinet-fsa.go.jp/api/v2/documents/S100R8QI?type=5
 2024-03-31,edinet-energia-ordinary-income,JP,194076,https://api.edinet-fsa.go.jp/api/v2/documents/S100TVNH?type=5
 2025-03-31,edinet-energia-ordinary-income,JP,128543,https://api.edinet-fsa.go.jp/api/v2/documents/S100W1TM?type=5
+2026-03-31,edinet-energia-ordinary-income,JP,80225,https://api.edinet-fsa.go.jp/api/v2/documents/S100YGCV?type=5

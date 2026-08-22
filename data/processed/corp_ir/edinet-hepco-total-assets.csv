@@ -9,3 +9,4 @@ date,indicator_id,region,value,source_url
 2023-03-31,edinet-hepco-total-assets,JP,2093339,https://api.edinet-fsa.go.jp/api/v2/documents/S100R1IZ?type=5
 2024-03-31,edinet-hepco-total-assets,JP,2141691,https://api.edinet-fsa.go.jp/api/v2/documents/S100TT39?type=5
 2025-03-31,edinet-hepco-total-assets,JP,2244003,https://api.edinet-fsa.go.jp/api/v2/documents/S100W0BE?type=5
+2026-03-31,edinet-hepco-total-assets,JP,2471051,https://api.edinet-fsa.go.jp/api/v2/documents/S100YDWY?type=5
