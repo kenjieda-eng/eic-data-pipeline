@@ -9,3 +9,4 @@ date,indicator_id,region,value,source_url
 2023-03-31,edinet-kepco-ordinary-income,JP,-6666,https://api.edinet-fsa.go.jp/api/v2/documents/S100R4SI?type=5
 2024-03-31,edinet-kepco-ordinary-income,JP,765970,https://api.edinet-fsa.go.jp/api/v2/documents/S100TUNQ?type=5
 2025-03-31,edinet-kepco-ordinary-income,JP,531686,https://api.edinet-fsa.go.jp/api/v2/documents/S100W38I?type=5
+2026-03-31,edinet-kepco-ordinary-income,JP,518530,https://api.edinet-fsa.go.jp/api/v2/documents/S100YFXZ?type=5

@@ -1,0 +1,97 @@
+name: EDINET Annual Fetch
+
+# 金融庁 EDINET 有価証券報告書（corp_ir 45 系列 = 9 電力会社 × 5 指標）専用の年次ワークフロー。
+#
+# ★ なぜ nightly-fetch.yml に入れないか:
+#   有報は年 1 回（3 月期決算 → 金商法の提出期限は期末後 3 ヶ月 = 6 月末）にしか出ない。
+#   毎晩叩くと documents.json を空振りで年 365 回×30 日分 = 約 1 万リクエスト無駄に打つことになる。
+#   逆に「スクリプトはあるが workflow に繋がっていない」状態は更新が永久に来ない
+#   （2026-06-13 の手動 seed が FY2024 で凍結し、8 月時点で SLA 500 日を 8 日超過した実際の原因）。
+#   → 6 月・7 月の毎週月曜だけ回す独立ワークフローにして、年 1 回の提出期を確実に拾う。
+#
+# ★ 7 月まで回す理由: 提出期限は 6 月末だが、期限間際（6/25-6/30）の提出を取りこぼした場合や
+#   EDINET API 側の一時障害に備えて、7 月の月曜にも再試行して自己回復させる。
+#   fetch_edinet.py は提出年の 6 月（submission_month=6, source_map.yaml）を走査する作りなので、
+#   7 月に実行しても「その年の 6 月提出分」を正しく見に行く（走査年は実行日の JST 年から導出）。
+
+on:
+  schedule:
+    # JST 月曜 12:00 = UTC 月曜 03:00（UTC→JST は +9h。03:00 UTC なら曜日が跨がらない）。
+    # cron 欄 = 分 時 日 月 曜日。日と曜日を両方指定すると OR 評価になる仕様のため、
+    # 「6・7 月の月曜だけ」は 日=* / 月=6,7 / 曜日=1(月) と書く。
+    - cron: "0 3 * 6,7 1"
+  workflow_dispatch:
+    inputs:
+      backfill:
+        description: "Backfill: 提出年を 10 年さかのぼって再取得（通常は当年のみ）"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    # 通常モードは documents.json 30 日 + 有報 ZIP 9 本で 5 分程度。backfill は 11 年分走査で長い。
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Fetch EDINET 有報 financials (annual, corp_ir, 45 series)
+        # 9 一般電気事業者（tepco/chuden/kepco/energia/rikuden/tohoku/yonden/kyuden/hepco）×
+        # 5 指標（営業収益 / 営業利益 / 経常利益 / 当期純利益 / 総資産、連結・百万円）。
+        # docID は年次ローテーションするためハードコードせず、documents.json を走査して動的特定する（L-062）。
+        # write_processed が date×indicator×region で dedup する append-safe 実装なので再実行は安全。
+        #
+        # ⚠️ secrets.EDINET_API_KEY は 2026-08-22 時点で **未登録**（登録済みは EIA/ESTAT/FRED の 3 件）。
+        #   fetch_edinet.py は load_api_key() でキー未設定時に RuntimeError → exit 2 で落ちる。
+        #   ここは他系列と同居しない独立ワークフローなので continue-on-error は付けない
+        #   （＝キー未登録のまま放置すればランが赤くなって気付ける。silent stall にしない, L-064）。
+        env:
+          EDINET_API_KEY: ${{ secrets.EDINET_API_KEY }}
+        run: |
+          if [ "${{ inputs.backfill }}" = "true" ]; then
+            echo "backfill mode: scanning last 10 submission years"
+            python scripts/fetch_edinet.py --backfill-years 10
+          else
+            echo "normal mode: scanning current submission year only"
+            python scripts/fetch_edinet.py --backfill-years 0
+          fi
+
+      - name: Generate indicators catalog (D-011)
+        # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を再生成。
+        # corp_ir の observation_cutoff を新年度（例 2026-03-31）に進めるためにここで必須。
+        run: |
+          python scripts/generate_catalog.py
+
+      - name: Commit & push if changed
+        # nightly-fetch.yml と同一の作法（bot 名義・変更が無ければ no-op）。
+        run: |
+          git config user.name "eic-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            today=$(TZ=Asia/Tokyo date +%Y-%m-%d)
+            git commit -m "edinet: annual data update ${today}"
+            git push
+          fi
+
+      # ★ Staleness hard check は置かない: check_staleness.py はカタログ全 602 系列を見るため、
+      #   EDINET と無関係な系列の停滞でこのワークフローが赤くなり原因の切り分けを濁す。
+      #   停滞検知は毎晩走る nightly-fetch.yml の Staleness hard check が担う（L-064）。

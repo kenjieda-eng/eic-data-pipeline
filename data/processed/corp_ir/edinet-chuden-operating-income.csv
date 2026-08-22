@@ -9,3 +9,4 @@ date,indicator_id,region,value,source_url
 2023-03-31,edinet-chuden-operating-income,JP,107089,https://api.edinet-fsa.go.jp/api/v2/documents/S100R9SJ?type=5
 2024-03-31,edinet-chuden-operating-income,JP,343339,https://api.edinet-fsa.go.jp/api/v2/documents/S100T3LA?type=5
 2025-03-31,edinet-chuden-operating-income,JP,242045,https://api.edinet-fsa.go.jp/api/v2/documents/S100VZ3E?type=5
+2026-03-31,edinet-chuden-operating-income,JP,230042,https://api.edinet-fsa.go.jp/api/v2/documents/S100YDH0?type=5

@@ -9,3 +9,4 @@ date,indicator_id,region,value,source_url
 2023-03-31,edinet-energia-revenue,JP,1694602,https://api.edinet-fsa.go.jp/api/v2/documents/S100R8QI?type=5
 2024-03-31,edinet-energia-revenue,JP,1628785,https://api.edinet-fsa.go.jp/api/v2/documents/S100TVNH?type=5
 2025-03-31,edinet-energia-revenue,JP,1529218,https://api.edinet-fsa.go.jp/api/v2/documents/S100W1TM?type=5
+2026-03-31,edinet-energia-revenue,JP,1442302,https://api.edinet-fsa.go.jp/api/v2/documents/S100YGCV?type=5

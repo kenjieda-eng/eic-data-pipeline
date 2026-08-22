@@ -9,3 +9,4 @@ date,indicator_id,region,value,source_url
 2023-03-31,edinet-kyuden-revenue,JP,2221300,https://api.edinet-fsa.go.jp/api/v2/documents/S100R7AV?type=5
 2024-03-31,edinet-kyuden-revenue,JP,2139447,https://api.edinet-fsa.go.jp/api/v2/documents/S100TTZH?type=5
 2025-03-31,edinet-kyuden-revenue,JP,2356833,https://api.edinet-fsa.go.jp/api/v2/documents/S100W361?type=5
+2026-03-31,edinet-kyuden-revenue,JP,2247214,https://api.edinet-fsa.go.jp/api/v2/documents/S100YHHO?type=5

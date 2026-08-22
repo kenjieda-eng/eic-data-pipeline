@@ -9,3 +9,4 @@ date,indicator_id,region,value,source_url
 2023-03-31,edinet-tepco-revenue,JP,7798696,https://api.edinet-fsa.go.jp/api/v2/documents/S100R8P3?type=5
 2024-03-31,edinet-tepco-revenue,JP,6918389,https://api.edinet-fsa.go.jp/api/v2/documents/S100TVQJ?type=5
 2025-03-31,edinet-tepco-revenue,JP,6810391,https://api.edinet-fsa.go.jp/api/v2/documents/S100W4QX?type=5
+2026-03-31,edinet-tepco-revenue,JP,6328574,https://api.edinet-fsa.go.jp/api/v2/documents/S100YIHR?type=5
