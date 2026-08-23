@@ -1,0 +1,127 @@
+name: OCCTO Capacity Market Annual Fetch
+
+# OCCTO 容量市場 メインオークション約定結果（power 20 系列 = 9 エリア × {価格, 容量} + 全国 2）
+# 専用の年次ワークフロー。
+#
+# ★ なぜ nightly-fetch.yml に入れないか:
+#   メインオークションは年 1 回しか約定結果が出ない。毎晩 index ページ + ZIP を叩くと
+#   年 365 回の空振りを OCCTO サーバに打つことになる。
+#   逆に「スクリプトはあるが workflow に繋がっていない」状態は更新が永久に来ない
+#   （fetch_occto_capacity.py は 2026-05-21 の手動 backfill 以降どの workflow からも呼ばれず、
+#    第 6 回＝FY2029 で凍結したまま約 3 ヶ月停止していた。本ワークフローがその解消）。
+#   → 結果公表期の月曜だけ回す独立ワークフローにする（edinet-annual.yml と同じ作法）。
+#
+# ★ なぜ 12〜3 月か（実績ベース、「7〜9 月」ではない）:
+#   - 第 5 回（FY2028 対象）結果公表 2025-01-29
+#   - 第 6 回（FY2029 対象）結果公表 2026-01-20（当初「12 月頃」→ 2025-12-19 に延期告知 → 1/20 公表）
+#   - 第 7 回（FY2030 対象）は応札 2026 年 10 月 → 結果公表 2027 年 1 月頃の見込み
+#   ⚠️ よく混同されるが「7〜9 月」は**参加登録・募集要綱**の時期であって結果公表ではない。
+#      公表の実績は 1 月中で ±2 週ぶれ、しかも延期告知が入った実績がある。
+#   → 12 月から回すのは前倒し・延期告知への備え、3 月まで回すのは
+#     公表直後の取りこぼし（OCCTO 側の一時障害等）を自己回復させるため。
+#
+# ★ 認証は不要:
+#   index ページ（.../capacity-market/yoryoshijyo/main/data/）も約定結果 ZIP も公開 URL で、
+#   scripts/common/http.py の共通 UA のみで 200 が返る（2026-08-23 実測）。secrets 参照は無い。
+#
+# ★ 回次・年度はスクリプトにハードコードされていない:
+#   fetch_occto_capacity.py は index ページの <a href> を走査し、ファイル名
+#   {fy}_yakujoukekka_csv.zip / {fy}_main_yakujoukekka_csv.zip から実需給年度を正規表現で導出する。
+#   通常モードは抽出結果を年度昇順にソートして最新 1 件だけを取りに行くので、
+#   第 7 回（2030_*.zip）が index に載った時点で自動的に拾われる。
+#   source_map.yaml の min_delivery_fy=2024 は下限（第 1 回）であって上限ではない。
+#   → 第 7 回のためのコード変更は不要（＝ Pink Sheet 型の URL 決め打ちではない）。
+
+on:
+  schedule:
+    # JST 月曜 12:00 = UTC 月曜 03:00（UTC→JST は +9h。03:00 UTC なら曜日が跨がらない）。
+    # cron 欄 = 分 時 日 月 曜日。日と曜日を両方指定すると OR 評価になる仕様のため、
+    # 「12・1・2・3 月の月曜だけ」は 日=* / 月=12,1,2,3 / 曜日=1(月) と書く。
+    - cron: "0 3 * 12,1,2,3 1"
+  workflow_dispatch:
+    inputs:
+      backfill:
+        description: "Backfill: FY2024（第 1 回）以降の全メインオークションを再取得（通常は最新 1 回のみ）"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    # 通常モードは index 1 リクエスト + ZIP 最大 1 本（数十 KB）で 1 分未満。
+    # backfill でも 6 年度 × (ZIP 1 本 + 2 秒スリープ) で数分。余裕を見て 30 分。
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Fetch OCCTO 容量市場 メインオークション約定結果 (annual, power, 20 series)
+        # 9 エリア（hokkaido/tohoku/tokyo/chubu/hokuriku/kansai/chugoku/shikoku/kyushu）×
+        # {約定価格 ¥/kW, 約定容量 kW} 18 系列 + 全国 2 系列
+        # （volume-total = Σ9 エリア容量、price-national = Σ(価格×容量)/Σ容量 の加重平均）。
+        # 派生 2 系列も fetch_occto_capacity.py 内で計算するので追加ステップは不要。
+        #
+        # date 軸 = 実需給年度の 4/1（FY2029 → 2029-04-01）。オークション実施日とは別。
+        # write_processed が date×indicator×region で dedup する append-safe 実装なので再実行は安全。
+        # data/raw/occto-capacity/*.zip はリポジトリに追跡済みで、download_auction_zip が
+        # 既存ファイルを再利用するため、公表前の週は OCCTO への ZIP リクエストが 0 本になる。
+        #
+        # ⚠️ 公表前の週は「データが増えない」のが正常（第 7 回は 2027 年 1 月頃の見込み）。
+        #   その場合も metadata の updated_at は毎回更新されるので commit は発生する。
+        #   これは無駄ではなく proof-of-life（＝サイレント停滞の逆）として機能する。
+        #
+        # ここは他系列と同居しない独立ワークフローなので continue-on-error は付けない
+        # （＝ index の構造変更やファイル名規約の変更でランが赤くなって気付ける。L-064）。
+        run: |
+          if [ "${{ inputs.backfill }}" = "true" ]; then
+            echo "backfill mode: re-fetching all main auctions from FY2024"
+            python scripts/fetch_occto_capacity.py --backfill
+          else
+            echo "normal mode: fetching latest main auction only"
+            python scripts/fetch_occto_capacity.py
+          fi
+
+      - name: Generate indicators catalog (D-011)
+        # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を再生成。
+        # 第 7 回が載ったときに occto-capacity 20 系列の observation_cutoff を
+        # 2029-04-01 → 2030-04-01 へ進めるためにここで必須。
+        run: |
+          python scripts/generate_catalog.py
+
+      - name: Commit & push if changed
+        # nightly-fetch.yml / edinet-annual.yml と同一の作法（bot 名義・変更が無ければ no-op）。
+        run: |
+          git config user.name "eic-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            today=$(TZ=Asia/Tokyo date +%Y-%m-%d)
+            git commit -m "occto: annual data update ${today}"
+            git push
+          fi
+
+      # ★ Staleness hard check は置かない: check_staleness.py はカタログ全 602 系列を見るため、
+      #   OCCTO と無関係な系列の停滞でこのワークフローが赤くなり原因の切り分けを濁す。
+      #   停滞検知は毎晩走る nightly-fetch.yml の Staleness hard check が担う（L-064）。
+      #
+      # ⚠️ ただし occto-capacity は observation_cutoff が実需給年度の 4/1（＝現在 2029-04-01 の
+      #   **未来日**）なので age が負になり、check_staleness.py の 2×SLA ゲートに構造的に
+      #   引っかからない。今回の 3 ヶ月停止が停滞検知をすり抜けたのはこれが理由で、
+      #   本ワークフローの接続がその唯一の防波堤になる（date 軸規約の見直しは別 PR 案件）。
