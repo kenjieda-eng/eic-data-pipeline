@@ -8,7 +8,7 @@
   "source_url": "https://www.eprx.or.jp/information/summary.php",
   "license": "eprx-terms",
   "observation_cutoff": "2025-04-01",
-  "updated_at": "2026-05-23T11:21:31+09:00",
+  "updated_at": "2026-08-24T11:46:49+09:00",
   "license_url": "https://www.eprx.or.jp/terms/",
   "license_notice": "出典: 一般社団法人 電力需給調整力取引所「取引実績の取りまとめ結果」\nEPRX 利用規約 §4 に従い、非商用・出典明示で利用可。年次 PDF より転記・編集（加工した旨を明記）。商用利用は事前契約、自動的な大量取得は事前承諾が必要。\n",
   "tz": "Asia/Tokyo",
@@ -16,6 +16,6 @@
   "backfill_start": "2022-04-01",
   "publisher": "一般社団法人 電力需給調整力取引所 (EPRX)",
   "aggregation": "annual_mean",
-  "notes": "EPRX 年次取りまとめ PDF の商品別「平均落札単価（年間）」を手動転記。単位は PDF により kW/ΔkW の表記揺れあり（実体同一）。2025-04-01 は FY2025 上期（4〜9月）の暫定値で、全年度公表後に改訂予定。不足率は定義が 2023→2024 で不連続のため本系列には含めない。",
+  "notes": "EPRX 年次取りまとめ PDF の商品別「平均落札単価（年間）」を手動転記。単位は PDF により kW/ΔkW の表記揺れあり（実体同一）。2025-04-01 は FY2025 通年（2025年4月〜2026年3月）の確報値（2026-06-18 公表 PDF、旧・上期暫定値から改訂済み）。不足率は定義が 2023→2024 で不連続のため本系列には含めない。",
   "depends_on": null
 }

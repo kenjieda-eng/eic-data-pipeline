@@ -4802,3 +4802,103 @@ sources:
         notes: "GDP当たりCO2 = eia-co2-oecd ÷ 実質GDP。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。電力部門の排出強度（ember-co2-intensity-*、gCO2/kWh）とは分子・分母とも異なる別概念。countryRegionId=OECD（type=r/Region）。基準年は unit 文字列 BDOLPPP に含まれないため、取得時に基準年カナリア（USA の基準年で実質=名目が成立するか）を検証している。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 173.5 t-CO2/百万2015年PPPドル。"
         depends_on:
           - eia-co2-oecd
+
+  eprx-balancing:
+    name: EPRX 需給調整市場 取引実績の取りまとめ結果（年次）
+    publisher: 一般社団法人 電力需給調整力取引所 (EPRX)
+    publisher_url: https://www.eprx.or.jp/
+    source_url: https://www.eprx.or.jp/information/summary.php
+    # 年度別 PDF の直リンク。年度ごとにパスが揺れる（/information/ 直下 と /information/docs/ が混在）。
+    #   FY2025: https://www.eprx.or.jp/information/summary_2025.pdf
+    #   FY2024: https://www.eprx.or.jp/information/docs/summary_2024.pdf
+    #   FY2023: https://www.eprx.or.jp/information/docs/summary_2023.pdf
+    #   FY2022: https://www.eprx.or.jp/information/summary_2022.pdf
+    #   FY2021: https://www.eprx.or.jp/information/docs/summary_2021.pdf
+    index_url: "https://www.eprx.or.jp/information/summary.php"
+    # ----- D-018 (2026-05-23): 自動 fetcher を設けず、年次 PDF の手動運用とする -----
+    # EPRX 利用規約上、自動的な大量取得は事前承諾が必要。年 1 回更新のためコストも見合わない。
+    #
+    # ⚠️ 監視上の注意（2026-08-24 に実地確認）:
+    #   summary_2025.pdf は **URL 不変のまま中身が in-place 上書きされる**。
+    #   実績: 同 URL が FY2025 上期版 → FY2025 通年版 に差し替えられた
+    #         （Wayback の 2026-04-18 スナップショットは 5.24MB、2026-06-18 更新後の現行は 4.50MB）。
+    #   このため URL の増減や HTTP ステータスを監視しても更新を検知できない。
+    #   Pink Sheet 型（URL ローテで 200 応答のまま内部凍結）と同じサイレント停滞の温床。
+    #   → **毎年 6 月中旬に summary.php を手動点検すること**（実測公表日: FY2021=2022-07-06 /
+    #     FY2024=2025-06-19 / FY2025=2026-06-18）。Last-Modified ヘッダが更新検知に使える。
+    #
+    # 転記規約（metadata.json の notes と対応）:
+    #   商品別 12 系列 = PDF「平均落札単価（年平均）」列 / 「不足率（年間）」列を直読
+    #   電源種別別     = 月次表の単純平均（約定量加重ではない、「ー」= 落札なしの月は除外）、四捨五入
+    #
+    # FY2025 からの構造変化: 電源種別別の行が 5 行（火力/水力/揚水/蓄電池/VPP）→
+    #   4 行（火力/水力・揚水/蓄電池/VPP）に統合された。水力・揚水の分離値は公表されなくなったため、
+    #   *-hydro / *-pumped 11 系列は FY2024 で終端し、*-hydro-pumped 6 系列を新設した
+    #   （終端側は check_staleness.py の KNOWN_STALE に登録済み）。
+    # ------------------------------------------------------------------------
+    # --- D-011 メタデータ共通項目 ---
+    license: eprx-terms
+    license_url: https://www.eprx.or.jp/terms/
+    license_notice: |
+      出典: 一般社団法人 電力需給調整力取引所「取引実績の取りまとめ結果」
+      EPRX 利用規約 §4 に従い、非商用・出典明示で利用可。年次 PDF より転記・編集（加工した旨を明記）。
+      商用利用は事前契約、自動的な大量取得は事前承諾が必要。
+    license_text: |
+      EPRX 利用規約。https://www.eprx.or.jp/terms/
+    frequency: annual
+    tz: Asia/Tokyo
+    missing_policy: "null"
+    # 観測値は年度開始日 (YYYY-04-01) で日付づける規約。FY N 分は N+1 年 6 月中旬に公表されるため、
+    # 公表時点で既に age は約 443-461 日（実測: FY2021=461d / FY2024=444d / FY2025=443d）。
+    # cutoff が次に動くのは翌年 6 月なので、最大 age は 461 + 365 = 約 826 日に達する。
+    # frequency=annual の既定 540 日では FY2026 が公表される前に必ず違反する
+    #（FY2025 分は 2026-09-23 に 1×SLA 超過）ため、実測 826 日 + マージンで 900 とする。
+    # 注: 年 1 回・手動運用のため 2×SLA (1800 日) の hard gate は実質的な防波堤にならない。
+    #     真の再発防止は上記「毎年 6 月中旬の手動点検」。
+    freshness_sla_days: 900
+    indicator_ids:
+      - balancing-price-composite
+      - balancing-price-composite-battery
+      - balancing-price-composite-hydro
+      - balancing-price-composite-hydro-pumped
+      - balancing-price-composite-pumped
+      - balancing-price-composite-thermal
+      - balancing-price-composite-vpp
+      - balancing-price-primary
+      - balancing-price-primary-battery
+      - balancing-price-primary-hydro
+      - balancing-price-primary-hydro-pumped
+      - balancing-price-primary-pumped
+      - balancing-price-primary-thermal
+      - balancing-price-primary-vpp
+      - balancing-price-secondary-1
+      - balancing-price-secondary-1-battery
+      - balancing-price-secondary-1-hydro
+      - balancing-price-secondary-1-hydro-pumped
+      - balancing-price-secondary-1-pumped
+      - balancing-price-secondary-1-thermal
+      - balancing-price-secondary-2
+      - balancing-price-secondary-2-battery
+      - balancing-price-secondary-2-hydro
+      - balancing-price-secondary-2-hydro-pumped
+      - balancing-price-secondary-2-pumped
+      - balancing-price-secondary-2-thermal
+      - balancing-price-tertiary-1
+      - balancing-price-tertiary-1-battery
+      - balancing-price-tertiary-1-hydro
+      - balancing-price-tertiary-1-hydro-pumped
+      - balancing-price-tertiary-1-pumped
+      - balancing-price-tertiary-1-thermal
+      - balancing-price-tertiary-1-vpp
+      - balancing-price-tertiary-2
+      - balancing-price-tertiary-2-battery
+      - balancing-price-tertiary-2-hydro-pumped
+      - balancing-price-tertiary-2-pumped
+      - balancing-price-tertiary-2-thermal
+      - balancing-price-tertiary-2-vpp
+      - balancing-shortage-composite
+      - balancing-shortage-primary
+      - balancing-shortage-secondary-1
+      - balancing-shortage-secondary-2
+      - balancing-shortage-tertiary-1
+      - balancing-shortage-tertiary-2
