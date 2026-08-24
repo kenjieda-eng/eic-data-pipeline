@@ -1386,7 +1386,10 @@ sources:
     frequency: monthly
     tz: America/New_York
     missing_policy: "null"
-    freshness_sla_days: 45                      # 月次、翌月中旬公表 → 45 日マージン
+    # 月次系列は観測値を「月初日 (YYYY-MM-01)」で日付づける規約のため、M 月分は M+1 月初〜中旬に
+    # 着地しても age は既に 30 日超。次の M+1 月分が着地する直前には age が 60 日台に達する。
+    # 45 日だと毎月 15 日頃から着地までの 2-3 週間が恒常的に違反 → 兄弟系列 (nonfarm/unemployment) と同じ 60 に是正。
+    freshness_sla_days: 60                      # 月初日規約ぶん (約30日) + 翌月公表ラグ
     indicator_ids:
       - us-cpi-yoy
       - us-fed-funds-rate
@@ -1596,6 +1599,8 @@ sources:
         unit: "USD/EUR"
         backfill_start: "1999-01-01"
         aggregation: monthly_mean
+        # 月初日規約: M 月平均は M+1 月 1 日着地 → 次の着地直前で age 約 61 日。source 既定 45 だと毎月違反
+        freshness_sla_days: 60
         notes: "ECB EXR/M.USD.EUR.SP00.A。ECB 公表 14:15 CET 参照レート、月平均。USD per 1 EUR"
         depends_on: null
       fx-eurjpy-monthly-avg:
@@ -1604,6 +1609,8 @@ sources:
         unit: "JPY/EUR"
         backfill_start: "1999-01-01"
         aggregation: monthly_mean
+        # 月初日規約: M 月平均は M+1 月 1 日着地 → 次の着地直前で age 約 61 日。source 既定 45 だと毎月違反
+        freshness_sla_days: 60
         notes: "ECB EXR/M.JPY.EUR.SP00.A。ECB 公表 14:15 CET 参照レート、月平均。JPY per 1 EUR。Phase 0 で BOJ FM08 に EUR/JPY 系列が無いことを実 API で確認し、ECB 一次ソースに切替"
         depends_on: null
     notes: |
@@ -3150,8 +3157,10 @@ sources:
     tz: Asia/Shanghai
     missing_policy: "null"
     # 翌月 1 日朝（北京時間 09:30）に前月分を公表。最新リリースに過去 13 ヶ月の表が同梱されるため、
-    # 通常運用では毎月初に 1 回叩けば直近値が更新される。45 日マージン。
-    freshness_sla_days: 45
+    # 通常運用では毎月初に 1 回叩けば直近値が更新される。
+    # 観測値は月初日 (YYYY-MM-01) 規約なので、着地時点で既に age 約 33 日、次の着地直前は約 64 日。
+    # 45 日では毎月中旬から着地まで恒常的に違反するため 60 に是正。
+    freshness_sla_days: 60
     indicator_ids:
       - china-nbs-mfg-pmi
     indicators:

@@ -1,7 +1,7 @@
 {
   "version": 2,
   "schema": "D-017",
-  "generated_at": "2026-08-24T08:29:15+09:00",
+  "generated_at": "2026-08-24T10:02:52+09:00",
   "indicator_count": 602,
   "indicators": [
     {
@@ -2067,7 +2067,7 @@
       "notes": "stats.gov.cn 英語版 Purchasing Managers' Index 月次リリース Table 1 の PMI 列。50 を境界に >50=拡張 / <50=収縮。Caixin PMI は S&P Global proprietary のため不採用 (L-063, 2026-05-27)。FRED に NBS PMI 直系列は存在せず、NBS 英語版プレスリリースから直接抽出。各リリースに過去 13 ヶ月のテーブルが同梱され、月次運用で過去分は dedup で安定化",
       "depends_on": null,
       "csv_path": "data/processed/international/china-nbs-mfg-pmi.csv",
-      "freshness_sla_days": 45
+      "freshness_sla_days": 60
     },
     {
       "id": "commodity-iron-ore",
@@ -6806,7 +6806,7 @@
       "notes": "ECB EXR/M.JPY.EUR.SP00.A。ECB 公表 14:15 CET 参照レート、月平均。JPY per 1 EUR。Phase 0 で BOJ FM08 に EUR/JPY 系列が無いことを実 API で確認し、ECB 一次ソースに切替",
       "depends_on": null,
       "csv_path": "data/processed/international/fx-eurjpy-monthly-avg.csv",
-      "freshness_sla_days": 45
+      "freshness_sla_days": 60
     },
     {
       "id": "fx-eurusd-monthly-avg",
@@ -6829,7 +6829,7 @@
       "notes": "ECB EXR/M.USD.EUR.SP00.A。ECB 公表 14:15 CET 参照レート、月平均。USD per 1 EUR",
       "depends_on": null,
       "csv_path": "data/processed/international/fx-eurusd-monthly-avg.csv",
-      "freshness_sla_days": 45
+      "freshness_sla_days": 60
     },
     {
       "id": "fx-usdjpy-monthly-avg",
@@ -13690,7 +13690,7 @@
       "notes": "FEDFUNDS（Federal Funds Effective Rate, 月内平均）。FOMC 決定値ではなく実効レート。Insight #41「Fed FF rate × JEPX」で使用",
       "depends_on": null,
       "csv_path": "data/processed/macro/us-fed-funds-rate.csv",
-      "freshness_sla_days": 45
+      "freshness_sla_days": 60
     },
     {
       "id": "us-industrial-production",
