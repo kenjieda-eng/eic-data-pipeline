@@ -64,6 +64,22 @@ KNOWN_STALE: dict[str, str] = {
     # --- EU ETS リヒテンシュタイン: 近年の検証排出データが存在しない（構造的死系列） ---
     "eu-ets-emissions-country-li": "Liechtenstein has no recent verified-emissions data (registered 2026-07-18)",
     "eu-ets-allowances-allocated-country-li": "Liechtenstein has no recent verified-emissions data (registered 2026-07-18)",
+    # --- EPRX 需給調整 電源種別別 水力/揚水: FY2025 の年次取りまとめ PDF (2026-06-18 公表) から
+    #     EPRX が水力と揚水を「水力・揚水」1 行に合算して公表する方式に変わり、分離値が公表されなくなった。
+    #     よって本 11 系列は FY2024 で構造的に終端（更新が来ないのが正常）。
+    #     FY2025 以降は balancing-price-{商品}-hydro-pumped が後継。
+    #     もし EPRX が分離公表を再開したら、ここから外して通常監視に戻すこと。 ---
+    "balancing-price-primary-hydro": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
+    "balancing-price-primary-pumped": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
+    "balancing-price-secondary-1-hydro": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
+    "balancing-price-secondary-1-pumped": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
+    "balancing-price-secondary-2-hydro": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
+    "balancing-price-secondary-2-pumped": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
+    "balancing-price-tertiary-1-hydro": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
+    "balancing-price-tertiary-1-pumped": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
+    "balancing-price-composite-hydro": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
+    "balancing-price-composite-pumped": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
+    "balancing-price-tertiary-2-pumped": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
     # --- JMA 最深積雪: 積雪が稀な地点。降雪イベントが無い＝値が更新されないのが正常（SLA は既に 365 に緩和済み） ---
     "jma-snow-max-kansai": "seasonal: no snowfall since 2021-01; absence is expected (registered 2026-07-18)",
     "jma-snow-max-shikoku": "seasonal: no snowfall since 2022-02; absence is expected (registered 2026-07-18)",

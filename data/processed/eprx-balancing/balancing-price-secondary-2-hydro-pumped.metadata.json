@@ -1,6 +1,6 @@
 {
-  "id": "balancing-price-tertiary-2",
-  "name": "需給調整市場 三次調整力② 年間平均落札単価 (年次)",
+  "id": "balancing-price-secondary-2-hydro-pumped",
+  "name": "需給調整市場 二次調整力② 水力・揚水（合算） 年平均落札単価 (年次)",
   "domain": "power",
   "frequency": "annual",
   "unit": "円/ΔkW・30分",
@@ -13,9 +13,9 @@
   "license_notice": "出典: 一般社団法人 電力需給調整力取引所「取引実績の取りまとめ結果」\nEPRX 利用規約 §4 に従い、非商用・出典明示で利用可。年次 PDF より転記・編集（加工した旨を明記）。商用利用は事前契約、自動的な大量取得は事前承諾が必要。\n",
   "tz": "Asia/Tokyo",
   "missing_policy": "null",
-  "backfill_start": "2021-04-01",
+  "backfill_start": "2025-04-01",
   "publisher": "一般社団法人 電力需給調整力取引所 (EPRX)",
   "aggregation": "annual_mean",
-  "notes": "EPRX 年次取りまとめ PDF の商品別「平均落札単価（年間）」を手動転記。単位は PDF により kW/ΔkW の表記揺れあり（実体同一）。2025-04-01 は FY2025 通年（2025年4月〜2026年3月）の確報値（2026-06-18 公表 PDF、旧・上期暫定値から改訂済み）。不足率は定義が 2023→2024 で不連続のため本系列には含めない。",
+  "notes": "電源種別別 月次落札単価（水力・揚水 合算）の年平均（約定月のみ: FY2025 12ヶ月）。単純平均（約定量で加重していない）。FY2025 の年次取りまとめ PDF（2026-06-18 公表）から EPRX が水力と揚水を合算して公表する方式に変わったため新設。FY2024 以前は水力・揚水が分離公表されており合算値は公表されていないため、遡って作成しない（FY2024 以前の分離値は balancing-price-secondary-2-hydro / balancing-price-secondary-2-pumped を参照）。出典: 電力需給調整力取引所 年次取りまとめ PDF より転記・編集。",
   "depends_on": null
 }
