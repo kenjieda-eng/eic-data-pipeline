@@ -1,0 +1,21 @@
+{
+  "id": "balancing-price-secondary-2-vpp",
+  "name": "需給調整市場 二次調整力② VPP（DR等） 年平均落札単価 (年次)",
+  "domain": "power",
+  "frequency": "annual",
+  "unit": "円/ΔkW・30分",
+  "source_name": "電力需給調整力取引所 取引実績の取りまとめ結果",
+  "source_url": "https://www.eprx.or.jp/information/summary.php",
+  "license": "eprx-terms",
+  "observation_cutoff": "2025-04-01",
+  "updated_at": "2026-08-24T12:10:00+09:00",
+  "license_url": "https://www.eprx.or.jp/terms/",
+  "license_notice": "出典: 一般社団法人 電力需給調整力取引所「取引実績の取りまとめ結果」\nEPRX 利用規約 §4 に従い、非商用・出典明示で利用可。年次 PDF より転記・編集（加工した旨を明記）。商用利用は事前契約、自動的な大量取得は事前承諾が必要。\n",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2025-04-01",
+  "publisher": "一般社団法人 電力需給調整力取引所 (EPRX)",
+  "aggregation": "annual_mean",
+  "notes": "電源種別別 月次落札単価（VPP（DR等））の年平均（約定月のみ: FY2025 1ヶ月）。⚠️ FY2025 は 3 月のみ落札があり、単月値。他月は落札なし（EPRX 表記「ー」）。年平均として他系列と単純比較する際は注意。⚠️ 単純平均で volume-weighted ではない（高値は小ボリュームに乗るため市場寄与とは異なる）。FY2024 は 12 ヶ月すべて「ー」＝落札なしで年平均が定義できないため、FY2024 行は存在しない（遡って作成しない）。2025-04-01 は FY2025 通年（2025年4月〜2026年3月）の確報値（2026-06-18 公表 PDF）。出典: 電力需給調整力取引所 年次取りまとめ PDF より転記・編集。",
+  "depends_on": null
+}

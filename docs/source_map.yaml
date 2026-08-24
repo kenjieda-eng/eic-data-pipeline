@@ -4883,6 +4883,7 @@ sources:
       - balancing-price-secondary-2-hydro-pumped
       - balancing-price-secondary-2-pumped
       - balancing-price-secondary-2-thermal
+      - balancing-price-secondary-2-vpp
       - balancing-price-tertiary-1
       - balancing-price-tertiary-1-battery
       - balancing-price-tertiary-1-hydro
