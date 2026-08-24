@@ -571,7 +571,13 @@ sources:
     frequency: monthly
     tz: Asia/Tokyo
     missing_policy: "null"
-    freshness_sla_days: 60
+    # 月次系列は観測値を「月初日 (YYYY-MM-01)」で日付づける規約のため、M 月分が M+1 月に着地した
+    # 時点で age は既に 30 日超。次の M+1 月分が着地する直前まで age は伸び続ける。
+    # git 履歴からの実測最大 age（対象 10 系列）: 60-66 日（最大は us-nonfarm-payrolls /
+    # us-unemployment-rate の 66 日 = obs 2026-06-01 が 2026-07-03 着地 → 2026-08-07 に更新）。
+    # 45 も 60 も実測最大を下回るため構造的に毎月違反が残る → 90 に統一（実測 66 日に対しマージン 24 日）。
+    # 90 は monthly 89 系列の最頻値 (42 件) であり、us-cpi-yoy / us-industrial-production と同値。
+    freshness_sla_days: 90                        # 実測最大 age 64 日（fx-usdjpy 4 系列）+ マージン
     # 各系列は BOJ 側の系列コード 1 対 1。単位は「円/ドル」で共通。
     series:
       - id: fx-usdjpy-monthly-avg
@@ -1386,7 +1392,13 @@ sources:
     frequency: monthly
     tz: America/New_York
     missing_policy: "null"
-    freshness_sla_days: 45                      # 月次、翌月中旬公表 → 45 日マージン
+    # 月次系列は観測値を「月初日 (YYYY-MM-01)」で日付づける規約のため、M 月分が M+1 月に着地した
+    # 時点で age は既に 30 日超。次の M+1 月分が着地する直前まで age は伸び続ける。
+    # git 履歴からの実測最大 age（対象 10 系列）: 60-66 日（最大は us-nonfarm-payrolls /
+    # us-unemployment-rate の 66 日 = obs 2026-06-01 が 2026-07-03 着地 → 2026-08-07 に更新）。
+    # 45 も 60 も実測最大を下回るため構造的に毎月違反が残る → 90 に統一（実測 66 日に対しマージン 24 日）。
+    # 90 は monthly 89 系列の最頻値 (42 件) であり、us-cpi-yoy / us-industrial-production と同値。
+    freshness_sla_days: 90                      # 実測最大 age 63 日（us-fed-funds-rate）+ マージン
     indicator_ids:
       - us-cpi-yoy
       - us-fed-funds-rate
@@ -1455,8 +1467,9 @@ sources:
         depends_on: null
         citation_url: "https://fred.stlouisfed.org/series/PAYEMS"
         publisher_detail: "U.S. Bureau of Labor Statistics"
-        # PAYEMS は対象月の翌月第一金曜公表 → 7-14 日後に FRED 反映、改定も多い → 60 で余裕
-        freshness_sla_days: 60
+        # PAYEMS は対象月の翌月第一金曜公表 → 7-14 日後に FRED 反映、改定も多い。
+        # 実測最大 age 66 日（obs 2026-06-01 が 2026-07-03 着地 → 2026-08-07 に更新）で 60 を超えるため 90。
+        freshness_sla_days: 90
       us-unemployment-rate:
         name: "米国 失業率（%）"
         domain: macro
@@ -1470,8 +1483,8 @@ sources:
         depends_on: null
         citation_url: "https://fred.stlouisfed.org/series/UNRATE"
         publisher_detail: "U.S. Bureau of Labor Statistics"
-        # UNRATE も PAYEMS と同時公表 → 60 日 SLA
-        freshness_sla_days: 60
+        # UNRATE も PAYEMS と同時公表（実測最大 age 66 日）→ PAYEMS と同じ 90
+        freshness_sla_days: 90
       us-cpi-food-yoy:
         name: "米国 CPI 食品（前年比 %）"
         domain: macro
@@ -1596,6 +1609,9 @@ sources:
         unit: "USD/EUR"
         backfill_start: "1999-01-01"
         aggregation: monthly_mean
+        # 月初日規約: M 月平均は M+1 月 1 日着地 → 次の着地直前で実測 age 60 日。source 既定 45 だと毎月違反。
+        # 他の月初日規約系列（実測最大 66 日）と揃えて 90。政策金利 3 系列は当月値が載るため source 既定 45 のまま。
+        freshness_sla_days: 90
         notes: "ECB EXR/M.USD.EUR.SP00.A。ECB 公表 14:15 CET 参照レート、月平均。USD per 1 EUR"
         depends_on: null
       fx-eurjpy-monthly-avg:
@@ -1604,6 +1620,9 @@ sources:
         unit: "JPY/EUR"
         backfill_start: "1999-01-01"
         aggregation: monthly_mean
+        # 月初日規約: M 月平均は M+1 月 1 日着地 → 次の着地直前で実測 age 60 日。source 既定 45 だと毎月違反。
+        # 他の月初日規約系列（実測最大 66 日）と揃えて 90。政策金利 3 系列は当月値が載るため source 既定 45 のまま。
+        freshness_sla_days: 90
         notes: "ECB EXR/M.JPY.EUR.SP00.A。ECB 公表 14:15 CET 参照レート、月平均。JPY per 1 EUR。Phase 0 で BOJ FM08 に EUR/JPY 系列が無いことを実 API で確認し、ECB 一次ソースに切替"
         depends_on: null
     notes: |
@@ -3150,8 +3169,14 @@ sources:
     tz: Asia/Shanghai
     missing_policy: "null"
     # 翌月 1 日朝（北京時間 09:30）に前月分を公表。最新リリースに過去 13 ヶ月の表が同梱されるため、
-    # 通常運用では毎月初に 1 回叩けば直近値が更新される。45 日マージン。
-    freshness_sla_days: 45
+    # 通常運用では毎月初に 1 回叩けば直近値が更新される。
+    # 月次系列は観測値を「月初日 (YYYY-MM-01)」で日付づける規約のため、M 月分が M+1 月に着地した
+    # 時点で age は既に 30 日超。次の M+1 月分が着地する直前まで age は伸び続ける。
+    # git 履歴からの実測最大 age（対象 10 系列）: 60-66 日（最大は us-nonfarm-payrolls /
+    # us-unemployment-rate の 66 日 = obs 2026-06-01 が 2026-07-03 着地 → 2026-08-07 に更新）。
+    # 45 も 60 も実測最大を下回るため構造的に毎月違反が残る → 90 に統一（実測 66 日に対しマージン 24 日）。
+    # 90 は monthly 89 系列の最頻値 (42 件) であり、us-cpi-yoy / us-industrial-production と同値。
+    freshness_sla_days: 90                        # 実測最大 age 63 日（china-nbs-mfg-pmi）+ マージン
     indicator_ids:
       - china-nbs-mfg-pmi
     indicators:
