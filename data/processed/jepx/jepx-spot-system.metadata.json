@@ -7,8 +7,8 @@
   "source_name": "JEPX スポット価格（日次サマリ）",
   "source_url": "https://www.jepx.jp/electricpower/market-data/spot/",
   "license": "jepx-terms",
-  "observation_cutoff": "2026-08-25",
-  "updated_at": "2026-08-25T08:26:28+09:00",
+  "observation_cutoff": "2026-08-26",
+  "updated_at": "2026-08-26T08:28:59+09:00",
   "license_url": "https://www.jepx.jp/electricpower/index.html",
   "license_notice": "",
   "tz": "Asia/Tokyo",
@@ -17,5 +17,8 @@
   "publisher": "一般社団法人 日本卸電力取引所 (JEPX)",
   "aggregation": "daily_mean",
   "notes": "48 コマの単純平均。システム全体の指標価格",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "delivery",
+  "delivery_horizon_days": 1,
+  "grace_days": null
 }

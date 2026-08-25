@@ -8,7 +8,7 @@
   "source_url": "https://www.worldbank.org/en/research/commodity-markets",
   "license": "CC-BY-4.0",
   "observation_cutoff": "2026-07-01",
-  "updated_at": "2026-08-25T08:27:05+09:00",
+  "updated_at": "2026-08-26T08:29:38+09:00",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "license_notice": "",
   "tz": "UTC",
@@ -17,5 +17,8 @@
   "publisher": "The World Bank Group",
   "aggregation": "raw",
   "notes": "Natural gas, US 系列（Pink Sheet 列）",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

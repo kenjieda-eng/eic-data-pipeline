@@ -8,7 +8,7 @@
   "source_url": "https://www.stats.gov.cn/english/",
   "license": "nbs-terms",
   "observation_cutoff": "2026-07-01",
-  "updated_at": "2026-08-25T08:28:58+09:00",
+  "updated_at": "2026-08-26T08:32:33+09:00",
   "license_url": "https://www.stats.gov.cn/english/",
   "license_notice": "Source: National Bureau of Statistics of China (NBS) / CFLP. Reuse permitted with citation.",
   "tz": "Asia/Shanghai",
@@ -17,5 +17,8 @@
   "publisher": "National Bureau of Statistics of China (NBS) / China Federation of Logistics & Purchasing (CFLP)",
   "aggregation": "raw",
   "notes": "stats.gov.cn 英語版 Purchasing Managers' Index 月次リリース Table 1 の PMI 列。50 を境界に >50=拡張 / <50=収縮。Caixin PMI は S&P Global proprietary のため不採用 (L-063, 2026-05-27)。FRED に NBS PMI 直系列は存在せず、NBS 英語版プレスリリースから直接抽出。各リリースに過去 13 ヶ月のテーブルが同梱され、月次運用で過去分は dedup で安定化",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

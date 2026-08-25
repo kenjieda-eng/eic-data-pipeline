@@ -8,7 +8,7 @@
   "source_url": "https://fred.stlouisfed.org/",
   "license": "public-domain",
   "observation_cutoff": "2026-07-01",
-  "updated_at": "2026-08-25T08:27:35+09:00",
+  "updated_at": "2026-08-26T08:30:20+09:00",
   "license_url": "https://fred.stlouisfed.org/legal/",
   "license_notice": "出典: Federal Reserve Bank of St. Louis (FRED).\n各系列の元データは BLS（CPIAUCSL）/ Federal Reserve Board（FEDFUNDS, INDPRO）が作成。\n米連邦政府公表資料は public domain（17 U.S.C. § 105）。\n",
   "tz": "America/New_York",
@@ -17,5 +17,8 @@
   "publisher": "Federal Reserve Bank of St. Louis",
   "aggregation": "raw",
   "notes": "INDPRO（Industrial Production Total Index, SA）。製造業＋鉱業＋公益事業の総合指数。Insight #42「米景気 × 日本電力需要」で使用",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

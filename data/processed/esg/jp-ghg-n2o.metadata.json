@@ -8,7 +8,7 @@
   "source_url": "https://www.nies.go.jp/gio/archive/ghgdata/index.html",
   "license": "gio-terms",
   "observation_cutoff": "2025-03-31",
-  "updated_at": "2026-08-25T08:29:56+09:00",
+  "updated_at": "2026-08-26T08:33:32+09:00",
   "license_url": "https://www.nies.go.jp/gio/copyright/index.html",
   "license_notice": "出典: 国立環境研究所 温室効果ガスインベントリオフィス (GIO)「日本の温室効果ガス排出量データ」（環境省監修）。本データの原頒布元は http://www.nies.go.jp/gio/archive/index.html であり、GIO「温室効果ガス排出量データの利用規約」のもとで提供されています。また GIO データは GIO によって随時更新されます。本系列は GIO データをもとに作成した派生物であり、GIO は本派生物の内容について何ら保証を与えるものではありません。",
   "tz": "Asia/Tokyo",
@@ -17,5 +17,8 @@
   "publisher": "国立研究開発法人 国立環境研究所 地球システム領域 地球環境研究センター 温室効果ガスインベントリオフィス (GIO)",
   "aggregation": "raw",
   "notes": "GWP=265（AR5）で CO2 換算。農地土壌・燃料燃焼・工業プロセス等。",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

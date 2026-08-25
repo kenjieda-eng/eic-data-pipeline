@@ -8,7 +8,7 @@
   "source_url": "https://atb.nrel.gov/",
   "license": "CC-BY-4.0",
   "observation_cutoff": "2024-01-01",
-  "updated_at": "2026-08-25T08:29:44+09:00",
+  "updated_at": "2026-08-26T08:33:20+09:00",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "license_notice": "Source: NREL Annual Technology Baseline (ATB), Open Energy Data Initiative (OEDI), CC BY 4.0.",
   "tz": "UTC",
@@ -17,5 +17,8 @@
   "publisher": "National Renewable Energy Laboratory (NREL)",
   "aggregation": "raw",
   "notes": "NREL ATB 2021-2024 各年版の base year（当年）コスト推計。technology=UtilityPV / techdetail=ATB既定区分（Class5） / scenario=Moderate / case=Market / CRP=20年。米国前提コスト。将来射影は非収載（base year 値のみ、横軸=年版公表年）。",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

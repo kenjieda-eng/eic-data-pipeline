@@ -8,7 +8,7 @@
   "source_url": "https://www.eea.europa.eu/en/datahub/datahubitem-view/98f04097-26de-4fca-86c4-63834818c0c0",
   "license": "eea-terms",
   "observation_cutoff": "2025-01-01",
-  "updated_at": "2026-08-25T08:29:02+09:00",
+  "updated_at": "2026-08-26T08:32:36+09:00",
   "license_url": "https://www.eea.europa.eu/legal/copyright",
   "license_notice": "Source: EU Emissions Trading System (EU ETS) data from EUTL, European Environment Agency / DG-CLIMA. Re-use permitted with attribution. Processed package: ODC-PDDL-1.0 (datahub.io).",
   "tz": "UTC",
@@ -17,5 +17,8 @@
   "publisher": "European Environment Agency (EEA)",
   "aggregation": "annual_sum",
   "notes": "eu-ets.csv '1.1 Freely allocated allowances' を国×年で合計（10 航空 + 20-99 全固定設備 rollup、÷1e6 で百万 EUA 化）。country=SK",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

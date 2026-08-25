@@ -8,7 +8,7 @@
   "source_url": "https://www.e-stat.go.jp/",
   "license": "estat-terms",
   "observation_cutoff": "2026-03-01",
-  "updated_at": "2026-08-25T08:28:26+09:00",
+  "updated_at": "2026-08-26T08:31:21+09:00",
   "license_url": "https://www.e-stat.go.jp/terms-of-use",
   "license_notice": "出典: 政府統計の総合窓口（e-Stat）。",
   "tz": "Asia/Tokyo",
@@ -17,5 +17,8 @@
   "publisher": "総務省統計局",
   "aggregation": "raw",
   "notes": "e-Stat 統計表 0004052181（鉱工業生産・出荷・在庫指数 業種別原指数【月次】 付加価値額生産（2020＝100.0））から cat01=0001000 (鉱工業計、業種別の親項目) を抽出。原指数（非季節調整）。経産省 METI が速報・確報を翌々月に公表、e-Stat 時系列表は survey 年単位で再公開され表 ID がローテーションする（直近スナップ id=0004052181, open=2026-05-19, survey=2025、データ末端は 2026-03）。旧 ID 0004015804 は 2026-06 に STATUS=300 で消滅、getStatsList で後継を再特定（L-062、2026-06-06）",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

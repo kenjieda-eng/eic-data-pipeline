@@ -8,7 +8,7 @@
   "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
   "license": "CC-BY-4.0",
   "observation_cutoff": "2026-05-01",
-  "updated_at": "2026-08-25T08:28:21+09:00",
+  "updated_at": "2026-08-26T08:31:17+09:00",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
   "tz": "UTC",
@@ -17,5 +17,8 @@
   "publisher": "Ember",
   "aggregation": "monthly_sum",
   "notes": "Ember monthly: China, Electricity generation / Total / Total Generation",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

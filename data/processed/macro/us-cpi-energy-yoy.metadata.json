@@ -8,7 +8,7 @@
   "source_url": "https://fred.stlouisfed.org/",
   "license": "public-domain",
   "observation_cutoff": "2026-07-01",
-  "updated_at": "2026-08-25T08:27:36+09:00",
+  "updated_at": "2026-08-26T08:30:30+09:00",
   "license_url": "https://fred.stlouisfed.org/legal/",
   "license_notice": "出典: Federal Reserve Bank of St. Louis (FRED).\n各系列の元データは BLS（CPIAUCSL）/ Federal Reserve Board（FEDFUNDS, INDPRO）が作成。\n米連邦政府公表資料は public domain（17 U.S.C. § 105）。\n",
   "tz": "America/New_York",
@@ -17,5 +17,8 @@
   "publisher": "Federal Reserve Bank of St. Louis",
   "aggregation": "monthly_mean",
   "notes": "CPIENGSL（Consumer Price Index for All Urban Consumers: Energy, SA）の 12 ヶ月前比 %。ガソリン + 家庭用電気 + 暖房油などのエネルギー価格、原油価格の変動を直接反映するため CPI の中で最も変動が大きい",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

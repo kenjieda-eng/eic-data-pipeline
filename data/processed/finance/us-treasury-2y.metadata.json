@@ -7,8 +7,8 @@
   "source_name": "U.S. Department of the Treasury",
   "source_url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
   "license": "public-domain",
-  "observation_cutoff": "2026-08-24",
-  "updated_at": "2026-08-25T08:27:33+09:00",
+  "observation_cutoff": "2026-08-25",
+  "updated_at": "2026-08-26T08:30:13+09:00",
   "license_url": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
   "license_notice": "",
   "tz": "America/New_York",
@@ -17,5 +17,8 @@
   "publisher": "United States Department of the Treasury",
   "aggregation": "raw",
   "notes": "Constant Maturity Treasury (CMT) 利回り、米連邦準備制度の指標金利の一つ",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

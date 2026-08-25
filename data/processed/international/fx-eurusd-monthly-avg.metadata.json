@@ -8,7 +8,7 @@
   "source_url": "https://data.ecb.europa.eu/",
   "license": "ecb-terms",
   "observation_cutoff": "2026-07-01",
-  "updated_at": "2026-08-25T08:28:15+09:00",
+  "updated_at": "2026-08-26T08:31:07+09:00",
   "license_url": "https://www.ecb.europa.eu/services/disclaimer/html/index.en.html",
   "license_notice": "Source: European Central Bank. Reuse permitted with attribution.",
   "tz": "UTC",
@@ -17,5 +17,8 @@
   "publisher": "European Central Bank (ECB)",
   "aggregation": "monthly_mean",
   "notes": "ECB EXR/M.USD.EUR.SP00.A。ECB 公表 14:15 CET 参照レート、月平均。USD per 1 EUR",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

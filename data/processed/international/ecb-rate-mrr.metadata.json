@@ -8,7 +8,7 @@
   "source_url": "https://data.ecb.europa.eu/",
   "license": "ecb-terms",
   "observation_cutoff": "2026-08-01",
-  "updated_at": "2026-08-25T08:28:11+09:00",
+  "updated_at": "2026-08-26T08:31:02+09:00",
   "license_url": "https://www.ecb.europa.eu/services/disclaimer/html/index.en.html",
   "license_notice": "Source: European Central Bank. Reuse permitted with attribution.",
   "tz": "UTC",
@@ -17,5 +17,8 @@
   "publisher": "European Central Bank (ECB)",
   "aggregation": "monthly_end",
   "notes": "ECB FM/D.U2.EUR.4F.KR.MRR_FR.LEV。主要リファイナンス・オペ金利 (fixed rate tenders)。MROフィックスドレート、ユーロ圏短期金利の基準",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

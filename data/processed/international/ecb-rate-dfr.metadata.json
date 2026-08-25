@@ -8,7 +8,7 @@
   "source_url": "https://data.ecb.europa.eu/",
   "license": "ecb-terms",
   "observation_cutoff": "2026-08-01",
-  "updated_at": "2026-08-25T08:28:07+09:00",
+  "updated_at": "2026-08-26T08:31:01+09:00",
   "license_url": "https://www.ecb.europa.eu/services/disclaimer/html/index.en.html",
   "license_notice": "Source: European Central Bank. Reuse permitted with attribution.",
   "tz": "UTC",
@@ -17,5 +17,8 @@
   "publisher": "European Central Bank (ECB)",
   "aggregation": "monthly_end",
   "notes": "ECB FM/D.U2.EUR.4F.KR.DFR.LEV。中銀預金ファシリティ金利。政策金利変更日に tick、日次 ffill → 月末値で月次化",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

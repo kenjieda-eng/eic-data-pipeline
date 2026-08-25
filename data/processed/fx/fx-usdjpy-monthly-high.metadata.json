@@ -8,7 +8,7 @@
   "source_url": "https://www.stat-search.boj.or.jp/ssi/mtshtml/fm08_m_1_en.html",
   "license": "boj-terms",
   "observation_cutoff": "2026-07-01",
-  "updated_at": "2026-08-25T08:27:07+09:00",
+  "updated_at": "2026-08-26T08:29:42+09:00",
   "license_url": "https://www.stat-search.boj.or.jp/info/api_notice.pdf",
   "license_notice": "本サービスは、日本銀行時系列統計データ検索サイトの API 機能を使用しています。本サービスの内容は日本銀行によって保証されたものではありません。",
   "tz": "Asia/Tokyo",
@@ -17,5 +17,8 @@
   "publisher": "日本銀行",
   "aggregation": "monthly_high",
   "notes": "BOJ FM08 / FXERM03。月内高値（東京市場）",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

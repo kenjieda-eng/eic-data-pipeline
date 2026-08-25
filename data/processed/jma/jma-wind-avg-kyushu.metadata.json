@@ -7,8 +7,8 @@
   "source_name": "気象庁 日次気温（9 エリア代表観測点）",
   "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
   "license": "jma-terms",
-  "observation_cutoff": "2026-08-24",
-  "updated_at": "2026-08-25T08:27:03+09:00",
+  "observation_cutoff": "2026-08-25",
+  "updated_at": "2026-08-26T08:29:35+09:00",
   "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
   "license_notice": "",
   "tz": "Asia/Tokyo",
@@ -17,5 +17,8 @@
   "publisher": "気象庁",
   "aggregation": "daily_mean",
   "notes": "気象官署 福岡",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }

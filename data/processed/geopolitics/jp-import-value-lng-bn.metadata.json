@@ -8,7 +8,7 @@
   "source_url": "https://www.e-stat.go.jp/",
   "license": "estat-terms",
   "observation_cutoff": "2025-01-01",
-  "updated_at": "2026-08-25T08:28:51+09:00",
+  "updated_at": "2026-08-26T08:32:26+09:00",
   "license_url": "https://www.e-stat.go.jp/terms-of-use",
   "license_notice": "出典: 財務省 貿易統計（政府統計の総合窓口 e-Stat）。",
   "tz": "Asia/Tokyo",
@@ -17,5 +17,8 @@
   "publisher": "財務省",
   "aggregation": "annual_sum",
   "notes": "財務省 貿易統計 品別国別表（輸入）の LNG（液化天然ガス） 相手国 BN 別 年間金額（千円）。HS 見出し配下の全コードを合算。",
-  "depends_on": null
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null
 }
