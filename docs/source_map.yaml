@@ -31,6 +31,8 @@ sources:
     tz: Asia/Tokyo
     missing_policy: "null"                        # 欠損日はそのまま null（forward fill しない）
     freshness_sla_days: 3                         # 平日 1 回更新、3 営業日以内を許容
+    cutoff_semantics: delivery                    # cutoff は受渡日（当日/翌日）で毎日前進する
+    delivery_horizon_days: 1                      # 実効的に前営業日基準 → 既存 SLA3 検知を温存 (D-020 §2.1)
     columns:
       # 元 CSV の列構造（参考）
       - 受渡日
@@ -1094,6 +1096,13 @@ sources:
     tz: Asia/Tokyo
     missing_policy: "null"                        # 未開催年度は null
     freshness_sla_days: 365                       # 年 1 回オークションのため
+    cutoff_semantics: delivery                    # cutoff は受渡年度開始日 (例 2029-04-01) で固定。前進しない
+    delivery_horizon_days: 1203                   # 公表→受渡開始の実測リードタイム。第7回 (FY2030) は 2026年12月頃
+                                                  # 公表予定 (OCCTO 2026-07-30 発表 https://www.occto.or.jp/news/012742.html、12/15 仮置き)
+    grace_days: 45                                # 制度側都合の遅延は正常系 (第6回: 12月予定→翌1/20 公表)。
+                                                  # 発火窓 2026-12-15〜2027-01-29 (D-020 §9.1)
+                                                  # 注: horizon は回ごとに変わるため D-020④ の update_schedule 導入時に
+                                                  # 「直近公表のスケジュール期日」参照へ置換予定
     # ----- スコープ境界 (実需給年度ベース) --------------------------------
     # FY2024 (第 1 回オークション、2020 年実施) ～ FY2029 (第 6 回、2025 年実施) = 6 年分
     # FY2028 は ZIP 名が "{fy}_main_yakujoukekka_csv.zip" と異なるので filename pattern は柔軟に

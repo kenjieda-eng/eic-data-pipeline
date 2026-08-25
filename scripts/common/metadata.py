@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import json
 import logging
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -53,16 +53,29 @@ RECOMMENDED_FIELDS: tuple[str, ...] = (
     "backfill_start",
 )
 
-# Optional 4 フィールド
+# Optional 7 フィールド（末尾 3 つは D-020② 鮮度監視スキーマ v2）
 OPTIONAL_FIELDS: tuple[str, ...] = (
     "publisher",
     "aggregation",
     "notes",
     "depends_on",
+    # --- D-020② 鮮度監視スキーマ v2 (2026-08-25) -------------------------
+    # observation_cutoff が「何の日付か」を宣言する。
+    #   observation … 実際に観測された最終日（既定。従来どおりの解釈）
+    #   delivery    … 受渡日 / 受渡年度開始日。将来日付になり得るため、そのまま
+    #                 age を測ると負値になり鮮度監視が永久に沈黙する（P1 の原因）。
+    "cutoff_semantics",
+    # delivery 系列の「公表 → 受渡開始」リードタイム（日）。
+    # 実効観測日 = observation_cutoff − delivery_horizon_days として age を測る。
+    "delivery_horizon_days",
+    # 制度側都合の公表遅延を正常系として吸収する猶予日数（違反判定にのみ加算）。
+    "grace_days",
 )
 
 ALL_FIELDS: tuple[str, ...] = REQUIRED_FIELDS + RECOMMENDED_FIELDS + OPTIONAL_FIELDS
-assert len(ALL_FIELDS) == 20, "D-017 のスキーマは 20 項目固定 (D-011 v1 = 19 → v2 = 20、csv_path 追加)"
+assert len(ALL_FIELDS) == 23, (
+    "D-020 で 23 項目固定 (D-017 の 20 + cutoff_semantics / delivery_horizon_days / grace_days)"
+)
 
 # 値候補（CI smoke test で検証）
 DOMAIN_VALUES = {
@@ -104,6 +117,8 @@ AGGREGATION_VALUES = {
     "annual_mean",  # Phase D (2026-05-23, D-018): EPRX 需給調整 商品別 年間平均落札単価
     "annual_sum",  # 2026-06-01 EU ETS 国別合計（Family B: leaf 部門の国 × 年 合計）
 }
+# D-020②: observation_cutoff の意味論。未宣言は "observation" 扱い（後方互換）。
+CUTOFF_SEMANTICS_VALUES = {"observation", "delivery"}
 
 # frequency 別デフォルトの鮮度 SLA（日数）。
 # source_map.yaml の freshness_sla_days で個別 override 可能。
@@ -197,11 +212,15 @@ def build_metadata(
         "tz": pick("tz", "UTC"),
         "missing_policy": pick("missing_policy"),
         "backfill_start": pick("backfill_start"),
-        # --- Optional 4 ---
+        # --- Optional 7 ---
         "publisher": pick("publisher"),
         "aggregation": pick("aggregation"),
         "notes": pick("notes"),
         "depends_on": ind.get("depends_on"),  # 派生系列のみ埋まる。null 可
+        # --- D-020② 鮮度監視スキーマ v2 ---
+        "cutoff_semantics": pick("cutoff_semantics", "observation"),
+        "delivery_horizon_days": pick("delivery_horizon_days"),
+        "grace_days": pick("grace_days"),
     }
     return meta
 
@@ -244,6 +263,11 @@ def write_metadata_for_indicator(
 # --- 検証 ----------------------------------------------------------------
 
 
+def _is_nonneg_int(v: Any) -> bool:
+    """非負整数か。bool は int のサブクラスだが数値としては受け付けない。"""
+    return isinstance(v, int) and not isinstance(v, bool) and v >= 0
+
+
 def validate_metadata(meta: dict) -> dict[str, list[str]]:
     """
     メタデータの健全性を検査。戻り値:
@@ -273,6 +297,30 @@ def validate_metadata(meta: dict) -> dict[str, list[str]]:
     if meta.get("aggregation") and meta["aggregation"] not in AGGREGATION_VALUES:
         warnings.append(f"aggregation '{meta['aggregation']}' is not in AGGREGATION_VALUES")
 
+    # --- D-020② 鮮度監視スキーマ v2 -------------------------------------
+    semantics = meta.get("cutoff_semantics")
+    horizon = meta.get("delivery_horizon_days")
+    if semantics is not None and semantics not in CUTOFF_SEMANTICS_VALUES:
+        errors.append(
+            f"cutoff_semantics '{semantics}' is not in CUTOFF_SEMANTICS_VALUES"
+        )
+    if semantics == "delivery":
+        # 「delivery と宣言だけして offset 不明」は age を実効化できず、
+        # cutoff が将来日付のまま監視が沈黙する P1 の再来になるので即 fail。
+        if not _is_nonneg_int(horizon):
+            errors.append(
+                "cutoff_semantics='delivery' requires delivery_horizon_days "
+                f"as a non-negative int (got {horizon!r})"
+            )
+    elif horizon is not None:
+        warnings.append(
+            f"delivery_horizon_days={horizon!r} is ignored because "
+            f"cutoff_semantics is '{semantics or 'observation'}'"
+        )
+    grace = meta.get("grace_days")
+    if grace is not None and not _is_nonneg_int(grace):
+        errors.append(f"grace_days must be a non-negative int (got {grace!r})")
+
     # Recommended 欠落（warning）
     for f in RECOMMENDED_FIELDS:
         v = meta.get(f)
@@ -283,6 +331,35 @@ def validate_metadata(meta: dict) -> dict[str, list[str]]:
             warnings.append(f"recommended field missing: {f}")
 
     return {"errors": errors, "warnings": warnings}
+
+
+def effective_cutoff_age(entry: dict, today: date) -> int | None:
+    """
+    D-020②: delivery 系列は cutoff − delivery_horizon_days を実効観測日として age を測る。
+
+    cutoff_semantics="delivery" の系列（容量市場・JEPX スポット）は
+    observation_cutoff が受渡日 / 受渡年度開始日であり、将来日付になり得る。
+    そのまま today − cutoff を取ると負値になり、閾値を永久に超えない
+    （＝鮮度監視が沈黙する）ため、公表 → 受渡開始のリードタイム分を巻き戻す。
+
+    observation（未宣言を含む）は horizon 0 となり従来と同一の age を返す。
+    cutoff 欠落・parse 不能は None（従来どおり呼び出し側で skip）。
+
+    generate_catalog.py と check_staleness.py の双方から呼ぶ単一実装。
+    """
+    cutoff = entry.get("observation_cutoff")
+    if not cutoff:
+        return None
+    try:
+        cutoff_date = datetime.strptime(str(cutoff), "%Y-%m-%d").date()
+    except (ValueError, TypeError):
+        return None
+    horizon = (
+        entry.get("delivery_horizon_days")
+        if entry.get("cutoff_semantics") == "delivery"
+        else 0
+    )
+    return (today - (cutoff_date - timedelta(days=horizon or 0))).days
 
 
 def freshness_sla_days(
