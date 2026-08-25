@@ -39,6 +39,7 @@ sys.path.insert(0, str(ROOT))
 from scripts.common.metadata import (  # noqa: E402
     DEFAULT_FRESHNESS_SLA_DAYS,
     REQUIRED_FIELDS,
+    effective_cutoff_age,
     freshness_sla_days as resolve_freshness_sla,
     validate_metadata,
 )
@@ -116,28 +117,37 @@ def freshness_warning(meta: dict) -> str | None:
     """
     observation_cutoff と frequency から鮮度を評価し、
     SLA を超えていたら警告文字列を返す（超えていなければ None）。
+
+    D-020②: age は effective_cutoff_age() で測る。cutoff_semantics="delivery"
+    の系列は cutoff（受渡日 / 受渡年度開始日）から delivery_horizon_days を
+    巻き戻した実効観測日が基準になる。違反判定には grace_days を加算し、
+    制度側都合の公表遅延を正常系として吸収する。
+    observation（未宣言を含む）は horizon 0 / grace 0 で従来と同一挙動。
     """
     cutoff = meta.get("observation_cutoff")
     frequency = meta.get("frequency") or "daily"
     if not cutoff:
         return None
     try:
-        cutoff_dt = datetime.strptime(cutoff, "%Y-%m-%d").replace(
-            tzinfo=timezone(timedelta(hours=9))
-        )
-    except ValueError:
+        datetime.strptime(cutoff, "%Y-%m-%d")
+    except (ValueError, TypeError):
         return f"observation_cutoff '{cutoff}' is not YYYY-MM-DD"
-    now_jst = _now_jst()
-    age_days = (now_jst.date() - cutoff_dt.date()).days
+    age_days = effective_cutoff_age(meta, _now_jst().date())
+    if age_days is None:
+        return None
     sla = DEFAULT_FRESHNESS_SLA_DAYS.get(frequency, 3)
     # meta 自体に freshness_sla_days が埋まっていれば（将来拡張）それを優先
     sla_override = meta.get("freshness_sla_days")
     if isinstance(sla_override, (int, float)) and sla_override > 0:
         sla = int(sla_override)
-    if age_days > sla:
+    semantics = meta.get("cutoff_semantics") or "observation"
+    horizon = meta.get("delivery_horizon_days") if semantics == "delivery" else 0
+    grace = meta.get("grace_days") or 0
+    if age_days > sla + grace:
         return (
-            f"freshness SLA exceeded: age={age_days}d, sla={sla}d "
-            f"(frequency={frequency}, cutoff={cutoff})"
+            f"freshness SLA exceeded: effective_age={age_days}d "
+            f"(semantics={semantics}, horizon={horizon or 0}, grace={grace}), "
+            f"sla={sla}d, cutoff={cutoff} (frequency={frequency})"
         )
     return None
 
@@ -236,7 +246,19 @@ def main() -> int:
                     src_cfg, meta.get("frequency"), ind_id
                 )
 
-        # 鮮度警告（注入された SLA を含めて評価）
+        # D-020②: cutoff_semantics / delivery_horizon_days / grace_days も
+        # source_map.yaml から補填する（freshness_sla_days と同じ暫定配線）。
+        # fetch_*.py が書いた metadata.json に既に入っていれば触らない。
+        # 未宣言のソースは observation = 従来どおりの age 解釈。
+        if "cutoff_semantics" not in meta:
+            ind_id = meta.get("id")
+            src_cfg = indicator_to_source.get(ind_id) if ind_id else None
+            src_cfg = src_cfg or {}
+            meta["cutoff_semantics"] = src_cfg.get("cutoff_semantics") or "observation"
+            meta["delivery_horizon_days"] = src_cfg.get("delivery_horizon_days")
+            meta["grace_days"] = src_cfg.get("grace_days")
+
+        # 鮮度警告（注入された SLA / D-020 セマンティクスを含めて評価）
         fw = freshness_warning(meta)
         if fw:
             total_warnings.append(f"{path.name}: {fw}")

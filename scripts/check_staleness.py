@@ -8,6 +8,13 @@ data/catalog/indicators.json を読み、各系列について
 ただし KNOWN_STALE allowlist に載る「更新が来ないのが正常」な系列は対象外。
 停滞が 1 件でもあれば exit 1、無ければ exit 0。
 
+D-020②（2026-08-25）: age は observation_cutoff をそのまま引かず、
+scripts.common.metadata.effective_cutoff_age() で測る。cutoff_semantics="delivery"
+の系列（容量市場 20 + JEPX スポット 10）は cutoff が受渡日 / 受渡年度開始日であり、
+とくに容量市場は 2029-04-01 固定 = age が約 −950 日の負値。閾値を永久に超えず
+鮮度監視が沈黙していた（＝軸 1 の P1）。実効観測日 = cutoff − delivery_horizon_days
+に置き換えることでこの永久沈黙が解消され、公表遅延は grace_days で吸収する。
+
 背景（なぜ 2× なのか）:
     generate_catalog.py は 1×SLA で soft warning を出すが、warning 止まりのため
     ラン自体は緑のまま流れ、見落とされる（＝サイレント停滞。今回の Pink Sheet 2026
@@ -48,7 +55,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from scripts.common.metadata import DEFAULT_FRESHNESS_SLA_DAYS  # noqa: E402
+from scripts.common.metadata import (  # noqa: E402
+    DEFAULT_FRESHNESS_SLA_DAYS,
+    effective_cutoff_age,
+)
 
 DEFAULT_CATALOG = ROOT / "data" / "catalog" / "indicators.json"
 STALE_MULTIPLIER = 2  # freshness_sla_days の何倍で「停滞」と判定するか（1×=soft warning より厳しく）
@@ -109,15 +119,14 @@ def find_stale(indicators: list[dict], multiplier: int, today) -> tuple[list[dic
     allowlisted_hits = 0
     for entry in indicators:
         cutoff = entry.get("observation_cutoff")
-        if not cutoff:
+        # D-020②: delivery 系列は cutoff − delivery_horizon_days が実効観測日。
+        # cutoff 欠落 / parse 不能は None が返るので従来どおり skip。
+        age_days = effective_cutoff_age(entry, today)
+        if age_days is None:
             continue
-        try:
-            cutoff_date = datetime.strptime(cutoff, "%Y-%m-%d").date()
-        except (ValueError, TypeError):
-            continue
-        age_days = (today - cutoff_date).days
         sla = resolve_sla(entry)
-        threshold = sla * multiplier
+        grace = entry.get("grace_days") or 0
+        threshold = sla * multiplier + grace
         if age_days <= threshold:
             continue
         ind_id = entry.get("id", "?")
@@ -134,6 +143,9 @@ def find_stale(indicators: list[dict], multiplier: int, today) -> tuple[list[dic
                 "age_days": age_days,
                 "sla_days": sla,
                 "threshold_days": threshold,
+                "cutoff_semantics": entry.get("cutoff_semantics") or "observation",
+                "delivery_horizon_days": entry.get("delivery_horizon_days"),
+                "grace_days": grace,
             }
         )
     stale.sort(key=lambda s: s["age_days"], reverse=True)
@@ -141,10 +153,18 @@ def find_stale(indicators: list[dict], multiplier: int, today) -> tuple[list[dic
 
 
 def format_line(s: dict, multiplier: int) -> str:
+    # D-020②: delivery 系列は cutoff がそのままでは age の基準にならないため、
+    # 実効値の導出過程（horizon / grace）を行に添えて読み手が再現できるようにする。
+    extra = ""
+    if s.get("cutoff_semantics") == "delivery":
+        extra = (
+            f" [semantics=delivery, horizon={s.get('delivery_horizon_days')}d, "
+            f"grace={s.get('grace_days')}d]"
+        )
     return (
         f"{s['id']}  (domain={s['domain']}, freq={s['frequency']}) "
         f"cutoff={s['observation_cutoff']} age={s['age_days']}d "
-        f"> {multiplier}×SLA({s['sla_days']}d)={s['threshold_days']}d"
+        f"> {multiplier}×SLA({s['sla_days']}d)={s['threshold_days']}d{extra}"
     )
 
 
