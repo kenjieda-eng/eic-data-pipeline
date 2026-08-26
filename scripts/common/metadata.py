@@ -70,11 +70,17 @@ OPTIONAL_FIELDS: tuple[str, ...] = (
     "delivery_horizon_days",
     # 制度側都合の公表遅延を正常系として吸収する猶予日数（違反判定にのみ加算）。
     "grace_days",
+    # --- D-020③ 収録範囲の機械可読化 (2026-08-26) ------------------------
+    # {first,last,count,label_first,label_last} を catalog 生成時に CSV から導出する。
+    # 人手でも fetcher でも書かない。下流が「FY2024-FY2029」等を文言に焼き込むと
+    # 系列が伸びても表示は壊れず陳腐化に気付けないため（D-020 P3）。
+    "coverage",
 )
 
 ALL_FIELDS: tuple[str, ...] = REQUIRED_FIELDS + RECOMMENDED_FIELDS + OPTIONAL_FIELDS
-assert len(ALL_FIELDS) == 23, (
-    "D-020 で 23 項目固定 (D-017 の 20 + cutoff_semantics / delivery_horizon_days / grace_days)"
+assert len(ALL_FIELDS) == 24, (
+    "D-020 で 24 項目固定 (D-017 の 20 + cutoff_semantics / delivery_horizon_days / grace_days"
+    " + coverage (D-020③、catalog 生成時導出))"
 )
 
 # 値候補（CI smoke test で検証）
@@ -260,6 +266,63 @@ def write_metadata_for_indicator(
     return write_metadata(processed_dir, indicator_id, meta)
 
 
+# --- D-020③ 収録範囲の導出 ------------------------------------------------
+
+# coverage が持つキー。過不足は validate_metadata で error。
+COVERAGE_FIELDS: tuple[str, ...] = (
+    "first",
+    "last",
+    "count",
+    "label_first",
+    "label_last",
+)
+
+
+def _fy_label(date_str: str, entry: dict) -> str:
+    """
+    収録範囲の端点ラベルを導出する。
+
+    cutoff_semantics="delivery" かつ frequency="annual"（= 容量市場のような
+    受渡年度もの）は「2024-04-01」ではなく「FY2024」が業務上の呼び名なので
+    年度表記にする。4 月始まりなので month<4 は前年度に倒す。
+    それ以外は ISO 日付文字列のまま返す。
+    """
+    if entry.get("cutoff_semantics") != "delivery" or entry.get("frequency") != "annual":
+        return date_str
+    d = date.fromisoformat(date_str)
+    return f"FY{d.year if d.month >= 4 else d.year - 1}"
+
+
+def derive_coverage(csv_path: Path, entry: dict) -> dict | None:
+    """
+    CSV の実データから収録範囲 {first,last,count,label_first,label_last} を導出する。
+
+    D-020③: 収録範囲は人手でも fetcher でも書かず、catalog 生成時に必ずここで
+    導出する。下流が「FY2024-FY2029」等を文言に焼き込むと、系列が伸びても表示は
+    壊れないまま陳腐化するため（D-020 P3）。
+
+    entry は cutoff_semantics / frequency 解決後のメタデータ（ラベル導出に使う）。
+    CSV 不在・データ行ゼロのときは None を返す（呼び出し側で warning）。
+    """
+    if not csv_path.exists():
+        return None
+    df = pd.read_csv(csv_path)
+    if "date" not in df.columns or len(df) == 0:
+        return None
+    s = pd.to_datetime(df["date"], errors="coerce").dropna()
+    if len(s) == 0:
+        return None
+    s = s.dt.strftime("%Y-%m-%d")
+    first, last = str(s.min()), str(s.max())
+    return {
+        "first": first,
+        "last": last,
+        "count": int(len(df)),
+        "label_first": _fy_label(first, entry),
+        "label_last": _fy_label(last, entry),
+    }
+
+
 # --- 検証 ----------------------------------------------------------------
 
 
@@ -320,6 +383,33 @@ def validate_metadata(meta: dict) -> dict[str, list[str]]:
     grace = meta.get("grace_days")
     if grace is not None and not _is_nonneg_int(grace):
         errors.append(f"grace_days must be a non-negative int (got {grace!r})")
+
+    # --- D-020③ coverage ------------------------------------------------
+    # catalog 生成時に derive_coverage() が注入する。fetcher 由来の metadata.json
+    # には通常存在しないため、「あるときだけ」形状を検査する。
+    cov = meta.get("coverage")
+    if cov is not None:
+        if not isinstance(cov, dict):
+            errors.append(f"coverage must be a dict (got {type(cov).__name__})")
+        else:
+            missing = [k for k in COVERAGE_FIELDS if k not in cov]
+            if missing:
+                errors.append(f"coverage missing keys: {', '.join(missing)}")
+            extra = sorted(k for k in cov if k not in COVERAGE_FIELDS)
+            if extra:
+                errors.append(f"coverage has unexpected keys: {', '.join(extra)}")
+            count = cov.get("count")
+            if not (_is_nonneg_int(count) and count >= 1):
+                errors.append(f"coverage.count must be a positive int (got {count!r})")
+            first, last = cov.get("first"), cov.get("last")
+            if not (isinstance(first, str) and first and isinstance(last, str) and last):
+                if not missing:
+                    errors.append(
+                        f"coverage.first / coverage.last must be non-empty strings "
+                        f"(got {first!r} / {last!r})"
+                    )
+            elif first > last:
+                errors.append(f"coverage.first ({first}) must be <= coverage.last ({last})")
 
     # Recommended 欠落（warning）
     for f in RECOMMENDED_FIELDS:
