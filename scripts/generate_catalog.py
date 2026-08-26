@@ -39,6 +39,7 @@ sys.path.insert(0, str(ROOT))
 from scripts.common.metadata import (  # noqa: E402
     DEFAULT_FRESHNESS_SLA_DAYS,
     REQUIRED_FIELDS,
+    derive_coverage,
     effective_cutoff_age,
     freshness_sla_days as resolve_freshness_sla,
     validate_metadata,
@@ -164,7 +165,7 @@ def build_catalog(indicators: list[dict]) -> dict[str, Any]:
     sorted_indicators = sorted(indicators, key=lambda m: m.get("id", ""))
     return {
         "version": 2,
-        "schema": "D-017",
+        "schema": "D-020",
         "generated_at": _now_jst().isoformat(timespec="seconds"),
         "indicator_count": len(sorted_indicators),
         "indicators": sorted_indicators,
@@ -257,6 +258,14 @@ def main() -> int:
             meta["cutoff_semantics"] = src_cfg.get("cutoff_semantics") or "observation"
             meta["delivery_horizon_days"] = src_cfg.get("delivery_horizon_days")
             meta["grace_days"] = src_cfg.get("grace_days")
+
+        # D-020③: 収録範囲を CSV の実データから導出して注入する。
+        # 人手でも fetcher の metadata.json でも書かない（生成時導出のみ）。
+        # cutoff_semantics / frequency 確定後に呼ぶ必要がある
+        # （delivery + annual のときだけ label が FY 表記になるため）。
+        meta["coverage"] = derive_coverage(ROOT / meta["csv_path"], meta)
+        if meta["coverage"] is None:
+            total_warnings.append(f"coverage underivable: {meta.get('id') or path.name}")
 
         # 鮮度警告（注入された SLA / D-020 セマンティクスを含めて評価）
         fw = freshness_warning(meta)
