@@ -311,16 +311,18 @@ sources:
       jma-temp-min-shikoku:  { name: "高松 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 高松", depends_on: null }
       jma-temp-min-kyushu:   { name: "福岡 日最低気温",     domain: weather, unit: "℃", backfill_start: "2012-01-01", aggregation: daily_min,  notes: "気象官署 福岡", depends_on: null }
       # --- 日降水量合計（9 地点）---
-      # 観測所からの値到着が一時的にラグることがあるため、3 日 → 7 日に緩和して誤検知を減らす。
-      jma-precip-hokkaido:   { name: "札幌 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 札幌。水力発電ダム流入と雪・豪雨イベントの素材指標", depends_on: null, freshness_sla_days: 7 }
-      jma-precip-tohoku:     { name: "仙台 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 仙台", depends_on: null, freshness_sla_days: 7 }
-      jma-precip-tokyo:      { name: "東京 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 東京。首都圏の豪雨・梅雨指標", depends_on: null, freshness_sla_days: 7 }
-      jma-precip-chubu:      { name: "名古屋 日降水量合計", domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 名古屋", depends_on: null, freshness_sla_days: 7 }
-      jma-precip-hokuriku:   { name: "金沢 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 金沢。冬の豪雪＝水力貯水の素材", depends_on: null, freshness_sla_days: 7 }
-      jma-precip-kansai:     { name: "大阪 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 大阪", depends_on: null, freshness_sla_days: 7 }
-      jma-precip-chugoku:    { name: "広島 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 広島", depends_on: null, freshness_sla_days: 7 }
-      jma-precip-shikoku:    { name: "高松 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 高松", depends_on: null, freshness_sla_days: 7 }
-      jma-precip-kyushu:     { name: "福岡 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 福岡。九州北部豪雨の素材", depends_on: null, freshness_sla_days: 7 }
+      # 値到着ラグ（3→7 日緩和の旧理由）に加え、無降水日 ("--") は行が生成されず cutoff が前進しない。
+      # 全9地点の全履歴実測（2012〜2026）で無降水ギャップ最大22日（東京・高松）→ SLA 7 は毎夏誤警報になる。
+      # 実測最大22 + マージンで 30 に緩和（#32 と同じ手法）。wind-dir は実測最大ギャップ1日のため 7 のまま。
+      jma-precip-hokkaido:   { name: "札幌 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 札幌。水力発電ダム流入と雪・豪雨イベントの素材指標", depends_on: null, freshness_sla_days: 30 }
+      jma-precip-tohoku:     { name: "仙台 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 仙台", depends_on: null, freshness_sla_days: 30 }
+      jma-precip-tokyo:      { name: "東京 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 東京。首都圏の豪雨・梅雨指標", depends_on: null, freshness_sla_days: 30 }
+      jma-precip-chubu:      { name: "名古屋 日降水量合計", domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 名古屋", depends_on: null, freshness_sla_days: 30 }
+      jma-precip-hokuriku:   { name: "金沢 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 金沢。冬の豪雪＝水力貯水の素材", depends_on: null, freshness_sla_days: 30 }
+      jma-precip-kansai:     { name: "大阪 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 大阪", depends_on: null, freshness_sla_days: 30 }
+      jma-precip-chugoku:    { name: "広島 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 広島", depends_on: null, freshness_sla_days: 30 }
+      jma-precip-shikoku:    { name: "高松 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 高松", depends_on: null, freshness_sla_days: 30 }
+      jma-precip-kyushu:     { name: "福岡 日降水量合計",   domain: weather, unit: "mm", backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 福岡。九州北部豪雨の素材", depends_on: null, freshness_sla_days: 30 }
       # --- 日照時間（9 地点）---
       jma-sunshine-hokkaido: { name: "札幌 日照時間",       domain: weather, unit: "h",  backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 札幌。太陽光発電の発電量の素材指標", depends_on: null }
       jma-sunshine-tohoku:   { name: "仙台 日照時間",       domain: weather, unit: "h",  backfill_start: "2012-01-01", aggregation: daily_sum,  notes: "気象官署 仙台", depends_on: null }

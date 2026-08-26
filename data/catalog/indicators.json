@@ -1,7 +1,7 @@
 {
   "version": 2,
   "schema": "D-017",
-  "generated_at": "2026-08-26T08:33:36+09:00",
+  "generated_at": "2026-08-26T16:30:37+09:00",
   "indicator_count": 609,
   "indicators": [
     {
@@ -8383,7 +8383,7 @@
       "delivery_horizon_days": null,
       "grace_days": null,
       "csv_path": "data/processed/jma/jma-precip-chubu.csv",
-      "freshness_sla_days": 7
+      "freshness_sla_days": 30
     },
     {
       "id": "jma-precip-chugoku",
@@ -8409,7 +8409,7 @@
       "delivery_horizon_days": null,
       "grace_days": null,
       "csv_path": "data/processed/jma/jma-precip-chugoku.csv",
-      "freshness_sla_days": 7
+      "freshness_sla_days": 30
     },
     {
       "id": "jma-precip-hokkaido",
@@ -8435,7 +8435,7 @@
       "delivery_horizon_days": null,
       "grace_days": null,
       "csv_path": "data/processed/jma/jma-precip-hokkaido.csv",
-      "freshness_sla_days": 7
+      "freshness_sla_days": 30
     },
     {
       "id": "jma-precip-hokuriku",
@@ -8461,7 +8461,7 @@
       "delivery_horizon_days": null,
       "grace_days": null,
       "csv_path": "data/processed/jma/jma-precip-hokuriku.csv",
-      "freshness_sla_days": 7
+      "freshness_sla_days": 30
     },
     {
       "id": "jma-precip-kansai",
@@ -8487,7 +8487,7 @@
       "delivery_horizon_days": null,
       "grace_days": null,
       "csv_path": "data/processed/jma/jma-precip-kansai.csv",
-      "freshness_sla_days": 7
+      "freshness_sla_days": 30
     },
     {
       "id": "jma-precip-kyushu",
@@ -8513,7 +8513,7 @@
       "delivery_horizon_days": null,
       "grace_days": null,
       "csv_path": "data/processed/jma/jma-precip-kyushu.csv",
-      "freshness_sla_days": 7
+      "freshness_sla_days": 30
     },
     {
       "id": "jma-precip-shikoku",
@@ -8539,7 +8539,7 @@
       "delivery_horizon_days": null,
       "grace_days": null,
       "csv_path": "data/processed/jma/jma-precip-shikoku.csv",
-      "freshness_sla_days": 7
+      "freshness_sla_days": 30
     },
     {
       "id": "jma-precip-tohoku",
@@ -8565,7 +8565,7 @@
       "delivery_horizon_days": null,
       "grace_days": null,
       "csv_path": "data/processed/jma/jma-precip-tohoku.csv",
-      "freshness_sla_days": 7
+      "freshness_sla_days": 30
     },
     {
       "id": "jma-precip-tokyo",
@@ -8591,7 +8591,7 @@
       "delivery_horizon_days": null,
       "grace_days": null,
       "csv_path": "data/processed/jma/jma-precip-tokyo.csv",
-      "freshness_sla_days": 7
+      "freshness_sla_days": 30
     },
     {
       "id": "jma-snow-max-chubu",
