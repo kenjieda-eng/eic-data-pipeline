@@ -45,7 +45,10 @@ from scripts.common.io import (  # noqa: E402
     save_raw,
     write_processed,
 )
-from scripts.common.metadata import write_metadata_for_indicator  # noqa: E402
+from scripts.common.metadata import (  # noqa: E402
+    write_metadata_for_expected_indicators,
+    write_metadata_for_indicator,
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -335,8 +338,34 @@ def main(argv: list[str] | None = None) -> int:
         # D-011: 系列メタデータを {id}.metadata.json に書き出す
         write_metadata_for_indicator(processed_dir, source_cfg, str(indicator_id), group)
 
+    # D-020④: フェッチ成功範囲で行が来なかった indicator も metadata を書き直す
+    # （updated_at = 生存信号）。JEPX は年単位で fetch するため、failed_years が
+    # 空のときだけ refresh する。全系列は同じ merged から groupby で導出される。
+    meta_refreshed: list[str] = []
+    meta_skipped: list[str] = []
+    if not failed_years:
+        expected_ids = set(source_cfg.get("indicator_ids") or [])
+        meta_refreshed, meta_skipped = write_metadata_for_expected_indicators(
+            processed_dir, source_cfg, sorted(expected_ids - set(merged["indicator_id"].astype(str)))
+        )
+    else:
+        logger.warning(
+            "metadata refresh skipped: failed_years あり "
+            "— 失敗範囲の updated_at は進めない（D-020 §2.4 軸2 の故障隠蔽を防ぐ）"
+        )
+    logger.info(
+        "metadata refreshed for row-less indicators: %d (skipped=%d)",
+        len(meta_refreshed), len(meta_skipped),
+    )
+    if meta_skipped:
+        logger.warning(
+            "metadata refresh skipped (no CSV / unreadable cutoff): %s",
+            ", ".join(meta_skipped),
+        )
+
     summary = (
         f"years={fetched_years} rows={len(merged)} "
+        f"metadata_refreshed={len(meta_refreshed)} "
         f"range={merged['date'].min()}..{merged['date'].max()} "
         f"failed={failed_years}"
     )

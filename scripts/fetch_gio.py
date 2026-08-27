@@ -97,7 +97,10 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.common.http import make_session, session_get  # noqa: E402
 from scripts.common.io import append_log, save_raw, write_processed  # noqa: E402
-from scripts.common.metadata import write_metadata_for_indicator  # noqa: E402
+from scripts.common.metadata import (  # noqa: E402
+    write_metadata_for_expected_indicators,
+    write_metadata_for_indicator,
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -844,6 +847,24 @@ def main(argv: list[str] | None = None) -> int:
         write_processed(group, processed_dir, basename=str(indicator_id), replace=True)
         write_metadata_for_indicator(processed_dir, source_cfg, str(indicator_id), group)
 
+    # D-020④: フェッチ成功範囲で行が来なかった indicator も metadata を書き直す
+    # （updated_at = 生存信号）。GIO は 1 xlsx を全置換で書き出し、
+    # ラベル照合・整合性・バンド検証を全通過した後にしか到達しない（= 全系列成功）。
+    # --dry-run はこの手前で return するのでここは通らない。
+    expected_ids = set(source_cfg.get("indicator_ids") or [])
+    meta_refreshed, meta_skipped = write_metadata_for_expected_indicators(
+        processed_dir, source_cfg, sorted(expected_ids - set(df["indicator_id"].astype(str)))
+    )
+    logger.info(
+        "metadata refreshed for row-less indicators: %d (skipped=%d)",
+        len(meta_refreshed), len(meta_skipped),
+    )
+    if meta_skipped:
+        logger.warning(
+            "metadata refresh skipped (no CSV / unreadable cutoff): %s",
+            ", ".join(meta_skipped),
+        )
+
     per_series = ", ".join(
         f"{iid}={len(g)}" for iid, g in sorted(df.groupby("indicator_id"))
     )
@@ -851,7 +872,7 @@ def main(argv: list[str] | None = None) -> int:
         f"file={filename} md5={md5} published={published or 'unknown'} "
         f"series={df['indicator_id'].nunique()} rows={len(df)} "
         f"range={df['date'].min()}..{df['date'].max()} latest_fy={latest_year} "
-        f"mode=full-replace [{per_series}]"
+        f"mode=full-replace metadata_refreshed={len(meta_refreshed)} [{per_series}]"
     )
     logger.info("done: %s", summary)
     append_log(log_dir, "fetch_gio", "OK", summary)
