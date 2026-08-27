@@ -88,7 +88,10 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.common.http import get  # noqa: E402
 from scripts.common.io import append_log, save_raw, write_processed  # noqa: E402
-from scripts.common.metadata import write_metadata_for_indicator  # noqa: E402
+from scripts.common.metadata import (  # noqa: E402
+    write_metadata_for_expected_indicators,
+    write_metadata_for_indicator,
+)
 
 # Windows コンソール（cp932）でも日本語の二重計上検証 print が化けないように。
 try:
@@ -590,12 +593,34 @@ def main(argv: list[str] | None = None) -> int:
     # --- 二重計上の検証（print） ---
     double_count_check(df_sector, ve)
 
+    # D-020④: フェッチ成功範囲で行が来なかった indicator も metadata を書き直す
+    # （updated_at = 生存信号）。EUTL は 2 CSV を一括取得し
+    # Family A/B/C/D を同じデータから導出するため、ここに到達した時点で
+    # indicators の全 id がフェッチ成功範囲（失敗時は上で return 1）。
+    expected_ids = {
+        iid for iid in (source_cfg.get("indicators") or {})
+        if wanted is None or iid in wanted
+    }
+    meta_refreshed, meta_skipped = write_metadata_for_expected_indicators(
+        processed_dir, source_cfg, sorted(expected_ids - set(written))
+    )
+    logger.info(
+        "metadata refreshed for row-less indicators: %d (skipped=%d)",
+        len(meta_refreshed), len(meta_skipped),
+    )
+    if meta_skipped:
+        logger.warning(
+            "metadata refresh skipped (no CSV / unreadable cutoff): %s",
+            ", ".join(meta_skipped),
+        )
+
     summary = (
         f"Family A={len(a_ids)} series ({a_rows} rows), "
         f"Family B={len(b_ids)} series ({b_rows} rows), "
         f"Family C={len(c_ids)} series ({c_rows} rows), "
         f"Family D={len(d_ids)} series ({d_rows} rows), "
         f"total={len(written)} series, "
+        f"metadata_refreshed={len(meta_refreshed)}, "
         f"unmapped_sectors={len(unmapped)}, unnamed_countries={len(unnamed) + len(d_unnamed)}"
     )
     logger.info("done: %s", summary)

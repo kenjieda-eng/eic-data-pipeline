@@ -42,7 +42,10 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.common.http import get  # noqa: E402
 from scripts.common.io import append_log, save_raw, write_processed  # noqa: E402
-from scripts.common.metadata import write_metadata_for_indicator  # noqa: E402
+from scripts.common.metadata import (  # noqa: E402
+    write_metadata_for_expected_indicators,
+    write_metadata_for_indicator,
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -228,7 +231,35 @@ def main(argv: list[str] | None = None) -> int:
         append_log(log_dir, "fetch_us_treasury", "FAIL", "no series produced rows")
         return 1
 
-    summary = f"series={len(written)} rows={total_rows} years={len(all_dfs)}"
+    # D-020④: フェッチ成功範囲で行が来なかった indicator も metadata を書き直す
+    # （updated_at = 生存信号）。Treasury は年単位で fetch するため、対象年が全て
+    # 成功（かつ空でない）ときだけ refresh する。全系列は同じ merged から導出される。
+    meta_refreshed: list[str] = []
+    meta_skipped: list[str] = []
+    if len(all_dfs) == len(years):
+        expected_ids = set(indicators_cfg)
+        meta_refreshed, meta_skipped = write_metadata_for_expected_indicators(
+            processed_dir, source_cfg, sorted(expected_ids - set(written))
+        )
+    else:
+        logger.warning(
+            "metadata refresh skipped: 一部の年の取得に失敗または空 "
+            "— 失敗範囲の updated_at は進めない（D-020 §2.4 軸2 の故障隠蔽を防ぐ）"
+        )
+    logger.info(
+        "metadata refreshed for row-less indicators: %d (skipped=%d)",
+        len(meta_refreshed), len(meta_skipped),
+    )
+    if meta_skipped:
+        logger.warning(
+            "metadata refresh skipped (no CSV / unreadable cutoff): %s",
+            ", ".join(meta_skipped),
+        )
+
+    summary = (
+        f"series={len(written)} rows={total_rows} years={len(all_dfs)} "
+        f"metadata_refreshed={len(meta_refreshed)}"
+    )
     logger.info("done: %s", summary)
     append_log(log_dir, "fetch_us_treasury", "OK", summary)
     return 0

@@ -60,7 +60,10 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.common.http import USER_AGENT, get  # noqa: E402
 from scripts.common.io import append_log, write_processed  # noqa: E402
-from scripts.common.metadata import write_metadata_for_indicator  # noqa: E402
+from scripts.common.metadata import (  # noqa: E402
+    write_metadata_for_expected_indicators,
+    write_metadata_for_indicator,
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -305,8 +308,34 @@ def main(argv: list[str] | None = None) -> int:
             [round(float(v), 2) for v in long_df["value"]],
         )
 
+    # D-020④: フェッチ成功範囲で行が来なかった indicator も metadata を書き直す
+    # （updated_at = 生存信号）。ATB は edition 単位で fetch/parse するため、
+    # 全 edition が成功したときだけ refresh する（base_years は成功時のみ埋まる）。
+    meta_refreshed: list[str] = []
+    meta_skipped: list[str] = []
+    if len(base_years) == len(editions):
+        expected_ids = {iid for iid in indicators if wanted is None or iid in wanted}
+        meta_refreshed, meta_skipped = write_metadata_for_expected_indicators(
+            processed_dir, src, sorted(expected_ids - set(written))
+        )
+    else:
+        logger.warning(
+            "metadata refresh skipped: 一部 edition の fetch/parse が失敗 "
+            "— 失敗範囲の updated_at は進めない（D-020 §2.4 軸2 の故障隠蔽を防ぐ）"
+        )
+    logger.info(
+        "metadata refreshed for row-less indicators: %d (skipped=%d)",
+        len(meta_refreshed), len(meta_skipped),
+    )
+    if meta_skipped:
+        logger.warning(
+            "metadata refresh skipped (no CSV / unreadable cutoff): %s",
+            ", ".join(meta_skipped),
+        )
+
     summary = (
         f"series={len(written)} rows={total_rows} "
+        f"metadata_refreshed={len(meta_refreshed)} "
         f"editions={','.join(f'{e}(by={base_years[e]})' for e in base_years)}"
     )
     logger.info("done: %s", summary)

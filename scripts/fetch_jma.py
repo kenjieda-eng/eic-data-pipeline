@@ -42,7 +42,10 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.common.http import make_session, session_get  # noqa: E402
 from scripts.common.io import append_log, save_raw, write_processed  # noqa: E402
-from scripts.common.metadata import write_metadata_for_indicator  # noqa: E402
+from scripts.common.metadata import (  # noqa: E402
+    write_metadata_for_expected_indicators,
+    write_metadata_for_indicator,
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -385,10 +388,34 @@ def main(argv: list[str] | None = None) -> int:
             written_files.append(str(indicator_id))
             total_rows += len(group)
 
+    # D-020④: フェッチ成功エリアで行が来なかった indicator も metadata を書き直す
+    # （updated_at = 生存信号。積雪の無降雪期・降水の乾燥期の凍結を解消）。
+    # 失敗エリアは除外する — 失敗し続けている系列の updated_at を進めると
+    # 「接続はされているが失敗している」故障を隠蔽してしまうため。
+    failed_areas = {f[0] for f in failed}
+    expected_ids = {
+        f"{item['id_prefix']}-{area}"
+        for item in items
+        for area in stations
+        if area not in failed_areas
+    }
+    refreshed, skipped = write_metadata_for_expected_indicators(
+        processed_dir, source_cfg, sorted(expected_ids - set(written_files))
+    )
+    logger.info(
+        "metadata refreshed for row-less indicators: %d (skipped=%d, failed_areas=%d)",
+        len(refreshed), len(skipped), len(failed_areas),
+    )
+    if skipped:
+        logger.warning(
+            "metadata refresh skipped (no CSV / unreadable cutoff): %s",
+            ", ".join(skipped),
+        )
+
     summary = (
         f"months={len(target_months)} areas={len(stations)} "
         f"rows={total_rows} files={len(written_files)} "
-        f"failed={len(failed)}"
+        f"failed={len(failed)} metadata_refreshed={len(refreshed)}"
     )
     logger.info("done: %s", summary)
 
