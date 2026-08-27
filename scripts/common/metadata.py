@@ -266,6 +266,72 @@ def write_metadata_for_indicator(
     return write_metadata(processed_dir, indicator_id, meta)
 
 
+# --- D-020④ 生存信号としての updated_at ------------------------------------
+
+
+def observation_cutoff_from_csv(csv_path: Path) -> str:
+    """
+    既存 processed CSV の date 列の最大値（YYYY-MM-DD）を返す。
+
+    ファイル不在・date 列なし・行ゼロ・パース不能など、値を確定できない場合は
+    一律 "" を返す（呼び出し側は "" を「metadata を書けない」の合図として扱う）。
+    """
+    try:
+        df = pd.read_csv(Path(csv_path), usecols=["date"])
+        s = pd.to_datetime(df["date"], errors="coerce").dropna()
+        if len(s) == 0:
+            return ""
+        return str(s.dt.strftime("%Y-%m-%d").max())
+    except Exception as e:  # noqa: BLE001 — 読めない理由を問わず "" に倒す
+        logger.debug("observation_cutoff_from_csv failed for %s: %s", csv_path, e)
+        return ""
+
+
+def write_metadata_for_expected_indicators(
+    processed_dir: Path,
+    source_cfg: dict,
+    expected_ids: Iterable[str],
+) -> tuple[list[str], list[str]]:
+    """
+    D-020④: フェッチには成功したが今回は行がゼロだった indicator の metadata を
+    書き直す（updated_at = 実行時刻、observation_cutoff は既存 CSV から再導出）。
+
+    従来の updated_at は「行が書かれた時刻」だったため、行が生成されない期間を
+    持つ indicator（積雪の無降雪期・降水の乾燥期など）は metadata が凍結し、
+    パイプラインが生きているのか死んでいるのか区別できなかった（D-020 §9.3）。
+    ここを通すことで updated_at は「系列が確認された時刻」= 純粋な生存信号になる。
+
+    書かない（skipped に入る）条件:
+      - 既存 CSV が無い id（catalog 登録は CSV 実在が前提。metadata だけ先に
+        生えると下流が実体のない系列を掴む）
+      - observation_cutoff が "" になる id（CSV が読めない / 行ゼロ）
+
+    ⚠️ 呼び出し側の責務: expected_ids には「今回フェッチに成功した範囲」の id
+    のみを渡すこと。フェッチが失敗した範囲まで渡すと、「接続はされているが
+    失敗し続けている」故障（D-020 §2.4 軸2）の updated_at が進み続け、
+    鮮度監視が永久に沈黙する。行ゼロの refresh は必ず成功範囲に限定する。
+
+    戻り値: (written_ids, skipped_ids)。書き出す内容は build_metadata +
+    write_metadata による通常経路と同一の 22 項目。
+    """
+    processed_dir = Path(processed_dir)
+    written: list[str] = []
+    skipped: list[str] = []
+    for indicator_id in expected_ids:
+        csv_path = processed_dir / f"{indicator_id}.csv"
+        if not csv_path.exists():
+            skipped.append(indicator_id)
+            continue
+        cutoff = observation_cutoff_from_csv(csv_path)
+        if not cutoff:
+            skipped.append(indicator_id)
+            continue
+        meta = build_metadata(source_cfg, indicator_id, observation_cutoff=cutoff)
+        write_metadata(processed_dir, indicator_id, meta)
+        written.append(indicator_id)
+    return written, skipped
+
+
 # --- D-020③ 収録範囲の導出 ------------------------------------------------
 
 # coverage が持つキー。過不足は validate_metadata で error。
