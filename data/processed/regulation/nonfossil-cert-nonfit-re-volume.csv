@@ -22,3 +22,4 @@ date,indicator_id,region,value,source_url
 2025-11-27,nonfossil-cert-nonfit-re-volume,jp,623109580.0,https://www.jepx.jp/js/csv_read.php?dir=nf_summary&file=nf_summary_2025.csv
 2026-02-26,nonfossil-cert-nonfit-re-volume,jp,820449535.0,https://www.jepx.jp/js/csv_read.php?dir=nf_summary&file=nf_summary_2025.csv
 2026-05-21,nonfossil-cert-nonfit-re-volume,jp,1048610232.0,https://www.jepx.jp/js/csv_read.php?dir=nf_summary&file=nf_summary_2025.csv
+2026-08-28,nonfossil-cert-nonfit-re-volume,jp,1142504198.0,https://www.jepx.jp/js/csv_read.php?dir=nf_summary&file=nf_summary_2026.csv
