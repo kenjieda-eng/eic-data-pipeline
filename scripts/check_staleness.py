@@ -42,6 +42,15 @@ freshness_sla_days の解決:
     catalog の各エントリには generate_catalog.py が source_map.yaml 由来の
     freshness_sla_days を注入済み。欠落していた場合は frequency 別デフォルト
     （scripts/common/metadata.DEFAULT_FRESHNESS_SLA_DAYS）にフォールバックする。
+
+D-020④(c)（2026-08-30）: 軸2（パイプライン生存監視）のレポートを末尾に追加した。
+    軸1（上記の observation_cutoff ベース）は「データが古い」を測るのに対し、
+    軸2は update_schedule と updated_at から「workflow がもう回っていない」を測る
+    別軸（D-020 §2.2）。データ頻度は軸1 の担当で、軸2 は一切見ない。
+    ⚠️ 軸2 は **report-only**。判定結果を exit コードに反映しない（gating しない）。
+    ④(a)(b) で updated_at を生存信号化した直後であり、まず 1 週間の無事故運転を
+    確認してから hard 化する（D-020⑤）。soft 先行にするのは、導入直後の誤検知で
+    nightly が万年赤 → 赤疲れ → 無視、という Pink Sheet 型の失敗を避けるため。
 """
 
 from __future__ import annotations
@@ -57,6 +66,7 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.common.metadata import (  # noqa: E402
     DEFAULT_FRESHNESS_SLA_DAYS,
+    axis2_violation,
     effective_cutoff_age,
 )
 
@@ -199,7 +209,8 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     indicators = catalog.get("indicators") or []
-    today = _now_jst().date()
+    now = _now_jst()
+    today = now.date()
     stale, allowlisted_hits = find_stale(indicators, args.multiplier, today)
 
     if args.list:
@@ -219,6 +230,22 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"  - {format_line(s, args.multiplier)}")
         else:
             print("OK: no unexpected series exceeds the staleness threshold.")
+
+    # --- D-020④(c) 軸2: パイプライン生存監視（report-only） -----------------
+    # exit コードには反映しない。ここは「軸1 が沈黙していても workflow の停止だけは
+    # 見えている」状態を可視化するための出力。hard 化は D-020⑤。
+    axis2_hits = []
+    for entry in indicators:
+        v = axis2_violation(entry, now)
+        if v:
+            axis2_hits.append((entry.get("id", "?"), v))
+    if not args.list:
+        if axis2_hits:
+            print(f"AXIS2 (report-only, not gating): {len(axis2_hits)} series")
+            for ind_id, reason in axis2_hits:
+                print(f"  - {ind_id}: {reason}")
+        else:
+            print("AXIS2 (report-only, not gating): 0 series")
 
     if stale:
         # 停滞ありは exit 1（nightly ではデータ commit 後に走るので、ランが赤くなる）。

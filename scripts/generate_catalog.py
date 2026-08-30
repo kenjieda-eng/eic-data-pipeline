@@ -38,7 +38,9 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.common.metadata import (  # noqa: E402
     DEFAULT_FRESHNESS_SLA_DAYS,
+    DEFAULT_UPDATE_SCHEDULE,
     REQUIRED_FIELDS,
+    axis2_violation,
     derive_coverage,
     effective_cutoff_age,
     freshness_sla_days as resolve_freshness_sla,
@@ -220,6 +222,7 @@ def main() -> int:
     indicators: list[dict] = []
     total_errors: list[str] = []
     total_warnings: list[str] = []
+    now = _now_jst()  # 軸2 判定の基準時刻（全系列で同一時刻を使う）
 
     for path in files:
         try:
@@ -259,6 +262,18 @@ def main() -> int:
             meta["delivery_horizon_days"] = src_cfg.get("delivery_horizon_days")
             meta["grace_days"] = src_cfg.get("grace_days")
 
+        # D-020④(c): update_schedule（軸2 = workflow 周期）も同じ暫定配線で補填する。
+        # source_map.yaml に宣言が無いソースは既定 {"kind":"interval","days":7} を
+        # **実体化して** 入れる（null のまま置かない）。catalog を自己記述に保ち、
+        # 下流が「未宣言のときの既定値」を各自で持たなくて済むようにするため。
+        if "update_schedule" not in meta:
+            ind_id = meta.get("id")
+            src_cfg = indicator_to_source.get(ind_id) if ind_id else None
+            src_cfg = src_cfg or {}
+            meta["update_schedule"] = (
+                src_cfg.get("update_schedule") or dict(DEFAULT_UPDATE_SCHEDULE)
+            )
+
         # D-020③: 収録範囲を CSV の実データから導出して注入する。
         # 人手でも fetcher の metadata.json でも書かない（生成時導出のみ）。
         # cutoff_semantics / frequency 確定後に呼ぶ必要がある
@@ -267,10 +282,17 @@ def main() -> int:
         if meta["coverage"] is None:
             total_warnings.append(f"coverage underivable: {meta.get('id') or path.name}")
 
-        # 鮮度警告（注入された SLA / D-020 セマンティクスを含めて評価）
+        # 鮮度警告（注入された SLA / D-020 セマンティクスを含めて評価）= 軸1
         fw = freshness_warning(meta)
         if fw:
             total_warnings.append(f"{path.name}: {fw}")
+
+        # D-020④(c) 軸2: updated_at が update_schedule どおり前進しているか
+        # （= workflow が回っているか）。soft 先行のため warning 止まりで、
+        # exit コードには影響しない（hard 化は D-020⑤）。
+        axis2 = axis2_violation(meta, now)
+        if axis2:
+            total_warnings.append(f"{path.name}: {axis2}")
 
         indicators.append(meta)
 
