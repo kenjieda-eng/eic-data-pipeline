@@ -1103,8 +1103,13 @@ sources:
                                                   # 公表予定 (OCCTO 2026-07-30 発表 https://www.occto.or.jp/news/012742.html、12/15 仮置き)
     grace_days: 45                                # 制度側都合の遅延は正常系 (第6回: 12月予定→翌1/20 公表)。
                                                   # 発火窓 2026-12-15〜2027-01-29 (D-020 §9.1)
-                                                  # 注: horizon は回ごとに変わるため D-020④ の update_schedule 導入時に
-                                                  # 「直近公表のスケジュール期日」参照へ置換予定
+    # D-020④(c) 軸2（パイプライン生存監視）:
+    # 第7回（FY2030）約定結果の公表予定は 2026年12月頃
+    # （OCCTO 2026-07-30 公表 https://www.occto.or.jp/news/012742.html、12/15 仮置き）。
+    # 運用ルール: 各回の着地後、次回スケジュール公表を確認して next_expected を手動更新する。
+    # 軸1 の delivery_horizon_days（上の 1203）と二重系 —
+    # 回ごとのリードタイム変動はこちらの期日が吸収する。
+    update_schedule: { kind: window, next_expected: "2026-12-15", grace_days: 45 }
     # ----- スコープ境界 (実需給年度ベース) --------------------------------
     # FY2024 (第 1 回オークション、2020 年実施) ～ FY2029 (第 6 回、2025 年実施) = 6 年分
     # FY2028 は ZIP 名が "{fy}_main_yakujoukekka_csv.zip" と異なるので filename pattern は柔軟に
@@ -3543,6 +3548,10 @@ sources:
     # 年次（有報）。観測日 = 会計期末（例 2025-03-31）だが、翌年度有報の公表は ~6 月（FYE+約15ヶ月）。
     # この自然な空白期間（期末→次回公表 ≈ 451 日）を SLA 違反扱いしないよう 500 日に設定。
     freshness_sla_days: 500
+    # D-020④(c) 軸2（パイプライン生存監視）: 年次 workflow（edinet-annual、6月想定）。
+    # 6月末 +45 日までに updated_at が動かなければ軸2違反。軸1（上の SLA 500）は
+    # 「観測日が古い」を測るのに対し、こちらは「workflow がもう回っていない」を測る。
+    update_schedule: { kind: window, months: [6], grace_days: 45 }
     backfill_start: "2016-03-31"   # Phase 2: 直近10年度 backfill（FY2015〜, submission 2016〜）
     # 提出者 = 9 一般電気事業者。edinetCode / secCode は EDINET コードリスト（Edinetcode.zip）で確定（L-062, 2026-06-13）。
     #   secCode は EDINET 5 桁（証券コード 4 桁 + チェック 0）。全社 3 月期決算 → 6 月有報提出。
@@ -4867,6 +4876,13 @@ sources:
     # 注: 年 1 回・手動運用のため 2×SLA (1800 日) の hard gate は実質的な防波堤にならない。
     #     真の再発防止は上記「毎年 6 月中旬の手動点検」。
     freshness_sla_days: 900
+    # D-020④(c) 軸2（パイプライン生存監視）: EPRX 年次取りまとめは毎年 6 月中旬公表・
+    # 手動転記（実測公表日 FY2024=2025-06-19 / FY2025=2026-06-18）。
+    # この宣言が D-020⑥「毎年 6 月の点検トリガ」の実装を兼ねる —
+    # 6月末 +45 日（= 8/14 頃）までに手動更新が無ければ軸2が鳴る。
+    # 上記の「URL 不変のまま in-place 上書き」型サイレント停滞に対し、
+    # HTTP 監視では検知できない分をカレンダー側から捕まえる二重系。
+    update_schedule: { kind: window, months: [6], grace_days: 45 }
     indicator_ids:
       - balancing-price-composite
       - balancing-price-composite-battery

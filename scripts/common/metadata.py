@@ -16,6 +16,7 @@ energy-data-platform/docs/metadata-schema-discussion.md §12 を参照。
 
 from __future__ import annotations
 
+import calendar
 import json
 import logging
 from datetime import date, datetime, timedelta, timezone
@@ -75,12 +76,24 @@ OPTIONAL_FIELDS: tuple[str, ...] = (
     # 人手でも fetcher でも書かない。下流が「FY2024-FY2029」等を文言に焼き込むと
     # 系列が伸びても表示は壊れず陳腐化に気付けないため（D-020 P3）。
     "coverage",
+    # --- D-020④(c) 軸2: パイプライン生存監視 (2026-08-30) -----------------
+    # workflow が「回っているか」の周期を宣言する。データの頻度（frequency）でも
+    # 観測日の鮮度（軸1 = observation_cutoff）でもなく、updated_at が前進し続けて
+    # いるかだけを測るための軸（D-020 §2.2）。
+    #   {"kind": "interval", "days": N}
+    #       … N 日ごとに回る workflow（nightly 系は既定の 7）。
+    #   {"kind": "window", "months": [6], "grace_days": 45}
+    #       … 毎年決まった月に回る workflow（年次取りまとめ等）。
+    #   {"kind": "window", "next_expected": "2026-12-15", "grace_days": 45}
+    #       … 次回の公表期日が判っている単発運用（回ごとにリードタイムが動くもの）。
+    # 未宣言のソースは catalog 生成時に既定 {"kind":"interval","days":7} が実体化される。
+    "update_schedule",
 )
 
 ALL_FIELDS: tuple[str, ...] = REQUIRED_FIELDS + RECOMMENDED_FIELDS + OPTIONAL_FIELDS
-assert len(ALL_FIELDS) == 24, (
-    "D-020 で 24 項目固定 (D-017 の 20 + cutoff_semantics / delivery_horizon_days / grace_days"
-    " + coverage (D-020③、catalog 生成時導出))"
+assert len(ALL_FIELDS) == 25, (
+    "D-020 で 25 項目固定 (D-017 の 20 + cutoff_semantics / delivery_horizon_days / grace_days"
+    " + coverage (D-020③、catalog 生成時導出) + update_schedule (D-020④(c) 軸2))"
 )
 
 # 値候補（CI smoke test で検証）
@@ -125,6 +138,18 @@ AGGREGATION_VALUES = {
 }
 # D-020②: observation_cutoff の意味論。未宣言は "observation" 扱い（後方互換）。
 CUTOFF_SEMANTICS_VALUES = {"observation", "delivery"}
+
+# --- D-020④(c) 軸2 update_schedule ---------------------------------------
+# kind とその許容キー。余剰キーは validate_metadata で error（宣言ミスを
+# 「静かに無視」して監視が沈黙するのを防ぐ）。
+UPDATE_SCHEDULE_KINDS = {"interval", "window"}
+UPDATE_SCHEDULE_KEYS: dict[str, frozenset[str]] = {
+    "interval": frozenset({"kind", "days"}),
+    "window": frozenset({"kind", "months", "next_expected", "grace_days"}),
+}
+# 未宣言ソースの既定。nightly workflow は毎日回るが、単発の失敗や祝日運休で
+# 数日空くことはあるため 7 日を「明らかに止まっている」の線とする。
+DEFAULT_UPDATE_SCHEDULE: dict[str, Any] = {"kind": "interval", "days": 7}
 
 # frequency 別デフォルトの鮮度 SLA（日数）。
 # source_map.yaml の freshness_sla_days で個別 override 可能。
@@ -227,6 +252,9 @@ def build_metadata(
         "cutoff_semantics": pick("cutoff_semantics", "observation"),
         "delivery_horizon_days": pick("delivery_horizon_days"),
         "grace_days": pick("grace_days"),
+        # --- D-020④(c) 軸2 生存監視 ---
+        # 未宣言（None）は「既定 interval 7」として catalog 生成時に実体化される。
+        "update_schedule": pick("update_schedule"),
     }
     return meta
 
@@ -397,6 +425,17 @@ def _is_nonneg_int(v: Any) -> bool:
     return isinstance(v, int) and not isinstance(v, bool) and v >= 0
 
 
+def _is_iso_date(v: Any) -> bool:
+    """YYYY-MM-DD 形式の文字列か。"""
+    if not isinstance(v, str):
+        return False
+    try:
+        date.fromisoformat(v)
+    except ValueError:
+        return False
+    return True
+
+
 def validate_metadata(meta: dict) -> dict[str, list[str]]:
     """
     メタデータの健全性を検査。戻り値:
@@ -477,6 +516,66 @@ def validate_metadata(meta: dict) -> dict[str, list[str]]:
             elif first > last:
                 errors.append(f"coverage.first ({first}) must be <= coverage.last ({last})")
 
+    # --- D-020④(c) update_schedule（軸2） ---------------------------------
+    # source_map.yaml で宣言したソースだけが持つ（未宣言は catalog 生成時に
+    # 既定 interval 7 が注入される）。よって「あるときだけ」形状を検査する。
+    sched = meta.get("update_schedule")
+    if sched is not None:
+        if not isinstance(sched, dict):
+            errors.append(
+                f"update_schedule must be a dict (got {type(sched).__name__})"
+            )
+        else:
+            kind = sched.get("kind")
+            if kind not in UPDATE_SCHEDULE_KINDS:
+                errors.append(
+                    f"update_schedule.kind '{kind}' is not in UPDATE_SCHEDULE_KINDS"
+                )
+            elif kind == "interval":
+                days = sched.get("days")
+                if not (_is_nonneg_int(days) and days >= 1):
+                    errors.append(
+                        f"update_schedule.days must be a positive int (got {days!r})"
+                    )
+            else:  # window
+                months = sched.get("months")
+                next_expected = sched.get("next_expected")
+                if months is None and next_expected is None:
+                    errors.append(
+                        "update_schedule kind='window' requires months or next_expected"
+                    )
+                if months is not None:
+                    if not (isinstance(months, list) and months):
+                        errors.append(
+                            f"update_schedule.months must be a non-empty list "
+                            f"(got {months!r})"
+                        )
+                    elif not all(
+                        _is_nonneg_int(m) and 1 <= m <= 12 for m in months
+                    ):
+                        errors.append(
+                            f"update_schedule.months must be ints in 1..12 "
+                            f"(got {months!r})"
+                        )
+                if next_expected is not None and not _is_iso_date(next_expected):
+                    errors.append(
+                        f"update_schedule.next_expected must be YYYY-MM-DD "
+                        f"(got {next_expected!r})"
+                    )
+            if isinstance(kind, str) and kind in UPDATE_SCHEDULE_KINDS:
+                grace_s = sched.get("grace_days")
+                if grace_s is not None and not _is_nonneg_int(grace_s):
+                    errors.append(
+                        f"update_schedule.grace_days must be a non-negative int "
+                        f"(got {grace_s!r})"
+                    )
+                allowed = UPDATE_SCHEDULE_KEYS[kind]
+                extra_s = sorted(k for k in sched if k not in allowed)
+                if extra_s:
+                    errors.append(
+                        f"update_schedule has unexpected keys: {', '.join(extra_s)}"
+                    )
+
     # Recommended 欠落（warning）
     for f in RECOMMENDED_FIELDS:
         v = meta.get(f)
@@ -516,6 +615,106 @@ def effective_cutoff_age(entry: dict, today: date) -> int | None:
         else 0
     )
     return (today - (cutoff_date - timedelta(days=horizon or 0))).days
+
+
+# --- D-020④(c) 軸2: パイプライン生存監視 --------------------------------
+
+
+def _parse_updated_at(value: Any, now: datetime) -> datetime | None:
+    """updated_at（ISO-8601 文字列）を now と比較可能な datetime に正規化する。"""
+    if not isinstance(value, str) or not value.strip():
+        return None
+    try:
+        dt = datetime.fromisoformat(value.strip())
+    except ValueError:
+        return None
+    # tz 有無を now 側に揃える（catalog の updated_at は JST aware、テストの now は
+    # naive で渡されることがある）。
+    if dt.tzinfo is None and now.tzinfo is not None:
+        dt = dt.replace(tzinfo=now.tzinfo)
+    elif dt.tzinfo is not None and now.tzinfo is None:
+        dt = dt.replace(tzinfo=None)
+    return dt
+
+
+def _latest_completed_window(months: list[int], today: date) -> date | None:
+    """
+    months で宣言された対象月のうち、today 時点で「完全に過ぎた」直近の月の
+    初日を返す。候補が無ければ None。
+    """
+    for year in (today.year, today.year - 1, today.year - 2):
+        starts = []
+        for m in sorted(set(months), reverse=True):
+            last_day = calendar.monthrange(year, m)[1]
+            if date(year, m, last_day) < today:
+                starts.append(date(year, m, 1))
+        if starts:
+            return max(starts)
+    return None
+
+
+def axis2_violation(entry: dict, now: datetime) -> str | None:
+    """
+    D-020④(c) 軸2: updated_at が update_schedule どおりに前進しているかを判定する。
+
+    ⚠️ 軸2は **workflow 周期の監視**。データ頻度（何日おきに新しい観測が出るか）は
+    軸1（observation_cutoff / freshness SLA）の担当であり、ここでは一切見ない。
+    軸2が答えるのは「パイプラインがまだ回っているか」だけ。両者を混ぜると、
+    データ側の自然な空白（無降雪期・年次公表の待ち時間）で生存監視まで沈黙する
+    ／逆に生きているのに鮮度違反で赤くなる、という取り違えが起きる（D-020 §2.2）。
+
+    未宣言のエントリは既定 {"kind": "interval", "days": 7} で判定する。
+    違反なら理由文字列、違反なしなら None を返す。
+    """
+    sched = entry.get("update_schedule") or DEFAULT_UPDATE_SCHEDULE
+    updated = _parse_updated_at(entry.get("updated_at"), now)
+    if updated is None:
+        return "updated_at unparsable"
+
+    kind = sched.get("kind")
+    today = now.date()
+    updated_date = updated.date()
+
+    if kind == "window":
+        grace = sched.get("grace_days") or 0
+        next_expected = sched.get("next_expected")
+        if next_expected:
+            try:
+                ne = date.fromisoformat(str(next_expected))
+            except ValueError:
+                return f"update_schedule.next_expected unparsable: {next_expected!r}"
+            due = ne + timedelta(days=grace)
+            if today > due and updated_date < ne:
+                return (
+                    f"axis2: updated_at {updated_date} predates next_expected "
+                    f"{ne} (due {due} = +{grace}d grace) (pipeline liveness)"
+                )
+            return None
+        months = sched.get("months") or []
+        win_start = _latest_completed_window(list(months), today)
+        if win_start is None:
+            return None
+        last_day = calendar.monthrange(win_start.year, win_start.month)[1]
+        anchor = date(win_start.year, win_start.month, last_day) + timedelta(days=grace)
+        if today > anchor and updated_date < win_start:
+            return (
+                f"axis2: updated_at {updated_date} predates the "
+                f"{win_start:%Y-%m} window (anchor {anchor} = month end "
+                f"+{grace}d grace) (pipeline liveness)"
+            )
+        return None
+
+    # interval（既定）
+    days = sched.get("days")
+    if not (_is_nonneg_int(days) and days >= 1):
+        return f"update_schedule.days invalid: {days!r}"
+    stalled = (now - updated).days
+    if stalled > days:
+        return (
+            f"axis2: updated_at stalled {stalled}d > interval {days}d "
+            f"(pipeline liveness)"
+        )
+    return None
 
 
 def freshness_sla_days(
