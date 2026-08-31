@@ -133,7 +133,8 @@ date,indicator_id,region,value,source_url
 2025-12-01,ember-demand-de,de,41.54,https://ember-energy.org/data/monthly-electricity-data/
 2026-01-01,ember-demand-de,de,46.73,https://ember-energy.org/data/monthly-electricity-data/
 2026-02-01,ember-demand-de,de,41.69,https://ember-energy.org/data/monthly-electricity-data/
-2026-03-01,ember-demand-de,de,41.58,https://ember-energy.org/data/monthly-electricity-data/
-2026-04-01,ember-demand-de,de,38.83,https://ember-energy.org/data/monthly-electricity-data/
+2026-03-01,ember-demand-de,de,41.56,https://ember-energy.org/data/monthly-electricity-data/
+2026-04-01,ember-demand-de,de,38.76,https://ember-energy.org/data/monthly-electricity-data/
 2026-05-01,ember-demand-de,de,39.01,https://ember-energy.org/data/monthly-electricity-data/
-2026-06-01,ember-demand-de,de,40.2,https://ember-energy.org/data/monthly-electricity-data/
+2026-06-01,ember-demand-de,de,40.19,https://ember-energy.org/data/monthly-electricity-data/
+2026-07-01,ember-demand-de,de,41.64,https://ember-energy.org/data/monthly-electricity-data/

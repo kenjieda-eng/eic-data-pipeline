@@ -95,3 +95,6 @@ date,indicator_id,region,value,source_url
 2026-01-01,ember-generation-jp,jp,87.91,https://ember-energy.org/data/monthly-electricity-data/
 2026-02-01,ember-generation-jp,jp,76.99,https://ember-energy.org/data/monthly-electricity-data/
 2026-03-01,ember-generation-jp,jp,77.98,https://ember-energy.org/data/monthly-electricity-data/
+2026-04-01,ember-generation-jp,jp,64.92,https://ember-energy.org/data/monthly-electricity-data/
+2026-05-01,ember-generation-jp,jp,65.81,https://ember-energy.org/data/monthly-electricity-data/
+2026-06-01,ember-generation-jp,jp,67.86,https://ember-energy.org/data/monthly-electricity-data/
