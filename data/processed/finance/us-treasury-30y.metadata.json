@@ -8,7 +8,7 @@
   "source_url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
   "license": "public-domain",
   "observation_cutoff": "2026-08-28",
-  "updated_at": "2026-08-30T10:12:07+09:00",
+  "updated_at": "2026-08-31T10:16:52+09:00",
   "license_url": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
   "license_notice": "",
   "tz": "America/New_York",
@@ -20,5 +20,6 @@
   "depends_on": null,
   "cutoff_semantics": "observation",
   "delivery_horizon_days": null,
-  "grace_days": null
+  "grace_days": null,
+  "update_schedule": null
 }

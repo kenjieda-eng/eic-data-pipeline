@@ -8,7 +8,7 @@
   "source_url": "https://www.worldbank.org/en/research/commodity-markets",
   "license": "CC-BY-4.0",
   "observation_cutoff": "2026-07-01",
-  "updated_at": "2026-08-30T10:11:41+09:00",
+  "updated_at": "2026-08-31T10:16:23+09:00",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "license_notice": "",
   "tz": "UTC",
@@ -20,5 +20,6 @@
   "depends_on": null,
   "cutoff_semantics": "observation",
   "delivery_horizon_days": null,
-  "grace_days": null
+  "grace_days": null,
+  "update_schedule": null
 }

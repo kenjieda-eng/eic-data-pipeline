@@ -7,8 +7,8 @@
   "source_name": "財務省 国債金利情報（日次、各年限）",
   "source_url": "https://www.mof.go.jp/jgbs/reference/interest_rate/",
   "license": "public-domain",
-  "observation_cutoff": "2026-08-27",
-  "updated_at": "2026-08-30T10:11:49+09:00",
+  "observation_cutoff": "2026-08-28",
+  "updated_at": "2026-08-31T10:16:32+09:00",
   "license_url": "https://www.mof.go.jp/index.htm",
   "license_notice": "",
   "tz": "Asia/Tokyo",
@@ -20,5 +20,6 @@
   "depends_on": null,
   "cutoff_semantics": "observation",
   "delivery_horizon_days": null,
-  "grace_days": null
+  "grace_days": null,
+  "update_schedule": null
 }
