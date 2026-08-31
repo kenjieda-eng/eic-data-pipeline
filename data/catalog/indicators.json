@@ -1,7 +1,7 @@
 {
   "version": 2,
   "schema": "D-020",
-  "generated_at": "2026-08-31T10:19:46+09:00",
+  "generated_at": "2026-08-31T18:24:41+09:00",
   "indicator_count": 609,
   "indicators": [
     {
@@ -27,7 +27,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-capex-battery.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -61,7 +64,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-capex-biopower.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -95,7 +101,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-capex-commercial-pv.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -129,7 +138,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-capex-csp.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -163,7 +175,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-capex-geothermal.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -197,7 +212,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-capex-hydro.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -231,7 +249,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-capex-nuclear.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -265,7 +286,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-capex-offshore-wind.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -299,7 +323,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-capex-onshore-wind.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -333,7 +360,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-capex-residential-pv.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -367,7 +397,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-capex-utility-pv.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -401,7 +434,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-cf-biopower.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -435,7 +471,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-cf-commercial-pv.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -469,7 +508,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-cf-csp.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -503,7 +545,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-cf-geothermal.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -537,7 +582,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-cf-hydro.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -571,7 +619,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-cf-nuclear.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -605,7 +656,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-cf-offshore-wind.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -639,7 +693,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-cf-onshore-wind.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -673,7 +730,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-cf-residential-pv.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -707,7 +767,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-cf-utility-pv.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -741,7 +804,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-lcoe-biopower.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -775,7 +841,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-lcoe-commercial-pv.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -809,7 +878,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-lcoe-csp.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -843,7 +915,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-lcoe-geothermal.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -877,7 +952,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-lcoe-hydro.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -911,7 +989,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-lcoe-nuclear.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -945,7 +1026,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-lcoe-offshore-wind.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -979,7 +1063,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-lcoe-onshore-wind.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -1013,7 +1100,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-lcoe-residential-pv.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -1047,7 +1137,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tech/atb-lcoe-utility-pv.csv",
       "freshness_sla_days": 1000,
       "coverage": {
@@ -3692,7 +3785,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/china-nbs-mfg-pmi.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -3726,7 +3822,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/fuel/commodity-iron-ore.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -3760,7 +3859,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ecb-rate-dfr.csv",
       "freshness_sla_days": 45,
       "coverage": {
@@ -3794,7 +3896,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ecb-rate-mlf.csv",
       "freshness_sla_days": 45,
       "coverage": {
@@ -3828,7 +3933,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ecb-rate-mrr.csv",
       "freshness_sla_days": 45,
       "coverage": {
@@ -5662,7 +5770,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-cn.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -5696,7 +5807,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-eu27.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -5730,7 +5844,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-jp.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -5764,7 +5881,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-jp-coal.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -5798,7 +5918,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-jp-gas.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -5832,7 +5955,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-jp-oil.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -5866,7 +5992,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-oecd.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -5902,7 +6031,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-per-capita-cn.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -5938,7 +6070,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-per-capita-eu27.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -5974,7 +6109,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-per-capita-jp.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -6010,7 +6148,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-per-capita-oecd.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -6046,7 +6187,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-per-capita-us.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -6082,7 +6226,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-per-capita-world.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -6118,7 +6265,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-per-gdp-cn.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -6154,7 +6304,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-per-gdp-eu27.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -6190,7 +6343,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-per-gdp-jp.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -6226,7 +6382,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-per-gdp-oecd.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -6262,7 +6421,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-per-gdp-us.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -6298,7 +6460,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-per-gdp-world.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -6332,7 +6497,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-us.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -6366,7 +6534,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/eia-co2-world.csv",
       "freshness_sla_days": 1300,
       "coverage": {
@@ -6400,7 +6571,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-co2-intensity-cn.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -6434,7 +6608,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-co2-intensity-de.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -6468,7 +6645,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-co2-intensity-gb.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -6502,7 +6682,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-co2-intensity-jp.csv",
       "freshness_sla_days": 180,
       "coverage": {
@@ -6536,7 +6719,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-co2-intensity-us.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -6570,7 +6756,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-demand-cn.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -6604,7 +6793,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-demand-de.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -6638,7 +6830,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-demand-gb.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -6672,7 +6867,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-demand-jp.csv",
       "freshness_sla_days": 180,
       "coverage": {
@@ -6706,7 +6904,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-demand-us.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -6740,7 +6941,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-generation-cn.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -6774,7 +6978,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-generation-de.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -6808,7 +7015,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-generation-gb.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -6842,7 +7052,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-generation-jp.csv",
       "freshness_sla_days": 180,
       "coverage": {
@@ -6876,7 +7089,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-generation-us.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -6910,7 +7126,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-bioenergy-cn.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -6944,7 +7163,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-bioenergy-de.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -6978,7 +7200,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-bioenergy-gb.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7012,7 +7237,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-bioenergy-jp.csv",
       "freshness_sla_days": 180,
       "coverage": {
@@ -7046,7 +7274,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-bioenergy-us.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7080,7 +7311,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-coal-cn.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -7114,7 +7348,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-coal-de.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7148,7 +7385,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-coal-gb.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7182,7 +7422,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-coal-jp.csv",
       "freshness_sla_days": 180,
       "coverage": {
@@ -7216,7 +7459,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-coal-us.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7250,7 +7496,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-gas-cn.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -7284,7 +7533,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-gas-de.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7318,7 +7570,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-gas-gb.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7352,7 +7607,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-gas-jp.csv",
       "freshness_sla_days": 180,
       "coverage": {
@@ -7386,7 +7644,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-gas-us.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7420,7 +7681,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-hydro-cn.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -7454,7 +7718,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-hydro-de.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7488,7 +7755,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-hydro-gb.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7522,7 +7792,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-hydro-jp.csv",
       "freshness_sla_days": 180,
       "coverage": {
@@ -7556,7 +7829,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-hydro-us.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7590,7 +7866,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-nuclear-cn.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -7624,7 +7903,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-nuclear-de.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7658,7 +7940,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-nuclear-gb.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7692,7 +7977,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-nuclear-jp.csv",
       "freshness_sla_days": 180,
       "coverage": {
@@ -7726,7 +8014,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-nuclear-us.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7760,7 +8051,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-solar-cn.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -7794,7 +8088,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-solar-de.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7828,7 +8125,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-solar-gb.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7862,7 +8162,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-solar-jp.csv",
       "freshness_sla_days": 180,
       "coverage": {
@@ -7896,7 +8199,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-solar-us.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7930,7 +8236,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-wind-cn.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -7964,7 +8273,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-wind-de.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -7998,7 +8310,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-wind-gb.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -8032,7 +8347,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-wind-jp.csv",
       "freshness_sla_days": 180,
       "coverage": {
@@ -8066,7 +8384,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/ember-share-wind-us.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -8100,7 +8421,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8134,7 +8458,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-at.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8168,7 +8495,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-be.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8202,7 +8532,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-bg.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8236,7 +8569,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-cy.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8270,7 +8606,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-cz.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8304,7 +8643,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-de.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8338,7 +8680,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-dk.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8372,7 +8717,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-ee.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8406,7 +8754,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-es.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8440,7 +8791,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-fi.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8474,7 +8828,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-fr.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8508,7 +8865,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-gb.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8542,7 +8902,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-gr.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8576,7 +8939,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-hr.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8610,7 +8976,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-hu.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8644,7 +9013,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-ie.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8678,7 +9050,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-is.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8712,7 +9087,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-it.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8746,7 +9124,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-li.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8780,7 +9161,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-lt.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8814,7 +9198,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-lu.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8848,7 +9235,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-lv.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8882,7 +9272,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-mt.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8916,7 +9309,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-nl.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8950,7 +9346,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-no.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -8984,7 +9383,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-pl.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9018,7 +9420,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-pt.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9052,7 +9457,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-ro.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9086,7 +9494,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-se.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9120,7 +9531,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-si.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9154,7 +9568,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-allocated-country-sk.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9188,7 +9605,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-allowances-auctioned.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9222,7 +9642,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-aviation.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9256,7 +9679,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-cement.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9290,7 +9716,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-chemicals.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9324,7 +9753,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-combustion.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9358,7 +9790,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-at.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9392,7 +9827,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-be.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9426,7 +9864,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-bg.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9460,7 +9901,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-cy.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9494,7 +9938,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-cz.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9528,7 +9975,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-de.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9562,7 +10012,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-dk.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9596,7 +10049,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-ee.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9630,7 +10086,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-es.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9664,7 +10123,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-fi.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9698,7 +10160,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-fr.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9732,7 +10197,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-gb.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9766,7 +10234,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-gr.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9800,7 +10271,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-hr.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9834,7 +10308,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-hu.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9868,7 +10345,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-ie.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9902,7 +10382,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-is.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9936,7 +10419,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-it.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -9970,7 +10456,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-li.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10004,7 +10493,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-lt.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10038,7 +10530,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-lu.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10072,7 +10567,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-lv.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10106,7 +10604,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-mt.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10140,7 +10641,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-nl.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10174,7 +10678,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-no.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10208,7 +10715,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-pl.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10242,7 +10752,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-pt.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10276,7 +10789,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-ro.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10310,7 +10826,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-se.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10344,7 +10863,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-si.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10378,7 +10900,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-country-sk.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10412,7 +10937,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-iron-steel.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10446,7 +10974,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-lime.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10480,7 +11011,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-paper.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10514,7 +11048,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/eu-ets-emissions-refining.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -10548,7 +11085,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/regulation/fit-price-biomass-wood.csv",
       "freshness_sla_days": 540,
       "coverage": {
@@ -10582,7 +11122,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/regulation/fit-price-geothermal.csv",
       "freshness_sla_days": 540,
       "coverage": {
@@ -10616,7 +11159,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/regulation/fit-price-hydro-small.csv",
       "freshness_sla_days": 540,
       "coverage": {
@@ -10650,7 +11196,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/regulation/fit-price-solar-business.csv",
       "freshness_sla_days": 540,
       "coverage": {
@@ -10684,7 +11233,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/regulation/fit-price-wind-onshore.csv",
       "freshness_sla_days": 540,
       "coverage": {
@@ -10718,7 +11270,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/fuel/fuel-coal-au.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -10752,7 +11307,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/fuel/fuel-crude-brent.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -10786,7 +11344,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/fuel/fuel-crude-dubai.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -10820,7 +11381,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/fuel/fuel-crude-wti.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -10854,7 +11418,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/fuel/fuel-lng-jp-cif.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -10888,7 +11455,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/fuel/fuel-ng-europe-ttf.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -10922,7 +11492,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/fuel/fuel-ng-henryhub.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -10956,7 +11529,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/fx-eurjpy-monthly-avg.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -10990,7 +11566,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/international/fx-eurusd-monthly-avg.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -11024,7 +11603,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/fx/fx-usdjpy-monthly-avg.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -11058,7 +11640,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/fx/fx-usdjpy-monthly-end.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -11092,7 +11677,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/fx/fx-usdjpy-monthly-high.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -11126,7 +11714,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/fx/fx-usdjpy-monthly-low.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -11160,7 +11751,10 @@
       "cutoff_semantics": "delivery",
       "delivery_horizon_days": 1,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jepx/jepx-spot-chubu.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -11194,7 +11788,10 @@
       "cutoff_semantics": "delivery",
       "delivery_horizon_days": 1,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jepx/jepx-spot-chugoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -11228,7 +11825,10 @@
       "cutoff_semantics": "delivery",
       "delivery_horizon_days": 1,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jepx/jepx-spot-hokkaido.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -11262,7 +11862,10 @@
       "cutoff_semantics": "delivery",
       "delivery_horizon_days": 1,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jepx/jepx-spot-hokuriku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -11296,7 +11899,10 @@
       "cutoff_semantics": "delivery",
       "delivery_horizon_days": 1,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jepx/jepx-spot-kansai.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -11330,7 +11936,10 @@
       "cutoff_semantics": "delivery",
       "delivery_horizon_days": 1,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jepx/jepx-spot-kyushu.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -11364,7 +11973,10 @@
       "cutoff_semantics": "delivery",
       "delivery_horizon_days": 1,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jepx/jepx-spot-shikoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -11398,7 +12010,10 @@
       "cutoff_semantics": "delivery",
       "delivery_horizon_days": 1,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jepx/jepx-spot-system.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -11432,7 +12047,10 @@
       "cutoff_semantics": "delivery",
       "delivery_horizon_days": 1,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jepx/jepx-spot-tohoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -11466,7 +12084,10 @@
       "cutoff_semantics": "delivery",
       "delivery_horizon_days": 1,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jepx/jepx-spot-tokyo.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -11500,7 +12121,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jgb/jgb-10y-yield.csv",
       "freshness_sla_days": 5,
       "coverage": {
@@ -11534,7 +12158,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jgb/jgb-30y-yield.csv",
       "freshness_sla_days": 5,
       "coverage": {
@@ -11568,7 +12195,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-precip-chubu.csv",
       "freshness_sla_days": 30,
       "coverage": {
@@ -11602,7 +12232,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-precip-chugoku.csv",
       "freshness_sla_days": 30,
       "coverage": {
@@ -11636,7 +12269,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-precip-hokkaido.csv",
       "freshness_sla_days": 30,
       "coverage": {
@@ -11670,7 +12306,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-precip-hokuriku.csv",
       "freshness_sla_days": 30,
       "coverage": {
@@ -11704,7 +12343,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-precip-kansai.csv",
       "freshness_sla_days": 30,
       "coverage": {
@@ -11738,7 +12380,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-precip-kyushu.csv",
       "freshness_sla_days": 30,
       "coverage": {
@@ -11772,7 +12417,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-precip-shikoku.csv",
       "freshness_sla_days": 30,
       "coverage": {
@@ -11806,7 +12454,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-precip-tohoku.csv",
       "freshness_sla_days": 30,
       "coverage": {
@@ -11840,7 +12491,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-precip-tokyo.csv",
       "freshness_sla_days": 30,
       "coverage": {
@@ -11874,7 +12528,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-snow-max-chubu.csv",
       "freshness_sla_days": 365,
       "coverage": {
@@ -11908,7 +12565,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-snow-max-chugoku.csv",
       "freshness_sla_days": 365,
       "coverage": {
@@ -11942,7 +12602,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-snow-max-hokkaido.csv",
       "freshness_sla_days": 365,
       "coverage": {
@@ -11976,7 +12639,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-snow-max-hokuriku.csv",
       "freshness_sla_days": 365,
       "coverage": {
@@ -12010,7 +12676,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-snow-max-kansai.csv",
       "freshness_sla_days": 365,
       "coverage": {
@@ -12044,7 +12713,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-snow-max-kyushu.csv",
       "freshness_sla_days": 365,
       "coverage": {
@@ -12078,7 +12750,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-snow-max-shikoku.csv",
       "freshness_sla_days": 365,
       "coverage": {
@@ -12112,7 +12787,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-snow-max-tohoku.csv",
       "freshness_sla_days": 365,
       "coverage": {
@@ -12146,7 +12824,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-snow-max-tokyo.csv",
       "freshness_sla_days": 365,
       "coverage": {
@@ -12180,7 +12861,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-sunshine-chubu.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12214,7 +12898,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-sunshine-chugoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12248,7 +12935,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-sunshine-hokkaido.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12282,7 +12972,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-sunshine-hokuriku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12316,7 +13009,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-sunshine-kansai.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12350,7 +13046,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-sunshine-kyushu.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12384,7 +13083,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-sunshine-shikoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12418,7 +13120,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-sunshine-tohoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12452,7 +13157,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-sunshine-tokyo.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12486,7 +13194,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-avg-chubu.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12520,7 +13231,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-avg-chugoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12554,7 +13268,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-avg-hokkaido.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12588,7 +13305,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-avg-hokuriku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12622,7 +13342,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-avg-kansai.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12656,7 +13379,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-avg-kyushu.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12690,7 +13416,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-avg-shikoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12724,7 +13453,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-avg-tohoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12758,7 +13490,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-avg-tokyo.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12792,7 +13527,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-max-chubu.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12826,7 +13564,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-max-chugoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12860,7 +13601,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-max-hokkaido.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12894,7 +13638,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-max-hokuriku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12928,7 +13675,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-max-kansai.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12962,7 +13712,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-max-kyushu.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -12996,7 +13749,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-max-shikoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13030,7 +13786,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-max-tohoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13064,7 +13823,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-max-tokyo.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13098,7 +13860,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-min-chubu.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13132,7 +13897,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-min-chugoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13166,7 +13934,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-min-hokkaido.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13200,7 +13971,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-min-hokuriku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13234,7 +14008,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-min-kansai.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13268,7 +14045,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-min-kyushu.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13302,7 +14082,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-min-shikoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13336,7 +14119,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-min-tohoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13370,7 +14156,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-temp-min-tokyo.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13404,7 +14193,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-avg-chubu.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13438,7 +14230,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-avg-chugoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13472,7 +14267,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-avg-hokkaido.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13506,7 +14304,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-avg-hokuriku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13540,7 +14341,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-avg-kansai.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13574,7 +14378,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-avg-kyushu.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13608,7 +14415,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-avg-shikoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13642,7 +14452,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-avg-tohoku.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13676,7 +14489,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-avg-tokyo.csv",
       "freshness_sla_days": 3,
       "coverage": {
@@ -13710,7 +14526,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-dir-chubu.csv",
       "freshness_sla_days": 7,
       "coverage": {
@@ -13744,7 +14563,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-dir-chugoku.csv",
       "freshness_sla_days": 7,
       "coverage": {
@@ -13778,7 +14600,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-dir-hokkaido.csv",
       "freshness_sla_days": 7,
       "coverage": {
@@ -13812,7 +14637,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-dir-hokuriku.csv",
       "freshness_sla_days": 7,
       "coverage": {
@@ -13846,7 +14674,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-dir-kansai.csv",
       "freshness_sla_days": 7,
       "coverage": {
@@ -13880,7 +14711,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-dir-kyushu.csv",
       "freshness_sla_days": 7,
       "coverage": {
@@ -13914,7 +14748,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-dir-shikoku.csv",
       "freshness_sla_days": 7,
       "coverage": {
@@ -13948,7 +14785,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-dir-tohoku.csv",
       "freshness_sla_days": 7,
       "coverage": {
@@ -13982,7 +14822,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/jma/jma-wind-dir-tokyo.csv",
       "freshness_sla_days": 7,
       "coverage": {
@@ -14016,7 +14859,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-ch4.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14050,7 +14896,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-co2.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14084,7 +14933,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-co2-commercial.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14118,7 +14970,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-co2-energy-conversion.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14152,7 +15007,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-co2-energy-origin.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14186,7 +15044,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-co2-household.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14220,7 +15081,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-co2-industrial-process.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14254,7 +15118,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-co2-industry.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14288,7 +15155,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-co2-nonenergy-origin.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14322,7 +15192,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-co2-other.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14356,7 +15229,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-co2-total.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14390,7 +15266,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-co2-transport.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14424,7 +15303,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-co2-waste.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14458,7 +15340,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-fgas.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14492,7 +15377,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-lulucf-removal.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14526,7 +15414,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-n2o.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14560,7 +15451,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-net.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14594,7 +15488,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/esg/jp-ghg-total.csv",
       "freshness_sla_days": 800,
       "coverage": {
@@ -14628,7 +15525,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-coal-au.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -14662,7 +15562,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-coal-ca.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -14696,7 +15599,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-coal-id.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -14730,7 +15636,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-coal-ru.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -14764,7 +15673,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-coal-total.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -14798,7 +15710,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-coal-us.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -14832,7 +15747,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-coal-za.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -14866,7 +15784,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-crude-ae.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -14900,7 +15821,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-crude-kw.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -14934,7 +15858,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-crude-om.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -14968,7 +15895,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-crude-qa.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -15002,7 +15932,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-crude-sa.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -15036,7 +15969,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-crude-total.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -15070,7 +16006,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-crude-us.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -15104,7 +16043,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-lng-au.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -15138,7 +16080,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-lng-bn.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -15172,7 +16117,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-lng-id.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -15206,7 +16154,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-lng-my.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -15240,7 +16191,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-lng-pg.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -15274,7 +16228,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-lng-qa.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -15308,7 +16265,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-lng-ru.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -15342,7 +16302,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-lng-total.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -15376,7 +16339,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/geopolitics/jp-import-value-lng-us.csv",
       "freshness_sla_days": 760,
       "coverage": {
@@ -15410,7 +16376,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/economy/jpn-cpi-yoy.csv",
       "freshness_sla_days": 180,
       "coverage": {
@@ -15444,7 +16413,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/economy/jpn-industrial-production.csv",
       "freshness_sla_days": 540,
       "coverage": {
@@ -15478,7 +16450,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-01.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15512,7 +16487,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-02.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15546,7 +16524,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-03.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15580,7 +16561,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-04.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15614,7 +16598,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-05.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15648,7 +16635,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-06.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15682,7 +16672,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-07.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15716,7 +16709,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-08.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15750,7 +16746,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-09.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15784,7 +16783,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-10.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15818,7 +16820,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-11.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15852,7 +16857,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-12.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15886,7 +16894,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-13.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15920,7 +16931,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-14.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15954,7 +16968,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-15.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -15988,7 +17005,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-16.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16022,7 +17042,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-17.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16056,7 +17079,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-18.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16090,7 +17116,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-19.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16124,7 +17153,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-20.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16158,7 +17190,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-21.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16192,7 +17227,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-22.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16226,7 +17264,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-23.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16260,7 +17301,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-24.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16294,7 +17338,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-25.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16328,7 +17375,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-26.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16362,7 +17412,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-27.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16396,7 +17449,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-28.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16430,7 +17486,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-29.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16464,7 +17523,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-30.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16498,7 +17560,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-31.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16532,7 +17597,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-32.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16566,7 +17634,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-33.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16600,7 +17671,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-34.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16634,7 +17708,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-35.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16668,7 +17745,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-36.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16702,7 +17782,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-37.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16736,7 +17819,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-38.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16770,7 +17856,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-39.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16804,7 +17893,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-40.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16838,7 +17930,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-41.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16872,7 +17967,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-42.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16906,7 +18004,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-43.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16940,7 +18041,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-44.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -16974,7 +18078,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-45.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17008,7 +18115,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-46.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17042,7 +18152,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-65over-47.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17076,7 +18189,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-01.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17110,7 +18226,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-02.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17144,7 +18263,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-03.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17178,7 +18300,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-04.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17212,7 +18337,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-05.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17246,7 +18374,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-06.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17280,7 +18411,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-07.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17314,7 +18448,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-08.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17348,7 +18485,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-09.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17382,7 +18522,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-10.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17416,7 +18559,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-11.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17450,7 +18596,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-12.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17484,7 +18633,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-13.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17518,7 +18670,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-14.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17552,7 +18707,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-15.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17586,7 +18744,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-16.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17620,7 +18781,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-17.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17654,7 +18818,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-18.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17688,7 +18855,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-19.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17722,7 +18892,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-20.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17756,7 +18929,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-21.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17790,7 +18966,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-22.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17824,7 +19003,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-23.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17858,7 +19040,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-24.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17892,7 +19077,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-25.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17926,7 +19114,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-26.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17960,7 +19151,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-27.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -17994,7 +19188,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-28.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18028,7 +19225,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-29.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18062,7 +19262,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-30.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18096,7 +19299,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-31.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18130,7 +19336,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-32.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18164,7 +19373,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-33.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18198,7 +19410,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-34.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18232,7 +19447,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-35.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18266,7 +19484,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-36.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18300,7 +19521,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-37.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18334,7 +19558,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-38.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18368,7 +19595,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-39.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18402,7 +19632,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-40.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18436,7 +19669,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-41.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18470,7 +19706,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-42.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18504,7 +19743,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-43.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18538,7 +19780,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-44.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18572,7 +19817,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-45.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18606,7 +19854,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-46.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18640,7 +19891,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-total-47.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18674,7 +19928,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-01.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18708,7 +19965,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-02.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18742,7 +20002,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-03.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18776,7 +20039,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-04.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18810,7 +20076,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-05.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18844,7 +20113,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-06.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18878,7 +20150,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-07.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18912,7 +20187,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-08.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18946,7 +20224,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-09.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -18980,7 +20261,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-10.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19014,7 +20298,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-11.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19048,7 +20335,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-12.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19082,7 +20372,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-13.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19116,7 +20409,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-14.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19150,7 +20446,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-15.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19184,7 +20483,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-16.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19218,7 +20520,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-17.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19252,7 +20557,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-18.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19286,7 +20594,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-19.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19320,7 +20631,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-20.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19354,7 +20668,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-21.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19388,7 +20705,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-22.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19422,7 +20742,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-23.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19456,7 +20779,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-24.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19490,7 +20816,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-25.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19524,7 +20853,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-26.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19558,7 +20890,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-27.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19592,7 +20927,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-28.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19626,7 +20964,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-29.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19660,7 +21001,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-30.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19694,7 +21038,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-31.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19728,7 +21075,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-32.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19762,7 +21112,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-33.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19796,7 +21149,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-34.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19830,7 +21186,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-35.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19864,7 +21223,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-36.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19898,7 +21260,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-37.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19932,7 +21297,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-38.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -19966,7 +21334,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-39.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -20000,7 +21371,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-40.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -20034,7 +21408,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-41.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -20068,7 +21445,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-42.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -20102,7 +21482,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-43.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -20136,7 +21519,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-44.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -20170,7 +21556,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-45.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -20204,7 +21593,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-46.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -20238,7 +21630,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/population/jpn-pop-working-47.csv",
       "freshness_sla_days": 400,
       "coverage": {
@@ -20272,7 +21667,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/enecho-power/meti-demand-lights.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20306,7 +21704,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/enecho-power/meti-demand-power.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20340,7 +21741,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/enecho-power/meti-demand-total.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20374,7 +21778,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/enecho-power/meti-gen-biomass.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20408,7 +21815,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/enecho-power/meti-gen-geothermal.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20442,7 +21852,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/enecho-power/meti-gen-hydro.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20476,7 +21889,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/enecho-power/meti-gen-nuclear.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20510,7 +21926,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/enecho-power/meti-gen-solar.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20544,7 +21963,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/enecho-power/meti-gen-thermal.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20578,7 +22000,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/enecho-power/meti-gen-total.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20612,7 +22037,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/enecho-power/meti-gen-wind.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20653,7 +22081,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/enecho-power/meti-renewables-share.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20687,7 +22118,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/regulation/nonfossil-cert-fit-price.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -20721,7 +22155,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/regulation/nonfossil-cert-fit-volume.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -20755,7 +22192,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/regulation/nonfossil-cert-nonfit-price.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -20789,7 +22229,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/regulation/nonfossil-cert-nonfit-re-price.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -20823,7 +22266,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/regulation/nonfossil-cert-nonfit-re-volume.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -20857,7 +22303,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/regulation/nonfossil-cert-nonfit-volume.csv",
       "freshness_sla_days": 120,
       "coverage": {
@@ -20891,7 +22340,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tankan/tankan-large-mfg-di.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20925,7 +22377,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tankan/tankan-large-nonmfg-di.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20959,7 +22414,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tankan/tankan-sme-mfg-di.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -20993,7 +22451,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/tankan/tankan-sme-nonmfg-di.csv",
       "freshness_sla_days": 150,
       "coverage": {
@@ -21027,7 +22488,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/macro/us-cpi-energy-yoy.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -21061,7 +22525,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/macro/us-cpi-food-yoy.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -21095,7 +22562,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/macro/us-cpi-yoy.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -21129,7 +22599,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/macro/us-fed-funds-rate.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -21163,7 +22636,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/macro/us-industrial-production.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -21197,7 +22673,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/macro/us-nonfarm-payrolls.csv",
       "freshness_sla_days": 90,
       "coverage": {
@@ -21231,7 +22710,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/finance/us-treasury-10y.csv",
       "freshness_sla_days": 5,
       "coverage": {
@@ -21265,7 +22747,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/finance/us-treasury-2y.csv",
       "freshness_sla_days": 5,
       "coverage": {
@@ -21299,7 +22784,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/finance/us-treasury-30y.csv",
       "freshness_sla_days": 5,
       "coverage": {
@@ -21333,7 +22821,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/finance/us-treasury-5y.csv",
       "freshness_sla_days": 5,
       "coverage": {
@@ -21367,7 +22858,10 @@
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
       "grace_days": null,
-      "update_schedule": null,
+      "update_schedule": {
+        "kind": "interval",
+        "days": 7
+      },
       "csv_path": "data/processed/macro/us-unemployment-rate.csv",
       "freshness_sla_days": 90,
       "coverage": {

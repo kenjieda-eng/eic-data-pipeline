@@ -266,7 +266,9 @@ def main() -> int:
         # source_map.yaml に宣言が無いソースは既定 {"kind":"interval","days":7} を
         # **実体化して** 入れる（null のまま置かない）。catalog を自己記述に保ち、
         # 下流が「未宣言のときの既定値」を各自で持たなくて済むようにするため。
-        if "update_schedule" not in meta:
+        # fetcher の build_metadata がキー = null を書き込むため、キー存在ではなく
+        # null で判定する（day-2 の nightly で顕在化した相互作用）。
+        if meta.get("update_schedule") is None:
             ind_id = meta.get("id")
             src_cfg = indicator_to_source.get(ind_id) if ind_id else None
             src_cfg = src_cfg or {}
