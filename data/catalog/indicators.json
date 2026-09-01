@@ -1,7 +1,7 @@
 {
   "version": 2,
   "schema": "D-020",
-  "generated_at": "2026-09-01T10:48:34+09:00",
+  "generated_at": "2026-09-01T12:54:03+09:00",
   "indicator_count": 609,
   "indicators": [
     {
@@ -6553,12 +6553,12 @@
       "name": "中国 電力部門 CO2 排出強度",
       "domain": "international",
       "frequency": "monthly",
-      "unit": "gCO2/kWh",
+      "unit": "gCO2e/kWh",
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-05-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:06+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -6566,7 +6566,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: China, Power sector emissions / CO2 intensity / CO2 intensity",
+      "notes": "Ember monthly (wide): ISO3=CHN, Electricity source='Total generation' → Emissions intensity (gCO2e/kWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -6579,10 +6579,10 @@
       "freshness_sla_days": 120,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-05-01",
-        "count": 137,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-05-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -6590,12 +6590,12 @@
       "name": "ドイツ 電力部門 CO2 排出強度",
       "domain": "international",
       "frequency": "monthly",
-      "unit": "gCO2/kWh",
+      "unit": "gCO2e/kWh",
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -6603,7 +6603,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Germany, Power sector emissions / CO2 intensity / CO2 intensity",
+      "notes": "Ember monthly (wide): ISO3=DEU, Electricity source='Total generation' → Emissions intensity (gCO2e/kWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -6616,10 +6616,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -6627,12 +6627,12 @@
       "name": "英国 電力部門 CO2 排出強度",
       "domain": "international",
       "frequency": "monthly",
-      "unit": "gCO2/kWh",
+      "unit": "gCO2e/kWh",
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:08+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -6640,7 +6640,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United Kingdom, Power sector emissions / CO2 intensity / CO2 intensity",
+      "notes": "Ember monthly (wide): ISO3=GBR, Electricity source='Total generation' → Emissions intensity (gCO2e/kWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -6653,10 +6653,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -6664,12 +6664,12 @@
       "name": "日本 電力部門 CO2 排出強度",
       "domain": "international",
       "frequency": "monthly",
-      "unit": "gCO2/kWh",
+      "unit": "gCO2e/kWh",
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-03-01",
-      "updated_at": "2026-09-01T10:46:24+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-09-01T12:53:04+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -6677,7 +6677,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Japan, Power sector emissions / CO2 intensity / CO2 intensity",
+      "notes": "Ember monthly (wide): ISO3=JPN, Electricity source='Total generation' → Emissions intensity (gCO2e/kWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -6690,10 +6690,10 @@
       "freshness_sla_days": 180,
       "coverage": {
         "first": "2018-04-01",
-        "last": "2026-03-01",
-        "count": 96,
+        "last": "2026-06-01",
+        "count": 99,
         "label_first": "2018-04-01",
-        "label_last": "2026-03-01"
+        "label_last": "2026-06-01"
       }
     },
     {
@@ -6701,12 +6701,12 @@
       "name": "米国 電力部門 CO2 排出強度",
       "domain": "international",
       "frequency": "monthly",
-      "unit": "gCO2/kWh",
+      "unit": "gCO2e/kWh",
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -6714,7 +6714,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: USA, Power sector emissions / CO2 intensity / CO2 intensity",
+      "notes": "Ember monthly (wide): ISO3=USA, Electricity source='Total generation' → Emissions intensity (gCO2e/kWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -6727,10 +6727,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2001-01-01",
-        "last": "2026-06-01",
-        "count": 306,
+        "last": "2026-07-01",
+        "count": 307,
         "label_first": "2001-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -6742,8 +6742,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-05-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:06+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -6751,7 +6751,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_sum",
-      "notes": "Ember monthly: China, Electricity demand / Demand / Demand",
+      "notes": "Ember monthly (wide): ISO3=CHN, Electricity source='Demand' → Generation (TWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -6764,10 +6764,10 @@
       "freshness_sla_days": 120,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-05-01",
-        "count": 137,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-05-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -6779,8 +6779,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -6788,7 +6788,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_sum",
-      "notes": "Ember monthly: Germany, Electricity demand / Demand / Demand",
+      "notes": "Ember monthly (wide): ISO3=DEU, Electricity source='Demand' → Generation (TWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -6801,10 +6801,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -6816,8 +6816,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:08+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -6825,7 +6825,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_sum",
-      "notes": "Ember monthly: United Kingdom, Electricity demand / Demand / Demand",
+      "notes": "Ember monthly (wide): ISO3=GBR, Electricity source='Demand' → Generation (TWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -6838,10 +6838,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -6853,8 +6853,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-03-01",
-      "updated_at": "2026-09-01T10:46:24+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-09-01T12:53:04+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -6862,7 +6862,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_sum",
-      "notes": "Ember monthly: Japan, Electricity demand / Demand / Demand",
+      "notes": "Ember monthly (wide): ISO3=JPN, Electricity source='Demand' → Generation (TWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -6875,10 +6875,10 @@
       "freshness_sla_days": 180,
       "coverage": {
         "first": "2018-04-01",
-        "last": "2026-03-01",
-        "count": 96,
+        "last": "2026-06-01",
+        "count": 99,
         "label_first": "2018-04-01",
-        "label_last": "2026-03-01"
+        "label_last": "2026-06-01"
       }
     },
     {
@@ -6890,8 +6890,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -6899,7 +6899,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_sum",
-      "notes": "Ember monthly: United States of America, Electricity demand / Demand / Demand",
+      "notes": "Ember monthly (wide): ISO3=USA, Electricity source='Demand' → Generation (TWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -6912,10 +6912,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2001-01-01",
-        "last": "2026-06-01",
-        "count": 306,
+        "last": "2026-07-01",
+        "count": 307,
         "label_first": "2001-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -6927,8 +6927,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-05-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:06+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -6936,7 +6936,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_sum",
-      "notes": "Ember monthly: China, Electricity generation / Total / Total Generation",
+      "notes": "Ember monthly (wide): ISO3=CHN, Electricity source='Total generation' → Generation (TWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -6949,10 +6949,10 @@
       "freshness_sla_days": 120,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-05-01",
-        "count": 137,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-05-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -6964,8 +6964,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -6973,7 +6973,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_sum",
-      "notes": "Ember monthly: Germany, Electricity generation / Total / Total Generation",
+      "notes": "Ember monthly (wide): ISO3=DEU, Electricity source='Total generation' → Generation (TWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -6986,10 +6986,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7001,8 +7001,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:08+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7010,7 +7010,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_sum",
-      "notes": "Ember monthly: United Kingdom, Electricity generation / Total / Total Generation",
+      "notes": "Ember monthly (wide): ISO3=GBR, Electricity source='Total generation' → Generation (TWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7023,10 +7023,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7038,8 +7038,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-03-01",
-      "updated_at": "2026-09-01T10:46:24+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-09-01T12:53:04+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7047,7 +7047,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_sum",
-      "notes": "Ember monthly: Japan, Electricity generation / Total / Total Generation",
+      "notes": "Ember monthly (wide): ISO3=JPN, Electricity source='Total generation' → Generation (TWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7060,10 +7060,10 @@
       "freshness_sla_days": 180,
       "coverage": {
         "first": "2018-04-01",
-        "last": "2026-03-01",
-        "count": 96,
+        "last": "2026-06-01",
+        "count": 99,
         "label_first": "2018-04-01",
-        "label_last": "2026-03-01"
+        "label_last": "2026-06-01"
       }
     },
     {
@@ -7075,8 +7075,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7084,7 +7084,7 @@
       "backfill_start": "1999-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_sum",
-      "notes": "Ember monthly: United States of America, Electricity generation / Total / Total Generation",
+      "notes": "Ember monthly (wide): ISO3=USA, Electricity source='Total generation' → Generation (TWh)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7097,10 +7097,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2001-01-01",
-        "last": "2026-06-01",
-        "count": 306,
+        "last": "2026-07-01",
+        "count": 307,
         "label_first": "2001-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7112,8 +7112,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-05-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7121,7 +7121,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: China, Electricity generation / Fuel / Bioenergy (%)",
+      "notes": "Ember monthly (wide): ISO3=CHN, Electricity source='Bioenergy' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7134,10 +7134,10 @@
       "freshness_sla_days": 120,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-05-01",
-        "count": 137,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-05-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7149,8 +7149,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:08+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7158,7 +7158,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Germany, Electricity generation / Fuel / Bioenergy (%)",
+      "notes": "Ember monthly (wide): ISO3=DEU, Electricity source='Bioenergy' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7171,10 +7171,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7186,8 +7186,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:09+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7195,7 +7195,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United Kingdom, Electricity generation / Fuel / Bioenergy (%)",
+      "notes": "Ember monthly (wide): ISO3=GBR, Electricity source='Bioenergy' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7208,10 +7208,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7223,8 +7223,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-03-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-09-01T12:53:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7232,7 +7232,7 @@
       "backfill_start": "2018-04-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Japan, Electricity generation / Fuel / Bioenergy (%)",
+      "notes": "Ember monthly (wide): ISO3=JPN, Electricity source='Bioenergy' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7245,10 +7245,10 @@
       "freshness_sla_days": 180,
       "coverage": {
         "first": "2018-04-01",
-        "last": "2026-03-01",
-        "count": 96,
+        "last": "2026-06-01",
+        "count": 99,
         "label_first": "2018-04-01",
-        "label_last": "2026-03-01"
+        "label_last": "2026-06-01"
       }
     },
     {
@@ -7260,8 +7260,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:06+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7269,7 +7269,7 @@
       "backfill_start": "2001-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United States of America, Electricity generation / Fuel / Bioenergy (%)",
+      "notes": "Ember monthly (wide): ISO3=USA, Electricity source='Bioenergy' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7282,10 +7282,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2001-01-01",
-        "last": "2026-06-01",
-        "count": 306,
+        "last": "2026-07-01",
+        "count": 307,
         "label_first": "2001-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7297,8 +7297,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-05-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:06+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7306,7 +7306,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: China, Electricity generation / Fuel / Coal (%)",
+      "notes": "Ember monthly (wide): ISO3=CHN, Electricity source='Coal' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7319,10 +7319,10 @@
       "freshness_sla_days": 120,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-05-01",
-        "count": 137,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-05-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7334,8 +7334,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7343,7 +7343,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Germany, Electricity generation / Fuel / Coal (%)",
+      "notes": "Ember monthly (wide): ISO3=DEU, Electricity source='Coal' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7356,10 +7356,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7371,8 +7371,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:08+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7380,7 +7380,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United Kingdom, Electricity generation / Fuel / Coal (%)",
+      "notes": "Ember monthly (wide): ISO3=GBR, Electricity source='Coal' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7393,10 +7393,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7408,8 +7408,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-03-01",
-      "updated_at": "2026-09-01T10:46:24+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-09-01T12:53:04+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7417,7 +7417,7 @@
       "backfill_start": "2018-04-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Japan, Electricity generation / Fuel / Coal (%)",
+      "notes": "Ember monthly (wide): ISO3=JPN, Electricity source='Coal' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7430,10 +7430,10 @@
       "freshness_sla_days": 180,
       "coverage": {
         "first": "2018-04-01",
-        "last": "2026-03-01",
-        "count": 96,
+        "last": "2026-06-01",
+        "count": 99,
         "label_first": "2018-04-01",
-        "label_last": "2026-03-01"
+        "label_last": "2026-06-01"
       }
     },
     {
@@ -7445,8 +7445,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7454,7 +7454,7 @@
       "backfill_start": "2001-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United States of America, Electricity generation / Fuel / Coal (%)",
+      "notes": "Ember monthly (wide): ISO3=USA, Electricity source='Coal' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7467,10 +7467,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2001-01-01",
-        "last": "2026-06-01",
-        "count": 306,
+        "last": "2026-07-01",
+        "count": 307,
         "label_first": "2001-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7482,8 +7482,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-05-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:06+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7491,7 +7491,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: China, Electricity generation / Fuel / Gas (%)",
+      "notes": "Ember monthly (wide): ISO3=CHN, Electricity source='Gas' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7504,10 +7504,10 @@
       "freshness_sla_days": 120,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-05-01",
-        "count": 137,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-05-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7519,8 +7519,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7528,7 +7528,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Germany, Electricity generation / Fuel / Gas (%)",
+      "notes": "Ember monthly (wide): ISO3=DEU, Electricity source='Gas' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7541,10 +7541,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7556,8 +7556,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:09+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7565,7 +7565,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United Kingdom, Electricity generation / Fuel / Gas (%)",
+      "notes": "Ember monthly (wide): ISO3=GBR, Electricity source='Gas' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7578,10 +7578,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7593,8 +7593,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-03-01",
-      "updated_at": "2026-09-01T10:46:24+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-09-01T12:53:04+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7602,7 +7602,7 @@
       "backfill_start": "2018-04-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Japan, Electricity generation / Fuel / Gas (%)",
+      "notes": "Ember monthly (wide): ISO3=JPN, Electricity source='Gas' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7615,10 +7615,10 @@
       "freshness_sla_days": 180,
       "coverage": {
         "first": "2018-04-01",
-        "last": "2026-03-01",
-        "count": 96,
+        "last": "2026-06-01",
+        "count": 99,
         "label_first": "2018-04-01",
-        "label_last": "2026-03-01"
+        "label_last": "2026-06-01"
       }
     },
     {
@@ -7630,8 +7630,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7639,7 +7639,7 @@
       "backfill_start": "2001-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United States of America, Electricity generation / Fuel / Gas (%)",
+      "notes": "Ember monthly (wide): ISO3=USA, Electricity source='Gas' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7652,10 +7652,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2001-01-01",
-        "last": "2026-06-01",
-        "count": 306,
+        "last": "2026-07-01",
+        "count": 307,
         "label_first": "2001-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7667,8 +7667,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-05-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7676,7 +7676,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: China, Electricity generation / Fuel / Hydro (%)",
+      "notes": "Ember monthly (wide): ISO3=CHN, Electricity source='Hydro' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7689,10 +7689,10 @@
       "freshness_sla_days": 120,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-05-01",
-        "count": 137,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-05-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7704,8 +7704,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:08+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7713,7 +7713,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Germany, Electricity generation / Fuel / Hydro (%)",
+      "notes": "Ember monthly (wide): ISO3=DEU, Electricity source='Hydro' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7726,10 +7726,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7741,8 +7741,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:09+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7750,7 +7750,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United Kingdom, Electricity generation / Fuel / Hydro (%)",
+      "notes": "Ember monthly (wide): ISO3=GBR, Electricity source='Hydro' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7763,10 +7763,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7778,8 +7778,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-03-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-09-01T12:53:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7787,7 +7787,7 @@
       "backfill_start": "2018-04-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Japan, Electricity generation / Fuel / Hydro (%)",
+      "notes": "Ember monthly (wide): ISO3=JPN, Electricity source='Hydro' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7800,10 +7800,10 @@
       "freshness_sla_days": 180,
       "coverage": {
         "first": "2018-04-01",
-        "last": "2026-03-01",
-        "count": 96,
+        "last": "2026-06-01",
+        "count": 99,
         "label_first": "2018-04-01",
-        "label_last": "2026-03-01"
+        "label_last": "2026-06-01"
       }
     },
     {
@@ -7815,8 +7815,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:06+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7824,7 +7824,7 @@
       "backfill_start": "2001-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United States of America, Electricity generation / Fuel / Hydro (%)",
+      "notes": "Ember monthly (wide): ISO3=USA, Electricity source='Hydro' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7837,10 +7837,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2001-01-01",
-        "last": "2026-06-01",
-        "count": 306,
+        "last": "2026-07-01",
+        "count": 307,
         "label_first": "2001-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7852,8 +7852,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-05-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:06+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7861,7 +7861,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: China, Electricity generation / Fuel / Nuclear (%)",
+      "notes": "Ember monthly (wide): ISO3=CHN, Electricity source='Nuclear' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7874,10 +7874,10 @@
       "freshness_sla_days": 120,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-05-01",
-        "count": 137,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-05-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7889,8 +7889,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7898,7 +7898,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Germany, Electricity generation / Fuel / Nuclear (%)",
+      "notes": "Ember monthly (wide): ISO3=DEU, Electricity source='Nuclear' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7911,10 +7911,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7926,8 +7926,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:09+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7935,7 +7935,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United Kingdom, Electricity generation / Fuel / Nuclear (%)",
+      "notes": "Ember monthly (wide): ISO3=GBR, Electricity source='Nuclear' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7948,10 +7948,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -7963,8 +7963,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-03-01",
-      "updated_at": "2026-09-01T10:46:24+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-09-01T12:53:04+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -7972,7 +7972,7 @@
       "backfill_start": "2018-04-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Japan, Electricity generation / Fuel / Nuclear (%)",
+      "notes": "Ember monthly (wide): ISO3=JPN, Electricity source='Nuclear' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -7985,10 +7985,10 @@
       "freshness_sla_days": 180,
       "coverage": {
         "first": "2018-04-01",
-        "last": "2026-03-01",
-        "count": 96,
+        "last": "2026-06-01",
+        "count": 99,
         "label_first": "2018-04-01",
-        "label_last": "2026-03-01"
+        "label_last": "2026-06-01"
       }
     },
     {
@@ -8000,8 +8000,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -8009,7 +8009,7 @@
       "backfill_start": "2001-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United States of America, Electricity generation / Fuel / Nuclear (%)",
+      "notes": "Ember monthly (wide): ISO3=USA, Electricity source='Nuclear' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -8022,10 +8022,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2001-01-01",
-        "last": "2026-06-01",
-        "count": 306,
+        "last": "2026-07-01",
+        "count": 307,
         "label_first": "2001-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -8037,8 +8037,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-05-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -8046,7 +8046,7 @@
       "backfill_start": "2016-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: China, Electricity generation / Fuel / Solar (%)",
+      "notes": "Ember monthly (wide): ISO3=CHN, Electricity source='Solar' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -8059,10 +8059,10 @@
       "freshness_sla_days": 120,
       "coverage": {
         "first": "2016-01-01",
-        "last": "2026-05-01",
-        "count": 125,
+        "last": "2026-07-01",
+        "count": 127,
         "label_first": "2016-01-01",
-        "label_last": "2026-05-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -8074,8 +8074,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:08+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -8083,7 +8083,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Germany, Electricity generation / Fuel / Solar (%)",
+      "notes": "Ember monthly (wide): ISO3=DEU, Electricity source='Solar' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -8096,10 +8096,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -8111,8 +8111,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:09+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -8120,7 +8120,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United Kingdom, Electricity generation / Fuel / Solar (%)",
+      "notes": "Ember monthly (wide): ISO3=GBR, Electricity source='Solar' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -8133,10 +8133,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -8148,8 +8148,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-03-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-09-01T12:53:04+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -8157,7 +8157,7 @@
       "backfill_start": "2018-04-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Japan, Electricity generation / Fuel / Solar (%)",
+      "notes": "Ember monthly (wide): ISO3=JPN, Electricity source='Solar' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -8170,10 +8170,10 @@
       "freshness_sla_days": 180,
       "coverage": {
         "first": "2018-04-01",
-        "last": "2026-03-01",
-        "count": 96,
+        "last": "2026-06-01",
+        "count": 99,
         "label_first": "2018-04-01",
-        "label_last": "2026-03-01"
+        "label_last": "2026-06-01"
       }
     },
     {
@@ -8185,8 +8185,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:05+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -8194,7 +8194,7 @@
       "backfill_start": "2003-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United States of America, Electricity generation / Fuel / Solar (%)",
+      "notes": "Ember monthly (wide): ISO3=USA, Electricity source='Solar' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -8207,10 +8207,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2003-01-01",
-        "last": "2026-06-01",
-        "count": 282,
+        "last": "2026-07-01",
+        "count": 283,
         "label_first": "2003-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -8222,8 +8222,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-05-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:07+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -8231,7 +8231,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: China, Electricity generation / Fuel / Wind (%)",
+      "notes": "Ember monthly (wide): ISO3=CHN, Electricity source='Wind' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -8244,10 +8244,10 @@
       "freshness_sla_days": 120,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-05-01",
-        "count": 137,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-05-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -8259,8 +8259,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:08+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -8268,7 +8268,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Germany, Electricity generation / Fuel / Wind (%)",
+      "notes": "Ember monthly (wide): ISO3=DEU, Electricity source='Wind' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -8281,10 +8281,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -8296,8 +8296,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:26+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:09+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -8305,7 +8305,7 @@
       "backfill_start": "2015-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United Kingdom, Electricity generation / Fuel / Wind (%)",
+      "notes": "Ember monthly (wide): ISO3=GBR, Electricity source='Wind' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -8318,10 +8318,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2015-01-01",
-        "last": "2026-06-01",
-        "count": 138,
+        "last": "2026-07-01",
+        "count": 139,
         "label_first": "2015-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {
@@ -8333,8 +8333,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-03-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-06-01",
+      "updated_at": "2026-09-01T12:53:04+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -8342,7 +8342,7 @@
       "backfill_start": "2018-04-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: Japan, Electricity generation / Fuel / Wind (%)",
+      "notes": "Ember monthly (wide): ISO3=JPN, Electricity source='Wind' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -8355,10 +8355,10 @@
       "freshness_sla_days": 180,
       "coverage": {
         "first": "2018-04-01",
-        "last": "2026-03-01",
-        "count": 96,
+        "last": "2026-06-01",
+        "count": 99,
         "label_first": "2018-04-01",
-        "label_last": "2026-03-01"
+        "label_last": "2026-06-01"
       }
     },
     {
@@ -8370,8 +8370,8 @@
       "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
       "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
       "license": "CC-BY-4.0",
-      "observation_cutoff": "2026-06-01",
-      "updated_at": "2026-09-01T10:46:25+09:00",
+      "observation_cutoff": "2026-07-01",
+      "updated_at": "2026-09-01T12:53:06+09:00",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
       "tz": "UTC",
@@ -8379,7 +8379,7 @@
       "backfill_start": "2001-01-01",
       "publisher": "Ember",
       "aggregation": "monthly_mean",
-      "notes": "Ember monthly: United States of America, Electricity generation / Fuel / Wind (%)",
+      "notes": "Ember monthly (wide): ISO3=USA, Electricity source='Wind' (Is aggregated source=False) → Share of generation (%)",
       "depends_on": null,
       "cutoff_semantics": "observation",
       "delivery_horizon_days": null,
@@ -8392,10 +8392,10 @@
       "freshness_sla_days": 90,
       "coverage": {
         "first": "2001-01-01",
-        "last": "2026-06-01",
-        "count": 306,
+        "last": "2026-07-01",
+        "count": 307,
         "label_first": "2001-01-01",
-        "label_last": "2026-06-01"
+        "label_last": "2026-07-01"
       }
     },
     {

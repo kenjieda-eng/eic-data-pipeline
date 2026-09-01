@@ -1,30 +1,40 @@
 """
-Ember Monthly Electricity Data (long format CSV) から国際 50 系列を取得するスクリプト。
+Ember Monthly Electricity Data (wide format CSV) から国際 50 系列を取得するスクリプト。
 
 対象 (5 ヶ国 × 10 指標 = 50 系列, 月次):
     国: 日本 (jp), 米国 (us), 中国 (cn), ドイツ (de), 英国 (gb)
     指標:
         - ember-demand-{cc}        : 電力需要合計 (TWh)
         - ember-generation-{cc}    : 発電量合計   (TWh)
-        - ember-co2-intensity-{cc} : 電力部門 CO2 排出強度 (gCO2/kWh)
+        - ember-co2-intensity-{cc} : 電力部門 CO2 排出強度 (gCO2e/kWh)
         - ember-share-{fuel}-{cc}  : 電源種別 share of generation (%)
             fuel ∈ {coal, gas, nuclear, solar, wind, hydro, bioenergy} (7 種)
             #67 CO2 強度の「なぜ＝電源構成」を見せる主要国 電源構成比較 Insight の素材。
 
 方式:
-    GET https://files.ember-energy.org/public-downloads/monthly_full_release_long_format.csv
-    (約 70 MB の long-format CSV。1999-01〜最新月の全国全変数を 1 リクエストで取得)
+    GET https://files.ember-energy.org/public-downloads/generation/outputs/release_generation_monthly_global.csv
+    (約 28 MB の wide-format CSV。1999-01〜最新月の全国全指標を 1 リクエストで取得)
 
-実 API 検証 (2026-05-26):
-    - CSV 構造 18 列: Area / ISO 3 code / Date / Area type / Continent / Ember region / EU / OECD / G20 / G7 / ASEAN
-                       / Category / Subcategory / Variable / Unit / Value / YoY absolute change / YoY % change
-    - 国名: 米国は "United States of America" (NOT "United States")
-    - 抽出条件:
-        ('Electricity demand', 'Demand', 'Demand')             → TWh
-        ('Electricity generation', 'Total', 'Total Generation')→ TWh
-        ('Power sector emissions', 'CO2 intensity', 'CO2 intensity') → gCO2/kWh
-        ('Electricity generation', 'Fuel', <FuelName>) Unit='%' → 電源種別 share% (Coal/Gas/Nuclear/Solar/Wind/Hydro/Bioenergy)
-            ※ 同じ Variable で Unit='TWh' と Unit='%' が両方存在するため Unit による絞り込み必須。
+2026-08-31 のフォーマット移行 (L-064 型サイレント停滞の第 2 例):
+    旧 URL (monthly_full_release_long_format.csv) は 7/08 以降 HTTP 200 を返したまま
+    中身が凍結した (blob 同一・全国最大月 2026-06 で停止)。US/DE/GB の SLA90 canary が
+    軸1 で検知。Ember 公式が案内する現行 URL は long → wide 形式に変わっている。
+
+    - CSV 構造 23 列: Area / ISO 3 code / Date / Area type / Electricity source /
+                       Is aggregated source / Generation (TWh) / Share of generation (%) /
+                       Emissions (MtCO2e) / Emissions intensity (gCO2e/kWh) / ... /
+                       Continent / Ember region / EU member / OECD member / G20 member / ...
+    - 1 行 = (Area, Date, Electricity source)。指標は列 (旧 long 形式の
+      Category/Subcategory/Variable/Unit/Value は存在しない)。
+    - 国の突合は ISO 3 code。Area 名は改称される
+      (2026-08 に "United States of America" → "United States")。
+    - 抽出条件 (source_map.yaml の indicator_templates で宣言):
+        Electricity source='Demand'           → Generation (TWh)
+        Electricity source='Total generation' → Generation (TWh)
+        Electricity source='Total generation' → Emissions intensity (gCO2e/kWh)
+        Electricity source=<FuelName>         → Share of generation (%)
+            ※ leaf_only=true で Is aggregated source=False に絞る。Wind and solar /
+              Renewables / Clean / Fossil 等の集計行と二重計上しないため必須。
 
 ライセンス:
     CC BY 4.0 (Creative Commons Attribution 4.0 International)
@@ -32,7 +42,7 @@ Ember Monthly Electricity Data (long format CSV) から国際 50 系列を取得
     license_notice: "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0."
 
 出力:
-    - data/raw/ember/ember_monthly_{YYYYMMDD}.csv          (生 CSV、約 70 MB)
+    - data/raw/ember/ember_monthly_{YYYYMMDD}.csv          (生 CSV、約 28 MB)
     - data/processed/international/{indicator_id}.csv      (共通スキーマ long 形式)
     - data/processed/international/{indicator_id}.parquet
     - data/processed/international/{indicator_id}.metadata.json
@@ -76,7 +86,7 @@ def load_source_map() -> dict:
 
 
 def fetch_csv(csv_url: str) -> bytes:
-    """Ember の long-format CSV を 1 発で取得。"""
+    """Ember の wide-format CSV を 1 発で取得。"""
     logger.info("GET %s", csv_url)
     r = get(csv_url, timeout=180)
     r.raise_for_status()
@@ -89,18 +99,32 @@ def fetch_csv(csv_url: str) -> bytes:
     return r.content
 
 
-def parse_ember_csv(csv_bytes: bytes) -> pd.DataFrame:
+# wide 形式で常に必要な構造列。指標列 (Generation (TWh) 等) は
+# source_map.yaml の metric_column 宣言から動的に決まるので別途検証する。
+BASE_COLUMNS = {
+    "Area",
+    "ISO 3 code",
+    "Date",
+    "Area type",
+    "Electricity source",
+    "Is aggregated source",
+}
+
+
+def parse_ember_csv(csv_bytes: bytes, metric_columns: set[str]) -> pd.DataFrame:
     """
-    Ember long-format CSV をパース。重要列のみ str/数値で整える。
+    Ember wide-format CSV をパース。構造列と、宣言された指標列の存在を検証する。
+
+    列が欠けたら 0 行を静かに返すのではなく即座に落とす。フォーマット変更を
+    「サイレント停滞」ではなく「はっきりした失敗」として検知するため
+    (2026-08-31 の long → wide 移行はまさにこの検証で気づける)。
     """
     df = pd.read_csv(io.BytesIO(csv_bytes), dtype=str)
-    required = {"Area", "Date", "Area type", "Category", "Subcategory", "Variable", "Unit", "Value"}
-    missing = required - set(df.columns)
+    missing = (BASE_COLUMNS | metric_columns) - set(df.columns)
     if missing:
         raise RuntimeError(
-            f"Ember CSV missing required columns: {missing}. Got: {list(df.columns)}"
+            f"Ember CSV missing required columns: {sorted(missing)}. Got: {list(df.columns)}"
         )
-    df["Value"] = pd.to_numeric(df["Value"], errors="coerce")
     return df
 
 
@@ -129,39 +153,47 @@ def parse_ember_dates(date_series: pd.Series) -> pd.Series:
 
 def extract_series(
     df: pd.DataFrame,
-    area_name: str,
-    category: str,
-    subcategory: str,
-    variable: str,
+    iso3: str,
+    electricity_source: str,
+    metric_column: str,
     indicator_id: str,
     region: str,
     source_url: str,
-    unit: str | None = None,
+    leaf_only: bool = False,
 ) -> pd.DataFrame:
     """
-    1 国 × 1 指標を抽出 → 共通スキーマ (date,indicator_id,region,value,source_url)。
+    1 国 × 1 指標を wide CSV から抽出 → 共通スキーマ
+    (date,indicator_id,region,value,source_url)。
 
-    unit を指定すると Unit 列でも絞り込む（Electricity generation / Fuel は
-    同じ Variable に Unit='TWh' と Unit='%' の両方が存在するため、share% 系列で必須）。
+    国は ISO 3 code で絞る (Area 名は改称されるため使わない)。
+    leaf_only=True のときは "Is aggregated source" = False の行だけに絞る。
+    電源種別 share% は Coal/Gas/... の個別行と Renewables/Fossil 等の集計行が
+    同じ列に同居するため、fuel 系列では必須。
     """
     mask = (
-        (df["Area"] == area_name)
+        (df["ISO 3 code"] == iso3)
         & (df["Area type"] == "Country or economy")
-        & (df["Category"] == category)
-        & (df["Subcategory"] == subcategory)
-        & (df["Variable"] == variable)
+        & (df["Electricity source"] == electricity_source)
     )
-    if unit is not None:
-        mask = mask & (df["Unit"] == unit)
+    if leaf_only:
+        mask = mask & (df["Is aggregated source"].str.strip().str.lower() == "false")
     sub = df.loc[mask].copy()
     if sub.empty:
         logger.warning(
-            "%s: 0 rows matched (Area=%r, Cat=%r, Sub=%r, Var=%r)",
-            indicator_id, area_name, category, subcategory, variable,
+            "%s: 0 rows matched (ISO3=%r, source=%r, leaf_only=%s)",
+            indicator_id, iso3, electricity_source, leaf_only,
         )
         return pd.DataFrame(columns=["date", "indicator_id", "region", "value", "source_url"])
 
-    sub = sub.dropna(subset=["Value"])
+    sub["value"] = pd.to_numeric(sub[metric_column], errors="coerce")
+    sub = sub.dropna(subset=["value"])
+    if sub.empty:
+        logger.warning(
+            "%s: all values NaN in column %r (ISO3=%r, source=%r)",
+            indicator_id, metric_column, iso3, electricity_source,
+        )
+        return pd.DataFrame(columns=["date", "indicator_id", "region", "value", "source_url"])
+
     sub["date_dt"] = parse_ember_dates(sub["Date"])
     sub = sub.dropna(subset=["date_dt"])
     # 月次データは必ず月初。日が 01 でない行が出たら日付フォーマットの想定外変化
@@ -179,7 +211,7 @@ def extract_series(
         "date": sub["date"].values,
         "indicator_id": indicator_id,
         "region": region,
-        "value": sub["Value"].values,
+        "value": sub["value"].values,
         "source_url": source_url,
     })
     out = out.drop_duplicates(subset=["date", "indicator_id", "region"], keep="last")
@@ -227,9 +259,10 @@ def main(argv: list[str] | None = None) -> int:
 
     save_raw(csv_bytes, raw_dir, f"ember_monthly_{today_tag}.csv")
 
-    # パース
+    # パース（宣言された指標列の存在もここで検証する）
+    metric_columns = {ind["metric_column"] for ind in indicators_def}
     try:
-        df = parse_ember_csv(csv_bytes)
+        df = parse_ember_csv(csv_bytes, metric_columns)
     except Exception as e:
         logger.exception("parse failed: %s", e)
         append_log(log_dir, "fetch_ember", "FAIL", f"parse failed: {e}")
@@ -246,7 +279,7 @@ def main(argv: list[str] | None = None) -> int:
     total_rows = 0
 
     for country in countries:
-        area_name = country["area_name"]
+        iso3 = country["iso3"]
         region = country["region"]
         for ind in indicators_def:
             id_template = ind["id_template"]
@@ -256,14 +289,13 @@ def main(argv: list[str] | None = None) -> int:
 
             long_df = extract_series(
                 df,
-                area_name=area_name,
-                category=ind["category"],
-                subcategory=ind["subcategory"],
-                variable=ind["variable"],
+                iso3=iso3,
+                electricity_source=ind["electricity_source"],
+                metric_column=ind["metric_column"],
                 indicator_id=indicator_id,
                 region=region,
                 source_url=source_url,
-                unit=ind.get("unit"),
+                leaf_only=bool(ind.get("leaf_only", False)),
             )
             if long_df.empty:
                 continue
