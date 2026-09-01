@@ -38,3 +38,4 @@ date,indicator_id,region,value,source_url
 2026-05-01,fx-eurusd-monthly-avg,eu,1.16732,https://data-api.ecb.europa.eu/service/data/EXR/M.USD.EUR.SP00.A
 2026-06-01,fx-eurusd-monthly-avg,eu,1.1518,https://data-api.ecb.europa.eu/service/data/EXR/M.USD.EUR.SP00.A
 2026-07-01,fx-eurusd-monthly-avg,eu,1.1417478260869562,https://data-api.ecb.europa.eu/service/data/EXR/M.USD.EUR.SP00.A
+2026-08-01,fx-eurusd-monthly-avg,eu,1.159309523809524,https://data-api.ecb.europa.eu/service/data/EXR/M.USD.EUR.SP00.A

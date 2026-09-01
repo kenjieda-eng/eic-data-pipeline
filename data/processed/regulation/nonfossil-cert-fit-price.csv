@@ -31,3 +31,4 @@ date,indicator_id,region,value,source_url
 2025-11-28,nonfossil-cert-fit-price,jp,0.4,https://www.jepx.jp/js/csv_read.php?dir=nf_summary&file=nf_summary_2025.csv
 2026-02-27,nonfossil-cert-fit-price,jp,0.4,https://www.jepx.jp/js/csv_read.php?dir=nf_summary&file=nf_summary_2025.csv
 2026-05-22,nonfossil-cert-fit-price,jp,0.44,https://www.jepx.jp/js/csv_read.php?dir=nf_summary&file=nf_summary_2025.csv
+2026-08-31,nonfossil-cert-fit-price,jp,0.4,https://www.jepx.jp/js/csv_read.php?dir=nf_summary&file=nf_summary_2026.csv

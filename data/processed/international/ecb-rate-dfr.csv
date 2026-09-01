@@ -39,3 +39,4 @@ date,indicator_id,region,value,source_url
 2026-06-01,ecb-rate-dfr,eu,2.25,https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.DFR.LEV
 2026-07-01,ecb-rate-dfr,eu,2.25,https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.DFR.LEV
 2026-08-01,ecb-rate-dfr,eu,2.25,https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.DFR.LEV
+2026-09-01,ecb-rate-dfr,eu,2.25,https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.DFR.LEV
