@@ -8,7 +8,7 @@
   "source_url": "https://www.eia.gov/international/data/world",
   "license": "public-domain",
   "observation_cutoff": "2024-01-01",
-  "updated_at": "2026-09-01T10:48:32+09:00",
+  "updated_at": "2026-09-02T09:59:24+09:00",
   "license_url": "https://www.eia.gov/about/copyrights_reuse.php",
   "license_notice": "米国連邦政府著作物としてパブリックドメイン。EIA は出典表記を推奨（例: Source: U.S. Energy Information Administration）",
   "tz": "UTC",
@@ -16,7 +16,7 @@
   "backfill_start": "1980-01-01",
   "publisher": "U.S. Energy Information Administration (EIA)",
   "aggregation": "derived",
-  "notes": "GDP当たりCO2 = eia-co2-us ÷ 実質GDP。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。電力部門の排出強度（ember-co2-intensity-*、gCO2/kWh）とは分子・分母とも異なる別概念。countryRegionId=USA（type=c/Country）。同名の WP27（type=r）は人口・GDP でも同値の重複コードなので使わない。基準年は unit 文字列 BDOLPPP に含まれないため、取得時に基準年カナリア（USA の基準年で実質=名目が成立するか）を検証している。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 210.4 t-CO2/百万2015年PPPドル。",
+  "notes": "GDP当たりCO2 = eia-co2-us ÷ 実質GDP。分子は EIA 国際CO2（暦年・エネルギー起源のみ）、分母は EIA 提供の人口（productId 4702、千人）または実質GDP（productId 4701、2015年基準・購買力平価PPPドル、履歴値の出所は Oxford Economics）。EIA 自身のエネルギー原単位算出と同一の分母を用いる。電力部門の排出強度（ember-co2-intensity-*、gCO2e/kWh）とは分子・分母とも異なる別概念。countryRegionId=USA（type=c/Country）。同名の WP27（type=r）は人口・GDP でも同値の重複コードなので使わない。基準年は unit 文字列 BDOLPPP に含まれないため、取得時に基準年カナリア（USA の基準年で実質=名目が成立するか）を検証している。分母（人口・GDP）は系列化していない（生値は data/raw/eia_intl/ の生レスに残る）。2024年実測 = 210.4 t-CO2/百万2015年PPPドル。",
   "depends_on": [
     "eia-co2-us"
   ],
