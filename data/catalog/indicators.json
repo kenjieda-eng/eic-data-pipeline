@@ -1,7 +1,7 @@
 {
   "version": 2,
   "schema": "D-020",
-  "generated_at": "2026-09-02T09:59:27+09:00",
+  "generated_at": "2026-09-02T11:37:37+09:00",
   "indicator_count": 609,
   "indicators": [
     {
@@ -21672,7 +21672,7 @@
         "days": 7
       },
       "csv_path": "data/processed/enecho-power/meti-demand-lights.csv",
-      "freshness_sla_days": 150,
+      "freshness_sla_days": 200,
       "coverage": {
         "first": "2018-04-01",
         "last": "2026-04-01",
@@ -21709,7 +21709,7 @@
         "days": 7
       },
       "csv_path": "data/processed/enecho-power/meti-demand-power.csv",
-      "freshness_sla_days": 150,
+      "freshness_sla_days": 200,
       "coverage": {
         "first": "2018-04-01",
         "last": "2026-04-01",
@@ -21746,7 +21746,7 @@
         "days": 7
       },
       "csv_path": "data/processed/enecho-power/meti-demand-total.csv",
-      "freshness_sla_days": 150,
+      "freshness_sla_days": 200,
       "coverage": {
         "first": "2022-04-01",
         "last": "2026-04-01",
@@ -21783,7 +21783,7 @@
         "days": 7
       },
       "csv_path": "data/processed/enecho-power/meti-gen-biomass.csv",
-      "freshness_sla_days": 150,
+      "freshness_sla_days": 200,
       "coverage": {
         "first": "2021-01-01",
         "last": "2026-04-01",
@@ -21820,7 +21820,7 @@
         "days": 7
       },
       "csv_path": "data/processed/enecho-power/meti-gen-geothermal.csv",
-      "freshness_sla_days": 150,
+      "freshness_sla_days": 200,
       "coverage": {
         "first": "2021-01-01",
         "last": "2026-04-01",
@@ -21857,7 +21857,7 @@
         "days": 7
       },
       "csv_path": "data/processed/enecho-power/meti-gen-hydro.csv",
-      "freshness_sla_days": 150,
+      "freshness_sla_days": 200,
       "coverage": {
         "first": "2021-01-01",
         "last": "2026-04-01",
@@ -21894,7 +21894,7 @@
         "days": 7
       },
       "csv_path": "data/processed/enecho-power/meti-gen-nuclear.csv",
-      "freshness_sla_days": 150,
+      "freshness_sla_days": 200,
       "coverage": {
         "first": "2021-01-01",
         "last": "2026-04-01",
@@ -21931,7 +21931,7 @@
         "days": 7
       },
       "csv_path": "data/processed/enecho-power/meti-gen-solar.csv",
-      "freshness_sla_days": 150,
+      "freshness_sla_days": 200,
       "coverage": {
         "first": "2021-01-01",
         "last": "2026-04-01",
@@ -21968,7 +21968,7 @@
         "days": 7
       },
       "csv_path": "data/processed/enecho-power/meti-gen-thermal.csv",
-      "freshness_sla_days": 150,
+      "freshness_sla_days": 200,
       "coverage": {
         "first": "2021-01-01",
         "last": "2026-04-01",
@@ -22005,7 +22005,7 @@
         "days": 7
       },
       "csv_path": "data/processed/enecho-power/meti-gen-total.csv",
-      "freshness_sla_days": 150,
+      "freshness_sla_days": 200,
       "coverage": {
         "first": "2023-04-01",
         "last": "2026-04-01",
@@ -22042,7 +22042,7 @@
         "days": 7
       },
       "csv_path": "data/processed/enecho-power/meti-gen-wind.csv",
-      "freshness_sla_days": 150,
+      "freshness_sla_days": 200,
       "coverage": {
         "first": "2021-01-01",
         "last": "2026-04-01",
@@ -22086,7 +22086,7 @@
         "days": 7
       },
       "csv_path": "data/processed/enecho-power/meti-renewables-share.csv",
-      "freshness_sla_days": 150,
+      "freshness_sla_days": 200,
       "coverage": {
         "first": "2023-04-01",
         "last": "2026-04-01",

@@ -859,7 +859,9 @@ sources:
     frequency: monthly
     tz: Asia/Tokyo
     missing_policy: "null"                        # 欠測月は null
-    freshness_sla_days: 150                       # METI 電力調査統計は 4 ヶ月遅れ（FY2025 確定は 2026-07 頃）
+    freshness_sla_days: 200                       # METI 電力調査統計。git 履歴の実測で公表ラグ 122〜144 日、
+                                                  # 月次なので最大 age ≒ 144+30 = 174 → 実測 + マージンで 200（2026-09-02、#42）。
+                                                  # 着地が 2〜3 回貯まったら再測定。旧 150 は 4 ヶ月遅れ想定で毎サイクル数日鳴っていた。
     # ----- 対象ファイル名パターン ---------------------------------------
     # 発電実績テーブル: 2-1-{YEAR}.xlsx or 2-1-H{nn}.xlsx or 2-1-{YEAR}n.xlsx（機械判読版、2025 のみ）
     # 需要実績テーブル: 3-1-{YEAR}.xlsx or 3-1-H{nn}.xlsx
