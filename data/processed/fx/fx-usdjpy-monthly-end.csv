@@ -642,3 +642,4 @@ date,indicator_id,region,value,source_url
 2026-05-01,fx-usdjpy-monthly-end,jp,159.27,"https://www.stat-search.boj.or.jp/api/v1/getDataCode?db=FM08&code=FXERM07,FXERM06,FXERM03,FXERM05"
 2026-06-01,fx-usdjpy-monthly-end,jp,162.26,"https://www.stat-search.boj.or.jp/api/v1/getDataCode?db=FM08&code=FXERM07,FXERM06,FXERM03,FXERM05"
 2026-07-01,fx-usdjpy-monthly-end,jp,160.21,"https://www.stat-search.boj.or.jp/api/v1/getDataCode?db=FM08&code=FXERM07,FXERM06,FXERM03,FXERM05"
+2026-08-01,fx-usdjpy-monthly-end,jp,159.57,"https://www.stat-search.boj.or.jp/api/v1/getDataCode?db=FM08&code=FXERM07,FXERM06,FXERM03,FXERM05"
