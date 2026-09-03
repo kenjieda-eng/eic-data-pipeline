@@ -41,6 +41,7 @@ from scripts.common.metadata import (  # noqa: E402
     DEFAULT_UPDATE_SCHEDULE,
     REQUIRED_FIELDS,
     axis2_violation,
+    depends_on_violation,
     derive_coverage,
     effective_cutoff_age,
     freshness_sla_days as resolve_freshness_sla,
@@ -297,6 +298,20 @@ def main() -> int:
             total_warnings.append(f"{path.name}: {axis2}")
 
         indicators.append(meta)
+
+    # D-020④(d): 派生系列の継続判定（depends_on）。
+    # ⚠️ 収集ループ内では評価できない — 依存先の metadata.json がまだ読まれて
+    # いない可能性があるため、全件を集め終えた **二段目** で by_id を作って判定する。
+    # 依存先が改訂されたのに派生の再計算が漏れると、エラーも出ず値も表示されたまま
+    # 静かに古い入力に基づく値が残る（軸2 と同型の沈黙。D-020 §8.3.1）。
+    # soft 先行のため warning 止まりで exit コードには影響しない（hard 化は D-020⑤）。
+    by_id = {m["id"]: m for m in indicators if m.get("id")}
+    for meta in indicators:
+        if not meta.get("depends_on"):
+            continue
+        dv = depends_on_violation(meta, by_id)
+        if dv:
+            total_warnings.append(f"{meta.get('id')}: {dv}")
 
     # 集計
     n = len(indicators)

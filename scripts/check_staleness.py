@@ -51,6 +51,14 @@ D-020④(c)（2026-08-30）: 軸2（パイプライン生存監視）のレポ�
     ④(a)(b) で updated_at を生存信号化した直後であり、まず 1 週間の無事故運転を
     確認してから hard 化する（D-020⑤）。soft 先行にするのは、導入直後の誤検知で
     nightly が万年赤 → 赤疲れ → 無視、という Pink Sheet 型の失敗を避けるため。
+
+D-020④(d)（2026-09-03）: 派生系列の継続判定（depends_on）のレポートも末尾に追加した。
+    派生系列（比率・シェア・合算）は入力が改訂されると再計算が要るが、再計算が
+    漏れてもエラーにならず値も表示され、静かに古い入力に基づいた値が残る
+    （軸2 と同型の「沈黙」）。D-011 の depends_on を辿り、派生の updated_at が
+    依存先の最大値より 24h 以上古ければ違反として挙げる（D-020 §8.3.1）。
+    依存元も派生も揃って古い「全体停止」は軸2 の担当で、ここは「片側だけ更新された
+    不整合」だけを見る。④(c) と同じく **report-only**（exit コードに反映しない）。
 """
 
 from __future__ import annotations
@@ -67,6 +75,7 @@ sys.path.insert(0, str(ROOT))
 from scripts.common.metadata import (  # noqa: E402
     DEFAULT_FRESHNESS_SLA_DAYS,
     axis2_violation,
+    depends_on_violation,
     effective_cutoff_age,
 )
 
@@ -246,6 +255,26 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"  - {ind_id}: {reason}")
         else:
             print("AXIS2 (report-only, not gating): 0 series")
+
+    # --- D-020④(d) 派生系列の継続判定（report-only） ------------------------
+    # 軸2 が「全体が止まった」を見るのに対し、ここは「依存先だけ更新され、派生の
+    # 再計算が漏れた」片側不整合を見る。④(c) と同じく exit コードには反映しない
+    # （hard 化は D-020⑤）。
+    by_id = {e["id"]: e for e in indicators if e.get("id")}
+    depends_on_hits = []
+    for entry in indicators:
+        if not entry.get("depends_on"):
+            continue
+        v = depends_on_violation(entry, by_id)
+        if v:
+            depends_on_hits.append((entry.get("id", "?"), v))
+    if not args.list:
+        if depends_on_hits:
+            print(f"DEPENDS_ON (report-only, not gating): {len(depends_on_hits)} series")
+            for ind_id, reason in depends_on_hits:
+                print(f"  - {ind_id}: {reason}")
+        else:
+            print("DEPENDS_ON (report-only, not gating): 0 series")
 
     if stale:
         # 停滞ありは exit 1（nightly ではデータ commit 後に走るので、ランが赤くなる）。

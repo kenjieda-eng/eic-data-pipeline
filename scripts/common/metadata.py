@@ -151,6 +151,11 @@ UPDATE_SCHEDULE_KEYS: dict[str, frozenset[str]] = {
 # 数日空くことはあるため 7 日を「明らかに止まっている」の線とする。
 DEFAULT_UPDATE_SCHEDULE: dict[str, Any] = {"kind": "interval", "days": 7}
 
+# --- D-020④(d) depends_on: 派生系列の継続判定 ------------------------------
+# 派生と依存先は同じ run で書かれるため、書き順による数秒の前後は正常。
+# 検出したい故障は「片側だけ数日以上更新されない」なので 24h を許容幅にする。
+DEPENDS_ON_TOLERANCE_SECONDS = 86400
+
 # frequency 別デフォルトの鮮度 SLA（日数）。
 # source_map.yaml の freshness_sla_days で個別 override 可能。
 DEFAULT_FRESHNESS_SLA_DAYS: dict[str, int] = {
@@ -713,6 +718,75 @@ def axis2_violation(entry: dict, now: datetime) -> str | None:
         return (
             f"axis2: updated_at stalled {stalled}d > interval {days}d "
             f"(pipeline liveness)"
+        )
+    return None
+
+
+# --- D-020④(d) depends_on: 派生系列の継続判定 ------------------------------
+
+
+def depends_on_violation(entry: dict, by_id: dict[str, dict]) -> str | None:
+    """
+    D-020④(d): 派生系列の継続判定。depends_on が無ければ None。
+
+    派生系列（比率・シェア・合算）は入力が改訂されると再計算が要るが、再計算が
+    漏れてもエラーにならず値も表示され、静かに古い入力に基づいた値が残る
+    （軸2 と同型の「沈黙」）。D-011 の depends_on を使い、派生の updated_at が
+    依存先より古ければ警告する（D-020 §8.3.1）。
+
+    - 依存先 id が by_id に無い → "depends_on refers to unknown id: X"（宣言ミス）
+    - 依存先の updated_at の最大値 − 派生の updated_at > 24h →
+      "derived updated_at YYYY-MM-DD lags dependency <id> (YYYY-MM-DD) by Nd"
+    - updated_at が parse 不能 → "updated_at unparsable"
+
+    軸2（全体停止）とは別担当: 依存元も派生も同じく古い場合は軸2が拾う。
+    ここは「片側だけ更新された不整合」だけを見る（§8.3.1）。
+
+    by_id は id → catalog エントリ。全 metadata を読み終えた後にしか作れないため、
+    収集ループ内ではなく二段目で呼ぶこと（依存先が後から読まれ得る）。
+    """
+    deps = entry.get("depends_on")
+    if not deps:
+        return None
+    if isinstance(deps, str):
+        deps = [deps]
+    elif isinstance(deps, (list, tuple)):
+        deps = list(deps)
+    else:
+        return f"depends_on unusable: expected id or list of ids, got {type(deps).__name__}"
+
+    # 宣言ミスを先に潰す。存在しない id を指したまま「違反 0」で緑になるのが
+    # いちばん危ない沈黙のため、比較より前に落とす。
+    for dep_id in deps:
+        if dep_id not in by_id:
+            return f"depends_on refers to unknown id: {dep_id}"
+
+    raw = entry.get("updated_at")
+    if not isinstance(raw, str) or not raw.strip():
+        return "updated_at unparsable"
+    try:
+        derived = datetime.fromisoformat(raw.strip())
+    except ValueError:
+        return "updated_at unparsable"
+
+    # 依存先のうち最も新しいものと比べる（1 つでも新しければ再計算が要る）。
+    latest_id: str | None = None
+    latest_dt: datetime | None = None
+    for dep_id in deps:
+        # derived を基準に tz 有無を揃える（catalog は JST aware、テストは naive）。
+        dep_dt = _parse_updated_at(by_id[dep_id].get("updated_at"), derived)
+        if dep_dt is None:
+            return f"dependency {dep_id} updated_at unparsable"
+        if latest_dt is None or dep_dt > latest_dt:
+            latest_dt, latest_id = dep_dt, dep_id
+
+    if latest_dt is None:
+        return None
+    lag = (latest_dt - derived).total_seconds()
+    if lag > DEPENDS_ON_TOLERANCE_SECONDS:
+        return (
+            f"derived updated_at {derived.date()} lags dependency {latest_id} "
+            f"({latest_dt.date()}) by {int(lag // 86400)}d"
         )
     return None
 
