@@ -59,6 +59,16 @@ D-020④(d)（2026-09-03）: 派生系列の継続判定（depends_on）のレ�
     依存先の最大値より 24h 以上古ければ違反として挙げる（D-020 §8.3.1）。
     依存元も派生も揃って古い「全体停止」は軸2 の担当で、ここは「片側だけ更新された
     不整合」だけを見る。④(c) と同じく **report-only**（exit コードに反映しない）。
+
+D-020⑤-1（2026-09-05）: 2 点を追加した。
+    (1) depends_on の **宣言ミス**（存在しない id / 型不正）は gating に昇格（exit 1）。
+        「存在しない id を指したまま違反 0 で緑」がいちばん危ない沈黙であり、観測に
+        依存しない決定論的な誤りなので soft 期間を置く理由がない。lag（24h 超）は
+        引き続き report-only（hard 化は ⑤-2 の昇格条件を満たしてから）。
+    (2) 第3層 = 上流の発行そのもの（raw ハッシュ台帳、scripts/raw_ledger.py）の
+        assessment を末尾に再掲する（RAW_LEDGER 節）。凍結（変わるはずの raw が
+        N 日不変）と変化（過去値が改訂されうる raw が変わった日）。**report-only**。
+        台帳が無ければ skip（nightly では fetch 群の後・catalog 生成の前に記帳される）。
 """
 
 from __future__ import annotations
@@ -78,6 +88,7 @@ from scripts.common.metadata import (  # noqa: E402
     depends_on_violation,
     effective_cutoff_age,
 )
+from scripts.raw_ledger import DEFAULT_LEDGER, format_assessment  # noqa: E402
 
 DEFAULT_CATALOG = ROOT / "data" / "catalog" / "indicators.json"
 STALE_MULTIPLIER = 2  # freshness_sla_days の何倍で「停滞」と判定するか（1×=soft warning より厳しく）
@@ -206,6 +217,12 @@ def main(argv: list[str] | None = None) -> int:
         default=STALE_MULTIPLIER,
         help=f"閾値倍率（既定 {STALE_MULTIPLIER}）",
     )
+    parser.add_argument(
+        "--ledger",
+        type=Path,
+        default=DEFAULT_LEDGER,
+        help="raw ハッシュ台帳 JSON（既定: data/ledger/raw-hash.json。無ければ RAW_LEDGER 節を skip）",
+    )
     args = parser.parse_args(argv)
 
     if not args.catalog.exists():
@@ -262,11 +279,17 @@ def main(argv: list[str] | None = None) -> int:
     # （hard 化は D-020⑤）。
     by_id = {e["id"]: e for e in indicators if e.get("id")}
     depends_on_hits = []
+    # ⑤-1: 宣言ミス（未知 id / 型不正）は決定論的なので gating（exit 1）。lag は report-only のまま。
+    depends_on_errors = []
     for entry in indicators:
         if not entry.get("depends_on"):
             continue
         v = depends_on_violation(entry, by_id)
-        if v:
+        if not v:
+            continue
+        if v.startswith("depends_on refers to unknown id") or v.startswith("depends_on unusable"):
+            depends_on_errors.append((entry.get("id", "?"), v))
+        else:
             depends_on_hits.append((entry.get("id", "?"), v))
     if not args.list:
         if depends_on_hits:
@@ -275,15 +298,49 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"  - {ind_id}: {reason}")
         else:
             print("DEPENDS_ON (report-only, not gating): 0 series")
+        if depends_on_errors:
+            print(f"DEPENDS_ON DECLARATION ERROR (gating): {len(depends_on_errors)} series")
+            for ind_id, reason in depends_on_errors:
+                print(f"  - {ind_id}: {reason}")
 
-    if stale:
-        # 停滞ありは exit 1（nightly ではデータ commit 後に走るので、ランが赤くなる）。
+    # --- D-020⑤-1 第3層: raw ハッシュ台帳（report-only） ---------------------
+    # 軸1（データの日付）・軸2（workflow の生存）とは別に、上流の発行そのもの
+    # （raw の中身が変わったか）を見る。判定は scripts/raw_ledger.py が nightly の
+    # fetch 群の後に行って台帳に残す。ここではその assessment を再掲するだけで、
+    # exit コードには反映しない（hard 化は ⑤-2 の昇格条件を満たしてから）。
+    if not args.list:
+        if args.ledger.exists():
+            try:
+                assessment = (json.loads(args.ledger.read_text(encoding="utf-8")) or {}).get("assessment") or {}
+            except Exception as e:  # noqa: BLE001
+                assessment = None
+                print(f"RAW_LEDGER: failed to read {args.ledger}: {e}")
+            if assessment is not None:
+                fr = assessment.get("frozen") or []
+                ch = assessment.get("changed") or []
+                print(
+                    f"RAW_LEDGER (report-only, not gating): frozen {len(fr)} / changed {len(ch)} "
+                    f"(assessed {assessment.get('date')}, watched={len(assessment.get('watched') or [])})"
+                )
+                for line in format_assessment(assessment):
+                    print(f"  {line}")
+        else:
+            print(f"RAW_LEDGER: ledger not found ({args.ledger}) — skip (run scripts/raw_ledger.py)")
+
+    if stale or depends_on_errors:
+        # 停滞あり / depends_on 宣言ミスありは exit 1（nightly ではデータ commit 後に走るので、ランが赤くなる）。
         # --list は「違反一覧のみ表示」なのでサマリ行は出さず、exit code だけで結果を伝える。
         if not args.list:
-            print(
-                f"FAIL: {len(stale)} unexpected stale series (age > {args.multiplier}×SLA).",
-                file=sys.stderr,
-            )
+            if stale:
+                print(
+                    f"FAIL: {len(stale)} unexpected stale series (age > {args.multiplier}×SLA).",
+                    file=sys.stderr,
+                )
+            if depends_on_errors:
+                print(
+                    f"FAIL: {len(depends_on_errors)} depends_on declaration error(s) (unknown id / unusable).",
+                    file=sys.stderr,
+                )
         return 1
     return 0
 

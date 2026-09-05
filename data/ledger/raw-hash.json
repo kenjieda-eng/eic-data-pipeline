@@ -1,0 +1,1000 @@
+{
+  "schema": "raw-ledger-v1",
+  "updated_at": "2026-09-05T13:56:38+09:00",
+  "sources": {
+    "boj-tankan": {
+      "digest": "sha256:33f0ee3e55af6ba112bce14f91d892d1fd7296df9a3cb5ef83620a401076a557",
+      "stable_since": "2026-09-05",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "boj_CO.csv": {
+          "file": "boj_CO_20260905.csv",
+          "sha256": "4cfda52b93f73a7c317c20d4377ba4afa191a6fcf23363c38496e00b87261b6f",
+          "size": 124134
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:33f0ee3e55af6ba112bce14f91d892d1fd7296df9a3cb5ef83620a401076a557",
+          "first_seen": "2026-09-05",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "ecb": {
+      "digest": "sha256:1c09a7b7b4b5d4192ba763f5b6cc04a37f8652ec85a6e7ed4d939c78bcd8eac1",
+      "stable_since": "2026-09-05",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "ecb_EXR_M_JPY_EUR_SP00_A.csv": {
+          "file": "ecb_EXR_M_JPY_EUR_SP00_A_20260905.csv",
+          "sha256": "26ed1af55660ffe7323415e9921c885f888ffbee3a49bbc28cb6b6a8e34182ff",
+          "size": 8260
+        },
+        "ecb_EXR_M_USD_EUR_SP00_A.csv": {
+          "file": "ecb_EXR_M_USD_EUR_SP00_A_20260905.csv",
+          "sha256": "9e36284ce12d1ac41dc66df171374f5c57a8eb8921f1040444ceaf71f4a4a41f",
+          "size": 7994
+        },
+        "ecb_FM_D_U2_EUR_4F_KR_DFR_LEV.csv": {
+          "file": "ecb_FM_D_U2_EUR_4F_KR_DFR_LEV_20260905.csv",
+          "sha256": "4d7bdeb6d180193877f76404dbaef42f6e16ce98f6263e0b1010cc779a4047a0",
+          "size": 326411
+        },
+        "ecb_FM_D_U2_EUR_4F_KR_MLFR_LEV.csv": {
+          "file": "ecb_FM_D_U2_EUR_4F_KR_MLFR_LEV_20260905.csv",
+          "sha256": "3dcf102b2d9a2a0dc60887c8bb573e578aaf8645b8828322718937996dfc7a3a",
+          "size": 349952
+        },
+        "ecb_FM_D_U2_EUR_4F_KR_MRR_FR_LEV.csv": {
+          "file": "ecb_FM_D_U2_EUR_4F_KR_MRR_FR_LEV_20260905.csv",
+          "sha256": "aca7d56c7ab41c5662ee743acea1ddcdc2a214e68f1781675ee9fa0be537265c",
+          "size": 409533
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:1c09a7b7b4b5d4192ba763f5b6cc04a37f8652ec85a6e7ed4d939c78bcd8eac1",
+          "first_seen": "2026-09-05",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "edinet": {
+      "digest": "sha256:13167e31caaae7db1b48f7953bab620a4b9d6eb684a6ebfc47a8e31fe8fb2b90",
+      "stable_since": "2026-08-22",
+      "last_seen": "2026-09-05",
+      "keys": null,
+      "history": [
+        {
+          "digest": "sha256:13167e31caaae7db1b48f7953bab620a4b9d6eb684a6ebfc47a8e31fe8fb2b90",
+          "first_seen": "2026-08-22",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "eia_intl": {
+      "digest": "sha256:a3d4b9cbb3e8fd54e34b15056f5eed6a427418d2383354f9a07e225da0a76e39",
+      "stable_since": "2026-08-25",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "eia_intl_gdp.json": {
+          "file": "eia_intl_gdp_20260905.json",
+          "sha256": "8c6b8652843aa46f598396f93dfa2adcd3b7bdb3921ccc0449e074c74a3fb8e5",
+          "size": 140678
+        },
+        "eia_intl_jp_breakdown.json": {
+          "file": "eia_intl_jp_breakdown_20260905.json",
+          "sha256": "e29b600385e6793b80c36670ca6b91d50fa673bde81eab13e2545127da3abc88",
+          "size": 69254
+        },
+        "eia_intl_population.json": {
+          "file": "eia_intl_population_20260905.json",
+          "sha256": "17baf4a5225fd869590f29e41995f21ab63508fbc5969d3325ab5d6ca564d979",
+          "size": 131194
+        },
+        "eia_intl_totals.json": {
+          "file": "eia_intl_totals_20260905.json",
+          "sha256": "9872efd28c0e52d2cc08d10b139ed0a5f12f7fc3ae9eead474f100eb68a92066",
+          "size": 180956
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:a3d4b9cbb3e8fd54e34b15056f5eed6a427418d2383354f9a07e225da0a76e39",
+          "first_seen": "2026-08-25",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "ember": {
+      "digest": "sha256:383f03410f6b616ee5ff58eeb29176b3af49ccdef1c4994fc3ae5729e689548f",
+      "stable_since": "2026-08-31",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "ember_monthly.csv": {
+          "file": "ember_monthly_20260905.csv",
+          "sha256": "4bfefbba42a823117f8a73526ee809fdb9601dffe8ddf9e30619bc639b05cc3e",
+          "size": 27748654
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:383f03410f6b616ee5ff58eeb29176b3af49ccdef1c4994fc3ae5729e689548f",
+          "first_seen": "2026-08-31",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "enecho-power": {
+      "digest": "sha256:17a3fb5ef35165c18603dd1204b5773de6142eec8b188580841d28029f34d85c",
+      "stable_since": "2026-08-01",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "2-1-2018.xlsx": {
+          "file": "2-1-2018.xlsx",
+          "sha256": "d85c1f771618adf1583c281a2a6566ba621e6307e20379579807c8b9dd699db2",
+          "size": 1485551
+        },
+        "2-1-2019.xlsx": {
+          "file": "2-1-2019.xlsx",
+          "sha256": "4ed844230daf3209860d53a23fafdbfb0ba3eead83cfe7b6f4aff1b1eb6c7b6b",
+          "size": 1618188
+        },
+        "2-1-2020.xlsx": {
+          "file": "2-1-2020.xlsx",
+          "sha256": "44164e0192510748ad25bb0c06d5a2ea049ea9b55ae6bede2797c907dbc6f898",
+          "size": 1744902
+        },
+        "2-1-2021.xlsx": {
+          "file": "2-1-2021.xlsx",
+          "sha256": "eb71c114ff1910aeb3a554b5482a349f30aba8e76f0adbbf90cd8b26faffe0ae",
+          "size": 1886201
+        },
+        "2-1-2022.xlsx": {
+          "file": "2-1-2022.xlsx",
+          "sha256": "8f7c2f6eb10c0766a6bdd78b09533c75fa5355555c6134c60ec73d5f813cf248",
+          "size": 2156100
+        },
+        "2-1-2023.xlsx": {
+          "file": "2-1-2023.xlsx",
+          "sha256": "9d5296546d755e20231d6b9f7c98cbf87a592a5dbb20e4d2bf0bab1137d8838b",
+          "size": 2300262
+        },
+        "2-1-2024.xlsx": {
+          "file": "2-1-2024.xlsx",
+          "sha256": "0c373830c23eb8c26cf85c7b4ca14ceadcc93db3ff5ffdb022bc473d2b0df49b",
+          "size": 2389088
+        },
+        "2-1-2025.xlsx": {
+          "file": "2-1-2025.xlsx",
+          "sha256": "2722b59a72a09c2d12888c5aa9d1235ccff8b9d250c7a8154beb903b52590b03",
+          "size": 1702114
+        },
+        "2-1-2026.xlsx": {
+          "file": "2-1-2026.xlsx",
+          "sha256": "9ca99f92f84e9cb91ba1cfb49ec85ba54ac012dd4842bd76a6e9715f756a53b3",
+          "size": 240821
+        },
+        "2-1-H28.xlsx": {
+          "file": "2-1-H28.xlsx",
+          "sha256": "a970cce0c01440ca08a659c33630ed460323c6f5941b5cd77f622cc611338f1c",
+          "size": 1084799
+        },
+        "2-1-H29.xlsx": {
+          "file": "2-1-H29.xlsx",
+          "sha256": "c0efb43e03b242da2c58807b0027cd05ef86d26afa35cd571229ecf7d0d59c00",
+          "size": 1285935
+        },
+        "3-1-2018.xlsx": {
+          "file": "3-1-2018.xlsx",
+          "sha256": "ba6cdd30e92adeb902be9a85945508a9bf8ce4a97d9700c9693f58b0e39d0d70",
+          "size": 675381
+        },
+        "3-1-2019.xlsx": {
+          "file": "3-1-2019.xlsx",
+          "sha256": "a43e41534b14ba8b4ce534355a66a95ced840beb6fb998b39ca8abbc1933ce6e",
+          "size": 795336
+        },
+        "3-1-2020.xlsx": {
+          "file": "3-1-2020.xlsx",
+          "sha256": "b8810521999db4c66c8510548f82111322027ccb8493633657c55f230d480bbf",
+          "size": 905223
+        },
+        "3-1-2021.xlsx": {
+          "file": "3-1-2021.xlsx",
+          "sha256": "7e809b354c2ec141ab6e4f75ea6932c8c62f4ec959057be50359c2228679372a",
+          "size": 925390
+        },
+        "3-1-2022.xlsx": {
+          "file": "3-1-2022.xlsx",
+          "sha256": "c962352d5d476072d89e7e44afee33ed6ee3c54f0146d5ec956471b565576f8f",
+          "size": 984631
+        },
+        "3-1-2023.xlsx": {
+          "file": "3-1-2023.xlsx",
+          "sha256": "1f76c25662cf9c8520e4e0533585d38ba298056d87f6342ecfc95dca7f5e1df5",
+          "size": 965243
+        },
+        "3-1-2024.xlsx": {
+          "file": "3-1-2024.xlsx",
+          "sha256": "76ef4a18a92df56a6350d0ad9a77ef9e6a9fe509c4a81f0c2b759221df64698d",
+          "size": 980136
+        },
+        "3-1-2025.xlsx": {
+          "file": "3-1-2025.xlsx",
+          "sha256": "5a7053ed297d03e948ab6cb8c479d5457ebf1d0d0988cd3be2cc118aa67eec72",
+          "size": 692690
+        },
+        "3-1-2026.xlsx": {
+          "file": "3-1-2026.xlsx",
+          "sha256": "928093986b9dc724b34ea52229063b5e431aaa0e8665677c17bdd1ae536d9c9e",
+          "size": 110962
+        },
+        "3-1-H28.xlsx": {
+          "file": "3-1-H28.xlsx",
+          "sha256": "33b142189148977fe5eca4412321bdb022aac7a3aee350f4a6cf87999b2ba79d",
+          "size": 499402
+        },
+        "3-1-H29.xlsx": {
+          "file": "3-1-H29.xlsx",
+          "sha256": "512a8c7bd9893174c77faa29abae26fd578cab6300bf735bcd531926c695ae67",
+          "size": 592154
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:17a3fb5ef35165c18603dd1204b5773de6142eec8b188580841d28029f34d85c",
+          "first_seen": "2026-08-01",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "estat": {
+      "digest": "sha256:7b74f770b938afa03720489421a6c3877a4a69c5d5b0541de5233d7f79eb0830",
+      "stable_since": "2026-09-05",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "jpn-cpi-yoy.json": {
+          "file": "jpn-cpi-yoy_20260905.json",
+          "sha256": "b113b32886c93acf013aac412ee98bee5c8fa06c1d140011f098a374787d6b86",
+          "size": 129552
+        },
+        "jpn-industrial-production.json": {
+          "file": "jpn-industrial-production_20260905.json",
+          "sha256": "2d57cb8f40db931a0a19d87be7d0d6edbed071bf98f41a2b79fe8c75e22151bf",
+          "size": 12402
+        },
+        "jpn-pop_0003448225.json": {
+          "file": "jpn-pop_0003448225_20260905.json",
+          "sha256": "c4324e6810111579b6e46255f20400c9922668259e329c87ec68e77aa1df7781",
+          "size": 863611
+        },
+        "jpn-pop_0004021110.json": {
+          "file": "jpn-pop_0004021110_20260905.json",
+          "sha256": "2d599a1f780bef485e9b8229d99acae4d3dea9602da9178da9c5515d0809d58d",
+          "size": 1078374
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:7b74f770b938afa03720489421a6c3877a4a69c5d5b0541de5233d7f79eb0830",
+          "first_seen": "2026-09-05",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "estat_trade": {
+      "digest": "sha256:3703d02e4047f66f4c14117a99c6f9f3d6d2a8954ed104f0a017b89c53d41b1c",
+      "stable_since": "2026-09-05",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "coal_0003313966.json": {
+          "file": "coal_0003313966_20260905.json",
+          "sha256": "6b5ff0dabef92e4dad47ba7b0e36001b7c24a02d9918907ac82e01cb3fe270c0",
+          "size": 54824
+        },
+        "coal_0003425294.json": {
+          "file": "coal_0003425294_20260905.json",
+          "sha256": "1bd0b42d7234ec0f44ae39613a41a1b350b8eea65b9f4dd44be01869844f73e8",
+          "size": 51554
+        },
+        "crude_0003313966.json": {
+          "file": "crude_0003313966_20260905.json",
+          "sha256": "d38eaa6fa178f7d78ad41c04985f07fe8a381e5086311a02f80978ae8d75954d",
+          "size": 35791
+        },
+        "crude_0003425294.json": {
+          "file": "crude_0003425294_20260905.json",
+          "sha256": "c6d39e811c8d1d9f08668108cf5aea277b6db5163572b1c869a1ff28d5e7fb70",
+          "size": 32524
+        },
+        "lng_0003313966.json": {
+          "file": "lng_0003313966_20260905.json",
+          "sha256": "9498d019cb531fa591799dc6f4d40d3a96bc3df49c3a82c499ca938d1886f0c7",
+          "size": 31554
+        },
+        "lng_0003425294.json": {
+          "file": "lng_0003425294_20260905.json",
+          "sha256": "48db1a98567f60318319128a2f50875fcfca0bae3773c5f4422fdebb28a45839",
+          "size": 32693
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:3703d02e4047f66f4c14117a99c6f9f3d6d2a8954ed104f0a017b89c53d41b1c",
+          "first_seen": "2026-09-05",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "eu-ets": {
+      "digest": "sha256:7a70a9f57123aec8c39c735688b007c3dfa83942fd6b9982fa9a07c9224f4e92",
+      "stable_since": "2026-06-01",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "eu_ets_full.csv": {
+          "file": "eu_ets_full_20260905.csv",
+          "sha256": "6d08b878f0d347057343f9cc51a620fd8e4d38a0bcb1d156201d0f0d32f8db3e",
+          "size": 8197604
+        },
+        "eu_ets_sector.csv": {
+          "file": "eu_ets_sector_20260905.csv",
+          "sha256": "733dabac632b01c4296f7ea5bc649382570a0fec913811e0e9561b39c1ef7db9",
+          "size": 7391
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:7a70a9f57123aec8c39c735688b007c3dfa83942fd6b9982fa9a07c9224f4e92",
+          "first_seen": "2026-06-01",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "fit": {
+      "digest": "sha256:e591a87b96ddbc3c8bba94c5f224843b3def53fd5fa2dfad10798e42a57b74a6",
+      "stable_since": "2026-07-07",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "current.html": {
+          "file": "current_20260905.html",
+          "sha256": "2d84114f3ea4c7a373fe3d4052afb489e57c760a4a300d8d1146a4d275805bd8",
+          "size": 36353
+        },
+        "past.html": {
+          "file": "past_20260905.html",
+          "sha256": "3acc54c97a076c9ef87eb0a10a1fe04fda39ae703562586bb8be6fd0304018c6",
+          "size": 190178
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:e591a87b96ddbc3c8bba94c5f224843b3def53fd5fa2dfad10798e42a57b74a6",
+          "first_seen": "2026-07-07",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "fred-macro": {
+      "digest": "sha256:2137510068335e6712d74939fcaa0b4069c26d61d3a60a6a4a7d923cfeede760",
+      "stable_since": "2026-09-05",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "CPIAUCSL.csv": {
+          "file": "CPIAUCSL_20260511.csv",
+          "sha256": "a47601ac1bd0dcc4d06fb29d5ed2d6d87fa9ece717e58410de67bf9a206cb0e7",
+          "size": 18601
+        },
+        "CPIAUCSL.json": {
+          "file": "CPIAUCSL_20260905.json",
+          "sha256": "7c1540ad0eafc4c462cb9bd9545024c1de00b99f40ba5c39a8e125dd9f880026",
+          "size": 92295
+        },
+        "CPIENGSL.json": {
+          "file": "CPIENGSL_20260905.json",
+          "sha256": "5eb6d6921418e1e56ca7b87f1c82c060915dccad18bd4a3225dfe25a2fa0625e",
+          "size": 80575
+        },
+        "CPIUFDSL.json": {
+          "file": "CPIUFDSL_20260905.json",
+          "sha256": "75c2f85823e482fd0e730da53156b69c6a2f29a40068033cf0166bd6c345e299",
+          "size": 91978
+        },
+        "FEDFUNDS.csv": {
+          "file": "FEDFUNDS_20260511.csv",
+          "sha256": "8228672d23a53d9b8c866c240a08235bad197802097aecf53e363cc057b0199b",
+          "size": 14742
+        },
+        "FEDFUNDS.json": {
+          "file": "FEDFUNDS_20260905.json",
+          "sha256": "e57ade20cba6ac3f09d56a1d99748516696674dc517f2f4e54117fb963d37599",
+          "size": 82606
+        },
+        "INDPRO.csv": {
+          "file": "INDPRO_20260511.csv",
+          "sha256": "bda049278ae8ef6109575ac5ad403cc4570ee18d4a41f9b1aa77d13356320208",
+          "size": 25628
+        },
+        "INDPRO.json": {
+          "file": "INDPRO_20260905.json",
+          "sha256": "36d66eb53a072e014fe45005bd112227caac1a39a3d6697a810b207bcfb918d7",
+          "size": 126554
+        },
+        "PAYEMS.json": {
+          "file": "PAYEMS_20260905.json",
+          "sha256": "9d759f6b850b74da7ca78e9c6625a974631cc3363491b1b3a194403454cc8e51",
+          "size": 101748
+        },
+        "UNRATE.json": {
+          "file": "UNRATE_20260905.json",
+          "sha256": "5de165542934d06d8b3a937f4e69fd36f0b11698fd617bdd05808ea29a5f7319",
+          "size": 89025
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:2137510068335e6712d74939fcaa0b4069c26d61d3a60a6a4a7d923cfeede760",
+          "first_seen": "2026-09-05",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "fuel": {
+      "digest": "sha256:b3cf95e5623325a1c167d84b60e006049154c7ca356d484caea96cc1329bafb4",
+      "stable_since": "2026-09-03",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "CMO-Historical-Data-Monthly.xlsx": {
+          "file": "CMO-Historical-Data-Monthly_20260905.xlsx",
+          "sha256": "9fdcfa8a2aed9a1bb545a10c1a5ce036c6a0acd4766f450424ca800b4b5a0225",
+          "size": 586735
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:b3cf95e5623325a1c167d84b60e006049154c7ca356d484caea96cc1329bafb4",
+          "first_seen": "2026-09-03",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "fx": {
+      "digest": "sha256:3723456e0e7a1281e9d24ac8a885796666ce135de1e8c0077d9f7a6b8b4d0979",
+      "stable_since": "2026-09-05",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "boj_FM08.csv": {
+          "file": "boj_FM08_20260905.csv",
+          "sha256": "fbf2b3ea48fff908f0c1111a959ae1f4f3551719b5d0ffeee4081cc4a8582a66",
+          "size": 407766
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:3723456e0e7a1281e9d24ac8a885796666ce135de1e8c0077d9f7a6b8b4d0979",
+          "first_seen": "2026-09-05",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "gio": {
+      "digest": "sha256:4f5f9b22a0e9af57cd122603f475d1d8aabcb69074e6a0c324181008ae500899",
+      "stable_since": "2026-08-08",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "L5-7gas_2026_gioweb_ver1.0.xlsx": {
+          "file": "L5-7gas_2026_gioweb_ver1.0.xlsx",
+          "sha256": "351fdd30ea5f55ecbcfae8c2f96097f3126ee040c99df30c0a42f28ad6cf8e99",
+          "size": 1434689
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:4f5f9b22a0e9af57cd122603f475d1d8aabcb69074e6a0c324181008ae500899",
+          "first_seen": "2026-08-08",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "jepx": {
+      "digest": "sha256:b5f58c0eb6481f542fd243f8af873220e3c5e4d6343b9cd69582699a9765cd81",
+      "stable_since": "2026-09-05",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "_listing_debug.html": {
+          "file": "_listing_debug.html",
+          "sha256": "2f69962bc1a377cf173697d5f6b709b3023757f79f9b17bcad2b5d234483d8bd",
+          "size": 31858
+        },
+        "_spot_summary.js": {
+          "file": "_spot_summary.js",
+          "sha256": "f67e5c62a3eab6beca3182fae4cb5ffa1d586c777dc20599872e7b31a7662624",
+          "size": 67864
+        },
+        "spot_summary_2012.csv": {
+          "file": "spot_summary_2012.csv",
+          "sha256": "7519c50ebe877bcb8d16102d7f3a78f6db26cbe8de3a95b781b4699161bf0cf2",
+          "size": 1774933
+        },
+        "spot_summary_2013.csv": {
+          "file": "spot_summary_2013.csv",
+          "sha256": "fa1874ad0963c2a6798d8440ab4f51cdb2fa21b7ce4bcc7281c4b2c06b8b044d",
+          "size": 1975041
+        },
+        "spot_summary_2014.csv": {
+          "file": "spot_summary_2014.csv",
+          "sha256": "e1b1a05b0ffbb92da8dbd96ef3a676acfa3caedbdf113c51e6a691dda2af9341",
+          "size": 1980816
+        },
+        "spot_summary_2015.csv": {
+          "file": "spot_summary_2015.csv",
+          "sha256": "869a740101a6548034eadbac66a58cf94cddec53f9ff7e214c0cb5acd691b8ca",
+          "size": 1905864
+        },
+        "spot_summary_2016.csv": {
+          "file": "spot_summary_2016.csv",
+          "sha256": "47a3b5888615dad43a6494419e814b2944db0686745ec444dd36557169d5680c",
+          "size": 1898748
+        },
+        "spot_summary_2017.csv": {
+          "file": "spot_summary_2017.csv",
+          "sha256": "c311b073f95a2489f42dc9d465b8afcef2fa6c75c604b99a99603f111966723f",
+          "size": 2088789
+        },
+        "spot_summary_2018.csv": {
+          "file": "spot_summary_2018.csv",
+          "sha256": "06bb9ee5431ed4d3c47aa795ad1d581c15ca04f173120cc75dde342fae1999e8",
+          "size": 2222219
+        },
+        "spot_summary_2019.csv": {
+          "file": "spot_summary_2019.csv",
+          "sha256": "92e1a071eb4b7654022adf810028ade657be918adeeb84d88d05af19dfe80dd1",
+          "size": 2198156
+        },
+        "spot_summary_2020.csv": {
+          "file": "spot_summary_2020.csv",
+          "sha256": "485ab388e5d8e7366d14bbfc14f81da277e81ce007f16acabaf1fa1e889e8b34",
+          "size": 2192787
+        },
+        "spot_summary_2021.csv": {
+          "file": "spot_summary_2021.csv",
+          "sha256": "d9ea86c8735b974ac17bea9dc6e2b487606fa7d266b6720c5de0b37d9e5a5734",
+          "size": 2255981
+        },
+        "spot_summary_2022.csv": {
+          "file": "spot_summary_2022.csv",
+          "sha256": "2727b29b48154c7a4252229e3dacdbfc98616f38a1469ec821168f7fdb1be8d1",
+          "size": 2321838
+        },
+        "spot_summary_2023.csv": {
+          "file": "spot_summary_2023.csv",
+          "sha256": "443b7126f4fb2676e32e840327c8ae8d774046bec23a36823a716787936adf3d",
+          "size": 2269546
+        },
+        "spot_summary_2024.csv": {
+          "file": "spot_summary_2024.csv",
+          "sha256": "b3131192a4de3e43a6e2fd4f11f26aec2129de2764cdd423d937ca1d4389cd07",
+          "size": 2287176
+        },
+        "spot_summary_2025.csv": {
+          "file": "spot_summary_2025.csv",
+          "sha256": "cf95e1aea783ecac2d876244d99c6610506db2bb4ed1c24c5dc887e7c16731d0",
+          "size": 2265696
+        },
+        "spot_summary_2026.csv": {
+          "file": "spot_summary_2026.csv",
+          "sha256": "8e5ed8b8dd72834e4b10552ee880e87c0123e9ed163323f3c404f274606b2d90",
+          "size": 994515
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:b5f58c0eb6481f542fd243f8af873220e3c5e4d6343b9cd69582699a9765cd81",
+          "first_seen": "2026-09-05",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "jepx-nonfossil": {
+      "digest": "sha256:899a16d9b0c55dea680f896f732ae32de1b2689aa89406a2ff265a22ec2f07c4",
+      "stable_since": "2026-09-01",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "nf_summary_2017.csv": {
+          "file": "nf_summary_2017.csv",
+          "sha256": "b4800295654139914069386effe6dd9e0bd06037937b8b86fbea7fd1de8204a3",
+          "size": 376
+        },
+        "nf_summary_2018.csv": {
+          "file": "nf_summary_2018.csv",
+          "sha256": "408a8f3e086a2e2bd93d192d18de1acb98d605f0e3b4bedb52f2ebdf38ff2d40",
+          "size": 829
+        },
+        "nf_summary_2019.csv": {
+          "file": "nf_summary_2019.csv",
+          "sha256": "b6295824a6593c321bd7f741b125388dd2671b062b45afc13863d87b2317747a",
+          "size": 835
+        },
+        "nf_summary_2020.csv": {
+          "file": "nf_summary_2020.csv",
+          "sha256": "053f1e9496e8ac7765b804b0728b94a458da25c9df99d9350d357c7457d5b62c",
+          "size": 1022
+        },
+        "nf_summary_2021.csv": {
+          "file": "nf_summary_2021.csv",
+          "sha256": "5c3eb8a033e184a810b0d26809568bbc4762693136ebd449e71fbfe15ed9ea70",
+          "size": 1191
+        },
+        "nf_summary_2022.csv": {
+          "file": "nf_summary_2022.csv",
+          "sha256": "ceaca1c42e362eecc207dab3f8a30464e6eebe2dd593cf773fb0dc2e95a51c59",
+          "size": 1251
+        },
+        "nf_summary_2023.csv": {
+          "file": "nf_summary_2023.csv",
+          "sha256": "81e8be18b0312ce870b928164cb8a50c414188f906d69e465e07d067ba89cf26",
+          "size": 1223
+        },
+        "nf_summary_2024.csv": {
+          "file": "nf_summary_2024.csv",
+          "sha256": "7728a23cda53190620bebdc643b299cb3e2a492fd8c494064117c515cf85d534",
+          "size": 1238
+        },
+        "nf_summary_2025.csv": {
+          "file": "nf_summary_2025.csv",
+          "sha256": "509608985684ed03301a291984489f4e4b427a888573ffa95edf2baa08500bc0",
+          "size": 1252
+        },
+        "nf_summary_2026.csv": {
+          "file": "nf_summary_2026.csv",
+          "sha256": "539f95d2bd73c5097b982d0ae634f87f38ac8e0d5cb1e24e4983180729dac25a",
+          "size": 471
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:899a16d9b0c55dea680f896f732ae32de1b2689aa89406a2ff265a22ec2f07c4",
+          "first_seen": "2026-09-01",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "jgb": {
+      "digest": "sha256:0f6576bceb6a09976805e308b120b8e98fd3dc956a9ffedd067ca5029ebe368e",
+      "stable_since": "2026-09-04",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "jgbcm.csv": {
+          "file": "jgbcm_20260905.csv",
+          "sha256": "4ad1c8e0927bf2af683e5cc4a817fc0b4cd5d8758a624d08b2cf0b39a0cdd46a",
+          "size": 568
+        },
+        "jgbcm_all.csv": {
+          "file": "jgbcm_all_20260905.csv",
+          "sha256": "d486cccc5d0197f79c4f9b8248dd657b18e5d4a1549fdc1a42d0ae31f5cb96c2",
+          "size": 1176385
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:0f6576bceb6a09976805e308b120b8e98fd3dc956a9ffedd067ca5029ebe368e",
+          "first_seen": "2026-09-04",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "jma": {
+      "digest": "sha256:aad3274f27aa5bb904a0a38058c34da18cf8f7943bef0e022e773575e434e62e",
+      "stable_since": "2026-09-05",
+      "last_seen": "2026-09-05",
+      "keys": null,
+      "history": [
+        {
+          "digest": "sha256:aad3274f27aa5bb904a0a38058c34da18cf8f7943bef0e022e773575e434e62e",
+          "first_seen": "2026-09-05",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "nbs-pmi": {
+      "digest": "sha256:3bcd652a3de23d65e99a34efe44facc9bfff220c976e143acfbc8481e9b49bf5",
+      "stable_since": "2026-09-05",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "index.html": {
+          "file": "index_20260905.html",
+          "sha256": "e79b6d63cbc9876f0e1d8cbee89bfa981391c3001c0b3965f04e0aeb03a2e9cf",
+          "size": 12126
+        },
+        "t20260506_1963595.html": {
+          "file": "t20260506_1963595_20260529.html",
+          "sha256": "081a8cdef7b0a4e20a9e7362dadb59223461970462367bf11062b5c86dd802e1",
+          "size": 157436
+        },
+        "t20260601_1963851.html": {
+          "file": "t20260601_1963851_20260703.html",
+          "sha256": "88dead12bfa8504f2fceaf3276df78b094d6de8c4bd3a32e55fefb7dd02d4535",
+          "size": 155636
+        },
+        "t20260701_1964047.html": {
+          "file": "t20260701_1964047_20260717.html",
+          "sha256": "491325c2c981373e53d0da73c03456ea84ce2799b3e58190038678a627a9c3b7",
+          "size": 162332
+        },
+        "t20260803_1964272.html": {
+          "file": "t20260803_1964272_20260901.html",
+          "sha256": "77c0791b5af98121e1e3b5034fd4a610013c35029b413a9230f9ce8af31ba350",
+          "size": 155668
+        },
+        "t20260901_1965170.html": {
+          "file": "t20260901_1965170_20260905.html",
+          "sha256": "925fe7ed8f09e31df2de50383200f7e8e3f4826453586db86abcc8ca1e7e5edc",
+          "size": 131197
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:3bcd652a3de23d65e99a34efe44facc9bfff220c976e143acfbc8481e9b49bf5",
+          "first_seen": "2026-09-05",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "occto-capacity": {
+      "digest": "sha256:ef257b9b0b210677a412513ba99dfa1f06144d69117e2e7e3855a849de659216",
+      "stable_since": "2026-05-20",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "2024_yakujoukekka_csv.zip": {
+          "file": "2024_yakujoukekka_csv.zip",
+          "sha256": "62b3d4b5b8fa5a454b6c85a7908f12931f395a88400f8280b823134de625b744",
+          "size": 561
+        },
+        "2025_yakujoukekka_csv.zip": {
+          "file": "2025_yakujoukekka_csv.zip",
+          "sha256": "e67e6761ce00c28dcc8dc6f17a1f466a51e754aeaa38c041cd67d53d080f5207",
+          "size": 576
+        },
+        "2026_yakujoukekka_csv.zip": {
+          "file": "2026_yakujoukekka_csv.zip",
+          "sha256": "0cb7fc4d7fb46637ef3b7c41ca7d2d59290ccd3deba401a29095c65f0a6210e4",
+          "size": 608
+        },
+        "2027_yakujoukekka_csv.zip": {
+          "file": "2027_yakujoukekka_csv.zip",
+          "sha256": "427718d9a28b358a676af0e0fbb02c1e5eb1be3b8dbb206bcb738737e45dd970",
+          "size": 611
+        },
+        "2028_main_yakujoukekka_csv.zip": {
+          "file": "2028_main_yakujoukekka_csv.zip",
+          "sha256": "4949abeb6cd2f8e787c1af6819318fc0f12fb796a3f03467f54fb6c2621eec5d",
+          "size": 602
+        },
+        "2029_yakujoukekka_csv.zip": {
+          "file": "2029_yakujoukekka_csv.zip",
+          "sha256": "d682dcb36c9b778be40e3ecb75779d128b4fb6e1bc844fe4e3a155ad239bd846",
+          "size": 859
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:ef257b9b0b210677a412513ba99dfa1f06144d69117e2e7e3855a849de659216",
+          "first_seen": "2026-05-20",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    },
+    "us-treasury": {
+      "digest": "sha256:026f62559268b1d682939714cc38e4abdf55910baf4d31a851ea967b541fa6f9",
+      "stable_since": "2026-09-05",
+      "last_seen": "2026-09-05",
+      "keys": {
+        "treasury_yields_1990.csv": {
+          "file": "treasury_yields_1990_20260518.csv",
+          "sha256": "defcc321e1b3442f43d68a2ddf032442b4a668a2c06f62074b516abbb990c99c",
+          "size": 14319
+        },
+        "treasury_yields_1991.csv": {
+          "file": "treasury_yields_1991_20260518.csv",
+          "sha256": "4afa6106184bb194907c2b21d71f75c583187d4c95629ef1b81978b04932cd56",
+          "size": 14319
+        },
+        "treasury_yields_1992.csv": {
+          "file": "treasury_yields_1992_20260518.csv",
+          "sha256": "fa8e0e6a2e9be22229a25a41611ce412130cfaeba0ddd012723dee899de639e2",
+          "size": 14376
+        },
+        "treasury_yields_1993.csv": {
+          "file": "treasury_yields_1993_20260518.csv",
+          "sha256": "5a339904bc72283ad9e3711a95c519fe076dd8f65e98c5e292c9019606f126fb",
+          "size": 14825
+        },
+        "treasury_yields_1994.csv": {
+          "file": "treasury_yields_1994_20260518.csv",
+          "sha256": "48d7c787136a567832f5e765c0515a2722f58c49063aa3cd2f9ed6206ff1bbce",
+          "size": 15515
+        },
+        "treasury_yields_1995.csv": {
+          "file": "treasury_yields_1995_20260518.csv",
+          "sha256": "4230f259fa68211cec4fceb0a33bbacb54d07a9741e5bd884e9d798b05b8b856",
+          "size": 15577
+        },
+        "treasury_yields_1996.csv": {
+          "file": "treasury_yields_1996_20260518.csv",
+          "sha256": "b39c7dd67c77c6d203969abba1884d843700d0a0b15ad6af1b7b0ade32eb3945",
+          "size": 15701
+        },
+        "treasury_yields_1997.csv": {
+          "file": "treasury_yields_1997_20260518.csv",
+          "sha256": "0a767f2028cd7a5ea4f2cff05ae299659e67ee1c021b42b02860633dca49d718",
+          "size": 15577
+        },
+        "treasury_yields_1998.csv": {
+          "file": "treasury_yields_1998_20260518.csv",
+          "sha256": "a28c28e8c182f05d3c39bc5ee34e2950cccad0838004fdf4231b13d76ad0228d",
+          "size": 15577
+        },
+        "treasury_yields_1999.csv": {
+          "file": "treasury_yields_1999_20260518.csv",
+          "sha256": "31e9ab41999ba43b91d6cbbfddfe42ac5b0fa23b39a21b59020ac7950c88af26",
+          "size": 15639
+        },
+        "treasury_yields_2000.csv": {
+          "file": "treasury_yields_2000_20260518.csv",
+          "sha256": "fd0ee0107b3537a4355dcb7feef3abcc37a7d2cc353b1245564c84e90eb25d0c",
+          "size": 15639
+        },
+        "treasury_yields_2001.csv": {
+          "file": "treasury_yields_2001_20260518.csv",
+          "sha256": "55e562e7f5ec83080cf0304faba5540f9ee033a386fb359f7191a7a6de9515f7",
+          "size": 16120
+        },
+        "treasury_yields_2002.csv": {
+          "file": "treasury_yields_2002_20260518.csv",
+          "sha256": "45b905402a433e081286c1d6864191d30bc880ad7fe4f0c38c7844c8c3b4be05",
+          "size": 15962
+        },
+        "treasury_yields_2003.csv": {
+          "file": "treasury_yields_2003_20260518.csv",
+          "sha256": "1280a28b6ffd044b71011ac28d0117dd196386586eedb42471e1b467d6661053",
+          "size": 15576
+        },
+        "treasury_yields_2004.csv": {
+          "file": "treasury_yields_2004_20260518.csv",
+          "sha256": "83fb3836a6b54175c65c0d1dc32501f754fcf6b5ef70557c0734fee1cb67716f",
+          "size": 15576
+        },
+        "treasury_yields_2005.csv": {
+          "file": "treasury_yields_2005_20260518.csv",
+          "sha256": "1af679989307721c8a6380edc7a7cfe88587099632288ceb180d1dbe5cfc4b67",
+          "size": 15576
+        },
+        "treasury_yields_2006.csv": {
+          "file": "treasury_yields_2006_20260518.csv",
+          "sha256": "6665bcd3691ee7420619bbb62a8428dcd678402acef281469f7e5302ed6604bc",
+          "size": 16730
+        },
+        "treasury_yields_2007.csv": {
+          "file": "treasury_yields_2007_20260518.csv",
+          "sha256": "7552bded7774aec8a8a3a898a56c9a8caece87336124ac9099b3035ee5970598",
+          "size": 16901
+        },
+        "treasury_yields_2008.csv": {
+          "file": "treasury_yields_2008_20260518.csv",
+          "sha256": "884b2ec940c6788936d3277400221cb1ea4572b80c92695322b4a9a4c34fd663",
+          "size": 16889
+        },
+        "treasury_yields_2009.csv": {
+          "file": "treasury_yields_2009_20260518.csv",
+          "sha256": "83a57cc48910ccd4c0cdcbd6826d1d08cb2e31abde0feddd310b8502c6970660",
+          "size": 16834
+        },
+        "treasury_yields_2010.csv": {
+          "file": "treasury_yields_2010_20260518.csv",
+          "sha256": "b3a6e90ad52f7151980581531638a63f4cd0270fc267b2caf43a7d94cce5dbf8",
+          "size": 16924
+        },
+        "treasury_yields_2011.csv": {
+          "file": "treasury_yields_2011_20260518.csv",
+          "sha256": "9c8a28690f229286a0485b2d158d8fe4ed50574d7bf21b7e034059a0d3591b25",
+          "size": 16834
+        },
+        "treasury_yields_2012.csv": {
+          "file": "treasury_yields_2012_20260518.csv",
+          "sha256": "7325ea2750f7a315ee813c3457ae03cdbffd093af017840c80714f89cf4d9763",
+          "size": 16834
+        },
+        "treasury_yields_2013.csv": {
+          "file": "treasury_yields_2013_20260518.csv",
+          "sha256": "1970f6a703dbc937e8418c96151432a1912d495f9091a2644f431590e44f218f",
+          "size": 16834
+        },
+        "treasury_yields_2014.csv": {
+          "file": "treasury_yields_2014_20260518.csv",
+          "sha256": "76c85b13f529842177398379f79dbabf240c7e635501ae1b95c05b9b9b780f52",
+          "size": 16834
+        },
+        "treasury_yields_2015.csv": {
+          "file": "treasury_yields_2015_20260518.csv",
+          "sha256": "2907ffd3075c9c578f0662907672691ad13617f059a9c89de9747510cfe5afc7",
+          "size": 16901
+        },
+        "treasury_yields_2016.csv": {
+          "file": "treasury_yields_2016_20260518.csv",
+          "sha256": "c7e2b90d25b8ea9f08507f7a98984276f3de70f5df66bba1adc3ff48a990672f",
+          "size": 16834
+        },
+        "treasury_yields_2017.csv": {
+          "file": "treasury_yields_2017_20260518.csv",
+          "sha256": "e017a46816deaa6e6c2c3a1c1b92ff4de9200ba8020623ced2e736dc5b7e74ee",
+          "size": 16834
+        },
+        "treasury_yields_2018.csv": {
+          "file": "treasury_yields_2018_20260518.csv",
+          "sha256": "1eeb4e389573172a0eb9a30d53ca7a803a3cb7297c020c7ec996a21e2339a8aa",
+          "size": 17227
+        },
+        "treasury_yields_2019.csv": {
+          "file": "treasury_yields_2019_20260518.csv",
+          "sha256": "028117f9d5d799372323f20a30337b6365c5d61b5d6e33cad88dfced5af00764",
+          "size": 18091
+        },
+        "treasury_yields_2020.csv": {
+          "file": "treasury_yields_2020_20260518.csv",
+          "sha256": "c028621ad8755f62cc0bfc8b7c09f62be9e49d4e1a17bc57582ed53249b0466f",
+          "size": 18163
+        },
+        "treasury_yields_2021.csv": {
+          "file": "treasury_yields_2021_20260518.csv",
+          "sha256": "bd50bb1530b07850e3f696114724f950da8be1171c42f5b8f0624af167dd534c",
+          "size": 18163
+        },
+        "treasury_yields_2022.csv": {
+          "file": "treasury_yields_2022_20260518.csv",
+          "sha256": "b3aeb9ab6998878be2c82722fd42933b1e461f1953f999b3dd2fb6f200707bc9",
+          "size": 18475
+        },
+        "treasury_yields_2023.csv": {
+          "file": "treasury_yields_2023_20260518.csv",
+          "sha256": "1d5072667b66fda85631219d9b8baab95d631a92765c0bf2885558019f2d0816",
+          "size": 19348
+        },
+        "treasury_yields_2024.csv": {
+          "file": "treasury_yields_2024_20260518.csv",
+          "sha256": "27898e5d4409074f9f387a736f6864574b5f5721b38b0199286eaf9d1ef575d8",
+          "size": 19348
+        },
+        "treasury_yields_2025.csv": {
+          "file": "treasury_yields_2025_20260518.csv",
+          "sha256": "e834d3ba9fc2821db78e804fca19c44b89b864911c36a14e2c6a446815b1d709",
+          "size": 20404
+        },
+        "treasury_yields_2026.csv": {
+          "file": "treasury_yields_2026_20260905.csv",
+          "sha256": "be0b64400022cf467f57f5ccdd901412eada30b0933183e56dcd8b93d5179eaa",
+          "size": 14132
+        }
+      },
+      "history": [
+        {
+          "digest": "sha256:026f62559268b1d682939714cc38e4abdf55910baf4d31a851ea967b541fa6f9",
+          "first_seen": "2026-09-05",
+          "last_seen": "2026-09-05"
+        }
+      ]
+    }
+  },
+  "assessment": {
+    "date": "2026-09-05",
+    "watched": [
+      "eia_intl",
+      "ember",
+      "enecho-power",
+      "fuel",
+      "gio"
+    ],
+    "frozen": [],
+    "changed": []
+  }
+}

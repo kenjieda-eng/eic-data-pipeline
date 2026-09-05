@@ -378,6 +378,13 @@ sources:
     publisher: The World Bank Group
     publisher_url: https://www.worldbank.org/en/research/commodity-markets
     source_url: https://www.worldbank.org/en/research/commodity-markets
+    # ----- D-020⑤-1 raw ハッシュ台帳（scripts/raw_ledger.py、2026-09-05）-----
+    # 第3層 = 上流の発行そのもの。月次公表（毎月 2〜4 営業日）なので raw が 40 日を超えて
+    # 1 バイトも変わらなければ L-064 型（URL 年度切替）を疑う。月次で必ず変わるため変化通知は不要。
+    raw_watch:
+      dir: fuel
+      freeze_days: 40
+      notify_change: false
     # 単一の安定 XLSX URL（"CMO-Historical-Data-Monthly"）。
     # World Bank は毎年この文書 URL をローテーションする（0050012025 → 0050012026）。年次で要更新。
     # 旧年版 URL は失効しても暫くは応答するが内部データが古い月で止まる（サイレント停滞）ため、
@@ -829,6 +836,14 @@ sources:
     publisher: 資源エネルギー庁（METI）
     publisher_url: https://www.enecho.meti.go.jp/
     source_url: https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+    # ----- D-020⑤-1 raw ハッシュ台帳（2026-09-05）-----
+    # 凍結: 年度ファイルは公表中の年度が毎月上書き更新される（PR #44 で cache 短絡を解消）。
+    #   45 日を超えて不変なら fetch 側（cache・Akamai・URL）か上流の停止を疑う。
+    # 変化通知: 確報・年報での遡及改訂が起きうる。記事引用があれば L-077 grep。
+    raw_watch:
+      dir: enecho-power
+      freeze_days: 45
+      notify_change: true
     # ----- 2026-04-24 Day 3 実 HTML 疎通で確定した仕様 ------------------
     # ファイルは **年度単位** で公開される（月次ファイルではない）。
     # 1 XLSX に 4 月〜翌 3 月の 12 ヶ月分が格納される wide 形式。
@@ -1656,6 +1671,15 @@ sources:
     publisher: Ember
     publisher_url: https://ember-energy.org/
     source_url: https://ember-energy.org/data/monthly-electricity-data/
+    # ----- D-020⑤-1 raw ハッシュ台帳（2026-09-05）-----
+    # 凍結: 2026-07-08〜08-31 の URL 凍結（54 日）は SLA90 canary が検知したが、jp180/cn120 の
+    #   段差に依存しないソース単位の検知として 45 日で鳴らす（月次更新 + 遅延の実測上限）。
+    # 変化通知: Ember は過去値を改訂する（2026-08-31 移行時に 33/50 系列）。記事 6 本が引用して
+    #   いるため、raw が変わった日に L-077 三系統 grep を走らせる。
+    raw_watch:
+      dir: ember
+      freeze_days: 45
+      notify_change: true
     # 2026-08-31: 旧 URL (monthly_full_release_long_format.csv) は 7/08 以降 200 のまま
     # 凍結（blob 同一・全国最大月 2026-06 で停止）。L-064（Pink Sheet）と同型の
     # サイレント停滞で、US/DE/GB の SLA90 canary が検知した（この 90 日は緩めないこと）。
@@ -4096,6 +4120,13 @@ sources:
     publisher: 国立研究開発法人 国立環境研究所 地球システム領域 地球環境研究センター 温室効果ガスインベントリオフィス (GIO)
     publisher_url: https://www.nies.go.jp/gio/
     source_url: https://www.nies.go.jp/gio/archive/ghgdata/index.html
+    # ----- D-020⑤-1 raw ハッシュ台帳（2026-09-05）-----
+    # 年 1 回（4 月）公表・毎年の再計算で過去年も遡及改定 → 全置換で書く設計。凍結判定はせず、
+    # 変わった日（新年版）に L-077 grep のトリガを出す。
+    raw_watch:
+      dir: gio
+      freeze_days: null
+      notify_change: true
     # ----- 取得経路（L-063 レポート §S-1 §1・§4）--------------------------
     # ★ xlsx の直 URL は絶対にハードコードしない。理由が 2 つ重なっている:
     #   (a) GIO サイトポリシーに「データファイル(PDF、エクセル、ZIP等)への直接リンクは
@@ -4400,6 +4431,14 @@ sources:
     publisher: U.S. Energy Information Administration (EIA)
     publisher_url: https://www.eia.gov/
     source_url: https://www.eia.gov/international/data/world
+    # ----- D-020⑤-1 raw ハッシュ台帳（2026-09-05）-----
+    # 年 1 回更新なので凍結判定はしない。変化通知のみ: 2026-08-25 に GDP（productId 4701）が
+    # CHN/EU27/OECD/WORL の 1980〜2025 で改訂（最大 0.2%）、人口も 8 値改訂されていたが、
+    # 誰も気付かなかった（派生 12 系列は同 run で再計算されるため値は正しいが、告知が無い）。
+    raw_watch:
+      dir: eia_intl
+      freeze_days: null
+      notify_change: true
     # ----- 取得経路 --------------------------------------------------------
     # REST API v2。API キー必須（無料登録、https://www.eia.gov/opendata/register.php）。
     # キーは環境変数 EIA_API_KEY からのみ読む。★ yaml にもコードにも絶対に書かない。
