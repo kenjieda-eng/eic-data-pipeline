@@ -301,6 +301,17 @@ jobs:
         # （観測日規約と SLA はセットで動かすこと）。
         continue-on-error: true
 
+      - name: Record raw hash ledger (D-020⑤-1, third layer)
+        # data/raw/<dir>/ の現在の内容をハッシュして data/ledger/raw-hash.json に記帳し、
+        # 凍結（変わるはずの raw が N 日不変）と変化（過去値が改訂されうる raw が変わった）を判定する。
+        # 全 fetch step の後・catalog 生成の前に置く（fetch の成否・cache の有無に依存しない post-hoc scan。
+        # enecho の cache 短絡〈L-064 第 3 例〉はフェッチ時記帳では見えなかった型）。
+        # ⑤-1 は report-only。判定は commit 後の Staleness hard check が RAW_LEDGER 節として再掲する。
+        # 台帳側の不具合で nightly を止めないため true。
+        run: |
+          python scripts/raw_ledger.py
+        continue-on-error: true
+
       - name: Generate indicators catalog (D-011)
         # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を生成。
         # Required 10 欠落は exit 1（CI fail）、Recommended 欠落/鮮度超過は warning 止まり。
@@ -342,3 +353,11 @@ jobs:
         # check_staleness.py の KNOWN_STALE allowlist で除外している。
         run: |
           python scripts/check_staleness.py
+
+      - name: Fetcher ↔ workflow wiring audit (D-020 §2.4)
+        # scripts/fetch_*.py を全列挙し、いずれかの workflow から python scripts/<name>.py で
+        # 呼ばれているかを照合（逆に、存在しないスクリプトを呼ぶ workflow も検出）。
+        # 未接続（EDINET・OCCTO が 2026-08 まで未接続だった型）が 1 本でもあれば exit 1。
+        # 決定論的（観測に依存しない）なので soft 期間を置かず gating。
+        run: |
+          python scripts/audit_workflow_wiring.py
