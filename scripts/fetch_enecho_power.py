@@ -435,12 +435,20 @@ def fetch_index_pages(index_urls: list[str]) -> list[dict]:
 # ---------------------------------------------------------------------------
 
 
-def download_xlsx(url: str, dest_path: Path) -> bytes:
+def download_xlsx(url: str, dest_path: Path, *, use_cache: bool = True) -> bytes:
     """XLSX を download して raw ディレクトリに保存、bytes を返す。
 
-    既に dest_path が存在する場合は download せず、既存ファイルの bytes を返す。
+    use_cache=True かつ dest_path が既に存在する場合は download せず、既存ファイルの
+    bytes を返す（公表が完了した過去年度向け。年度ファイルは完了後は不変）。
+
+    ★ 2026-09-05（L-064 第 3 例・キャッシュ短絡型）: 公表中の年度ファイル（最新 2 年度）
+    は **毎月上書き更新** される。raw は git 追跡なので nightly の checkout に前回ファイル
+    が常に存在し、この cache hit が最新 2 年度にも効いた結果、FY2025 の 2026-01〜03 月と
+    FY2026 の 5 月以降が一度も取り込まれず、fetcher は毎晩「成功」して updated_at だけが
+    前進していた（軸2 は緑のまま）。公表中の年度は呼び出し側が use_cache=False で毎晩
+    再取得すること。
     """
-    if dest_path.exists() and dest_path.stat().st_size > 10_000:
+    if use_cache and dest_path.exists() and dest_path.stat().st_size > 10_000:
         logger.info("cache hit: %s (%d bytes)", dest_path, dest_path.stat().st_size)
         return dest_path.read_bytes()
 
@@ -455,8 +463,11 @@ def download_xlsx(url: str, dest_path: Path) -> bytes:
             f"content preview: {content[:200]!r}"
         )
     dest_path.parent.mkdir(parents=True, exist_ok=True)
-    dest_path.write_bytes(content)
-    logger.info("saved raw: %s (%d bytes)", dest_path, len(content))
+    if dest_path.exists() and dest_path.read_bytes() == content:
+        logger.info("raw unchanged: %s (%d bytes)", dest_path, len(content))
+    else:
+        dest_path.write_bytes(content)
+        logger.info("saved raw: %s (%d bytes)", dest_path, len(content))
     return content
 
 
@@ -1163,10 +1174,14 @@ def fetch_all_months(cfg: dict, *, backfill: bool, since_ym: Optional[str], dry_
     all_links = fetch_index_pages(index_urls)
     all_links = [lk for lk in all_links if lk["fiscal_year"] >= min_fy]
 
+    # 公表中の年度 = index 上の最新 2 年度。毎晩 use_cache=False で再取得する
+    # （年度ファイルは月次で上書き更新される。cache hit で短絡すると新しい月が永久に来ない）。
+    uniq_fys = sorted({lk["fiscal_year"] for lk in all_links}, reverse=True)
+    refresh_fys = set(uniq_fys[:2])
+
     # 通常モードは最新 2 年度のみ（fiscal year 単位で降順 2 件）
     if not backfill:
-        uniq_fys = sorted({lk["fiscal_year"] for lk in all_links}, reverse=True)
-        keep_fys = set(uniq_fys[:2])
+        keep_fys = refresh_fys
         links = [lk for lk in all_links if lk["fiscal_year"] in keep_fys]
         logger.info("normal mode: keeping latest 2 fiscal years %s (was %d candidates)",
                     sorted(keep_fys), len(all_links))
@@ -1223,7 +1238,7 @@ def fetch_all_months(cfg: dict, *, backfill: bool, since_ym: Optional[str], dry_
                 continue
             raw_path = raw_dir / lk["filename"]
             try:
-                xlsx_bytes = download_xlsx(lk["url"], raw_path)
+                xlsx_bytes = download_xlsx(lk["url"], raw_path, use_cache=fy not in refresh_fys)
             except Exception as e:
                 logger.error("FY%d %s download failed: %s", fy, kind, e)
                 continue
