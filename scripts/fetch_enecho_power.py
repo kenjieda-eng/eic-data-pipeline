@@ -98,6 +98,14 @@ LOG_DIR = DATA_ROOT / "_logs"
 # 1 リクエストごとのスリープ（METI サーバへの配慮、1.5 秒）
 SLEEP_BETWEEN_REQUESTS = 1.5
 
+# ----- 2026-09-05 Akamai 202 対策（#44 の実走で判明）-----------------------
+# METI（Akamai Bot Manager）は間欠的に HTTP 202 + 0 bytes のチャレンジ応答を返す。
+# raise_for_status() は 2xx を通すので、index ページなら「リンク 0 件で正常終了」、
+# XLSX なら「0 bytes」になる。#44 で公表中年度を毎晩再取得するようになり、この確率が
+# 毎晩顕在化するため、202 のときは待って再試行する（実測: 180 秒後の再試行で 200）。
+# 試行回数 = len(METI_RETRY_SLEEPS) + 1。最後も 202 なら RuntimeError（黙って 0 件にしない）。
+METI_RETRY_SLEEPS = (45, 120)
+
 # ----- Phase 2-A Day 5 対策（Run #24/25/26 timeout post-mortem）-------
 # GitHub Actions runner（US DC）→ METI サーバへのデフォルト UA
 # （"eic-data-pipeline/0.1 (+github...)"）では応答が返ってこない。
@@ -149,16 +157,29 @@ def _meti_get(url: str, *, timeout: int = 120, accept_xlsx: bool = False):
     headers = dict(XLSX_HEADERS if accept_xlsx else BROWSER_HEADERS)
     # curl_cffi は User-Agent を impersonate プロファイルが自動で設定する。
     # Accept / Accept-Language だけ明示的に上書きする。
-    r = _curl_requests.get(
-        url,
-        impersonate="chrome120",
-        timeout=timeout,
-        headers={
-            "Accept": headers["Accept"],
-            "Accept-Language": headers["Accept-Language"],
-        },
+    attempts = len(METI_RETRY_SLEEPS) + 1
+    for attempt in range(1, attempts + 1):
+        r = _curl_requests.get(
+            url,
+            impersonate="chrome120",
+            timeout=timeout,
+            headers={
+                "Accept": headers["Accept"],
+                "Accept-Language": headers["Accept-Language"],
+            },
+        )
+        if r.status_code != 202:
+            return r
+        if attempt < attempts:
+            wait = METI_RETRY_SLEEPS[attempt - 1]
+            logger.warning(
+                "METI returned 202 (Akamai challenge, %d bytes) for %s — retry %d/%d after %ds",
+                len(r.content), url, attempt, attempts - 1, wait,
+            )
+            time.sleep(wait)
+    raise RuntimeError(
+        f"METI returned HTTP 202 (Akamai challenge) {attempts} times for {url}; giving up"
     )
-    return r
 
 # ファイル名や link text から YYYY-MM を拾う正規表現（複数パターン、上から試す）
 # ※ 本スクリプトのメイン経路では filename は fiscal year 単位（YYYY / H{nn}）。
@@ -460,6 +481,12 @@ def download_xlsx(url: str, dest_path: Path, *, use_cache: bool = True) -> bytes
     if len(content) < 10_000:
         raise RuntimeError(
             f"downloaded xlsx is suspiciously small ({len(content)} bytes); "
+            f"content preview: {content[:200]!r}"
+        )
+    # XLSX は ZIP 容器。チャレンジ HTML や エラーページを raw として保存しない（台帳の偽「変化」防止）。
+    if not content.startswith(b"PK"):
+        raise RuntimeError(
+            f"downloaded file is not an XLSX/ZIP (magic bytes: {content[:4]!r}); "
             f"content preview: {content[:200]!r}"
         )
     dest_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1173,6 +1200,13 @@ def fetch_all_months(cfg: dict, *, backfill: bool, since_ym: Optional[str], dry_
     min_fy = int(cfg.get("min_fiscal_year") or 2016)
     all_links = fetch_index_pages(index_urls)
     all_links = [lk for lk in all_links if lk["fiscal_year"] >= min_fy]
+    if not all_links:
+        # index は 200 だがリンクが 1 本も取れない = HTML 構造変更かチャレンジページ。
+        # 0 件のまま exit 0 で終わると「取得成功・追加 0 行」と区別がつかない（サイレント成功）。
+        raise RuntimeError(
+            f"no target XLSX links parsed from index pages {index_urls} (min_fy={min_fy}); "
+            "HTML structure changed or challenge page served"
+        )
 
     # 公表中の年度 = index 上の最新 2 年度。毎晩 use_cache=False で再取得する
     # （年度ファイルは月次で上書き更新される。cache hit で短絡すると新しい月が永久に来ない）。
