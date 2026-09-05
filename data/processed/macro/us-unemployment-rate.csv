@@ -941,3 +941,4 @@ date,indicator_id,region,value,source_url
 2026-05-01,us-unemployment-rate,us,4.3,https://fred.stlouisfed.org/series/UNRATE
 2026-06-01,us-unemployment-rate,us,4.2,https://fred.stlouisfed.org/series/UNRATE
 2026-07-01,us-unemployment-rate,us,4.1,https://fred.stlouisfed.org/series/UNRATE
+2026-08-01,us-unemployment-rate,us,4.1,https://fred.stlouisfed.org/series/UNRATE
