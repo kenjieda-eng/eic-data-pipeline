@@ -92,4 +92,8 @@ date,indicator_id,region,value,source_url
 2025-10-01,meti-demand-lights,jp,13696.961,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2025-11-01,meti-demand-lights,jp,13833.897,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2025-12-01,meti-demand-lights,jp,16187.276,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-01-01,meti-demand-lights,jp,21748.839,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-02-01,meti-demand-lights,jp,21920.326,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-03-01,meti-demand-lights,jp,17712.361,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2026-04-01,meti-demand-lights,jp,15260.175,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-05-01,meti-demand-lights,jp,12633.864,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/

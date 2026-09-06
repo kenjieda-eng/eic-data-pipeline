@@ -56,7 +56,11 @@ date,indicator_id,region,value,source_url
 2025-07-01,meti-gen-wind,jp,524.317,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2025-08-01,meti-gen-wind,jp,462.671,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2025-09-01,meti-gen-wind,jp,563.334,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
-2025-10-01,meti-gen-wind,jp,1183.058,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
-2025-11-01,meti-gen-wind,jp,1060.517,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
-2025-12-01,meti-gen-wind,jp,1276.373,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2025-10-01,meti-gen-wind,jp,692.49,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2025-11-01,meti-gen-wind,jp,1070.666,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2025-12-01,meti-gen-wind,jp,1296.18,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-01-01,meti-gen-wind,jp,1434.808,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-02-01,meti-gen-wind,jp,1064.016,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-03-01,meti-gen-wind,jp,947.391,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2026-04-01,meti-gen-wind,jp,973.157,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-05-01,meti-gen-wind,jp,7241.271,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/

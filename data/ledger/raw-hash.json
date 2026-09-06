@@ -1,16 +1,16 @@
 {
   "schema": "raw-ledger-v1",
-  "updated_at": "2026-09-05T13:56:38+09:00",
+  "updated_at": "2026-09-06T09:50:00+09:00",
   "sources": {
     "boj-tankan": {
-      "digest": "sha256:33f0ee3e55af6ba112bce14f91d892d1fd7296df9a3cb5ef83620a401076a557",
-      "stable_since": "2026-09-05",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:b49b9aa4fb860bf114fa3861d599b3dfff299a97b7a2086639e0101ed7d0758c",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "boj_CO.csv": {
-          "file": "boj_CO_20260905.csv",
-          "sha256": "4cfda52b93f73a7c317c20d4377ba4afa191a6fcf23363c38496e00b87261b6f",
-          "size": 124134
+          "file": "boj_CO_20260906.csv",
+          "sha256": "3704457d6db014bd1073b99a5e974c04af086527b381122fda5a4524a5df7af2",
+          "size": 123331
         }
       },
       "history": [
@@ -18,38 +18,43 @@
           "digest": "sha256:33f0ee3e55af6ba112bce14f91d892d1fd7296df9a3cb5ef83620a401076a557",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:b49b9aa4fb860bf114fa3861d599b3dfff299a97b7a2086639e0101ed7d0758c",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "ecb": {
-      "digest": "sha256:1c09a7b7b4b5d4192ba763f5b6cc04a37f8652ec85a6e7ed4d939c78bcd8eac1",
-      "stable_since": "2026-09-05",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:dc22e0ca4aa7cd39a13b99c70d3cf90606fcf0f2a1cb74b9203919d3f3be8c9e",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "ecb_EXR_M_JPY_EUR_SP00_A.csv": {
-          "file": "ecb_EXR_M_JPY_EUR_SP00_A_20260905.csv",
+          "file": "ecb_EXR_M_JPY_EUR_SP00_A_20260906.csv",
           "sha256": "26ed1af55660ffe7323415e9921c885f888ffbee3a49bbc28cb6b6a8e34182ff",
           "size": 8260
         },
         "ecb_EXR_M_USD_EUR_SP00_A.csv": {
-          "file": "ecb_EXR_M_USD_EUR_SP00_A_20260905.csv",
+          "file": "ecb_EXR_M_USD_EUR_SP00_A_20260906.csv",
           "sha256": "9e36284ce12d1ac41dc66df171374f5c57a8eb8921f1040444ceaf71f4a4a41f",
           "size": 7994
         },
         "ecb_FM_D_U2_EUR_4F_KR_DFR_LEV.csv": {
-          "file": "ecb_FM_D_U2_EUR_4F_KR_DFR_LEV_20260905.csv",
-          "sha256": "4d7bdeb6d180193877f76404dbaef42f6e16ce98f6263e0b1010cc779a4047a0",
-          "size": 326411
+          "file": "ecb_FM_D_U2_EUR_4F_KR_DFR_LEV_20260906.csv",
+          "sha256": "dca215b9ca03e5fc228c8a292978704013fe732abe54bacf5148bfbafc56cf83",
+          "size": 326709
         },
         "ecb_FM_D_U2_EUR_4F_KR_MLFR_LEV.csv": {
-          "file": "ecb_FM_D_U2_EUR_4F_KR_MLFR_LEV_20260905.csv",
-          "sha256": "3dcf102b2d9a2a0dc60887c8bb573e578aaf8645b8828322718937996dfc7a3a",
-          "size": 349952
+          "file": "ecb_FM_D_U2_EUR_4F_KR_MLFR_LEV_20260906.csv",
+          "sha256": "39e1d22e75581844ca6fca3a5ce310b5118e24061eac054dc6ff840ac2abb692",
+          "size": 350270
         },
         "ecb_FM_D_U2_EUR_4F_KR_MRR_FR_LEV.csv": {
-          "file": "ecb_FM_D_U2_EUR_4F_KR_MRR_FR_LEV_20260905.csv",
-          "sha256": "aca7d56c7ab41c5662ee743acea1ddcdc2a214e68f1781675ee9fa0be537265c",
-          "size": 409533
+          "file": "ecb_FM_D_U2_EUR_4F_KR_MRR_FR_LEV_20260906.csv",
+          "sha256": "258ddc9122b04d3c7fc1506216be36d4470e15c6d4cb3ce10bb1d8a2f1da70ca",
+          "size": 409904
         }
       },
       "history": [
@@ -57,46 +62,51 @@
           "digest": "sha256:1c09a7b7b4b5d4192ba763f5b6cc04a37f8652ec85a6e7ed4d939c78bcd8eac1",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:dc22e0ca4aa7cd39a13b99c70d3cf90606fcf0f2a1cb74b9203919d3f3be8c9e",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "edinet": {
       "digest": "sha256:13167e31caaae7db1b48f7953bab620a4b9d6eb684a6ebfc47a8e31fe8fb2b90",
       "stable_since": "2026-08-22",
-      "last_seen": "2026-09-05",
+      "last_seen": "2026-09-06",
       "keys": null,
       "history": [
         {
           "digest": "sha256:13167e31caaae7db1b48f7953bab620a4b9d6eb684a6ebfc47a8e31fe8fb2b90",
           "first_seen": "2026-08-22",
-          "last_seen": "2026-09-05"
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "eia_intl": {
-      "digest": "sha256:a3d4b9cbb3e8fd54e34b15056f5eed6a427418d2383354f9a07e225da0a76e39",
-      "stable_since": "2026-08-25",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:80313e939bb9d75766ed0add94a354c35c2c1bfbc5c970289af52a7391dc5a81",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "eia_intl_gdp.json": {
-          "file": "eia_intl_gdp_20260905.json",
-          "sha256": "8c6b8652843aa46f598396f93dfa2adcd3b7bdb3921ccc0449e074c74a3fb8e5",
-          "size": 140678
+          "file": "eia_intl_gdp_20260906.json",
+          "sha256": "b9313fa1520ecd77998dacd842efc1fa3b1499238760d19ed29807036dac6d49",
+          "size": 136255
         },
         "eia_intl_jp_breakdown.json": {
-          "file": "eia_intl_jp_breakdown_20260905.json",
-          "sha256": "e29b600385e6793b80c36670ca6b91d50fa673bde81eab13e2545127da3abc88",
-          "size": 69254
+          "file": "eia_intl_jp_breakdown_20260906.json",
+          "sha256": "208d16f689072199c22ff625a63be7cea02654db5fdf989c2daadfd9c3d30c48",
+          "size": 67087
         },
         "eia_intl_population.json": {
-          "file": "eia_intl_population_20260905.json",
-          "sha256": "17baf4a5225fd869590f29e41995f21ab63508fbc5969d3325ab5d6ca564d979",
-          "size": 131194
+          "file": "eia_intl_population_20260906.json",
+          "sha256": "a2ad02b41bd985a7ed2c357696bc72f705c37487e56c1da6e778e8160fbf6580",
+          "size": 126771
         },
         "eia_intl_totals.json": {
-          "file": "eia_intl_totals_20260905.json",
-          "sha256": "9872efd28c0e52d2cc08d10b139ed0a5f12f7fc3ae9eead474f100eb68a92066",
-          "size": 180956
+          "file": "eia_intl_totals_20260906.json",
+          "sha256": "2d0887c55884e7ecaa85f5744a43a50aedc44ce40fd82497969039449da6fb06",
+          "size": 175141
         }
       },
       "history": [
@@ -104,18 +114,23 @@
           "digest": "sha256:a3d4b9cbb3e8fd54e34b15056f5eed6a427418d2383354f9a07e225da0a76e39",
           "first_seen": "2026-08-25",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:80313e939bb9d75766ed0add94a354c35c2c1bfbc5c970289af52a7391dc5a81",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "ember": {
-      "digest": "sha256:383f03410f6b616ee5ff58eeb29176b3af49ccdef1c4994fc3ae5729e689548f",
-      "stable_since": "2026-08-31",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:ce462e3fa02ebee1391167361c3f1dd5633b1ba7601a4610c5d265b511328e60",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "ember_monthly.csv": {
-          "file": "ember_monthly_20260905.csv",
-          "sha256": "4bfefbba42a823117f8a73526ee809fdb9601dffe8ddf9e30619bc639b05cc3e",
-          "size": 27748654
+          "file": "ember_monthly_20260906.csv",
+          "sha256": "64f6d60f6805a1c19d583e69a8f5361a70de244a9987de777f1e3cbf922e4584",
+          "size": 27573056
         }
       },
       "history": [
@@ -123,13 +138,18 @@
           "digest": "sha256:383f03410f6b616ee5ff58eeb29176b3af49ccdef1c4994fc3ae5729e689548f",
           "first_seen": "2026-08-31",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:ce462e3fa02ebee1391167361c3f1dd5633b1ba7601a4610c5d265b511328e60",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "enecho-power": {
-      "digest": "sha256:17a3fb5ef35165c18603dd1204b5773de6142eec8b188580841d28029f34d85c",
-      "stable_since": "2026-08-01",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:250cf4286a9575a74b397f9cb88e53b4f38fcffa785e1bcd0c5e87c62948e2e7",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "2-1-2018.xlsx": {
           "file": "2-1-2018.xlsx",
@@ -168,13 +188,13 @@
         },
         "2-1-2025.xlsx": {
           "file": "2-1-2025.xlsx",
-          "sha256": "2722b59a72a09c2d12888c5aa9d1235ccff8b9d250c7a8154beb903b52590b03",
-          "size": 1702114
+          "sha256": "85496ef5bcc2e95404f7cc75da60cd4cc2e94b93d1f046897674f8591f6e64cb",
+          "size": 2280249
         },
         "2-1-2026.xlsx": {
           "file": "2-1-2026.xlsx",
-          "sha256": "9ca99f92f84e9cb91ba1cfb49ec85ba54ac012dd4842bd76a6e9715f756a53b3",
-          "size": 240821
+          "sha256": "e68897f4cde9783160801f8a7a12f3b2bba926b08841002c6c241d6831483823",
+          "size": 433593
         },
         "2-1-H28.xlsx": {
           "file": "2-1-H28.xlsx",
@@ -223,13 +243,13 @@
         },
         "3-1-2025.xlsx": {
           "file": "3-1-2025.xlsx",
-          "sha256": "5a7053ed297d03e948ab6cb8c479d5457ebf1d0d0988cd3be2cc118aa67eec72",
-          "size": 692690
+          "sha256": "22d167d917e441e3e7d800ea260c556001c85f55f17a89db350fd936a5aea882",
+          "size": 917763
         },
         "3-1-2026.xlsx": {
           "file": "3-1-2026.xlsx",
-          "sha256": "928093986b9dc724b34ea52229063b5e431aaa0e8665677c17bdd1ae536d9c9e",
-          "size": 110962
+          "sha256": "bbe7b65a1c4e3df2741735ae1cae59f58b5bcb0e6089131a30f16e7930702f4b",
+          "size": 184694
         },
         "3-1-H28.xlsx": {
           "file": "3-1-H28.xlsx",
@@ -247,32 +267,37 @@
           "digest": "sha256:17a3fb5ef35165c18603dd1204b5773de6142eec8b188580841d28029f34d85c",
           "first_seen": "2026-08-01",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:250cf4286a9575a74b397f9cb88e53b4f38fcffa785e1bcd0c5e87c62948e2e7",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "estat": {
-      "digest": "sha256:7b74f770b938afa03720489421a6c3877a4a69c5d5b0541de5233d7f79eb0830",
-      "stable_since": "2026-09-05",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:d7e9fbedaa71aea2ddb4d45566902849bed7c94d3562314daf7da2b34bece803",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "jpn-cpi-yoy.json": {
-          "file": "jpn-cpi-yoy_20260905.json",
-          "sha256": "b113b32886c93acf013aac412ee98bee5c8fa06c1d140011f098a374787d6b86",
+          "file": "jpn-cpi-yoy_20260906.json",
+          "sha256": "3d23e9337d90f7ee5fa43f4be4bf760729476d54d1ad06caf5bde2defa9af9d5",
           "size": 129552
         },
         "jpn-industrial-production.json": {
-          "file": "jpn-industrial-production_20260905.json",
-          "sha256": "2d57cb8f40db931a0a19d87be7d0d6edbed071bf98f41a2b79fe8c75e22151bf",
+          "file": "jpn-industrial-production_20260906.json",
+          "sha256": "3889ebdb4dcb1b6e02cee06f74ec274d9eaf80f0509aa82a3cf459f706783caa",
           "size": 12402
         },
         "jpn-pop_0003448225.json": {
-          "file": "jpn-pop_0003448225_20260905.json",
-          "sha256": "c4324e6810111579b6e46255f20400c9922668259e329c87ec68e77aa1df7781",
+          "file": "jpn-pop_0003448225_20260906.json",
+          "sha256": "095616782582ed608eb6ddfe6122eb5d331bf3165ac45d636a4ca4f7e12d7cd3",
           "size": 863611
         },
         "jpn-pop_0004021110.json": {
-          "file": "jpn-pop_0004021110_20260905.json",
-          "sha256": "2d599a1f780bef485e9b8229d99acae4d3dea9602da9178da9c5515d0809d58d",
+          "file": "jpn-pop_0004021110_20260906.json",
+          "sha256": "e1216d068ffb0cba626a7e2e283a6ae1cf80af38a2fd9778207854518e4c83ed",
           "size": 1078374
         }
       },
@@ -281,42 +306,47 @@
           "digest": "sha256:7b74f770b938afa03720489421a6c3877a4a69c5d5b0541de5233d7f79eb0830",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:d7e9fbedaa71aea2ddb4d45566902849bed7c94d3562314daf7da2b34bece803",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "estat_trade": {
-      "digest": "sha256:3703d02e4047f66f4c14117a99c6f9f3d6d2a8954ed104f0a017b89c53d41b1c",
-      "stable_since": "2026-09-05",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:baf6eb10c7662f060f3bb781beebf28772ef1d060dfb73b23a18ab5dde7896c0",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "coal_0003313966.json": {
-          "file": "coal_0003313966_20260905.json",
-          "sha256": "6b5ff0dabef92e4dad47ba7b0e36001b7c24a02d9918907ac82e01cb3fe270c0",
+          "file": "coal_0003313966_20260906.json",
+          "sha256": "0b54e784ae63f9a72db5fbd99e4f9244719d084ebb92becd35f7e1b1cbba9a49",
           "size": 54824
         },
         "coal_0003425294.json": {
-          "file": "coal_0003425294_20260905.json",
-          "sha256": "1bd0b42d7234ec0f44ae39613a41a1b350b8eea65b9f4dd44be01869844f73e8",
+          "file": "coal_0003425294_20260906.json",
+          "sha256": "490a9ea724bc39e066212504d9f177c4547d7078be4daf7fbf557c2c08cfeac0",
           "size": 51554
         },
         "crude_0003313966.json": {
-          "file": "crude_0003313966_20260905.json",
-          "sha256": "d38eaa6fa178f7d78ad41c04985f07fe8a381e5086311a02f80978ae8d75954d",
+          "file": "crude_0003313966_20260906.json",
+          "sha256": "485157023628134cdee4f1bd48e600b8deb79a9c486d8e43e1cb0ec7244715ab",
           "size": 35791
         },
         "crude_0003425294.json": {
-          "file": "crude_0003425294_20260905.json",
-          "sha256": "c6d39e811c8d1d9f08668108cf5aea277b6db5163572b1c869a1ff28d5e7fb70",
+          "file": "crude_0003425294_20260906.json",
+          "sha256": "47743b03aedb40196146a0c4f35b6d360c2d39a916dc9014b2cf92000e2a8954",
           "size": 32524
         },
         "lng_0003313966.json": {
-          "file": "lng_0003313966_20260905.json",
-          "sha256": "9498d019cb531fa591799dc6f4d40d3a96bc3df49c3a82c499ca938d1886f0c7",
+          "file": "lng_0003313966_20260906.json",
+          "sha256": "53053ffb13c8de3380d8e7627afc6a3d3be3ae93547235c0fffd8d193df58cf6",
           "size": 31554
         },
         "lng_0003425294.json": {
-          "file": "lng_0003425294_20260905.json",
-          "sha256": "48db1a98567f60318319128a2f50875fcfca0bae3773c5f4422fdebb28a45839",
+          "file": "lng_0003425294_20260906.json",
+          "sha256": "edb087e3d0566afdf12c5a6b50cc586481ecf041705f5db2d3e7f388a8a8f7fc",
           "size": 32693
         }
       },
@@ -325,23 +355,28 @@
           "digest": "sha256:3703d02e4047f66f4c14117a99c6f9f3d6d2a8954ed104f0a017b89c53d41b1c",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:baf6eb10c7662f060f3bb781beebf28772ef1d060dfb73b23a18ab5dde7896c0",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "eu-ets": {
-      "digest": "sha256:7a70a9f57123aec8c39c735688b007c3dfa83942fd6b9982fa9a07c9224f4e92",
-      "stable_since": "2026-06-01",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:fd4fb34f2127f8d3b8686fd50798fccc10d25a2b521dd0a2e00aab6e4ac3f945",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "eu_ets_full.csv": {
-          "file": "eu_ets_full_20260905.csv",
-          "sha256": "6d08b878f0d347057343f9cc51a620fd8e4d38a0bcb1d156201d0f0d32f8db3e",
-          "size": 8197604
+          "file": "eu_ets_full_20260906.csv",
+          "sha256": "db622731846f843b414a6de1aed3060b0dbdd6ff94618fe7e3893837331458d5",
+          "size": 8113697
         },
         "eu_ets_sector.csv": {
-          "file": "eu_ets_sector_20260905.csv",
-          "sha256": "733dabac632b01c4296f7ea5bc649382570a0fec913811e0e9561b39c1ef7db9",
-          "size": 7391
+          "file": "eu_ets_sector_20260906.csv",
+          "sha256": "bb938ffabf1079d0d1dbe8630381c10b796117814531a7baba12eb3b7b0970ea",
+          "size": 7229
         }
       },
       "history": [
@@ -349,23 +384,28 @@
           "digest": "sha256:7a70a9f57123aec8c39c735688b007c3dfa83942fd6b9982fa9a07c9224f4e92",
           "first_seen": "2026-06-01",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:fd4fb34f2127f8d3b8686fd50798fccc10d25a2b521dd0a2e00aab6e4ac3f945",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "fit": {
-      "digest": "sha256:e591a87b96ddbc3c8bba94c5f224843b3def53fd5fa2dfad10798e42a57b74a6",
-      "stable_since": "2026-07-07",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:809e0784cb9a6d3972462ff229a216b80abd60cd794ff46629839ea196be330a",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "current.html": {
-          "file": "current_20260905.html",
-          "sha256": "2d84114f3ea4c7a373fe3d4052afb489e57c760a4a300d8d1146a4d275805bd8",
-          "size": 36353
+          "file": "current_20260906.html",
+          "sha256": "0e2906f575319f89857194e834d311189c316109810ca3ec6d20d725d5857031",
+          "size": 2467
         },
         "past.html": {
-          "file": "past_20260905.html",
-          "sha256": "3acc54c97a076c9ef87eb0a10a1fe04fda39ae703562586bb8be6fd0304018c6",
-          "size": 190178
+          "file": "past_20260906.html",
+          "sha256": "021642d0d66e77b8f9d50b38211df7ec639d0dc43d2d5bfa268abd9633e545d8",
+          "size": 2467
         }
       },
       "history": [
@@ -373,61 +413,66 @@
           "digest": "sha256:e591a87b96ddbc3c8bba94c5f224843b3def53fd5fa2dfad10798e42a57b74a6",
           "first_seen": "2026-07-07",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:809e0784cb9a6d3972462ff229a216b80abd60cd794ff46629839ea196be330a",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "fred-macro": {
-      "digest": "sha256:2137510068335e6712d74939fcaa0b4069c26d61d3a60a6a4a7d923cfeede760",
-      "stable_since": "2026-09-05",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:f52480e936d0872b7741b3a5dd52a5ebea1f2f674ff70e787885f8bb4e661745",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "CPIAUCSL.csv": {
           "file": "CPIAUCSL_20260511.csv",
-          "sha256": "a47601ac1bd0dcc4d06fb29d5ed2d6d87fa9ece717e58410de67bf9a206cb0e7",
-          "size": 18601
+          "sha256": "549802c699343cf4bb87167fc489451bc1e02a2e9d5fcb2efe89889ea06fefa1",
+          "size": 17649
         },
         "CPIAUCSL.json": {
-          "file": "CPIAUCSL_20260905.json",
-          "sha256": "7c1540ad0eafc4c462cb9bd9545024c1de00b99f40ba5c39a8e125dd9f880026",
+          "file": "CPIAUCSL_20260906.json",
+          "sha256": "fd65533bd177ddd52a456254d737b5ff5dd0162424596e4c19ba4829ac4511ef",
           "size": 92295
         },
         "CPIENGSL.json": {
-          "file": "CPIENGSL_20260905.json",
-          "sha256": "5eb6d6921418e1e56ca7b87f1c82c060915dccad18bd4a3225dfe25a2fa0625e",
+          "file": "CPIENGSL_20260906.json",
+          "sha256": "2db8fc3761cb076e040a0ad3bcbfe41d3c0cd8375994105112fd14d38311b509",
           "size": 80575
         },
         "CPIUFDSL.json": {
-          "file": "CPIUFDSL_20260905.json",
-          "sha256": "75c2f85823e482fd0e730da53156b69c6a2f29a40068033cf0166bd6c345e299",
+          "file": "CPIUFDSL_20260906.json",
+          "sha256": "a79a0803fb1e09427fabddfacf39031a3648bcf024b63501f1b4989b31963517",
           "size": 91978
         },
         "FEDFUNDS.csv": {
           "file": "FEDFUNDS_20260511.csv",
-          "sha256": "8228672d23a53d9b8c866c240a08235bad197802097aecf53e363cc057b0199b",
-          "size": 14742
+          "sha256": "b595c07d1dee8abf0270a96e59e1594441d89fd26e706dc7a01d78600c53df9a",
+          "size": 13879
         },
         "FEDFUNDS.json": {
-          "file": "FEDFUNDS_20260905.json",
+          "file": "FEDFUNDS_20260906.json",
           "sha256": "e57ade20cba6ac3f09d56a1d99748516696674dc517f2f4e54117fb963d37599",
           "size": 82606
         },
         "INDPRO.csv": {
           "file": "INDPRO_20260511.csv",
-          "sha256": "bda049278ae8ef6109575ac5ad403cc4570ee18d4a41f9b1aa77d13356320208",
-          "size": 25628
+          "sha256": "ab5848d2519103d2abf36413726432223ca5c0399e937932a3069bd8bd9b3b63",
+          "size": 24340
         },
         "INDPRO.json": {
-          "file": "INDPRO_20260905.json",
+          "file": "INDPRO_20260906.json",
           "sha256": "36d66eb53a072e014fe45005bd112227caac1a39a3d6697a810b207bcfb918d7",
           "size": 126554
         },
         "PAYEMS.json": {
-          "file": "PAYEMS_20260905.json",
+          "file": "PAYEMS_20260906.json",
           "sha256": "9d759f6b850b74da7ca78e9c6625a974631cc3363491b1b3a194403454cc8e51",
           "size": 101748
         },
         "UNRATE.json": {
-          "file": "UNRATE_20260905.json",
+          "file": "UNRATE_20260906.json",
           "sha256": "5de165542934d06d8b3a937f4e69fd36f0b11698fd617bdd05808ea29a5f7319",
           "size": 89025
         }
@@ -437,16 +482,21 @@
           "digest": "sha256:2137510068335e6712d74939fcaa0b4069c26d61d3a60a6a4a7d923cfeede760",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:f52480e936d0872b7741b3a5dd52a5ebea1f2f674ff70e787885f8bb4e661745",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "fuel": {
       "digest": "sha256:b3cf95e5623325a1c167d84b60e006049154c7ca356d484caea96cc1329bafb4",
       "stable_since": "2026-09-03",
-      "last_seen": "2026-09-05",
+      "last_seen": "2026-09-06",
       "keys": {
         "CMO-Historical-Data-Monthly.xlsx": {
-          "file": "CMO-Historical-Data-Monthly_20260905.xlsx",
+          "file": "CMO-Historical-Data-Monthly_20260906.xlsx",
           "sha256": "9fdcfa8a2aed9a1bb545a10c1a5ce036c6a0acd4766f450424ca800b4b5a0225",
           "size": 586735
         }
@@ -455,19 +505,19 @@
         {
           "digest": "sha256:b3cf95e5623325a1c167d84b60e006049154c7ca356d484caea96cc1329bafb4",
           "first_seen": "2026-09-03",
-          "last_seen": "2026-09-05"
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "fx": {
-      "digest": "sha256:3723456e0e7a1281e9d24ac8a885796666ce135de1e8c0077d9f7a6b8b4d0979",
-      "stable_since": "2026-09-05",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:5e30f134b17d73f1a0241357c573a0c8f060284c1f6376961e343fa3a37f50eb",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "boj_FM08.csv": {
-          "file": "boj_FM08_20260905.csv",
-          "sha256": "fbf2b3ea48fff908f0c1111a959ae1f4f3551719b5d0ffeee4081cc4a8582a66",
-          "size": 407766
+          "file": "boj_FM08_20260906.csv",
+          "sha256": "30a5d75ac32c36a70420c30c46154006c7083af3ee61d3a9130be14efe63ce2f",
+          "size": 404934
         }
       },
       "history": [
@@ -475,13 +525,18 @@
           "digest": "sha256:3723456e0e7a1281e9d24ac8a885796666ce135de1e8c0077d9f7a6b8b4d0979",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:5e30f134b17d73f1a0241357c573a0c8f060284c1f6376961e343fa3a37f50eb",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "gio": {
       "digest": "sha256:4f5f9b22a0e9af57cd122603f475d1d8aabcb69074e6a0c324181008ae500899",
       "stable_since": "2026-08-08",
-      "last_seen": "2026-09-05",
+      "last_seen": "2026-09-06",
       "keys": {
         "L5-7gas_2026_gioweb_ver1.0.xlsx": {
           "file": "L5-7gas_2026_gioweb_ver1.0.xlsx",
@@ -493,24 +548,24 @@
         {
           "digest": "sha256:4f5f9b22a0e9af57cd122603f475d1d8aabcb69074e6a0c324181008ae500899",
           "first_seen": "2026-08-08",
-          "last_seen": "2026-09-05"
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "jepx": {
-      "digest": "sha256:b5f58c0eb6481f542fd243f8af873220e3c5e4d6343b9cd69582699a9765cd81",
-      "stable_since": "2026-09-05",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:75f2067ee0be70a84f034fa4d55932e2275f1cf89339996d8d30502063e96135",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "_listing_debug.html": {
           "file": "_listing_debug.html",
-          "sha256": "2f69962bc1a377cf173697d5f6b709b3023757f79f9b17bcad2b5d234483d8bd",
-          "size": 31858
+          "sha256": "a37e834f297e8f03927cbd9b3807a16d6a747f05b4b548bdf28bdbd57f223279",
+          "size": 31256
         },
         "_spot_summary.js": {
           "file": "_spot_summary.js",
-          "sha256": "f67e5c62a3eab6beca3182fae4cb5ffa1d586c777dc20599872e7b31a7662624",
-          "size": 67864
+          "sha256": "5a17f22529ff2cca285e7539574ace747ce7232ab7f5211110e527630d64f9da",
+          "size": 65567
         },
         "spot_summary_2012.csv": {
           "file": "spot_summary_2012.csv",
@@ -584,8 +639,8 @@
         },
         "spot_summary_2026.csv": {
           "file": "spot_summary_2026.csv",
-          "sha256": "8e5ed8b8dd72834e4b10552ee880e87c0123e9ed163323f3c404f274606b2d90",
-          "size": 994515
+          "sha256": "a94c78eb960296da293c448b2f50959f746846e2329c9364e2aa7e5be8728c66",
+          "size": 1000859
         }
       },
       "history": [
@@ -593,48 +648,53 @@
           "digest": "sha256:b5f58c0eb6481f542fd243f8af873220e3c5e4d6343b9cd69582699a9765cd81",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:75f2067ee0be70a84f034fa4d55932e2275f1cf89339996d8d30502063e96135",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "jepx-nonfossil": {
-      "digest": "sha256:899a16d9b0c55dea680f896f732ae32de1b2689aa89406a2ff265a22ec2f07c4",
-      "stable_since": "2026-09-01",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:e88439a6600b5417d66d1baf9df091ffb7e37af13feb1c04e03eab06ca6f8f1c",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "nf_summary_2017.csv": {
           "file": "nf_summary_2017.csv",
-          "sha256": "b4800295654139914069386effe6dd9e0bd06037937b8b86fbea7fd1de8204a3",
-          "size": 376
+          "sha256": "079e6fe1f4662fd32a69fdb36be8adbaadbc8690016b8ffa64e996b20491b281",
+          "size": 372
         },
         "nf_summary_2018.csv": {
           "file": "nf_summary_2018.csv",
-          "sha256": "408a8f3e086a2e2bd93d192d18de1acb98d605f0e3b4bedb52f2ebdf38ff2d40",
-          "size": 829
+          "sha256": "85b4714e79be3210ad57dc9fbe8d82c2f33b447c1cd7a8748fca564c4d1744c1",
+          "size": 816
         },
         "nf_summary_2019.csv": {
           "file": "nf_summary_2019.csv",
-          "sha256": "b6295824a6593c321bd7f741b125388dd2671b062b45afc13863d87b2317747a",
-          "size": 835
+          "sha256": "1255526d598f5844f4ae158bfa296e9101fe1bc5fbb863ba9649c073fd521939",
+          "size": 822
         },
         "nf_summary_2020.csv": {
           "file": "nf_summary_2020.csv",
-          "sha256": "053f1e9496e8ac7765b804b0728b94a458da25c9df99d9350d357c7457d5b62c",
-          "size": 1022
+          "sha256": "0aa884f8865c4d61bd6a9dc4a2bb381f969ce1992b215b05f1a25bfe9b7e3cc2",
+          "size": 1009
         },
         "nf_summary_2021.csv": {
           "file": "nf_summary_2021.csv",
-          "sha256": "5c3eb8a033e184a810b0d26809568bbc4762693136ebd449e71fbfe15ed9ea70",
-          "size": 1191
+          "sha256": "e462e8e95eaa596ea4d37a441acf227fcfb2be9bf931d2a48d4c639b652baefd",
+          "size": 1178
         },
         "nf_summary_2022.csv": {
           "file": "nf_summary_2022.csv",
-          "sha256": "ceaca1c42e362eecc207dab3f8a30464e6eebe2dd593cf773fb0dc2e95a51c59",
-          "size": 1251
+          "sha256": "204040136ae6792c4654d250e3d0f910440a8c26143ea765f35c3c41ed085849",
+          "size": 1238
         },
         "nf_summary_2023.csv": {
           "file": "nf_summary_2023.csv",
-          "sha256": "81e8be18b0312ce870b928164cb8a50c414188f906d69e465e07d067ba89cf26",
-          "size": 1223
+          "sha256": "93e544e50ac18edf8fbe02515ea6de53d927057b2b84b1d29590e533638c470d",
+          "size": 1210
         },
         "nf_summary_2024.csv": {
           "file": "nf_summary_2024.csv",
@@ -657,21 +717,26 @@
           "digest": "sha256:899a16d9b0c55dea680f896f732ae32de1b2689aa89406a2ff265a22ec2f07c4",
           "first_seen": "2026-09-01",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:e88439a6600b5417d66d1baf9df091ffb7e37af13feb1c04e03eab06ca6f8f1c",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "jgb": {
       "digest": "sha256:0f6576bceb6a09976805e308b120b8e98fd3dc956a9ffedd067ca5029ebe368e",
       "stable_since": "2026-09-04",
-      "last_seen": "2026-09-05",
+      "last_seen": "2026-09-06",
       "keys": {
         "jgbcm.csv": {
-          "file": "jgbcm_20260905.csv",
+          "file": "jgbcm_20260906.csv",
           "sha256": "4ad1c8e0927bf2af683e5cc4a817fc0b4cd5d8758a624d08b2cf0b39a0cdd46a",
           "size": 568
         },
         "jgbcm_all.csv": {
-          "file": "jgbcm_all_20260905.csv",
+          "file": "jgbcm_all_20260906.csv",
           "sha256": "d486cccc5d0197f79c4f9b8248dd657b18e5d4a1549fdc1a42d0ae31f5cb96c2",
           "size": 1176385
         }
@@ -680,57 +745,62 @@
         {
           "digest": "sha256:0f6576bceb6a09976805e308b120b8e98fd3dc956a9ffedd067ca5029ebe368e",
           "first_seen": "2026-09-04",
-          "last_seen": "2026-09-05"
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "jma": {
-      "digest": "sha256:aad3274f27aa5bb904a0a38058c34da18cf8f7943bef0e022e773575e434e62e",
-      "stable_since": "2026-09-05",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:1b7f76ea7441d5db8b893942f83b1b3a3a71d6e5f843543397af6ef692280e1e",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": null,
       "history": [
         {
           "digest": "sha256:aad3274f27aa5bb904a0a38058c34da18cf8f7943bef0e022e773575e434e62e",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:1b7f76ea7441d5db8b893942f83b1b3a3a71d6e5f843543397af6ef692280e1e",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "nbs-pmi": {
-      "digest": "sha256:3bcd652a3de23d65e99a34efe44facc9bfff220c976e143acfbc8481e9b49bf5",
-      "stable_since": "2026-09-05",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:b21e5ee2baa84889fff41d59560619a87c6207630b8a5cebd9503f89cc7165c3",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "index.html": {
-          "file": "index_20260905.html",
-          "sha256": "e79b6d63cbc9876f0e1d8cbee89bfa981391c3001c0b3965f04e0aeb03a2e9cf",
-          "size": 12126
+          "file": "index_20260906.html",
+          "sha256": "9d5da81f86e0922d3e9d204bfb2067765eb3738f7ed7fc403d8f8a56acea5e21",
+          "size": 11856
         },
         "t20260506_1963595.html": {
           "file": "t20260506_1963595_20260529.html",
-          "sha256": "081a8cdef7b0a4e20a9e7362dadb59223461970462367bf11062b5c86dd802e1",
-          "size": 157436
+          "sha256": "490388aa1c033cb8da912b0965215fb744fbd5b351b906e7ec4e75c3df47566b",
+          "size": 156425
         },
         "t20260601_1963851.html": {
           "file": "t20260601_1963851_20260703.html",
-          "sha256": "88dead12bfa8504f2fceaf3276df78b094d6de8c4bd3a32e55fefb7dd02d4535",
-          "size": 155636
+          "sha256": "cfe96294f1f7500b4e9db894b3705dbc69f67a80f2ff2021122c6f6b1e6f5f45",
+          "size": 154625
         },
         "t20260701_1964047.html": {
           "file": "t20260701_1964047_20260717.html",
-          "sha256": "491325c2c981373e53d0da73c03456ea84ce2799b3e58190038678a627a9c3b7",
-          "size": 162332
+          "sha256": "64ab0f4f06b299173e4a2764bce9182b84a96ba517400fc7b466ecbbe29b1a42",
+          "size": 161314
         },
         "t20260803_1964272.html": {
           "file": "t20260803_1964272_20260901.html",
-          "sha256": "77c0791b5af98121e1e3b5034fd4a610013c35029b413a9230f9ce8af31ba350",
-          "size": 155668
+          "sha256": "b7e1666a393e98227115a4215b5c7099770a9cad55f8e0d2d7a5cc60abd309db",
+          "size": 154650
         },
         "t20260901_1965170.html": {
-          "file": "t20260901_1965170_20260905.html",
-          "sha256": "925fe7ed8f09e31df2de50383200f7e8e3f4826453586db86abcc8ca1e7e5edc",
-          "size": 131197
+          "file": "t20260901_1965170_20260906.html",
+          "sha256": "08b39d2877203788e26edc989777faff8f65319a9c46d7ac7f1e0bb3f6cc5841",
+          "size": 130179
         }
       },
       "history": [
@@ -738,13 +808,18 @@
           "digest": "sha256:3bcd652a3de23d65e99a34efe44facc9bfff220c976e143acfbc8481e9b49bf5",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:b21e5ee2baa84889fff41d59560619a87c6207630b8a5cebd9503f89cc7165c3",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "occto-capacity": {
       "digest": "sha256:ef257b9b0b210677a412513ba99dfa1f06144d69117e2e7e3855a849de659216",
       "stable_since": "2026-05-20",
-      "last_seen": "2026-09-05",
+      "last_seen": "2026-09-06",
       "keys": {
         "2024_yakujoukekka_csv.zip": {
           "file": "2024_yakujoukekka_csv.zip",
@@ -781,199 +856,199 @@
         {
           "digest": "sha256:ef257b9b0b210677a412513ba99dfa1f06144d69117e2e7e3855a849de659216",
           "first_seen": "2026-05-20",
-          "last_seen": "2026-09-05"
+          "last_seen": "2026-09-06"
         }
       ]
     },
     "us-treasury": {
-      "digest": "sha256:026f62559268b1d682939714cc38e4abdf55910baf4d31a851ea967b541fa6f9",
-      "stable_since": "2026-09-05",
-      "last_seen": "2026-09-05",
+      "digest": "sha256:ca13e1d386e7d5a28b27012bafc04c6867d228f2d371d69c0b1a8ba9000be2cb",
+      "stable_since": "2026-09-06",
+      "last_seen": "2026-09-06",
       "keys": {
         "treasury_yields_1990.csv": {
           "file": "treasury_yields_1990_20260518.csv",
-          "sha256": "defcc321e1b3442f43d68a2ddf032442b4a668a2c06f62074b516abbb990c99c",
-          "size": 14319
+          "sha256": "d8d5e4bb7ae2f13ccf03a7f50537723a4a5a37e2ebe85da3e32f53328c411d18",
+          "size": 14069
         },
         "treasury_yields_1991.csv": {
           "file": "treasury_yields_1991_20260518.csv",
-          "sha256": "4afa6106184bb194907c2b21d71f75c583187d4c95629ef1b81978b04932cd56",
-          "size": 14319
+          "sha256": "d52d81bd96f5e02d8b7a74384d568eaafe36c2a067272e0840c5ea4022c1d4d4",
+          "size": 14069
         },
         "treasury_yields_1992.csv": {
           "file": "treasury_yields_1992_20260518.csv",
-          "sha256": "fa8e0e6a2e9be22229a25a41611ce412130cfaeba0ddd012723dee899de639e2",
-          "size": 14376
+          "sha256": "13fb485ff7085d1c8afb70b3bb6fd7fe7c728f7b672a9c1844d7e9e6d26827f9",
+          "size": 14125
         },
         "treasury_yields_1993.csv": {
           "file": "treasury_yields_1993_20260518.csv",
-          "sha256": "5a339904bc72283ad9e3711a95c519fe076dd8f65e98c5e292c9019606f126fb",
-          "size": 14825
+          "sha256": "c5482e2e88fa8256eb513600c44fbcb8bd317e061a840a429676f4d1330cea3d",
+          "size": 14575
         },
         "treasury_yields_1994.csv": {
           "file": "treasury_yields_1994_20260518.csv",
-          "sha256": "48d7c787136a567832f5e765c0515a2722f58c49063aa3cd2f9ed6206ff1bbce",
-          "size": 15515
+          "sha256": "cea2fce245f7a1be83395a82c4f56e146d2074909255930226551170bf25de18",
+          "size": 15266
         },
         "treasury_yields_1995.csv": {
           "file": "treasury_yields_1995_20260518.csv",
-          "sha256": "4230f259fa68211cec4fceb0a33bbacb54d07a9741e5bd884e9d798b05b8b856",
-          "size": 15577
+          "sha256": "5815b05e0575a6220d84666346c56bc1fa39d0a4212b89bf0f50a3c09579de15",
+          "size": 15327
         },
         "treasury_yields_1996.csv": {
           "file": "treasury_yields_1996_20260518.csv",
-          "sha256": "b39c7dd67c77c6d203969abba1884d843700d0a0b15ad6af1b7b0ade32eb3945",
-          "size": 15701
+          "sha256": "656992cb54c922745bb7ccf11a57a3dd5fe2f1653f7d8127d04d25f3e3aaa674",
+          "size": 15449
         },
         "treasury_yields_1997.csv": {
           "file": "treasury_yields_1997_20260518.csv",
-          "sha256": "0a767f2028cd7a5ea4f2cff05ae299659e67ee1c021b42b02860633dca49d718",
-          "size": 15577
+          "sha256": "3653e22f12846593dc6e0d95a7518acfc2d2f6dd89ec83cc82e2ebeb4586b833",
+          "size": 15327
         },
         "treasury_yields_1998.csv": {
           "file": "treasury_yields_1998_20260518.csv",
-          "sha256": "a28c28e8c182f05d3c39bc5ee34e2950cccad0838004fdf4231b13d76ad0228d",
-          "size": 15577
+          "sha256": "3861b3be824744c1c6c616224fd1b87054dfcf2e8106c7551a589b5fedeb7f4a",
+          "size": 15327
         },
         "treasury_yields_1999.csv": {
           "file": "treasury_yields_1999_20260518.csv",
-          "sha256": "31e9ab41999ba43b91d6cbbfddfe42ac5b0fa23b39a21b59020ac7950c88af26",
-          "size": 15639
+          "sha256": "36bff57ac81eb582c68e57479c0ad4fbc4ee090e9028886d49b7f1ce434a5aea",
+          "size": 15388
         },
         "treasury_yields_2000.csv": {
           "file": "treasury_yields_2000_20260518.csv",
-          "sha256": "fd0ee0107b3537a4355dcb7feef3abcc37a7d2cc353b1245564c84e90eb25d0c",
-          "size": 15639
+          "sha256": "a8cde4c7a757ac74f7b6257d3778db73a215483002317e19ee9e3f3c524a8a24",
+          "size": 15388
         },
         "treasury_yields_2001.csv": {
           "file": "treasury_yields_2001_20260518.csv",
-          "sha256": "55e562e7f5ec83080cf0304faba5540f9ee033a386fb359f7191a7a6de9515f7",
-          "size": 16120
+          "sha256": "bc48181de2b452d19b159bc12354653f64ce3b119d7072dbf4aa92fa6998799c",
+          "size": 15872
         },
         "treasury_yields_2002.csv": {
           "file": "treasury_yields_2002_20260518.csv",
-          "sha256": "45b905402a433e081286c1d6864191d30bc880ad7fe4f0c38c7844c8c3b4be05",
-          "size": 15962
+          "sha256": "33f84b7c6f50bf3ea0ca4703cb51c8d469bbb93dad92f181d42132b7e2359bf7",
+          "size": 15712
         },
         "treasury_yields_2003.csv": {
           "file": "treasury_yields_2003_20260518.csv",
-          "sha256": "1280a28b6ffd044b71011ac28d0117dd196386586eedb42471e1b467d6661053",
-          "size": 15576
+          "sha256": "0c255188cf596e5bc42a4e00b9a60649df01fb95a58a3382d7586da83e5cc0e0",
+          "size": 15326
         },
         "treasury_yields_2004.csv": {
           "file": "treasury_yields_2004_20260518.csv",
-          "sha256": "83fb3836a6b54175c65c0d1dc32501f754fcf6b5ef70557c0734fee1cb67716f",
-          "size": 15576
+          "sha256": "0f0561773c7a3220fe1eded9a7ba0645790e9239fd3cf569158171fedf2dc969",
+          "size": 15326
         },
         "treasury_yields_2005.csv": {
           "file": "treasury_yields_2005_20260518.csv",
-          "sha256": "1af679989307721c8a6380edc7a7cfe88587099632288ceb180d1dbe5cfc4b67",
-          "size": 15576
+          "sha256": "ecf2ab3d1ca1b6ee8e916fee90474028c2d1221b8d236131621ad58020db0552",
+          "size": 15326
         },
         "treasury_yields_2006.csv": {
           "file": "treasury_yields_2006_20260518.csv",
-          "sha256": "6665bcd3691ee7420619bbb62a8428dcd678402acef281469f7e5302ed6604bc",
-          "size": 16730
+          "sha256": "cdbdcd8b32735caa453e00280232ff70c7012c055b7daf7b8cf1d9aaa8c66bfe",
+          "size": 16480
         },
         "treasury_yields_2007.csv": {
           "file": "treasury_yields_2007_20260518.csv",
-          "sha256": "7552bded7774aec8a8a3a898a56c9a8caece87336124ac9099b3035ee5970598",
-          "size": 16901
+          "sha256": "297f6be4059a605b1ec0f266eb7b8467c3d40504a0dd53341746223276e6e6d8",
+          "size": 16650
         },
         "treasury_yields_2008.csv": {
           "file": "treasury_yields_2008_20260518.csv",
-          "sha256": "884b2ec940c6788936d3277400221cb1ea4572b80c92695322b4a9a4c34fd663",
-          "size": 16889
+          "sha256": "686db01584dd45f67addc243ee0c42339d491171a0e947c8f88ecac78ee0e9ea",
+          "size": 16638
         },
         "treasury_yields_2009.csv": {
           "file": "treasury_yields_2009_20260518.csv",
-          "sha256": "83a57cc48910ccd4c0cdcbd6826d1d08cb2e31abde0feddd310b8502c6970660",
-          "size": 16834
+          "sha256": "3c9294cfa71136e1d5330b09a00bf996ecf86c865d593d7ee954d11984a5bdb1",
+          "size": 16584
         },
         "treasury_yields_2010.csv": {
           "file": "treasury_yields_2010_20260518.csv",
-          "sha256": "b3a6e90ad52f7151980581531638a63f4cd0270fc267b2caf43a7d94cce5dbf8",
-          "size": 16924
+          "sha256": "f973bd3988989d3e408655cbc7fed89faefbaa8a1c111ec313241fb47fc75e2d",
+          "size": 16672
         },
         "treasury_yields_2011.csv": {
           "file": "treasury_yields_2011_20260518.csv",
-          "sha256": "9c8a28690f229286a0485b2d158d8fe4ed50574d7bf21b7e034059a0d3591b25",
-          "size": 16834
+          "sha256": "224eaf29d6fe7cbccc746c7a8c845f189cf91424bab43f46ca386a74e98d81f7",
+          "size": 16584
         },
         "treasury_yields_2012.csv": {
           "file": "treasury_yields_2012_20260518.csv",
-          "sha256": "7325ea2750f7a315ee813c3457ae03cdbffd093af017840c80714f89cf4d9763",
-          "size": 16834
+          "sha256": "9c889b6e3cb87f40f3760bddb69f05f7525800ac480ef5712b2cf318765fa184",
+          "size": 16584
         },
         "treasury_yields_2013.csv": {
           "file": "treasury_yields_2013_20260518.csv",
-          "sha256": "1970f6a703dbc937e8418c96151432a1912d495f9091a2644f431590e44f218f",
-          "size": 16834
+          "sha256": "1e1a98426d9274afcc68467962f9238104db775b8765e48f45ac7488b33ff338",
+          "size": 16584
         },
         "treasury_yields_2014.csv": {
           "file": "treasury_yields_2014_20260518.csv",
-          "sha256": "76c85b13f529842177398379f79dbabf240c7e635501ae1b95c05b9b9b780f52",
-          "size": 16834
+          "sha256": "8d560698e03e4c0d8d22ff8be7f5f7c5c0d472b1e33a22b6a75373a57e84aa0f",
+          "size": 16584
         },
         "treasury_yields_2015.csv": {
           "file": "treasury_yields_2015_20260518.csv",
-          "sha256": "2907ffd3075c9c578f0662907672691ad13617f059a9c89de9747510cfe5afc7",
-          "size": 16901
+          "sha256": "b7665d1ce46d6ed6d08fbda34aae1831de38e274e3c7caed81904042aac9b5bc",
+          "size": 16650
         },
         "treasury_yields_2016.csv": {
           "file": "treasury_yields_2016_20260518.csv",
-          "sha256": "c7e2b90d25b8ea9f08507f7a98984276f3de70f5df66bba1adc3ff48a990672f",
-          "size": 16834
+          "sha256": "b4d0a8d86e2734bc64d84d9a9824434d841737621582daeac58f13c7129f325c",
+          "size": 16584
         },
         "treasury_yields_2017.csv": {
           "file": "treasury_yields_2017_20260518.csv",
-          "sha256": "e017a46816deaa6e6c2c3a1c1b92ff4de9200ba8020623ced2e736dc5b7e74ee",
-          "size": 16834
+          "sha256": "56074da7c32103a28cf4ba2bdf5eaa12f98fd49852047aef1a6eb16e64bd6e83",
+          "size": 16584
         },
         "treasury_yields_2018.csv": {
           "file": "treasury_yields_2018_20260518.csv",
-          "sha256": "1eeb4e389573172a0eb9a30d53ca7a803a3cb7297c020c7ec996a21e2339a8aa",
-          "size": 17227
+          "sha256": "e8375524a7a8d3e8091bbe7690d0378b9365be09efff5b18b8eefddc25f718d3",
+          "size": 16978
         },
         "treasury_yields_2019.csv": {
           "file": "treasury_yields_2019_20260518.csv",
-          "sha256": "028117f9d5d799372323f20a30337b6365c5d61b5d6e33cad88dfced5af00764",
-          "size": 18091
+          "sha256": "83fc47c17325e222c45fd3a1eb26c69ae01f62d33b793030b4b8b350ca0a290b",
+          "size": 17841
         },
         "treasury_yields_2020.csv": {
           "file": "treasury_yields_2020_20260518.csv",
-          "sha256": "c028621ad8755f62cc0bfc8b7c09f62be9e49d4e1a17bc57582ed53249b0466f",
-          "size": 18163
+          "sha256": "edcf1c8be9622f3cd92eb7de1847aefc3977e2118e2ff9af67f46614a5c306a7",
+          "size": 17912
         },
         "treasury_yields_2021.csv": {
           "file": "treasury_yields_2021_20260518.csv",
-          "sha256": "bd50bb1530b07850e3f696114724f950da8be1171c42f5b8f0624af167dd534c",
-          "size": 18163
+          "sha256": "1be57e49c63a99f6002431a1030c8fbe539b71066c3eaf14f9f58ddc34492cea",
+          "size": 17912
         },
         "treasury_yields_2022.csv": {
           "file": "treasury_yields_2022_20260518.csv",
-          "sha256": "b3aeb9ab6998878be2c82722fd42933b1e461f1953f999b3dd2fb6f200707bc9",
-          "size": 18475
+          "sha256": "c33cb2758e5e34c2c23b7ab759d18681091860f3f9e5960112859f64f31cd814",
+          "size": 18226
         },
         "treasury_yields_2023.csv": {
           "file": "treasury_yields_2023_20260518.csv",
-          "sha256": "1d5072667b66fda85631219d9b8baab95d631a92765c0bf2885558019f2d0816",
-          "size": 19348
+          "sha256": "edb7f3904e11dcaa502cdcc03ad9b1b16c893802d166ce9bc5fa1118251249d4",
+          "size": 19098
         },
         "treasury_yields_2024.csv": {
           "file": "treasury_yields_2024_20260518.csv",
-          "sha256": "27898e5d4409074f9f387a736f6864574b5f5721b38b0199286eaf9d1ef575d8",
-          "size": 19348
+          "sha256": "6775840b76cd7fd41121f61d6f6c60184eca6b2ba49954ec7372c463cbeef34d",
+          "size": 19098
         },
         "treasury_yields_2025.csv": {
           "file": "treasury_yields_2025_20260518.csv",
-          "sha256": "e834d3ba9fc2821db78e804fca19c44b89b864911c36a14e2c6a446815b1d709",
-          "size": 20404
+          "sha256": "cf2fa3da7f160384b63d2ead698532b1d76cd9f789ce4911e2304db85b14e6d5",
+          "size": 20155
         },
         "treasury_yields_2026.csv": {
-          "file": "treasury_yields_2026_20260905.csv",
-          "sha256": "be0b64400022cf467f57f5ccdd901412eada30b0933183e56dcd8b93d5179eaa",
-          "size": 14132
+          "file": "treasury_yields_2026_20260906.csv",
+          "sha256": "a14a321adffded36dfd9ab1aec72cc81423aeca271110f76569d37dd02ca4ee5",
+          "size": 13961
         }
       },
       "history": [
@@ -981,12 +1056,17 @@
           "digest": "sha256:026f62559268b1d682939714cc38e4abdf55910baf4d31a851ea967b541fa6f9",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
+        },
+        {
+          "digest": "sha256:ca13e1d386e7d5a28b27012bafc04c6867d228f2d371d69c0b1a8ba9000be2cb",
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06"
         }
       ]
     }
   },
   "assessment": {
-    "date": "2026-09-05",
+    "date": "2026-09-06",
     "watched": [
       "eia_intl",
       "ember",
@@ -995,6 +1075,40 @@
       "gio"
     ],
     "frozen": [],
-    "changed": []
+    "changed": [
+      {
+        "dir": "eia_intl",
+        "source": "eia-intl",
+        "keys": [
+          "eia_intl_gdp.json",
+          "eia_intl_jp_breakdown.json",
+          "eia_intl_population.json",
+          "eia_intl_totals.json"
+        ],
+        "previous_since": "2026-08-25",
+        "previous_days": 12
+      },
+      {
+        "dir": "ember",
+        "source": "ember",
+        "keys": [
+          "ember_monthly.csv"
+        ],
+        "previous_since": "2026-08-31",
+        "previous_days": 6
+      },
+      {
+        "dir": "enecho-power",
+        "source": "enecho-power",
+        "keys": [
+          "2-1-2025.xlsx",
+          "2-1-2026.xlsx",
+          "3-1-2025.xlsx",
+          "3-1-2026.xlsx"
+        ],
+        "previous_since": "2026-08-01",
+        "previous_days": 36
+      }
+    ]
   }
 }
