@@ -35,6 +35,9 @@ data/raw/<dir>/ の「現在の内容」を毎晩ハッシュして台帳（data
     `git log -1 --format=%cs -- <file>` の日付（取れなければ today）。
     ⚠️ CI の shallow checkout では git の日付が today になる。seed はローカルの
     フルクローンで一度行い、生成した台帳を PR に含めること。
+  - テキストファイル（先頭 8KB に NUL 無し）は CR を除いてハッシュする（2026-09-06:
+    Windows checkout の autocrlf で seed と CI のハッシュが食い違い、初日に偽「変化」が
+    14 ソースで出た。行末は上流の発行内容ではない）。
   - 判定は docs/source_map.yaml の各ソース `raw_watch:` 宣言に従う:
         raw_watch:
           dir: fuel            # data/raw/<dir>
@@ -95,11 +98,29 @@ def _now_jst() -> datetime:
     return datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=9)))
 
 
+TEXT_SNIFF_BYTES = 8192
+
+
+def _is_text_file(path: Path) -> bool:
+    """先頭 8KB に NUL が無ければテキスト扱い（CSV / JSON / HTML）。xlsx / zip は NUL を含む。"""
+    with path.open("rb") as f:
+        head = f.read(TEXT_SNIFF_BYTES)
+    return b"\x00" not in head
+
+
 def _sha256_file(path: Path) -> str:
+    """ファイル内容の sha256。テキストは CR（0x0D）を除いてからハッシュする。
+
+    2026-09-06 の教訓: 台帳の seed を Windows の checkout（core.autocrlf=true）で行ったため、
+    LF のテキスト raw が作業ツリーでは CRLF になっており、CI（Linux）の初回記帳で
+    テキスト系 14 ソースが一斉に「変化」した（バイナリの xlsx / zip は一致）。
+    行末は上流の発行内容ではないので、環境に依存しないよう CR を無視してハッシュする。
+    """
     h = hashlib.sha256()
+    text = _is_text_file(path)
     with path.open("rb") as f:
         for chunk in iter(lambda: f.read(1 << 20), b""):
-            h.update(chunk)
+            h.update(chunk.replace(b"\r", b"") if text else chunk)
     return h.hexdigest()
 
 

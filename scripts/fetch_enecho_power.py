@@ -837,12 +837,49 @@ def parse_generation_sheet(
             continue
 
         ymd = f"{year:04d}-{month:02d}-01"
-        extracted = 0
+        # 2026-09-06: FY2026 の 5 月シートで **合計行だけが 1 列右にずれていた**（c1 にも '合計'、数値が
+        # c9 から。ヘッダ行・事業者行はずれていない）。固定列で読むと総計 15.977 GWh・原子力 36,897 GWh
+        # のような列取り違えのゴミが着地した（nightly 2026-09-06 で実害）。合計行の最初の数値セル位置
+        # （期待 c8 = 水力 一般）から列 offset を決めて col_map に足す。0〜2 列以外は構造変更とみなし skip。
+        first_num = next(
+            (c for c in range(0, 40) if _cell_to_float(_cell_at(ws, summary_row, c)) is not None),
+            None,
+        )
+        offset = (first_num - 8) if first_num is not None else None
+        if offset is None or not (0 <= offset <= 2):
+            logger.error(
+                "FY%d sheet='%s': 合計行 r%d の数値開始列が c%s（期待 c8〜c10）— 構造変更の疑い、skip",
+                fiscal_year, sheet_name, summary_row, first_num,
+            )
+            continue
+        if offset:
+            logger.warning(
+                "FY%d sheet='%s': 合計行の数値開始列が c%d → 列 offset +%d を適用",
+                fiscal_year, sheet_name, first_num, offset,
+            )
+        vals: dict[str, float] = {}
         for ind_id, col_idx in col_map.items():
-            v = _cell_at(ws, summary_row, col_idx)
-            gwh = _to_gwh(v)
-            if gwh is None:
-                continue
+            gwh = _to_gwh(_cell_at(ws, summary_row, col_idx + offset))
+            if gwh is not None:
+                vals[ind_id] = gwh
+        # 想定枠ゲート（列取り違え型のパースバグでゴミを着地させない。fetch_nonfossil の sanity と同型）:
+        #   総計 30,000〜120,000 GWh（日本の月間発電量、実測 57,035〜81,442）、
+        #   水力計+火力計+原子力+風力+太陽光+地熱 ≒ 総計（±3%。実測の最大乖離 0.11%。
+        #   バイオマスは火力に含まれる再掲なので足さない。残差は蓄電池・その他）。
+        total = vals.get("meti-gen-total")
+        six = sum(
+            vals.get(k, 0.0)
+            for k in ("meti-gen-hydro", "meti-gen-thermal", "meti-gen-nuclear",
+                      "meti-gen-wind", "meti-gen-solar", "meti-gen-geothermal")
+        )
+        if total is None or not (30_000 <= total <= 120_000) or abs(six - total) / total > 0.03:
+            logger.error(
+                "FY%d sheet='%s': sanity gate failed (total=%s GWh, six-sum=%.1f GWh) — skip month",
+                fiscal_year, sheet_name, total, six,
+            )
+            continue
+        extracted = 0
+        for ind_id, gwh in vals.items():
             rows.append({
                 "date": ymd,
                 "indicator_id": ind_id,
@@ -1176,7 +1213,9 @@ def derive_renewables_share_from_csvs(processed_dir: Path) -> list[dict]:
 # ---------------------------------------------------------------------------
 
 
-def fetch_all_months(cfg: dict, *, backfill: bool, since_ym: Optional[str], dry_run: bool) -> int:
+def fetch_all_months(
+    cfg: dict, *, backfill: bool, since_ym: Optional[str], dry_run: bool, prefer_cache: bool = False,
+) -> int:
     """公表済み全年度を走査、XLSX を download → 12 ヶ月 parse → CSV 追記。
 
     Day 4 本実装: fiscal_year × {generation, demand} のループで、
@@ -1272,7 +1311,9 @@ def fetch_all_months(cfg: dict, *, backfill: bool, since_ym: Optional[str], dry_
                 continue
             raw_path = raw_dir / lk["filename"]
             try:
-                xlsx_bytes = download_xlsx(lk["url"], raw_path, use_cache=fy not in refresh_fys)
+                xlsx_bytes = download_xlsx(
+                    lk["url"], raw_path, use_cache=(fy not in refresh_fys) or prefer_cache,
+                )
             except Exception as e:
                 logger.error("FY%d %s download failed: %s", fy, kind, e)
                 continue
@@ -1351,6 +1392,10 @@ def main(argv: list[str] | None = None) -> int:
         "--dry-run", action="store_true",
         help="XLSX のダウンロードは行わず、INDEX ページのリンク一覧だけを表示",
     )
+    parser.add_argument(
+        "--prefer-cache", action="store_true",
+        help="公表中年度も既存 raw を再利用する（ダウンロードせず再パースだけ行う。パーサ修正後の再生成用）",
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -1368,6 +1413,7 @@ def main(argv: list[str] | None = None) -> int:
             backfill=args.backfill,
             since_ym=args.since,
             dry_run=args.dry_run,
+            prefer_cache=args.prefer_cache,
         )
         logger.info("done: %d new rows appended", added)
         append_log(LOG_DIR, "fetch_enecho_power", "ok",
