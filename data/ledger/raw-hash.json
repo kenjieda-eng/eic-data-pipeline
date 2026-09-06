@@ -15,7 +15,297 @@
       },
       "history": [
         {
-          "digest": "sha256:33f0ee3e55af6ba112bce14f91d892d1fd7296df9a3cb5ef83620a401076a557",
+          "digest": "git:38dc040842837b4e08639eaa4baf304d9921b417",
+          "first_seen": "2026-07-09",
+          "last_seen": "2026-07-09"
+        },
+        {
+          "digest": "git:b9897e575cfcc8485f87c8138c1846f88053142a",
+          "first_seen": "2026-07-10",
+          "last_seen": "2026-07-10"
+        },
+        {
+          "digest": "git:cdd83f0c3321588d09a54e39c3b1065ed8208159",
+          "first_seen": "2026-07-11",
+          "last_seen": "2026-07-11"
+        },
+        {
+          "digest": "git:68cea5bff68f3cfb94d7bd2431751de7f45b4489",
+          "first_seen": "2026-07-12",
+          "last_seen": "2026-07-12"
+        },
+        {
+          "digest": "git:4133ac76017c26db0528673a8b7707eb72f48203",
+          "first_seen": "2026-07-13",
+          "last_seen": "2026-07-13"
+        },
+        {
+          "digest": "git:ac40823e61d277fa2c460b4dabeac57855f4db96",
+          "first_seen": "2026-07-14",
+          "last_seen": "2026-07-14"
+        },
+        {
+          "digest": "git:e028caaf967ea60f7517f0ada357d2d028f8a7f8",
+          "first_seen": "2026-07-15",
+          "last_seen": "2026-07-15"
+        },
+        {
+          "digest": "git:3c96227aee99792d6f28ebc9b3414b7028eab1c6",
+          "first_seen": "2026-07-16",
+          "last_seen": "2026-07-16"
+        },
+        {
+          "digest": "git:60094111cd885b2b3b1586060066bb0a83ae0552",
+          "first_seen": "2026-07-17",
+          "last_seen": "2026-07-17"
+        },
+        {
+          "digest": "git:e30d2b05490197806210f76437129d118339a7fc",
+          "first_seen": "2026-07-18",
+          "last_seen": "2026-07-18"
+        },
+        {
+          "digest": "git:8ed8e51fb7770a0060c4045f66da337e90226d75",
+          "first_seen": "2026-07-19",
+          "last_seen": "2026-07-19"
+        },
+        {
+          "digest": "git:2ed6d7357a088e5f0e603568eba167004736ed05",
+          "first_seen": "2026-07-20",
+          "last_seen": "2026-07-20"
+        },
+        {
+          "digest": "git:9d4570ba0fdc42edc01b076552ba4be9abb248e0",
+          "first_seen": "2026-07-21",
+          "last_seen": "2026-07-21"
+        },
+        {
+          "digest": "git:6caaf2a795d19ea033dbe8eb8d2c4d0ac0e4c57a",
+          "first_seen": "2026-07-22",
+          "last_seen": "2026-07-22"
+        },
+        {
+          "digest": "git:e35912b63d03afa5ea4b1031102238fae87fe0b0",
+          "first_seen": "2026-07-23",
+          "last_seen": "2026-07-23"
+        },
+        {
+          "digest": "git:1300681e59e46dbdcaaaa3691b1f34a6dc663844",
+          "first_seen": "2026-07-24",
+          "last_seen": "2026-07-24"
+        },
+        {
+          "digest": "git:07370751df0ab9fed693d2725428d83615d4b8ff",
+          "first_seen": "2026-07-25",
+          "last_seen": "2026-07-25"
+        },
+        {
+          "digest": "git:dfe7e7ae4d48da3b3f7f86e222e7f885abddd509",
+          "first_seen": "2026-07-26",
+          "last_seen": "2026-07-26"
+        },
+        {
+          "digest": "git:d3b2505e95fde56514c149a2ac5250ce9b2d1579",
+          "first_seen": "2026-07-27",
+          "last_seen": "2026-07-27"
+        },
+        {
+          "digest": "git:f3a7089c390b091434fbdb52f2d1fe7c634b7eb5",
+          "first_seen": "2026-07-28",
+          "last_seen": "2026-07-28"
+        },
+        {
+          "digest": "git:8643be864e79eb56cfbb084a79003d2eea43adf0",
+          "first_seen": "2026-07-29",
+          "last_seen": "2026-07-29"
+        },
+        {
+          "digest": "git:11c659418b97af108f654178ad28f9d0ade77505",
+          "first_seen": "2026-07-30",
+          "last_seen": "2026-07-30"
+        },
+        {
+          "digest": "git:3e5fda13d92f6b4ce5ec372f9ee04121ea90dca9",
+          "first_seen": "2026-07-31",
+          "last_seen": "2026-07-31"
+        },
+        {
+          "digest": "git:a3eb00e858ae0400483ff3e455f6e741a085c127",
+          "first_seen": "2026-08-01",
+          "last_seen": "2026-08-01"
+        },
+        {
+          "digest": "git:57ec6c7f29582531e65c0993c7da4926d5ce21fc",
+          "first_seen": "2026-08-02",
+          "last_seen": "2026-08-02"
+        },
+        {
+          "digest": "git:23b3d6cbf15567c73ed27f9e0a40232cb553ea2f",
+          "first_seen": "2026-08-03",
+          "last_seen": "2026-08-03"
+        },
+        {
+          "digest": "git:b2bae3034237e18a4fe4f781c0044eefce13ec7e",
+          "first_seen": "2026-08-04",
+          "last_seen": "2026-08-04"
+        },
+        {
+          "digest": "git:7df45b43de5f2154564dc829709501716b877923",
+          "first_seen": "2026-08-05",
+          "last_seen": "2026-08-05"
+        },
+        {
+          "digest": "git:ba37878164079ed5387680bb99e658458cbb9089",
+          "first_seen": "2026-08-06",
+          "last_seen": "2026-08-06"
+        },
+        {
+          "digest": "git:af136321b4ceb1e69c82a72d5d1ea1dd371c06bb",
+          "first_seen": "2026-08-07",
+          "last_seen": "2026-08-07"
+        },
+        {
+          "digest": "git:5d3b47b8870d69945ef7afa7230ac1fa2fca8929",
+          "first_seen": "2026-08-08",
+          "last_seen": "2026-08-08"
+        },
+        {
+          "digest": "git:0179ce3713c48b042b91fc451e54c464a0f276ab",
+          "first_seen": "2026-08-09",
+          "last_seen": "2026-08-09"
+        },
+        {
+          "digest": "git:7bb129ee2e271cd00c749c3d4f6c9b6ed22a8be6",
+          "first_seen": "2026-08-10",
+          "last_seen": "2026-08-10"
+        },
+        {
+          "digest": "git:6f6afd9bc39650faab8bc1bc5def54f97cfa4662",
+          "first_seen": "2026-08-11",
+          "last_seen": "2026-08-11"
+        },
+        {
+          "digest": "git:bc69e22a6470b9d5eae861f9714c502b202a0469",
+          "first_seen": "2026-08-12",
+          "last_seen": "2026-08-12"
+        },
+        {
+          "digest": "git:2e354baec2aae4f5f371759b3099f42966ba89c9",
+          "first_seen": "2026-08-13",
+          "last_seen": "2026-08-13"
+        },
+        {
+          "digest": "git:7c402a51fc5cb0bf96d6830c5c8999a2c8cea8a8",
+          "first_seen": "2026-08-14",
+          "last_seen": "2026-08-14"
+        },
+        {
+          "digest": "git:4f27af0f370a94af6421f4bc36ef9cb15e65a7f3",
+          "first_seen": "2026-08-15",
+          "last_seen": "2026-08-15"
+        },
+        {
+          "digest": "git:5110aa3ca744fe200fc8c64dedfb60f5df654637",
+          "first_seen": "2026-08-16",
+          "last_seen": "2026-08-16"
+        },
+        {
+          "digest": "git:b484bb61fb57c36691d9a4fdad3ac91bf396c89a",
+          "first_seen": "2026-08-17",
+          "last_seen": "2026-08-17"
+        },
+        {
+          "digest": "git:dfb3c53596733b4a11e0983cb9d7beb0a4844c16",
+          "first_seen": "2026-08-18",
+          "last_seen": "2026-08-18"
+        },
+        {
+          "digest": "git:3fa83ef787ddc2586cfbb42eb4beaace2fd9833b",
+          "first_seen": "2026-08-19",
+          "last_seen": "2026-08-19"
+        },
+        {
+          "digest": "git:fdef2eb8158776ea4df17147b68b5f06288a3e86",
+          "first_seen": "2026-08-20",
+          "last_seen": "2026-08-20"
+        },
+        {
+          "digest": "git:5fd2fed1d1f2f74a6cb50180f1dc49394c9c6c2b",
+          "first_seen": "2026-08-21",
+          "last_seen": "2026-08-21"
+        },
+        {
+          "digest": "git:0f97d0a97f1e99bf31220a944ac3b2165124e9d9",
+          "first_seen": "2026-08-22",
+          "last_seen": "2026-08-22"
+        },
+        {
+          "digest": "git:bc53b9705388d3650f352f81c3f85b78a4ade583",
+          "first_seen": "2026-08-23",
+          "last_seen": "2026-08-23"
+        },
+        {
+          "digest": "git:0b0ee22de9e54db1bbfd404feaf666239b7ab171",
+          "first_seen": "2026-08-24",
+          "last_seen": "2026-08-24"
+        },
+        {
+          "digest": "git:0434058a71348295c6bfc57212debfc58f70aba1",
+          "first_seen": "2026-08-25",
+          "last_seen": "2026-08-25"
+        },
+        {
+          "digest": "git:afad5ad24cd59265063f1a6fffaad737d919d3a3",
+          "first_seen": "2026-08-26",
+          "last_seen": "2026-08-26"
+        },
+        {
+          "digest": "git:be6a61e573268cc928af2000f588fa88a0e1450b",
+          "first_seen": "2026-08-27",
+          "last_seen": "2026-08-27"
+        },
+        {
+          "digest": "git:6640ec61a3c756915ea1407cd4172fb74cccf7e0",
+          "first_seen": "2026-08-28",
+          "last_seen": "2026-08-28"
+        },
+        {
+          "digest": "git:05a2ac001ac690b4698cea8c4963be05508346e3",
+          "first_seen": "2026-08-29",
+          "last_seen": "2026-08-29"
+        },
+        {
+          "digest": "git:7289a325e11a0345d264818ea3160f9249d18f17",
+          "first_seen": "2026-08-30",
+          "last_seen": "2026-08-30"
+        },
+        {
+          "digest": "git:13a9c7a649e52b0a868c6ada9876e1bb93592e03",
+          "first_seen": "2026-08-31",
+          "last_seen": "2026-08-31"
+        },
+        {
+          "digest": "git:73621b9104fabe055e69674c4a6214832f25787e",
+          "first_seen": "2026-09-01",
+          "last_seen": "2026-09-01"
+        },
+        {
+          "digest": "git:542cd4a3ab59f839cc7b3ac4db1c731972ce5665",
+          "first_seen": "2026-09-02",
+          "last_seen": "2026-09-02"
+        },
+        {
+          "digest": "git:25ced5d38d9d297bb6d926dcc89996bb4dcae6ee",
+          "first_seen": "2026-09-03",
+          "last_seen": "2026-09-03"
+        },
+        {
+          "digest": "git:cdb522806ac902e972540001f4bdac1ea68f0b82",
+          "first_seen": "2026-09-04",
+          "last_seen": "2026-09-04"
+        },
+        {
+          "digest": "git:6043eee990236531cd2f40c7e21fb8d2c1022ff2",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
         },
@@ -27,44 +317,334 @@
       ]
     },
     "ecb": {
-      "digest": "sha256:dc22e0ca4aa7cd39a13b99c70d3cf90606fcf0f2a1cb74b9203919d3f3be8c9e",
+      "digest": "sha256:040dd49ef235d89edb83fd432a58dd9e917075dc69d9789904135cfede48240b",
       "stable_since": "2026-09-06",
       "last_seen": "2026-09-06",
       "keys": {
         "ecb_EXR_M_JPY_EUR_SP00_A.csv": {
           "file": "ecb_EXR_M_JPY_EUR_SP00_A_20260906.csv",
-          "sha256": "26ed1af55660ffe7323415e9921c885f888ffbee3a49bbc28cb6b6a8e34182ff",
-          "size": 8260
+          "sha256": "c5021543a7981c17f1eb6d41f54fc902093ce5ab08312d95c39451652b48965d",
+          "size": 8223
         },
         "ecb_EXR_M_USD_EUR_SP00_A.csv": {
           "file": "ecb_EXR_M_USD_EUR_SP00_A_20260906.csv",
-          "sha256": "9e36284ce12d1ac41dc66df171374f5c57a8eb8921f1040444ceaf71f4a4a41f",
-          "size": 7994
+          "sha256": "b723cb05e35be959036f65ff48bc447dfd3583a838207be84e156a10c377b100",
+          "size": 7957
         },
         "ecb_FM_D_U2_EUR_4F_KR_DFR_LEV.csv": {
           "file": "ecb_FM_D_U2_EUR_4F_KR_DFR_LEV_20260906.csv",
-          "sha256": "dca215b9ca03e5fc228c8a292978704013fe732abe54bacf5148bfbafc56cf83",
-          "size": 326709
+          "sha256": "7b28e11e86442e4e18d276c4779a36044f993817a4e0b0572b5c87953108752f",
+          "size": 325606
         },
         "ecb_FM_D_U2_EUR_4F_KR_MLFR_LEV.csv": {
           "file": "ecb_FM_D_U2_EUR_4F_KR_MLFR_LEV_20260906.csv",
-          "sha256": "39e1d22e75581844ca6fca3a5ce310b5118e24061eac054dc6ff840ac2abb692",
-          "size": 350270
+          "sha256": "69ee8ead320c59040367c0bf6f003f7f8a326e932cdb9a7d0caf00a208b48de4",
+          "size": 349167
         },
         "ecb_FM_D_U2_EUR_4F_KR_MRR_FR_LEV.csv": {
           "file": "ecb_FM_D_U2_EUR_4F_KR_MRR_FR_LEV_20260906.csv",
-          "sha256": "258ddc9122b04d3c7fc1506216be36d4470e15c6d4cb3ce10bb1d8a2f1da70ca",
-          "size": 409904
+          "sha256": "59900f1a90f0f4e8c2ca2d5d3aaa722b7ebb21c88597d1b844dad11258f2b32a",
+          "size": 408801
         }
       },
       "history": [
         {
-          "digest": "sha256:1c09a7b7b4b5d4192ba763f5b6cc04a37f8652ec85a6e7ed4d939c78bcd8eac1",
+          "digest": "git:c52ea24028f71e7ba2d4bf2eaf0d6046deccc1b3",
+          "first_seen": "2026-07-04",
+          "last_seen": "2026-07-04"
+        },
+        {
+          "digest": "git:c2bd45053798eab0c9fd61d957aef2fbba96cf4d",
+          "first_seen": "2026-07-05",
+          "last_seen": "2026-07-06"
+        },
+        {
+          "digest": "git:7db86a3944e9d4940654839faba6a65b5067dfe0",
+          "first_seen": "2026-07-07",
+          "last_seen": "2026-07-07"
+        },
+        {
+          "digest": "git:2b5bb0b9c22d11f45adfe1afa8c890abb07d1f3e",
+          "first_seen": "2026-07-08",
+          "last_seen": "2026-07-08"
+        },
+        {
+          "digest": "git:007d71bea5c51dc69492cb51eb1e4e5af52ec492",
+          "first_seen": "2026-07-09",
+          "last_seen": "2026-07-09"
+        },
+        {
+          "digest": "git:2347afb1e55e310dc71f26dead0be3ed44f4d896",
+          "first_seen": "2026-07-10",
+          "last_seen": "2026-07-10"
+        },
+        {
+          "digest": "git:fbc338edac84b87b377f56c7cd9c50cbc0ca0fa8",
+          "first_seen": "2026-07-11",
+          "last_seen": "2026-07-11"
+        },
+        {
+          "digest": "git:714e1a5ff9316e2b632e91d0e9603a1a5c859ecb",
+          "first_seen": "2026-07-12",
+          "last_seen": "2026-07-12"
+        },
+        {
+          "digest": "git:9f83044b5594d3425a719dd5436a1a08285446f4",
+          "first_seen": "2026-07-13",
+          "last_seen": "2026-07-13"
+        },
+        {
+          "digest": "git:d30adc19c41cf0b551030ae73d1632bd933b52ba",
+          "first_seen": "2026-07-14",
+          "last_seen": "2026-07-14"
+        },
+        {
+          "digest": "git:12d082b803c3c9371764be2a5b7bb5abf551527f",
+          "first_seen": "2026-07-15",
+          "last_seen": "2026-07-15"
+        },
+        {
+          "digest": "git:df2207aeff0998b146e8d675f57c6ff42638b9a7",
+          "first_seen": "2026-07-16",
+          "last_seen": "2026-07-16"
+        },
+        {
+          "digest": "git:13b9e9ad662b64d7d57c7975d96d095cf6e6c251",
+          "first_seen": "2026-07-17",
+          "last_seen": "2026-07-17"
+        },
+        {
+          "digest": "git:e685d2286fe72eebab1d17b31935f84410f61626",
+          "first_seen": "2026-07-18",
+          "last_seen": "2026-07-18"
+        },
+        {
+          "digest": "git:632327edf7f01136f05c0b4aa0f99ac0293ad959",
+          "first_seen": "2026-07-19",
+          "last_seen": "2026-07-19"
+        },
+        {
+          "digest": "git:4a406209fa3b2365b1870578b35be483c10aa32d",
+          "first_seen": "2026-07-20",
+          "last_seen": "2026-07-20"
+        },
+        {
+          "digest": "git:8a7a46b8c7f35d0a514c209c9ad72dcf1c689545",
+          "first_seen": "2026-07-21",
+          "last_seen": "2026-07-21"
+        },
+        {
+          "digest": "git:b325f50d8683002145d033f945b58e7b7a777c1d",
+          "first_seen": "2026-07-22",
+          "last_seen": "2026-07-22"
+        },
+        {
+          "digest": "git:93a5b19c54802dfc1e5b1588974025ce6c4c0f9c",
+          "first_seen": "2026-07-23",
+          "last_seen": "2026-07-23"
+        },
+        {
+          "digest": "git:da8871a38494eb86637e29183cc640455c6b9a32",
+          "first_seen": "2026-07-24",
+          "last_seen": "2026-07-24"
+        },
+        {
+          "digest": "git:b677f62ffca94a6c3901aef47502e66b94d8a111",
+          "first_seen": "2026-07-25",
+          "last_seen": "2026-07-25"
+        },
+        {
+          "digest": "git:73184d18054ff0c0ea406312059c0663f50f8fcd",
+          "first_seen": "2026-07-26",
+          "last_seen": "2026-07-26"
+        },
+        {
+          "digest": "git:984e7fc9b9a68c339613ab1d2e5120468d2b151e",
+          "first_seen": "2026-07-27",
+          "last_seen": "2026-07-27"
+        },
+        {
+          "digest": "git:a6903b2d8990c27b8940d6ffb9e4ffa7924954bb",
+          "first_seen": "2026-07-28",
+          "last_seen": "2026-07-28"
+        },
+        {
+          "digest": "git:3a70848a31afe4624063f2234f4e33e1c8c93f4e",
+          "first_seen": "2026-07-29",
+          "last_seen": "2026-07-29"
+        },
+        {
+          "digest": "git:1bc78bcb9a0fe0e33ed272a746bdd0d0e75d9be5",
+          "first_seen": "2026-07-30",
+          "last_seen": "2026-07-30"
+        },
+        {
+          "digest": "git:0c520b5960a558b0a6ff0d1895a10f23378de7c6",
+          "first_seen": "2026-07-31",
+          "last_seen": "2026-07-31"
+        },
+        {
+          "digest": "git:3c1601a5be7d216f2c1d290f78185838fc1dfa77",
+          "first_seen": "2026-08-01",
+          "last_seen": "2026-08-01"
+        },
+        {
+          "digest": "git:80e6166bb01e1c84c76c179e8c9ee78650613ee1",
+          "first_seen": "2026-08-02",
+          "last_seen": "2026-08-02"
+        },
+        {
+          "digest": "git:bda60831f3a5815c53fd7a6c68e1cc296e580654",
+          "first_seen": "2026-08-03",
+          "last_seen": "2026-08-03"
+        },
+        {
+          "digest": "git:08a610a4465e064ead77481369a8372a27b9a5d8",
+          "first_seen": "2026-08-04",
+          "last_seen": "2026-08-04"
+        },
+        {
+          "digest": "git:1a41ec190d16414e22f11455d35b08d5b2db780f",
+          "first_seen": "2026-08-05",
+          "last_seen": "2026-08-05"
+        },
+        {
+          "digest": "git:d2099c6140f9c166139f4584cd648a4b050be1eb",
+          "first_seen": "2026-08-06",
+          "last_seen": "2026-08-06"
+        },
+        {
+          "digest": "git:20d06b88df9053a9e73cafee3957e49720d564db",
+          "first_seen": "2026-08-07",
+          "last_seen": "2026-08-07"
+        },
+        {
+          "digest": "git:ffaa1be28ffd97cc1f271191ac7451f5d2647058",
+          "first_seen": "2026-08-08",
+          "last_seen": "2026-08-09"
+        },
+        {
+          "digest": "git:bc38d15cea21e08949d103b5fd673e5979936dbf",
+          "first_seen": "2026-08-10",
+          "last_seen": "2026-08-10"
+        },
+        {
+          "digest": "git:287fd7bccce3be9664440bbf3e8bf424e5fddd8a",
+          "first_seen": "2026-08-11",
+          "last_seen": "2026-08-11"
+        },
+        {
+          "digest": "git:5d3e109f9c109589bb742dc1cb7d95f10229f5fa",
+          "first_seen": "2026-08-12",
+          "last_seen": "2026-08-13"
+        },
+        {
+          "digest": "git:39725f7fe23efbb23eac12c46f4780a36fc1af04",
+          "first_seen": "2026-08-14",
+          "last_seen": "2026-08-15"
+        },
+        {
+          "digest": "git:98db0437dc44131f14d6072c0d991a3258ad0fa8",
+          "first_seen": "2026-08-16",
+          "last_seen": "2026-08-17"
+        },
+        {
+          "digest": "git:7a7932880dc480cb46a866bd7cfcaacf2430605e",
+          "first_seen": "2026-08-18",
+          "last_seen": "2026-08-18"
+        },
+        {
+          "digest": "git:c656abf111a97c844a5de99d116bba6b12490734",
+          "first_seen": "2026-08-19",
+          "last_seen": "2026-08-19"
+        },
+        {
+          "digest": "git:135b3beb149a26a7457afd16bae431fb23e648ae",
+          "first_seen": "2026-08-20",
+          "last_seen": "2026-08-20"
+        },
+        {
+          "digest": "git:49e9d8826705d4f00c8d877aa65ff1ced69afcb3",
+          "first_seen": "2026-08-21",
+          "last_seen": "2026-08-21"
+        },
+        {
+          "digest": "git:731f9d19c505028ccbfaf99b8580e619331537eb",
+          "first_seen": "2026-08-22",
+          "last_seen": "2026-08-22"
+        },
+        {
+          "digest": "git:5f92a0f128f997ccd0887a304fd56423984c641e",
+          "first_seen": "2026-08-23",
+          "last_seen": "2026-08-23"
+        },
+        {
+          "digest": "git:459d11c7103eae3a531171b024080c8008b3e0e8",
+          "first_seen": "2026-08-24",
+          "last_seen": "2026-08-24"
+        },
+        {
+          "digest": "git:8f328f521d2fd1fa928d12c1c63f2fcc79d17176",
+          "first_seen": "2026-08-25",
+          "last_seen": "2026-08-25"
+        },
+        {
+          "digest": "git:8188874971ca6173a87b7a069bbd82530a5b8e55",
+          "first_seen": "2026-08-26",
+          "last_seen": "2026-08-26"
+        },
+        {
+          "digest": "git:755079c2d4d5172ef31968c96994ebc6517488de",
+          "first_seen": "2026-08-27",
+          "last_seen": "2026-08-27"
+        },
+        {
+          "digest": "git:6ae66bd0028fb2a6b783eb964b7d480e6f97775f",
+          "first_seen": "2026-08-28",
+          "last_seen": "2026-08-28"
+        },
+        {
+          "digest": "git:47b5a268102731c40a4b0b07dae72afa1b09e9ae",
+          "first_seen": "2026-08-29",
+          "last_seen": "2026-08-29"
+        },
+        {
+          "digest": "git:657639687056d41a2df4f1995fa3e89b1cbd0d4c",
+          "first_seen": "2026-08-30",
+          "last_seen": "2026-08-30"
+        },
+        {
+          "digest": "git:1d8e6b955bacf052d73a92ba06fe9363d8492dd5",
+          "first_seen": "2026-08-31",
+          "last_seen": "2026-08-31"
+        },
+        {
+          "digest": "git:7af6cdcace72b180b7ac85ea4a8ab00415a2e0c3",
+          "first_seen": "2026-09-01",
+          "last_seen": "2026-09-01"
+        },
+        {
+          "digest": "git:4c16cfc38be0c3779e40a6244ba5feecedd4e2a8",
+          "first_seen": "2026-09-02",
+          "last_seen": "2026-09-02"
+        },
+        {
+          "digest": "git:fc806be503f1a6daf682502642e27419f0d00a56",
+          "first_seen": "2026-09-03",
+          "last_seen": "2026-09-03"
+        },
+        {
+          "digest": "git:d4948764d019f83137e82c161660a29b531c9d04",
+          "first_seen": "2026-09-04",
+          "last_seen": "2026-09-04"
+        },
+        {
+          "digest": "git:dfa3f2ca7e782c4a381f760786a8c0999fc56043",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
         },
         {
-          "digest": "sha256:dc22e0ca4aa7cd39a13b99c70d3cf90606fcf0f2a1cb74b9203919d3f3be8c9e",
+          "digest": "sha256:040dd49ef235d89edb83fd432a58dd9e917075dc69d9789904135cfede48240b",
           "first_seen": "2026-09-06",
           "last_seen": "2026-09-06"
         }
@@ -85,7 +665,7 @@
     },
     "eia_intl": {
       "digest": "sha256:80313e939bb9d75766ed0add94a354c35c2c1bfbc5c970289af52a7391dc5a81",
-      "stable_since": "2026-09-06",
+      "stable_since": "2026-08-25",
       "last_seen": "2026-09-06",
       "keys": {
         "eia_intl_gdp.json": {
@@ -111,20 +691,25 @@
       },
       "history": [
         {
-          "digest": "sha256:a3d4b9cbb3e8fd54e34b15056f5eed6a427418d2383354f9a07e225da0a76e39",
-          "first_seen": "2026-08-25",
-          "last_seen": "2026-09-05"
+          "digest": "git:99c769112aa72267243cd07e00a345d42d2c3a27",
+          "first_seen": "2026-08-14",
+          "last_seen": "2026-08-19"
+        },
+        {
+          "digest": "git:077a565ceeee69260c1d66b60a7a694683dbd105",
+          "first_seen": "2026-08-20",
+          "last_seen": "2026-08-24"
         },
         {
           "digest": "sha256:80313e939bb9d75766ed0add94a354c35c2c1bfbc5c970289af52a7391dc5a81",
-          "first_seen": "2026-09-06",
+          "first_seen": "2026-08-25",
           "last_seen": "2026-09-06"
         }
       ]
     },
     "ember": {
       "digest": "sha256:ce462e3fa02ebee1391167361c3f1dd5633b1ba7601a4610c5d265b511328e60",
-      "stable_since": "2026-09-06",
+      "stable_since": "2026-08-31",
       "last_seen": "2026-09-06",
       "keys": {
         "ember_monthly.csv": {
@@ -135,13 +720,33 @@
       },
       "history": [
         {
-          "digest": "sha256:383f03410f6b616ee5ff58eeb29176b3af49ccdef1c4994fc3ae5729e689548f",
-          "first_seen": "2026-08-31",
-          "last_seen": "2026-09-05"
+          "digest": "git:8b4f95114e764bcabd5ed6fbb5de2ac8d7395218",
+          "first_seen": "2026-05-26",
+          "last_seen": "2026-06-04"
+        },
+        {
+          "digest": "git:61f61d51b23013375949f120429e20e0b2ce5875",
+          "first_seen": "2026-06-05",
+          "last_seen": "2026-06-10"
+        },
+        {
+          "digest": "git:32cde34a8b7bd4e237e48fef6ead51c095413eee",
+          "first_seen": "2026-06-11",
+          "last_seen": "2026-06-17"
+        },
+        {
+          "digest": "git:b224c17ec063459ad39dd1d5ffb1192992782494",
+          "first_seen": "2026-06-18",
+          "last_seen": "2026-07-07"
+        },
+        {
+          "digest": "git:660c014af8f2c90bedbc59169f9668083397fd8d",
+          "first_seen": "2026-07-08",
+          "last_seen": "2026-08-30"
         },
         {
           "digest": "sha256:ce462e3fa02ebee1391167361c3f1dd5633b1ba7601a4610c5d265b511328e60",
-          "first_seen": "2026-09-06",
+          "first_seen": "2026-08-31",
           "last_seen": "2026-09-06"
         }
       ]
@@ -303,7 +908,297 @@
       },
       "history": [
         {
-          "digest": "sha256:7b74f770b938afa03720489421a6c3877a4a69c5d5b0541de5233d7f79eb0830",
+          "digest": "git:0e77a4feecf99511098517fa6ed8e075330f3ed5",
+          "first_seen": "2026-07-09",
+          "last_seen": "2026-07-09"
+        },
+        {
+          "digest": "git:e4f05406878c6c40cadeb0c143c3e92433371a90",
+          "first_seen": "2026-07-10",
+          "last_seen": "2026-07-10"
+        },
+        {
+          "digest": "git:1f96b5627ec26415eb668ff87674c1ffe23c770e",
+          "first_seen": "2026-07-11",
+          "last_seen": "2026-07-11"
+        },
+        {
+          "digest": "git:26d0ae28fc5c14816cbd7d8ff7381fce71df5725",
+          "first_seen": "2026-07-12",
+          "last_seen": "2026-07-12"
+        },
+        {
+          "digest": "git:e45b7df2dec4e87c164f4120fd0a50fc983f4278",
+          "first_seen": "2026-07-13",
+          "last_seen": "2026-07-13"
+        },
+        {
+          "digest": "git:c4bf940980a14b9a1586e1bc644b484db5f2be50",
+          "first_seen": "2026-07-14",
+          "last_seen": "2026-07-14"
+        },
+        {
+          "digest": "git:8cd293efa4c442a7e0154b5e150ecbc9c93c4077",
+          "first_seen": "2026-07-15",
+          "last_seen": "2026-07-15"
+        },
+        {
+          "digest": "git:0b6081888d20d2666986d9327d46677e0a53ed06",
+          "first_seen": "2026-07-16",
+          "last_seen": "2026-07-16"
+        },
+        {
+          "digest": "git:79c53c2f45432f285103de70185024a31267b221",
+          "first_seen": "2026-07-17",
+          "last_seen": "2026-07-17"
+        },
+        {
+          "digest": "git:f20c0abb3c7b26c90f77169f6948e2fc16427f4f",
+          "first_seen": "2026-07-18",
+          "last_seen": "2026-07-18"
+        },
+        {
+          "digest": "git:b1d43914e93e1b0d451b9de608743ed3586a299e",
+          "first_seen": "2026-07-19",
+          "last_seen": "2026-07-19"
+        },
+        {
+          "digest": "git:cfaa716d1f501f5598df101a8fa776f0ae95f48a",
+          "first_seen": "2026-07-20",
+          "last_seen": "2026-07-20"
+        },
+        {
+          "digest": "git:8e4ae2cdabf139c5ff5ce57285fa5167e98b06aa",
+          "first_seen": "2026-07-21",
+          "last_seen": "2026-07-21"
+        },
+        {
+          "digest": "git:fc7a990b04c7a08b0dc3206c1d27359f247a16de",
+          "first_seen": "2026-07-22",
+          "last_seen": "2026-07-22"
+        },
+        {
+          "digest": "git:5476cc38902e59c048a59354b171471db95327f3",
+          "first_seen": "2026-07-23",
+          "last_seen": "2026-07-23"
+        },
+        {
+          "digest": "git:d52715dc92afc98f8c34747dd63645fecf29f660",
+          "first_seen": "2026-07-24",
+          "last_seen": "2026-07-24"
+        },
+        {
+          "digest": "git:51181684325b98816cfde59bf1dc1d176bd2e9ee",
+          "first_seen": "2026-07-25",
+          "last_seen": "2026-07-25"
+        },
+        {
+          "digest": "git:f3ccce8c1bf1dda373d5de5f3734059bd2eb8fbb",
+          "first_seen": "2026-07-26",
+          "last_seen": "2026-07-26"
+        },
+        {
+          "digest": "git:c6ad4d1b4c4396201934496e46ec085f75e1c33e",
+          "first_seen": "2026-07-27",
+          "last_seen": "2026-07-27"
+        },
+        {
+          "digest": "git:04c8e731dc6ec659767b932405fb110840fb4240",
+          "first_seen": "2026-07-28",
+          "last_seen": "2026-07-28"
+        },
+        {
+          "digest": "git:c635010a94f9dd41218ef8925fbbbe0fa6d3af09",
+          "first_seen": "2026-07-29",
+          "last_seen": "2026-07-29"
+        },
+        {
+          "digest": "git:8a5ffa6683816cd94c349e12deafcb1211f9c549",
+          "first_seen": "2026-07-30",
+          "last_seen": "2026-07-30"
+        },
+        {
+          "digest": "git:53694fe228235f1121a1748b1ceee158d659abaf",
+          "first_seen": "2026-07-31",
+          "last_seen": "2026-07-31"
+        },
+        {
+          "digest": "git:832100bf18f86a5bf590ce0a0d5b73273ac2e608",
+          "first_seen": "2026-08-01",
+          "last_seen": "2026-08-01"
+        },
+        {
+          "digest": "git:678575a6b5c975e078c94a620e3cbc14ca601547",
+          "first_seen": "2026-08-02",
+          "last_seen": "2026-08-02"
+        },
+        {
+          "digest": "git:902eb8e6af924d9ea0bc405924601c47b14cd801",
+          "first_seen": "2026-08-03",
+          "last_seen": "2026-08-03"
+        },
+        {
+          "digest": "git:0d0151d2594d1c49e1f6271dfe420a2e9d654302",
+          "first_seen": "2026-08-04",
+          "last_seen": "2026-08-04"
+        },
+        {
+          "digest": "git:c5f291090a25e9e47536db87bb2cc11a8154452d",
+          "first_seen": "2026-08-05",
+          "last_seen": "2026-08-05"
+        },
+        {
+          "digest": "git:ddb462963abf2f6a9aa7ca7a7162e903b5fed956",
+          "first_seen": "2026-08-06",
+          "last_seen": "2026-08-06"
+        },
+        {
+          "digest": "git:dda0289da63a0c82b5fac04ac116981085ab1efa",
+          "first_seen": "2026-08-07",
+          "last_seen": "2026-08-07"
+        },
+        {
+          "digest": "git:f2d37ed2a1b55a7300c8088f496778404f53da7d",
+          "first_seen": "2026-08-08",
+          "last_seen": "2026-08-08"
+        },
+        {
+          "digest": "git:84d380024c04ef41b713c9b4e6e517008af65274",
+          "first_seen": "2026-08-09",
+          "last_seen": "2026-08-09"
+        },
+        {
+          "digest": "git:3e5c2bc97f0737856c297ccd713e8a868982fd9f",
+          "first_seen": "2026-08-10",
+          "last_seen": "2026-08-10"
+        },
+        {
+          "digest": "git:4fc0af4a6f4edd60ddabe67a31df74392bc9c877",
+          "first_seen": "2026-08-11",
+          "last_seen": "2026-08-11"
+        },
+        {
+          "digest": "git:311632fb4a5a160f89a139b7dd49967558191a33",
+          "first_seen": "2026-08-12",
+          "last_seen": "2026-08-12"
+        },
+        {
+          "digest": "git:2d51b3eb5caa41e7fb4d8e2216f373252861e66b",
+          "first_seen": "2026-08-13",
+          "last_seen": "2026-08-13"
+        },
+        {
+          "digest": "git:0fb4f9438b47a79452f82e7b941968b8540f89bb",
+          "first_seen": "2026-08-14",
+          "last_seen": "2026-08-14"
+        },
+        {
+          "digest": "git:b1909cedec6f9f3162d65704d49778e27985b562",
+          "first_seen": "2026-08-15",
+          "last_seen": "2026-08-15"
+        },
+        {
+          "digest": "git:14325456ce013bb174f4506e1744e3e892b3b209",
+          "first_seen": "2026-08-16",
+          "last_seen": "2026-08-16"
+        },
+        {
+          "digest": "git:1fbf96467c2f5cee082b66d6652abe9d3add113d",
+          "first_seen": "2026-08-17",
+          "last_seen": "2026-08-17"
+        },
+        {
+          "digest": "git:14bc1c4786f4b2f645e58fae9a5a47c71d9577db",
+          "first_seen": "2026-08-18",
+          "last_seen": "2026-08-18"
+        },
+        {
+          "digest": "git:10deb1d94041a8cd80d1c1a57c4b79efac687881",
+          "first_seen": "2026-08-19",
+          "last_seen": "2026-08-19"
+        },
+        {
+          "digest": "git:171cd24fc453e8891f21eb42b0836ec910ccc75b",
+          "first_seen": "2026-08-20",
+          "last_seen": "2026-08-20"
+        },
+        {
+          "digest": "git:5f0b310ae0404944c5fdde9299e6799c9e19509b",
+          "first_seen": "2026-08-21",
+          "last_seen": "2026-08-21"
+        },
+        {
+          "digest": "git:5f47017b4005c2faf65be413d0f411481fc6d638",
+          "first_seen": "2026-08-22",
+          "last_seen": "2026-08-22"
+        },
+        {
+          "digest": "git:0a3f56cb2ce319ec2689fba4d984ef19d8af8d99",
+          "first_seen": "2026-08-23",
+          "last_seen": "2026-08-23"
+        },
+        {
+          "digest": "git:4c2334ba16699e15eff3802cff63394b38d3e75f",
+          "first_seen": "2026-08-24",
+          "last_seen": "2026-08-24"
+        },
+        {
+          "digest": "git:dad3766c7fbedef0deda09f1675fbeffb7509344",
+          "first_seen": "2026-08-25",
+          "last_seen": "2026-08-25"
+        },
+        {
+          "digest": "git:6f58fdf9cb36806f98c1c0f4f9d93e517593fd15",
+          "first_seen": "2026-08-26",
+          "last_seen": "2026-08-26"
+        },
+        {
+          "digest": "git:28c30ef2613c2c49f711a13735017938ca126f30",
+          "first_seen": "2026-08-27",
+          "last_seen": "2026-08-27"
+        },
+        {
+          "digest": "git:dfb0af1e7a38afe301af98b9dca0bf64fc15dc2b",
+          "first_seen": "2026-08-28",
+          "last_seen": "2026-08-28"
+        },
+        {
+          "digest": "git:14fc7b5039da29914564a92d3b3a4606005895ff",
+          "first_seen": "2026-08-29",
+          "last_seen": "2026-08-29"
+        },
+        {
+          "digest": "git:2c0a45137c021ef73ee21954fa2d92d3f95a5749",
+          "first_seen": "2026-08-30",
+          "last_seen": "2026-08-30"
+        },
+        {
+          "digest": "git:6c4912e3b00bcbf9cea0e93e69955bed6922fcf4",
+          "first_seen": "2026-08-31",
+          "last_seen": "2026-08-31"
+        },
+        {
+          "digest": "git:2dc98af02ee635aad20773fa96aa8fdb11791f1a",
+          "first_seen": "2026-09-01",
+          "last_seen": "2026-09-01"
+        },
+        {
+          "digest": "git:25b311009c5d3fe8353bf9a562dcecfe8e18424f",
+          "first_seen": "2026-09-02",
+          "last_seen": "2026-09-02"
+        },
+        {
+          "digest": "git:5ba70b29d4b2706854df19cc03dd85681e99c0a1",
+          "first_seen": "2026-09-03",
+          "last_seen": "2026-09-03"
+        },
+        {
+          "digest": "git:c0bca475b3c8f9a493f27a79c5c09a930f2207c6",
+          "first_seen": "2026-09-04",
+          "last_seen": "2026-09-04"
+        },
+        {
+          "digest": "git:8e006ae6582c29c5844f629438337e0838c45fb1",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
         },
@@ -352,7 +1247,297 @@
       },
       "history": [
         {
-          "digest": "sha256:3703d02e4047f66f4c14117a99c6f9f3d6d2a8954ed104f0a017b89c53d41b1c",
+          "digest": "git:6ab2f9ff6a5401b316a208f579a950e276e23412",
+          "first_seen": "2026-07-09",
+          "last_seen": "2026-07-09"
+        },
+        {
+          "digest": "git:795850c4a8a721729cda296944cec37c2973bb19",
+          "first_seen": "2026-07-10",
+          "last_seen": "2026-07-10"
+        },
+        {
+          "digest": "git:eb7a166cbd2c4b942a4a6b67fa3edd997bf9c08c",
+          "first_seen": "2026-07-11",
+          "last_seen": "2026-07-11"
+        },
+        {
+          "digest": "git:0c83aecf6aadeca17435077d086b1b2a1c92121b",
+          "first_seen": "2026-07-12",
+          "last_seen": "2026-07-12"
+        },
+        {
+          "digest": "git:df8bad390ebd33d556feedc6f87766e337bb9734",
+          "first_seen": "2026-07-13",
+          "last_seen": "2026-07-13"
+        },
+        {
+          "digest": "git:9f5a3998ead52bd7d2a340d5db00e4ee3a3775ae",
+          "first_seen": "2026-07-14",
+          "last_seen": "2026-07-14"
+        },
+        {
+          "digest": "git:6d03e9ea01fd91e02cdb2123b97f9893925eaa1a",
+          "first_seen": "2026-07-15",
+          "last_seen": "2026-07-15"
+        },
+        {
+          "digest": "git:b54a6f53516defb152c7e37d7270de876a4ae9f2",
+          "first_seen": "2026-07-16",
+          "last_seen": "2026-07-16"
+        },
+        {
+          "digest": "git:b5eeb878f6d294b856cae95235c14ac5fb4e36b3",
+          "first_seen": "2026-07-17",
+          "last_seen": "2026-07-17"
+        },
+        {
+          "digest": "git:67b0c5fad15db73f952718f969b83094ef3227f4",
+          "first_seen": "2026-07-18",
+          "last_seen": "2026-07-18"
+        },
+        {
+          "digest": "git:e0e1e800cc34eb68a7b9905473b4cb8488988f2c",
+          "first_seen": "2026-07-19",
+          "last_seen": "2026-07-19"
+        },
+        {
+          "digest": "git:b77ff3343fa66df41dac85c286803c795237aed0",
+          "first_seen": "2026-07-20",
+          "last_seen": "2026-07-20"
+        },
+        {
+          "digest": "git:c02589274f3702592ecad79da2012b1f3f5b2731",
+          "first_seen": "2026-07-21",
+          "last_seen": "2026-07-21"
+        },
+        {
+          "digest": "git:085c1826e1a5fa6cc0957dfae3528bf016c9ac2d",
+          "first_seen": "2026-07-22",
+          "last_seen": "2026-07-22"
+        },
+        {
+          "digest": "git:397011c86372fbbcc8875db27c757d4656d99c7d",
+          "first_seen": "2026-07-23",
+          "last_seen": "2026-07-23"
+        },
+        {
+          "digest": "git:d3c62f000f1cb83270a882da77d1fe8672ace7f4",
+          "first_seen": "2026-07-24",
+          "last_seen": "2026-07-24"
+        },
+        {
+          "digest": "git:ac7e0318da6f0f94aec8fcb79a8b899bd70eabc2",
+          "first_seen": "2026-07-25",
+          "last_seen": "2026-07-25"
+        },
+        {
+          "digest": "git:917711514ca7baad48f59d9fa5c94bfc34bb9b12",
+          "first_seen": "2026-07-26",
+          "last_seen": "2026-07-26"
+        },
+        {
+          "digest": "git:3709bcdf9a60ac6b3cc0dba6da45c6d8e88fabc8",
+          "first_seen": "2026-07-27",
+          "last_seen": "2026-07-27"
+        },
+        {
+          "digest": "git:9dee3f48d4acd4897a1bd2029db4ba6d4d5879a8",
+          "first_seen": "2026-07-28",
+          "last_seen": "2026-07-28"
+        },
+        {
+          "digest": "git:2ae1f751d4547e50121de99d0c346b57d61a2e48",
+          "first_seen": "2026-07-29",
+          "last_seen": "2026-07-29"
+        },
+        {
+          "digest": "git:719255cf25f62895d5bed98a1291d5934a9dd704",
+          "first_seen": "2026-07-30",
+          "last_seen": "2026-07-30"
+        },
+        {
+          "digest": "git:3bbd8b0299ba81ea204721fd3d437fcd52f24a25",
+          "first_seen": "2026-07-31",
+          "last_seen": "2026-07-31"
+        },
+        {
+          "digest": "git:7927c3acee575d3830e926840d5df4b72a2dfd82",
+          "first_seen": "2026-08-01",
+          "last_seen": "2026-08-01"
+        },
+        {
+          "digest": "git:ec4093abb805ddbeab8c3a21c84910d6ffb3f9d6",
+          "first_seen": "2026-08-02",
+          "last_seen": "2026-08-02"
+        },
+        {
+          "digest": "git:b5fecc2f0d5bd4bf808e9f632e6486171402a4c7",
+          "first_seen": "2026-08-03",
+          "last_seen": "2026-08-03"
+        },
+        {
+          "digest": "git:5ad0a59c42bec90ecd732efd6e253eb9fadb0ebb",
+          "first_seen": "2026-08-04",
+          "last_seen": "2026-08-04"
+        },
+        {
+          "digest": "git:bfe0ffa7e398b4896beda5e570a4d31d0ee46872",
+          "first_seen": "2026-08-05",
+          "last_seen": "2026-08-05"
+        },
+        {
+          "digest": "git:1c638c9ca0b796a52d26455bc13601b98b0682f5",
+          "first_seen": "2026-08-06",
+          "last_seen": "2026-08-06"
+        },
+        {
+          "digest": "git:be17913cb729ed3c6829f18a3c10e671e9b56d53",
+          "first_seen": "2026-08-07",
+          "last_seen": "2026-08-07"
+        },
+        {
+          "digest": "git:4528afac382ac9d1ad790e89d5bd70f01fed2bf8",
+          "first_seen": "2026-08-08",
+          "last_seen": "2026-08-08"
+        },
+        {
+          "digest": "git:e730c9815dc74824deff9698a5f1d4181f82f6ce",
+          "first_seen": "2026-08-09",
+          "last_seen": "2026-08-09"
+        },
+        {
+          "digest": "git:3531ae23a131bddc7374923df0a74ad155a511a9",
+          "first_seen": "2026-08-10",
+          "last_seen": "2026-08-10"
+        },
+        {
+          "digest": "git:ee91560d9dc0df4619ea7ac02ac5131f7911e4a3",
+          "first_seen": "2026-08-11",
+          "last_seen": "2026-08-11"
+        },
+        {
+          "digest": "git:2e82a36555d5024e26f2b265860e3cc7802b68db",
+          "first_seen": "2026-08-12",
+          "last_seen": "2026-08-12"
+        },
+        {
+          "digest": "git:49328e295c6d30f4a5402199d7cec4f7b1354172",
+          "first_seen": "2026-08-13",
+          "last_seen": "2026-08-13"
+        },
+        {
+          "digest": "git:d6358c0979f4b14c5bbdb37d017e0fa0bb1c81c6",
+          "first_seen": "2026-08-14",
+          "last_seen": "2026-08-14"
+        },
+        {
+          "digest": "git:1477eac1b7e4ec2893990195c0bd711f82edf24b",
+          "first_seen": "2026-08-15",
+          "last_seen": "2026-08-15"
+        },
+        {
+          "digest": "git:f8de855abcbf96e59a2fced6f80dc3a4b76165cb",
+          "first_seen": "2026-08-16",
+          "last_seen": "2026-08-16"
+        },
+        {
+          "digest": "git:5eebf4f8c229358baaeeccbb8ba7155858e4829c",
+          "first_seen": "2026-08-17",
+          "last_seen": "2026-08-17"
+        },
+        {
+          "digest": "git:83ce5019faed4e7a55c1de75fa62382309c6dfab",
+          "first_seen": "2026-08-18",
+          "last_seen": "2026-08-18"
+        },
+        {
+          "digest": "git:43ca3641bb3f68f1b775e5235d0e9901afa85c31",
+          "first_seen": "2026-08-19",
+          "last_seen": "2026-08-19"
+        },
+        {
+          "digest": "git:e79914b41810e5213a87126b6404c12c6c8d72f7",
+          "first_seen": "2026-08-20",
+          "last_seen": "2026-08-20"
+        },
+        {
+          "digest": "git:d4a360e841aa92b854772b9d31a32a2bd8c2e765",
+          "first_seen": "2026-08-21",
+          "last_seen": "2026-08-21"
+        },
+        {
+          "digest": "git:cb9529096b4a389892bb6a522adbea949dbaa1f6",
+          "first_seen": "2026-08-22",
+          "last_seen": "2026-08-22"
+        },
+        {
+          "digest": "git:2cae2a0446429326c45e6e5c04c99ac069148a66",
+          "first_seen": "2026-08-23",
+          "last_seen": "2026-08-23"
+        },
+        {
+          "digest": "git:9d824e5f410d89a7d330bcd4f0c7e156eaff2db5",
+          "first_seen": "2026-08-24",
+          "last_seen": "2026-08-24"
+        },
+        {
+          "digest": "git:01cd34ba75a02ad77b493ffbc0ff4b3880006c08",
+          "first_seen": "2026-08-25",
+          "last_seen": "2026-08-25"
+        },
+        {
+          "digest": "git:2c08b0a0e8943b774384530f3c49e1f4ebfce598",
+          "first_seen": "2026-08-26",
+          "last_seen": "2026-08-26"
+        },
+        {
+          "digest": "git:92001e47d1609b0a29a46f0bcae0611dc2d12ba3",
+          "first_seen": "2026-08-27",
+          "last_seen": "2026-08-27"
+        },
+        {
+          "digest": "git:df3123c830a5604d9ce140d0a9482a00fd3e0ee6",
+          "first_seen": "2026-08-28",
+          "last_seen": "2026-08-28"
+        },
+        {
+          "digest": "git:e142790ee7b0dcb2748f08c92bb1e0826e84ff82",
+          "first_seen": "2026-08-29",
+          "last_seen": "2026-08-29"
+        },
+        {
+          "digest": "git:269e03716ffb12945565013c1e27a254544efbf5",
+          "first_seen": "2026-08-30",
+          "last_seen": "2026-08-30"
+        },
+        {
+          "digest": "git:fd6e9ea2bdb030dff7f3a22b7c4e1b6d1229e886",
+          "first_seen": "2026-08-31",
+          "last_seen": "2026-08-31"
+        },
+        {
+          "digest": "git:76edcb8dbe955a267495f3ab18c4dfcd932da6ce",
+          "first_seen": "2026-09-01",
+          "last_seen": "2026-09-01"
+        },
+        {
+          "digest": "git:8e35354d3b56dcb19672072e6978d5dcda31a212",
+          "first_seen": "2026-09-02",
+          "last_seen": "2026-09-02"
+        },
+        {
+          "digest": "git:e823d8a2570bf009343b1290f3c6c73b278c98a4",
+          "first_seen": "2026-09-03",
+          "last_seen": "2026-09-03"
+        },
+        {
+          "digest": "git:9c8d8b69a006bf6b0d9f62ea72858c6dbafc3ad1",
+          "first_seen": "2026-09-04",
+          "last_seen": "2026-09-04"
+        },
+        {
+          "digest": "git:4c715cea0b9357994b99a12d0f78ab1a7a7c32a0",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
         },
@@ -365,7 +1550,7 @@
     },
     "eu-ets": {
       "digest": "sha256:fd4fb34f2127f8d3b8686fd50798fccc10d25a2b521dd0a2e00aab6e4ac3f945",
-      "stable_since": "2026-09-06",
+      "stable_since": "2026-06-01",
       "last_seen": "2026-09-06",
       "keys": {
         "eu_ets_full.csv": {
@@ -381,13 +1566,8 @@
       },
       "history": [
         {
-          "digest": "sha256:7a70a9f57123aec8c39c735688b007c3dfa83942fd6b9982fa9a07c9224f4e92",
-          "first_seen": "2026-06-01",
-          "last_seen": "2026-09-05"
-        },
-        {
           "digest": "sha256:fd4fb34f2127f8d3b8686fd50798fccc10d25a2b521dd0a2e00aab6e4ac3f945",
-          "first_seen": "2026-09-06",
+          "first_seen": "2026-06-01",
           "last_seen": "2026-09-06"
         }
       ]
@@ -410,7 +1590,12 @@
       },
       "history": [
         {
-          "digest": "sha256:e591a87b96ddbc3c8bba94c5f224843b3def53fd5fa2dfad10798e42a57b74a6",
+          "digest": "git:638f6b67f3ecf42d4674aedf62fb8a094bff0aa2",
+          "first_seen": "2026-06-12",
+          "last_seen": "2026-06-12"
+        },
+        {
+          "digest": "git:539916416c13f4716260c381197958187888b3df",
           "first_seen": "2026-07-07",
           "last_seen": "2026-09-05"
         },
@@ -479,7 +1664,297 @@
       },
       "history": [
         {
-          "digest": "sha256:2137510068335e6712d74939fcaa0b4069c26d61d3a60a6a4a7d923cfeede760",
+          "digest": "git:35911e8afa69875658f34cb6b065fa156ebfd14d",
+          "first_seen": "2026-06-20",
+          "last_seen": "2026-06-20"
+        },
+        {
+          "digest": "git:f67add814ac9f02fae70f738cd00578b5903f6ad",
+          "first_seen": "2026-06-21",
+          "last_seen": "2026-06-21"
+        },
+        {
+          "digest": "git:ee72ae857a0cb2010b6d96a6274b94a48c6cbd28",
+          "first_seen": "2026-06-22",
+          "last_seen": "2026-06-22"
+        },
+        {
+          "digest": "git:35911e8afa69875658f34cb6b065fa156ebfd14d",
+          "first_seen": "2026-06-23",
+          "last_seen": "2026-06-23"
+        },
+        {
+          "digest": "git:55afceb8b2829c114c9c082eaee63c7d0a4f406d",
+          "first_seen": "2026-06-24",
+          "last_seen": "2026-06-24"
+        },
+        {
+          "digest": "git:35911e8afa69875658f34cb6b065fa156ebfd14d",
+          "first_seen": "2026-06-25",
+          "last_seen": "2026-06-26"
+        },
+        {
+          "digest": "git:02d9419a0124072120d9a70bbeaf0f1daf09d700",
+          "first_seen": "2026-06-27",
+          "last_seen": "2026-06-27"
+        },
+        {
+          "digest": "git:35911e8afa69875658f34cb6b065fa156ebfd14d",
+          "first_seen": "2026-06-28",
+          "last_seen": "2026-07-01"
+        },
+        {
+          "digest": "git:cddddadeff1a07c041f9f4cc25d7b4b7339f95ff",
+          "first_seen": "2026-07-02",
+          "last_seen": "2026-07-02"
+        },
+        {
+          "digest": "git:4aaa14032c3c3698327404552efb76eee718870a",
+          "first_seen": "2026-07-03",
+          "last_seen": "2026-07-05"
+        },
+        {
+          "digest": "git:4bdb147e43a9daca5ff79434c19607dfde80607d",
+          "first_seen": "2026-07-06",
+          "last_seen": "2026-07-06"
+        },
+        {
+          "digest": "git:d89a6de1386eca7e30112656c07f9ca1c477e031",
+          "first_seen": "2026-07-07",
+          "last_seen": "2026-07-07"
+        },
+        {
+          "digest": "git:4aaa14032c3c3698327404552efb76eee718870a",
+          "first_seen": "2026-07-08",
+          "last_seen": "2026-07-09"
+        },
+        {
+          "digest": "git:332681df0e14df485b66c4676b4f083714ec35c7",
+          "first_seen": "2026-07-10",
+          "last_seen": "2026-07-10"
+        },
+        {
+          "digest": "git:d89a6de1386eca7e30112656c07f9ca1c477e031",
+          "first_seen": "2026-07-11",
+          "last_seen": "2026-07-11"
+        },
+        {
+          "digest": "git:4aaa14032c3c3698327404552efb76eee718870a",
+          "first_seen": "2026-07-12",
+          "last_seen": "2026-07-12"
+        },
+        {
+          "digest": "git:d89a6de1386eca7e30112656c07f9ca1c477e031",
+          "first_seen": "2026-07-13",
+          "last_seen": "2026-07-13"
+        },
+        {
+          "digest": "git:4aaa14032c3c3698327404552efb76eee718870a",
+          "first_seen": "2026-07-14",
+          "last_seen": "2026-07-14"
+        },
+        {
+          "digest": "git:3e245f9a1190e45f742c4658c1db8fa5f0b02664",
+          "first_seen": "2026-07-15",
+          "last_seen": "2026-07-15"
+        },
+        {
+          "digest": "git:f06d77f1e5b21b5e7cd7bc0a52d84710722ec861",
+          "first_seen": "2026-07-16",
+          "last_seen": "2026-07-17"
+        },
+        {
+          "digest": "git:cad517f4ededcaf3d72bb6d393c7faf075242038",
+          "first_seen": "2026-07-18",
+          "last_seen": "2026-07-18"
+        },
+        {
+          "digest": "git:242bf0dbe70ec0a9a2fca0ed68bc618fc2391738",
+          "first_seen": "2026-07-19",
+          "last_seen": "2026-07-19"
+        },
+        {
+          "digest": "git:0b384275ee2a3a1f99e54e320752635fbd225377",
+          "first_seen": "2026-07-20",
+          "last_seen": "2026-07-20"
+        },
+        {
+          "digest": "git:61907050cab947f5a978830c5c3b70271e26a75c",
+          "first_seen": "2026-07-21",
+          "last_seen": "2026-07-21"
+        },
+        {
+          "digest": "git:0b384275ee2a3a1f99e54e320752635fbd225377",
+          "first_seen": "2026-07-22",
+          "last_seen": "2026-07-24"
+        },
+        {
+          "digest": "git:61907050cab947f5a978830c5c3b70271e26a75c",
+          "first_seen": "2026-07-25",
+          "last_seen": "2026-07-25"
+        },
+        {
+          "digest": "git:3a4aa326b3176267280e964943a75abb48488a96",
+          "first_seen": "2026-07-26",
+          "last_seen": "2026-07-26"
+        },
+        {
+          "digest": "git:61907050cab947f5a978830c5c3b70271e26a75c",
+          "first_seen": "2026-07-27",
+          "last_seen": "2026-07-27"
+        },
+        {
+          "digest": "git:0b384275ee2a3a1f99e54e320752635fbd225377",
+          "first_seen": "2026-07-28",
+          "last_seen": "2026-07-28"
+        },
+        {
+          "digest": "git:17c42612b581cb9be41ec394b52a75a696820a96",
+          "first_seen": "2026-07-29",
+          "last_seen": "2026-07-29"
+        },
+        {
+          "digest": "git:004a536a0b50fdf7b881cfd6af61800fa2854870",
+          "first_seen": "2026-07-30",
+          "last_seen": "2026-07-30"
+        },
+        {
+          "digest": "git:0b384275ee2a3a1f99e54e320752635fbd225377",
+          "first_seen": "2026-07-31",
+          "last_seen": "2026-07-31"
+        },
+        {
+          "digest": "git:004a536a0b50fdf7b881cfd6af61800fa2854870",
+          "first_seen": "2026-08-01",
+          "last_seen": "2026-08-01"
+        },
+        {
+          "digest": "git:7f64218e23f226ff028c2900c873fc0aab353118",
+          "first_seen": "2026-08-02",
+          "last_seen": "2026-08-02"
+        },
+        {
+          "digest": "git:0b384275ee2a3a1f99e54e320752635fbd225377",
+          "first_seen": "2026-08-03",
+          "last_seen": "2026-08-03"
+        },
+        {
+          "digest": "git:8dd34f40b1cbd1e08ffcb0af6390b89029aec618",
+          "first_seen": "2026-08-04",
+          "last_seen": "2026-08-04"
+        },
+        {
+          "digest": "git:f91abdd588eb535f83fc314cdd0aac57b07f5c01",
+          "first_seen": "2026-08-05",
+          "last_seen": "2026-08-05"
+        },
+        {
+          "digest": "git:80e8959f4989d1b1faab4f29f280620ba49222da",
+          "first_seen": "2026-08-06",
+          "last_seen": "2026-08-06"
+        },
+        {
+          "digest": "git:f91abdd588eb535f83fc314cdd0aac57b07f5c01",
+          "first_seen": "2026-08-07",
+          "last_seen": "2026-08-07"
+        },
+        {
+          "digest": "git:aad1cb74eafe066534578fb7090f8a331060bc78",
+          "first_seen": "2026-08-08",
+          "last_seen": "2026-08-08"
+        },
+        {
+          "digest": "git:b1eb6da12d5bc542a869e2f8bb6e8c9f0b8a3a29",
+          "first_seen": "2026-08-09",
+          "last_seen": "2026-08-11"
+        },
+        {
+          "digest": "git:ad9bd748057d092de2c607d215c58c02ada10395",
+          "first_seen": "2026-08-12",
+          "last_seen": "2026-08-12"
+        },
+        {
+          "digest": "git:a731202d09ca7a97cc58537d344430200291707e",
+          "first_seen": "2026-08-13",
+          "last_seen": "2026-08-14"
+        },
+        {
+          "digest": "git:536b2a1730ab757d2428705fb3cf2936ab6464dc",
+          "first_seen": "2026-08-15",
+          "last_seen": "2026-08-15"
+        },
+        {
+          "digest": "git:a731202d09ca7a97cc58537d344430200291707e",
+          "first_seen": "2026-08-16",
+          "last_seen": "2026-08-17"
+        },
+        {
+          "digest": "git:c52c59267c3d463b03fca7fc6227c6a93e3f98eb",
+          "first_seen": "2026-08-18",
+          "last_seen": "2026-08-18"
+        },
+        {
+          "digest": "git:5a78a88fa18fed3d2ee0e7e9cf71f98758c8f03d",
+          "first_seen": "2026-08-19",
+          "last_seen": "2026-08-21"
+        },
+        {
+          "digest": "git:8e187b5db2abfa344d48fe870c9a3999a69afcbe",
+          "first_seen": "2026-08-22",
+          "last_seen": "2026-08-22"
+        },
+        {
+          "digest": "git:5a78a88fa18fed3d2ee0e7e9cf71f98758c8f03d",
+          "first_seen": "2026-08-23",
+          "last_seen": "2026-08-23"
+        },
+        {
+          "digest": "git:a46b5de52bb0ac9bc8e277897ca590f96d6b5fd5",
+          "first_seen": "2026-08-24",
+          "last_seen": "2026-08-24"
+        },
+        {
+          "digest": "git:824317db8a28923bc471249149c8ef29401c9843",
+          "first_seen": "2026-08-25",
+          "last_seen": "2026-08-25"
+        },
+        {
+          "digest": "git:ae4ec6eaf4fa1136e38f0284456a463c92939726",
+          "first_seen": "2026-08-26",
+          "last_seen": "2026-08-26"
+        },
+        {
+          "digest": "git:5a78a88fa18fed3d2ee0e7e9cf71f98758c8f03d",
+          "first_seen": "2026-08-27",
+          "last_seen": "2026-08-28"
+        },
+        {
+          "digest": "git:8e187b5db2abfa344d48fe870c9a3999a69afcbe",
+          "first_seen": "2026-08-29",
+          "last_seen": "2026-08-29"
+        },
+        {
+          "digest": "git:824317db8a28923bc471249149c8ef29401c9843",
+          "first_seen": "2026-08-30",
+          "last_seen": "2026-08-30"
+        },
+        {
+          "digest": "git:5a78a88fa18fed3d2ee0e7e9cf71f98758c8f03d",
+          "first_seen": "2026-08-31",
+          "last_seen": "2026-09-01"
+        },
+        {
+          "digest": "git:a38e72e504921270a05423eafda1e1697319f6b6",
+          "first_seen": "2026-09-02",
+          "last_seen": "2026-09-02"
+        },
+        {
+          "digest": "git:7490ae915c1551db10c36487b5f21ce99daa725a",
+          "first_seen": "2026-09-03",
+          "last_seen": "2026-09-04"
+        },
+        {
+          "digest": "git:7496eb0f115e7af3eae4ab7ff6fcd7b79bf7a395",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
         },
@@ -503,6 +1978,21 @@
       },
       "history": [
         {
+          "digest": "git:8cd8ccf3cfa85ad4badb2da3824b8292467206ab",
+          "first_seen": "2026-04-21",
+          "last_seen": "2026-07-17"
+        },
+        {
+          "digest": "git:a308dc319682d4243720a9149fa8a3a750cebaae",
+          "first_seen": "2026-07-18",
+          "last_seen": "2026-08-04"
+        },
+        {
+          "digest": "git:c88ec02e739f7281a0a5d2dccec07bf46b4cf818",
+          "first_seen": "2026-08-05",
+          "last_seen": "2026-09-02"
+        },
+        {
           "digest": "sha256:b3cf95e5623325a1c167d84b60e006049154c7ca356d484caea96cc1329bafb4",
           "first_seen": "2026-09-03",
           "last_seen": "2026-09-06"
@@ -522,7 +2012,297 @@
       },
       "history": [
         {
-          "digest": "sha256:3723456e0e7a1281e9d24ac8a885796666ce135de1e8c0077d9f7a6b8b4d0979",
+          "digest": "git:9e1035335d3377dec24a0ef1812e4abb91cf7d67",
+          "first_seen": "2026-07-09",
+          "last_seen": "2026-07-09"
+        },
+        {
+          "digest": "git:f72ed8e18fbd15a3d7b088e9b63ebb2f9f8bbec1",
+          "first_seen": "2026-07-10",
+          "last_seen": "2026-07-10"
+        },
+        {
+          "digest": "git:90ab6d4fd2c6efe618e80894ff92bb8cbdc186a5",
+          "first_seen": "2026-07-11",
+          "last_seen": "2026-07-11"
+        },
+        {
+          "digest": "git:fff0d48c5962298fb2e8876e337ec1c7ef9ff269",
+          "first_seen": "2026-07-12",
+          "last_seen": "2026-07-12"
+        },
+        {
+          "digest": "git:0359bad926d51518eaa39b9fff03cf0484fc9e7d",
+          "first_seen": "2026-07-13",
+          "last_seen": "2026-07-13"
+        },
+        {
+          "digest": "git:7a1c4c02f9d5453fca0af3ba098113e910f400a8",
+          "first_seen": "2026-07-14",
+          "last_seen": "2026-07-14"
+        },
+        {
+          "digest": "git:b67b21e9dac6f9cde209b2ae00c51524c1a3d753",
+          "first_seen": "2026-07-15",
+          "last_seen": "2026-07-15"
+        },
+        {
+          "digest": "git:7a1e52f5e17915ca50640b0b1306862c92ce6c21",
+          "first_seen": "2026-07-16",
+          "last_seen": "2026-07-16"
+        },
+        {
+          "digest": "git:9c74f69d129e44b4d59d210659a2dcc6765064a2",
+          "first_seen": "2026-07-17",
+          "last_seen": "2026-07-17"
+        },
+        {
+          "digest": "git:db178cee8a7b57828de93c6feeca5dd7f685b7e1",
+          "first_seen": "2026-07-18",
+          "last_seen": "2026-07-18"
+        },
+        {
+          "digest": "git:957401f95dcbadd1818b705afd60679108b9a2ce",
+          "first_seen": "2026-07-19",
+          "last_seen": "2026-07-19"
+        },
+        {
+          "digest": "git:42a1b933013e37bc9b721fb67a66eb61e929d041",
+          "first_seen": "2026-07-20",
+          "last_seen": "2026-07-20"
+        },
+        {
+          "digest": "git:ddbe19d11578d8ae1863bb2d97616c128125e730",
+          "first_seen": "2026-07-21",
+          "last_seen": "2026-07-21"
+        },
+        {
+          "digest": "git:1494560c06cdc127564ca9d47b2342ae1cecc153",
+          "first_seen": "2026-07-22",
+          "last_seen": "2026-07-22"
+        },
+        {
+          "digest": "git:1a0260d3da886e0722dcc7760e32deac6c4535df",
+          "first_seen": "2026-07-23",
+          "last_seen": "2026-07-23"
+        },
+        {
+          "digest": "git:7b1a86e70909e868e8cf155dfea1f6395f6ac3fa",
+          "first_seen": "2026-07-24",
+          "last_seen": "2026-07-24"
+        },
+        {
+          "digest": "git:e45132f98acfb771781a740042c7675708aa6620",
+          "first_seen": "2026-07-25",
+          "last_seen": "2026-07-25"
+        },
+        {
+          "digest": "git:368616fdc72acb4541f95d38a478d2517ec7c2cd",
+          "first_seen": "2026-07-26",
+          "last_seen": "2026-07-26"
+        },
+        {
+          "digest": "git:fab3760b252e76c35697ebe40ced235113666d38",
+          "first_seen": "2026-07-27",
+          "last_seen": "2026-07-27"
+        },
+        {
+          "digest": "git:da35d3acd59b592c045d6d22e94615fd7eedda4b",
+          "first_seen": "2026-07-28",
+          "last_seen": "2026-07-28"
+        },
+        {
+          "digest": "git:76fde63e00d6793024a2574847b93a3d29e714b0",
+          "first_seen": "2026-07-29",
+          "last_seen": "2026-07-29"
+        },
+        {
+          "digest": "git:afef9ba9bb1aa3a347b263b3379d23b328814e60",
+          "first_seen": "2026-07-30",
+          "last_seen": "2026-07-30"
+        },
+        {
+          "digest": "git:e63dfbadeb42c62c4ad29c7b36b4a7526edc931e",
+          "first_seen": "2026-07-31",
+          "last_seen": "2026-07-31"
+        },
+        {
+          "digest": "git:adcb7ca6f4a0302130c715211af52b99ae89c064",
+          "first_seen": "2026-08-01",
+          "last_seen": "2026-08-01"
+        },
+        {
+          "digest": "git:0c30755e5d815de00e161b90712d4f4fa01f412b",
+          "first_seen": "2026-08-02",
+          "last_seen": "2026-08-02"
+        },
+        {
+          "digest": "git:1b2a8455f910e4bc53a1d81b80cf46107596245a",
+          "first_seen": "2026-08-03",
+          "last_seen": "2026-08-03"
+        },
+        {
+          "digest": "git:220bc9a870eaa114d8dbe2f716710c1549ef53d1",
+          "first_seen": "2026-08-04",
+          "last_seen": "2026-08-04"
+        },
+        {
+          "digest": "git:3979fa7001b7b32f50266ba470a4efdc17ec1f3d",
+          "first_seen": "2026-08-05",
+          "last_seen": "2026-08-05"
+        },
+        {
+          "digest": "git:8252e815f862b9ef5b2089409deb8ce8dd6973a8",
+          "first_seen": "2026-08-06",
+          "last_seen": "2026-08-06"
+        },
+        {
+          "digest": "git:250a959960f6983fcf09e557c2091ab2391fe3b5",
+          "first_seen": "2026-08-07",
+          "last_seen": "2026-08-07"
+        },
+        {
+          "digest": "git:d2dd6f060beb2029ae5a7a09667093fdcef45218",
+          "first_seen": "2026-08-08",
+          "last_seen": "2026-08-08"
+        },
+        {
+          "digest": "git:c9f338f7bb8a4251617857333e58ae1439c1f9ec",
+          "first_seen": "2026-08-09",
+          "last_seen": "2026-08-09"
+        },
+        {
+          "digest": "git:9dbe3a9667de1a0c74d583e5c8e7c3d2fdbc47bf",
+          "first_seen": "2026-08-10",
+          "last_seen": "2026-08-10"
+        },
+        {
+          "digest": "git:3611e36b409190d4acfeabbb72909c04640d21db",
+          "first_seen": "2026-08-11",
+          "last_seen": "2026-08-11"
+        },
+        {
+          "digest": "git:96e64b354a1475692300c0083e29b5292297b76b",
+          "first_seen": "2026-08-12",
+          "last_seen": "2026-08-12"
+        },
+        {
+          "digest": "git:3f2d8ee55eb31d6747a0c061628356131fdf588b",
+          "first_seen": "2026-08-13",
+          "last_seen": "2026-08-13"
+        },
+        {
+          "digest": "git:af8ee788aef00748166c6f7831c055784d5fcf6e",
+          "first_seen": "2026-08-14",
+          "last_seen": "2026-08-14"
+        },
+        {
+          "digest": "git:c54ef4692c9bdc641689f048cc2f3a9c1738b40a",
+          "first_seen": "2026-08-15",
+          "last_seen": "2026-08-15"
+        },
+        {
+          "digest": "git:ee85ff08d9a3090f5a80efa8700a10f3a4f47afe",
+          "first_seen": "2026-08-16",
+          "last_seen": "2026-08-16"
+        },
+        {
+          "digest": "git:192bbc4d248ea51e802047da15fa979136e5f09c",
+          "first_seen": "2026-08-17",
+          "last_seen": "2026-08-17"
+        },
+        {
+          "digest": "git:0e246405dd658a0c621071f4c7a375884df708d7",
+          "first_seen": "2026-08-18",
+          "last_seen": "2026-08-18"
+        },
+        {
+          "digest": "git:e135f3012c65c1b343be9b92b07d17f5fd44bba4",
+          "first_seen": "2026-08-19",
+          "last_seen": "2026-08-19"
+        },
+        {
+          "digest": "git:b87220171eb521f3f8085b887c0f94ff093eaebe",
+          "first_seen": "2026-08-20",
+          "last_seen": "2026-08-20"
+        },
+        {
+          "digest": "git:16f3b3bdc1f07a68d1ee157282dd804f8448fd69",
+          "first_seen": "2026-08-21",
+          "last_seen": "2026-08-21"
+        },
+        {
+          "digest": "git:921fa1ad26f9f340395de62518f57d7fdd133410",
+          "first_seen": "2026-08-22",
+          "last_seen": "2026-08-22"
+        },
+        {
+          "digest": "git:0b2cf0dd68a1607bc2e596f86feeb735ebac8329",
+          "first_seen": "2026-08-23",
+          "last_seen": "2026-08-23"
+        },
+        {
+          "digest": "git:ddf37cdd8bbb3fa8722190c816f34ced764083c3",
+          "first_seen": "2026-08-24",
+          "last_seen": "2026-08-24"
+        },
+        {
+          "digest": "git:5574b52a71ccd7ae3d3acb3652db6eab71b8eb4d",
+          "first_seen": "2026-08-25",
+          "last_seen": "2026-08-25"
+        },
+        {
+          "digest": "git:fae358035651fb4aa2c44381b64313ad585616b9",
+          "first_seen": "2026-08-26",
+          "last_seen": "2026-08-26"
+        },
+        {
+          "digest": "git:9dca992a3a44c5017898116935852d27b36e65a4",
+          "first_seen": "2026-08-27",
+          "last_seen": "2026-08-27"
+        },
+        {
+          "digest": "git:613673c2b3bdaa2a35fc8b39ce1e422563a59695",
+          "first_seen": "2026-08-28",
+          "last_seen": "2026-08-28"
+        },
+        {
+          "digest": "git:f3eaee0ddde9dfc34bd513df38a9c0675ba6a37e",
+          "first_seen": "2026-08-29",
+          "last_seen": "2026-08-29"
+        },
+        {
+          "digest": "git:e6d3beb7ac3545d9d06400af7a5772d4201c5e7b",
+          "first_seen": "2026-08-30",
+          "last_seen": "2026-08-30"
+        },
+        {
+          "digest": "git:b01552ca787098edb0fb1f3cd58156b30d9e4a86",
+          "first_seen": "2026-08-31",
+          "last_seen": "2026-08-31"
+        },
+        {
+          "digest": "git:0aee46956056b934af1b9a3efdd6cf68e4fa4b0d",
+          "first_seen": "2026-09-01",
+          "last_seen": "2026-09-01"
+        },
+        {
+          "digest": "git:62bad4180c0cc16f79473082604635da15e54f16",
+          "first_seen": "2026-09-02",
+          "last_seen": "2026-09-02"
+        },
+        {
+          "digest": "git:e79add2c62ab71953678bad1d3843962cbff8285",
+          "first_seen": "2026-09-03",
+          "last_seen": "2026-09-03"
+        },
+        {
+          "digest": "git:f6208154e4e243d7847caa5e2ddb0c3cb779927f",
+          "first_seen": "2026-09-04",
+          "last_seen": "2026-09-04"
+        },
+        {
+          "digest": "git:a2869d63b867eed3868325cf901939a4ff6cdc7f",
           "first_seen": "2026-09-05",
           "last_seen": "2026-09-05"
         },
@@ -553,7 +2333,7 @@
       ]
     },
     "jepx": {
-      "digest": "sha256:75f2067ee0be70a84f034fa4d55932e2275f1cf89339996d8d30502063e96135",
+      "digest": "sha256:de0167a3cefa196ec9d1e25b95b799a5969828c609f0c62b8ee132173cd7181a",
       "stable_since": "2026-09-06",
       "last_seen": "2026-09-06",
       "keys": {
@@ -569,96 +2349,91 @@
         },
         "spot_summary_2012.csv": {
           "file": "spot_summary_2012.csv",
-          "sha256": "7519c50ebe877bcb8d16102d7f3a78f6db26cbe8de3a95b781b4699161bf0cf2",
-          "size": 1774933
+          "sha256": "2c5a7ebc821f2e8cd4d91865f8d3e8008a2fb09a7f4f67b140fc0119cfee9e85",
+          "size": 1757412
         },
         "spot_summary_2013.csv": {
           "file": "spot_summary_2013.csv",
-          "sha256": "fa1874ad0963c2a6798d8440ab4f51cdb2fa21b7ce4bcc7281c4b2c06b8b044d",
-          "size": 1975041
+          "sha256": "2ee2ee780d08e75b29dce1611d70ce2bc22ad249cbc1a31d7e3c9ca956873e37",
+          "size": 1957520
         },
         "spot_summary_2014.csv": {
           "file": "spot_summary_2014.csv",
-          "sha256": "e1b1a05b0ffbb92da8dbd96ef3a676acfa3caedbdf113c51e6a691dda2af9341",
-          "size": 1980816
+          "sha256": "0c4ffcace611b616a3e2f9bc16170594f708c3bbce8bb8bfbec90a4558de2f5e",
+          "size": 1963295
         },
         "spot_summary_2015.csv": {
           "file": "spot_summary_2015.csv",
-          "sha256": "869a740101a6548034eadbac66a58cf94cddec53f9ff7e214c0cb5acd691b8ca",
-          "size": 1905864
+          "sha256": "6c06b721a15fca47c714aa6dbc3d9f77d177cbf8b224756e013e8013801173ad",
+          "size": 1888295
         },
         "spot_summary_2016.csv": {
           "file": "spot_summary_2016.csv",
-          "sha256": "47a3b5888615dad43a6494419e814b2944db0686745ec444dd36557169d5680c",
-          "size": 1898748
+          "sha256": "e5206f3a85e1d1278c262a0e86c53a4da2096ac39436894d1721268d54c5235c",
+          "size": 1881227
         },
         "spot_summary_2017.csv": {
           "file": "spot_summary_2017.csv",
-          "sha256": "c311b073f95a2489f42dc9d465b8afcef2fa6c75c604b99a99603f111966723f",
-          "size": 2088789
+          "sha256": "da30ea61e3f2ac2b8d7742eaa201b11be83fa064c88774e0c0993e91c35a8873",
+          "size": 2071268
         },
         "spot_summary_2018.csv": {
           "file": "spot_summary_2018.csv",
-          "sha256": "06bb9ee5431ed4d3c47aa795ad1d581c15ca04f173120cc75dde342fae1999e8",
-          "size": 2222219
+          "sha256": "06e788c4640d5aa7b8b5f0c820c9e79e467e3298afa460bf88aa785bb054742f",
+          "size": 2204698
         },
         "spot_summary_2019.csv": {
           "file": "spot_summary_2019.csv",
-          "sha256": "92e1a071eb4b7654022adf810028ade657be918adeeb84d88d05af19dfe80dd1",
-          "size": 2198156
+          "sha256": "a09b76edb2917f4c5c883b017eafa348d1668608052a5139038a91a27e5ecf98",
+          "size": 2180587
         },
         "spot_summary_2020.csv": {
           "file": "spot_summary_2020.csv",
-          "sha256": "485ab388e5d8e7366d14bbfc14f81da277e81ce007f16acabaf1fa1e889e8b34",
-          "size": 2192787
+          "sha256": "436f2f1b0f001d00683b5df59912e91743a242f074194214005c6c45ce14ffcb",
+          "size": 2175266
         },
         "spot_summary_2021.csv": {
           "file": "spot_summary_2021.csv",
-          "sha256": "d9ea86c8735b974ac17bea9dc6e2b487606fa7d266b6720c5de0b37d9e5a5734",
-          "size": 2255981
+          "sha256": "cd68f0765a1c339d5d8193c2b1d8127fd3b7036ad357fd4648163b8a03bd5205",
+          "size": 2238460
         },
         "spot_summary_2022.csv": {
           "file": "spot_summary_2022.csv",
-          "sha256": "2727b29b48154c7a4252229e3dacdbfc98616f38a1469ec821168f7fdb1be8d1",
-          "size": 2321838
+          "sha256": "e4c588b569da034dfeb865f70f9a569a7d59a66314dbbe04dc1e1a3579fc3ccd",
+          "size": 2304317
         },
         "spot_summary_2023.csv": {
           "file": "spot_summary_2023.csv",
-          "sha256": "443b7126f4fb2676e32e840327c8ae8d774046bec23a36823a716787936adf3d",
-          "size": 2269546
+          "sha256": "58654172bed5fd60ad7d0dde892087e54e896e862f130fcaece4cd6f243de9b0",
+          "size": 2251977
         },
         "spot_summary_2024.csv": {
           "file": "spot_summary_2024.csv",
-          "sha256": "b3131192a4de3e43a6e2fd4f11f26aec2129de2764cdd423d937ca1d4389cd07",
-          "size": 2287176
+          "sha256": "9945398cee75fa4b990b0170cc0880f1741093211f2d8a258893c8f476211152",
+          "size": 2269655
         },
         "spot_summary_2025.csv": {
           "file": "spot_summary_2025.csv",
-          "sha256": "cf95e1aea783ecac2d876244d99c6610506db2bb4ed1c24c5dc887e7c16731d0",
-          "size": 2265696
+          "sha256": "2753c0f06a798c5954d48148e811fc55f5df732164b57951882d45435a4ea799",
+          "size": 2248175
         },
         "spot_summary_2026.csv": {
           "file": "spot_summary_2026.csv",
-          "sha256": "a94c78eb960296da293c448b2f50959f746846e2329c9364e2aa7e5be8728c66",
-          "size": 1000859
+          "sha256": "f79fd1c33c591ab3a994985871d7a38757db0b5d62e2c5490eab589deed53b05",
+          "size": 993226
         }
       },
       "history": [
         {
-          "digest": "sha256:b5f58c0eb6481f542fd243f8af873220e3c5e4d6343b9cd69582699a9765cd81",
-          "first_seen": "2026-09-05",
-          "last_seen": "2026-09-05"
-        },
-        {
-          "digest": "sha256:75f2067ee0be70a84f034fa4d55932e2275f1cf89339996d8d30502063e96135",
+          "digest": "sha256:de0167a3cefa196ec9d1e25b95b799a5969828c609f0c62b8ee132173cd7181a",
           "first_seen": "2026-09-06",
           "last_seen": "2026-09-06"
         }
       ]
     },
     "jepx-nonfossil": {
-      "digest": "sha256:e88439a6600b5417d66d1baf9df091ffb7e37af13feb1c04e03eab06ca6f8f1c",
-      "stable_since": "2026-09-06",
+      "digest": "sha256:b8682ebb4ae44c892ee7606a9f2eaf3851a206871186ba8502be57c054d8d943",
+      "stable_since": "2026-09-01",
       "last_seen": "2026-09-06",
       "keys": {
         "nf_summary_2017.csv": {
@@ -698,52 +2473,342 @@
         },
         "nf_summary_2024.csv": {
           "file": "nf_summary_2024.csv",
-          "sha256": "7728a23cda53190620bebdc643b299cb3e2a492fd8c494064117c515cf85d534",
-          "size": 1238
+          "sha256": "cfd013f840c832eeadc9d51111863b1cda14fc59757c1463c4b7e72dfd2afb6a",
+          "size": 1225
         },
         "nf_summary_2025.csv": {
           "file": "nf_summary_2025.csv",
-          "sha256": "509608985684ed03301a291984489f4e4b427a888573ffa95edf2baa08500bc0",
-          "size": 1252
+          "sha256": "86b2455b6710977e1d4df59551081898ee7cf7fd3512f21a4cdb7db730337803",
+          "size": 1239
         },
         "nf_summary_2026.csv": {
           "file": "nf_summary_2026.csv",
-          "sha256": "539f95d2bd73c5097b982d0ae634f87f38ac8e0d5cb1e24e4983180729dac25a",
-          "size": 471
+          "sha256": "3445f2cacc99149fd7ca425acf5fb08e7d7e283167336f6bf256b8953d7aeb48",
+          "size": 467
         }
       },
       "history": [
         {
-          "digest": "sha256:899a16d9b0c55dea680f896f732ae32de1b2689aa89406a2ff265a22ec2f07c4",
+          "digest": "sha256:b8682ebb4ae44c892ee7606a9f2eaf3851a206871186ba8502be57c054d8d943",
           "first_seen": "2026-09-01",
-          "last_seen": "2026-09-05"
-        },
-        {
-          "digest": "sha256:e88439a6600b5417d66d1baf9df091ffb7e37af13feb1c04e03eab06ca6f8f1c",
-          "first_seen": "2026-09-06",
           "last_seen": "2026-09-06"
         }
       ]
     },
     "jgb": {
-      "digest": "sha256:0f6576bceb6a09976805e308b120b8e98fd3dc956a9ffedd067ca5029ebe368e",
+      "digest": "sha256:eb3bfcf1a26be84ebf9068c82141950d331a5e5421c70aed623408b8cde8ee8b",
       "stable_since": "2026-09-04",
       "last_seen": "2026-09-06",
       "keys": {
         "jgbcm.csv": {
           "file": "jgbcm_20260906.csv",
-          "sha256": "4ad1c8e0927bf2af683e5cc4a817fc0b4cd5d8758a624d08b2cf0b39a0cdd46a",
-          "size": 568
+          "sha256": "5b730662f7466a0960c889fbbffe086b7b01cb0dfc0c425f67ab1e27d305de3b",
+          "size": 561
         },
         "jgbcm_all.csv": {
           "file": "jgbcm_all_20260906.csv",
-          "sha256": "d486cccc5d0197f79c4f9b8248dd657b18e5d4a1549fdc1a42d0ae31f5cb96c2",
-          "size": 1176385
+          "sha256": "f3059302bc996e61772e05f2d78f41ee0a543d22e6746c1f20265ddf4396c77a",
+          "size": 1163093
         }
       },
       "history": [
         {
-          "digest": "sha256:0f6576bceb6a09976805e308b120b8e98fd3dc956a9ffedd067ca5029ebe368e",
+          "digest": "git:6c3e7f6d1fff48f686456f6d7b59810c208c157d",
+          "first_seen": "2026-06-06",
+          "last_seen": "2026-06-08"
+        },
+        {
+          "digest": "git:4ce16d65d97c97f87d778b2344bf38fb3d735dfd",
+          "first_seen": "2026-06-09",
+          "last_seen": "2026-06-09"
+        },
+        {
+          "digest": "git:79727c72a85c769e9d215921ba6ca798545f9841",
+          "first_seen": "2026-06-10",
+          "last_seen": "2026-06-10"
+        },
+        {
+          "digest": "git:ec1e92e26535f0cee57c24675fdb79828cb93e2e",
+          "first_seen": "2026-06-11",
+          "last_seen": "2026-06-11"
+        },
+        {
+          "digest": "git:013a85c965fa27489765e2ef14837cd6c45cc01a",
+          "first_seen": "2026-06-12",
+          "last_seen": "2026-06-12"
+        },
+        {
+          "digest": "git:3ede3a41a3791febd75c9e6511832db2d5404cee",
+          "first_seen": "2026-06-13",
+          "last_seen": "2026-06-15"
+        },
+        {
+          "digest": "git:4be0c3bec5e866c74b7413111d45afba901cac61",
+          "first_seen": "2026-06-16",
+          "last_seen": "2026-06-17"
+        },
+        {
+          "digest": "git:2954e442fbf223efe522abc49a8236709a6dd66e",
+          "first_seen": "2026-06-18",
+          "last_seen": "2026-06-18"
+        },
+        {
+          "digest": "git:4b3ab003511c00c268ec7a7536f98532c90770ee",
+          "first_seen": "2026-06-19",
+          "last_seen": "2026-06-22"
+        },
+        {
+          "digest": "git:2718b987e49d80e1db534bdcc8917dcca612ec9f",
+          "first_seen": "2026-06-23",
+          "last_seen": "2026-06-23"
+        },
+        {
+          "digest": "git:ec5e8b369a8703b42620d465c8b2514ea709de82",
+          "first_seen": "2026-06-24",
+          "last_seen": "2026-06-24"
+        },
+        {
+          "digest": "git:dfb42694fa0914b25d6a41029efa81318cd969bd",
+          "first_seen": "2026-06-25",
+          "last_seen": "2026-06-25"
+        },
+        {
+          "digest": "git:48ee61946558fb7da67a9bd01bf748054328cfaa",
+          "first_seen": "2026-06-26",
+          "last_seen": "2026-06-26"
+        },
+        {
+          "digest": "git:121a568b28acf368747d8fc79914dd4dc637451c",
+          "first_seen": "2026-06-27",
+          "last_seen": "2026-06-29"
+        },
+        {
+          "digest": "git:635a9c67513f9f473d7d85c964158d9a7824c63f",
+          "first_seen": "2026-06-30",
+          "last_seen": "2026-06-30"
+        },
+        {
+          "digest": "git:e282988b3e337ac7ec622bbe8e2d9d5e8dea5225",
+          "first_seen": "2026-07-01",
+          "last_seen": "2026-07-01"
+        },
+        {
+          "digest": "git:71f5f2a610a6481f280da40c44a79a7241118448",
+          "first_seen": "2026-07-02",
+          "last_seen": "2026-07-02"
+        },
+        {
+          "digest": "git:767cc5b0a7d55da0182f7631be1c5cc4e418c700",
+          "first_seen": "2026-07-03",
+          "last_seen": "2026-07-03"
+        },
+        {
+          "digest": "git:8cd1c3ea52e8a62c439a9a6a99c60754ef509241",
+          "first_seen": "2026-07-04",
+          "last_seen": "2026-07-06"
+        },
+        {
+          "digest": "git:86e46d9908cf8eb7f0c62dcfd26e04fa74dd8a15",
+          "first_seen": "2026-07-07",
+          "last_seen": "2026-07-07"
+        },
+        {
+          "digest": "git:fa81bf588311afd731c335546dbe119e55ea62ae",
+          "first_seen": "2026-07-08",
+          "last_seen": "2026-07-08"
+        },
+        {
+          "digest": "git:1b3e34af484c48bdafab10c84eeef8faa2638590",
+          "first_seen": "2026-07-09",
+          "last_seen": "2026-07-09"
+        },
+        {
+          "digest": "git:65e4dbd42f3c7aee551b581698a115ce4481d6ae",
+          "first_seen": "2026-07-10",
+          "last_seen": "2026-07-10"
+        },
+        {
+          "digest": "git:5ccedb68148841ec9d87a02ace9220f3208ccc03",
+          "first_seen": "2026-07-11",
+          "last_seen": "2026-07-13"
+        },
+        {
+          "digest": "git:9f0a2f5dd7db907d0df171fe5acc4f50416be128",
+          "first_seen": "2026-07-14",
+          "last_seen": "2026-07-14"
+        },
+        {
+          "digest": "git:fa7b83f725a0c2cf0b614d552067e33589739302",
+          "first_seen": "2026-07-15",
+          "last_seen": "2026-07-15"
+        },
+        {
+          "digest": "git:698be3b8410a8434da15b2839ec694444459c81a",
+          "first_seen": "2026-07-16",
+          "last_seen": "2026-07-16"
+        },
+        {
+          "digest": "git:6181101b02dd58bffb7605cda805433d2ae787f2",
+          "first_seen": "2026-07-17",
+          "last_seen": "2026-07-17"
+        },
+        {
+          "digest": "git:52c0284ebd25bd304653f4202536d69fed74ada3",
+          "first_seen": "2026-07-18",
+          "last_seen": "2026-07-21"
+        },
+        {
+          "digest": "git:26a4c69090d6b5715d29373ad99c23b0f62994b4",
+          "first_seen": "2026-07-22",
+          "last_seen": "2026-07-22"
+        },
+        {
+          "digest": "git:a93a4ab94399536f1708786f59cc861eec70893b",
+          "first_seen": "2026-07-23",
+          "last_seen": "2026-07-23"
+        },
+        {
+          "digest": "git:989a8268e8fdf6d01838270467bcca2f55ef0d20",
+          "first_seen": "2026-07-24",
+          "last_seen": "2026-07-24"
+        },
+        {
+          "digest": "git:ea65ee05292612349f066a0425284134d9f60e20",
+          "first_seen": "2026-07-25",
+          "last_seen": "2026-07-27"
+        },
+        {
+          "digest": "git:3892016678536344b8a7ca8cd1331a381fd6ed0d",
+          "first_seen": "2026-07-28",
+          "last_seen": "2026-07-28"
+        },
+        {
+          "digest": "git:5486de36f5d2c001c72b3238a4cdde6ca6602e99",
+          "first_seen": "2026-07-29",
+          "last_seen": "2026-07-29"
+        },
+        {
+          "digest": "git:12777158aae8f0350981aad2318139cb2b813615",
+          "first_seen": "2026-07-30",
+          "last_seen": "2026-07-30"
+        },
+        {
+          "digest": "git:5853d3ff516a16441175f774b12130746cc1e92b",
+          "first_seen": "2026-07-31",
+          "last_seen": "2026-07-31"
+        },
+        {
+          "digest": "git:4d13757ca0704ee9b707f08e0f7fd4213e3e204d",
+          "first_seen": "2026-08-01",
+          "last_seen": "2026-08-03"
+        },
+        {
+          "digest": "git:509a738b82f1c0d2345fd9b2aae7a19f4fb498d1",
+          "first_seen": "2026-08-04",
+          "last_seen": "2026-08-04"
+        },
+        {
+          "digest": "git:91d0f4ff4f627d1a082f3788ab4f648f40016974",
+          "first_seen": "2026-08-05",
+          "last_seen": "2026-08-05"
+        },
+        {
+          "digest": "git:9a5e1d942b8379036b532bae1a5def0aace8cbb4",
+          "first_seen": "2026-08-06",
+          "last_seen": "2026-08-06"
+        },
+        {
+          "digest": "git:61ca5b3a651d72f05900dce4a75cd72b92b5b833",
+          "first_seen": "2026-08-07",
+          "last_seen": "2026-08-10"
+        },
+        {
+          "digest": "git:b0f822102b74036c75921988983e5c1343214314",
+          "first_seen": "2026-08-11",
+          "last_seen": "2026-08-12"
+        },
+        {
+          "digest": "git:12aac47765bdc668580a880680a890db1499df27",
+          "first_seen": "2026-08-13",
+          "last_seen": "2026-08-13"
+        },
+        {
+          "digest": "git:98b66821aa454e5a93fbf4ccfbafff5308741f8b",
+          "first_seen": "2026-08-14",
+          "last_seen": "2026-08-14"
+        },
+        {
+          "digest": "git:3bf73ece343dbd335402881646f2425db370a18a",
+          "first_seen": "2026-08-15",
+          "last_seen": "2026-08-17"
+        },
+        {
+          "digest": "git:a635ca5fae1dd80f0aa3efdf26c2969ee43a9b69",
+          "first_seen": "2026-08-18",
+          "last_seen": "2026-08-18"
+        },
+        {
+          "digest": "git:ec08375edff58671dc784fec6e4cfda6aaeeec1d",
+          "first_seen": "2026-08-19",
+          "last_seen": "2026-08-19"
+        },
+        {
+          "digest": "git:f8910aa297948735fb496ce3a1b47d739a9440a8",
+          "first_seen": "2026-08-20",
+          "last_seen": "2026-08-20"
+        },
+        {
+          "digest": "git:0fbea6ada3fd0b3e00b2593a49f2e10dc2bde0ef",
+          "first_seen": "2026-08-21",
+          "last_seen": "2026-08-21"
+        },
+        {
+          "digest": "git:62dfb3580df5375263c32ac0db988bc80febb243",
+          "first_seen": "2026-08-22",
+          "last_seen": "2026-08-24"
+        },
+        {
+          "digest": "git:314a60acfa7e9096226295ddf13aba2fbf5994ca",
+          "first_seen": "2026-08-25",
+          "last_seen": "2026-08-25"
+        },
+        {
+          "digest": "git:661326ad41cac21396f9b1c2c5cdfb6ebba6dc74",
+          "first_seen": "2026-08-26",
+          "last_seen": "2026-08-26"
+        },
+        {
+          "digest": "git:3724a05b11dc82a42f9cdbf8a44e5355000bf5cb",
+          "first_seen": "2026-08-27",
+          "last_seen": "2026-08-27"
+        },
+        {
+          "digest": "git:eb72f2a712df27ad9172248daec4f9d91467eaf8",
+          "first_seen": "2026-08-28",
+          "last_seen": "2026-08-30"
+        },
+        {
+          "digest": "git:67d6968f6d8035e6731dd9353eda3684237a161b",
+          "first_seen": "2026-08-31",
+          "last_seen": "2026-08-31"
+        },
+        {
+          "digest": "git:6664d93cb939ba850feeac360e71127a29261275",
+          "first_seen": "2026-09-01",
+          "last_seen": "2026-09-01"
+        },
+        {
+          "digest": "git:06564e775df4dec396ba50ad3e32b8ff6c2cb8f4",
+          "first_seen": "2026-09-02",
+          "last_seen": "2026-09-02"
+        },
+        {
+          "digest": "git:370086668ae5654839ad3c89d0aee9f88657f84f",
+          "first_seen": "2026-09-03",
+          "last_seen": "2026-09-03"
+        },
+        {
+          "digest": "sha256:eb3bfcf1a26be84ebf9068c82141950d331a5e5421c70aed623408b8cde8ee8b",
           "first_seen": "2026-09-04",
           "last_seen": "2026-09-06"
         }
@@ -756,11 +2821,6 @@
       "keys": null,
       "history": [
         {
-          "digest": "sha256:aad3274f27aa5bb904a0a38058c34da18cf8f7943bef0e022e773575e434e62e",
-          "first_seen": "2026-09-05",
-          "last_seen": "2026-09-05"
-        },
-        {
           "digest": "sha256:1b7f76ea7441d5db8b893942f83b1b3a3a71d6e5f843543397af6ef692280e1e",
           "first_seen": "2026-09-06",
           "last_seen": "2026-09-06"
@@ -769,7 +2829,7 @@
     },
     "nbs-pmi": {
       "digest": "sha256:b21e5ee2baa84889fff41d59560619a87c6207630b8a5cebd9503f89cc7165c3",
-      "stable_since": "2026-09-06",
+      "stable_since": "2026-09-05",
       "last_seen": "2026-09-06",
       "keys": {
         "index.html": {
@@ -805,13 +2865,158 @@
       },
       "history": [
         {
-          "digest": "sha256:3bcd652a3de23d65e99a34efe44facc9bfff220c976e143acfbc8481e9b49bf5",
-          "first_seen": "2026-09-05",
-          "last_seen": "2026-09-05"
+          "digest": "git:9b3371b606bad10ff1f2913f3217fea3b6a0ec3e",
+          "first_seen": "2026-05-27",
+          "last_seen": "2026-05-29"
+        },
+        {
+          "digest": "git:40b4c6017034011e19e8075ba23b14561cdc829b",
+          "first_seen": "2026-05-30",
+          "last_seen": "2026-06-01"
+        },
+        {
+          "digest": "git:ea8cbe21fcefbd36f88c8a682eae4277a9601468",
+          "first_seen": "2026-06-02",
+          "last_seen": "2026-06-03"
+        },
+        {
+          "digest": "git:69aa0190d648bc57b0d3aa419e02918032097c99",
+          "first_seen": "2026-06-04",
+          "last_seen": "2026-06-11"
+        },
+        {
+          "digest": "git:d35ba148f513703795cf883995e21884af793c29",
+          "first_seen": "2026-06-12",
+          "last_seen": "2026-06-14"
+        },
+        {
+          "digest": "git:0acd19b404cc7f72ef90793069b0438d037a136e",
+          "first_seen": "2026-06-15",
+          "last_seen": "2026-06-16"
+        },
+        {
+          "digest": "git:6657d314b4d271602daa8300c80a0dc22cb4136c",
+          "first_seen": "2026-06-17",
+          "last_seen": "2026-06-22"
+        },
+        {
+          "digest": "git:08849328430bea2ad81d48c2134ce4ec1ef48672",
+          "first_seen": "2026-06-23",
+          "last_seen": "2026-06-24"
+        },
+        {
+          "digest": "git:902ec6d7cdc875dc15dcaa9ac54dc32258bc8c6d",
+          "first_seen": "2026-06-25",
+          "last_seen": "2026-06-30"
+        },
+        {
+          "digest": "git:348aa8aa9cfc08544f15716a60ace0124734e3c2",
+          "first_seen": "2026-07-01",
+          "last_seen": "2026-07-03"
+        },
+        {
+          "digest": "git:be83ebcad560bf232778f51d55d5644889dee117",
+          "first_seen": "2026-07-04",
+          "last_seen": "2026-07-04"
+        },
+        {
+          "digest": "git:9e169f9d90faa40f4373f4d7ecdc07aa47c6e171",
+          "first_seen": "2026-07-05",
+          "last_seen": "2026-07-10"
+        },
+        {
+          "digest": "git:bad9b348ad24e3a3161c0531b7fd39209036d6b2",
+          "first_seen": "2026-07-11",
+          "last_seen": "2026-07-13"
+        },
+        {
+          "digest": "git:97f62e5f6c401352f474192b4adee688f5f7eef8",
+          "first_seen": "2026-07-14",
+          "last_seen": "2026-07-14"
+        },
+        {
+          "digest": "git:f22b8640d8f08d6bcf20431f1e0ddbafcb9934fe",
+          "first_seen": "2026-07-15",
+          "last_seen": "2026-07-15"
+        },
+        {
+          "digest": "git:fbaa5a664793b8b3e9880d422a068982ce0a347d",
+          "first_seen": "2026-07-16",
+          "last_seen": "2026-07-16"
+        },
+        {
+          "digest": "git:282c95d4002fd6066bd57e348fe1fdb03febd1d3",
+          "first_seen": "2026-07-17",
+          "last_seen": "2026-07-17"
+        },
+        {
+          "digest": "git:9d0c8883ee92f1fb4e96f24390702d04c8f78230",
+          "first_seen": "2026-07-18",
+          "last_seen": "2026-07-24"
+        },
+        {
+          "digest": "git:53bdd95913f926e2d01d0fdecaef5ee2077ec160",
+          "first_seen": "2026-07-25",
+          "last_seen": "2026-07-31"
+        },
+        {
+          "digest": "git:dc48b5446a99229911118534385edfb01ac8bac5",
+          "first_seen": "2026-08-01",
+          "last_seen": "2026-08-03"
+        },
+        {
+          "digest": "git:289045110cd7c6e033783f1b94d9d1b9131808f8",
+          "first_seen": "2026-08-04",
+          "last_seen": "2026-08-04"
+        },
+        {
+          "digest": "git:fb1b74e6b632179b7c5211dff510748f925f468e",
+          "first_seen": "2026-08-05",
+          "last_seen": "2026-08-10"
+        },
+        {
+          "digest": "git:174fb5a4108dc20fd28e4afa814426acd1fd7c64",
+          "first_seen": "2026-08-11",
+          "last_seen": "2026-08-14"
+        },
+        {
+          "digest": "git:7bdcf636f8a88396777c9d0fe9dec8abdc210b0c",
+          "first_seen": "2026-08-15",
+          "last_seen": "2026-08-17"
+        },
+        {
+          "digest": "git:caf44b4a61f2c68fb3722de63c8fdb71bc27e2e3",
+          "first_seen": "2026-08-18",
+          "last_seen": "2026-08-18"
+        },
+        {
+          "digest": "git:9c806c0ccd000e21b504dc6a69db12782be5fc15",
+          "first_seen": "2026-08-19",
+          "last_seen": "2026-08-20"
+        },
+        {
+          "digest": "git:336ed04e83021d3c9bd5a93bf80b23725c3bbaea",
+          "first_seen": "2026-08-21",
+          "last_seen": "2026-08-24"
+        },
+        {
+          "digest": "git:26d6567c02efb068d2982660d2c2b8364d265fa4",
+          "first_seen": "2026-08-25",
+          "last_seen": "2026-08-27"
+        },
+        {
+          "digest": "git:36b35dc3783d0eb80a774bec380e3855933acec6",
+          "first_seen": "2026-08-28",
+          "last_seen": "2026-09-01"
+        },
+        {
+          "digest": "git:18eef21ab567316aa256d541cd90904b35f8b0d4",
+          "first_seen": "2026-09-02",
+          "last_seen": "2026-09-04"
         },
         {
           "digest": "sha256:b21e5ee2baa84889fff41d59560619a87c6207630b8a5cebd9503f89cc7165c3",
-          "first_seen": "2026-09-06",
+          "first_seen": "2026-09-05",
           "last_seen": "2026-09-06"
         }
       ]
@@ -862,7 +3067,7 @@
     },
     "us-treasury": {
       "digest": "sha256:ca13e1d386e7d5a28b27012bafc04c6867d228f2d371d69c0b1a8ba9000be2cb",
-      "stable_since": "2026-09-06",
+      "stable_since": "2026-09-05",
       "last_seen": "2026-09-06",
       "keys": {
         "treasury_yields_1990.csv": {
@@ -1053,13 +3258,303 @@
       },
       "history": [
         {
-          "digest": "sha256:026f62559268b1d682939714cc38e4abdf55910baf4d31a851ea967b541fa6f9",
-          "first_seen": "2026-09-05",
-          "last_seen": "2026-09-05"
+          "digest": "git:bf528c4ce59eec43a83315aa2739f81cfa0d7bb2",
+          "first_seen": "2026-06-09",
+          "last_seen": "2026-06-09"
+        },
+        {
+          "digest": "git:2b33258a5c0678fdf32c9cb41fa1d507b399ab95",
+          "first_seen": "2026-06-10",
+          "last_seen": "2026-06-10"
+        },
+        {
+          "digest": "git:978ca669f2e906e7247c16e67d88de28e865af67",
+          "first_seen": "2026-06-11",
+          "last_seen": "2026-06-11"
+        },
+        {
+          "digest": "git:161ff1395f87168b73e4b277c838c70e2d9cf48b",
+          "first_seen": "2026-06-12",
+          "last_seen": "2026-06-12"
+        },
+        {
+          "digest": "git:25186fa0f6f02abea1880f5eeb77bd8cdd207841",
+          "first_seen": "2026-06-13",
+          "last_seen": "2026-06-15"
+        },
+        {
+          "digest": "git:00cd2037bec0925d027d079da0d65f15fe128f3e",
+          "first_seen": "2026-06-16",
+          "last_seen": "2026-06-16"
+        },
+        {
+          "digest": "git:596a64622d8e54f729b9e930925a7d0a083d1ccb",
+          "first_seen": "2026-06-17",
+          "last_seen": "2026-06-17"
+        },
+        {
+          "digest": "git:09321051da810237b1d691337556f7d198b25180",
+          "first_seen": "2026-06-18",
+          "last_seen": "2026-06-18"
+        },
+        {
+          "digest": "git:fd9f584c253ad08d7eb71add4f6f7c222eeff21e",
+          "first_seen": "2026-06-19",
+          "last_seen": "2026-06-22"
+        },
+        {
+          "digest": "git:f2ded9146b87d8077daf9e54be1625da47cdec34",
+          "first_seen": "2026-06-23",
+          "last_seen": "2026-06-23"
+        },
+        {
+          "digest": "git:04330c93e65ca5b1191bcb31187e68988a60b853",
+          "first_seen": "2026-06-24",
+          "last_seen": "2026-06-24"
+        },
+        {
+          "digest": "git:c6da5f8e82ea3461f89fa5d848b4a4fae165936d",
+          "first_seen": "2026-06-25",
+          "last_seen": "2026-06-25"
+        },
+        {
+          "digest": "git:7c87adda2ec12d53f0d5ce6d924fa306b822beeb",
+          "first_seen": "2026-06-26",
+          "last_seen": "2026-06-26"
+        },
+        {
+          "digest": "git:3da8cef4eb1ddcef07eff1cd69eb01eb7a2c83d1",
+          "first_seen": "2026-06-27",
+          "last_seen": "2026-06-29"
+        },
+        {
+          "digest": "git:f03571c7e108113d387a97dd54b0acac97fe1de5",
+          "first_seen": "2026-06-30",
+          "last_seen": "2026-06-30"
+        },
+        {
+          "digest": "git:2ca7a8976229a689d7cbb9671dbb8f691bf430c0",
+          "first_seen": "2026-07-01",
+          "last_seen": "2026-07-01"
+        },
+        {
+          "digest": "git:5a4512d349e6dc45afebf8947bb2dc4d4d9ab312",
+          "first_seen": "2026-07-02",
+          "last_seen": "2026-07-02"
+        },
+        {
+          "digest": "git:86e10b5a566777e5d23326d6a4f26c4ba1e43bfc",
+          "first_seen": "2026-07-03",
+          "last_seen": "2026-07-06"
+        },
+        {
+          "digest": "git:8814db3c305e688278c475079ac117f8579cfcea",
+          "first_seen": "2026-07-07",
+          "last_seen": "2026-07-08"
+        },
+        {
+          "digest": "git:c8cb4c8df28d05b6f3793927e12a299230c61e84",
+          "first_seen": "2026-07-09",
+          "last_seen": "2026-07-10"
+        },
+        {
+          "digest": "git:677cdcbb3b9d82b424f4c9d51ef354005cf29fba",
+          "first_seen": "2026-07-11",
+          "last_seen": "2026-07-13"
+        },
+        {
+          "digest": "git:50393710abbfd11f337126760ca0374ab4f1ee24",
+          "first_seen": "2026-07-14",
+          "last_seen": "2026-07-14"
+        },
+        {
+          "digest": "git:7761827573b1f57e318b75f2b7fd7303cc73de0d",
+          "first_seen": "2026-07-15",
+          "last_seen": "2026-07-15"
+        },
+        {
+          "digest": "git:2223183dfc405492040ea73b8bf46541be31cd7b",
+          "first_seen": "2026-07-16",
+          "last_seen": "2026-07-16"
+        },
+        {
+          "digest": "git:94694ee8959789e69b9ddec20a55951472371ec1",
+          "first_seen": "2026-07-17",
+          "last_seen": "2026-07-17"
+        },
+        {
+          "digest": "git:523b43b2e5f79fa3aace2ed6839285edd144510c",
+          "first_seen": "2026-07-18",
+          "last_seen": "2026-07-20"
+        },
+        {
+          "digest": "git:18906ba90a1c7ad1711ca92607c9e3c19137aeb9",
+          "first_seen": "2026-07-21",
+          "last_seen": "2026-07-21"
+        },
+        {
+          "digest": "git:9c0789bbdb1ef76234e08a12efb38aea42906163",
+          "first_seen": "2026-07-22",
+          "last_seen": "2026-07-22"
+        },
+        {
+          "digest": "git:449cb781291614da56611c3a0f28ce03efdb5578",
+          "first_seen": "2026-07-23",
+          "last_seen": "2026-07-23"
+        },
+        {
+          "digest": "git:d729c8d880727e1a011becf9a9a0a46f01c4e68b",
+          "first_seen": "2026-07-24",
+          "last_seen": "2026-07-24"
+        },
+        {
+          "digest": "git:a0cb64b3e8f89b68108b49e5ca62c3610868dce8",
+          "first_seen": "2026-07-25",
+          "last_seen": "2026-07-27"
+        },
+        {
+          "digest": "git:60c3084f45068b66228919357bdda55363a8588a",
+          "first_seen": "2026-07-28",
+          "last_seen": "2026-07-28"
+        },
+        {
+          "digest": "git:3664d8af6aa41a9df78273bd9a6119c52406f383",
+          "first_seen": "2026-07-29",
+          "last_seen": "2026-07-29"
+        },
+        {
+          "digest": "git:ccc4b20f7ee437c84fac36bafb3f8dfcd55acb9c",
+          "first_seen": "2026-07-30",
+          "last_seen": "2026-07-30"
+        },
+        {
+          "digest": "git:5ffc29d6b313611c221354a4c8932460bfb671ce",
+          "first_seen": "2026-07-31",
+          "last_seen": "2026-07-31"
+        },
+        {
+          "digest": "git:0a0df39aaa3f97ccff965381d848c0ee510af77c",
+          "first_seen": "2026-08-01",
+          "last_seen": "2026-08-03"
+        },
+        {
+          "digest": "git:5be93dca7c41db04c82c467ff17ca0452beb9066",
+          "first_seen": "2026-08-04",
+          "last_seen": "2026-08-04"
+        },
+        {
+          "digest": "git:00e997cd04dd639b5f26a5def04eb382f8b41819",
+          "first_seen": "2026-08-05",
+          "last_seen": "2026-08-05"
+        },
+        {
+          "digest": "git:77532f459e93e73047cfdeaab8b3fc901ed5bed5",
+          "first_seen": "2026-08-06",
+          "last_seen": "2026-08-06"
+        },
+        {
+          "digest": "git:19766f27a0f9b9ddc99a9e4c6dab0c7657144c80",
+          "first_seen": "2026-08-07",
+          "last_seen": "2026-08-07"
+        },
+        {
+          "digest": "git:153996e949ce34ebd6fb0da7e39183ac5db0c1e4",
+          "first_seen": "2026-08-08",
+          "last_seen": "2026-08-10"
+        },
+        {
+          "digest": "git:4f11c7696050672a0d1a6de82c503f5665807044",
+          "first_seen": "2026-08-11",
+          "last_seen": "2026-08-11"
+        },
+        {
+          "digest": "git:b5029613c7926fc08bf42e83c285da4aab366c21",
+          "first_seen": "2026-08-12",
+          "last_seen": "2026-08-12"
+        },
+        {
+          "digest": "git:f8e3ca3d94ad75903c29f317bf642e88a49c0e38",
+          "first_seen": "2026-08-13",
+          "last_seen": "2026-08-13"
+        },
+        {
+          "digest": "git:e2b98c63ff19e0b0aab6b1ea7816212ee3c0735c",
+          "first_seen": "2026-08-14",
+          "last_seen": "2026-08-14"
+        },
+        {
+          "digest": "git:afb4ae0d41d175ad592bc6d3d30a5b60c48c5859",
+          "first_seen": "2026-08-15",
+          "last_seen": "2026-08-17"
+        },
+        {
+          "digest": "git:5fb599941fa11d8c1d20336ccef887e6c326de53",
+          "first_seen": "2026-08-18",
+          "last_seen": "2026-08-19"
+        },
+        {
+          "digest": "git:2c547d8e237be0d8c1b8126ece8f7958515514d9",
+          "first_seen": "2026-08-20",
+          "last_seen": "2026-08-20"
+        },
+        {
+          "digest": "git:bfe3550340987f693272c0b90b4b82995536ebfc",
+          "first_seen": "2026-08-21",
+          "last_seen": "2026-08-21"
+        },
+        {
+          "digest": "git:4265e6f22c3ca89661d0aa2b61c79a21dbf29eed",
+          "first_seen": "2026-08-22",
+          "last_seen": "2026-08-24"
+        },
+        {
+          "digest": "git:07443d4ae3476544c7830d5deb793e9c5eb587a7",
+          "first_seen": "2026-08-25",
+          "last_seen": "2026-08-25"
+        },
+        {
+          "digest": "git:8f4d0d392b4ade1979a9dcf0e1e07182ba3e5d42",
+          "first_seen": "2026-08-26",
+          "last_seen": "2026-08-26"
+        },
+        {
+          "digest": "git:f4f64d43fe42ace23419aa2d51b70bc9e7c8c7e7",
+          "first_seen": "2026-08-27",
+          "last_seen": "2026-08-27"
+        },
+        {
+          "digest": "git:7717ecdf3a6752c2affdce2f4310381bb9153ae8",
+          "first_seen": "2026-08-28",
+          "last_seen": "2026-08-28"
+        },
+        {
+          "digest": "git:a765e589da3aa69845654709fcdb15b8390bf310",
+          "first_seen": "2026-08-29",
+          "last_seen": "2026-08-31"
+        },
+        {
+          "digest": "git:e4d1bf58307eaaa0ead59723753f21df6a404b70",
+          "first_seen": "2026-09-01",
+          "last_seen": "2026-09-01"
+        },
+        {
+          "digest": "git:c401d871501d185b3e0684fafea943cc62724616",
+          "first_seen": "2026-09-02",
+          "last_seen": "2026-09-02"
+        },
+        {
+          "digest": "git:a29a56bf840fb5e023617269db8277e0f349c943",
+          "first_seen": "2026-09-03",
+          "last_seen": "2026-09-03"
+        },
+        {
+          "digest": "git:d7c26df861903abaa2a9c8405219947ba3d16555",
+          "first_seen": "2026-09-04",
+          "last_seen": "2026-09-04"
         },
         {
           "digest": "sha256:ca13e1d386e7d5a28b27012bafc04c6867d228f2d371d69c0b1a8ba9000be2cb",
-          "first_seen": "2026-09-06",
+          "first_seen": "2026-09-05",
           "last_seen": "2026-09-06"
         }
       ]
@@ -1077,27 +3572,6 @@
     "frozen": [],
     "changed": [
       {
-        "dir": "eia_intl",
-        "source": "eia-intl",
-        "keys": [
-          "eia_intl_gdp.json",
-          "eia_intl_jp_breakdown.json",
-          "eia_intl_population.json",
-          "eia_intl_totals.json"
-        ],
-        "previous_since": "2026-08-25",
-        "previous_days": 12
-      },
-      {
-        "dir": "ember",
-        "source": "ember",
-        "keys": [
-          "ember_monthly.csv"
-        ],
-        "previous_since": "2026-08-31",
-        "previous_days": 6
-      },
-      {
         "dir": "enecho-power",
         "source": "enecho-power",
         "keys": [
@@ -1110,5 +3584,8 @@
         "previous_days": 36
       }
     ]
-  }
+  },
+  "notes": [
+    "2026-09-06 seed repair (PR #47): the initial seed was produced on a Windows checkout (core.autocrlf=true), so text raw files were hashed with CRLF and the first CI run flagged 14 text-based sources as changed. first_seen/history were rebuilt from git blob identity (data/raw dated filenames + git log for overwrite-type files); historical entries carry 'git:' digests (sha1 of key→blob map) and are informational only. Text files are now hashed with CR removed (raw_ledger.py v2)."
+  ]
 }
