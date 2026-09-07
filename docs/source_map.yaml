@@ -2996,6 +2996,14 @@ sources:
     # 過去（2012-2025 年度）と現行（2026 年度以降）の 2 ページから HTML 表を抽出。
     # source_url は過去ページ（2012-2025 の大半の出典）。2026 は fit_kakaku.html。
     source_url: https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/kakaku.html
+    # ----- D-020⑤-1 raw ハッシュ台帳（2026-09-07）-----
+    # 年 1 回（3 月の調達価格決定）更新なので凍結判定はしない。変化通知のみ: 2026-09-06 から
+    # GitHub Actions への応答が AWS WAF チャレンジページに置き換わった事象を台帳が最初に見ていた
+    # （fetch_fit_price.py はチャレンジページを raw に保存せず exit 1 にした）。
+    raw_watch:
+      dir: fit
+      freeze_days: null
+      notify_change: true
     past_url: https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/kakaku.html
     current_url: https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/fit_kakaku.html
     # --- D-011 メタデータ共通項目 ---
