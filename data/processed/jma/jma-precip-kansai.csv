@@ -3074,3 +3074,4 @@ date,indicator_id,region,value,source_url
 2026-09-03,jma-precip-kansai,kansai,11.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=62&block_no=47772&year=YYYY&month=MM&day=&view=
 2026-09-04,jma-precip-kansai,kansai,20.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=62&block_no=47772&year=YYYY&month=MM&day=&view=
 2026-09-05,jma-precip-kansai,kansai,0.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=62&block_no=47772&year=YYYY&month=MM&day=&view=
+2026-09-06,jma-precip-kansai,kansai,0.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=62&block_no=47772&year=YYYY&month=MM&day=&view=
