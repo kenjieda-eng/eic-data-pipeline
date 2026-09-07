@@ -83,6 +83,23 @@ _HEADERS = {
 }
 
 
+# 2026-09-06〜: GitHub Actions からの取得が AWS WAF の JS チャレンジページ（約 2.4KB、
+# "awsWafCookieDomainList" / "gokuProps" を含む）に置き換わった。curl_cffi の TLS 偽装では
+# 越えられない。チャレンジページを raw に保存すると台帳が毎晩「変化」し、パースは 0 行で黙る
+# （updated_at が止まるので軸2 が 7 日後に拾う）。本文として扱わず、保存もせずに落とす。
+WAF_MARKERS = ("awsWafCookieDomainList", "gokuProps")
+MIN_PAGE_BYTES = 10_000
+
+
+def _guard_page(html: str, label: str) -> None:
+    """WAF チャレンジ／空応答なら RuntimeError（呼び出し側は raw を保存せず exit 1）。"""
+    hit = [m for m in WAF_MARKERS if m in html]
+    if hit or len(html) < MIN_PAGE_BYTES:
+        raise RuntimeError(
+            f"{label}: challenge/empty page ({len(html)} bytes, markers={hit}) — not saved as raw"
+        )
+
+
 def _meti_get(url: str, *, timeout: int = 120):
     if not _CURL_CFFI_AVAILABLE:
         raise RuntimeError(
@@ -342,6 +359,7 @@ def collect_all(today_tag: str, *, save_raw_files: bool = True) -> dict[str, dic
     r = _meti_get(PAST_URL)
     r.raise_for_status()
     past_html = r.content.decode("utf-8", errors="replace")
+    _guard_page(past_html, "past page")
     if save_raw_files:
         save_raw(past_html.encode("utf-8"), RAW_DIR, f"past_{today_tag}.html")
     past_by_year = group_tables_by_year(past_html)
@@ -356,6 +374,7 @@ def collect_all(today_tag: str, *, save_raw_files: bool = True) -> dict[str, dic
     r = _meti_get(CURRENT_URL)
     r.raise_for_status()
     cur_html = r.content.decode("utf-8", errors="replace")
+    _guard_page(cur_html, "current page")
     if save_raw_files:
         save_raw(cur_html.encode("utf-8"), RAW_DIR, f"current_{today_tag}.html")
     cur_by_year = group_tables_by_year(cur_html)

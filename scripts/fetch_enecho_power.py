@@ -914,6 +914,8 @@ def parse_demand_sheet(
       - `meti-demand-lights`: みなし小売合計行（r28 付近の「合  計」全角スペース）の c12+c15
       - `meti-demand-power`:  同合計行の c13+c16
     単位: 千 kWh → GWh（÷1000）。
+    2026-09-07: 合計行の列 offset 検出 + 想定枠ゲート（#47 の発電側と同型）。需要合計が取れない月は
+    電灯・電力も書かない（総計無しでは枠検査ができないため。通常モードの最新 2 年度では常に取れる）。
     """
     from openpyxl import load_workbook
 
@@ -946,43 +948,87 @@ def parse_demand_sheet(
 
         ymd = f"{year:04d}-{month:02d}-01"
         extracted = 0
+        vals: dict[str, float] = {}
 
+        # 2026-09-07: 発電側（#47、5 月シートの合計行ずれ）と同型の防御を需要側にも入れる。
+        # 合計行の最初の数値セル位置から列 offset を検出し（みなし小売合計行は c8、需要合計の値行は
+        # c13 が期待位置。0〜2 列以外は構造変更とみなし skip）、最後に想定枠ゲートで列取り違えを
+        # 着地させない。
         if minashi_row is not None:
-            # c12（電灯・自由）+ c15（電灯・経過措置）
-            lights = _to_gwh(_cell_at(ws, minashi_row, 12))
-            lights_extra = _to_gwh(_cell_at(ws, minashi_row, 15))
-            if lights is not None or lights_extra is not None:
-                total_lights = (lights or 0) + (lights_extra or 0)
-                rows.append({
-                    "date": ymd, "indicator_id": "meti-demand-lights",
-                    "region": "jp", "value": round(total_lights, 3),
-                })
-                extracted += 1
-            # c13（電力・自由）+ c16（電力・経過措置）
-            power = _to_gwh(_cell_at(ws, minashi_row, 13))
-            power_extra = _to_gwh(_cell_at(ws, minashi_row, 16))
-            if power is not None or power_extra is not None:
-                total_power = (power or 0) + (power_extra or 0)
-                rows.append({
-                    "date": ymd, "indicator_id": "meti-demand-power",
-                    "region": "jp", "value": round(total_power, 3),
-                })
-                extracted += 1
+            first_num = next(
+                (c for c in range(0, 40) if _cell_to_float(_cell_at(ws, minashi_row, c)) is not None),
+                None,
+            )
+            m_off = (first_num - 8) if first_num is not None else None
+            if m_off is None or not (0 <= m_off <= 2):
+                logger.error(
+                    "FY%d sheet='%s': みなし小売合計行 r%d の数値開始列が c%s（期待 c8〜c10）— 構造変更の疑い、skip",
+                    fiscal_year, sheet_name, minashi_row, first_num,
+                )
+            else:
+                if m_off:
+                    logger.warning(
+                        "FY%d sheet='%s': みなし小売合計行の数値開始列が c%d → 列 offset +%d を適用",
+                        fiscal_year, sheet_name, first_num, m_off,
+                    )
+                # c12（電灯・自由）+ c15（電灯・経過措置）
+                lights = _to_gwh(_cell_at(ws, minashi_row, 12 + m_off))
+                lights_extra = _to_gwh(_cell_at(ws, minashi_row, 15 + m_off))
+                if lights is not None or lights_extra is not None:
+                    vals["meti-demand-lights"] = round((lights or 0) + (lights_extra or 0), 3)
+                # c13（電力・自由）+ c16（電力・経過措置）
+                power = _to_gwh(_cell_at(ws, minashi_row, 13 + m_off))
+                power_extra = _to_gwh(_cell_at(ws, minashi_row, 16 + m_off))
+                if power is not None or power_extra is not None:
+                    vals["meti-demand-power"] = round((power or 0) + (power_extra or 0), 3)
 
         if grand_row is not None:
-            # 「需要合計」行の数値は c0 の下のラベル「合計」の行（r744）or 直後の行にある
-            # 実ファイルでは r744 に「需要合計」、r745 (index 744) の c13 に値
-            # ただし検出ロジックで grand_row が「需要合計」のラベル行を指している可能性。
-            # ラベル行 and 次行の両方で c13 を確認。
-            total_v = _to_gwh(_cell_at(ws, grand_row + 1, 13))
-            if total_v is None:
-                total_v = _to_gwh(_cell_at(ws, grand_row, 13))
-            if total_v is not None:
-                rows.append({
-                    "date": ymd, "indicator_id": "meti-demand-total",
-                    "region": "jp", "value": total_v,
-                })
-                extracted += 1
+            # 「需要合計」はラベル行（c0 に長い見出し、c13 に '合計'）の **次の行** の c13 に値がある
+            # （実ファイル r752/r753 型）。念のためラベル行自身も見る。数値開始列で offset を検出。
+            for r_try in (grand_row + 1, grand_row):
+                first_num = next(
+                    (c for c in range(0, 40) if _cell_to_float(_cell_at(ws, r_try, c)) is not None),
+                    None,
+                )
+                if first_num is None:
+                    continue
+                g_off = first_num - 13
+                if not (0 <= g_off <= 2):
+                    logger.error(
+                        "FY%d sheet='%s': 需要合計の値行 r%d の数値開始列が c%d（期待 c13〜c15）— 構造変更の疑い、skip",
+                        fiscal_year, sheet_name, r_try, first_num,
+                    )
+                    break
+                if g_off:
+                    logger.warning(
+                        "FY%d sheet='%s': 需要合計の値行の数値開始列が c%d → 列 offset +%d を適用",
+                        fiscal_year, sheet_name, first_num, g_off,
+                    )
+                total_v = _to_gwh(_cell_at(ws, r_try, 13 + g_off))
+                if total_v is not None:
+                    vals["meti-demand-total"] = total_v
+                break
+
+        # 想定枠ゲート（総計 30,000〜120,000 GWh、実測 61,013〜83,403。電灯/総計 0.10〜0.45（実測 0.18〜0.30）、
+        # 電力/総計 0.01〜0.10（実測 0.027〜0.038）、電灯+電力 < 総計）。1 つでも破れたら月ごと skip。
+        total = vals.get("meti-demand-total")
+        lights_v = vals.get("meti-demand-lights")
+        power_v = vals.get("meti-demand-power")
+        gate_ok = (
+            total is not None and 30_000 <= total <= 120_000
+            and (lights_v is None or 0.10 <= lights_v / total <= 0.45)
+            and (power_v is None or 0.01 <= power_v / total <= 0.10)
+            and (lights_v or 0) + (power_v or 0) < total
+        )
+        if not gate_ok:
+            logger.error(
+                "FY%d sheet='%s': sanity gate failed (total=%s lights=%s power=%s GWh) — skip month",
+                fiscal_year, sheet_name, total, lights_v, power_v,
+            )
+            vals = {}
+        for ind_id, v in vals.items():
+            rows.append({"date": ymd, "indicator_id": ind_id, "region": "jp", "value": v})
+            extracted += 1
 
         if extracted > 0:
             months_found += 1
