@@ -69,6 +69,14 @@ D-020⑤-1（2026-09-05）: 2 点を追加した。
         assessment を末尾に再掲する（RAW_LEDGER 節）。凍結（変わるはずの raw が
         N 日不変）と変化（過去値が改訂されうる raw が変わった日）。**report-only**。
         台帳が無ければ skip（nightly では fetch 群の後・catalog 生成の前に記帳される）。
+
+D-020 §9.6（2026-09-08）: 終端系列（catalog の status == "retired"）を監視対象外にした。
+    上流が公表をやめた系列は更新が来ないのが正常で、KNOWN_STALE（hard gate の allowlist）
+    では generate_catalog の soft warning（1×SLA）を黙らせられず永久 warning になる。
+    状態は系列自身（status / successor_id。source_map.yaml の `retired:` 宣言から
+    catalog 生成時に注入）に持たせ、ここでは軸1 / 軸2 / depends_on のすべてで skip する
+    （サマリ行に retired-skipped=N を出す）。KNOWN_STALE は「更新が来ないのが正常だが
+    終端ではない」系列（構造的死系列・季節性）だけに縮めた（17 → 6）。
 """
 
 from __future__ import annotations
@@ -104,22 +112,10 @@ KNOWN_STALE: dict[str, str] = {
     # --- EU ETS リヒテンシュタイン: 近年の検証排出データが存在しない（構造的死系列） ---
     "eu-ets-emissions-country-li": "Liechtenstein has no recent verified-emissions data (registered 2026-07-18)",
     "eu-ets-allowances-allocated-country-li": "Liechtenstein has no recent verified-emissions data (registered 2026-07-18)",
-    # --- EPRX 需給調整 電源種別別 水力/揚水: FY2025 の年次取りまとめ PDF (2026-06-18 公表) から
-    #     EPRX が水力と揚水を「水力・揚水」1 行に合算して公表する方式に変わり、分離値が公表されなくなった。
-    #     よって本 11 系列は FY2024 で構造的に終端（更新が来ないのが正常）。
-    #     FY2025 以降は balancing-price-{商品}-hydro-pumped が後継。
-    #     もし EPRX が分離公表を再開したら、ここから外して通常監視に戻すこと。 ---
-    "balancing-price-primary-hydro": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
-    "balancing-price-primary-pumped": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
-    "balancing-price-secondary-1-hydro": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
-    "balancing-price-secondary-1-pumped": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
-    "balancing-price-secondary-2-hydro": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
-    "balancing-price-secondary-2-pumped": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
-    "balancing-price-tertiary-1-hydro": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
-    "balancing-price-tertiary-1-pumped": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
-    "balancing-price-composite-hydro": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
-    "balancing-price-composite-pumped": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
-    "balancing-price-tertiary-2-pumped": "EPRX merged hydro+pumped from FY2025; series ends FY2024 (registered 2026-08-24)",
+    # --- EPRX 需給調整 電源種別別 水力/揚水 11 系列（FY2024 終端・後継 *-hydro-pumped）は
+    #     2026-09-08 に status: retired へ移した（source_map.yaml eprx-balancing の `retired:` 宣言、
+    #     D-020 §9.6）。終端系列はここ（hard gate の allowlist）ではなく系列自身の status で
+    #     監視対象外にする。もし EPRX が分離公表を再開したら `retired:` 宣言を外す。 ---
     # --- JMA 最深積雪: 積雪が稀な地点。降雪イベントが無い＝値が更新されないのが正常（SLA は既に 365 に緩和済み） ---
     "jma-snow-max-kansai": "seasonal: no snowfall since 2021-01; absence is expected (registered 2026-07-18)",
     "jma-snow-max-shikoku": "seasonal: no snowfall since 2022-02; absence is expected (registered 2026-07-18)",
@@ -139,15 +135,20 @@ def resolve_sla(entry: dict) -> int:
     return DEFAULT_FRESHNESS_SLA_DAYS.get(freq, 3)
 
 
-def find_stale(indicators: list[dict], multiplier: int, today) -> tuple[list[dict], int]:
+def find_stale(indicators: list[dict], multiplier: int, today) -> tuple[list[dict], int, int]:
     """
     age > freshness_sla_days × multiplier を満たす系列を列挙（KNOWN_STALE は除外）。
-    戻り値は (停滞系列リスト[age 降順], allowlist で除外した停滞件数)。
+    戻り値は (停滞系列リスト[age 降順], allowlist で除外した停滞件数, retired で除外した件数)。
     observation_cutoff が無い / 不正な系列は age を測れないので対象外（skip）。
+    D-020 §9.6: status == "retired" の系列は age に関わらず対象外（終端 = 更新が来ないのが正常）。
     """
     stale: list[dict] = []
     allowlisted_hits = 0
+    retired_skipped = 0
     for entry in indicators:
+        if entry.get("status") == "retired":
+            retired_skipped += 1
+            continue
         cutoff = entry.get("observation_cutoff")
         # D-020②: delivery 系列は cutoff − delivery_horizon_days が実効観測日。
         # cutoff 欠落 / parse 不能は None が返るので従来どおり skip。
@@ -179,7 +180,7 @@ def find_stale(indicators: list[dict], multiplier: int, today) -> tuple[list[dic
             }
         )
     stale.sort(key=lambda s: s["age_days"], reverse=True)
-    return stale, allowlisted_hits
+    return stale, allowlisted_hits, retired_skipped
 
 
 def format_line(s: dict, multiplier: int) -> str:
@@ -237,7 +238,7 @@ def main(argv: list[str] | None = None) -> int:
     indicators = catalog.get("indicators") or []
     now = _now_jst()
     today = now.date()
-    stale, allowlisted_hits = find_stale(indicators, args.multiplier, today)
+    stale, allowlisted_hits, retired_skipped = find_stale(indicators, args.multiplier, today)
 
     if args.list:
         # 一覧のみ。停滞ゼロなら何も出さない。
@@ -248,7 +249,8 @@ def main(argv: list[str] | None = None) -> int:
             f"staleness check: catalog={args.catalog.name} "
             f"indicators={len(indicators)} today(JST)={today} "
             f"threshold={args.multiplier}×SLA "
-            f"(allowlist={len(KNOWN_STALE)}, allowlisted-stale-skipped={allowlisted_hits})"
+            f"(allowlist={len(KNOWN_STALE)}, allowlisted-stale-skipped={allowlisted_hits}, "
+            f"retired-skipped={retired_skipped})"
         )
         if stale:
             print(f"STALE ({len(stale)} series exceed {args.multiplier}×SLA):")
@@ -262,6 +264,8 @@ def main(argv: list[str] | None = None) -> int:
     # 見えている」状態を可視化するための出力。hard 化は D-020⑤。
     axis2_hits = []
     for entry in indicators:
+        if entry.get("status") == "retired":
+            continue  # D-020 §9.6: 終端系列は updated_at が前進しないのが正常
         v = axis2_violation(entry, now)
         if v:
             axis2_hits.append((entry.get("id", "?"), v))
@@ -284,6 +288,8 @@ def main(argv: list[str] | None = None) -> int:
     for entry in indicators:
         if not entry.get("depends_on"):
             continue
+        if entry.get("status") == "retired":
+            continue  # D-020 §9.6: 終端した派生系列は再計算されないのが正常
         v = depends_on_violation(entry, by_id)
         if not v:
             continue

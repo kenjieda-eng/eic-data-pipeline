@@ -4925,7 +4925,9 @@ sources:
     # FY2025 からの構造変化: 電源種別別の行が 5 行（火力/水力/揚水/蓄電池/VPP）→
     #   4 行（火力/水力・揚水/蓄電池/VPP）に統合された。水力・揚水の分離値は公表されなくなったため、
     #   *-hydro / *-pumped 11 系列は FY2024 で終端し、*-hydro-pumped 6 系列を新設した
-    #   （終端側は check_staleness.py の KNOWN_STALE に登録済み）。
+    #   （終端側は下の `retired:` 宣言で status: retired。D-020 §9.6、2026-09-08。
+    #     それまでは check_staleness.py の KNOWN_STALE に載せていたが、hard gate の allowlist では
+    #     generate_catalog の 1×SLA soft warning を黙らせられないため系列自身の状態に移した）。
     # ------------------------------------------------------------------------
     # --- D-011 メタデータ共通項目 ---
     license: eprx-terms
@@ -4954,6 +4956,22 @@ sources:
     # 上記の「URL 不変のまま in-place 上書き」型サイレント停滞に対し、
     # HTTP 監視では検知できない分をカレンダー側から捕まえる二重系。
     update_schedule: { kind: window, months: [6], grace_days: 45 }
+    # D-020 §9.6（2026-09-08）: 終端系列と後継。catalog 生成時に status: retired / successor_id を注入する。
+    # retired は軸1 / 軸2 / depends_on の監視対象外（coverage は終端範囲として残る）。
+    # tertiary-2 は分離時代の hydro 系列が収載されていない（catalog に無い）ため pumped のみ = 計 11 系列。
+    # もし EPRX が分離公表を再開したら、この宣言を外して通常監視に戻す。
+    retired:
+      balancing-price-primary-hydro:      { successor_id: balancing-price-primary-hydro-pumped }
+      balancing-price-primary-pumped:     { successor_id: balancing-price-primary-hydro-pumped }
+      balancing-price-secondary-1-hydro:  { successor_id: balancing-price-secondary-1-hydro-pumped }
+      balancing-price-secondary-1-pumped: { successor_id: balancing-price-secondary-1-hydro-pumped }
+      balancing-price-secondary-2-hydro:  { successor_id: balancing-price-secondary-2-hydro-pumped }
+      balancing-price-secondary-2-pumped: { successor_id: balancing-price-secondary-2-hydro-pumped }
+      balancing-price-tertiary-1-hydro:   { successor_id: balancing-price-tertiary-1-hydro-pumped }
+      balancing-price-tertiary-1-pumped:  { successor_id: balancing-price-tertiary-1-hydro-pumped }
+      balancing-price-tertiary-2-pumped:  { successor_id: balancing-price-tertiary-2-hydro-pumped }
+      balancing-price-composite-hydro:    { successor_id: balancing-price-composite-hydro-pumped }
+      balancing-price-composite-pumped:   { successor_id: balancing-price-composite-hydro-pumped }
     indicator_ids:
       - balancing-price-composite
       - balancing-price-composite-battery

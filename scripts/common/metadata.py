@@ -88,12 +88,26 @@ OPTIONAL_FIELDS: tuple[str, ...] = (
     #       … 次回の公表期日が判っている単発運用（回ごとにリードタイムが動くもの）。
     # 未宣言のソースは catalog 生成時に既定 {"kind":"interval","days":7} が実体化される。
     "update_schedule",
+    # --- D-020 §9.6 終端系列 (2026-09-08) ----------------------------------
+    # 上流が公表をやめた系列（例: EPRX が水力/揚水を合算公表に変えて FY2024 で終端した
+    # 11 系列）は更新が来ないのが正常。KNOWN_STALE（hard gate の allowlist）では
+    # generate_catalog の soft warning（1×SLA）を黙らせられず永久 warning になるため、
+    # 系列自身に状態を持たせる。
+    #   status       … "active"（既定。未指定 / null も active）| "retired"
+    #                  retired は軸1（鮮度）・軸2（生存）・depends_on の監視対象外。
+    #                  coverage は導出する（終端範囲を機械可読に残す）。終端理由は notes に書く。
+    #   successor_id … retired 系列の後継 id（下流の参照付け替え用）。catalog に実在しなければ
+    #                  生成 error（depends_on の未知 id と同じ思想）。
+    # 宣言は source_map.yaml の `retired:`（id → {successor_id}）。catalog 生成時に注入・実体化する。
+    "status",
+    "successor_id",
 )
 
 ALL_FIELDS: tuple[str, ...] = REQUIRED_FIELDS + RECOMMENDED_FIELDS + OPTIONAL_FIELDS
-assert len(ALL_FIELDS) == 25, (
-    "D-020 で 25 項目固定 (D-017 の 20 + cutoff_semantics / delivery_horizon_days / grace_days"
-    " + coverage (D-020③、catalog 生成時導出) + update_schedule (D-020④(c) 軸2))"
+assert len(ALL_FIELDS) == 27, (
+    "D-020 で 27 項目固定 (D-017 の 20 + cutoff_semantics / delivery_horizon_days / grace_days"
+    " + coverage (D-020③、catalog 生成時導出) + update_schedule (D-020④(c) 軸2)"
+    " + status / successor_id (D-020 §9.6 終端系列))"
 )
 
 # 値候補（CI smoke test で検証）
@@ -138,6 +152,8 @@ AGGREGATION_VALUES = {
 }
 # D-020②: observation_cutoff の意味論。未宣言は "observation" 扱い（後方互換）。
 CUTOFF_SEMANTICS_VALUES = {"observation", "delivery"}
+# D-020 §9.6: 系列の状態。未宣言 / null は "active" 扱い（後方互換）。
+STATUS_VALUES = {"active", "retired"}
 
 # --- D-020④(c) 軸2 update_schedule ---------------------------------------
 # kind とその許容キー。余剰キーは validate_metadata で error（宣言ミスを
@@ -189,6 +205,21 @@ def observation_cutoff_from_df(df: pd.DataFrame) -> str:
 # --- スキーマ組み立て -----------------------------------------------------
 
 
+def retired_declaration(source_cfg: dict, indicator_id: str | None) -> tuple[str | None, str | None]:
+    """
+    D-020 §9.6: source_map.yaml の `retired:` 宣言（indicator_id → {successor_id}）を引く。
+    戻り値は (status, successor_id)。宣言が無ければ (None, None)（= active 扱い）。
+    build_metadata（fetcher 側）と generate_catalog（注入側）の両方がここを通る。
+    """
+    if not indicator_id:
+        return None, None
+    retired = source_cfg.get("retired") or {}
+    if indicator_id not in retired:
+        return None, None
+    decl = retired.get(indicator_id) or {}
+    return "retired", decl.get("successor_id")
+
+
 def build_metadata(
     source_cfg: dict,
     indicator_id: str,
@@ -221,6 +252,9 @@ def build_metadata(
         if key in source_cfg and source_cfg[key] is not None:
             return source_cfg[key]
         return default
+
+    # D-020 §9.6: 終端系列の宣言（無ければ (None, None)）
+    r_status, r_successor = retired_declaration(source_cfg, indicator_id)
 
     # source_url は個別 → 共通 の順に、共通は source_cfg["publisher_url"] も候補
     source_url = (
@@ -260,6 +294,11 @@ def build_metadata(
         # --- D-020④(c) 軸2 生存監視 ---
         # 未宣言（None）は「既定 interval 7」として catalog 生成時に実体化される。
         "update_schedule": pick("update_schedule"),
+        # --- D-020 §9.6 終端系列 ---
+        # source_map.yaml の `retired:` 宣言から埋める。未宣言は null（= active。
+        # catalog 生成時に "active" が実体化される）。
+        "status": r_status,
+        "successor_id": r_successor,
     }
     return meta
 
@@ -580,6 +619,19 @@ def validate_metadata(meta: dict) -> dict[str, list[str]]:
                     errors.append(
                         f"update_schedule has unexpected keys: {', '.join(extra_s)}"
                     )
+
+    # --- D-020 §9.6 status / successor_id（終端系列） -----------------------
+    # 未宣言 / null は active。successor_id は retired のときだけ持てる
+    # （active に後継があるのは宣言ミス）。実在チェックは catalog 生成の二段目。
+    status = meta.get("status")
+    if status is not None and status not in STATUS_VALUES:
+        errors.append(f"status '{status}' is not in STATUS_VALUES")
+    succ = meta.get("successor_id")
+    if succ is not None:
+        if not isinstance(succ, str) or not succ.strip():
+            errors.append(f"successor_id must be a non-empty string or null (got {succ!r})")
+        elif status != "retired":
+            errors.append("successor_id requires status 'retired'")
 
     # Recommended 欠落（warning）
     for f in RECOMMENDED_FIELDS:

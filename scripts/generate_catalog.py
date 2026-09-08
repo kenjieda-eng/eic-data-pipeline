@@ -10,6 +10,8 @@ D-011「系列メタデータ・スキーマ v1」で決めた案 γ（ハイブ
 CI smoke test:
 - Required 10 欠落は errors に積み、exit 1
 - Recommended 5 欠落 / 鮮度オーバーは warnings に積み、exit 0（情報のみ）
+- D-020 §9.6: successor_id が catalog に無い id（自分自身を含む）を指す系列は errors、exit 1。
+  status == "retired" の系列は鮮度（軸1）/ 軸2 / depends_on の対象外（coverage は導出する）
 
 使い方:
     python scripts/generate_catalog.py               # 通常
@@ -45,6 +47,7 @@ from scripts.common.metadata import (  # noqa: E402
     derive_coverage,
     effective_cutoff_age,
     freshness_sla_days as resolve_freshness_sla,
+    retired_declaration,
     validate_metadata,
 )
 
@@ -277,6 +280,18 @@ def main() -> int:
                 src_cfg.get("update_schedule") or dict(DEFAULT_UPDATE_SCHEDULE)
             )
 
+        # D-020 §9.6: 終端系列。source_map.yaml の `retired:` 宣言（id → {successor_id}）
+        # から status / successor_id を注入する。未宣言は "active" を **実体化** して入れる
+        # （update_schedule と同じく、下流が既定値を各自で持たなくて済むように）。
+        # retired は軸1（freshness_warning）・軸2（axis2_violation）・depends_on の対象外。
+        # coverage は導出する（終端範囲を機械可読に残す）。successor_id の実在は二段目で検査。
+        ind_id = meta.get("id")
+        src_cfg = indicator_to_source.get(ind_id) if ind_id else None
+        r_status, r_successor = retired_declaration(src_cfg or {}, ind_id)
+        meta["status"] = r_status or meta.get("status") or "active"
+        meta["successor_id"] = r_successor or meta.get("successor_id")
+        is_retired = meta["status"] == "retired"
+
         # D-020③: 収録範囲を CSV の実データから導出して注入する。
         # 人手でも fetcher の metadata.json でも書かない（生成時導出のみ）。
         # cutoff_semantics / frequency 確定後に呼ぶ必要がある
@@ -286,14 +301,15 @@ def main() -> int:
             total_warnings.append(f"coverage underivable: {meta.get('id') or path.name}")
 
         # 鮮度警告（注入された SLA / D-020 セマンティクスを含めて評価）= 軸1
-        fw = freshness_warning(meta)
+        # D-020 §9.6: retired は更新が来ないのが正常なので軸1 / 軸2 とも評価しない。
+        fw = None if is_retired else freshness_warning(meta)
         if fw:
             total_warnings.append(f"{path.name}: {fw}")
 
         # D-020④(c) 軸2: updated_at が update_schedule どおり前進しているか
         # （= workflow が回っているか）。soft 先行のため warning 止まりで、
         # exit コードには影響しない（hard 化は D-020⑤）。
-        axis2 = axis2_violation(meta, now)
+        axis2 = None if is_retired else axis2_violation(meta, now)
         if axis2:
             total_warnings.append(f"{path.name}: {axis2}")
 
@@ -309,13 +325,31 @@ def main() -> int:
     for meta in indicators:
         if not meta.get("depends_on"):
             continue
+        if meta.get("status") == "retired":
+            # D-020 §9.6: 終端した派生系列は再計算されないのが正常。依存先側が retired の
+            # 場合は updated_at が前進しないので lag の原因になり得ず、特別扱いは不要。
+            continue
         dv = depends_on_violation(meta, by_id)
         if dv:
             total_warnings.append(f"{meta.get('id')}: {dv}")
 
+    # D-020 §9.6: successor_id の実在チェック。存在しない id（typo / 後継の未登録）や
+    # 自分自身を指したまま緑になるのは depends_on の未知 id と同じ沈黙なので error（exit 1）。
+    n_retired = 0
+    for meta in indicators:
+        if meta.get("status") == "retired":
+            n_retired += 1
+        succ = meta.get("successor_id")
+        if not succ:
+            continue
+        if succ == meta.get("id"):
+            total_errors.append(f"{meta.get('id')}: successor_id refers to itself")
+        elif succ not in by_id:
+            total_errors.append(f"{meta.get('id')}: successor_id refers to unknown id: {succ}")
+
     # 集計
     n = len(indicators)
-    logger.info("collected %d metadata.json files", n)
+    logger.info("collected %d metadata.json files (retired=%d)", n, n_retired)
     if total_warnings:
         logger.warning("--- warnings (%d) ---", len(total_warnings))
         for w in total_warnings:
@@ -340,7 +374,7 @@ def main() -> int:
         logger.error("exit 1 due to %d warnings (--strict)", len(total_warnings))
         return 1
 
-    logger.info("OK: %d indicators, %d warnings", n, len(total_warnings))
+    logger.info("OK: %d indicators, %d warnings (retired=%d)", n, len(total_warnings), n_retired)
     return 0
 
 
