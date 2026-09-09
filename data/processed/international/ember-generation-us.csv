@@ -304,5 +304,6 @@ date,indicator_id,region,value,source_url
 2026-03-01,ember-generation-us,us,357.608,https://ember-energy.org/data/monthly-electricity-data/
 2026-04-01,ember-generation-us,us,340.315,https://ember-energy.org/data/monthly-electricity-data/
 2026-05-01,ember-generation-us,us,365.153,https://ember-energy.org/data/monthly-electricity-data/
-2026-06-01,ember-generation-us,us,412.713,https://ember-energy.org/data/monthly-electricity-data/
-2026-07-01,ember-generation-us,us,470.748,https://ember-energy.org/data/monthly-electricity-data/
+2026-06-01,ember-generation-us,us,410.15,https://ember-energy.org/data/monthly-electricity-data/
+2026-07-01,ember-generation-us,us,467.936,https://ember-energy.org/data/monthly-electricity-data/
+2026-08-01,ember-generation-us,us,465.153,https://ember-energy.org/data/monthly-electricity-data/

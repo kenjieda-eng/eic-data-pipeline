@@ -304,5 +304,6 @@ date,indicator_id,region,value,source_url
 2026-03-01,ember-share-bioenergy-us,us,1.037,https://ember-energy.org/data/monthly-electricity-data/
 2026-04-01,ember-share-bioenergy-us,us,0.935,https://ember-energy.org/data/monthly-electricity-data/
 2026-05-01,ember-share-bioenergy-us,us,1.019,https://ember-energy.org/data/monthly-electricity-data/
-2026-06-01,ember-share-bioenergy-us,us,0.889,https://ember-energy.org/data/monthly-electricity-data/
-2026-07-01,ember-share-bioenergy-us,us,0.828,https://ember-energy.org/data/monthly-electricity-data/
+2026-06-01,ember-share-bioenergy-us,us,0.917,https://ember-energy.org/data/monthly-electricity-data/
+2026-07-01,ember-share-bioenergy-us,us,0.84,https://ember-energy.org/data/monthly-electricity-data/
+2026-08-01,ember-share-bioenergy-us,us,0.849,https://ember-energy.org/data/monthly-electricity-data/

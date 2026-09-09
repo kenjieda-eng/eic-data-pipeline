@@ -95,6 +95,7 @@ date,indicator_id,region,value,source_url
 2026-01-01,ember-co2-intensity-jp,jp,475.191,https://ember-energy.org/data/monthly-electricity-data/
 2026-02-01,ember-co2-intensity-jp,jp,483.595,https://ember-energy.org/data/monthly-electricity-data/
 2026-03-01,ember-co2-intensity-jp,jp,440.562,https://ember-energy.org/data/monthly-electricity-data/
-2026-04-01,ember-co2-intensity-jp,jp,388.339,https://ember-energy.org/data/monthly-electricity-data/
-2026-05-01,ember-co2-intensity-jp,jp,371.539,https://ember-energy.org/data/monthly-electricity-data/
-2026-06-01,ember-co2-intensity-jp,jp,407.221,https://ember-energy.org/data/monthly-electricity-data/
+2026-04-01,ember-co2-intensity-jp,jp,388.399,https://ember-energy.org/data/monthly-electricity-data/
+2026-05-01,ember-co2-intensity-jp,jp,374.798,https://ember-energy.org/data/monthly-electricity-data/
+2026-06-01,ember-co2-intensity-jp,jp,410.598,https://ember-energy.org/data/monthly-electricity-data/
+2026-07-01,ember-co2-intensity-jp,jp,450.593,https://ember-energy.org/data/monthly-electricity-data/

@@ -8,7 +8,7 @@
   "source_url": "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
   "license": "jma-terms",
   "observation_cutoff": "2025-01-10",
-  "updated_at": "2026-09-08T10:03:46+09:00",
+  "updated_at": "2026-09-09T10:08:34+09:00",
   "license_url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
   "license_notice": "",
   "tz": "Asia/Tokyo",
@@ -21,5 +21,7 @@
   "cutoff_semantics": "observation",
   "delivery_horizon_days": null,
   "grace_days": null,
-  "update_schedule": null
+  "update_schedule": null,
+  "status": null,
+  "successor_id": null
 }

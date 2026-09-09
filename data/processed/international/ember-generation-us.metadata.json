@@ -7,8 +7,8 @@
   "source_name": "Ember Monthly Electricity Data (グローバル月次電力統計)",
   "source_url": "https://ember-energy.org/data/monthly-electricity-data/",
   "license": "CC-BY-4.0",
-  "observation_cutoff": "2026-07-01",
-  "updated_at": "2026-09-08T10:06:04+09:00",
+  "observation_cutoff": "2026-08-01",
+  "updated_at": "2026-09-09T10:10:22+09:00",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "license_notice": "Source: Ember (https://ember-energy.org/), licensed under CC BY 4.0.",
   "tz": "UTC",
@@ -21,5 +21,7 @@
   "cutoff_semantics": "observation",
   "delivery_horizon_days": null,
   "grace_days": null,
-  "update_schedule": null
+  "update_schedule": null,
+  "status": null,
+  "successor_id": null
 }

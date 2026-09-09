@@ -304,5 +304,6 @@ date,indicator_id,region,value,source_url
 2026-03-01,ember-co2-intensity-us,us,324.632,https://ember-energy.org/data/monthly-electricity-data/
 2026-04-01,ember-co2-intensity-us,us,323.533,https://ember-energy.org/data/monthly-electricity-data/
 2026-05-01,ember-co2-intensity-us,us,335.221,https://ember-energy.org/data/monthly-electricity-data/
-2026-06-01,ember-co2-intensity-us,us,361.753,https://ember-energy.org/data/monthly-electricity-data/
-2026-07-01,ember-co2-intensity-us,us,406.886,https://ember-energy.org/data/monthly-electricity-data/
+2026-06-01,ember-co2-intensity-us,us,358.549,https://ember-energy.org/data/monthly-electricity-data/
+2026-07-01,ember-co2-intensity-us,us,404.083,https://ember-energy.org/data/monthly-electricity-data/
+2026-08-01,ember-co2-intensity-us,us,402.872,https://ember-energy.org/data/monthly-electricity-data/

@@ -95,6 +95,7 @@ date,indicator_id,region,value,source_url
 2026-01-01,ember-share-gas-jp,jp,33.716,https://ember-energy.org/data/monthly-electricity-data/
 2026-02-01,ember-share-gas-jp,jp,31.303,https://ember-energy.org/data/monthly-electricity-data/
 2026-03-01,ember-share-gas-jp,jp,27.764,https://ember-energy.org/data/monthly-electricity-data/
-2026-04-01,ember-share-gas-jp,jp,24.985,https://ember-energy.org/data/monthly-electricity-data/
-2026-05-01,ember-share-gas-jp,jp,24.434,https://ember-energy.org/data/monthly-electricity-data/
-2026-06-01,ember-share-gas-jp,jp,25.081,https://ember-energy.org/data/monthly-electricity-data/
+2026-04-01,ember-share-gas-jp,jp,24.988,https://ember-energy.org/data/monthly-electricity-data/
+2026-05-01,ember-share-gas-jp,jp,24.958,https://ember-energy.org/data/monthly-electricity-data/
+2026-06-01,ember-share-gas-jp,jp,25.594,https://ember-energy.org/data/monthly-electricity-data/
+2026-07-01,ember-share-gas-jp,jp,28.902,https://ember-energy.org/data/monthly-electricity-data/

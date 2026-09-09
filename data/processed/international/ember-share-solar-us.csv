@@ -280,5 +280,6 @@ date,indicator_id,region,value,source_url
 2026-03-01,ember-share-solar-us,us,10.613,https://ember-energy.org/data/monthly-electricity-data/
 2026-04-01,ember-share-solar-us,us,12.022,https://ember-energy.org/data/monthly-electricity-data/
 2026-05-01,ember-share-solar-us,us,12.912,https://ember-energy.org/data/monthly-electricity-data/
-2026-06-01,ember-share-solar-us,us,12.098,https://ember-energy.org/data/monthly-electricity-data/
-2026-07-01,ember-share-solar-us,us,11.282,https://ember-energy.org/data/monthly-electricity-data/
+2026-06-01,ember-share-solar-us,us,12.105,https://ember-energy.org/data/monthly-electricity-data/
+2026-07-01,ember-share-solar-us,us,11.292,https://ember-energy.org/data/monthly-electricity-data/
+2026-08-01,ember-share-solar-us,us,10.917,https://ember-energy.org/data/monthly-electricity-data/
