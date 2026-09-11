@@ -1,0 +1,34 @@
+{
+  "id": "ltdc-awarded-nuclear-new",
+  "name": "長期脱炭素電源オークション 落札容量（原子力（新設・リプレース））",
+  "domain": "power",
+  "frequency": "annual",
+  "unit": "kW",
+  "source_name": "OCCTO 容量市場 長期脱炭素電源オークション約定結果",
+  "source_url": "https://www.occto.or.jp/various/capacity-market/jitsujukyukanren/2025_boshuyoukou_long.html",
+  "license": "occto-terms",
+  "observation_cutoff": "2025-04-01",
+  "updated_at": "2026-09-11T11:04:38+09:00",
+  "license_url": "https://www.occto.or.jp/info/disclaimer.html",
+  "license_notice": "出典: 電力広域的運営推進機関 (OCCTO)「容量市場 長期脱炭素電源オークション約定結果」\nOCCTO 利用規約に従い、出典明示を条件に利用可。約定結果 PDF の図表より転記・編集（加工した旨を明記）。\n",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2023-04-01",
+  "publisher": "電力広域的運営推進機関 (OCCTO)",
+  "aggregation": "annual_auction",
+  "notes": "応札年度ごとの落札容量（OCCTO 約定結果 PDF p.14「発電方式別の応札容量・落札容量」の値ラベルより転記）。\n2024 は図に区分が現れず 0。2023 の図では「原子力」と表記（既設安全対策投資の区分が無い回のため新設扱い）。\n落札率は ltdc-awarded-nuclear-new ÷ ltdc-bid-nuclear-new で導出できる（公表の落札率は整数％丸めのため系列にしない）。\n",
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null,
+  "update_schedule": {
+    "kind": "window",
+    "months": [
+      4,
+      5
+    ],
+    "grace_days": 45
+  },
+  "status": null,
+  "successor_id": null
+}
