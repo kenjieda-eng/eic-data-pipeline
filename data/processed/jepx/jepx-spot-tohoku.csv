@@ -5279,3 +5279,5 @@ date,indicator_id,region,value,source_url
 2026-09-12,jepx-spot-tohoku,tohoku,11.3575,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-09-13,jepx-spot-tohoku,tohoku,14.763333333333334,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-09-14,jepx-spot-tohoku,tohoku,18.013541666666665,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
+2026-09-15,jepx-spot-tohoku,tohoku,24.300416666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
+2026-09-16,jepx-spot-tohoku,tohoku,20.454166666666666,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
