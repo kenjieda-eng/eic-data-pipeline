@@ -5372,3 +5372,4 @@ date,indicator_id,region,value,source_url
 2026-09-14,jma-sunshine-hokkaido,hokkaido,0.1,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=14&block_no=47412&year=YYYY&month=MM&day=&view=
 2026-09-15,jma-sunshine-hokkaido,hokkaido,7.8,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=14&block_no=47412&year=YYYY&month=MM&day=&view=
 2026-09-16,jma-sunshine-hokkaido,hokkaido,11.4,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=14&block_no=47412&year=YYYY&month=MM&day=&view=
+2026-09-17,jma-sunshine-hokkaido,hokkaido,11.1,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=14&block_no=47412&year=YYYY&month=MM&day=&view=
