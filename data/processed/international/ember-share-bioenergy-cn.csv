@@ -43,12 +43,12 @@ date,indicator_id,region,value,source_url
 2018-06-01,ember-share-bioenergy-cn,cn,0.99,https://ember-energy.org/data/monthly-electricity-data/
 2018-07-01,ember-share-bioenergy-cn,cn,0.818,https://ember-energy.org/data/monthly-electricity-data/
 2018-08-01,ember-share-bioenergy-cn,cn,0.801,https://ember-energy.org/data/monthly-electricity-data/
-2018-09-01,ember-share-bioenergy-cn,cn,0.955,https://ember-energy.org/data/monthly-electricity-data/
+2018-09-01,ember-share-bioenergy-cn,cn,0.954,https://ember-energy.org/data/monthly-electricity-data/
 2018-10-01,ember-share-bioenergy-cn,cn,1.042,https://ember-energy.org/data/monthly-electricity-data/
 2018-11-01,ember-share-bioenergy-cn,cn,1.038,https://ember-energy.org/data/monthly-electricity-data/
 2018-12-01,ember-share-bioenergy-cn,cn,0.92,https://ember-energy.org/data/monthly-electricity-data/
 2019-01-01,ember-share-bioenergy-cn,cn,0.905,https://ember-energy.org/data/monthly-electricity-data/
-2019-02-01,ember-share-bioenergy-cn,cn,1.094,https://ember-energy.org/data/monthly-electricity-data/
+2019-02-01,ember-share-bioenergy-cn,cn,1.092,https://ember-energy.org/data/monthly-electricity-data/
 2019-03-01,ember-share-bioenergy-cn,cn,0.999,https://ember-energy.org/data/monthly-electricity-data/
 2019-04-01,ember-share-bioenergy-cn,cn,1.143,https://ember-energy.org/data/monthly-electricity-data/
 2019-05-01,ember-share-bioenergy-cn,cn,1.154,https://ember-energy.org/data/monthly-electricity-data/
@@ -60,7 +60,7 @@ date,indicator_id,region,value,source_url
 2019-11-01,ember-share-bioenergy-cn,cn,1.187,https://ember-energy.org/data/monthly-electricity-data/
 2019-12-01,ember-share-bioenergy-cn,cn,1.045,https://ember-energy.org/data/monthly-electricity-data/
 2020-01-01,ember-share-bioenergy-cn,cn,1.051,https://ember-energy.org/data/monthly-electricity-data/
-2020-02-01,ember-share-bioenergy-cn,cn,1.466,https://ember-energy.org/data/monthly-electricity-data/
+2020-02-01,ember-share-bioenergy-cn,cn,1.465,https://ember-energy.org/data/monthly-electricity-data/
 2020-03-01,ember-share-bioenergy-cn,cn,1.169,https://ember-energy.org/data/monthly-electricity-data/
 2020-04-01,ember-share-bioenergy-cn,cn,1.288,https://ember-energy.org/data/monthly-electricity-data/
 2020-05-01,ember-share-bioenergy-cn,cn,1.267,https://ember-energy.org/data/monthly-electricity-data/
@@ -108,7 +108,7 @@ date,indicator_id,region,value,source_url
 2023-11-01,ember-share-bioenergy-cn,cn,1.307,https://ember-energy.org/data/monthly-electricity-data/
 2023-12-01,ember-share-bioenergy-cn,cn,1.177,https://ember-energy.org/data/monthly-electricity-data/
 2024-01-01,ember-share-bioenergy-cn,cn,1.297,https://ember-energy.org/data/monthly-electricity-data/
-2024-02-01,ember-share-bioenergy-cn,cn,1.348,https://ember-energy.org/data/monthly-electricity-data/
+2024-02-01,ember-share-bioenergy-cn,cn,1.349,https://ember-energy.org/data/monthly-electricity-data/
 2024-03-01,ember-share-bioenergy-cn,cn,1.299,https://ember-energy.org/data/monthly-electricity-data/
 2024-04-01,ember-share-bioenergy-cn,cn,1.389,https://ember-energy.org/data/monthly-electricity-data/
 2024-05-01,ember-share-bioenergy-cn,cn,1.315,https://ember-energy.org/data/monthly-electricity-data/
@@ -126,7 +126,7 @@ date,indicator_id,region,value,source_url
 2025-05-01,ember-share-bioenergy-cn,cn,1.397,https://ember-energy.org/data/monthly-electricity-data/
 2025-06-01,ember-share-bioenergy-cn,cn,1.277,https://ember-energy.org/data/monthly-electricity-data/
 2025-07-01,ember-share-bioenergy-cn,cn,1.08,https://ember-energy.org/data/monthly-electricity-data/
-2025-08-01,ember-share-bioenergy-cn,cn,1.079,https://ember-energy.org/data/monthly-electricity-data/
+2025-08-01,ember-share-bioenergy-cn,cn,1.08,https://ember-energy.org/data/monthly-electricity-data/
 2025-09-01,ember-share-bioenergy-cn,cn,1.252,https://ember-energy.org/data/monthly-electricity-data/
 2025-10-01,ember-share-bioenergy-cn,cn,1.358,https://ember-energy.org/data/monthly-electricity-data/
 2025-11-01,ember-share-bioenergy-cn,cn,1.425,https://ember-energy.org/data/monthly-electricity-data/
@@ -137,4 +137,5 @@ date,indicator_id,region,value,source_url
 2026-04-01,ember-share-bioenergy-cn,cn,1.43,https://ember-energy.org/data/monthly-electricity-data/
 2026-05-01,ember-share-bioenergy-cn,cn,1.323,https://ember-energy.org/data/monthly-electricity-data/
 2026-06-01,ember-share-bioenergy-cn,cn,1.241,https://ember-energy.org/data/monthly-electricity-data/
-2026-07-01,ember-share-bioenergy-cn,cn,1.088,https://ember-energy.org/data/monthly-electricity-data/
+2026-07-01,ember-share-bioenergy-cn,cn,1.075,https://ember-energy.org/data/monthly-electricity-data/
+2026-08-01,ember-share-bioenergy-cn,cn,1.079,https://ember-energy.org/data/monthly-electricity-data/
