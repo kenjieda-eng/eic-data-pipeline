@@ -75,6 +75,15 @@ SYSTEM_COL_CANDIDATES = [
 ]
 DATE_COL_CANDIDATES = ["受渡日", "年月日"]
 
+# --- D-020 §7（2026-09-20）: 日次スプレッドの派生 ------------------------------------
+# 境界規約（R-13 §7 / Y-13 §5 で bess-net と合意）:
+#   **同一断面内の決定論的関数（その日の 48 コマだけで決まる量）はパイプライン側の派生系列**、
+#   **窓・期間・加重の選択を含む統計（分位点・移動平均・年率）は消費側**。
+#   スプレッドは前者（パラメータの選択が無い）なのでここで作る。分位点は作らない。
+KOMA_PER_DAY = 48
+# タグ → 上下から取るコマ数。4 コマ = 2 時間、8 コマ = 4 時間。
+SPREAD_DEFS = {"top4": 4, "top8": 8}
+
 # spot_summary.js にあるファイル名から年を拾う
 YEAR_FROM_FILE_RE = re.compile(r"spot_summary_(\d{4})\.csv", re.IGNORECASE)
 # spot_summary.js に書かれそうな候補（念のため広めにとる）
@@ -204,29 +213,59 @@ def normalize(df: pd.DataFrame, source_url: str) -> pd.DataFrame:
             f"no value columns found. actual columns={list(df.columns)}"
         )
 
-    daily = df.groupby(date_col)[value_cols].mean().reset_index()
+    # 日次平均は **従来どおり pandas の groupby リダクション**で算出する。
+    # 下の日別ループの series.mean() は数学的には同値だが、pandas（Cython）と
+    # numpy（pairwise 加算）で加算順序が違い、float64 の最終 1 ULP がずれる。
+    # processed CSV は値を丸めずに保存するので、その 1 ULP がそのまま差分行になり、
+    # 「値は変わっていないのに過去 15 年分が書き換わる」という結果になる
+    # （実測: 19,225 行 / max |Δ| = 2.84e-14 = 相対 2e-15）。
+    # スプレッドは新規系列なのでどちらでもよいが、日次平均は既存の履歴と
+    # **バイト一致**させる必要があるため、計算元をここで固定する。
+    daily_mean = df.groupby(date_col)[value_cols].mean()
 
     rows: list[dict] = []
-    for _, row in daily.iterrows():
-        date = pd.to_datetime(row[date_col]).strftime("%Y-%m-%d")
-        if system_col and pd.notna(row[system_col]):
+    partial = 0
+    for date_value, g in df.groupby(date_col):
+        date = pd.to_datetime(date_value).strftime("%Y-%m-%d")
+        for col in value_cols:
+            series = g[col].dropna()
+            if series.empty:
+                continue
+            token = "system" if col == system_col else AREA_MAP[col]
+            region = "jp" if col == system_col else AREA_MAP[col]
             rows.append({
                 "date": date,
-                "indicator_id": "jepx-spot-system",
-                "region": "jp",
-                "value": float(row[system_col]),
+                "indicator_id": f"jepx-spot-{token}",
+                "region": region,
+                "value": float(daily_mean.loc[date_value, col]),
                 "source_url": source_url,
             })
-        for area_col in present_area_cols:
-            region = AREA_MAP[area_col]
-            if pd.notna(row[area_col]):
+            # --- 日次スプレッド（派生）------------------------------------------
+            # 48 コマ揃っている日だけ作る。コマが欠けた日は上下の取り方が偏るため、
+            # 値を作らずに数えて警告する（無理に作ると「狭い日」に見えてしまう）。
+            if len(series) != KOMA_PER_DAY:
+                partial += 1
+                continue
+            s = series.sort_values().to_numpy(dtype=float)
+            for tag, k in SPREAD_DEFS.items():
                 rows.append({
                     "date": date,
-                    "indicator_id": f"jepx-spot-{region}",
+                    "indicator_id": f"jepx-spread-{tag}-{token}",
                     "region": region,
-                    "value": float(row[area_col]),
+                    "value": float(s[-k:].mean() - s[:k].mean()),
                     "source_url": source_url,
                 })
+            rows.append({
+                "date": date,
+                "indicator_id": f"jepx-spread-range-{token}",
+                "region": region,
+                "value": float(s[-1] - s[0]),
+                "source_url": source_url,
+            })
+    if partial:
+        logger.warning(
+            "spread skipped for %d (day, area) pairs with != %d koma", partial, KOMA_PER_DAY
+        )
     return pd.DataFrame(rows)
 
 
