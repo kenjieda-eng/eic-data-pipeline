@@ -1,7 +1,7 @@
 {
   "version": 2,
   "schema": "D-020",
-  "generated_at": "2026-09-20T17:11:20+09:00",
+  "generated_at": "2026-09-20T17:33:00+09:00",
   "indicator_count": 658,
   "indicators": [
     {
@@ -11666,8 +11666,11 @@
       "delivery_horizon_days": null,
       "grace_days": null,
       "update_schedule": {
-        "kind": "interval",
-        "days": 7
+        "kind": "window",
+        "months": [
+          3
+        ],
+        "grace_days": 45
       },
       "csv_path": "data/processed/regulation/fit-price-biomass-wood.csv",
       "freshness_sla_days": 540,
@@ -11705,8 +11708,11 @@
       "delivery_horizon_days": null,
       "grace_days": null,
       "update_schedule": {
-        "kind": "interval",
-        "days": 7
+        "kind": "window",
+        "months": [
+          3
+        ],
+        "grace_days": 45
       },
       "csv_path": "data/processed/regulation/fit-price-geothermal.csv",
       "freshness_sla_days": 540,
@@ -11744,8 +11750,11 @@
       "delivery_horizon_days": null,
       "grace_days": null,
       "update_schedule": {
-        "kind": "interval",
-        "days": 7
+        "kind": "window",
+        "months": [
+          3
+        ],
+        "grace_days": 45
       },
       "csv_path": "data/processed/regulation/fit-price-hydro-small.csv",
       "freshness_sla_days": 540,
@@ -11783,8 +11792,11 @@
       "delivery_horizon_days": null,
       "grace_days": null,
       "update_schedule": {
-        "kind": "interval",
-        "days": 7
+        "kind": "window",
+        "months": [
+          3
+        ],
+        "grace_days": 45
       },
       "csv_path": "data/processed/regulation/fit-price-solar-business.csv",
       "freshness_sla_days": 540,
@@ -11822,8 +11834,11 @@
       "delivery_horizon_days": null,
       "grace_days": null,
       "update_schedule": {
-        "kind": "interval",
-        "days": 7
+        "kind": "window",
+        "months": [
+          3
+        ],
+        "grace_days": 45
       },
       "csv_path": "data/processed/regulation/fit-price-wind-onshore.csv",
       "freshness_sla_days": 540,
