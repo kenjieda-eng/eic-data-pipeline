@@ -62,13 +62,43 @@ sources:
       - jepx-spot-chugoku
       - jepx-spot-shikoku
       - jepx-spot-kyushu
-    # D-011 準拠の indicator 固有メタデータ（10 系列）
+      - jepx-spread-top4-system
+      - jepx-spread-top4-hokkaido
+      - jepx-spread-top4-tohoku
+      - jepx-spread-top4-tokyo
+      - jepx-spread-top4-chubu
+      - jepx-spread-top4-hokuriku
+      - jepx-spread-top4-kansai
+      - jepx-spread-top4-chugoku
+      - jepx-spread-top4-shikoku
+      - jepx-spread-top4-kyushu
+      - jepx-spread-top8-system
+      - jepx-spread-top8-hokkaido
+      - jepx-spread-top8-tohoku
+      - jepx-spread-top8-tokyo
+      - jepx-spread-top8-chubu
+      - jepx-spread-top8-hokuriku
+      - jepx-spread-top8-kansai
+      - jepx-spread-top8-chugoku
+      - jepx-spread-top8-shikoku
+      - jepx-spread-top8-kyushu
+      - jepx-spread-range-system
+      - jepx-spread-range-hokkaido
+      - jepx-spread-range-tohoku
+      - jepx-spread-range-tokyo
+      - jepx-spread-range-chubu
+      - jepx-spread-range-hokuriku
+      - jepx-spread-range-kansai
+      - jepx-spread-range-chugoku
+      - jepx-spread-range-shikoku
+      - jepx-spread-range-kyushu
+    # D-011 準拠の indicator 固有メタデータ（10 + 派生 30 = 40 系列）
     indicators:
       jepx-spot-system:
         name: JEPX スポット システムプライス
         domain: power
         unit: "¥/kWh"
-        backfill_start: "2005-04-01"
+        backfill_start: "2012-04-01"
         aggregation: daily_mean
         notes: "48 コマの単純平均。システム全体の指標価格"
         depends_on: null
@@ -76,7 +106,7 @@ sources:
         name: JEPX スポット 北海道エリアプライス
         domain: power
         unit: "¥/kWh"
-        backfill_start: "2005-04-01"
+        backfill_start: "2012-04-01"
         aggregation: daily_mean
         notes: "北海道電力管内の日次平均約定価格"
         depends_on: null
@@ -84,7 +114,7 @@ sources:
         name: JEPX スポット 東北エリアプライス
         domain: power
         unit: "¥/kWh"
-        backfill_start: "2005-04-01"
+        backfill_start: "2012-04-01"
         aggregation: daily_mean
         notes: "東北電力管内の日次平均約定価格"
         depends_on: null
@@ -92,7 +122,7 @@ sources:
         name: JEPX スポット 東京エリアプライス
         domain: power
         unit: "¥/kWh"
-        backfill_start: "2005-04-01"
+        backfill_start: "2012-04-01"
         aggregation: daily_mean
         notes: "東京電力 PG 管内の日次平均約定価格。首都圏の指標"
         depends_on: null
@@ -100,7 +130,7 @@ sources:
         name: JEPX スポット 中部エリアプライス
         domain: power
         unit: "¥/kWh"
-        backfill_start: "2005-04-01"
+        backfill_start: "2012-04-01"
         aggregation: daily_mean
         notes: "中部電力管内の日次平均約定価格"
         depends_on: null
@@ -108,7 +138,7 @@ sources:
         name: JEPX スポット 北陸エリアプライス
         domain: power
         unit: "¥/kWh"
-        backfill_start: "2005-04-01"
+        backfill_start: "2012-04-01"
         aggregation: daily_mean
         notes: "北陸電力管内の日次平均約定価格"
         depends_on: null
@@ -116,7 +146,7 @@ sources:
         name: JEPX スポット 関西エリアプライス
         domain: power
         unit: "¥/kWh"
-        backfill_start: "2005-04-01"
+        backfill_start: "2012-04-01"
         aggregation: daily_mean
         notes: "関西電力管内の日次平均約定価格"
         depends_on: null
@@ -124,7 +154,7 @@ sources:
         name: JEPX スポット 中国エリアプライス
         domain: power
         unit: "¥/kWh"
-        backfill_start: "2005-04-01"
+        backfill_start: "2012-04-01"
         aggregation: daily_mean
         notes: "中国電力管内の日次平均約定価格"
         depends_on: null
@@ -132,7 +162,7 @@ sources:
         name: JEPX スポット 四国エリアプライス
         domain: power
         unit: "¥/kWh"
-        backfill_start: "2005-04-01"
+        backfill_start: "2012-04-01"
         aggregation: daily_mean
         notes: "四国電力管内の日次平均約定価格"
         depends_on: null
@@ -140,12 +170,258 @@ sources:
         name: JEPX スポット 九州エリアプライス
         domain: power
         unit: "¥/kWh"
-        backfill_start: "2005-04-01"
+        backfill_start: "2012-04-01"
         aggregation: daily_mean
         notes: "九州電力管内の日次平均約定価格"
         depends_on: null
+      # --- 日次スプレッド（派生・D-020 §7）。48 コマ揃った日のみ ---------------
+      jepx-spread-top4-system:
+        name: JEPX スポット システム 日内スプレッド（top4）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-system]
+        notes: "上位 4 コマ平均 − 下位 4 コマ平均。2 時間充放電に相当。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top4-hokkaido:
+        name: JEPX スポット 北海道 日内スプレッド（top4）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-hokkaido]
+        notes: "上位 4 コマ平均 − 下位 4 コマ平均。2 時間充放電に相当。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top4-tohoku:
+        name: JEPX スポット 東北 日内スプレッド（top4）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-tohoku]
+        notes: "上位 4 コマ平均 − 下位 4 コマ平均。2 時間充放電に相当。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top4-tokyo:
+        name: JEPX スポット 東京 日内スプレッド（top4）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-tokyo]
+        notes: "上位 4 コマ平均 − 下位 4 コマ平均。2 時間充放電に相当。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top4-chubu:
+        name: JEPX スポット 中部 日内スプレッド（top4）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-chubu]
+        notes: "上位 4 コマ平均 − 下位 4 コマ平均。2 時間充放電に相当。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top4-hokuriku:
+        name: JEPX スポット 北陸 日内スプレッド（top4）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-hokuriku]
+        notes: "上位 4 コマ平均 − 下位 4 コマ平均。2 時間充放電に相当。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top4-kansai:
+        name: JEPX スポット 関西 日内スプレッド（top4）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-kansai]
+        notes: "上位 4 コマ平均 − 下位 4 コマ平均。2 時間充放電に相当。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top4-chugoku:
+        name: JEPX スポット 中国 日内スプレッド（top4）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-chugoku]
+        notes: "上位 4 コマ平均 − 下位 4 コマ平均。2 時間充放電に相当。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top4-shikoku:
+        name: JEPX スポット 四国 日内スプレッド（top4）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-shikoku]
+        notes: "上位 4 コマ平均 − 下位 4 コマ平均。2 時間充放電に相当。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top4-kyushu:
+        name: JEPX スポット 九州 日内スプレッド（top4）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-kyushu]
+        notes: "上位 4 コマ平均 − 下位 4 コマ平均。2 時間充放電に相当。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top8-system:
+        name: JEPX スポット システム 日内スプレッド（top8）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-system]
+        notes: "上位 8 コマ平均 − 下位 8 コマ平均。4 時間充放電に相当（国内高圧案件の定型）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top8-hokkaido:
+        name: JEPX スポット 北海道 日内スプレッド（top8）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-hokkaido]
+        notes: "上位 8 コマ平均 − 下位 8 コマ平均。4 時間充放電に相当（国内高圧案件の定型）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top8-tohoku:
+        name: JEPX スポット 東北 日内スプレッド（top8）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-tohoku]
+        notes: "上位 8 コマ平均 − 下位 8 コマ平均。4 時間充放電に相当（国内高圧案件の定型）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top8-tokyo:
+        name: JEPX スポット 東京 日内スプレッド（top8）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-tokyo]
+        notes: "上位 8 コマ平均 − 下位 8 コマ平均。4 時間充放電に相当（国内高圧案件の定型）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top8-chubu:
+        name: JEPX スポット 中部 日内スプレッド（top8）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-chubu]
+        notes: "上位 8 コマ平均 − 下位 8 コマ平均。4 時間充放電に相当（国内高圧案件の定型）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top8-hokuriku:
+        name: JEPX スポット 北陸 日内スプレッド（top8）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-hokuriku]
+        notes: "上位 8 コマ平均 − 下位 8 コマ平均。4 時間充放電に相当（国内高圧案件の定型）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top8-kansai:
+        name: JEPX スポット 関西 日内スプレッド（top8）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-kansai]
+        notes: "上位 8 コマ平均 − 下位 8 コマ平均。4 時間充放電に相当（国内高圧案件の定型）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top8-chugoku:
+        name: JEPX スポット 中国 日内スプレッド（top8）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-chugoku]
+        notes: "上位 8 コマ平均 − 下位 8 コマ平均。4 時間充放電に相当（国内高圧案件の定型）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top8-shikoku:
+        name: JEPX スポット 四国 日内スプレッド（top8）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-shikoku]
+        notes: "上位 8 コマ平均 − 下位 8 コマ平均。4 時間充放電に相当（国内高圧案件の定型）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-top8-kyushu:
+        name: JEPX スポット 九州 日内スプレッド（top8）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-kyushu]
+        notes: "上位 8 コマ平均 − 下位 8 コマ平均。4 時間充放電に相当（国内高圧案件の定型）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-range-system:
+        name: JEPX スポット システム 日内スプレッド（range）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-system]
+        notes: "日内最大 − 日内最小。上限値。実運用では取り切れない。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-range-hokkaido:
+        name: JEPX スポット 北海道 日内スプレッド（range）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-hokkaido]
+        notes: "日内最大 − 日内最小。上限値。実運用では取り切れない。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-range-tohoku:
+        name: JEPX スポット 東北 日内スプレッド（range）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-tohoku]
+        notes: "日内最大 − 日内最小。上限値。実運用では取り切れない。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-range-tokyo:
+        name: JEPX スポット 東京 日内スプレッド（range）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-tokyo]
+        notes: "日内最大 − 日内最小。上限値。実運用では取り切れない。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-range-chubu:
+        name: JEPX スポット 中部 日内スプレッド（range）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-chubu]
+        notes: "日内最大 − 日内最小。上限値。実運用では取り切れない。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-range-hokuriku:
+        name: JEPX スポット 北陸 日内スプレッド（range）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-hokuriku]
+        notes: "日内最大 − 日内最小。上限値。実運用では取り切れない。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-range-kansai:
+        name: JEPX スポット 関西 日内スプレッド（range）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-kansai]
+        notes: "日内最大 − 日内最小。上限値。実運用では取り切れない。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-range-chugoku:
+        name: JEPX スポット 中国 日内スプレッド（range）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-chugoku]
+        notes: "日内最大 − 日内最小。上限値。実運用では取り切れない。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-range-shikoku:
+        name: JEPX スポット 四国 日内スプレッド（range）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-shikoku]
+        notes: "日内最大 − 日内最小。上限値。実運用では取り切れない。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-spread-range-kyushu:
+        name: JEPX スポット 九州 日内スプレッド（range）
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-kyushu]
+        notes: "日内最大 − 日内最小。上限値。実運用では取り切れない。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
     notes: |
       - 1 日 = 48 コマ（30 分単位）。日次平均は 48 コマの単純平均で算出。
+      - 日次スプレッド 30 系列（top4 / top8 / range × システム + 9 エリア）は同じ 48 コマからの派生。
+        top4 = 上位 4 コマ平均 − 下位 4 コマ平均（2 時間）、top8 = 同 8 コマ（4 時間）、range = 最大 − 最小。
+        **窓・加重の選択を含む統計（分位点・移動平均）はここでは作らない**（消費側の領域。R-13 §7）。
+      - backfill_start は 2012-04-01。エリアプライスを含む spot_summary CSV が 2012 年度分から公開されており、
+        それ以前は本パイプラインに取り込んでいない（宣言と実データを一致させる）。
 
   jma-temp:
     name: 気象庁 日次気温（9 エリア代表観測点）
