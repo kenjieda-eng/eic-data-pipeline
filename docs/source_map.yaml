@@ -3409,6 +3409,18 @@ sources:
     backfill_start: "2012-04-01"
     # 翌年度の価格は調達価格等算定委員会を経て年度末に告示。年次更新のため SLA は約 18 ヶ月。
     freshness_sla_days: 540
+    # D-020⑤-2（2026-09-20）: 軸2 を年 1 回の窓に後退させる。
+    #   それまで update_schedule を宣言しておらず、既定の {kind: interval, days: 7} が
+    #   当たっていた。FIT ページは 2026-09-05 以降 GitHub Actions からの取得が AWS WAF の
+    #   チャレンジページに置き換わっており（raw は past_20260905.html が最後）、毎晩の取得は
+    #   実質止まっている。既定の 7 日周期のままだと軸2 が毎日鳴り続け、hard 化と同時に
+    #   nightly が万年赤になる（= 赤疲れ → 無視という Pink Sheet 型の失敗）。
+    #   実態は「年 1 回・3 月の告示を取りに行く」なので、周期の宣言を実態に合わせる。
+    #   3 月末 + 45 日（5/15 頃）までに updated_at が 3 月以降へ前進していなければ軸2 が鳴る。
+    #   ⚠️ nightly の FIT ステップは外さないこと（audit_workflow_wiring.py が UNWIRED で
+    #      落ちる）。当該ステップには既に continue-on-error: true が付いている。
+    #   WAF が解けて毎晩の取得が戻ったら、この宣言を外して既定（7 日）に戻す。
+    update_schedule: { kind: window, months: [3], grace_days: 45 }
     # ----- 抽出方式（fetch_fit_price.py） --------------------------------
     # ページは UTF-8 の HTML 表。h3「YYYY年度の価格表」(平成/令和は西暦換算) で年度ブロックを区切り、
     # 各電源の <table> を colspan/rowspan 展開した grid 上で「列見出しキーワード + 除外 + pick」により

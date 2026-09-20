@@ -47,10 +47,9 @@ D-020④(c)（2026-08-30）: 軸2（パイプライン生存監視）のレポ�
     軸1（上記の observation_cutoff ベース）は「データが古い」を測るのに対し、
     軸2は update_schedule と updated_at から「workflow がもう回っていない」を測る
     別軸（D-020 §2.2）。データ頻度は軸1 の担当で、軸2 は一切見ない。
-    ⚠️ 軸2 は **report-only**。判定結果を exit コードに反映しない（gating しない）。
-    ④(a)(b) で updated_at を生存信号化した直後であり、まず 1 週間の無事故運転を
-    確認してから hard 化する（D-020⑤）。soft 先行にするのは、導入直後の誤検知で
-    nightly が万年赤 → 赤疲れ → 無視、という Pink Sheet 型の失敗を避けるため。
+    ⚠️ 軸2 は 2026-08-30 の導入時 **report-only** で始めた。導入直後の誤検知で
+    nightly が万年赤 → 赤疲れ → 無視、という Pink Sheet 型の失敗を避けるため、
+    soft 先行にしていた（D-020⑤）。
 
 D-020④(d)（2026-09-03）: 派生系列の継続判定（depends_on）のレポートも末尾に追加した。
     派生系列（比率・シェア・合算）は入力が改訂されると再計算が要るが、再計算が
@@ -69,6 +68,16 @@ D-020⑤-1（2026-09-05）: 2 点を追加した。
         assessment を末尾に再掲する（RAW_LEDGER 節）。凍結（変わるはずの raw が
         N 日不変）と変化（過去値が改訂されうる raw が変わった日）。**report-only**。
         台帳が無ければ skip（nightly では fetch 群の後・catalog 生成の前に記帳される）。
+
+D-020⑤-2（2026-09-20）: 軸2 を **gating に昇格**した（exit 1 に反映）。
+    昇格条件: ④(c) 導入（2026-08-30）から 3 週間、誤検知ゼロで運転できたこと。
+    期間中の発火は FIT 5 系列の 1 件だけで、これは AWS WAF により GitHub Actions からの
+    取得が止まっていた **真陽性**だった（軸1 は SLA 540 日のため沈黙したままで、
+    軸2 だけがこれを見ていた = 軸2 を足した目的そのもの）。
+    昇格と同時に FIT の update_schedule を実態（年 1 回・3 月告示）へ後退させる。
+    そうしないと真陽性が毎日 exit 1 を出し、nightly が万年赤になって昇格の意味が消える。
+    ⚠️ 後退は「監視をやめる」ではない: 3 月末 + 45 日（5/15 頃）までに更新が無ければ鳴る。
+    WAF が解けて毎晩の取得が戻ったら宣言を外して既定（7 日）に戻す。
 
 D-020 §9.6（2026-09-08）: 終端系列（catalog の status == "retired"）を監視対象外にした。
     上流が公表をやめた系列は更新が来ないのが正常で、KNOWN_STALE（hard gate の allowlist）
@@ -200,7 +209,9 @@ def format_line(s: dict, multiplier: int) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Staleness hard check (age > 2×SLA → exit 1)")
+    parser = argparse.ArgumentParser(
+        description="Staleness hard check (age > 2×SLA / depends_on 宣言ミス / 軸2 違反 → exit 1)"
+    )
     parser.add_argument(
         "--catalog",
         type=Path,
@@ -259,9 +270,9 @@ def main(argv: list[str] | None = None) -> int:
         else:
             print("OK: no unexpected series exceeds the staleness threshold.")
 
-    # --- D-020④(c) 軸2: パイプライン生存監視（report-only） -----------------
-    # exit コードには反映しない。ここは「軸1 が沈黙していても workflow の停止だけは
-    # 見えている」状態を可視化するための出力。hard 化は D-020⑤。
+    # --- D-020④(c) 軸2: パイプライン生存監視（⑤-2 で gating に昇格）---------
+    # 2026-09-20: exit コードに反映する。④(c) 導入（2026-08-30）から 3 週間、
+    # 誤検知ゼロで運転できたため（唯一の発火は FIT の WAF 停止で、真陽性だった）。
     axis2_hits = []
     for entry in indicators:
         if entry.get("status") == "retired":
@@ -271,11 +282,11 @@ def main(argv: list[str] | None = None) -> int:
             axis2_hits.append((entry.get("id", "?"), v))
     if not args.list:
         if axis2_hits:
-            print(f"AXIS2 (report-only, not gating): {len(axis2_hits)} series")
+            print(f"AXIS2 (gating): {len(axis2_hits)} series")
             for ind_id, reason in axis2_hits:
                 print(f"  - {ind_id}: {reason}")
         else:
-            print("AXIS2 (report-only, not gating): 0 series")
+            print("AXIS2 (gating): 0 series")
 
     # --- D-020④(d) 派生系列の継続判定（report-only） ------------------------
     # 軸2 が「全体が止まった」を見るのに対し、ここは「依存先だけ更新され、派生の
@@ -333,8 +344,9 @@ def main(argv: list[str] | None = None) -> int:
         else:
             print(f"RAW_LEDGER: ledger not found ({args.ledger}) — skip (run scripts/raw_ledger.py)")
 
-    if stale or depends_on_errors:
-        # 停滞あり / depends_on 宣言ミスありは exit 1（nightly ではデータ commit 後に走るので、ランが赤くなる）。
+    if stale or depends_on_errors or axis2_hits:
+        # 停滞あり / depends_on 宣言ミスあり / 軸2 違反ありは exit 1
+        # （nightly ではデータ commit 後に走るので、ランが赤くなる）。
         # --list は「違反一覧のみ表示」なのでサマリ行は出さず、exit code だけで結果を伝える。
         if not args.list:
             if stale:
@@ -345,6 +357,11 @@ def main(argv: list[str] | None = None) -> int:
             if depends_on_errors:
                 print(
                     f"FAIL: {len(depends_on_errors)} depends_on declaration error(s) (unknown id / unusable).",
+                    file=sys.stderr,
+                )
+            if axis2_hits:
+                print(
+                    f"FAIL: {len(axis2_hits)} series violate axis2 (pipeline liveness; D-020⑤-2).",
                     file=sys.stderr,
                 )
         return 1
