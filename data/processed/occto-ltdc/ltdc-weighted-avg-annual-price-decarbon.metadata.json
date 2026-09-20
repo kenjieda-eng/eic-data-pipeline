@@ -1,9 +1,9 @@
 {
-  "id": "ltdc-bid-thermal-decarbon",
-  "name": "長期脱炭素電源オークション 応札容量（脱炭素火力）",
+  "id": "ltdc-weighted-avg-annual-price-decarbon",
+  "name": "長期脱炭素電源オークション 落札容量加重平均 年額単価（脱炭素電源）",
   "domain": "power",
   "frequency": "annual",
-  "unit": "kW",
+  "unit": "円/kW/年",
   "source_name": "OCCTO 容量市場 長期脱炭素電源オークション約定結果",
   "source_url": "https://www.occto.or.jp/various/capacity-market/jitsujukyukanren/2025_boshuyoukou_long.html",
   "license": "occto-terms",
@@ -15,9 +15,12 @@
   "missing_policy": "null",
   "backfill_start": "2023-04-01",
   "publisher": "電力広域的運営推進機関 (OCCTO)",
-  "aggregation": "annual_auction",
-  "notes": "応札年度ごとの応札容量（OCCTO 約定結果 PDF p.14「発電方式別の応札容量・落札容量」の値ラベルより転記）。\n回ごとの内訳: 2023=水素混焼改修・アンモニア混焼改修・水素混焼(リプレース) / 2024=アンモニア混焼改修 / 2025=アンモニア混焼改修・水素専焼。\n落札率は ltdc-awarded-thermal-decarbon ÷ ltdc-bid-thermal-decarbon で導出できる（公表の落札率は整数％丸めのため系列にしない）。\n",
-  "depends_on": null,
+  "aggregation": "derived",
+  "notes": "約定総額（億円/年）÷ 落札容量（万kW）。個別電源の約定価格は公表されないため、**全落札電源の容量加重平均**にあたる。\n入力が 4 桁の公表値（億円/年・万kW）なので有効数字も 4 桁。10 円未満は丸めている（1 円単位の精度を騙らない）。\n上限価格（募集要綱の一次値）とは別物。上限価格は別系列で収載予定。\n",
+  "depends_on": [
+    "ltdc-contract-amount-decarbon",
+    "ltdc-awarded-decarbon"
+  ],
   "cutoff_semantics": "observation",
   "delivery_horizon_days": null,
   "grace_days": null,

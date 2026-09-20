@@ -13,8 +13,16 @@ EPRX 年次取りまとめ（D-018）と同じ運用方針。
     (2) 公表本文が「応札容量（落札率）」と書きながら**落札容量**を列挙していた回（応札年度2025）を
         そのまま応札容量として読んだ
   → 値を打ち込んだあと、**恒等式が全部通らなければ CSV を書かない**。
-     ①Σ電源種別 = 全国 ②Σエリア = 全国 ③脱炭素 + LNG = 全国 ④図の LNG = 表の LNG
-     ⑤落札率 = 落札 ÷ 応札 ⑥本文の集約値 = 図の内訳の和
+     ①Σ電源種別 = 全国 ②Σ脱炭素枠 = 公表 脱炭素落札 ③Σエリア = 全国 ④脱炭素 + LNG = 全国
+     ⑤図の LNG = 表の LNG ⑥落札率 = 落札 ÷ 応札 ⑦本文の集約値 = 図の内訳の和
+     ⑧蓄電池 内訳の和 = 蓄電池計 ⑨採用した公表集約値 = 束ねたバーの和
+  許容幅は固定値ではなく **(n+1)×0.05**（n = 和に使った丸め項の本数）。固定 0.1 は n>=3 で
+  丸めだけで超える（Y-12 §3）。ログは上限（bound）と実差（diff）を分けて出す。
+
+■ Σ に入れる項の粒度（2026-09-19、Y-12 §2 / R-13 §1）
+  **Σ に入れる項は、公表集約値が存在するもっとも細かい粒度で採る。** 図のバーの和ではない。
+  この規約を入れると 3 回分すべてで Σ電源種別 落札 = 全国落札 / Σ脱炭素枠 = 公表 が ±0 になる
+  （旧ルールでは 6 本とも ±0.1 ずれていた）。AGG_OVERRIDE / SIGMA_MERGE を参照。
   転記の優先順位は **p.10 の表 > 図の値ラベル > 本文**（本文は上記 (2) の実績があるため最後）。
 
 ■ 一次資料の同一性
@@ -159,11 +167,96 @@ TEXT_AGG: dict[int, dict[str, tuple[float | None, float | None]]] = {
     2025: {"battery": (None, 125.1), "pumped": (None, 45.3)},   # 本文 = 落札容量（表記は「応札容量」）
 }
 
-TOL = 0.15  # 万kW。内訳の 0.1 万kW 丸めが最大 2 本分ずれても通る幅
+# --- 公表集約値による上書き（Y-12 §2 / R-13 §1、2026-09-19）--------------------------
+# 規約: **Σ に入れる項は、公表集約値が存在するもっとも細かい粒度で採る**。
+#   図のバーは 0.1 万kW 丸めなので、和を取ると内訳の本数ぶん丸め誤差が積まれる。同じ量の
+#   公表集約値（p.10 の表・本文）があるなら一次値はそちらであって和ではない。バーは
+#   「分解のため」にだけ使う（内訳の分け方が不定でも、和は公表で確定している）。
+# 効果: **系列値と Σ の項の両方**をこの値に置き換える。
+#   (2023, thermal-decarbon) バーの和 82.5 → 公表 82.6 … #50 が出荷した誤り
+#   (2025, pumped)           バーの和 45.4 → 本文 45.3 … 同上（Y-11 の指摘）
+#   いずれも区間の交差で確定（R-12 §1 / Y-12 §1）:
+#     成分和 [82.40, 82.60] ∩ 公表 82.6 の [82.55, 82.65] = [82.55, 82.60] → 82.6
+#     成分和 [45.30, 45.50] ∩ 公表 45.3 の [45.25, 45.35] = [45.30, 45.35] → 45.3
+AGG_OVERRIDE: dict[tuple[int, str], dict[str, float]] = {
+    (2023, "thermal-decarbon"): {"awarded": 82.6},
+    (2025, "pumped"): {"awarded": 45.3},
+    (2025, "battery"): {"awarded": 125.1},  # バーの和と一致。規約どおり公表側を採る
+}
+
+# --- Σ の項が複数カテゴリを束ねる場合（応札年度2024 の「6時間以上」区分）---------------
+# p.10 は揚水と蓄電池を跨いだ「3h〜6h / 6h〜」の区分別落札容量を公表している。6h〜 の
+# 公表値 76.9 は図のバー（揚水 6h〜 36.1 + 蓄電池 6h〜 40.9 = 77.0）より細かい粒度の
+# 公表集約値なので Σ の項にはこちらを使う。内訳 36.1 / 40.9 は「現時点で得られる最良の
+# 内訳」として系列には残すが、**Σ の項には使わない**（Y-12 §2 の分離）。
+SIGMA_MERGE: dict[int, list[dict]] = {
+    2024: [{
+        "name": "6時間以上区分（揚水 6h〜 + 蓄電池 6h〜）",
+        "members": [("pumped", 1), ("battery", 1)],
+        "bid": None,      # 応札側は区分別の公表集約値が無い → バーの和のまま
+        "awarded": 76.9,  # 成分和 [76.90, 77.10] ∩ 公表 [76.85, 76.95] = [76.90, 76.95]
+    }],
+}
+
+# --- 蓄電池の内訳（区分が公表された回のみ）。BY_SOURCE["battery"] のバー順と対応 --------
+BATTERY_SPLIT: dict[int, list[str]] = {
+    2025: ["li", "non-li"],  # リチウムイオン / リチウムイオン以外
+}
+
+
+def tol_for(n_terms: int) -> float:
+    """恒等式 #30 の許容幅（Y-12 §3 / R-13 §2）。
+
+    0.1 丸めの成分 n 本の和は誤差が最大 n×0.05、比較先の公表値も ±0.05 なので上限は
+    (n+1)×0.05。固定値（旧 TOL = 0.15）は n=2 なら通るが **n>=3 で丸めだけで超える**ため
+    導出式で持つ。n=2 で通るのは、公表値がすべて 0.1 刻みで**差も 0.1 の倍数にしかならない**
+    ため。上限 0.15 に対して実際に取り得る差は 0.0 / 0.1 までで、0.2 は n>=3（上限 0.20）に
+    ならないと現れない。固定 0.1 でも同じ理由で n>=3 が最初の破綻点になる。
+    公表 0.0 の真値区間は物理的に [0, 0.05) の片側だが、n に数えると上限が過大になる側なので
+    安全（マジックナンバーを増やさない趣旨を優先し厳密化しない）。
+    """
+    return (n_terms + 1) * 0.05
 
 
 def r1(x: float) -> float:
     return round(x + 1e-9, 1)
+
+
+def cat_value(fy: int, cat: str) -> tuple[float, float]:
+    """カテゴリの (応札, 落札) 万kW。公表集約値があればそれを採る（AGG_OVERRIDE）。"""
+    parts = BY_SOURCE[fy][cat]
+    ov = AGG_OVERRIDE.get((fy, cat), {})
+    bid = ov.get("bid", r1(sum(p[0] for p in parts)))
+    awd = ov.get("awarded", r1(sum(p[1] for p in parts)))
+    return bid, awd
+
+
+def sigma_terms(fy: int) -> list[tuple[str, set[str], float, float]]:
+    """Σ電源種別 の項を「公表集約値がある最細粒度」で作る（Y-12 §2 / R-13 §1）。
+
+    戻り値は (ラベル, 関与カテゴリ, 応札, 落札)。ラベルは NG 時にどの項かを示すため。
+    """
+    merges = SIGMA_MERGE.get(fy, [])
+    merged = {(c, i) for m in merges for c, i in m["members"]}
+    for m in merges:  # 上書きと束ねが同じカテゴリに重なると意味が二重になる
+        for c, _ in m["members"]:
+            assert (fy, c) not in AGG_OVERRIDE, f"{fy} {c}: AGG_OVERRIDE と SIGMA_MERGE が重複"
+    terms: list[tuple[str, set[str], float, float]] = []
+    for cat, parts in BY_SOURCE[fy].items():
+        if (fy, cat) in AGG_OVERRIDE:
+            b, a = cat_value(fy, cat)
+            terms.append((f"{cat}(公表集約値)", {cat}, b, a))
+            continue
+        for i, (b, a) in enumerate(parts):
+            if (cat, i) not in merged:
+                terms.append((f"{cat}[{i}]", {cat}, b, a))
+    for m in merges:
+        b = m["bid"] if m["bid"] is not None else r1(
+            sum(BY_SOURCE[fy][c][i][0] for c, i in m["members"]))
+        a = m["awarded"] if m["awarded"] is not None else r1(
+            sum(BY_SOURCE[fy][c][i][1] for c, i in m["members"]))
+        terms.append((m["name"], {c for c, _ in m["members"]}, b, a))
+    return terms
 
 
 def verify_raw(raw_dir: Path) -> list[str]:
@@ -184,33 +277,75 @@ def verify_raw(raw_dir: Path) -> list[str]:
 
 
 def check_identities() -> tuple[list[str], list[str]]:
-    """恒等式で転記表を検算する。戻り値は (OK 行, NG 行)。"""
+    """恒等式で転記表を検算する。戻り値は (OK 行, NG 行)。
+
+    許容幅は固定値ではなく **(n+1)×0.05**（tol_for）。上限（bound）と実差（diff）を
+    分けて記録する — 上限だけ見ていると 0.3 のずれを見逃すため（Y-12 §3）。
+    """
     ok, ng = [], []
 
-    def rec(fy: int, name: str, got, exp) -> None:
-        good = abs(got - exp) <= TOL if isinstance(exp, float) else got == exp
-        (ok if good else ng).append(f"{fy} {name}: {got} vs {exp}")
+    def rec(fy: int, name: str, got, exp, n_terms: int = 1) -> None:
+        if isinstance(exp, float):
+            bound = tol_for(n_terms)
+            diff = round(abs(got - exp), 4)
+            good = diff <= bound + 1e-9
+            line = (f"{fy} {name}: {got} vs {exp}"
+                    f" (terms={n_terms} bound={bound:.2f} diff={diff:.2f})")
+        else:
+            good = got == exp
+            line = f"{fy} {name}: {got} vs {exp}"
+        (ok if good else ng).append(line)
 
     for fy in sorted(BY_SOURCE):
         bs, t = BY_SOURCE[fy], TOTALS[fy]
-        bid_sum = r1(sum(p[0] for parts in bs.values() for p in parts))
-        awd_sum = r1(sum(p[1] for parts in bs.values() for p in parts))
+        st = sigma_terms(fy)
+        n = len(st)
+        bid_sum = r1(sum(x[2] for x in st))
+        awd_sum = r1(sum(x[3] for x in st))
+        # 脱炭素枠 = Σ の項のうち LNG を除いた分（#31）
+        dec = [x for x in st if "lng" not in x[1]]
+        awd_dec = r1(sum(x[3] for x in dec))
         ab = r1(sum(a for a, _ in BY_AREA[fy]))
         aa = r1(sum(b for _, b in BY_AREA[fy]))
-        rec(fy, "Σ電源種別 応札 = 全国応札", bid_sum, t["bid_total"])
-        rec(fy, "Σ電源種別 落札 = 全国落札", awd_sum, t["awarded_total"])
-        rec(fy, "Σエリア 応札 = 全国応札", ab, t["bid_total"])
-        rec(fy, "Σエリア 落札 = 全国落札", aa, t["awarded_total"])
+        rec(fy, "Σ電源種別 応札 = 全国応札", bid_sum, t["bid_total"], n)
+        rec(fy, "Σ電源種別 落札 = 全国落札", awd_sum, t["awarded_total"], n)
+        rec(fy, "Σ脱炭素枠 落札 = 公表 脱炭素落札", awd_dec, t["decarbon_awarded"], len(dec))
+        rec(fy, "Σエリア 応札 = 全国応札", ab, t["bid_total"], len(BY_AREA[fy]))
+        rec(fy, "Σエリア 落札 = 全国落札", aa, t["awarded_total"], len(BY_AREA[fy]))
         rec(fy, "脱炭素落札 + LNG落札 = 全国落札",
-            r1(t["decarbon_awarded"] + t["lng_awarded"]), t["awarded_total"])
-        rec(fy, "図のLNG落札 = 表のLNG落札", r1(sum(p[1] for p in bs["lng"])), t["lng_awarded"])
+            r1(t["decarbon_awarded"] + t["lng_awarded"]), t["awarded_total"], 2)
+        rec(fy, "図のLNG落札 = 表のLNG落札", r1(sum(p[1] for p in bs["lng"])),
+            t["lng_awarded"], len(bs["lng"]))
         rec(fy, "落札率 = 落札/応札",
             round(100 * t["awarded_total"] / t["bid_total"]), t["award_rate_total"])
         for cat, (tb, ta) in TEXT_AGG[fy].items():
             if tb is not None:
-                rec(fy, f"本文 {cat} 応札 = 図の和", r1(sum(p[0] for p in bs[cat])), tb)
+                rec(fy, f"本文 {cat} 応札 = 図の和", r1(sum(p[0] for p in bs[cat])),
+                    tb, len(bs[cat]))
             if ta is not None:
-                rec(fy, f"本文 {cat} 落札 = 図の和", r1(sum(p[1] for p in bs[cat])), ta)
+                # 比較対象は**図のバーの和**（cat_value ではない）。上書き後の採用値と
+                # 本文を比べると、上書きの出どころが本文なので同じ値どうしの比較になり、
+                # 「図が本文と食い違っている」という検出したい事象が消える。
+                rec(fy, f"本文 {cat} 落札 = 図の和", r1(sum(p[1] for p in bs[cat])),
+                    ta, len(bs[cat]))
+        # #28: 蓄電池の内訳（Li / 非Li）の和 = 蓄電池計（区分が公表された回のみ）
+        if BATTERY_SPLIT.get(fy):
+            k = len(BATTERY_SPLIT[fy])
+            rec(fy, "蓄電池 内訳の和 応札 = 蓄電池計",
+                r1(sum(p[0] for p in bs["battery"][:k])), cat_value(fy, "battery")[0], k)
+            rec(fy, "蓄電池 内訳の和 落札 = 蓄電池計",
+                r1(sum(p[1] for p in bs["battery"][:k])), cat_value(fy, "battery")[1], k)
+        # #29: 採用した公表集約値 vs 束ねたバーの和（0.1 の食い違いを消さずに記録する）
+        for m in SIGMA_MERGE.get(fy, []):
+            if m["awarded"] is not None:
+                rec(fy, f"{m['name']} バーの和 = 公表集約値",
+                    r1(sum(BY_SOURCE[fy][c][i][1] for c, i in m["members"])),
+                    m["awarded"], len(m["members"]))
+        for (ofy, cat), ov in sorted(AGG_OVERRIDE.items()):
+            if ofy == fy and "awarded" in ov:
+                rec(fy, f"{cat} バーの和 = 公表集約値",
+                    r1(sum(p[1] for p in BY_SOURCE[fy][cat])), ov["awarded"],
+                    len(BY_SOURCE[fy][cat]))
     return ok, ng
 
 
@@ -226,11 +361,17 @@ def build_rows() -> list[dict]:
 
     for fy in sorted(BY_SOURCE):
         bs, t = BY_SOURCE[fy], TOTALS[fy]
-        for cat, parts in bs.items():
+        for cat in bs:
             if cat == "other":   # 「その他」は残差であって電源種ではないので系列にしない
                 continue
-            add(fy, f"ltdc-bid-{cat}", "jp", round(r1(sum(p[0] for p in parts)) * 10_000))
-            add(fy, f"ltdc-awarded-{cat}", "jp", round(r1(sum(p[1] for p in parts)) * 10_000))
+            b, a = cat_value(fy, cat)   # 公表集約値があればそちら（AGG_OVERRIDE）
+            add(fy, f"ltdc-bid-{cat}", "jp", round(b * 10_000))
+            add(fy, f"ltdc-awarded-{cat}", "jp", round(a * 10_000))
+        # 蓄電池の内訳（区分が公表された回のみ。恒等式で計との一致を確認済み）
+        for i, tag in enumerate(BATTERY_SPLIT.get(fy, [])):
+            sb, sa = bs["battery"][i]
+            add(fy, f"ltdc-bid-battery-{tag}", "jp", round(sb * 10_000))
+            add(fy, f"ltdc-awarded-battery-{tag}", "jp", round(sa * 10_000))
         add(fy, "ltdc-bid-total", "jp", round(t["bid_total"] * 10_000))
         add(fy, "ltdc-awarded-total", "jp", round(t["awarded_total"] * 10_000))
         add(fy, "ltdc-awarded-decarbon", "jp", round(t["decarbon_awarded"] * 10_000))
@@ -242,6 +383,14 @@ def build_rows() -> list[dict]:
         add(fy, "ltdc-contract-amount-lng", "jp", t["lng_amount"])
         add(fy, "ltdc-contract-amount-net-decarbon", "jp", t["decarbon_net3"])
         add(fy, "ltdc-contract-amount-net-lng", "jp", t["lng_net3"])
+        # 年額単価（約定総額 ÷ 落札容量）。億円/年 ÷ 万kW → 円/kW/年。
+        # 入力が 4 桁なので有効数字も 4 桁。10 円未満は丸める（1 円単位の精度を騙らない）。
+        for tag, amount, awarded in (
+            ("decarbon", t["decarbon_amount"], t["decarbon_awarded"]),
+            ("lng", t["lng_amount"], t["lng_awarded"]),
+        ):
+            price = amount * 1e8 / (awarded * 1e4)
+            add(fy, f"ltdc-weighted-avg-annual-price-{tag}", "jp", int(round(price, -1)))
         for area, (b, a) in zip(AREAS, BY_AREA[fy]):
             add(fy, f"ltdc-bid-area-{area}", area, round(b * 10_000))
             add(fy, f"ltdc-awarded-area-{area}", area, round(a * 10_000))
