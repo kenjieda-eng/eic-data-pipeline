@@ -228,6 +228,20 @@ def main() -> int:
     total_warnings: list[str] = []
     now = _now_jst()  # 軸2 判定の基準時刻（全系列で同一時刻を使う）
 
+    # --- 2026-09-21 (R-15 §9): license_notice が空のソースは error（exit 1） ---------
+    # license_notice は下流（bess-net 等）が出典表示にそのまま使う文字列。空のまま通すと、
+    # CC-BY のように帰属表示がライセンス条件そのものであるソースで、下流が出典なしに
+    # 表示する事故が起きる（wb-pink-sheet で実際に空のまま 2 か月公開されていた）。
+    # 判定は metadata.json ではなく **source_map（宣言の原本）** に対して行う。
+    for src_key, src_cfg in (source_map.get("sources") or {}).items():
+        if not isinstance(src_cfg, dict) or "license" not in src_cfg:
+            continue
+        if not str(src_cfg.get("license_notice") or "").strip():
+            total_errors.append(
+                f"source_map.yaml sources.{src_key}: license_notice is empty "
+                "(下流が出典表示に使う必須項目。D-011)"
+            )
+
     for path in files:
         try:
             meta = load_metadata(path)
@@ -237,6 +251,20 @@ def main() -> int:
 
         # D-017: csv_path を自動付与 (validate_metadata の REQUIRED_FIELDS チェック前に注入)
         meta["csv_path"] = derive_csv_path(path, args.processed_dir)
+
+        # 2026-09-21: license_url / license_notice は **source_map.yaml を宣言の原本**として
+        # catalog に反映する（metadata.json に書かれた値より優先）。
+        # 理由: fetcher が書いた metadata.json はソース宣言の写しであり、宣言を直しても
+        # fetcher が次に走るまで古い値が残る（年 1 回しか走らない occto-annual や、
+        # 手動転記の occto-ltdc では数か月〜無期限）。死んだ license_url が catalog に
+        # 残り続けた実例（jepx / occto、2026-09-13 発見）への対処。
+        # license 識別子そのものは validate_metadata の対象なので触らない。
+        _lic_src = indicator_to_source.get(meta.get("id") or "")
+        if _lic_src:
+            for _f in ("license_url", "license_notice"):
+                _v = _lic_src.get(_f)
+                if _v is not None and str(_v).strip():
+                    meta[_f] = _v
 
         result = validate_metadata(meta)
         for err in result["errors"]:
@@ -291,6 +319,12 @@ def main() -> int:
         meta["status"] = r_status or meta.get("status") or "active"
         meta["successor_id"] = r_successor or meta.get("successor_id")
         is_retired = meta["status"] == "retired"
+        if is_retired:
+            # 2026-09-21 (Y-16 §6(1) 案 (a)): 終端系列は鮮度監視の対象外なので、catalog 上の
+            # freshness_sla_days を null にする。値を残すと、下流が自前で鮮度判定をしたときに
+            # 「SLA 超過」の偽陽性が出る（bess-net で 11 系列が 902 日 > 900 として検出された）。
+            # 宣言（source_map の freshness_sla_days）は残るので、retired を外せば元に戻る。
+            meta["freshness_sla_days"] = None
 
         # D-020③: 収録範囲を CSV の実データから導出して注入する。
         # 人手でも fetcher の metadata.json でも書かない（生成時導出のみ）。
