@@ -22,11 +22,18 @@ sources:
     filename_template: 'spot_summary_{year}.csv'
     # --- D-011 メタデータ共通項目 ---
     license: jepx-terms                           # SPDX 非対応のため独自識別子
-    license_url: https://www.jepx.jp/electricpower/index.html
-    license_notice: ""
+    license_url: https://www.jepx.jp/disclaimer/    # 旧 /electricpower/index.html は 404（2026-09-13 実測）
+    license_notice: |
+      出典: 一般社団法人 日本卸電力取引所 (JEPX)「スポット市場」（市場情報）
+      JEPX 免責事項・著作権（https://www.jepx.jp/disclaimer/）に従い、出所を明示して利用。48 コマの公表値から日次で集計・加工（加工した旨を明記）。
     license_text: |
-      JEPX 公開データ。再配布・引用は出典明示を条件に可。
-      参考: https://www.jepx.jp/electricpower/index.html
+      JEPX「免責事項・著作権」著作権条項の逐語（2026-09-13 取得）:
+      「当ウェブサイトに掲載されている内容に関する著作権は本所にあります。利用する場合は、出所を明示した上でご利用下さい。」
+      条件は出所明示のみ。商用/非商用の区別・自動取得の条項は無い。
+      （旧記述の「再配布・引用は出典明示を条件に可」は条文に無い「再配布」を足していた要約だったため逐語に差し替え。R-15 §3）
+      ⚠️ 同ページ「リンクについて」は「トップページ以外のページへのリンク」をお断りしている。
+         表示側の出典リンクは https://www.jepx.jp/ トップに張り、出所はテキストで明示する（bess-net と統一、Y-16 §4）。
+         source_url（出所の記録）は正確な深い URL のまま保持する。
     frequency: daily
     tz: Asia/Tokyo
     missing_policy: "null"                        # 欠損日はそのまま null（forward fill しない）
@@ -431,7 +438,9 @@ sources:
     # --- D-011 メタデータ共通項目 ---
     license: jma-terms
     license_url: https://www.jma.go.jp/jma/kishou/info/coment.html
-    license_notice: ""
+    license_notice: |
+      出典: 気象庁「過去の気象データ検索」
+      公共データ利用規約（第1.0版）に従い、出典明示を条件に利用可（商用含む）。編集・加工して利用（加工した旨を明記）。気象庁が作成したかのような態様で公表しない。
     tz: Asia/Tokyo
     missing_policy: "null"            # 欠測記号はすべて NaN = null に正規化
     freshness_sla_days: 3
@@ -676,7 +685,9 @@ sources:
     # --- D-011 メタデータ共通項目 ---
     license: CC-BY-4.0                # SPDX
     license_url: https://creativecommons.org/licenses/by/4.0/
-    license_notice: ""
+    license_notice: |
+      出典: World Bank, Commodity Price Data ("The Pink Sheet"). Licensed under CC BY 4.0.
+      世界銀行「Commodity Markets」の月次価格表より転記・編集（加工した旨を明記）。
     license_text: |
       World Bank Open Data: Creative Commons Attribution 4.0 International (CC BY 4.0)
       出典明示を条件に自由利用可（再配布・商用可）。
@@ -1048,7 +1059,8 @@ sources:
     # --- D-011 メタデータ共通項目 ---
     license: public-domain                       # 財務省公表資料、自由利用可（国の著作物）
     license_url: https://www.mof.go.jp/index.htm
-    license_notice: ""
+    license_notice: |
+      出典: 財務省「国債金利情報」（https://www.mof.go.jp/jgbs/reference/interest_rate/）
     license_text: |
       財務省（国）が作成した公表資料。国の著作物は原則として自由利用可。
       参考: 財務省ホームページ利用規約 https://www.mof.go.jp/index.htm
@@ -1380,7 +1392,7 @@ sources:
       九州: kyushu
     # --- D-011 メタデータ共通項目 ---
     license: occto-terms                          # OCCTO 利用規約 (出典明示で再配布可)
-    license_url: https://www.occto.or.jp/info/disclaimer.html
+    license_url: https://www.occto.or.jp/chosakuken.html    # 旧 /info/disclaimer.html は 404（2026-09-13 実測）
     license_notice: |
       出典: 電力広域的運営推進機関 (OCCTO)「容量市場 メインオークション約定結果」
       OCCTO 利用規約に従い、出典明示を条件に利用可。
@@ -1402,7 +1414,11 @@ sources:
     # 運用ルール: 各回の着地後、次回スケジュール公表を確認して next_expected を手動更新する。
     # 軸1 の delivery_horizon_days（上の 1203）と二重系 —
     # 回ごとのリードタイム変動はこちらの期日が吸収する。
-    update_schedule: { kind: window, next_expected: "2026-12-15", grace_days: 45 }
+    # 2026-09-21: grace_days 45 → 90。実績は第5回 2025-01-29 / 第6回 2026-01-20（12/19 → 1/20 の延期告知あり）。
+    #   45 日だと期日 1/29 で、第5回並みの遅さでも境界になる。90 日で 3/15 まで待つ =
+    #   occto-annual.yml の実行窓（12〜3 月の月曜）と整合。next_expected を 1 月に遅らせない理由:
+    #   window 判定は updated_at < next_expected を違反とするので、早着（12 月中の公表）を誤検知する。
+    update_schedule: { kind: window, next_expected: "2026-12-15", grace_days: 90 }
     # ----- スコープ境界 (実需給年度ベース) --------------------------------
     # FY2024 (第 1 回オークション、2020 年実施) ～ FY2029 (第 6 回、2025 年実施) = 6 年分
     # FY2028 は ZIP 名が "{fy}_main_yakujoukekka_csv.zip" と異なるので filename pattern は柔軟に
@@ -1655,7 +1671,7 @@ sources:
     # --------------------------------------------------------------------------------
     # --- D-011 メタデータ共通項目 ---
     license: occto-terms                          # OCCTO 利用規約 (出典明示で再配布可)
-    license_url: https://www.occto.or.jp/info/disclaimer.html
+    license_url: https://www.occto.or.jp/chosakuken.html    # 旧 /info/disclaimer.html は 404（2026-09-13 実測）
     license_notice: |
       出典: 電力広域的運営推進機関 (OCCTO)「容量市場 長期脱炭素電源オークション約定結果」
       OCCTO 利用規約に従い、出典明示を条件に利用可。約定結果 PDF の図表より転記・編集（加工した旨を明記）。
@@ -2002,7 +2018,9 @@ sources:
     date_format: "%m/%d/%Y"
     license: "public-domain"
     license_url: "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics"
-    license_notice: ""
+    license_notice: |
+      出典: U.S. Department of the Treasury, Daily Treasury Par Yield Curve Rates.
+      米国連邦政府の著作物（17 U.S.C. §105）につき著作権保護の対象外。
     source_name: "U.S. Department of the Treasury"
     source_url: "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve"
     publisher: "United States Department of the Treasury"
