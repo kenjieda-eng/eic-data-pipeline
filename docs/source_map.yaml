@@ -4147,8 +4147,11 @@ sources:
   nrel-atb:
     name: NREL Annual Technology Baseline (ATB) Electricity
     publisher: National Renewable Energy Laboratory (NREL)
-    publisher_url: https://atb.nrel.gov/
-    source_url: https://atb.nrel.gov/
+    # 2026-09-21: atb.nrel.gov は名前解決できなくなり（bess-net が発見、Y-19 §6）、
+    # ATB は https://atb.nlr.gov/ へ移転（実測 200、title「ATB | NLR」）。データ取得は OEDI の S3
+    # 直 URL なので fetcher は影響なし。表示用の URL だけ差し替える。
+    publisher_url: https://atb.nlr.gov/
+    source_url: https://atb.nlr.gov/
     # OEDI Data Lake（S3 公開、no-sign-request）。HTTPS 直 URL で年版別 CSV を取得。
     # aws cli 不要。L-062 実査（2026-06-06）: csv/{YYYY}/ATBe.csv（2024 のみ v3.0.0 サブディレクトリ）。
     s3_base: "https://oedi-data-lake.s3.amazonaws.com/ATB/electricity/csv"

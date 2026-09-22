@@ -93,7 +93,15 @@ def write_processed(
 
     # 既存があればマージ（replace=True のときは既存を読まずに丸ごと差し替える）
     if csv_path.exists() and not replace:
-        existing = pd.read_csv(csv_path, dtype={"date": str})
+        # ★ float_precision="round_trip" は必須（2026-09-22）。
+        # pandas の既定 float パーサは**正確に丸めない**ため、CSV に書かれた
+        # "14.462708333333333"（真値に最も近い double の最短 repr）を読むと 1 ULP ずれた
+        # double になり、書き戻すと "14.462708333333332" になる。崩れた形は固定点なので
+        # 以後は安定するが、fetcher が新しく計算して書いた値は翌日のマージで必ず 1 ULP
+        # 崩れる。実害: jepx-spot 10 系列で backfill（--all）のたびに 8,726 行（16.5%）が
+        # 書き換わり、翌日の nightly で戻る、を繰り返していた（2026-09-21〜22 に実測）。
+        # "round_trip" は Python の float() と同じ正確なパーサを使うので往復が byte 一致する。
+        existing = pd.read_csv(csv_path, dtype={"date": str}, float_precision="round_trip")
         validate_schema(existing)
         merged = pd.concat([existing, df], ignore_index=True)
     else:
