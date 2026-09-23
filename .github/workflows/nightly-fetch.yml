@@ -38,6 +38,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Fetch JEPX spot prices
+        id: fetch-jepx
         run: |
           if [ "${{ inputs.backfill }}" = "true" ]; then
             echo "backfill mode: fetching all available years"
@@ -49,6 +50,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch JMA daily temperature
+        id: fetch-jma
         run: |
           if [ "${{ inputs.backfill }}" = "true" ]; then
             echo "backfill mode: fetching all months from 2012-01"
@@ -60,6 +62,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch World Bank fuel prices (monthly)
+        id: fetch-fuel
         # 月次データだが、前月値の確定がズレるため毎日叩いて差分更新する。
         # XLSX を 1 回 DL して 7 系列を一括処理するため所要時間は短い（1 分未満）。
         run: |
@@ -67,6 +70,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch BOJ FX rates (monthly)
+        id: fetch-fx
         # BOJ FM08 の USD/JPY 4 系列（月中平均/月末/月内高値/月内安値）を 1 リクエストで取得。
         # 月次データ、翌月初に確定。毎日叩いてもほぼゼロ負荷（375KB 前後 × 1 req）。
         run: |
@@ -74,6 +78,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch BOJ Tankan DI (quarterly, 4 series)
+        id: fetch-boj-tankan
         # BOJ db=CO の業況判断 DI 4 系列（大企業/中小企業 × 製造業/非製造業、実績）。
         # 四半期データ、各 Q の翌月（4/7/10/12 月）初に確定。毎日叩いてもほぼゼロ負荷（120KB × 1 req）。
         run: |
@@ -81,6 +86,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch MOF JGB yields (daily)
+        id: fetch-jgb
         # 財務省の国債金利情報 CSV（jgbcm_all.csv、Shift-JIS、和暦、全期間 1974-09 〜）を 1 発で取得。
         # Phase 1 は 10 年新発のみ extract（source_map.yaml の term_to_id に定義）。
         # 平日 17 時台に当日分が追記されるため、毎朝実行で 1 営業日遅れを追従。
@@ -89,6 +95,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch US Treasury daily yields (CMT, 4 series)
+        id: fetch-us-treasury
         # 米国財務省の年別 CSV API（type=daily_treasury_yield_curve）から CMT 利回り 4 系列を取得。
         # 通常モードは当年のみ、--backfill で 1990-当年まで全期間（4 系列 × 約 9,000 行）。
         run: |
@@ -102,6 +109,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch US macro from FRED (Phase 3-B Round 2, 3 series)
+        id: fetch-us-macro
         # FRED API（無料・120 req/min）で米マクロ 3 系列を取得:
         #   us-cpi-yoy（CPIAUCSL の 12 ヶ月前比 %）/ us-fed-funds-rate（FEDFUNDS）/ us-industrial-production（INDPRO）
         # 月次データ、毎日叩いて差分更新（FRED 側で過去値の改定が入るため）。
@@ -113,6 +121,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch METI 電力調査統計 (Phase 2-A, monthly, fiscal-year XLSX)
+        id: fetch-enecho-power
         # 資源エネルギー庁 電力調査統計（ep002）の年度単位 XLSX から 12 系列を抽出。
         # 発電 8 + 需要 3 + 派生 1（meti-renewables-share）。約 2 ヶ月遅延で公表される。
         # バックフィル時は FY2016〜最新年度の 10 年度分（= 20 XLSX ≒ 60 MB）を走査。
@@ -129,6 +138,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch ECB rates & FX (Phase 2 international, 5 series)
+        id: fetch-ecb
         # ECB SDMX API で政策金利 3 (DFR/MRR/MLF) + 為替 2 (EUR/USD, EUR/JPY) を取得。
         # 政策金利は日次変化点を月末値で月次化。月次データ、毎日叩いても 5 リクエストで終わる。
         # backfill 引数で 1999-01 から、通常モードは直近 3 年分。
@@ -143,6 +153,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch Ember monthly electricity (Phase 2 international, 50 series)
+        id: fetch-ember
         # Ember の long-format CSV (約 70 MB) を 1 リクエストで取得し、
         # 主要 5 ヶ国 (日/米/中/独/英) × 10 指標を抽出:
         #   demand / generation / CO2 intensity (3) + 電源種別 share% × 7 fuel
@@ -154,6 +165,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch e-Stat Japan (economy CPI/IIP 2 + population 都道府県別 141 series)
+        id: fetch-estat
         # 政府統計の総合窓口 e-Stat API（appId 必須、無料登録）で日本の公的統計を取得:
         #   [economy] jpn-cpi-yoy（2020 年基準 CPI 総合 全国 前年同月比、1971-01〜）
         #             jpn-industrial-production（2020 年基準 鉱工業生産指数 業種別原指数 月次、2018-01〜）
@@ -169,6 +181,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch e-Stat trade (geopolitics エネルギー輸入 源国別 23 series)
+        id: fetch-estat-trade
         # 財務省 普通貿易統計「品別国別表（輸入）」を e-Stat API で取得し geopolitics ドメインを seed:
         #   原油 / LNG / 石炭 の輸入相手国別 年間金額（千円、年次）。中東依存度・源国集中の素材。
         #   jp-import-value-{crude|lng|coal}-{cc}（相手国別、region=ISO2）+ -total（全相手国合算、region=WORLD）。
@@ -182,6 +195,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch NBS Manufacturing PMI (Phase 2 international, 1 series)
+        id: fetch-nbs-pmi
         # 中国 国家統計局 英語版 PressRelease から月次 Manufacturing PMI を抽出。
         # 認証不要。index ページの "Purchasing Managers' Index" アンカーから最新リリースを動的に解決。
         # 各リリースに直近 13 ヶ月のテーブルが同梱 → write_processed が key_cols dedup で安全に append。
@@ -191,6 +205,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch EU ETS verified emissions (annual, ESG)
+        id: fetch-eu-ets
         # EU 排出量取引制度（EUTL / European Environment Agency）の検証排出量を取得し ESG ドメインを seed。
         # datahub.io ミラー（安定 r-link、ODC-PDDL-1.0）から CSV 2 本を 1 リクエストずつ取得:
         #   Family A: eu-ets-sector-emissions.csv → EU 全体 部門別 8 系列（aggregation=raw, region=EU-ETS）
@@ -203,6 +218,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch NREL ATB tech-cost (annual, tech domain, 31 series)
+        id: fetch-nrel-atb
         # NREL Annual Technology Baseline（ATB）電力版を OEDI Data Lake（S3 公開、CC BY 4.0）から
         # HTTPS 直 URL で取得し、技術（tech）ドメインを seed:
         #   10 技術 × {LCOE($/MWh), CAPEX($/kW), CF(%)} + 蓄電池 4hr CAPEX = 31 系列。
@@ -213,18 +229,13 @@ jobs:
           python scripts/fetch_nrel_atb.py
         continue-on-error: true
 
-      - name: Fetch FIT 調達価格 (annual, regulation domain, 5 series)
-        # 資源エネルギー庁「なっとく！再生可能エネルギー」FIT 買取価格ページ（HTML 表）から
-        # 電源別×年度の調達価格（円/kWh）を取得し、regulation ドメイン（12 ドメイン最後）を seed:
-        #   太陽光(事業用)/陸上風力/地熱/一般木質バイオマス/中小水力 の 5 系列、2012-2026 年度。
-        # METI は Akamai Bot Manager 保護のため curl_cffi/chrome120 で TLS fingerprint を模倣（enecho-power 流用）。
-        # 年度で列構成が激変するため <table> を colspan/rowspan 展開し、列見出しキーワードで代表区分を抽出。
-        # 年 1 回（年度末告示）の更新のため通常は no-op（write_processed が key_cols dedup で安全に append）。認証不要。
-        run: |
-          python scripts/fetch_fit_price.py
-        continue-on-error: true
+      # FIT 調達価格（fetch_fit_price.py, regulation 5 系列）は 2026-09-23 に fit-annual.yml（3〜5 月の月曜）へ
+      # 移した（D-020⑤-3）。年 1 回（3 月の告示）しか更新されないものを毎晩叩く意味がなく、2026-09-05 からの
+      # AWS WAF で毎晩の exit 1 が continue-on-error の陰で誰にも届かず流れていた（Y-18）。
+      # 年次側は continue-on-error 無しなので、告示期に取得できなければランが赤になる。
 
       - name: Fetch JEPX 非化石証書 約定価格・約定量 (quarterly, regulation domain, 6 series)
+        id: fetch-nonfossil
         # JEPX 非化石価値取引市場のオークション結果から 3 類型 ×（約定価格, 約定総量）を取得:
         #   FIT / 非FIT(再エネ指定) / 非FIT(再エネ指定なし) の 6 系列、FY2017-最新年度。
         # 取得範囲は年度レンジ API (get_graph_year.php?dir=nf_summary) の応答から決める。
@@ -246,6 +257,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch GIO 日本の温室効果ガス排出量 (annual, esg domain, 18 series)
+        id: fetch-gio
         # 国立環境研究所 温室効果ガスインベントリオフィス (GIO) のインベントリから 18 系列:
         #   部門別 CO2 9（電気・熱配分後）/ ガス別 GHG 7 / 吸収量・ネット 2、1990-最新年度。
         # ★ xlsx の直 URL はハードコードせず、毎回 index ページをパースして最新版を解決する。
@@ -264,6 +276,7 @@ jobs:
         continue-on-error: true
 
       - name: Fetch EIA international CO2 (annual, international domain, 21 series)
+        id: fetch-eia-intl
         # 米国エネルギー情報局 (EIA) International Energy Statistics API v2 から
         # 国際 CO2 排出量 9 系列: 地域別合計 6 (WORL/JPN/CHN/USA/EU27/OECD) + 日本の燃料別内訳 3。
         # + 派生 12 系列 (2026-08-20 追加): 一人当たり CO2 6 (t-CO2/人) と
@@ -302,12 +315,14 @@ jobs:
         continue-on-error: true
 
       - name: Record raw hash ledger (D-020⑤-1, third layer)
+        id: raw-ledger
         # data/raw/<dir>/ の現在の内容をハッシュして data/ledger/raw-hash.json に記帳し、
         # 凍結（変わるはずの raw が N 日不変）と変化（過去値が改訂されうる raw が変わった）を判定する。
         # 全 fetch step の後・catalog 生成の前に置く（fetch の成否・cache の有無に依存しない post-hoc scan。
         # enecho の cache 短絡〈L-064 第 3 例〉はフェッチ時記帳では見えなかった型）。
         # ⑤-1 は report-only。判定は commit 後の Staleness hard check が RAW_LEDGER 節として再掲する。
-        # 台帳側の不具合で nightly を止めないため true。
+        # 台帳側の不具合で nightly を止めないため true（commit は進める）。失敗そのものは末尾の
+        # Fetch outcome gate（⑤-3）が赤にする。raw-ledger は known_failures.yaml に登録できない。
         run: |
           python scripts/raw_ledger.py
         continue-on-error: true
@@ -361,3 +376,18 @@ jobs:
         # 決定論的（観測に依存しない）なので soft 期間を置かず gating。
         run: |
           python scripts/audit_workflow_wiring.py
+
+      - name: Fetch outcome gate (D-020⑤-3, unexpected fetch failures only)
+        # 各 fetch ステップは continue-on-error: true なので exit 1 でもランは緑になり、失敗は annotation にしか
+        # 残らない（FIT の WAF は 2026-09-05 から 2 週間、誰にも届かず毎晩落ち続けた。Y-18）。
+        # ここで id 付きステップの outcome（continue-on-error 適用前の結果）を集約し、docs/known_failures.yaml に
+        # **期限内**で登録された既知の失敗以外が 1 件でもあれば exit 1 でランを赤にする（GitHub が通知する）。
+        # ★ commit & push の後に置く（Staleness hard check と同じ作法）: 赤にしてもデータは着地済み。
+        # ★ !cancelled(): 前段（Staleness / wiring audit）が赤でも、この集約は必ず出す。
+        # ★ raw-ledger は allowlist に載せられない。fetch ステップの id 漏れ・規約外の id も exit 1（ゲートの外に出さない）。
+        # 結果は Step Summary にも Markdown で出す。
+        if: ${{ !cancelled() }}
+        env:
+          STEPS_JSON: ${{ toJSON(steps) }}
+        run: |
+          python scripts/check_fetch_outcomes.py

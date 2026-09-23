@@ -381,6 +381,14 @@ def main() -> int:
         elif succ not in by_id:
             total_errors.append(f"{meta.get('id')}: successor_id refers to unknown id: {succ}")
 
+    # Y-20 §2（2026-09-23）: aggregation: derived の系列は depends_on 必須（error, exit 1）。
+    # 消費側（bess-net）は「派生系列を除く」を aggregation !== 'derived' で機械的に行う。その前提は
+    # derived に必ず depends_on が付いていること（付け忘れは D-020④(d) の継続判定からも外れる沈黙）。
+    # 2026-09-23 時点で derived 45 系列はすべて depends_on を持つ（既存に対する偽陽性なし）。
+    for meta in indicators:
+        if meta.get("aggregation") == "derived" and not meta.get("depends_on"):
+            total_errors.append(f"{meta.get('id')}: aggregation=derived but depends_on is missing")
+
     # 集計
     n = len(indicators)
     logger.info("collected %d metadata.json files (retired=%d)", n, n_retired)

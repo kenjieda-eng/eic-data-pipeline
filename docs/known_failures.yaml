@@ -1,0 +1,27 @@
+# docs/known_failures.yaml — nightly の fetch 失敗のうち「既知」として扱うもの（D-020⑤-3）
+#
+# scripts/check_fetch_outcomes.py が commit & push の後に読む。ここに**期限内**で登録された
+# ステップの失敗は「既知」として通し（理由・期限をログと Step Summary に表示）、
+# それ以外の失敗（未登録・期限切れ）は 1 件でもランを赤にする（GitHub が通知する）。
+#
+# 各項目（すべて必須。ref のみ任意）:
+#   step:       nightly-fetch.yml の step id。スクリプト名から機械的に決まる
+#               （scripts/fetch_boj_tankan.py → fetch-boj-tankan）。raw-ledger は登録不可（第 3 層は黙らせない）
+#   reason:     なぜ失敗しているか・なぜ回避しないか。一次の観察を書く（推測なら推測と書く）
+#   registered: 登録日 YYYY-MM-DD
+#   expires:    期限 YYYY-MM-DD。**期限を過ぎると自動的に「想定外」に戻り、ランが赤になる**
+#               （「知っていて放置していない」を期限で担保する。Y-19 §4）。
+#               延長するときは reason に「なぜまだ直っていないか」を追記して日付を更新する
+#   ref:        任意。PR 番号・手紙の通番・決定の参照
+#
+# 例（形式の見本。実際の登録ではない）:
+#   known_failures:
+#     - step: fetch-fit-price
+#       reason: "enecho の FIT 価格ページが 2026-09-05 から AWS WAF のチャレンジページを返す（raw の past_20260905.html が最後）。回避はしない（方針）。"
+#       registered: 2026-09-23
+#       expires: 2026-10-31
+#       ref: "Y-18 / Y-19 §4"
+#
+# 2026-09-23 時点: 登録なし。FIT は nightly から fit-annual.yml（3〜5 月の月曜）へ移したため、
+# nightly に既知の失敗は残っていない。空でもこのファイルは消さない（無いと exit 1）。
+known_failures: []

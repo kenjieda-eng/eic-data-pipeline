@@ -3711,9 +3711,10 @@ sources:
     #   nightly が万年赤になる（= 赤疲れ → 無視という Pink Sheet 型の失敗）。
     #   実態は「年 1 回・3 月の告示を取りに行く」なので、周期の宣言を実態に合わせる。
     #   3 月末 + 45 日（5/15 頃）までに updated_at が 3 月以降へ前進していなければ軸2 が鳴る。
-    #   ⚠️ nightly の FIT ステップは外さないこと（audit_workflow_wiring.py が UNWIRED で
-    #      落ちる）。当該ステップには既に continue-on-error: true が付いている。
-    #   WAF が解けて毎晩の取得が戻ったら、この宣言を外して既定（7 日）に戻す。
+    #   2026-09-23（D-020⑤-3）: FIT の取得を nightly-fetch.yml から fit-annual.yml（3〜5 月の月曜）へ
+    #   移した。年 1 回の窓というこの宣言と実行周期が一致したので、WAF が解けてもこの宣言は外さない。
+    #   audit_workflow_wiring.py は fit-annual.yml の呼び出しで満たされる。年次側は continue-on-error
+    #   無しなので、告示期に取得できなければランが赤になる（→ LTDC と同じ手動転記の判断へ）。
     update_schedule: { kind: window, months: [3], grace_days: 45 }
     # ----- 抽出方式（fetch_fit_price.py） --------------------------------
     # ページは UTF-8 の HTML 表。h3「YYYY年度の価格表」(平成/令和は西暦換算) で年度ブロックを区切り、
