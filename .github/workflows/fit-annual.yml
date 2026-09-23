@@ -1,0 +1,92 @@
+name: FIT Price Annual Fetch
+
+# FIT 調達価格（regulation 5 系列 = fit-price-{solar-business|wind-onshore|geothermal|biomass-wood|hydro-small}）
+# 専用の年次ワークフロー（occto-annual.yml / edinet-annual.yml と同じ作法）。
+#
+# ★ なぜ nightly-fetch.yml から出したか（2026-09-23、D-020⑤-3）:
+#   調達価格は年 1 回、調達価格等算定委員会の意見を経て 3 月に告示され、資源エネルギー庁の
+#   価格ページが更新される。それ以外の 11 ヶ月は取りに行っても何も変わらない。
+#   さらに 2026-09-05 から同ページは GitHub Actions からの取得に AWS WAF のチャレンジページを返し
+#   （fetch_fit_price.py はチャレンジページを raw に保存せず exit 1 にする）、nightly では
+#   continue-on-error: true の陰で毎晩 exit 1 が誰にも届かず流れていた（Y-18）。
+#   → 毎晩叩く意味がなく、失敗を見えなくする副作用だけがあったので、告示期だけ回す独立ワークフローにする。
+#   WAF の回避はしない（方針。bess-net 側も同じ）。
+#
+# ★ なぜ 3〜5 月の月曜か:
+#   - 翌年度の価格は調達価格等算定委員会を経て年度末（3 月）に告示される（source_map.yaml の fit の記述と同じ）。
+#   - source_map.yaml の fit は update_schedule: { kind: window, months: [3], grace_days: 45 }
+#     （3 月末 + 45 日 ≒ 5/15 までに updated_at が 3 月以降へ前進していなければ軸2 が鳴る）。
+#   - 3 月から回すのは前倒しへの備え、5 月まで回すのは公表直後の取りこぼしを自己回復させるため。
+#
+# ★ ここは他系列と同居しない独立ワークフローなので continue-on-error は付けない
+#   （= WAF が続いていれば告示期に毎週ランが赤くなって気付ける。L-064）。
+#   赤が続く場合は、LTDC（transcribe_ltdc.py）と同じく告示 PDF からの手動転記を判断する。
+#
+# ★ 認証は不要。METI 側の Akamai Bot Manager 対策として curl_cffi（requirements.txt）を使う。
+
+on:
+  schedule:
+    # JST 月曜 12:00 = UTC 月曜 03:00（03:00 UTC なら曜日が跨がらない）。
+    # cron 欄 = 分 時 日 月 曜日。日と曜日を両方指定すると OR 評価になるため、
+    # 「3・4・5 月の月曜だけ」は 日=* / 月=3,4,5 / 曜日=1(月) と書く。
+    - cron: "0 3 * 3,4,5 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    # 過去ページ + 現行ページの HTML 2 リクエストで 1 分未満。余裕を見て 15 分。
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Fetch FIT 調達価格 (annual, regulation domain, 5 series)
+        # 資源エネルギー庁「なっとく！再生可能エネルギー」FIT 買取価格ページ（HTML 表）から
+        # 電源別×年度の調達価格（円/kWh）を取得:
+        #   太陽光(事業用)/陸上風力/地熱/一般木質バイオマス/中小水力 の 5 系列、2012 年度〜。
+        # 年度で列構成が激変するため <table> を colspan/rowspan 展開し、列見出しキーワードで代表区分を抽出。
+        # write_processed が key_cols dedup で安全に append するので再実行は安全。
+        # 告示前の週は「データが増えない」のが正常（metadata の updated_at は更新され commit は発生する
+        # = proof-of-life）。
+        run: |
+          python scripts/fetch_fit_price.py
+
+      - name: Generate indicators catalog (D-011)
+        # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を再生成。
+        # 新年度の価格が載ったときに fit-price-* の observation_cutoff を進めるためにここで必須。
+        run: |
+          python scripts/generate_catalog.py
+
+      - name: Commit & push if changed
+        # nightly-fetch.yml / occto-annual.yml と同一の作法（bot 名義・変更が無ければ no-op）。
+        run: |
+          git config user.name "eic-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            today=$(TZ=Asia/Tokyo date +%Y-%m-%d)
+            git commit -m "fit: annual data update ${today}"
+            git push
+          fi
+
+      # ★ Staleness hard check は置かない（occto-annual.yml と同じ理由）:
+      #   check_staleness.py はカタログ全系列を見るため、FIT と無関係な系列の停滞で
+      #   このワークフローが赤くなり原因の切り分けを濁す。停滞検知は nightly-fetch.yml が担う。
