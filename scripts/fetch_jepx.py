@@ -83,6 +83,13 @@ DATE_COL_CANDIDATES = ["受渡日", "年月日"]
 KOMA_PER_DAY = 48
 # タグ → 上下から取るコマ数。4 コマ = 2 時間、8 コマ = 4 時間。
 SPREAD_DEFS = {"top4": 4, "top8": 8}
+# Y-19 §1（2026-09-24, R-18 §2 の約束）: 価差だけでなく**水準**も持つ。
+#   top8avg    = 上位 8 コマ（4 時間）の単純平均 … 放電（売り）側の単価の目安
+#   bottom8avg = 下位 8 コマ（4 時間）の単純平均 … 充電（買い）側の単価の目安（往復効率を掛ける計算の入力）
+#   同じ s[-8:].mean() / s[:8].mean() を使うので jepx-spread-top8 = top8avg − bottom8avg が
+#   丸め前の double で成り立つ（恒等式。_inbox の verify_jepx_levels.py が全日で確かめる）。
+#   これも「同一断面内の決定論的関数」なのでパイプライン側（窓・加重の選択は無い）。
+LEVEL_DEFS = {"top8avg": ("top", 8), "bottom8avg": ("bottom", 8)}
 
 # spot_summary.js にあるファイル名から年を拾う
 YEAR_FROM_FILE_RE = re.compile(r"spot_summary_(\d{4})\.csv", re.IGNORECASE)
@@ -262,6 +269,16 @@ def normalize(df: pd.DataFrame, source_url: str) -> pd.DataFrame:
                 "value": float(s[-1] - s[0]),
                 "source_url": source_url,
             })
+            # --- 水準（派生）: 上位 / 下位 8 コマ平均。スプレッドと同じ 48 コマ揃いの日のみ ---
+            for tag, (side, k) in LEVEL_DEFS.items():
+                part = s[-k:] if side == "top" else s[:k]
+                rows.append({
+                    "date": date,
+                    "indicator_id": f"jepx-{tag}-{token}",
+                    "region": region,
+                    "value": float(part.mean()),
+                    "source_url": source_url,
+                })
     if partial:
         logger.warning(
             "spread skipped for %d (day, area) pairs with != %d koma", partial, KOMA_PER_DAY

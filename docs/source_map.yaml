@@ -99,7 +99,27 @@ sources:
       - jepx-spread-range-chugoku
       - jepx-spread-range-shikoku
       - jepx-spread-range-kyushu
-    # D-011 準拠の indicator 固有メタデータ（10 + 派生 30 = 40 系列）
+      - jepx-top8avg-system
+      - jepx-top8avg-hokkaido
+      - jepx-top8avg-tohoku
+      - jepx-top8avg-tokyo
+      - jepx-top8avg-chubu
+      - jepx-top8avg-hokuriku
+      - jepx-top8avg-kansai
+      - jepx-top8avg-chugoku
+      - jepx-top8avg-shikoku
+      - jepx-top8avg-kyushu
+      - jepx-bottom8avg-system
+      - jepx-bottom8avg-hokkaido
+      - jepx-bottom8avg-tohoku
+      - jepx-bottom8avg-tokyo
+      - jepx-bottom8avg-chubu
+      - jepx-bottom8avg-hokuriku
+      - jepx-bottom8avg-kansai
+      - jepx-bottom8avg-chugoku
+      - jepx-bottom8avg-shikoku
+      - jepx-bottom8avg-kyushu
+    # D-011 準拠の indicator 固有メタデータ（10 + 派生 30 + 水準 20 = 60 系列）
     indicators:
       jepx-spot-system:
         name: JEPX スポット システムプライス
@@ -422,11 +442,173 @@ sources:
         aggregation: derived
         depends_on: [jepx-spot-kyushu]
         notes: "日内最大 − 日内最小。上限値。実運用では取り切れない。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-top8avg-system:
+        name: JEPX スポット システム 上位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-system]
+        notes: "その日の 48 コマのうち価格上位 8 コマ（4 時間）の単純平均。放電（売り）側の単価の目安。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ（丸め前の double で一致）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-top8avg-hokkaido:
+        name: JEPX スポット 北海道 上位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-hokkaido]
+        notes: "その日の 48 コマのうち価格上位 8 コマ（4 時間）の単純平均。放電（売り）側の単価の目安。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ（丸め前の double で一致）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-top8avg-tohoku:
+        name: JEPX スポット 東北 上位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-tohoku]
+        notes: "その日の 48 コマのうち価格上位 8 コマ（4 時間）の単純平均。放電（売り）側の単価の目安。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ（丸め前の double で一致）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-top8avg-tokyo:
+        name: JEPX スポット 東京 上位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-tokyo]
+        notes: "その日の 48 コマのうち価格上位 8 コマ（4 時間）の単純平均。放電（売り）側の単価の目安。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ（丸め前の double で一致）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-top8avg-chubu:
+        name: JEPX スポット 中部 上位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-chubu]
+        notes: "その日の 48 コマのうち価格上位 8 コマ（4 時間）の単純平均。放電（売り）側の単価の目安。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ（丸め前の double で一致）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-top8avg-hokuriku:
+        name: JEPX スポット 北陸 上位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-hokuriku]
+        notes: "その日の 48 コマのうち価格上位 8 コマ（4 時間）の単純平均。放電（売り）側の単価の目安。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ（丸め前の double で一致）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-top8avg-kansai:
+        name: JEPX スポット 関西 上位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-kansai]
+        notes: "その日の 48 コマのうち価格上位 8 コマ（4 時間）の単純平均。放電（売り）側の単価の目安。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ（丸め前の double で一致）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-top8avg-chugoku:
+        name: JEPX スポット 中国 上位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-chugoku]
+        notes: "その日の 48 コマのうち価格上位 8 コマ（4 時間）の単純平均。放電（売り）側の単価の目安。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ（丸め前の double で一致）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-top8avg-shikoku:
+        name: JEPX スポット 四国 上位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-shikoku]
+        notes: "その日の 48 コマのうち価格上位 8 コマ（4 時間）の単純平均。放電（売り）側の単価の目安。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ（丸め前の double で一致）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-top8avg-kyushu:
+        name: JEPX スポット 九州 上位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-kyushu]
+        notes: "その日の 48 コマのうち価格上位 8 コマ（4 時間）の単純平均。放電（売り）側の単価の目安。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ（丸め前の double で一致）。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-bottom8avg-system:
+        name: JEPX スポット システム 下位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-system]
+        notes: "その日の 48 コマのうち価格下位 8 コマ（4 時間）の単純平均。充電（買い）側の単価の目安で、往復効率を掛ける計算の入力（Y-19 §1）。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-bottom8avg-hokkaido:
+        name: JEPX スポット 北海道 下位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-hokkaido]
+        notes: "その日の 48 コマのうち価格下位 8 コマ（4 時間）の単純平均。充電（買い）側の単価の目安で、往復効率を掛ける計算の入力（Y-19 §1）。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-bottom8avg-tohoku:
+        name: JEPX スポット 東北 下位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-tohoku]
+        notes: "その日の 48 コマのうち価格下位 8 コマ（4 時間）の単純平均。充電（買い）側の単価の目安で、往復効率を掛ける計算の入力（Y-19 §1）。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-bottom8avg-tokyo:
+        name: JEPX スポット 東京 下位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-tokyo]
+        notes: "その日の 48 コマのうち価格下位 8 コマ（4 時間）の単純平均。充電（買い）側の単価の目安で、往復効率を掛ける計算の入力（Y-19 §1）。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-bottom8avg-chubu:
+        name: JEPX スポット 中部 下位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-chubu]
+        notes: "その日の 48 コマのうち価格下位 8 コマ（4 時間）の単純平均。充電（買い）側の単価の目安で、往復効率を掛ける計算の入力（Y-19 §1）。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-bottom8avg-hokuriku:
+        name: JEPX スポット 北陸 下位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-hokuriku]
+        notes: "その日の 48 コマのうち価格下位 8 コマ（4 時間）の単純平均。充電（買い）側の単価の目安で、往復効率を掛ける計算の入力（Y-19 §1）。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-bottom8avg-kansai:
+        name: JEPX スポット 関西 下位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-kansai]
+        notes: "その日の 48 コマのうち価格下位 8 コマ（4 時間）の単純平均。充電（買い）側の単価の目安で、往復効率を掛ける計算の入力（Y-19 §1）。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-bottom8avg-chugoku:
+        name: JEPX スポット 中国 下位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-chugoku]
+        notes: "その日の 48 コマのうち価格下位 8 コマ（4 時間）の単純平均。充電（買い）側の単価の目安で、往復効率を掛ける計算の入力（Y-19 §1）。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-bottom8avg-shikoku:
+        name: JEPX スポット 四国 下位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-shikoku]
+        notes: "その日の 48 コマのうち価格下位 8 コマ（4 時間）の単純平均。充電（買い）側の単価の目安で、往復効率を掛ける計算の入力（Y-19 §1）。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
+      jepx-bottom8avg-kyushu:
+        name: JEPX スポット 九州 下位 8 コマ平均
+        domain: power
+        unit: "¥/kWh"
+        backfill_start: "2012-04-01"
+        aggregation: derived
+        depends_on: [jepx-spot-kyushu]
+        notes: "その日の 48 コマのうち価格下位 8 コマ（4 時間）の単純平均。充電（買い）側の単価の目安で、往復効率を掛ける計算の入力（Y-19 §1）。jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ。48 コマ揃った日のみ算出（欠けた日は値を作らない）"
     notes: |
       - 1 日 = 48 コマ（30 分単位）。日次平均は 48 コマの単純平均で算出。
       - 日次スプレッド 30 系列（top4 / top8 / range × システム + 9 エリア）は同じ 48 コマからの派生。
         top4 = 上位 4 コマ平均 − 下位 4 コマ平均（2 時間）、top8 = 同 8 コマ（4 時間）、range = 最大 − 最小。
         **窓・加重の選択を含む統計（分位点・移動平均）はここでは作らない**（消費側の領域。R-13 §7）。
+      - 水準 20 系列（top8avg / bottom8avg × システム + 9 エリア、2026-09-24 追加、Y-19 §1）: 上位 8 コマ平均・下位 8 コマ平均。
+        jepx-spread-top8 = top8avg − bottom8avg が同じ演算で成り立つ（充電単価に往復効率を掛ける計算の入力）。
       - backfill_start は 2012-04-01。エリアプライスを含む spot_summary CSV が 2012 年度分から公開されており、
         それ以前は本パイプラインに取り込んでいない（宣言と実データを一致させる）。
 
