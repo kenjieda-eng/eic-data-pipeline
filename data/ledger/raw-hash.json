@@ -1,24 +1,19 @@
 {
   "schema": "raw-ledger-v1",
-  "updated_at": "2026-09-25T10:22:53+09:00",
+  "updated_at": "2026-09-25T13:13:38+09:00",
   "sources": {
     "boj-tankan": {
-      "digest": "sha256:fb81378294d45b1fba3a5bf6d11b033a718e6e8c6b0e7554674b4be08c4e2acc",
+      "digest": "sha256:9e7552af9ce4198e9d4a42600b18769012f711f6ba80f94f8b9f5b7673ce63bb",
       "stable_since": "2026-09-25",
       "last_seen": "2026-09-25",
       "keys": {
         "boj_CO.csv": {
           "file": "boj_CO_20260925.csv",
-          "sha256": "8d2fb40029b66577a42f7a8b44a81e712c44c4e8b4c893c773efd98c1e1e6afa",
+          "sha256": "1c76e77145eecdea896993308daf9a37d2cad4514e2834142915876abdec56aa",
           "size": 123331
         }
       },
       "history": [
-        {
-          "digest": "git:8643be864e79eb56cfbb084a79003d2eea43adf0",
-          "first_seen": "2026-07-29",
-          "last_seen": "2026-07-29"
-        },
         {
           "digest": "git:11c659418b97af108f654178ad28f9d0ade77505",
           "first_seen": "2026-07-30",
@@ -313,46 +308,46 @@
           "digest": "sha256:fb81378294d45b1fba3a5bf6d11b033a718e6e8c6b0e7554674b4be08c4e2acc",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:9e7552af9ce4198e9d4a42600b18769012f711f6ba80f94f8b9f5b7673ce63bb",
+          "first_seen": "2026-09-25",
+          "last_seen": "2026-09-25"
         }
       ]
     },
     "ecb": {
-      "digest": "sha256:0d7961925f7ab714f3606179b0c572731fcb00fa0bb7dc2ed637b4473da27899",
+      "digest": "sha256:8fd15ed55c9843e3e7274d6441fd6e2b754c4b8a67f4d14bde9979f1391e9b8f",
       "stable_since": "2026-09-25",
       "last_seen": "2026-09-25",
       "keys": {
         "ecb_EXR_M_JPY_EUR_SP00_A.csv": {
           "file": "ecb_EXR_M_JPY_EUR_SP00_A_20260925.csv",
-          "sha256": "c5021543a7981c17f1eb6d41f54fc902093ce5ab08312d95c39451652b48965d",
-          "size": 8260
+          "sha256": "731e420c49a524b633a71175c9a64f22d46dbe2207dead0eb4f3eccd10ca318e",
+          "size": 73271
         },
         "ecb_EXR_M_USD_EUR_SP00_A.csv": {
           "file": "ecb_EXR_M_USD_EUR_SP00_A_20260925.csv",
-          "sha256": "b723cb05e35be959036f65ff48bc447dfd3583a838207be84e156a10c377b100",
-          "size": 7994
+          "sha256": "cbd3f2a82d320099b01a5e36e4364687913f7716f5c6fa029009350d23c6f6bf",
+          "size": 70732
         },
         "ecb_FM_D_U2_EUR_4F_KR_DFR_LEV.csv": {
           "file": "ecb_FM_D_U2_EUR_4F_KR_DFR_LEV_20260925.csv",
-          "sha256": "46d8ad7ad496b4b6a9ac37f22d7b341d837db43ebfd1ec5845663567128a42ab",
-          "size": 332361
+          "sha256": "b858cccd3a42d0824210aa95036f001e06b258c9cbbc5bc1b6056cd4f396b668",
+          "size": 3008642
         },
         "ecb_FM_D_U2_EUR_4F_KR_MLFR_LEV.csv": {
           "file": "ecb_FM_D_U2_EUR_4F_KR_MLFR_LEV_20260925.csv",
-          "sha256": "b0aef5b1c7ada83b2ad995e40a36e43fd1382e0174ef33db80e4cb1b740fba9f",
-          "size": 356302
+          "sha256": "b4052240a598ade960395418bd954dd148cd6a6189c6e14146f0dc0db5003c05",
+          "size": 3213628
         },
         "ecb_FM_D_U2_EUR_4F_KR_MRR_FR_LEV.csv": {
           "file": "ecb_FM_D_U2_EUR_4F_KR_MRR_FR_LEV_20260925.csv",
-          "sha256": "31b69b2c8ae042013a1667ebf126f1ceaeeb23e67f5a734acc88222543df9713",
-          "size": 416963
+          "sha256": "00dcdc2d8cbd072e9e5219b7e01b686072d1849256a79e3893d04deaac747c66",
+          "size": 2629187
         }
       },
       "history": [
-        {
-          "digest": "git:da8871a38494eb86637e29183cc640455c6b9a32",
-          "first_seen": "2026-07-24",
-          "last_seen": "2026-07-24"
-        },
         {
           "digest": "git:b677f62ffca94a6c3901aef47502e66b94d8a111",
           "first_seen": "2026-07-25",
@@ -647,6 +642,11 @@
           "digest": "sha256:0d7961925f7ab714f3606179b0c572731fcb00fa0bb7dc2ed637b4473da27899",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:8fd15ed55c9843e3e7274d6441fd6e2b754c4b8a67f4d14bde9979f1391e9b8f",
+          "first_seen": "2026-09-25",
+          "last_seen": "2026-09-25"
         }
       ]
     },
@@ -901,37 +901,32 @@
       ]
     },
     "estat": {
-      "digest": "sha256:71261323f597da999c92f4c1da1fefc48f5c3fe10bc2ca79906d07e2b07f6614",
+      "digest": "sha256:0d0393d91f788debddb67649eed61b498f2c4861654cb1d7489d6f334b1b1f05",
       "stable_since": "2026-09-25",
       "last_seen": "2026-09-25",
       "keys": {
         "jpn-cpi-yoy.json": {
           "file": "jpn-cpi-yoy_20260925.json",
-          "sha256": "056ddc80df7667ae9a362022f1b9d35f915a9adc7ccdee0b6bb5d3253adeb0ff",
+          "sha256": "ea17f95b2cdcdd7f844633b70594cf9807df1af6f0f49b2984b702fb6e4d7176",
           "size": 129731
         },
         "jpn-industrial-production.json": {
           "file": "jpn-industrial-production_20260925.json",
-          "sha256": "e99b2e3cfd6e309e5866c26c6e35217e8e6be0942007509556b6fa21a6b4b728",
+          "sha256": "4d92522315608270b252d7bbdca3628191152f23914134ee3d8e6903ab2fcfbc",
           "size": 12402
         },
         "jpn-pop_0003448225.json": {
           "file": "jpn-pop_0003448225_20260925.json",
-          "sha256": "09b9aa7eabdedfc9faff6f2489552e766da13a5aa25f4d1afab535ebfd8bf1c3",
+          "sha256": "8609e6cbcbbeac2f27ae1483539dd1e00468e3c91ffb08b7071780b0983e5fb4",
           "size": 863611
         },
         "jpn-pop_0004021110.json": {
           "file": "jpn-pop_0004021110_20260925.json",
-          "sha256": "87622c01325a1cf82509d6cef86c30d123f349a9493cc7b1d3da14c950ce5042",
+          "sha256": "15f10d596a4e47d4960cfe9f5a666ebc2b503b94612e2dc1d436fc07ae8c8e10",
           "size": 1078374
         }
       },
       "history": [
-        {
-          "digest": "git:c635010a94f9dd41218ef8925fbbbe0fa6d3af09",
-          "first_seen": "2026-07-29",
-          "last_seen": "2026-07-29"
-        },
         {
           "digest": "git:8a5ffa6683816cd94c349e12deafcb1211f9c549",
           "first_seen": "2026-07-30",
@@ -1226,51 +1221,51 @@
           "digest": "sha256:71261323f597da999c92f4c1da1fefc48f5c3fe10bc2ca79906d07e2b07f6614",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:0d0393d91f788debddb67649eed61b498f2c4861654cb1d7489d6f334b1b1f05",
+          "first_seen": "2026-09-25",
+          "last_seen": "2026-09-25"
         }
       ]
     },
     "estat_trade": {
-      "digest": "sha256:48705fc209628b6ee320e454f1b98f15b0b2dd3e9c85ec9163d6c3a762a79a69",
+      "digest": "sha256:031a921b1d005f369f79b2e2e9efb64775896a09385901f17e2b00c0f5ea8388",
       "stable_since": "2026-09-25",
       "last_seen": "2026-09-25",
       "keys": {
         "coal_0003313966.json": {
           "file": "coal_0003313966_20260925.json",
-          "sha256": "c055f4af239d7e591237f5413898be25d9d5a8a06ec479915f543ae1940856b1",
+          "sha256": "46bb3f5721078880af3132948b9d087df6041ccaa879edacfc52b3ec8eab2470",
           "size": 54824
         },
         "coal_0003425294.json": {
           "file": "coal_0003425294_20260925.json",
-          "sha256": "c43ce3e790c5e2177eff4927c3c2156f1284a68953cfb0752dc675f157eb3138",
+          "sha256": "1f7d889b8ea993d9b852a7582c9fe4c5fae8ab391f26a23388498163d467c93b",
           "size": 51554
         },
         "crude_0003313966.json": {
           "file": "crude_0003313966_20260925.json",
-          "sha256": "2ef0db55fd658fae4fedb5ea7d9f2e58593aff767d8023f00a7553db284b1c50",
+          "sha256": "511d26716b4e02a989ceca17f121d279537412fcffefcf58ba777f3a9cec329c",
           "size": 35791
         },
         "crude_0003425294.json": {
           "file": "crude_0003425294_20260925.json",
-          "sha256": "90eda827ebd302f0802f1373d0d4ce768d2c87a427a5639c0c40c67aab06c730",
+          "sha256": "2f5be8d21fb965399513cbaf99e878d7a1a6b8e62fa59558028077e7ff031142",
           "size": 32524
         },
         "lng_0003313966.json": {
           "file": "lng_0003313966_20260925.json",
-          "sha256": "098a1456940453f5d9b39f67ae737351e4c129e3ab03ffaf448ae1b06915d734",
+          "sha256": "8d5f3ff7927b8d1ffa4d49cb909e55bf5d09ab7cb1bfa470b1086ae20e8f8de6",
           "size": 31554
         },
         "lng_0003425294.json": {
           "file": "lng_0003425294_20260925.json",
-          "sha256": "11f64b643abcf8fc158c7c1a9f06b45bfb16656b3f3da8dac259819307742aa4",
+          "sha256": "5b8e5b54338708e6acd834cc8df061022994e7a07402aaa2443bcc6cc9cfa5a0",
           "size": 32693
         }
       },
       "history": [
-        {
-          "digest": "git:2ae1f751d4547e50121de99d0c346b57d61a2e48",
-          "first_seen": "2026-07-29",
-          "last_seen": "2026-07-29"
-        },
         {
           "digest": "git:719255cf25f62895d5bed98a1291d5934a9dd704",
           "first_seen": "2026-07-30",
@@ -1563,6 +1558,11 @@
         },
         {
           "digest": "sha256:48705fc209628b6ee320e454f1b98f15b0b2dd3e9c85ec9163d6c3a762a79a69",
+          "first_seen": "2026-09-25",
+          "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:031a921b1d005f369f79b2e2e9efb64775896a09385901f17e2b00c0f5ea8388",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
         }
@@ -2030,22 +2030,17 @@
       ]
     },
     "fx": {
-      "digest": "sha256:c1d6d8bbb1fe8eba6098edc3e702338e1cdf6b4f66fecf0f65ffa32d3e5ff887",
+      "digest": "sha256:5590efb4c5777d2e0ff4958b518dcf6d27d2b2a3c53ef47915f78827095f69ac",
       "stable_since": "2026-09-25",
       "last_seen": "2026-09-25",
       "keys": {
         "boj_FM08.csv": {
           "file": "boj_FM08_20260925.csv",
-          "sha256": "c5b168d9144a18048f8e25ed365aaacb173919a07e1d0826ee29699a90934945",
+          "sha256": "80ec1108ba1b795f6146838ec19463ba1b5fa0a73b2c58dbdf68f789c81433a5",
           "size": 404934
         }
       },
       "history": [
-        {
-          "digest": "git:76fde63e00d6793024a2574847b93a3d29e714b0",
-          "first_seen": "2026-07-29",
-          "last_seen": "2026-07-29"
-        },
         {
           "digest": "git:afef9ba9bb1aa3a347b263b3379d23b328814e60",
           "first_seen": "2026-07-30",
@@ -2338,6 +2333,11 @@
         },
         {
           "digest": "sha256:c1d6d8bbb1fe8eba6098edc3e702338e1cdf6b4f66fecf0f65ffa32d3e5ff887",
+          "first_seen": "2026-09-25",
+          "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:5590efb4c5777d2e0ff4958b518dcf6d27d2b2a3c53ef47915f78827095f69ac",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
         }
@@ -2930,7 +2930,7 @@
       ]
     },
     "jma": {
-      "digest": "sha256:f1834faa4f2114b063fec06c80296cbdf7114c20b7c4e75debf3c1ea6de4e2ac",
+      "digest": "sha256:b26e695d4af33e1472adb6e5e24b1cc1c6d5836c3673e371b918d1c39e0098e8",
       "stable_since": "2026-09-25",
       "last_seen": "2026-09-25",
       "keys": null,
@@ -3037,6 +3037,11 @@
         },
         {
           "digest": "sha256:f1834faa4f2114b063fec06c80296cbdf7114c20b7c4e75debf3c1ea6de4e2ac",
+          "first_seen": "2026-09-25",
+          "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:b26e695d4af33e1472adb6e5e24b1cc1c6d5836c3673e371b918d1c39e0098e8",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
         }
@@ -3311,182 +3316,182 @@
       "last_seen": "2026-09-25",
       "keys": {
         "treasury_yields_1990.csv": {
-          "file": "treasury_yields_1990_20260921.csv",
+          "file": "treasury_yields_1990_20260925.csv",
           "sha256": "d8d5e4bb7ae2f13ccf03a7f50537723a4a5a37e2ebe85da3e32f53328c411d18",
           "size": 14069
         },
         "treasury_yields_1991.csv": {
-          "file": "treasury_yields_1991_20260921.csv",
+          "file": "treasury_yields_1991_20260925.csv",
           "sha256": "d52d81bd96f5e02d8b7a74384d568eaafe36c2a067272e0840c5ea4022c1d4d4",
           "size": 14069
         },
         "treasury_yields_1992.csv": {
-          "file": "treasury_yields_1992_20260921.csv",
+          "file": "treasury_yields_1992_20260925.csv",
           "sha256": "13fb485ff7085d1c8afb70b3bb6fd7fe7c728f7b672a9c1844d7e9e6d26827f9",
           "size": 14125
         },
         "treasury_yields_1993.csv": {
-          "file": "treasury_yields_1993_20260921.csv",
+          "file": "treasury_yields_1993_20260925.csv",
           "sha256": "c5482e2e88fa8256eb513600c44fbcb8bd317e061a840a429676f4d1330cea3d",
           "size": 14575
         },
         "treasury_yields_1994.csv": {
-          "file": "treasury_yields_1994_20260921.csv",
+          "file": "treasury_yields_1994_20260925.csv",
           "sha256": "cea2fce245f7a1be83395a82c4f56e146d2074909255930226551170bf25de18",
           "size": 15266
         },
         "treasury_yields_1995.csv": {
-          "file": "treasury_yields_1995_20260921.csv",
+          "file": "treasury_yields_1995_20260925.csv",
           "sha256": "5815b05e0575a6220d84666346c56bc1fa39d0a4212b89bf0f50a3c09579de15",
           "size": 15327
         },
         "treasury_yields_1996.csv": {
-          "file": "treasury_yields_1996_20260921.csv",
+          "file": "treasury_yields_1996_20260925.csv",
           "sha256": "656992cb54c922745bb7ccf11a57a3dd5fe2f1653f7d8127d04d25f3e3aaa674",
           "size": 15449
         },
         "treasury_yields_1997.csv": {
-          "file": "treasury_yields_1997_20260921.csv",
+          "file": "treasury_yields_1997_20260925.csv",
           "sha256": "3653e22f12846593dc6e0d95a7518acfc2d2f6dd89ec83cc82e2ebeb4586b833",
           "size": 15327
         },
         "treasury_yields_1998.csv": {
-          "file": "treasury_yields_1998_20260921.csv",
+          "file": "treasury_yields_1998_20260925.csv",
           "sha256": "3861b3be824744c1c6c616224fd1b87054dfcf2e8106c7551a589b5fedeb7f4a",
           "size": 15327
         },
         "treasury_yields_1999.csv": {
-          "file": "treasury_yields_1999_20260921.csv",
+          "file": "treasury_yields_1999_20260925.csv",
           "sha256": "36bff57ac81eb582c68e57479c0ad4fbc4ee090e9028886d49b7f1ce434a5aea",
           "size": 15388
         },
         "treasury_yields_2000.csv": {
-          "file": "treasury_yields_2000_20260921.csv",
+          "file": "treasury_yields_2000_20260925.csv",
           "sha256": "a8cde4c7a757ac74f7b6257d3778db73a215483002317e19ee9e3f3c524a8a24",
           "size": 15388
         },
         "treasury_yields_2001.csv": {
-          "file": "treasury_yields_2001_20260921.csv",
+          "file": "treasury_yields_2001_20260925.csv",
           "sha256": "bc48181de2b452d19b159bc12354653f64ce3b119d7072dbf4aa92fa6998799c",
           "size": 15872
         },
         "treasury_yields_2002.csv": {
-          "file": "treasury_yields_2002_20260921.csv",
+          "file": "treasury_yields_2002_20260925.csv",
           "sha256": "33f84b7c6f50bf3ea0ca4703cb51c8d469bbb93dad92f181d42132b7e2359bf7",
           "size": 15712
         },
         "treasury_yields_2003.csv": {
-          "file": "treasury_yields_2003_20260921.csv",
+          "file": "treasury_yields_2003_20260925.csv",
           "sha256": "0c255188cf596e5bc42a4e00b9a60649df01fb95a58a3382d7586da83e5cc0e0",
           "size": 15326
         },
         "treasury_yields_2004.csv": {
-          "file": "treasury_yields_2004_20260921.csv",
+          "file": "treasury_yields_2004_20260925.csv",
           "sha256": "0f0561773c7a3220fe1eded9a7ba0645790e9239fd3cf569158171fedf2dc969",
           "size": 15326
         },
         "treasury_yields_2005.csv": {
-          "file": "treasury_yields_2005_20260921.csv",
+          "file": "treasury_yields_2005_20260925.csv",
           "sha256": "ecf2ab3d1ca1b6ee8e916fee90474028c2d1221b8d236131621ad58020db0552",
           "size": 15326
         },
         "treasury_yields_2006.csv": {
-          "file": "treasury_yields_2006_20260921.csv",
+          "file": "treasury_yields_2006_20260925.csv",
           "sha256": "cdbdcd8b32735caa453e00280232ff70c7012c055b7daf7b8cf1d9aaa8c66bfe",
           "size": 16480
         },
         "treasury_yields_2007.csv": {
-          "file": "treasury_yields_2007_20260921.csv",
+          "file": "treasury_yields_2007_20260925.csv",
           "sha256": "297f6be4059a605b1ec0f266eb7b8467c3d40504a0dd53341746223276e6e6d8",
           "size": 16650
         },
         "treasury_yields_2008.csv": {
-          "file": "treasury_yields_2008_20260921.csv",
+          "file": "treasury_yields_2008_20260925.csv",
           "sha256": "686db01584dd45f67addc243ee0c42339d491171a0e947c8f88ecac78ee0e9ea",
           "size": 16638
         },
         "treasury_yields_2009.csv": {
-          "file": "treasury_yields_2009_20260921.csv",
+          "file": "treasury_yields_2009_20260925.csv",
           "sha256": "3c9294cfa71136e1d5330b09a00bf996ecf86c865d593d7ee954d11984a5bdb1",
           "size": 16584
         },
         "treasury_yields_2010.csv": {
-          "file": "treasury_yields_2010_20260921.csv",
+          "file": "treasury_yields_2010_20260925.csv",
           "sha256": "f973bd3988989d3e408655cbc7fed89faefbaa8a1c111ec313241fb47fc75e2d",
           "size": 16672
         },
         "treasury_yields_2011.csv": {
-          "file": "treasury_yields_2011_20260921.csv",
+          "file": "treasury_yields_2011_20260925.csv",
           "sha256": "224eaf29d6fe7cbccc746c7a8c845f189cf91424bab43f46ca386a74e98d81f7",
           "size": 16584
         },
         "treasury_yields_2012.csv": {
-          "file": "treasury_yields_2012_20260921.csv",
+          "file": "treasury_yields_2012_20260925.csv",
           "sha256": "9c889b6e3cb87f40f3760bddb69f05f7525800ac480ef5712b2cf318765fa184",
           "size": 16584
         },
         "treasury_yields_2013.csv": {
-          "file": "treasury_yields_2013_20260921.csv",
+          "file": "treasury_yields_2013_20260925.csv",
           "sha256": "1e1a98426d9274afcc68467962f9238104db775b8765e48f45ac7488b33ff338",
           "size": 16584
         },
         "treasury_yields_2014.csv": {
-          "file": "treasury_yields_2014_20260921.csv",
+          "file": "treasury_yields_2014_20260925.csv",
           "sha256": "8d560698e03e4c0d8d22ff8be7f5f7c5c0d472b1e33a22b6a75373a57e84aa0f",
           "size": 16584
         },
         "treasury_yields_2015.csv": {
-          "file": "treasury_yields_2015_20260921.csv",
+          "file": "treasury_yields_2015_20260925.csv",
           "sha256": "b7665d1ce46d6ed6d08fbda34aae1831de38e274e3c7caed81904042aac9b5bc",
           "size": 16650
         },
         "treasury_yields_2016.csv": {
-          "file": "treasury_yields_2016_20260921.csv",
+          "file": "treasury_yields_2016_20260925.csv",
           "sha256": "b4d0a8d86e2734bc64d84d9a9824434d841737621582daeac58f13c7129f325c",
           "size": 16584
         },
         "treasury_yields_2017.csv": {
-          "file": "treasury_yields_2017_20260921.csv",
+          "file": "treasury_yields_2017_20260925.csv",
           "sha256": "56074da7c32103a28cf4ba2bdf5eaa12f98fd49852047aef1a6eb16e64bd6e83",
           "size": 16584
         },
         "treasury_yields_2018.csv": {
-          "file": "treasury_yields_2018_20260921.csv",
+          "file": "treasury_yields_2018_20260925.csv",
           "sha256": "e8375524a7a8d3e8091bbe7690d0378b9365be09efff5b18b8eefddc25f718d3",
           "size": 16978
         },
         "treasury_yields_2019.csv": {
-          "file": "treasury_yields_2019_20260921.csv",
+          "file": "treasury_yields_2019_20260925.csv",
           "sha256": "83fc47c17325e222c45fd3a1eb26c69ae01f62d33b793030b4b8b350ca0a290b",
           "size": 17841
         },
         "treasury_yields_2020.csv": {
-          "file": "treasury_yields_2020_20260921.csv",
+          "file": "treasury_yields_2020_20260925.csv",
           "sha256": "edcf1c8be9622f3cd92eb7de1847aefc3977e2118e2ff9af67f46614a5c306a7",
           "size": 17912
         },
         "treasury_yields_2021.csv": {
-          "file": "treasury_yields_2021_20260921.csv",
+          "file": "treasury_yields_2021_20260925.csv",
           "sha256": "1be57e49c63a99f6002431a1030c8fbe539b71066c3eaf14f9f58ddc34492cea",
           "size": 17912
         },
         "treasury_yields_2022.csv": {
-          "file": "treasury_yields_2022_20260921.csv",
+          "file": "treasury_yields_2022_20260925.csv",
           "sha256": "c33cb2758e5e34c2c23b7ab759d18681091860f3f9e5960112859f64f31cd814",
           "size": 18226
         },
         "treasury_yields_2023.csv": {
-          "file": "treasury_yields_2023_20260921.csv",
+          "file": "treasury_yields_2023_20260925.csv",
           "sha256": "edb7f3904e11dcaa502cdcc03ad9b1b16c893802d166ce9bc5fa1118251249d4",
           "size": 19098
         },
         "treasury_yields_2024.csv": {
-          "file": "treasury_yields_2024_20260921.csv",
+          "file": "treasury_yields_2024_20260925.csv",
           "sha256": "6775840b76cd7fd41121f61d6f6c60184eca6b2ba49954ec7372c463cbeef34d",
           "size": 19098
         },
         "treasury_yields_2025.csv": {
-          "file": "treasury_yields_2025_20260921.csv",
+          "file": "treasury_yields_2025_20260925.csv",
           "sha256": "cf2fa3da7f160384b63d2ead698532b1d76cd9f789ce4911e2304db85b14e6d5",
           "size": 20155
         },
