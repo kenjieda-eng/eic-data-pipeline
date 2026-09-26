@@ -1,24 +1,19 @@
 {
   "schema": "raw-ledger-v1",
-  "updated_at": "2026-09-25T13:13:38+09:00",
+  "updated_at": "2026-09-26T10:25:02+09:00",
   "sources": {
     "boj-tankan": {
-      "digest": "sha256:9e7552af9ce4198e9d4a42600b18769012f711f6ba80f94f8b9f5b7673ce63bb",
-      "stable_since": "2026-09-25",
-      "last_seen": "2026-09-25",
+      "digest": "sha256:8eaa7b6446ff33723b73415312413e031630aab10e6cd4526f7a438fc53d6b23",
+      "stable_since": "2026-09-26",
+      "last_seen": "2026-09-26",
       "keys": {
         "boj_CO.csv": {
-          "file": "boj_CO_20260925.csv",
-          "sha256": "1c76e77145eecdea896993308daf9a37d2cad4514e2834142915876abdec56aa",
+          "file": "boj_CO_20260926.csv",
+          "sha256": "1c9e7d42a86a9a276a2ece8091012235b4790cb0225e94180a2354dffdd6dc22",
           "size": 123331
         }
       },
       "history": [
-        {
-          "digest": "git:11c659418b97af108f654178ad28f9d0ade77505",
-          "first_seen": "2026-07-30",
-          "last_seen": "2026-07-30"
-        },
         {
           "digest": "git:3e5fda13d92f6b4ce5ec372f9ee04121ea90dca9",
           "first_seen": "2026-07-31",
@@ -313,46 +308,46 @@
           "digest": "sha256:9e7552af9ce4198e9d4a42600b18769012f711f6ba80f94f8b9f5b7673ce63bb",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:8eaa7b6446ff33723b73415312413e031630aab10e6cd4526f7a438fc53d6b23",
+          "first_seen": "2026-09-26",
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "ecb": {
-      "digest": "sha256:8fd15ed55c9843e3e7274d6441fd6e2b754c4b8a67f4d14bde9979f1391e9b8f",
-      "stable_since": "2026-09-25",
-      "last_seen": "2026-09-25",
+      "digest": "sha256:8505aacc102aae7d340bef70103485f2f73bf94226f9ae6fc222e748ad6f4eee",
+      "stable_since": "2026-09-26",
+      "last_seen": "2026-09-26",
       "keys": {
         "ecb_EXR_M_JPY_EUR_SP00_A.csv": {
-          "file": "ecb_EXR_M_JPY_EUR_SP00_A_20260925.csv",
-          "sha256": "731e420c49a524b633a71175c9a64f22d46dbe2207dead0eb4f3eccd10ca318e",
-          "size": 73271
+          "file": "ecb_EXR_M_JPY_EUR_SP00_A_20260926.csv",
+          "sha256": "c5021543a7981c17f1eb6d41f54fc902093ce5ab08312d95c39451652b48965d",
+          "size": 8260
         },
         "ecb_EXR_M_USD_EUR_SP00_A.csv": {
-          "file": "ecb_EXR_M_USD_EUR_SP00_A_20260925.csv",
-          "sha256": "cbd3f2a82d320099b01a5e36e4364687913f7716f5c6fa029009350d23c6f6bf",
-          "size": 70732
+          "file": "ecb_EXR_M_USD_EUR_SP00_A_20260926.csv",
+          "sha256": "b723cb05e35be959036f65ff48bc447dfd3583a838207be84e156a10c377b100",
+          "size": 7994
         },
         "ecb_FM_D_U2_EUR_4F_KR_DFR_LEV.csv": {
-          "file": "ecb_FM_D_U2_EUR_4F_KR_DFR_LEV_20260925.csv",
-          "sha256": "b858cccd3a42d0824210aa95036f001e06b258c9cbbc5bc1b6056cd4f396b668",
-          "size": 3008642
+          "file": "ecb_FM_D_U2_EUR_4F_KR_DFR_LEV_20260926.csv",
+          "sha256": "e8f94e14901963ad5e8ec837d07a43e44a8effe60d58542482121af3b210766b",
+          "size": 332658
         },
         "ecb_FM_D_U2_EUR_4F_KR_MLFR_LEV.csv": {
-          "file": "ecb_FM_D_U2_EUR_4F_KR_MLFR_LEV_20260925.csv",
-          "sha256": "b4052240a598ade960395418bd954dd148cd6a6189c6e14146f0dc0db5003c05",
-          "size": 3213628
+          "file": "ecb_FM_D_U2_EUR_4F_KR_MLFR_LEV_20260926.csv",
+          "sha256": "7e8c3b4481325712faf38ee5086eb903735842b19291aeb2fd991c60044cb713",
+          "size": 356619
         },
         "ecb_FM_D_U2_EUR_4F_KR_MRR_FR_LEV.csv": {
-          "file": "ecb_FM_D_U2_EUR_4F_KR_MRR_FR_LEV_20260925.csv",
-          "sha256": "00dcdc2d8cbd072e9e5219b7e01b686072d1849256a79e3893d04deaac747c66",
-          "size": 2629187
+          "file": "ecb_FM_D_U2_EUR_4F_KR_MRR_FR_LEV_20260926.csv",
+          "sha256": "778765827731ab01dcb8daadde72168a29ee9289d9fb0a97862994e634c440ac",
+          "size": 417335
         }
       },
       "history": [
-        {
-          "digest": "git:b677f62ffca94a6c3901aef47502e66b94d8a111",
-          "first_seen": "2026-07-25",
-          "last_seen": "2026-07-25"
-        },
         {
           "digest": "git:73184d18054ff0c0ea406312059c0663f50f8fcd",
           "first_seen": "2026-07-26",
@@ -647,44 +642,49 @@
           "digest": "sha256:8fd15ed55c9843e3e7274d6441fd6e2b754c4b8a67f4d14bde9979f1391e9b8f",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:8505aacc102aae7d340bef70103485f2f73bf94226f9ae6fc222e748ad6f4eee",
+          "first_seen": "2026-09-26",
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "edinet": {
       "digest": "sha256:13167e31caaae7db1b48f7953bab620a4b9d6eb684a6ebfc47a8e31fe8fb2b90",
       "stable_since": "2026-08-22",
-      "last_seen": "2026-09-25",
+      "last_seen": "2026-09-26",
       "keys": null,
       "history": [
         {
           "digest": "sha256:13167e31caaae7db1b48f7953bab620a4b9d6eb684a6ebfc47a8e31fe8fb2b90",
           "first_seen": "2026-08-22",
-          "last_seen": "2026-09-25"
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "eia_intl": {
       "digest": "sha256:80313e939bb9d75766ed0add94a354c35c2c1bfbc5c970289af52a7391dc5a81",
       "stable_since": "2026-08-25",
-      "last_seen": "2026-09-25",
+      "last_seen": "2026-09-26",
       "keys": {
         "eia_intl_gdp.json": {
-          "file": "eia_intl_gdp_20260925.json",
+          "file": "eia_intl_gdp_20260926.json",
           "sha256": "b9313fa1520ecd77998dacd842efc1fa3b1499238760d19ed29807036dac6d49",
           "size": 136255
         },
         "eia_intl_jp_breakdown.json": {
-          "file": "eia_intl_jp_breakdown_20260925.json",
+          "file": "eia_intl_jp_breakdown_20260926.json",
           "sha256": "208d16f689072199c22ff625a63be7cea02654db5fdf989c2daadfd9c3d30c48",
           "size": 67087
         },
         "eia_intl_population.json": {
-          "file": "eia_intl_population_20260925.json",
+          "file": "eia_intl_population_20260926.json",
           "sha256": "a2ad02b41bd985a7ed2c357696bc72f705c37487e56c1da6e778e8160fbf6580",
           "size": 126771
         },
         "eia_intl_totals.json": {
-          "file": "eia_intl_totals_20260925.json",
+          "file": "eia_intl_totals_20260926.json",
           "sha256": "2d0887c55884e7ecaa85f5744a43a50aedc44ce40fd82497969039449da6fb06",
           "size": 175141
         }
@@ -703,17 +703,17 @@
         {
           "digest": "sha256:80313e939bb9d75766ed0add94a354c35c2c1bfbc5c970289af52a7391dc5a81",
           "first_seen": "2026-08-25",
-          "last_seen": "2026-09-25"
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "ember": {
       "digest": "sha256:28aa74f892f0b6eab66b30411ead4c798822e57a11913e69656cbcc38981db58",
       "stable_since": "2026-09-19",
-      "last_seen": "2026-09-25",
+      "last_seen": "2026-09-26",
       "keys": {
         "ember_monthly.csv": {
-          "file": "ember_monthly_20260925.csv",
+          "file": "ember_monthly_20260926.csv",
           "sha256": "6c8a587a5dfe32277616135e3c5af8e3cb60dff8eba1d4bc18b9b936b0c75d55",
           "size": 28333064
         }
@@ -757,14 +757,14 @@
         {
           "digest": "sha256:28aa74f892f0b6eab66b30411ead4c798822e57a11913e69656cbcc38981db58",
           "first_seen": "2026-09-19",
-          "last_seen": "2026-09-25"
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "enecho-power": {
       "digest": "sha256:8c9f31d1c923c92fb2867ceaaed12528b0ba74278127f477bb650dd377cb2377",
       "stable_since": "2026-09-11",
-      "last_seen": "2026-09-25",
+      "last_seen": "2026-09-26",
       "keys": {
         "2-1-2018.xlsx": {
           "file": "2-1-2018.xlsx",
@@ -896,42 +896,37 @@
         {
           "digest": "sha256:8c9f31d1c923c92fb2867ceaaed12528b0ba74278127f477bb650dd377cb2377",
           "first_seen": "2026-09-11",
-          "last_seen": "2026-09-25"
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "estat": {
-      "digest": "sha256:0d0393d91f788debddb67649eed61b498f2c4861654cb1d7489d6f334b1b1f05",
-      "stable_since": "2026-09-25",
-      "last_seen": "2026-09-25",
+      "digest": "sha256:5e9d09d497b80941f9a7ec6ff975f27d7dcb27227148e31fa5b117d70b32a36c",
+      "stable_since": "2026-09-26",
+      "last_seen": "2026-09-26",
       "keys": {
         "jpn-cpi-yoy.json": {
-          "file": "jpn-cpi-yoy_20260925.json",
-          "sha256": "ea17f95b2cdcdd7f844633b70594cf9807df1af6f0f49b2984b702fb6e4d7176",
+          "file": "jpn-cpi-yoy_20260926.json",
+          "sha256": "8535b245c62242d66cab2d99638ed2a22b0bb0e112e89c6bca198c208a9cd2f0",
           "size": 129731
         },
         "jpn-industrial-production.json": {
-          "file": "jpn-industrial-production_20260925.json",
-          "sha256": "4d92522315608270b252d7bbdca3628191152f23914134ee3d8e6903ab2fcfbc",
+          "file": "jpn-industrial-production_20260926.json",
+          "sha256": "3b804486161b895e0ae25116c68a5e19d0b1823cca1cb7a428a5a85249ad0da8",
           "size": 12402
         },
         "jpn-pop_0003448225.json": {
-          "file": "jpn-pop_0003448225_20260925.json",
-          "sha256": "8609e6cbcbbeac2f27ae1483539dd1e00468e3c91ffb08b7071780b0983e5fb4",
+          "file": "jpn-pop_0003448225_20260926.json",
+          "sha256": "58db2f9d7b3bf57d619b9f9f7e7e7ddf273f7c07653dbfb1a41a06f49d75b1b7",
           "size": 863611
         },
         "jpn-pop_0004021110.json": {
-          "file": "jpn-pop_0004021110_20260925.json",
-          "sha256": "15f10d596a4e47d4960cfe9f5a666ebc2b503b94612e2dc1d436fc07ae8c8e10",
+          "file": "jpn-pop_0004021110_20260926.json",
+          "sha256": "70811804f536115d0ad7eeb3699e0e6733d357e810178709494eec2df5e8d6a5",
           "size": 1078374
         }
       },
       "history": [
-        {
-          "digest": "git:8a5ffa6683816cd94c349e12deafcb1211f9c549",
-          "first_seen": "2026-07-30",
-          "last_seen": "2026-07-30"
-        },
         {
           "digest": "git:53694fe228235f1121a1748b1ceee158d659abaf",
           "first_seen": "2026-07-31",
@@ -1226,51 +1221,51 @@
           "digest": "sha256:0d0393d91f788debddb67649eed61b498f2c4861654cb1d7489d6f334b1b1f05",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:5e9d09d497b80941f9a7ec6ff975f27d7dcb27227148e31fa5b117d70b32a36c",
+          "first_seen": "2026-09-26",
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "estat_trade": {
-      "digest": "sha256:031a921b1d005f369f79b2e2e9efb64775896a09385901f17e2b00c0f5ea8388",
-      "stable_since": "2026-09-25",
-      "last_seen": "2026-09-25",
+      "digest": "sha256:95e80285d7b9c0b6163e89de94e4e0db90cf784a51dc7b10252e7a968a1645ed",
+      "stable_since": "2026-09-26",
+      "last_seen": "2026-09-26",
       "keys": {
         "coal_0003313966.json": {
-          "file": "coal_0003313966_20260925.json",
-          "sha256": "46bb3f5721078880af3132948b9d087df6041ccaa879edacfc52b3ec8eab2470",
+          "file": "coal_0003313966_20260926.json",
+          "sha256": "34b982e74a842fc473c8fcc96a9682cfd6aeb476d6b40bcbbea74267fc4b2129",
           "size": 54824
         },
         "coal_0003425294.json": {
-          "file": "coal_0003425294_20260925.json",
-          "sha256": "1f7d889b8ea993d9b852a7582c9fe4c5fae8ab391f26a23388498163d467c93b",
+          "file": "coal_0003425294_20260926.json",
+          "sha256": "87c4e3cd35ca2f9eb109deabbe54336f6edc31df1e007a0375f203690c2500d4",
           "size": 51554
         },
         "crude_0003313966.json": {
-          "file": "crude_0003313966_20260925.json",
-          "sha256": "511d26716b4e02a989ceca17f121d279537412fcffefcf58ba777f3a9cec329c",
+          "file": "crude_0003313966_20260926.json",
+          "sha256": "c4b802397996227191eb1be776b317e356de39f07cf90e154f5476649123302a",
           "size": 35791
         },
         "crude_0003425294.json": {
-          "file": "crude_0003425294_20260925.json",
-          "sha256": "2f5be8d21fb965399513cbaf99e878d7a1a6b8e62fa59558028077e7ff031142",
+          "file": "crude_0003425294_20260926.json",
+          "sha256": "e256bf0955230a66779ce6555ad7a69986d989035b100426aae5186bb25c169f",
           "size": 32524
         },
         "lng_0003313966.json": {
-          "file": "lng_0003313966_20260925.json",
-          "sha256": "8d5f3ff7927b8d1ffa4d49cb909e55bf5d09ab7cb1bfa470b1086ae20e8f8de6",
+          "file": "lng_0003313966_20260926.json",
+          "sha256": "0ae2d0ccae5c007233d0ca7506a4aa6d5f695397b79762403bc6c15026ef91ce",
           "size": 31554
         },
         "lng_0003425294.json": {
-          "file": "lng_0003425294_20260925.json",
-          "sha256": "5b8e5b54338708e6acd834cc8df061022994e7a07402aaa2443bcc6cc9cfa5a0",
+          "file": "lng_0003425294_20260926.json",
+          "sha256": "e6240c29aa84c32e0568de8a0c9b3de4c0e4aa60a95d04ed68c9405686ab409b",
           "size": 32693
         }
       },
       "history": [
-        {
-          "digest": "git:719255cf25f62895d5bed98a1291d5934a9dd704",
-          "first_seen": "2026-07-30",
-          "last_seen": "2026-07-30"
-        },
         {
           "digest": "git:3bbd8b0299ba81ea204721fd3d437fcd52f24a25",
           "first_seen": "2026-07-31",
@@ -1565,21 +1560,26 @@
           "digest": "sha256:031a921b1d005f369f79b2e2e9efb64775896a09385901f17e2b00c0f5ea8388",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:95e80285d7b9c0b6163e89de94e4e0db90cf784a51dc7b10252e7a968a1645ed",
+          "first_seen": "2026-09-26",
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "eu-ets": {
       "digest": "sha256:fd4fb34f2127f8d3b8686fd50798fccc10d25a2b521dd0a2e00aab6e4ac3f945",
       "stable_since": "2026-06-01",
-      "last_seen": "2026-09-25",
+      "last_seen": "2026-09-26",
       "keys": {
         "eu_ets_full.csv": {
-          "file": "eu_ets_full_20260925.csv",
+          "file": "eu_ets_full_20260926.csv",
           "sha256": "db622731846f843b414a6de1aed3060b0dbdd6ff94618fe7e3893837331458d5",
           "size": 8113697
         },
         "eu_ets_sector.csv": {
-          "file": "eu_ets_sector_20260925.csv",
+          "file": "eu_ets_sector_20260926.csv",
           "sha256": "bb938ffabf1079d0d1dbe8630381c10b796117814531a7baba12eb3b7b0970ea",
           "size": 7229
         }
@@ -1588,14 +1588,14 @@
         {
           "digest": "sha256:fd4fb34f2127f8d3b8686fd50798fccc10d25a2b521dd0a2e00aab6e4ac3f945",
           "first_seen": "2026-06-01",
-          "last_seen": "2026-09-25"
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "fit": {
       "digest": "sha256:339e2e7b7517f293040533ac8b03d300322862c48bb492dab7ae26a8e1bb5548",
       "stable_since": "2026-09-08",
-      "last_seen": "2026-09-25",
+      "last_seen": "2026-09-26",
       "keys": {
         "current.html": {
           "file": "current_20260905.html",
@@ -1632,14 +1632,14 @@
         {
           "digest": "sha256:339e2e7b7517f293040533ac8b03d300322862c48bb492dab7ae26a8e1bb5548",
           "first_seen": "2026-09-08",
-          "last_seen": "2026-09-25"
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "fred-macro": {
-      "digest": "sha256:901c50cc91bab2d3c6697e47fe28b7478dfc5395fe4e59f22de1b2744ed0c4c3",
-      "stable_since": "2026-09-25",
-      "last_seen": "2026-09-25",
+      "digest": "sha256:048123fd12282d7bcfc9ef0771281ce9c3fb9e4f3c1214996124396739a5e977",
+      "stable_since": "2026-09-26",
+      "last_seen": "2026-09-26",
       "keys": {
         "CPIAUCSL.csv": {
           "file": "CPIAUCSL_20260511.csv",
@@ -1647,18 +1647,18 @@
           "size": 17649
         },
         "CPIAUCSL.json": {
-          "file": "CPIAUCSL_20260925.json",
+          "file": "CPIAUCSL_20260926.json",
           "sha256": "cb6900919ce543274339e144518cd145b8c1bc70b048519181a630e7b0dad16d",
           "size": 92393
         },
         "CPIENGSL.json": {
-          "file": "CPIENGSL_20260925.json",
+          "file": "CPIENGSL_20260926.json",
           "sha256": "ff8695d5e881c4370f2bc5da03d27136a228b56a5c3b032fcfff3a54f9fde18c",
           "size": 80673
         },
         "CPIUFDSL.json": {
-          "file": "CPIUFDSL_20260925.json",
-          "sha256": "2259d45b902c6bced86bb9d46eb844f3cb05581e5183514052aa7369abc3db78",
+          "file": "CPIUFDSL_20260926.json",
+          "sha256": "f4ea96c36b1ed1fc9c777519368b08de3472fbcb2a487239a83719f40cd1364e",
           "size": 92076
         },
         "FEDFUNDS.csv": {
@@ -1667,8 +1667,8 @@
           "size": 13879
         },
         "FEDFUNDS.json": {
-          "file": "FEDFUNDS_20260925.json",
-          "sha256": "e57ade20cba6ac3f09d56a1d99748516696674dc517f2f4e54117fb963d37599",
+          "file": "FEDFUNDS_20260926.json",
+          "sha256": "d07f9916bb3e4c4490359d554f46caabf212123acef53805375174a6f00f30a6",
           "size": 82606
         },
         "INDPRO.csv": {
@@ -1677,27 +1677,22 @@
           "size": 24340
         },
         "INDPRO.json": {
-          "file": "INDPRO_20260925.json",
-          "sha256": "1fb6d888e55e29c6eff4e1c1b4d8f2d80e10537f539595a0db99026279696814",
+          "file": "INDPRO_20260926.json",
+          "sha256": "c3907918451d277d4f051359589cddd3d9c67f57b88340225e04a606c70ad410",
           "size": 126616
         },
         "PAYEMS.json": {
-          "file": "PAYEMS_20260925.json",
-          "sha256": "b3b7a4d6d01602290a717e5af8d469e21bb0d91fb83b871e0b5a8426fc9595cf",
+          "file": "PAYEMS_20260926.json",
+          "sha256": "4e7b102cb17a80595747f02f99e020933fce0c3d83d02966ba215b5a438b13f8",
           "size": 101748
         },
         "UNRATE.json": {
-          "file": "UNRATE_20260925.json",
-          "sha256": "1b0918fb5d92f5d53e26645fad99a4b9efe31f23e84d3ab5adb4e73e100c9cff",
+          "file": "UNRATE_20260926.json",
+          "sha256": "5de165542934d06d8b3a937f4e69fd36f0b11698fd617bdd05808ea29a5f7319",
           "size": 89025
         }
       },
       "history": [
-        {
-          "digest": "git:332681df0e14df485b66c4676b4f083714ec35c7",
-          "first_seen": "2026-07-10",
-          "last_seen": "2026-07-10"
-        },
         {
           "digest": "git:d89a6de1386eca7e30112656c07f9ca1c477e031",
           "first_seen": "2026-07-11",
@@ -1992,16 +1987,21 @@
           "digest": "sha256:901c50cc91bab2d3c6697e47fe28b7478dfc5395fe4e59f22de1b2744ed0c4c3",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:048123fd12282d7bcfc9ef0771281ce9c3fb9e4f3c1214996124396739a5e977",
+          "first_seen": "2026-09-26",
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "fuel": {
       "digest": "sha256:b3cf95e5623325a1c167d84b60e006049154c7ca356d484caea96cc1329bafb4",
       "stable_since": "2026-09-03",
-      "last_seen": "2026-09-25",
+      "last_seen": "2026-09-26",
       "keys": {
         "CMO-Historical-Data-Monthly.xlsx": {
-          "file": "CMO-Historical-Data-Monthly_20260925.xlsx",
+          "file": "CMO-Historical-Data-Monthly_20260926.xlsx",
           "sha256": "9fdcfa8a2aed9a1bb545a10c1a5ce036c6a0acd4766f450424ca800b4b5a0225",
           "size": 586735
         }
@@ -2025,27 +2025,22 @@
         {
           "digest": "sha256:b3cf95e5623325a1c167d84b60e006049154c7ca356d484caea96cc1329bafb4",
           "first_seen": "2026-09-03",
-          "last_seen": "2026-09-25"
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "fx": {
-      "digest": "sha256:5590efb4c5777d2e0ff4958b518dcf6d27d2b2a3c53ef47915f78827095f69ac",
-      "stable_since": "2026-09-25",
-      "last_seen": "2026-09-25",
+      "digest": "sha256:72f56a265df855197065f372e191bf8813f3e204ee689f277f03e337e93b3425",
+      "stable_since": "2026-09-26",
+      "last_seen": "2026-09-26",
       "keys": {
         "boj_FM08.csv": {
-          "file": "boj_FM08_20260925.csv",
-          "sha256": "80ec1108ba1b795f6146838ec19463ba1b5fa0a73b2c58dbdf68f789c81433a5",
+          "file": "boj_FM08_20260926.csv",
+          "sha256": "b8a39151cc9e1ec79f41a66342d3a57d78a7cefdf1c7f680c467c8a1369ff653",
           "size": 404934
         }
       },
       "history": [
-        {
-          "digest": "git:afef9ba9bb1aa3a347b263b3379d23b328814e60",
-          "first_seen": "2026-07-30",
-          "last_seen": "2026-07-30"
-        },
         {
           "digest": "git:e63dfbadeb42c62c4ad29c7b36b4a7526edc931e",
           "first_seen": "2026-07-31",
@@ -2340,13 +2335,18 @@
           "digest": "sha256:5590efb4c5777d2e0ff4958b518dcf6d27d2b2a3c53ef47915f78827095f69ac",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:72f56a265df855197065f372e191bf8813f3e204ee689f277f03e337e93b3425",
+          "first_seen": "2026-09-26",
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "gio": {
       "digest": "sha256:4f5f9b22a0e9af57cd122603f475d1d8aabcb69074e6a0c324181008ae500899",
       "stable_since": "2026-08-08",
-      "last_seen": "2026-09-25",
+      "last_seen": "2026-09-26",
       "keys": {
         "L5-7gas_2026_gioweb_ver1.0.xlsx": {
           "file": "L5-7gas_2026_gioweb_ver1.0.xlsx",
@@ -2358,14 +2358,14 @@
         {
           "digest": "sha256:4f5f9b22a0e9af57cd122603f475d1d8aabcb69074e6a0c324181008ae500899",
           "first_seen": "2026-08-08",
-          "last_seen": "2026-09-25"
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "jepx": {
-      "digest": "sha256:e06ee1abc86ad5ac54b5f57a51fb258a1d141118c8e31141bf5e7bdc84599c98",
-      "stable_since": "2026-09-25",
-      "last_seen": "2026-09-25",
+      "digest": "sha256:d52f10489929d03b321cf91725c58acb5ee2ac24b8376be3ded64837377b43e3",
+      "stable_since": "2026-09-26",
+      "last_seen": "2026-09-26",
       "keys": {
         "_listing_debug.html": {
           "file": "_listing_debug.html",
@@ -2449,8 +2449,8 @@
         },
         "spot_summary_2026.csv": {
           "file": "spot_summary_2026.csv",
-          "sha256": "d8649f65aabc361fb7ce363cb567ca04d6976399497ff35f8bc6a58ab0835253",
-          "size": 1127726
+          "sha256": "43f23d75ccfbfa05c2801ea05fd8ab5c8959c548524770449c592a60aa8c76c9",
+          "size": 1134100
         }
       },
       "history": [
@@ -2543,13 +2543,18 @@
           "digest": "sha256:e06ee1abc86ad5ac54b5f57a51fb258a1d141118c8e31141bf5e7bdc84599c98",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:d52f10489929d03b321cf91725c58acb5ee2ac24b8376be3ded64837377b43e3",
+          "first_seen": "2026-09-26",
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "jepx-nonfossil": {
       "digest": "sha256:b8682ebb4ae44c892ee7606a9f2eaf3851a206871186ba8502be57c054d8d943",
       "stable_since": "2026-09-01",
-      "last_seen": "2026-09-25",
+      "last_seen": "2026-09-26",
       "keys": {
         "nf_summary_2017.csv": {
           "file": "nf_summary_2017.csv",
@@ -2606,22 +2611,22 @@
         {
           "digest": "sha256:b8682ebb4ae44c892ee7606a9f2eaf3851a206871186ba8502be57c054d8d943",
           "first_seen": "2026-09-01",
-          "last_seen": "2026-09-25"
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "jgb": {
       "digest": "sha256:21ce3bd93ade3056dd845166233fb6f17f50e1dc8ac5b606c3c2441864b57947",
       "stable_since": "2026-09-25",
-      "last_seen": "2026-09-25",
+      "last_seen": "2026-09-26",
       "keys": {
         "jgbcm.csv": {
-          "file": "jgbcm_20260925.csv",
+          "file": "jgbcm_20260926.csv",
           "sha256": "e90262947a4a8de347277b2104ec03df8a51e3bb12d1d416afaf0b870a1dac7c",
           "size": 1727
         },
         "jgbcm_all.csv": {
-          "file": "jgbcm_all_20260925.csv",
+          "file": "jgbcm_all_20260926.csv",
           "sha256": "f3059302bc996e61772e05f2d78f41ee0a543d22e6746c1f20265ddf4396c77a",
           "size": 1176385
         }
@@ -2925,14 +2930,14 @@
         {
           "digest": "sha256:21ce3bd93ade3056dd845166233fb6f17f50e1dc8ac5b606c3c2441864b57947",
           "first_seen": "2026-09-25",
-          "last_seen": "2026-09-25"
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "jma": {
-      "digest": "sha256:b26e695d4af33e1472adb6e5e24b1cc1c6d5836c3673e371b918d1c39e0098e8",
-      "stable_since": "2026-09-25",
-      "last_seen": "2026-09-25",
+      "digest": "sha256:20b13c1b586ad48738f71f125892b98c918b48f2ad97ca84fe9c829c14f94ccb",
+      "stable_since": "2026-09-26",
+      "last_seen": "2026-09-26",
       "keys": null,
       "history": [
         {
@@ -3044,16 +3049,21 @@
           "digest": "sha256:b26e695d4af33e1472adb6e5e24b1cc1c6d5836c3673e371b918d1c39e0098e8",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:20b13c1b586ad48738f71f125892b98c918b48f2ad97ca84fe9c829c14f94ccb",
+          "first_seen": "2026-09-26",
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "nbs-pmi": {
       "digest": "sha256:37b81512fd5dba306123e9be8b43fffe1ea920c342f5bb98f9be44732362d792",
       "stable_since": "2026-09-25",
-      "last_seen": "2026-09-25",
+      "last_seen": "2026-09-26",
       "keys": {
         "index.html": {
-          "file": "index_20260925.html",
+          "file": "index_20260926.html",
           "sha256": "7e22d3e4013ff6a81afcf59ed3f7b222a1cd8e628893208d58f1d7b9ab40b3d2",
           "size": 11868
         },
@@ -3078,7 +3088,7 @@
           "size": 154650
         },
         "t20260901_1965170.html": {
-          "file": "t20260901_1965170_20260925.html",
+          "file": "t20260901_1965170_20260926.html",
           "sha256": "08b39d2877203788e26edc989777faff8f65319a9c46d7ac7f1e0bb3f6cc5841",
           "size": 130179
         }
@@ -3262,14 +3272,14 @@
         {
           "digest": "sha256:37b81512fd5dba306123e9be8b43fffe1ea920c342f5bb98f9be44732362d792",
           "first_seen": "2026-09-25",
-          "last_seen": "2026-09-25"
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "occto-capacity": {
       "digest": "sha256:ef257b9b0b210677a412513ba99dfa1f06144d69117e2e7e3855a849de659216",
       "stable_since": "2026-05-20",
-      "last_seen": "2026-09-25",
+      "last_seen": "2026-09-26",
       "keys": {
         "2024_yakujoukekka_csv.zip": {
           "file": "2024_yakujoukekka_csv.zip",
@@ -3306,14 +3316,14 @@
         {
           "digest": "sha256:ef257b9b0b210677a412513ba99dfa1f06144d69117e2e7e3855a849de659216",
           "first_seen": "2026-05-20",
-          "last_seen": "2026-09-25"
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "us-treasury": {
-      "digest": "sha256:2222fd4865a5b61c7bf50ed677bc599cc47e9e5c9e0999f555aa4bc7d567b6a0",
-      "stable_since": "2026-09-25",
-      "last_seen": "2026-09-25",
+      "digest": "sha256:e22857c90ddea4840a02a12aadb52a677fcd6b3982604a2c944c8b053d18b33b",
+      "stable_since": "2026-09-26",
+      "last_seen": "2026-09-26",
       "keys": {
         "treasury_yields_1990.csv": {
           "file": "treasury_yields_1990_20260925.csv",
@@ -3496,17 +3506,12 @@
           "size": 20155
         },
         "treasury_yields_2026.csv": {
-          "file": "treasury_yields_2026_20260925.csv",
-          "sha256": "334eed6056c7d01bda71f7e81edb83740298d1376d4c6c81995ea39474fbe145",
-          "size": 15014
+          "file": "treasury_yields_2026_20260926.csv",
+          "sha256": "a6f539a43d43751ab75d2ec98cfa83909cb5ae084306aca1372594c2088e1239",
+          "size": 15095
         }
       },
       "history": [
-        {
-          "digest": "git:3da8cef4eb1ddcef07eff1cd69eb01eb7a2c83d1",
-          "first_seen": "2026-06-27",
-          "last_seen": "2026-06-29"
-        },
         {
           "digest": "git:f03571c7e108113d387a97dd54b0acac97fe1de5",
           "first_seen": "2026-06-30",
@@ -3801,13 +3806,18 @@
           "digest": "sha256:2222fd4865a5b61c7bf50ed677bc599cc47e9e5c9e0999f555aa4bc7d567b6a0",
           "first_seen": "2026-09-25",
           "last_seen": "2026-09-25"
+        },
+        {
+          "digest": "sha256:e22857c90ddea4840a02a12aadb52a677fcd6b3982604a2c944c8b053d18b33b",
+          "first_seen": "2026-09-26",
+          "last_seen": "2026-09-26"
         }
       ]
     },
     "occto-ltdc": {
       "digest": "sha256:7fc4a1ffd16ea282ca53a5f73d8142c6fb68f053c4fac0989ddff1c14cbe6194",
       "stable_since": "2026-09-11",
-      "last_seen": "2026-09-25",
+      "last_seen": "2026-09-26",
       "keys": {
         "longauction_kekka_ousatsu2023.pdf": {
           "file": "longauction_kekka_ousatsu2023.pdf",
@@ -3829,13 +3839,13 @@
         {
           "digest": "sha256:7fc4a1ffd16ea282ca53a5f73d8142c6fb68f053c4fac0989ddff1c14cbe6194",
           "first_seen": "2026-09-11",
-          "last_seen": "2026-09-25"
+          "last_seen": "2026-09-26"
         }
       ]
     }
   },
   "assessment": {
-    "date": "2026-09-25",
+    "date": "2026-09-26",
     "watched": [
       "eia_intl",
       "ember",
