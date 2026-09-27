@@ -8,15 +8,15 @@
   "source_url": "https://www.occto.or.jp/capacity-market/yoryoshijyo/main/data/",
   "license": "occto-terms",
   "observation_cutoff": "2029-04-01",
-  "updated_at": "2026-05-21T16:18:17+09:00",
-  "license_url": "https://www.occto.or.jp/info/disclaimer.html",
+  "updated_at": "2026-09-27T13:05:22+09:00",
+  "license_url": "https://www.occto.or.jp/chosakuken.html",
   "license_notice": "出典: 電力広域的運営推進機関 (OCCTO)「容量市場 メインオークション約定結果」\nOCCTO 利用規約に従い、出典明示を条件に利用可。\n",
   "tz": "Asia/Tokyo",
   "missing_policy": "null",
   "backfill_start": "2024-04-01",
   "publisher": "電力広域的運営推進機関 (OCCTO)",
-  "aggregation": "annual_auction",
-  "notes": "Σ(エリア価格 × エリア容量) / Σ(エリア容量) で加重平均。全エリア一律の年はその値",
+  "aggregation": "derived",
+  "notes": "Σ(エリア価格 × エリア容量) / Σ(エリア容量) で加重平均。全エリア一律の年はその値。当方の計算値（derived）",
   "depends_on": [
     "capacity-main-auction-price-hokkaido",
     "capacity-main-auction-price-tohoku",
@@ -28,5 +28,15 @@
     "capacity-main-auction-price-shikoku",
     "capacity-main-auction-price-kyushu",
     "capacity-main-auction-volume-total"
-  ]
+  ],
+  "cutoff_semantics": "delivery",
+  "delivery_horizon_days": 1203,
+  "grace_days": 45,
+  "update_schedule": {
+    "kind": "window",
+    "next_expected": "2026-12-15",
+    "grace_days": 90
+  },
+  "status": null,
+  "successor_id": null
 }
