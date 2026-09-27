@@ -1637,8 +1637,10 @@ sources:
         domain: power
         unit: "¥/kW"
         backfill_start: "2024-04-01"
-        aggregation: annual_auction
-        notes: "Σ(エリア価格 × エリア容量) / Σ(エリア容量) で加重平均。全エリア一律の年はその値"
+        # 2026-09-27: 公表値ではなく当方の計算値（fetch_occto_capacity.py 内で加重平均）なので derived に
+        #   揃えた（Y-20 §2 / Y-21 §1）。id は不変（bess-net が IRR の既定値と landing で参照している）。
+        aggregation: derived
+        notes: "Σ(エリア価格 × エリア容量) / Σ(エリア容量) で加重平均。全エリア一律の年はその値。当方の計算値（derived）"
         depends_on:
           - capacity-main-auction-price-hokkaido
           - capacity-main-auction-price-tohoku
@@ -1727,9 +1729,19 @@ sources:
         domain: power
         unit: "kW"
         backfill_start: "2024-04-01"
-        aggregation: annual_auction
-        notes: "Σ(9 エリア容量) = 全国の約定容量合計。4 年後の供給力を kW で表示"
-        depends_on: null
+        # 2026-09-27: Σ9 エリアは当方の計算値なので derived に揃え、依存先を宣言（Y-21 §1。id は不変）。
+        aggregation: derived
+        notes: "Σ(9 エリア容量) = 全国の約定容量合計。4 年後の供給力を kW で表示。当方の計算値（derived）"
+        depends_on:
+          - capacity-main-auction-volume-hokkaido
+          - capacity-main-auction-volume-tohoku
+          - capacity-main-auction-volume-tokyo
+          - capacity-main-auction-volume-chubu
+          - capacity-main-auction-volume-hokuriku
+          - capacity-main-auction-volume-kansai
+          - capacity-main-auction-volume-chugoku
+          - capacity-main-auction-volume-shikoku
+          - capacity-main-auction-volume-kyushu
       capacity-main-auction-volume-hokkaido:
         name: "容量市場 メインオークション 約定容量 北海道エリア (年次)"
         domain: power
@@ -3898,6 +3910,13 @@ sources:
     #   audit_workflow_wiring.py は fit-annual.yml の呼び出しで満たされる。年次側は continue-on-error
     #   無しなので、告示期に取得できなければランが赤になる（→ LTDC と同じ手動転記の判断へ）。
     update_schedule: { kind: window, months: [3], grace_days: 45 }
+    # D-020 §9.6（2026-09-27）: fit-price-geothermal は FY2025（2025-04-01）で終端。FY2026 から地熱の
+    #   1,000〜15,000kW 区分は「出力に応じて連続的に変化」する価格になり、代表単価が存在しない
+    #   （下の notes「地熱 2026 は 1,000-15,000kW が連続価格化したため未取得」）。無理に値は作らない。
+    #   後継なし。2026-09-24 に軸1（SLA 540 日）を越えたのを機に宣言。方式が戻れば宣言を外す。
+    #   他の FIT 4 系列は FY2026（2026-04-01）まであり、通常監視のまま。
+    retired:
+      fit-price-geothermal: { successor_id: null }
     # ----- 抽出方式（fetch_fit_price.py） --------------------------------
     # ページは UTF-8 の HTML 表。h3「YYYY年度の価格表」(平成/令和は西暦換算) で年度ブロックを区切り、
     # 各電源の <table> を colspan/rowspan 展開した grid 上で「列見出しキーワード + 除外 + pick」により
