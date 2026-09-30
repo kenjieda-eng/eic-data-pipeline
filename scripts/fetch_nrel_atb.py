@@ -23,13 +23,25 @@ NREL Annual Technology Baseline (ATB) 電力版から技術（tech）ドメイ�
 実 CSV 検証（L-062, 2026-06-06、6 版を S3 から実取得）:
     - 共通列: atb_year / core_metric_parameter / core_metric_case / crpyears / technology /
               techdetail / scenario / core_metric_variable / value（2019/2020 は revision 等が増減）。
-    - 採用版 = 2021/2022/2023/2024（base year 2019/2020/2021/2022）。
+    - 採用版 = 2021/2022/2023/2024/2025（base year 2019/2020/2021/2022/2023）。
       除外 = 2019（base year LCOE が Moderate でなく Constant/Low/Mid のみ）/
              2020（techdetail が LTRG・地名で Class 系非互換・default フラグ無し）。
+      2024 は v4.0.0（2026-07-28 再配信）を採用。v3.0.0 と当方 31 系列の base year 値は全て同一（2026-09-29 実査）。
     - 抽出固定: scenario=Moderate / core_metric_case=Market。LCOE は財務指標のため crpyears=20。
+      ★ 2025 年版は core_metric_case が Exp / Exp + TC / R&D / R&D + TC に改称された。一次
+      （atb.nlr.gov「Financial Cases & Methods | Electricity | 2025 | ATB | NLR」、2026-09-29 実機確認）で
+      「R&D + TC = 2024 年版の Markets and Policies（CSV では "Market"）に相当」と明記 → source_map の
+      filter_case_by_edition で年版ごとに上書きする（2025: "R&D + TC"）。Exp 系は新設の別ケース（不採用）。
       CAPEX/CF は CRP 非依存（全 CRP で同値）のため crpyears 非フィルタ。
     - techdetail: ATB default フラグ（=1、2021/2022 は "1.0"・2023/2024 は "1" で正規化）で代表区分を選定。
       蓄電池のみ明示 techdetail="4Hr Battery Storage"（default フラグが 2023 で欠落するため）。
+      ★ 2025 年版で ATB の既定区分が水力 NPD1 → NPD5、地熱 HydroFlash → HydroBinary に変わった（他 8 技術は
+      不変）。既定に追随すると水力 CAPEX が 3,241 → 9,829 $/kW と区分違いで跳ぶため、水力・地熱は
+      2021-2024 年版の既定区分（NPD1 / HydroFlash）を source_map で明示固定し、系列の連続性を保つ（2026-09-29）。
+    - 原子力（Nuclear）は 2024 年版以降 2030 年以降の射影行のみで base year 行が無い → 2023 年版で終端
+      （source_map の retired 宣言、2026-09-29）。
+    - 新しい年版・版の検知: OEDI S3 の listing（?list-type=2&prefix=ATB/electricity/csv/）を走査し、editions に
+      無い年版／採用版より新しい版があれば WARN（report-only。case 名の確認が要るため自動採用はしない）。
     - CF は分数（0-1）。metrics[*].scale=100 で % 化。
 
 ライセンス:
@@ -47,6 +59,7 @@ from __future__ import annotations
 
 import argparse
 import logging
+import re
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -195,6 +208,54 @@ def extract_value(
     return uniq[0]
 
 
+LISTING_KEY_RE = re.compile(r"<Key>([^<]*?/(\d{4})/(?:(v[\d.]+)/)?ATBe\.csv)</Key>")
+VERSION_RE = re.compile(r"v(\d+(?:\.\d+)*)")
+
+
+def _version_key(text: str) -> tuple[int, ...]:
+    """'v4.0.0' / '2024/v4.0.0/ATBe.csv' → (4, 0, 0)。版ディレクトリが無ければ (0,)。"""
+    m = VERSION_RE.search(text)
+    return tuple(int(p) for p in m.group(1).split(".")) if m else (0,)
+
+
+def discover_new_editions(s3_base: str, editions: dict, log_dir: Path) -> list[str]:
+    """
+    OEDI S3 の listing を走査し、editions に無い年版（2021 以降）／採用版より新しい版を WARN で報告する。
+    report-only（case 名の確認が要るため自動採用はしない）。listing が取れなければ何もしない。
+    """
+    try:
+        scheme, _, host, prefix = s3_base.split("/", 3)
+        url = f"{scheme}//{host}/?list-type=2&prefix={prefix.strip('/')}/"
+        r = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=60)
+        if r.status_code != 200:
+            logger.warning("edition discovery: listing HTTP %s — skipped", r.status_code)
+            return []
+        found: dict[str, list[str]] = {}
+        for _key, year, ver in LISTING_KEY_RE.findall(r.text):
+            found.setdefault(year, []).append(ver or "(root)")
+    except Exception as e:  # noqa: BLE001
+        logger.warning("edition discovery: listing failed (%s) — skipped", e)
+        return []
+    news: list[str] = []
+    for year, vers in sorted(found.items()):
+        if int(year) < 2021:
+            continue
+        if year not in editions:
+            news.append(f"{year}: {sorted(set(vers))} (not adopted)")
+            continue
+        adopted = str(editions[year])
+        newer = sorted({v for v in vers if _version_key(v) > _version_key(adopted)})
+        if newer:
+            news.append(f"{year}: newer {newer} (adopted {adopted})")
+    if news:
+        msg = "new ATB editions/versions on OEDI (not adopted; check core_metric_case names first): " + "; ".join(news)
+        logger.warning("edition discovery: %s", msg)
+        append_log(log_dir, "fetch_nrel_atb", "WARN", msg)
+    else:
+        logger.info("edition discovery: OEDI listing has no newer edition/version than source_map (%d years seen)", len(found))
+    return news
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Fetch NREL ATB tech-cost series (31 series)")
     parser.add_argument(
@@ -218,6 +279,8 @@ def main(argv: list[str] | None = None) -> int:
     editions: dict = src["editions"]
     scenario = src["filter_scenario"]
     case = src["filter_case"]
+    # 年版ごとの core_metric_case 上書き（2025: "R&D + TC" = 2024 年版の Market に相当。docstring 参照）
+    case_by_edition: dict = {str(k): str(v) for k, v in (src.get("filter_case_by_edition") or {}).items()}
     metrics: dict = src["metrics"]
     indicators: dict = src["indicators"]
     region = src.get("region", "US")
@@ -231,6 +294,9 @@ def main(argv: list[str] | None = None) -> int:
     wanted: set[str] | None = None
     if args.series:
         wanted = {s.strip() for s in args.series.split(",") if s.strip()}
+
+    # 新しい年版・版の検知（report-only）
+    discover_new_editions(s3_base, editions, log_dir)
 
     # indicator_id -> [(date, value), ...]
     accum: dict[str, list[tuple[str, float]]] = {}
@@ -250,7 +316,8 @@ def main(argv: list[str] | None = None) -> int:
         base_year = edition_base_year(df)
         base_years[edition] = base_year
         date = f"{edition}-01-01"
-        logger.info("edition %s: base_year=%d (将来年は不採用)", edition, base_year)
+        case_e = case_by_edition.get(str(edition), case)
+        logger.info("edition %s: base_year=%d (将来年は不採用) case=%s", edition, base_year, case_e)
 
         n_edition = 0
         for iid, icfg in indicators.items():
@@ -268,7 +335,7 @@ def main(argv: list[str] | None = None) -> int:
                 techdetail=icfg["atb_techdetail"],
                 crpyears=mc.get("crpyears"),
                 scenario=scenario,
-                case=case,
+                case=case_e,
             )
             if val is None:
                 continue
