@@ -9190,3 +9190,4 @@ date,indicator_id,region,value,source_url
 2026-09-24,us-treasury-10y,us,5.18,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
 2026-09-25,us-treasury-10y,us,5.17,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
 2026-09-28,us-treasury-10y,us,5.24,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
+2026-09-29,us-treasury-10y,us,5.26,https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve
