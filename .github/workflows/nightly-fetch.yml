@@ -223,7 +223,7 @@ jobs:
         # HTTPS 直 URL で取得し、技術（tech）ドメインを seed:
         #   10 技術 × {LCOE($/MWh), CAPEX($/kW), CF(%)} + 蓄電池 4hr CAPEX = 31 系列。
         # ⚠️ 編集方針（リク監修）: 未来予測値は非収載。各年版の base year（当年）コスト推計のみ採用
-        #   （2021-2024 版、横軸=年版公表年）。techdetail は ATB default フラグで代表区分を選定。
+        #   （2021-2025 版、横軸=年版公表年）。techdetail は ATB default フラグで代表区分を選定（水力・地熱・蓄電池は明示固定）。
         # 年 1 回の年版更新のため通常は no-op（各版 CSV は不変、サイズ一致で再利用）。aws cli 不要。
         run: |
           python scripts/fetch_nrel_atb.py
