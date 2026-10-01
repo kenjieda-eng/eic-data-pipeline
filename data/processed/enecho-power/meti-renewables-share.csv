@@ -36,4 +36,5 @@ date,indicator_id,region,value,source_url
 2026-02-01,meti-renewables-share,jp,15.074,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2026-03-01,meti-renewables-share,jp,18.623,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2026-04-01,meti-renewables-share,jp,26.052,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
-2026-05-01,meti-renewables-share,jp,27.034,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-05-01,meti-renewables-share,jp,26.522,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-06-01,meti-renewables-share,jp,22.835,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/

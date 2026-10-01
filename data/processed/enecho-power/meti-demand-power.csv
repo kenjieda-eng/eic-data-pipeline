@@ -97,3 +97,4 @@ date,indicator_id,region,value,source_url
 2026-03-01,meti-demand-power,jp,2107.961,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2026-04-01,meti-demand-power,jp,1826.384,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2026-05-01,meti-demand-power,jp,1697.358,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-06-01,meti-demand-power,jp,1667.676,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/

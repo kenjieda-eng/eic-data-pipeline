@@ -3,3 +3,4 @@ date,indicator_id,region,value,source_url
 2022-01-01,atb-lcoe-hydro,US,81.218506,https://atb.nlr.gov/
 2023-01-01,atb-lcoe-hydro,US,109.711151,https://atb.nlr.gov/
 2024-01-01,atb-lcoe-hydro,US,114.994491,https://atb.nlr.gov/
+2025-01-01,atb-lcoe-hydro,US,98.740513,https://atb.nlr.gov/

@@ -3,3 +3,4 @@ date,indicator_id,region,value,source_url
 2022-01-01,atb-lcoe-biopower,US,157.502377,https://atb.nlr.gov/
 2023-01-01,atb-lcoe-biopower,US,183.425942,https://atb.nlr.gov/
 2024-01-01,atb-lcoe-biopower,US,195.529792,https://atb.nlr.gov/
+2025-01-01,atb-lcoe-biopower,US,198.092245,https://atb.nlr.gov/

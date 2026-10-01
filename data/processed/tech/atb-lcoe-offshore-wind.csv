@@ -3,3 +3,4 @@ date,indicator_id,region,value,source_url
 2022-01-01,atb-lcoe-offshore-wind,US,75.864414,https://atb.nlr.gov/
 2023-01-01,atb-lcoe-offshore-wind,US,79.151174,https://atb.nlr.gov/
 2024-01-01,atb-lcoe-offshore-wind,US,112.200645,https://atb.nlr.gov/
+2025-01-01,atb-lcoe-offshore-wind,US,93.309974,https://atb.nlr.gov/

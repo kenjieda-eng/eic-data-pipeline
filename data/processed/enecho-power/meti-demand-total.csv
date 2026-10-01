@@ -47,5 +47,6 @@ date,indicator_id,region,value,source_url
 2026-01-01,meti-demand-total,jp,81121.28,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2026-02-01,meti-demand-total,jp,77647.927,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2026-03-01,meti-demand-total,jp,70865.543,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
-2026-04-01,meti-demand-total,jp,64150.033,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
-2026-05-01,meti-demand-total,jp,61012.706,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-04-01,meti-demand-total,jp,64637.062,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-05-01,meti-demand-total,jp,61021.416,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-06-01,meti-demand-total,jp,62013.11,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/

@@ -63,4 +63,5 @@ date,indicator_id,region,value,source_url
 2026-02-01,meti-gen-solar,jp,1836.493,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2026-03-01,meti-gen-solar,jp,2553.102,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2026-04-01,meti-gen-solar,jp,2358.583,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
-2026-05-01,meti-gen-solar,jp,2785.226,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-05-01,meti-gen-solar,jp,2786.606,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-06-01,meti-gen-solar,jp,2379.414,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
