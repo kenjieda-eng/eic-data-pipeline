@@ -865,3 +865,4 @@ date,indicator_id,region,value,source_url
 2026-06-01,us-fed-funds-rate,us,3.63,https://fred.stlouisfed.org/series/FEDFUNDS
 2026-07-01,us-fed-funds-rate,us,3.63,https://fred.stlouisfed.org/series/FEDFUNDS
 2026-08-01,us-fed-funds-rate,us,3.63,https://fred.stlouisfed.org/series/FEDFUNDS
+2026-09-01,us-fed-funds-rate,us,3.75,https://fred.stlouisfed.org/series/FEDFUNDS
