@@ -5298,3 +5298,4 @@ date,indicator_id,region,value,source_url
 2026-10-01,jepx-spread-top8-system,jp,22.928749999999997,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-10-02,jepx-spread-top8-system,jp,19.202499999999997,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-10-03,jepx-spread-top8-system,jp,21.452499999999997,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
+2026-10-04,jepx-spread-top8-system,jp,22.115,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
