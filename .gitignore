@@ -213,3 +213,6 @@ __marimo__/
 # 再取得可能（fetch_nrel_atb.py がサイズ一致で再利用/再 DL）。リポジトリ肥大化回避のため raw は非追跡。
 # 成果物は data/processed/tech/ と data/catalog/。
 data/raw/nrel-atb/
+# EPRX 年次取りまとめ PDF（手動転記の一次資料）。EPRX「サイトのご利用にあたって」の下では PDF の再配布は避け、
+# transcribe_eprx_monthly.py の --pdf-dir で sha256 だけ照合する（既定 data/raw/eprx-balancing/、未追跡）。
+data/raw/eprx-balancing/
