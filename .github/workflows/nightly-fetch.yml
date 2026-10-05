@@ -2,8 +2,10 @@ name: Nightly Fetch
 
 on:
   schedule:
-    # JST 8:00 = UTC 23:00（前日）
-    - cron: "0 23 * * *"
+    # JST 8:17 = UTC 23:17（前日）。2026-10-07 に 0 分 → 17 分へ: 毎正時の schedule は GitHub 側の遅延が大きく
+    # （実測 2〜3 時間。9/29 は 11:31 JST 開始、通常 10:13〜10:27）、正時に集中する他リポの job と競合するため。
+    # 実際の着地時刻は nightly の実行ログで確認する（着地の目安は 10:20〜11:40 JST）。
+    - cron: "17 23 * * *"
   workflow_dispatch:
     inputs:
       backfill:
@@ -14,9 +16,18 @@ on:
 permissions:
   contents: write
 
+# 同じ workflow の同時実行を 1 本に絞る。遅延した schedule と手動実行（backfill 等）が重なると、
+# 後から commit & push する側が non-fast-forward で失敗して赤になる（データは壊れないが run が落ちる）。
+# cancel-in-progress: false = 後着を待たせる（前の run を止めない）。
+concurrency:
+  group: nightly-fetch
+  cancel-in-progress: false
+
 jobs:
   fetch:
-    runs-on: ubuntu-latest
+    # 2026-10-07: ubuntu-latest は 2026-10-19 から Ubuntu 26 へ移行する（Actions の Annotation、actions/runner-images#14748）。
+    # Python・ツールの版が予告なく変わる事故を避けるため 24.04 に固定する。26.04 のイメージで動作確認してから上げる。
+    runs-on: ubuntu-24.04
     # backfill 時は JMA が 9 地点 × 180 ヶ月 = 1,620 リクエストで 40 分強かかるため 90 分確保
     timeout-minutes: 90
 
