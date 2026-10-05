@@ -1,0 +1,33 @@
+{
+  "id": "balancing-price-monthly-tertiary-2",
+  "name": "需給調整市場 三次調整力② 月次平均落札単価 (月次)",
+  "domain": "power",
+  "frequency": "monthly",
+  "unit": "円/ΔkW・30分",
+  "source_name": "電力需給調整力取引所 取引実績の取りまとめ結果",
+  "source_url": "https://www.eprx.or.jp/information/summary.php",
+  "license": "eprx-terms",
+  "observation_cutoff": "2026-03-01",
+  "updated_at": "2026-10-05T12:10:38+09:00",
+  "license_url": "https://www.eprx.or.jp/terms/",
+  "license_notice": "出典: 一般社団法人 電力需給調整力取引所「取引実績の取りまとめ結果」\nEPRX「サイトのご利用にあたって」４．著作権等について に従い、出典と、編集・加工等を行った旨を記載して利用。年次取りまとめ PDF より転記・編集。\n商用利用は事前契約、自動的な大量取得は事前承諾が必要。\n",
+  "tz": "Asia/Tokyo",
+  "missing_policy": "null",
+  "backfill_start": "2024-04-01",
+  "publisher": "一般社団法人 電力需給調整力取引所 (EPRX)",
+  "aggregation": "monthly_mean",
+  "notes": "需給調整市場 三次調整力② の月次平均落札単価（全電源。EPRX 公表の月次平均落札単価をそのまま。算出方法は資料に明記なし）。FY2024（2024年4月）以降。公表の年平均（月次表右端の計／年平均列）が年次系列 balancing-price-tertiary-2 と一致することを恒等式で検算済み（月次 12 値の単純平均とは一致しない）。出典: 一般社団法人 電力需給調整力取引所「取引実績の取りまとめ結果」（「2024年度の取引実績について」（2025年6月19日）p.51／「2025年度の取引実績について」（2026年6月18日）p.51）の「平均落札単価の推移」ページの月次表より転記（編集・加工なし）。",
+  "depends_on": null,
+  "cutoff_semantics": "observation",
+  "delivery_horizon_days": null,
+  "grace_days": null,
+  "update_schedule": {
+    "kind": "window",
+    "months": [
+      6
+    ],
+    "grace_days": 45
+  },
+  "status": null,
+  "successor_id": null
+}
