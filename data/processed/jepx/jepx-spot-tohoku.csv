@@ -5300,3 +5300,4 @@ date,indicator_id,region,value,source_url
 2026-10-03,jepx-spot-tohoku,tohoku,15.782708333333334,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-10-04,jepx-spot-tohoku,tohoku,16.13416666666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-10-05,jepx-spot-tohoku,tohoku,25.2225,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
+2026-10-06,jepx-spot-tohoku,tohoku,25.16479166666667,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
