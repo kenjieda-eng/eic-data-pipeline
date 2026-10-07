@@ -5302,3 +5302,4 @@ date,indicator_id,region,value,source_url
 2026-10-05,jepx-spread-range-system,jp,23.71,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-10-06,jepx-spread-range-system,jp,35.0,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-10-07,jepx-spread-range-system,jp,30.7,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
+2026-10-08,jepx-spread-range-system,jp,29.889999999999997,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
