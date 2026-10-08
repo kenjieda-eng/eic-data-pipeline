@@ -18,9 +18,12 @@ bess-net（Y-09 (B)、R-24 §4、Y-27 §4）が蓄電池の月次分布を使う
         一次 p.13 ／ 二次① p.21 ／ 二次② p.29 ／ 三次① p.37 ／ 複合 p.45。三次② のページには上限価格の表が無い。
         2025 年度版は「()内は3月14日適用開始」として改定後の値を併記: 複合・一次・二次① 19.51 → 15.00、
         二次②・三次① 7.21 → 7.21（変更なし）。
-    「需給調整市場のΔkW上限価格について」（2026-07-30 公表、https://www.eprx.or.jp/information/post.php、HTML ページ）
-    - 2026 年 9 月 1 日実需給分から 複合・一次・二次① の上限を 15.00 → 10.00（二次②・三次① は 7.21 のまま）。
-      年次 PDF（2026 年度版、2027 年 6 月公表見込み）に載るまでの一次資料。CAP_NOTICES に転記し、適用開始日に点を置く。
+    「需給調整市場のΔkW上限価格について」（2026-07-30 公表。上限価格ページ https://www.eprx.or.jp/information/post.php に
+    掲載された PDF、cap_20260730.pdf として --pdf-dir に置けば sha256 を照合）
+    - 表の該当行「2026年07月30日 2026年08月31日 2026年09月01日 当面の間 10.00 10.00 10.00 7.21 7.21 上限無し」:
+      2026 年 9 月 1 日（※1 適用開始日は実需給日）から 複合・一次・二次① の上限を 15.00 → 10.00。二次②・三次① は 7.21 で
+      据え置き（※5）、三次② は上限無し。年次 PDF（2026 年度版、2027 年 6 月公表見込み）に載るまでの一次資料。
+      CAP_NOTICES に転記し、適用開始日に点を置く。行の source_url はこの上限価格ページ（年次取りまとめページではなく）。
     2025 年度版は 2024 年度の月次行も再掲しており（「2024年度」行）、2024 年度版の値と全 72 値が一致する
     （恒等式③）。
 
@@ -181,7 +184,10 @@ CAP_NOTICES: list[dict] = [
         "effective": "2026-09-01",
         "published": "2026-07-30",
         "title": "需給調整市場のΔkW上限価格について",
-        "url": "https://www.eprx.or.jp/information/post.php",
+        "url": "https://www.eprx.or.jp/information/post.php",  # 行の source_url（上限価格ページ）
+        "pdf_file": "cap_20260730.pdf",  # --pdf-dir に置いたときの名前（リポには置かない）
+        "pdf_url": "https://www.eprx.or.jp/information/docs/14b85fbe8942da7d3bdddda80243e7e170f64d9e.pdf",
+        "pdf_sha256": "06f84fe90ea852335c12ca35db613f700e36f72051953de758d5046471431d4a",  # 217,685 bytes、2026-10-08 実機確認
         "values": {"composite": 10.00, "primary": 10.00, "secondary-1": 10.00},
     },
 ]
@@ -209,6 +215,16 @@ def verify_pdfs(pdf_dir: Path) -> tuple[list[str], list[str]]:
             problems.append(f"{fy}: PDF sha256 mismatch: {digest} != {s['sha256']} — EPRX が PDF を差し替えた可能性。表を読み直すまで書き出さない")
         else:
             infos.append(f"{fy}: PDF sha256 一致（{s['file']}）")
+    for n in CAP_NOTICES:  # 公表資料の PDF も同じ扱い（あれば照合、無ければ WARN）
+        p = pdf_dir / n["pdf_file"]
+        if not p.exists():
+            infos.append(f"{n['effective']}: PDF not present at {p} — sha256 未照合（恒等式のみで検算）")
+            continue
+        digest = hashlib.sha256(p.read_bytes()).hexdigest()
+        if digest != n["pdf_sha256"]:
+            problems.append(f"{n['effective']}: PDF sha256 mismatch: {digest} != {n['pdf_sha256']} — EPRX が PDF を差し替えた可能性。表を読み直すまで書き出さない")
+        else:
+            infos.append(f"{n['effective']}: PDF sha256 一致（{n['pdf_file']}）")
     return problems, infos
 
 
@@ -270,8 +286,8 @@ def check_identities(processed_dir: Path) -> tuple[list[str], list[str]]:
 def build_rows() -> list[dict]:
     rows: list[dict] = []
 
-    def add(date: str, ind: str, value) -> None:
-        rows.append({"date": date, "indicator_id": ind, "region": "jp", "value": value, "source_url": SOURCE_URL})
+    def add(date: str, ind: str, value, source_url: str = SOURCE_URL) -> None:
+        rows.append({"date": date, "indicator_id": ind, "region": "jp", "value": value, "source_url": source_url})
 
     for fy in sorted(MONTHLY_OVERALL):
         dates = month_dates(fy)
@@ -288,7 +304,7 @@ def build_rows() -> list[dict]:
             add(CAP_REVISION_DATE, f"balancing-price-cap-{pid}", rev)
     for n in CAP_NOTICES:
         for pid, v in n["values"].items():
-            add(n["effective"], f"balancing-price-cap-{pid}", v)
+            add(n["effective"], f"balancing-price-cap-{pid}", v, source_url=n["url"])  # 一次資料のページ
     return rows
 
 
