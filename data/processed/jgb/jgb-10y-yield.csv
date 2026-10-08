@@ -13312,3 +13312,4 @@ date,indicator_id,region,value,source_url
 2026-10-02,jgb-10y-yield,jp,3.097,https://www.mof.go.jp/jgbs/reference/interest_rate/data/jgbcm_all.csv
 2026-10-05,jgb-10y-yield,jp,3.085,https://www.mof.go.jp/jgbs/reference/interest_rate/data/jgbcm_all.csv
 2026-10-06,jgb-10y-yield,jp,3.103,https://www.mof.go.jp/jgbs/reference/interest_rate/data/jgbcm_all.csv
+2026-10-07,jgb-10y-yield,jp,3.111,https://www.mof.go.jp/jgbs/reference/interest_rate/data/jgbcm_all.csv
