@@ -18,6 +18,9 @@ bess-net（Y-09 (B)、R-24 §4、Y-27 §4）が蓄電池の月次分布を使う
         一次 p.13 ／ 二次① p.21 ／ 二次② p.29 ／ 三次① p.37 ／ 複合 p.45。三次② のページには上限価格の表が無い。
         2025 年度版は「()内は3月14日適用開始」として改定後の値を併記: 複合・一次・二次① 19.51 → 15.00、
         二次②・三次① 7.21 → 7.21（変更なし）。
+    「需給調整市場のΔkW上限価格について」（2026-07-30 公表、https://www.eprx.or.jp/information/post.php、HTML ページ）
+    - 2026 年 9 月 1 日実需給分から 複合・一次・二次① の上限を 15.00 → 10.00（二次②・三次① は 7.21 のまま）。
+      年次 PDF（2026 年度版、2027 年 6 月公表見込み）に載るまでの一次資料。CAP_NOTICES に転記し、適用開始日に点を置く。
     2025 年度版は 2024 年度の月次行も再掲しており（「2024年度」行）、2024 年度版の値と全 72 値が一致する
     （恒等式③）。
 
@@ -28,6 +31,7 @@ bess-net（Y-09 (B)、R-24 §4、Y-27 §4）が蓄電池の月次分布を使う
        （年次側の転記規約そのもの。FY2024 12/8/11/11/12/11 か月・FY2025 全 12 か月）
     ③ 2025 年度版に再掲された 2024 年度の月次行 == 2024 年度版の月次行（6 商品 × 13 値）
     ④ 上限価格: 2025 年度版の括弧なし値 == 2024 年度版の値（年度初めの上限は両年度同じ）
+    ⑤ 公表資料の上限改定（CAP_NOTICES）: 対象商品が年次 PDF の上限表にあり、適用日が年次 PDF の最終点（2026-03-14）より後
 
 ■ 一次資料の同一性
     EPRX は URL 不変のまま PDF を in-place で差し替える（source_map の注記）。--pdf-dir に PDF があれば
@@ -41,7 +45,7 @@ bess-net（Y-09 (B)、R-24 §4、Y-27 §4）が蓄電池の月次分布を使う
 
 ■ 値の扱い
     公表値をそのまま（円/ΔkW・30分、小数 2 桁）。蓄電池の「ー」（落札なし）は null（missing_policy: "null"）。
-    上限価格は「適用開始日」に点を置く（年度初め 4/1 と改定日）。
+    上限価格は「適用開始日」に点を置く（年度初め 4/1 と改定日。年次 PDF 未収載の改定は公表資料 CAP_NOTICES から）。
 
 使い方:
     python scripts/transcribe_eprx_monthly.py                      # 検算 → data/processed/eprx-balancing/ に書き出し
@@ -168,6 +172,20 @@ CAP_BY_EDITION: dict[int, dict[str, tuple[float, float | None]]] = {
 }
 CAP_REVISION_DATE = "2026-03-14"
 
+# --- 年次 PDF 以外の公表資料による上限価格の改定（年次 PDF に載るまでの一次資料。適用開始日に点を置く）-------
+# 「需給調整市場のΔkW上限価格について」（2026-07-30 公表、https://www.eprx.or.jp/information/post.php）:
+#   2026 年 9 月 1 日実需給分から 複合・一次・二次① の上限を 15.00 → 10.00。二次②・三次① は 7.21 のまま（点を足さない）。
+#   年次 PDF（2026 年度版）が同じ値を載せたら、CAP_BY_EDITION 側に移してここから外す（点は同じなので CSV は変わらない）。
+CAP_NOTICES: list[dict] = [
+    {
+        "effective": "2026-09-01",
+        "published": "2026-07-30",
+        "title": "需給調整市場のΔkW上限価格について",
+        "url": "https://www.eprx.or.jp/information/post.php",
+        "values": {"composite": 10.00, "primary": 10.00, "secondary-1": 10.00},
+    },
+]
+
 
 def month_dates(fy: int) -> list[str]:
     """年度 fy の 4 月〜翌 3 月の月初日。"""
@@ -240,6 +258,12 @@ def check_identities(processed_dir: Path) -> tuple[list[str], list[str]]:
     for pid in CAP_BY_EDITION[2024]:
         a, b = CAP_BY_EDITION[2024][pid][0], CAP_BY_EDITION[2025][pid][0]
         rec(f"④ {pid} 上限価格 年度初め 2024 = 2025", abs(a - b) < 1e-9, f"{a} vs {b}")
+    # ⑤ 公表資料の改定: 対象商品が年次 PDF の上限表にあり、適用日が年次 PDF の最終点より後（年次 PDF と二重に点を置かない）
+    for n in CAP_NOTICES:
+        for pid, v in n["values"].items():
+            rec(f"⑤ {pid} 上限価格 公表資料 {n['effective']} = {v}",
+                pid in CAP_BY_EDITION[2025] and n["effective"] > CAP_REVISION_DATE,
+                f"{n['title']}（{n['published']}）")
     return ok, ng
 
 
@@ -262,6 +286,9 @@ def build_rows() -> list[dict]:
         rev = CAP_BY_EDITION[2025][pid][1]
         if rev is not None:
             add(CAP_REVISION_DATE, f"balancing-price-cap-{pid}", rev)
+    for n in CAP_NOTICES:
+        for pid, v in n["values"].items():
+            add(n["effective"], f"balancing-price-cap-{pid}", v)
     return rows
 
 
