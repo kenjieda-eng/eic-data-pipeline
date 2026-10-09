@@ -18,12 +18,12 @@ scripts/check_fetch_outcomes.py — nightly の fetch 失敗を集約し「想�
   - データは既に commit 済み。赤にしてもデータは着地している（Staleness hard check と同じ作法）。
   - allowlist には必ず期限（expires）を持たせる。期限切れは自動的に「想定外」に戻る
     （「知っていて放置していない」を期限で担保する。Y-19 §4）。
-  - raw ハッシュ台帳（raw-ledger）は allowlist に載せられない
-    （第 3 層が黙ると上の 2 層〈軸1・軸2〉の意味がなくなる）。
+  - raw ハッシュ台帳（raw-ledger）と改訂台帳（detect-revisions）は allowlist に載せられない
+    （第 3 層が黙ると上の 2 層〈軸1・軸2〉の意味がなくなる。第 4 層が黙ると遡及改定が誰にも届かない）。
   - allowlist の step id は workflow に実在しなければならない（typo で沈黙しないため error）。
-  - nightly-fetch.yml で `python scripts/fetch_*.py` / `scripts/raw_ledger.py` を呼ぶステップは
+  - nightly-fetch.yml で `python scripts/fetch_*.py` / `scripts/raw_ledger.py` / `scripts/detect_revisions.py` を呼ぶステップは
     すべて id を持ち、id はスクリプト名から機械的に決まる（fetch_boj_tankan.py → fetch-boj-tankan、
-    raw_ledger.py → raw-ledger）。id が無いステップは steps コンテキストに現れずゲートの外に出るので、
+    raw_ledger.py → raw-ledger、detect_revisions.py → detect-revisions）。id が無いステップは steps コンテキストに現れずゲートの外に出るので、
     id 漏れ・規約外の id は error（沈黙の予防）。
 
 使い方:
@@ -51,9 +51,9 @@ DEFAULT_WORKFLOW = ROOT / ".github" / "workflows" / "nightly-fetch.yml"
 DEFAULT_ALLOWLIST = ROOT / "docs" / "known_failures.yaml"
 
 # id はスクリプト名から機械的に決まる: scripts/<stem>.py → <stem> の "_" を "-" に。
-GATED_CALL_RE = re.compile(r"python\s+scripts/((?:fetch_[A-Za-z0-9_]+)|raw_ledger)\.py")
-# allowlist に載せられないステップ（第 3 層）。
-NEVER_ALLOWLIST = {"raw-ledger"}
+GATED_CALL_RE = re.compile(r"python\s+scripts/((?:fetch_[A-Za-z0-9_]+)|raw_ledger|detect_revisions)\.py")
+# allowlist に載せられないステップ（第 3 層の raw 台帳・第 4 層の改訂台帳）。
+NEVER_ALLOWLIST = {"raw-ledger", "detect-revisions"}
 REQUIRED_KEYS = ("step", "reason", "registered", "expires")
 JST = timezone(timedelta(hours=9))
 

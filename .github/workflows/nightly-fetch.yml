@@ -338,6 +338,18 @@ jobs:
           python scripts/raw_ledger.py
         continue-on-error: true
 
+      - name: Record revisions ledger (D-020 §11, fourth layer)
+        id: detect-revisions
+        # 既収載の値が動いた系列（出典側の遡及改定・当方の処理変更）を data/ledger/revisions.json に記帳する。
+        # HEAD（この run の checkout 時点）と作業ツリーの data/processed/**/*.csv を突き合わせ、既にあった日付の
+        # 値が変わった点だけを改訂とする（新しい日付の追加は改訂ではない）。raw 台帳の後・catalog 生成の前。
+        # report-only（常に exit 0）。台帳側の不具合で nightly を止めないため continue-on-error。
+        # 失敗（exit 1）は末尾の Fetch outcome gate が赤にする。raw-ledger と同じく known_failures.yaml に登録できない。
+        # 消費側: bess-net は max_rel_change 10% 超で引用値を洗う（Y-12 §4）。web の記事点検（#173/#176 の型）もここから。
+        run: |
+          python scripts/detect_revisions.py
+        continue-on-error: true
+
       - name: Generate indicators catalog (D-011)
         # data/processed/**/*.metadata.json を集約して data/catalog/indicators.json を生成。
         # Required 10 欠落は exit 1（CI fail）、Recommended 欠落/鮮度超過は warning 止まり。
