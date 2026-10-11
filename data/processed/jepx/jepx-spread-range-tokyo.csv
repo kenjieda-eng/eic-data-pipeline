@@ -5306,3 +5306,4 @@ date,indicator_id,region,value,source_url
 2026-10-09,jepx-spread-range-tokyo,tokyo,27.72,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-10-10,jepx-spread-range-tokyo,tokyo,26.020000000000003,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-10-11,jepx-spread-range-tokyo,tokyo,34.38,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
+2026-10-12,jepx-spread-range-tokyo,tokyo,18.18,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv

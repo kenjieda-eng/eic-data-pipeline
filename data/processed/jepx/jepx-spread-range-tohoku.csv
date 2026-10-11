@@ -5306,3 +5306,4 @@ date,indicator_id,region,value,source_url
 2026-10-09,jepx-spread-range-tohoku,tohoku,35.99,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-10-10,jepx-spread-range-tohoku,tohoku,34.010000000000005,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
 2026-10-11,jepx-spread-range-tohoku,tohoku,34.42,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
+2026-10-12,jepx-spread-range-tohoku,tohoku,28.509999999999998,https://www.jepx.jp/_download.php?dir=spot_summary&file=spot_summary_2026.csv
