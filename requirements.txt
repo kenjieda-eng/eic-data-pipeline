@@ -1,12 +1,16 @@
-requests>=2.31
-pandas>=2.0
-pyarrow>=14.0
-PyYAML>=6.0
-beautifulsoup4>=4.12
-openpyxl>=3.1
+# 2026-10-10: 各依存に上限を付ける（major。0.x の curl_cffi は minor）。理由: 10/10 の nightly で pyarrow が
+# 25.0.1 → 26.0.0 に上がり、データは同じまま parquet 534 本の bytes が変わった（created_by の版が変わる）。
+# 上限を上げるときは PR で（parquet が全部差分に出るが、データ差ではない。改訂台帳は CSV を読むので影響なし）。
+# 当時の CI の版: pandas 3.0.x / pyarrow 26.0.0 / requests 2.34 / PyYAML 6.0.3 / bs4 4.15 / openpyxl 3.1.5 / curl_cffi 0.16 / python-dotenv 1.2
+requests>=2.31,<3
+pandas>=2.0,<4
+pyarrow>=14.0,<27
+PyYAML>=6.0,<7
+beautifulsoup4>=4.12,<5
+openpyxl>=3.1,<4
 # curl_cffi: Akamai Bot Manager (METI) 突破用。Chrome 120 TLS fingerprint 模倣。
 # fetch_enecho_power.py のみで使用。他の fetch_*.py は requests のまま。
-curl_cffi>=0.7
+curl_cffi>=0.7,<0.17
 # python-dotenv: ローカル開発時に .env から FRED_API_KEY を読み込む。
 # fetch_us_macro.py で使用。GitHub Actions では env: で渡すため読み込みは no-op。
-python-dotenv>=1.0
+python-dotenv>=1.0,<2
