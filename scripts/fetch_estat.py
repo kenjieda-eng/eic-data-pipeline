@@ -15,6 +15,9 @@ e-Stat API（政府統計の総合窓口）から日本の公的統計系列を�
     統計表（各年10月1日現在、男女計・総人口、単位=千人）:
       - 0004021110 : 2016-2020（cat02=人口 / cat03=年齢3区分）
       - 0003448225 : 2021-2024（cat02=年齢3区分 / cat03=人口）  ← cat 割当が表で入替
+      - 0004066158 : 2025 令和7年国勢調査 人口等基本集計 不詳補完値（人口推計に 2025 の都道府県別が無い）。
+                     コード体系と単位（人）が人口推計と違うので、source_map の tables に表ごとの上書き
+                     （sex_code / poptype_code / age_codes / value_divisor / query）を持つ。
     分類コード（getMetaInfo 検証 2026-06-03）: 男女計=000 / 総人口=001 /
       年齢3区分 総数=000・15～64歳=002・65歳以上=003。area={cc}000（cc=JIS 都道府県コード）。
     cdCatNN の位置は表で入れ替わるため、実行時に分類「名」で次元 @id を解決する（L-062）。
@@ -55,6 +58,7 @@ import os
 import re
 import sys
 from datetime import datetime, timedelta, timezone
+from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 
 import pandas as pd
@@ -115,8 +119,13 @@ def fetch_stats_data(
     cd_tab: str | None = None,
     cd_cat01: str | None = None,
     cd_area: str | None = None,
+    extra_params: dict | None = None,
 ) -> bytes:
-    """getStatsData を叩いて生 JSON バイト列を返す。"""
+    """getStatsData を叩いて生 JSON バイト列を返す。
+
+    extra_params: 追加の絞り込み条件（cdCat02・cdCat03 等。複数コードはカンマ区切り）。
+      source_map の tables[].query から渡す。絞り込み（cd*）以外のキーは受け付けない。
+    """
     params: dict[str, str] = {
         "appId": app_id,
         "statsDataId": stats_data_id,
@@ -129,6 +138,10 @@ def fetch_stats_data(
         params["cdCat01"] = cd_cat01
     if cd_area:
         params["cdArea"] = cd_area
+    for k, v in (extra_params or {}).items():
+        if not str(k).startswith("cd"):
+            raise ValueError(f"extra_params は絞り込み条件（cd*）だけ: {k!r}")
+        params[str(k)] = str(v)
     url = f"{api_base.rstrip('/')}/getStatsData"
     safe_params = {k: ("***" if k == "appId" else v) for k, v in params.items()}
     logger.info("GET %s params=%s", url, safe_params)
@@ -257,7 +270,8 @@ def resolve_pop_dims(class_objs: list[dict]) -> dict[str, str]:
             dims["time"] = cid
         elif "男女" in name:
             dims["sex"] = cid
-        elif name == "人口":
+        elif name == "人口" or "国籍" in name:
+            # 国勢調査の「国籍総数か日本人」は人口推計の「人口」（総人口・日本人人口）に当たる
             dims["poptype"] = cid
         elif "年齢" in name:
             dims["age"] = cid
@@ -295,10 +309,16 @@ def parse_pop_year(name: str) -> str | None:
 def collect_pop_rows(
     payload: dict,
     source_cfg: dict,
+    table_cfg: dict | None = None,
 ) -> dict[str, list[tuple[str, str, float]]]:
     """
     1 統計表分の getStatsData payload を 141 系列の行に分解する。
     返り値: indicator_id -> [(date, region, value), ...]
+
+    table_cfg（source_map の tables の 1 要素）があれば、その表だけ次の既定を上書きする:
+      sex_code / poptype_code / age_codes（指標名 -> 年齢コード）/ value_divisor（人 -> 千人なら 1000。
+      割ったあと四捨五入で整数にする。2020 の値〈千人〉と同じ表記）。
+    国勢調査の表（0004066158）はコード体系（男女 総数=0・年齢 00/R2/R3 …）と単位（人）が人口推計と違う。
     """
     class_objs = _stats_data_class_objs(payload)
     dims = resolve_pop_dims(class_objs)
@@ -307,14 +327,17 @@ def collect_pop_rows(
         raise ValueError(f"人口推計 次元の名前解決に失敗: missing={missing} got={dims}")
     time_map = build_pop_time_map(class_objs, dims["time"])
 
+    tcfg = table_cfg or {}
     metrics = source_cfg.get("metrics") or {}
-    age_to_metric = {str(m["age_code"]): mk for mk, m in metrics.items()}
+    age_codes = tcfg.get("age_codes") or {mk: m["age_code"] for mk, m in metrics.items()}
+    age_to_metric = {str(code): mk for mk, code in age_codes.items()}
     indicators = source_cfg.get("indicators") or {}
     key_to_id = {
         (str(v.get("area_code")), v.get("metric")): k for k, v in indicators.items()
     }
-    sex_code = str(source_cfg.get("sex_code", "000"))
-    poptype_code = str(source_cfg.get("poptype_code", "001"))
+    sex_code = str(tcfg.get("sex_code", source_cfg.get("sex_code", "000")))
+    poptype_code = str(tcfg.get("poptype_code", source_cfg.get("poptype_code", "001")))
+    divisor = tcfg.get("value_divisor")
 
     values = (
         payload.get("GET_STATS_DATA", {})
@@ -351,6 +374,12 @@ def collect_pop_rows(
             val = float(str(raw).replace(",", ""))
         except (ValueError, TypeError):
             continue
+        if divisor:
+            # 人 -> 千人。Decimal で割って四捨五入（float の 0.5 丸め・2 進誤差を避ける）。
+            val = float(
+                (Decimal(str(raw).replace(",", "")) / Decimal(str(divisor)))
+                .quantize(Decimal("1"), rounding=ROUND_HALF_UP)
+            )
         region = indicators[ind_id].get("region", "")
         out.setdefault(ind_id, []).append((iso, region, val))
     return out
@@ -389,8 +418,11 @@ def process_population(
         sid = tbl.get("stats_data_id") if isinstance(tbl, dict) else tbl
         if not sid:
             continue
+        tcfg = tbl if isinstance(tbl, dict) else {}
         try:
-            content = fetch_stats_data(api_base, app_id, str(sid))
+            content = fetch_stats_data(
+                api_base, app_id, str(sid), extra_params=tcfg.get("query"),
+            )
         except Exception as e:
             logger.exception("population %s: fetch failed: %s", sid, e)
             append_log(log_dir, "fetch_estat", "WARN", f"population {sid} fetch failed: {e}")
@@ -408,13 +440,20 @@ def process_population(
             append_log(log_dir, "fetch_estat", "FAIL", f"population {sid} STATUS={status}")
             continue
         try:
-            rows = collect_pop_rows(payload, source_cfg)
+            rows = collect_pop_rows(payload, source_cfg, tcfg)
         except ValueError as e:
             logger.error("population %s: %s", sid, e)
             append_log(log_dir, "fetch_estat", "FAIL", f"population {sid} {e}")
             continue
         n = sum(len(r) for r in rows.values())
         logger.info("population %s: %d series x rows parsed (%d values)", sid, len(rows), n)
+        expected = len(source_cfg.get("indicators") or {})
+        if len(rows) < expected:
+            # 表ごとの上書き（コード・query の絞り込み）が表と合わないと、その表の年だけ黙って欠ける。
+            logger.error("population %s: %d/%d series — tables の上書き・絞り込みを確認",
+                         sid, len(rows), expected)
+            append_log(log_dir, "fetch_estat", "FAIL",
+                       f"population {sid} series={len(rows)}/{expected}")
         for ind_id, rws in rows.items():
             accumulated.setdefault(ind_id, []).extend(rws)
 
