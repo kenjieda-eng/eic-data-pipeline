@@ -1,0 +1,162 @@
+sector,year,emissions_mt
+10 Aviation,2012,84.03
+10 Aviation,2013,53.49
+10 Aviation,2014,54.83
+10 Aviation,2015,57.11
+10 Aviation,2016,61.47
+10 Aviation,2017,64.42
+10 Aviation,2018,67.49
+10 Aviation,2019,68.18
+10 Aviation,2020,24.96
+10 Aviation,2021,27.68
+10 Aviation,2022,48.72
+10 Aviation,2023,53.46
+10 Aviation,2024,61.51
+10 Aviation,2025,57.23
+20 Combustion of fuels,2005,1452.25
+20 Combustion of fuels,2006,1464.09
+20 Combustion of fuels,2007,1554.3
+20 Combustion of fuels,2008,1500.8
+20 Combustion of fuels,2009,1376.08
+20 Combustion of fuels,2010,1409.15
+20 Combustion of fuels,2011,1378.39
+20 Combustion of fuels,2012,1366.14
+20 Combustion of fuels,2013,1327.1
+20 Combustion of fuels,2014,1231.13
+20 Combustion of fuels,2015,1220.77
+20 Combustion of fuels,2016,1173.77
+20 Combustion of fuels,2017,1171.01
+20 Combustion of fuels,2018,1103.45
+20 Combustion of fuels,2019,961.71
+20 Combustion of fuels,2020,828.51
+20 Combustion of fuels,2021,818.28
+20 Combustion of fuels,2022,825.99
+20 Combustion of fuels,2023,649.89
+20 Combustion of fuels,2024,588.9
+20 Combustion of fuels,2025,555.15
+21 Refining of mineral oil,2005,131.92
+21 Refining of mineral oil,2006,130.78
+21 Refining of mineral oil,2007,135.36
+21 Refining of mineral oil,2008,135.43
+21 Refining of mineral oil,2009,126.58
+21 Refining of mineral oil,2010,123.61
+21 Refining of mineral oil,2011,123.72
+21 Refining of mineral oil,2012,118.31
+21 Refining of mineral oil,2013,122.24
+21 Refining of mineral oil,2014,119.1
+21 Refining of mineral oil,2015,121.21
+21 Refining of mineral oil,2016,120.95
+21 Refining of mineral oil,2017,120.09
+21 Refining of mineral oil,2018,118.19
+21 Refining of mineral oil,2019,116.96
+21 Refining of mineral oil,2020,107.53
+21 Refining of mineral oil,2021,101.23
+21 Refining of mineral oil,2022,108.46
+21 Refining of mineral oil,2023,104.59
+21 Refining of mineral oil,2024,104.39
+21 Refining of mineral oil,2025,101.3
+24 Production of pig iron or steel,2005,133.29
+24 Production of pig iron or steel,2006,138.64
+24 Production of pig iron or steel,2007,148.92
+24 Production of pig iron or steel,2008,148.65
+24 Production of pig iron or steel,2009,103.52
+24 Production of pig iron or steel,2010,127.38
+24 Production of pig iron or steel,2011,126.69
+24 Production of pig iron or steel,2012,123.01
+24 Production of pig iron or steel,2013,129.47
+24 Production of pig iron or steel,2014,131.9
+24 Production of pig iron or steel,2015,130.27
+24 Production of pig iron or steel,2016,124.46
+24 Production of pig iron or steel,2017,124.18
+24 Production of pig iron or steel,2018,121.73
+24 Production of pig iron or steel,2019,118.25
+24 Production of pig iron or steel,2020,104.82
+24 Production of pig iron or steel,2021,113.03
+24 Production of pig iron or steel,2022,102.54
+24 Production of pig iron or steel,2023,94.22
+24 Production of pig iron or steel,2024,93.23
+24 Production of pig iron or steel,2025,85.83
+29 Production of cement clinker,2005,149.98
+29 Production of cement clinker,2006,153.78
+29 Production of cement clinker,2007,172.68
+29 Production of cement clinker,2008,161.5
+29 Production of cement clinker,2009,129.49
+29 Production of cement clinker,2010,127.5
+29 Production of cement clinker,2011,125.55
+29 Production of cement clinker,2012,117.87
+29 Production of cement clinker,2013,114.19
+29 Production of cement clinker,2014,119.4
+29 Production of cement clinker,2015,117.84
+29 Production of cement clinker,2016,118.29
+29 Production of cement clinker,2017,120.96
+29 Production of cement clinker,2018,122.68
+29 Production of cement clinker,2019,122.23
+29 Production of cement clinker,2020,115.51
+29 Production of cement clinker,2021,112.62
+29 Production of cement clinker,2022,105.69
+29 Production of cement clinker,2023,95.73
+29 Production of cement clinker,2024,91.23
+29 Production of cement clinker,2025,78.3
+"30 Production of lime, or calcination of dolomite/magnesite",2005,30.87
+"30 Production of lime, or calcination of dolomite/magnesite",2006,30.45
+"30 Production of lime, or calcination of dolomite/magnesite",2007,32.76
+"30 Production of lime, or calcination of dolomite/magnesite",2008,33.54
+"30 Production of lime, or calcination of dolomite/magnesite",2009,26.82
+"30 Production of lime, or calcination of dolomite/magnesite",2010,29.85
+"30 Production of lime, or calcination of dolomite/magnesite",2011,30.73
+"30 Production of lime, or calcination of dolomite/magnesite",2012,28.93
+"30 Production of lime, or calcination of dolomite/magnesite",2013,30.2
+"30 Production of lime, or calcination of dolomite/magnesite",2014,30.23
+"30 Production of lime, or calcination of dolomite/magnesite",2015,29.55
+"30 Production of lime, or calcination of dolomite/magnesite",2016,28.91
+"30 Production of lime, or calcination of dolomite/magnesite",2017,30.26
+"30 Production of lime, or calcination of dolomite/magnesite",2018,30.59
+"30 Production of lime, or calcination of dolomite/magnesite",2019,28.78
+"30 Production of lime, or calcination of dolomite/magnesite",2020,26.31
+"30 Production of lime, or calcination of dolomite/magnesite",2021,26.38
+"30 Production of lime, or calcination of dolomite/magnesite",2022,24.37
+"30 Production of lime, or calcination of dolomite/magnesite",2023,21.38
+"30 Production of lime, or calcination of dolomite/magnesite",2024,21.48
+"30 Production of lime, or calcination of dolomite/magnesite",2025,19.82
+36 Production of paper or cardboard,2005,26.05
+36 Production of paper or cardboard,2006,26.04
+36 Production of paper or cardboard,2007,25.59
+36 Production of paper or cardboard,2008,25.54
+36 Production of paper or cardboard,2009,22.54
+36 Production of paper or cardboard,2010,24.18
+36 Production of paper or cardboard,2011,23.19
+36 Production of paper or cardboard,2012,21.96
+36 Production of paper or cardboard,2013,21.53
+36 Production of paper or cardboard,2014,20.63
+36 Production of paper or cardboard,2015,20.8
+36 Production of paper or cardboard,2016,20.62
+36 Production of paper or cardboard,2017,21.24
+36 Production of paper or cardboard,2018,21.02
+36 Production of paper or cardboard,2019,20.9
+36 Production of paper or cardboard,2020,19.67
+36 Production of paper or cardboard,2021,19.28
+36 Production of paper or cardboard,2022,17.19
+36 Production of paper or cardboard,2023,14.44
+36 Production of paper or cardboard,2024,14.44
+36 Production of paper or cardboard,2025,12.46
+42 Production of bulk chemicals,2005,11.39
+42 Production of bulk chemicals,2006,11.77
+42 Production of bulk chemicals,2007,12.48
+42 Production of bulk chemicals,2008,32.86
+42 Production of bulk chemicals,2009,29.94
+42 Production of bulk chemicals,2010,30.83
+42 Production of bulk chemicals,2011,29.52
+42 Production of bulk chemicals,2012,28.02
+42 Production of bulk chemicals,2013,38.66
+42 Production of bulk chemicals,2014,37.86
+42 Production of bulk chemicals,2015,38.25
+42 Production of bulk chemicals,2016,38.48
+42 Production of bulk chemicals,2017,38.84
+42 Production of bulk chemicals,2018,38.88
+42 Production of bulk chemicals,2019,36.46
+42 Production of bulk chemicals,2020,36.29
+42 Production of bulk chemicals,2021,37.48
+42 Production of bulk chemicals,2022,32.39
+42 Production of bulk chemicals,2023,29.15
+42 Production of bulk chemicals,2024,31.07
+42 Production of bulk chemicals,2025,29.64
