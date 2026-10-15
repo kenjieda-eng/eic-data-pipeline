@@ -14,7 +14,9 @@
 
 from __future__ import annotations
 
+import glob
 import logging
+import re
 from pathlib import Path
 from typing import Iterable, Optional
 
@@ -25,11 +27,41 @@ logger = logging.getLogger(__name__)
 # 共通スキーマ（docs/schema.md と一致させる）
 SCHEMA_COLUMNS = ["date", "indicator_id", "region", "value", "source_url"]
 
+# 取得日トークンつきの raw 名（'ember_monthly_20261015.csv'）。raw_ledger.py の DATE_TOKEN_RE と同じ規則
+# （key = 日付を除いた名前 'ember_monthly.csv'）。save_raw の「前回と同じ中身なら書かない」に使う。
+RAW_DATE_TOKEN_RE = re.compile(r"^(?P<stem>.+?)_(?P<date>20\d{6})(?P<ext>\.[A-Za-z0-9]+)$")
+
 
 def ensure_dir(path: Path) -> Path:
     """ディレクトリを（必要なら作成して）返す。"""
     path.mkdir(parents=True, exist_ok=True)
     return path
+
+
+def _raw_equal(old: bytes, new: bytes) -> bool:
+    """raw_ledger.py の _sha256_file と同じ見方で比べる: 先頭 8KB に NUL が無ければテキストとして
+    CR を無視する（Windows の checkout〈autocrlf〉で行末だけ CRLF になった raw を「同じ」とみなす）。
+    バイナリ（xlsx・zip など）は 1 バイトでも違えば別物。
+    """
+    if old == new:
+        return True
+    if b"\x00" in old[:8192] or b"\x00" in new[:8192]:
+        return False
+    return old.replace(b"\r", b"") == new.replace(b"\r", b"")
+
+
+def _latest_raw_same_key(dest_dir: Path, stem: str, ext: str, before: str) -> Optional[Path]:
+    """同じ key（stem + ext）で、取得日トークンが before より前のファイルのうち最新のもの。"""
+    best: Optional[Path] = None
+    best_date = ""
+    for p in dest_dir.glob(f"{glob.escape(stem)}_20??????{glob.escape(ext)}"):
+        m = RAW_DATE_TOKEN_RE.match(p.name)
+        if not m or m.group("stem") != stem or m.group("ext") != ext:
+            continue
+        d = m.group("date")
+        if best_date < d < before:
+            best, best_date = p, d
+    return best
 
 
 def save_raw(
@@ -40,9 +72,24 @@ def save_raw(
     """
     一次ソースから取ってきたファイルをそのまま保存する。
     dest_dir は data/raw/{source}/ を想定。
+
+    名前に取得日トークン（_YYYYMMDD）があり、同じ key（日付を除いた名前）の直近のファイルと
+    中身が同じなら（テキストは行末の CR を除いて比べる。raw 台帳と同じ）、新しいファイルは作らずに
+    既存のパスを返す（2026-10-15:
+    data/raw の 88% が前日と同じ中身の複製で、checkout が 10 GB を超えていたため）。
+    raw_ledger.py は key ごとの最新ファイルの sha256 で判定するので、凍結・変化の判定は
+    変わらない。ファイル名の日付は「その中身を最初に取った日」になる。
+    同じ日の 2 回目（同名が既にある）と、日付トークンの無い名前（上書き型）は従来どおり上書きする。
     """
     ensure_dir(dest_dir)
     dest = dest_dir / filename
+    m = RAW_DATE_TOKEN_RE.match(filename)
+    if m and not dest.exists():
+        prev = _latest_raw_same_key(dest_dir, m.group("stem"), m.group("ext"), m.group("date"))
+        if prev is not None and _raw_equal(prev.read_bytes(), content):
+            logger.info("raw unchanged since %s: %s not written (%d bytes)",
+                        prev.name, filename, len(content))
+            return prev
     dest.write_bytes(content)
     logger.info("saved raw: %s (%d bytes)", dest, len(content))
     return dest
