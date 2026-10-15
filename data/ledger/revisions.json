@@ -2163,8 +2163,8 @@
       ]
     }
   ],
-  "generated_at": "2026-10-14T11:01:30+09:00",
-  "last_checked": "2026-10-14",
+  "generated_at": "2026-10-15T10:35:35+09:00",
+  "last_checked": "2026-10-15",
   "retention_days": 400,
   "max_dates_per_series": 500
 }
