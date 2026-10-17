@@ -2,6 +2,47 @@
   "schema": 1,
   "days": [
     {
+      "date": "2026-10-17",
+      "base": "642eaa9",
+      "head": null,
+      "summary": {
+        "series_revised": 1,
+        "points_revised": 5,
+        "max_rel_change": 0.001923
+      },
+      "series": [
+        {
+          "id": "us-industrial-production",
+          "source": "fred-macro",
+          "source_version": "sha256:141f6e9b1712d8cf29d0aafff2c1df961e698f69cb82b4c8708601e269e83856",
+          "revised_count": 5,
+          "added": 1,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-04-01",
+            "2026-08-01"
+          ],
+          "max_rel_change": 0.001923,
+          "max_abs_change": 0.1982,
+          "worst": {
+            "date": "2026-08-01",
+            "old": 103.0682,
+            "new": 103.2664
+          },
+          "revised_dates": [
+            "2026-04-01",
+            "2026-05-01",
+            "2026-06-01",
+            "2026-07-01",
+            "2026-08-01"
+          ],
+          "truncated": false
+        }
+      ]
+    },
+    {
       "date": "2026-10-07",
       "base": "39385a4",
       "head": "24fbaee",
@@ -2163,8 +2204,8 @@
       ]
     }
   ],
-  "generated_at": "2026-10-16T10:26:04+09:00",
-  "last_checked": "2026-10-16",
+  "generated_at": "2026-10-17T10:27:28+09:00",
+  "last_checked": "2026-10-17",
   "retention_days": 400,
   "max_dates_per_series": 500
 }
