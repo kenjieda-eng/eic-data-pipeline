@@ -1,9 +1,9 @@
 {
   "schema": "today-v1",
-  "date": "2026-10-17",
-  "weekday": "土",
+  "date": "2026-10-18",
+  "weekday": "日",
   "weekend": true,
-  "generatedAt": "2026-10-17T10:27:31+09:00",
+  "generatedAt": "2026-10-18T10:07:46+09:00",
   "lines": [
     {
       "indicatorId": "derived:jepx-9-region-avg",
