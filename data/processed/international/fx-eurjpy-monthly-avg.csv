@@ -323,12 +323,12 @@ date,indicator_id,region,value,source_url
 2025-10-01,fx-eurjpy-monthly-avg,eu,176.1526086956522,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
 2025-11-01,fx-eurjpy-monthly-avg,eu,179.31599999999997,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
 2025-12-01,fx-eurjpy-monthly-avg,eu,182.49714285714285,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
-2026-01-01,fx-eurjpy-monthly-avg,eu,183.93857142857144,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
+2026-01-01,fx-eurjpy-monthly-avg,eu,183.93857142857146,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
 2026-02-01,fx-eurjpy-monthly-avg,eu,183.45150000000004,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
 2026-03-01,fx-eurjpy-monthly-avg,eu,183.3990909090909,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
 2026-04-01,fx-eurjpy-monthly-avg,eu,186.206,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
 2026-05-01,fx-eurjpy-monthly-avg,eu,184.7095,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
-2026-06-01,fx-eurjpy-monthly-avg,eu,185.1140909090909,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
+2026-06-01,fx-eurjpy-monthly-avg,eu,185.11409090909092,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
 2026-07-01,fx-eurjpy-monthly-avg,eu,185.53913043478263,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
-2026-08-01,fx-eurjpy-monthly-avg,eu,184.10190476190476,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
+2026-08-01,fx-eurjpy-monthly-avg,eu,184.10190476190473,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
 2026-09-01,fx-eurjpy-monthly-avg,eu,180.04409090909087,https://data-api.ecb.europa.eu/service/data/EXR/M.JPY.EUR.SP00.A
