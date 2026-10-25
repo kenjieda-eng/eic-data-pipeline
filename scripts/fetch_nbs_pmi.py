@@ -32,6 +32,7 @@ import argparse
 import logging
 import re
 import sys
+import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urljoin
@@ -73,26 +74,38 @@ def _decode(resp) -> str:
     return resp.content.decode(resp.apparent_encoding or "utf-8", errors="replace")
 
 
+# NBS の Latest Releases は 1 ページ 15 件。1 ページ目に PMI が無いとき、index_1.html・index_2.html まで見る。
+INDEX_EXTRA_PAGES = (1, 2)
+INDEX_PAGE_SLEEP_SEC = 2
+
+
 def find_latest_pmi_url(index_url: str, raw_dir: Path, today_tag: str) -> str:
-    """インデックスから PMI プレスリリースの URL を引く。"""
-    logger.info("GET index %s", index_url)
-    r = get(index_url, timeout=60)
-    r.raise_for_status()
-    save_raw(r.content, raw_dir, f"index_{today_tag}.html")
-    html = _decode(r)
-    # 最初に登場する "Purchasing Managers' Index" アンカーが最新リリース。
+    """インデックスから PMI プレスリリースの URL を引く。
+
+    NBS の Latest Releases は 1 ページ 15 件。月の下旬に公表が続くと、前月末の PMI が 2 ページ目
+    （index_1.html）に押し出される（2026-10-24・25 の nightly がこれで赤）。1 ページ目に無ければ
+    2・3 ページ目まで見る（新しい PMI は月末に 1 ページ目の先頭に出るので、最初に見つかったものが最新）。
+    """
     # NBS の正書法は U+2019 (’) と U+0027 (') が混在し得る — どちらも許容。
     pat = re.compile(
         r'<a[^>]+href="([^"]+)"[^>]*>[^<]*Purchasing\s+Managers[’\']\s*Index[^<]*</a>',
         re.IGNORECASE,
     )
-    m = pat.search(html)
-    if not m:
-        raise RuntimeError("No 'Purchasing Managers' Index' link found on index page")
-    href = m.group(1)
-    full = urljoin(index_url, href)
-    logger.info("resolved PMI release URL: %s", full)
-    return full
+    pages = [index_url] + [urljoin(index_url, f"index_{i}.html") for i in INDEX_EXTRA_PAGES]
+    for n, url in enumerate(pages, 1):
+        if n > 1:
+            time.sleep(INDEX_PAGE_SLEEP_SEC)  # サーバへの配慮（2 ページ目以降を続けて取らない）
+        logger.info("GET index %s", url)
+        r = get(url, timeout=60)
+        r.raise_for_status()
+        save_raw(r.content, raw_dir, f"index_{today_tag}.html" if n == 1 else f"index_p{n}_{today_tag}.html")
+        m = pat.search(_decode(r))
+        if m:
+            full = urljoin(url, m.group(1))
+            logger.info("resolved PMI release URL (index page %d): %s", n, full)
+            return full
+        logger.info("no PMI link on index page %d", n)
+    raise RuntimeError(f"No 'Purchasing Managers' Index' link found on index pages 1-{len(pages)}")
 
 
 def fetch_release(url: str, raw_dir: Path, today_tag: str) -> str:
