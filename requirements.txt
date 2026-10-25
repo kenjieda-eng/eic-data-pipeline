@@ -2,8 +2,12 @@
 # 25.0.1 → 26.0.0 に上がり、データは同じまま parquet 534 本の bytes が変わった（created_by の版が変わる）。
 # 上限を上げるときは PR で（parquet が全部差分に出るが、データ差ではない。改訂台帳は CSV を読むので影響なし）。
 # 当時の CI の版: pandas 3.0.x / pyarrow 26.0.0 / requests 2.34 / PyYAML 6.0.3 / bs4 4.15 / openpyxl 3.1.5 / curl_cffi 0.16 / python-dotenv 1.2
+# 2026-10-25: pandas は minor で上限（<3.2）。理由: 10/22 公開の pandas 3.1.0 を 10/23 の nightly が取り込み、データは同じまま
+#   parquet 534 本の bytes（pandas の版を書く metadata）と、JEPX の日平均・ECB の月平均など 12 系列 2,811 点の最後の桁
+#   （例 13.529375 → 13.529375000000007。改訂台帳 2026-10-23）が変わった。major の上限では minor の上がりを止められない。
+#   3.1 は戻さない（戻すと同じ書き換えがもう一度起きる）。上げるときは PR で、parquet と改訂台帳に差分が出る日を選ぶ。
 requests>=2.31,<3
-pandas>=2.0,<4
+pandas>=2.0,<3.2
 pyarrow>=14.0,<27
 PyYAML>=6.0,<7
 beautifulsoup4>=4.12,<5
