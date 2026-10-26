@@ -73,6 +73,18 @@ def _get_api_key() -> str:
     return key
 
 
+def _reject_html(content: bytes, what: str) -> None:
+    """応答が HTML（メンテナンス画面など）なら、raw に保存せずに例外にする。
+
+    2026-10-22: St. Louis Fed の「Site Maintenance」ページが HTTP 200 で返り、7 系列 × json/csv の
+    14 本が raw に保存された（processed は守られたが raw が汚れた）。JSON・CSV のどちらも先頭が
+    `<` で始まることはないので、先頭の `<!doctype html` / `<html` で判定する。
+    """
+    head = content.lstrip()[:64].lower()
+    if head.startswith(b"<!doctype html") or head.startswith(b"<html"):
+        raise ValueError(f"{what}: HTML が返った（メンテナンス画面など）— raw に保存しない")
+
+
 def fetch_via_api(
     api_base: str,
     fred_id: str,
@@ -89,10 +101,10 @@ def fetch_via_api(
     logger.info("API GET %s series_id=%s", api_base, fred_id)
     r = get(api_base, params=params, timeout=60)
     r.raise_for_status()
+    _reject_html(r.content, f"API {fred_id}")
 
+    payload = r.json() or {}  # JSON でなければここで例外（raw には保存しない）
     save_raw(r.content, raw_dir, f"{fred_id}_{today_tag}.json")
-
-    payload = r.json() or {}
     obs = payload.get("observations") or []
     rows: list[tuple[str, float]] = []
     for o in obs:
@@ -125,6 +137,7 @@ def fetch_via_csv(
     logger.info("CSV GET %s", url)
     r = get(url, timeout=60)
     r.raise_for_status()
+    _reject_html(r.content, f"CSV {fred_id}")
 
     save_raw(r.content, raw_dir, f"{fred_id}_{today_tag}.csv")
 
