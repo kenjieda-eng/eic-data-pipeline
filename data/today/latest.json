@@ -1,54 +1,54 @@
 {
   "schema": "today-v1",
-  "date": "2026-10-25",
-  "weekday": "日",
-  "weekend": true,
-  "generatedAt": "2026-10-25T10:15:34+09:00",
+  "date": "2026-10-26",
+  "weekday": "月",
+  "weekend": false,
+  "generatedAt": "2026-10-26T10:15:12+09:00",
   "lines": [
     {
       "indicatorId": "derived:jepx-9-region-avg",
       "label": "JEPX 全国平均",
       "unit": "¥/kWh",
-      "dataDate": "2026-10-26",
-      "value": 25.82,
-      "prevDate": "2026-10-25",
-      "prevValue": 22.01,
-      "diff": 3.8,
-      "diffPct": 17.3,
+      "dataDate": "2026-10-27",
+      "value": 24.62,
+      "prevDate": "2026-10-26",
+      "prevValue": 25.82,
+      "diff": -1.2,
+      "diffPct": -4.6,
       "periodLabel": "前日比",
-      "rangePosPct": 84.11,
+      "rangePosPct": 77.28,
       "editor": "haru",
-      "explanation": "2026-10-26 のJEPX 全国平均は 25.82¥/kWh（前日比 +3.80¥/kWh・+17.3%）。直近30日のレンジでは上位圏にある。9エリアの最高は東京 35.73、最低は四国 7.85。"
+      "explanation": "2026-10-27 のJEPX 全国平均は 24.62¥/kWh（前日比 -1.20¥/kWh・-4.6%）。直近30日のレンジでは中位圏にある。9エリアの最高は東京 32.98、最低は四国 13.13。"
     },
     {
       "indicatorId": "jepx-spot-tokyo",
       "label": "JEPX 東京",
       "unit": "¥/kWh",
-      "dataDate": "2026-10-26",
-      "value": 35.73,
-      "prevDate": "2026-10-25",
-      "prevValue": 34.93,
-      "diff": 0.79,
-      "diffPct": 2.3,
+      "dataDate": "2026-10-27",
+      "value": 32.98,
+      "prevDate": "2026-10-26",
+      "prevValue": 35.73,
+      "diff": -2.75,
+      "diffPct": -7.7,
       "periodLabel": "前日比",
-      "rangePosPct": 100.0,
+      "rangePosPct": 85.95,
       "editor": "haru",
-      "explanation": "2026-10-26 のJEPX 東京は 35.73¥/kWh（前日比 +0.79¥/kWh・+2.3%）。直近30日のレンジでは上位圏にある。"
+      "explanation": "2026-10-27 のJEPX 東京は 32.98¥/kWh（前日比 -2.75¥/kWh・-7.7%）。直近30日のレンジでは上位圏にある。"
     },
     {
       "indicatorId": "jepx-spot-kyushu",
       "label": "JEPX 九州",
       "unit": "¥/kWh",
-      "dataDate": "2026-10-26",
-      "value": 20.45,
-      "prevDate": "2026-10-25",
-      "prevValue": 17.39,
-      "diff": 3.07,
-      "diffPct": 17.6,
+      "dataDate": "2026-10-27",
+      "value": 16.44,
+      "prevDate": "2026-10-26",
+      "prevValue": 20.45,
+      "diff": -4.01,
+      "diffPct": -19.6,
       "periodLabel": "前日比",
-      "rangePosPct": 86.69,
+      "rangePosPct": 59.36,
       "editor": "haru",
-      "explanation": "2026-10-26 のJEPX 九州は 20.45¥/kWh（前日比 +3.07¥/kWh・+17.6%）。直近30日のレンジでは上位圏にある。"
+      "explanation": "2026-10-27 のJEPX 九州は 16.44¥/kWh（前日比 -4.01¥/kWh・-19.6%）。直近30日のレンジでは中位圏にある。"
     },
     {
       "indicatorId": "fuel-lng-jp-cif",
@@ -84,30 +84,36 @@
       "indicatorId": "jgb-10y-yield",
       "label": "JGB 10年利回り",
       "unit": "%",
-      "dataDate": "2026-10-22",
-      "value": 2.91,
-      "prevDate": "2026-10-21",
-      "prevValue": 2.92,
-      "diff": -0.01,
-      "diffPct": -0.3,
+      "dataDate": "2026-10-23",
+      "value": 2.84,
+      "prevDate": "2026-10-22",
+      "prevValue": 2.91,
+      "diff": -0.08,
+      "diffPct": -2.6,
       "periodLabel": "前日比",
-      "rangePosPct": 10.45,
+      "rangePosPct": 0.0,
       "editor": "makoto",
-      "explanation": "2026-10-22 のJGB 10年利回りは 2.91%（前日比 -0.01%・-0.3%）。直近30日のレンジでは下位圏にある。"
+      "explanation": "2026-10-23 のJGB 10年利回りは 2.84%（前日比 -0.08%・-2.6%）。直近30日のレンジでは下位圏にある。"
     }
   ],
   "alerts": [
     {
       "indicatorId": "derived:jepx-9-region-avg",
       "label": "JEPX 全国平均",
-      "diffPct": 17.3,
-      "message": "JEPX 全国平均 が前日比 +17.3% の変動"
+      "diffPct": -4.6,
+      "message": "JEPX 全国平均 が前日比 -4.6% の変動"
+    },
+    {
+      "indicatorId": "jepx-spot-tokyo",
+      "label": "JEPX 東京",
+      "diffPct": -7.7,
+      "message": "JEPX 東京 が前日比 -7.7% の変動"
     },
     {
       "indicatorId": "jepx-spot-kyushu",
       "label": "JEPX 九州",
-      "diffPct": 17.6,
-      "message": "JEPX 九州 が前日比 +17.6% の変動"
+      "diffPct": -19.6,
+      "message": "JEPX 九州 が前日比 -19.6% の変動"
     },
     {
       "indicatorId": "fuel-lng-jp-cif",
