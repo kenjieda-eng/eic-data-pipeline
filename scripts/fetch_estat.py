@@ -69,7 +69,7 @@ sys.path.insert(0, str(ROOT))
 import yaml  # noqa: E402
 
 from scripts.common.http import get  # noqa: E402
-from scripts.common.io import append_log, save_raw, write_processed  # noqa: E402
+from scripts.common.io import ESTAT_RESULT_DATE_RE, append_log, save_raw, write_processed  # noqa: E402
 from scripts.common.metadata import write_metadata_for_indicator  # noqa: E402
 
 try:
@@ -427,7 +427,7 @@ def process_population(
             logger.exception("population %s: fetch failed: %s", sid, e)
             append_log(log_dir, "fetch_estat", "WARN", f"population {sid} fetch failed: {e}")
             continue
-        save_raw(content, raw_dir, f"jpn-pop_{sid}_{today_tag}.json")
+        save_raw(content, raw_dir, f"jpn-pop_{sid}_{today_tag}.json", ignore_re=ESTAT_RESULT_DATE_RE)
         try:
             payload = json.loads(content.decode("utf-8"))
         except Exception as e:
@@ -539,7 +539,7 @@ def process_estat(
             append_log(log_dir, "fetch_estat", "WARN", f"{indicator_id} fetch failed: {e}")
             continue
 
-        save_raw(content, raw_dir, f"{indicator_id}_{today_tag}.json")
+        save_raw(content, raw_dir, f"{indicator_id}_{today_tag}.json", ignore_re=ESTAT_RESULT_DATE_RE)
 
         try:
             payload = json.loads(content.decode("utf-8"))
