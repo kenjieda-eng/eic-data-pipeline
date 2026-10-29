@@ -31,6 +31,11 @@ SCHEMA_COLUMNS = ["date", "indicator_id", "region", "value", "source_url"]
 # （key = 日付を除いた名前 'ember_monthly.csv'）。save_raw の「前回と同じ中身なら書かない」に使う。
 RAW_DATE_TOKEN_RE = re.compile(r"^(?P<stem>.+?)_(?P<date>20\d{6})(?P<ext>\.[A-Za-z0-9]+)$")
 
+# e-Stat API の応答（JSON）は RESULT.DATE（応答を作った日時）が毎回変わる。save_raw の「同じ中身か」の判定でだけ
+# これを除いて比べる（保存する中身はそのまま）。2026-10-29: estat 5 本・estat_trade 6 本が毎日この 1 か所だけ違う
+# 複製で、1 日 約 2.4 MB 増えていた（A'）。STATUS が 0 以外（エラー応答）は除かない＝毎回保存される。
+ESTAT_RESULT_DATE_RE = re.compile(rb'("RESULT":\{"STATUS":0,"ERROR_MSG":"[^"]*","DATE":)"[^"]*"')
+
 
 def ensure_dir(path: Path) -> Path:
     """ディレクトリを（必要なら作成して）返す。"""
@@ -38,11 +43,16 @@ def ensure_dir(path: Path) -> Path:
     return path
 
 
-def _raw_equal(old: bytes, new: bytes) -> bool:
+def _raw_equal(old: bytes, new: bytes, ignore_re: Optional[re.Pattern[bytes]] = None) -> bool:
     """raw_ledger.py の _sha256_file と同じ見方で比べる: 先頭 8KB に NUL が無ければテキストとして
     CR を無視する（Windows の checkout〈autocrlf〉で行末だけ CRLF になった raw を「同じ」とみなす）。
     バイナリ（xlsx・zip など）は 1 バイトでも違えば別物。
+    ignore_re を渡すと、その一致部分（第 1 グループの後ろの値）を両方とも "-" に置き換えてから比べる
+    （e-Stat の RESULT.DATE など、応答ごとに変わるだけの値）。
     """
+    if ignore_re is not None:
+        old = ignore_re.sub(rb'\1"-"', old)
+        new = ignore_re.sub(rb'\1"-"', new)
     if old == new:
         return True
     if b"\x00" in old[:8192] or b"\x00" in new[:8192]:
@@ -68,6 +78,7 @@ def save_raw(
     content: bytes,
     dest_dir: Path,
     filename: str,
+    ignore_re: Optional[re.Pattern[bytes]] = None,
 ) -> Path:
     """
     一次ソースから取ってきたファイルをそのまま保存する。
@@ -86,7 +97,7 @@ def save_raw(
     m = RAW_DATE_TOKEN_RE.match(filename)
     if m and not dest.exists():
         prev = _latest_raw_same_key(dest_dir, m.group("stem"), m.group("ext"), m.group("date"))
-        if prev is not None and _raw_equal(prev.read_bytes(), content):
+        if prev is not None and _raw_equal(prev.read_bytes(), content, ignore_re):
             logger.info("raw unchanged since %s: %s not written (%d bytes)",
                         prev.name, filename, len(content))
             return prev
