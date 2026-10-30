@@ -2,6 +2,147 @@
   "schema": 1,
   "days": [
     {
+      "date": "2026-10-30",
+      "base": "93652d8",
+      "head": null,
+      "summary": {
+        "series_revised": 5,
+        "points_revised": 9,
+        "max_rel_change": 9.2e-05
+      },
+      "series": [
+        {
+          "id": "meti-gen-hydro",
+          "source": "enecho-power",
+          "source_version": "sha256:bf421673885aba3ecd18897194d469a877f3cdd34df31940782e5739ba419965",
+          "revised_count": 1,
+          "added": 1,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-06-01",
+            "2026-06-01"
+          ],
+          "max_rel_change": 9.2e-05,
+          "max_abs_change": 0.732,
+          "worst": {
+            "date": "2026-06-01",
+            "old": 7934.362,
+            "new": 7933.63
+          },
+          "revised_dates": [
+            "2026-06-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "meti-renewables-share",
+          "source": "enecho-power",
+          "source_version": "sha256:bf421673885aba3ecd18897194d469a877f3cdd34df31940782e5739ba419965",
+          "revised_count": 1,
+          "added": 1,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-06-01",
+            "2026-06-01"
+          ],
+          "max_rel_change": 4.4e-05,
+          "max_abs_change": 0.001,
+          "worst": {
+            "date": "2026-06-01",
+            "old": 22.835,
+            "new": 22.834
+          },
+          "revised_dates": [
+            "2026-06-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "meti-demand-total",
+          "source": "enecho-power",
+          "source_version": "sha256:bf421673885aba3ecd18897194d469a877f3cdd34df31940782e5739ba419965",
+          "revised_count": 2,
+          "added": 1,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-04-01",
+            "2026-06-01"
+          ],
+          "max_rel_change": 3.3e-05,
+          "max_abs_change": 2.128,
+          "worst": {
+            "date": "2026-04-01",
+            "old": 64637.062,
+            "new": 64639.19
+          },
+          "revised_dates": [
+            "2026-04-01",
+            "2026-06-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "meti-gen-solar",
+          "source": "enecho-power",
+          "source_version": "sha256:bf421673885aba3ecd18897194d469a877f3cdd34df31940782e5739ba419965",
+          "revised_count": 2,
+          "added": 1,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-04-01",
+            "2026-05-01"
+          ],
+          "max_rel_change": 3.2e-05,
+          "max_abs_change": 0.09,
+          "worst": {
+            "date": "2026-05-01",
+            "old": 2786.606,
+            "new": 2786.696
+          },
+          "revised_dates": [
+            "2026-04-01",
+            "2026-05-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "meti-gen-total",
+          "source": "enecho-power",
+          "source_version": "sha256:bf421673885aba3ecd18897194d469a877f3cdd34df31940782e5739ba419965",
+          "revised_count": 3,
+          "added": 1,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-04-01",
+            "2026-06-01"
+          ],
+          "max_rel_change": 1e-05,
+          "max_abs_change": 0.612,
+          "worst": {
+            "date": "2026-06-01",
+            "old": 60830.29,
+            "new": 60829.678
+          },
+          "revised_dates": [
+            "2026-04-01",
+            "2026-05-01",
+            "2026-06-01"
+          ],
+          "truncated": false
+        }
+      ]
+    },
+    {
       "date": "2026-10-23",
       "base": "8418811",
       "head": null,
@@ -7182,8 +7323,8 @@
       ]
     }
   ],
-  "generated_at": "2026-10-29T11:31:44+09:00",
-  "last_checked": "2026-10-29",
+  "generated_at": "2026-10-30T11:42:06+09:00",
+  "last_checked": "2026-10-30",
   "retention_days": 400,
   "max_dates_per_series": 500
 }

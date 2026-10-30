@@ -35,6 +35,7 @@ date,indicator_id,region,value,source_url
 2026-01-01,meti-gen-total,jp,81636.856,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2026-02-01,meti-gen-total,jp,69787.506,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
 2026-03-01,meti-gen-total,jp,67411.496,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
-2026-04-01,meti-gen-total,jp,57124.486,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
-2026-05-01,meti-gen-total,jp,56915.676,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
-2026-06-01,meti-gen-total,jp,60830.29,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-04-01,meti-gen-total,jp,57124.607,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-05-01,meti-gen-total,jp,56915.929,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-06-01,meti-gen-total,jp,60829.678,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
+2026-07-01,meti-gen-total,jp,74315.299,https://www.enecho.meti.go.jp/statistics/electric_power/ep002/
