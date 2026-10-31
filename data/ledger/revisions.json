@@ -2,6 +2,304 @@
   "schema": 1,
   "days": [
     {
+      "date": "2026-10-31",
+      "base": "5a3f435",
+      "head": null,
+      "summary": {
+        "series_revised": 11,
+        "points_revised": 22,
+        "max_rel_change": 0.027778
+      },
+      "series": [
+        {
+          "id": "ember-share-bioenergy-us",
+          "source": "ember",
+          "source_version": "sha256:501d6a56083ec1ddc4a6dc13c872daf0bc23710570061cb298a3ae8d4a988210",
+          "revised_count": 2,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "max_rel_change": 0.027778,
+          "max_abs_change": 0.025,
+          "worst": {
+            "date": "2026-09-01",
+            "old": 0.9,
+            "new": 0.925
+          },
+          "revised_dates": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "ember-demand-us",
+          "source": "ember",
+          "source_version": "sha256:501d6a56083ec1ddc4a6dc13c872daf0bc23710570061cb298a3ae8d4a988210",
+          "revised_count": 3,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-07-01",
+            "2026-09-01"
+          ],
+          "max_rel_change": 0.002504,
+          "max_abs_change": 1.164,
+          "worst": {
+            "date": "2026-08-01",
+            "old": 464.903,
+            "new": 463.739
+          },
+          "revised_dates": [
+            "2026-07-01",
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "ember-share-hydro-us",
+          "source": "ember",
+          "source_version": "sha256:501d6a56083ec1ddc4a6dc13c872daf0bc23710570061cb298a3ae8d4a988210",
+          "revised_count": 2,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "max_rel_change": 0.000287,
+          "max_abs_change": 0.001,
+          "worst": {
+            "date": "2026-09-01",
+            "old": 3.489,
+            "new": 3.488
+          },
+          "revised_dates": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "ember-share-wind-us",
+          "source": "ember",
+          "source_version": "sha256:501d6a56083ec1ddc4a6dc13c872daf0bc23710570061cb298a3ae8d4a988210",
+          "revised_count": 2,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "max_rel_change": 0.000274,
+          "max_abs_change": 0.002,
+          "worst": {
+            "date": "2026-08-01",
+            "old": 7.305,
+            "new": 7.303
+          },
+          "revised_dates": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "ember-share-gas-us",
+          "source": "ember",
+          "source_version": "sha256:501d6a56083ec1ddc4a6dc13c872daf0bc23710570061cb298a3ae8d4a988210",
+          "revised_count": 2,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "max_rel_change": 0.000272,
+          "max_abs_change": 0.012,
+          "worst": {
+            "date": "2026-09-01",
+            "old": 44.074,
+            "new": 44.062
+          },
+          "revised_dates": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "ember-generation-us",
+          "source": "ember",
+          "source_version": "sha256:501d6a56083ec1ddc4a6dc13c872daf0bc23710570061cb298a3ae8d4a988210",
+          "revised_count": 2,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "max_rel_change": 0.000266,
+          "max_abs_change": 0.108,
+          "worst": {
+            "date": "2026-09-01",
+            "old": 405.936,
+            "new": 406.044
+          },
+          "revised_dates": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "ember-share-coal-us",
+          "source": "ember",
+          "source_version": "sha256:501d6a56083ec1ddc4a6dc13c872daf0bc23710570061cb298a3ae8d4a988210",
+          "revised_count": 2,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "max_rel_change": 0.000254,
+          "max_abs_change": 0.004,
+          "worst": {
+            "date": "2026-09-01",
+            "old": 15.719,
+            "new": 15.715
+          },
+          "revised_dates": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "ember-share-nuclear-us",
+          "source": "ember",
+          "source_version": "sha256:501d6a56083ec1ddc4a6dc13c872daf0bc23710570061cb298a3ae8d4a988210",
+          "revised_count": 2,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "max_rel_change": 0.000249,
+          "max_abs_change": 0.004,
+          "worst": {
+            "date": "2026-09-01",
+            "old": 16.096,
+            "new": 16.092
+          },
+          "revised_dates": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "ember-share-solar-us",
+          "source": "ember",
+          "source_version": "sha256:501d6a56083ec1ddc4a6dc13c872daf0bc23710570061cb298a3ae8d4a988210",
+          "revised_count": 2,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "max_rel_change": 0.00019,
+          "max_abs_change": 0.002,
+          "worst": {
+            "date": "2026-09-01",
+            "old": 10.548,
+            "new": 10.546
+          },
+          "revised_dates": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "ember-co2-intensity-us",
+          "source": "ember",
+          "source_version": "sha256:501d6a56083ec1ddc4a6dc13c872daf0bc23710570061cb298a3ae8d4a988210",
+          "revised_count": 2,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "max_rel_change": 0.000118,
+          "max_abs_change": 0.047,
+          "worst": {
+            "date": "2026-09-01",
+            "old": 399.27,
+            "new": 399.223
+          },
+          "revised_dates": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "ember-demand-cn",
+          "source": "ember",
+          "source_version": "sha256:501d6a56083ec1ddc4a6dc13c872daf0bc23710570061cb298a3ae8d4a988210",
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-09-01",
+            "2026-09-01"
+          ],
+          "max_rel_change": 6.4e-05,
+          "max_abs_change": 0.057,
+          "worst": {
+            "date": "2026-09-01",
+            "old": 897.52,
+            "new": 897.577
+          },
+          "revised_dates": [
+            "2026-09-01"
+          ],
+          "truncated": false
+        }
+      ]
+    },
+    {
       "date": "2026-10-30",
       "base": "93652d8",
       "head": null,
@@ -7323,8 +7621,8 @@
       ]
     }
   ],
-  "generated_at": "2026-10-30T11:42:06+09:00",
-  "last_checked": "2026-10-30",
+  "generated_at": "2026-10-31T11:25:28+09:00",
+  "last_checked": "2026-10-31",
   "retention_days": 400,
   "max_dates_per_series": 500
 }
