@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import glob
 import logging
+import os
 import re
 from pathlib import Path
 from typing import Iterable, Optional
@@ -168,12 +169,32 @@ def write_processed(
     merged = merged.drop_duplicates(subset=list(key_cols), keep="last")
     merged = merged.sort_values(list(key_cols)).reset_index(drop=True)
 
-    merged.to_csv(csv_path, index=False, encoding="utf-8")
+    # 2026-11-04: CSV の中身（bytes）が既存と同じなら、CSV も parquet も書き直さない。
+    # parquet は書き手（pandas・pyarrow）の版を metadata に持つので、データが同じでも版が
+    # 上がった日に nightly が書く parquet 534 本が全部書き換わっていた（10/23 pandas 3.1.0、
+    # 11/4 pyarrow 26.0.1）。書き直さなければ「parquet が変わる日 == CSV が変わる日」になる。
+    # parquet が無いとき（初回・欠落）は従来どおり両方書く。全部書き直したいときは
+    # 環境変数 EIC_REWRITE_PROCESSED=1。
+    csv_bytes = merged.to_csv(index=False).encode("utf-8")
+    if (
+        os.environ.get("EIC_REWRITE_PROCESSED") != "1"
+        and csv_path.exists()
+        and parquet_path.exists()
+        and csv_path.read_bytes() == csv_bytes
+    ):
+        logger.info("processed unchanged: %s not rewritten (%d rows)", csv_path, len(merged))
+        return csv_path, parquet_path
+
+    csv_path.write_bytes(csv_bytes)
     try:
         merged.to_parquet(parquet_path, index=False)
     except Exception as e:
-        # pyarrow がインストールされていない等の場合は CSV だけでも残す
+        # pyarrow がインストールされていない等の場合は CSV だけでも残す。
+        # 2026-11-04（#73 のレビュー）: 古い（または途中で切れた）parquet は消しておく。残すと、
+        # 上の「CSV が同じなら書かない」で、次に CSV が変わる夜まで古いままになるため。
+        # 無ければ次の夜は両方書き直す。
         logger.warning("parquet write failed (%s) — CSV only", e)
+        parquet_path.unlink(missing_ok=True)
 
     logger.info(
         "wrote processed%s: %s (%d rows, range=%s..%s)",
