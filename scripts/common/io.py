@@ -189,8 +189,12 @@ def write_processed(
     try:
         merged.to_parquet(parquet_path, index=False)
     except Exception as e:
-        # pyarrow がインストールされていない等の場合は CSV だけでも残す
+        # pyarrow がインストールされていない等の場合は CSV だけでも残す。
+        # 2026-11-04（#73 のレビュー）: 古い（または途中で切れた）parquet は消しておく。残すと、
+        # 上の「CSV が同じなら書かない」で、次に CSV が変わる夜まで古いままになるため。
+        # 無ければ次の夜は両方書き直す。
         logger.warning("parquet write failed (%s) — CSV only", e)
+        parquet_path.unlink(missing_ok=True)
 
     logger.info(
         "wrote processed%s: %s (%d rows, range=%s..%s)",
