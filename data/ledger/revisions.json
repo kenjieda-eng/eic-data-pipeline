@@ -8213,8 +8213,8 @@
       ]
     }
   ],
-  "generated_at": "2026-11-04T12:06:23+09:00",
-  "last_checked": "2026-11-04",
+  "generated_at": "2026-11-05T12:34:17+09:00",
+  "last_checked": "2026-11-05",
   "retention_days": 400,
   "max_dates_per_series": 500
 }
