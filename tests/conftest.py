@@ -5,10 +5,15 @@ PR のたびに自動で確かめ直すためのもの。ネットに出ない�
 """
 from __future__ import annotations
 
+import os
 import sys
 from pathlib import Path
 
 import pytest
+
+# scripts/fetch_us_macro.py は import 時に .env を読む（python-dotenv）。テストは鍵を使わないので、ローカルで走らせても
+# .env の鍵をテストのプロセスに入れない（python-dotenv 1.1 以降の PYTHON_DOTENV_DISABLED。2026-11-06、#74 のレビュー）。
+os.environ["PYTHON_DOTENV_DISABLED"] = "1"
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:

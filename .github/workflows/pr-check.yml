@@ -4,7 +4,8 @@ name: PR Check
 # ネットに出るのは pip だけ（fetch は走らせない・鍵は読まない・data/ は書かない）。必須チェックにはしない。
 #   1. 構文: python -m compileall
 #   2. tests/: これまで _inbox の check で確かめてきた直し（#70 NBS・#71 FRED・#72 e-Stat・#73 processed）
-#   3. PR が data/ を変えていないか（data は nightly だけが main に直接 push する。PR では変えない）
+#   3. PR が data/ を変えていれば警告（失敗にはしない。手で書き写す系列〈transcribe_*.py〉や raw の整理の PR は
+#      data/ を変えるのが正しい＝#50・#51・#59・#61・#63・#64・#68。意図しない data/ の混入に気づくための表示。#74 のレビュー）
 on:
   pull_request:
     branches: [main]
@@ -49,13 +50,14 @@ jobs:
       - name: Tests
         run: pytest -q tests
 
-      - name: No data/ changes in PR
+      - name: data/ changes (warning only)
         if: github.event_name == 'pull_request'
         run: |
           changed=$(git diff --name-only HEAD^1 HEAD -- data/)
           if [ -n "$changed" ]; then
-            echo "::error::この PR は data/ を変更しています（data は nightly だけが書く）。"
-            echo "$changed" | head -50
-            exit 1
+            n=$(printf '%s\n' "$changed" | wc -l)
+            echo "::warning::この PR は data/ を ${n} 本変更しています。手で書き写した系列や raw の整理なら問題ありません。意図していなければ外してください。"
+            printf '%s\n' "$changed" | head -50
+          else
+            echo "data/ の変更なし"
           fi
-          echo "data/ の変更なし"

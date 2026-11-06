@@ -57,6 +57,15 @@ def test_error_response_written(tmp_path, days):
     assert _written(tmp_path, d1, err, True) is True
 
 
+def test_error_responses_in_a_row_written(tmp_path, days):
+    # エラー応答（STATUS が 0 以外）は RESULT.DATE を除かないので、日時が違えば続いても毎回保存される
+    d1, d2 = days
+    e1 = d1.replace(b'"STATUS":0,', b'"STATUS":100,', 1)
+    e2 = d2.replace(b'"STATUS":0,', b'"STATUS":100,', 1)
+    assert e1 != d1 and e2 != d2
+    assert _written(tmp_path, e1, e2, True) is True
+
+
 def test_identical_without_ignore_re_not_written(tmp_path, days):
     d1, _ = days
     assert _written(tmp_path, d1, d1, False) is False

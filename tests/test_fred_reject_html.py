@@ -55,12 +55,15 @@ def test_fetch_series_raw(monkeypatch, tmp_path, fixtures_dir, case):
         monkeypatch.setenv("FRED_API_KEY", key)
     else:
         monkeypatch.delenv("FRED_API_KEY", raising=False)
-    try:
+    for name in (api_fx, csv_fx):
+        if name:
+            # fixture が無いと FileNotFoundError で「失敗した」になり、#71 の直しが無くても通ってしまう（#74 のレビュー）
+            assert (fx / name).is_file(), name
+    if want_kind == "error":
+        # #71 の直し: HTML（メンテナンス画面）は ValueError で拒む。ほかの例外では通らない
+        with pytest.raises(ValueError, match="HTML"):
+            m.fetch_series_raw(SRC, "UNRATE", tmp_path, "20261026")
+    else:
         df = m.fetch_series_raw(SRC, "UNRATE", tmp_path, "20261026")
-        kind, n = "rows", len(df)
-    except Exception:  # noqa: BLE001
-        kind, n = "error", 0
-    assert kind == want_kind
-    if want_kind == "rows":
-        assert n > 0
+        assert len(df) > 0
     assert sorted(p.name for p in tmp_path.iterdir()) == want_raw
