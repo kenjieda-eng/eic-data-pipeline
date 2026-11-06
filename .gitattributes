@@ -1,0 +1,2 @@
+# 2026-11-06: tests/fixtures は取得元の応答の写し。改行も含めて 1 バイトも変えずに持つ（Windows の autocrlf で変わらないように）。
+tests/fixtures/** -text
