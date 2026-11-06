@@ -1,0 +1,61 @@
+name: PR Check
+
+# 2026-11-06: pipeline の PR に自動チェックを付ける（設計: energy-data-platform/docs/pipeline-pr-check-design-2026-11-06.md）。
+# ネットに出るのは pip だけ（fetch は走らせない・鍵は読まない・data/ は書かない）。必須チェックにはしない。
+#   1. 構文: python -m compileall
+#   2. tests/: これまで _inbox の check で確かめてきた直し（#70 NBS・#71 FRED・#72 e-Stat・#73 processed）
+#   3. PR が data/ を変えていないか（data は nightly だけが main に直接 push する。PR では変えない）
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    # nightly と同じ理由で 24.04 に固定（nightly-fetch.yml の 2026-10-07 のコメント参照）
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          # pull_request では PR を main に重ねたマージコミットが入る。HEAD^1 = main 側、HEAD = PR を重ねたもの
+          fetch-depth: 2
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        # pytest は requirements.txt に入れない（nightly の依存を増やさない）。上限は major（requirements.txt と同じ方針）
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install "pytest>=8,<10"
+
+      - name: Compile (syntax)
+        run: python -m compileall -q scripts tests
+
+      - name: Tests
+        run: pytest -q tests
+
+      - name: No data/ changes in PR
+        if: github.event_name == 'pull_request'
+        run: |
+          changed=$(git diff --name-only HEAD^1 HEAD -- data/)
+          if [ -n "$changed" ]; then
+            echo "::error::この PR は data/ を変更しています（data は nightly だけが書く）。"
+            echo "$changed" | head -50
+            exit 1
+          fi
+          echo "data/ の変更なし"
