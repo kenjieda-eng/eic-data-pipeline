@@ -2,6 +2,44 @@
   "schema": 1,
   "days": [
     {
+      "date": "2026-11-07",
+      "base": "349e363",
+      "head": null,
+      "summary": {
+        "series_revised": 1,
+        "points_revised": 2,
+        "max_rel_change": 0.000528
+      },
+      "series": [
+        {
+          "id": "us-nonfarm-payrolls",
+          "source": "fred-macro",
+          "source_version": "sha256:2f6aadd9089e37a3622ef26acf66ba836c8f96b5e2570904e9b086ac3241f7be",
+          "revised_count": 2,
+          "added": 1,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "max_rel_change": 0.000528,
+          "max_abs_change": 84.0,
+          "worst": {
+            "date": "2026-09-01",
+            "old": 159044.0,
+            "new": 159128.0
+          },
+          "revised_dates": [
+            "2026-08-01",
+            "2026-09-01"
+          ],
+          "truncated": false
+        }
+      ]
+    },
+    {
       "date": "2026-11-04",
       "base": "c367f59",
       "head": null,
@@ -8213,8 +8251,8 @@
       ]
     }
   ],
-  "generated_at": "2026-11-06T12:31:11+09:00",
-  "last_checked": "2026-11-06",
+  "generated_at": "2026-11-07T11:53:15+09:00",
+  "last_checked": "2026-11-07",
   "retention_days": 400,
   "max_dates_per_series": 500
 }

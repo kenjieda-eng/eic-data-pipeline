@@ -1,54 +1,54 @@
 {
   "schema": "today-v1",
-  "date": "2026-11-06",
-  "weekday": "金",
-  "weekend": false,
-  "generatedAt": "2026-11-06T12:31:14+09:00",
+  "date": "2026-11-07",
+  "weekday": "土",
+  "weekend": true,
+  "generatedAt": "2026-11-07T11:53:18+09:00",
   "lines": [
     {
       "indicatorId": "derived:jepx-9-region-avg",
       "label": "JEPX 全国平均",
       "unit": "¥/kWh",
-      "dataDate": "2026-11-07",
-      "value": 17.7,
-      "prevDate": "2026-11-06",
-      "prevValue": 19.57,
-      "diff": -1.87,
-      "diffPct": -9.5,
+      "dataDate": "2026-11-08",
+      "value": 16.43,
+      "prevDate": "2026-11-07",
+      "prevValue": 17.7,
+      "diff": -1.27,
+      "diffPct": -7.2,
       "periodLabel": "前日比",
-      "rangePosPct": 25.83,
+      "rangePosPct": 17.22,
       "editor": "haru",
-      "explanation": "2026-11-07 のJEPX 全国平均は 17.70¥/kWh（前日比 -1.87¥/kWh・-9.5%）。直近30日のレンジでは中位圏にある。9エリアの最高は中部 26.03、最低は東北 9.70。"
+      "explanation": "2026-11-08 のJEPX 全国平均は 16.43¥/kWh（前日比 -1.27¥/kWh・-7.2%）。直近30日のレンジでは下位圏にある。9エリアの最高は東京 25.76、最低は四国 13.21。"
     },
     {
       "indicatorId": "jepx-spot-tokyo",
       "label": "JEPX 東京",
       "unit": "¥/kWh",
-      "dataDate": "2026-11-07",
-      "value": 24.81,
-      "prevDate": "2026-11-06",
-      "prevValue": 24.82,
-      "diff": -0.01,
-      "diffPct": -0.0,
+      "dataDate": "2026-11-08",
+      "value": 25.76,
+      "prevDate": "2026-11-07",
+      "prevValue": 24.81,
+      "diff": 0.95,
+      "diffPct": 3.8,
       "periodLabel": "前日比",
-      "rangePosPct": 23.49,
+      "rangePosPct": 29.94,
       "editor": "haru",
-      "explanation": "2026-11-07 のJEPX 東京は 24.81¥/kWh（前日比 -0.01¥/kWh・-0.0%）。直近30日のレンジでは中位圏にある。"
+      "explanation": "2026-11-08 のJEPX 東京は 25.76¥/kWh（前日比 +0.95¥/kWh・+3.8%）。直近30日のレンジでは中位圏にある。"
     },
     {
       "indicatorId": "jepx-spot-kyushu",
       "label": "JEPX 九州",
       "unit": "¥/kWh",
-      "dataDate": "2026-11-07",
-      "value": 14.13,
-      "prevDate": "2026-11-06",
-      "prevValue": 14.23,
-      "diff": -0.09,
-      "diffPct": -0.7,
+      "dataDate": "2026-11-08",
+      "value": 13.85,
+      "prevDate": "2026-11-07",
+      "prevValue": 14.13,
+      "diff": -0.29,
+      "diffPct": -2.0,
       "periodLabel": "前日比",
-      "rangePosPct": 36.73,
+      "rangePosPct": 34.54,
       "editor": "haru",
-      "explanation": "2026-11-07 のJEPX 九州は 14.13¥/kWh（前日比 -0.09¥/kWh・-0.7%）。直近30日のレンジでは中位圏にある。"
+      "explanation": "2026-11-08 のJEPX 九州は 13.85¥/kWh（前日比 -0.29¥/kWh・-2.0%）。直近30日のレンジでは中位圏にある。"
     },
     {
       "indicatorId": "fuel-lng-jp-cif",
@@ -100,8 +100,14 @@
     {
       "indicatorId": "derived:jepx-9-region-avg",
       "label": "JEPX 全国平均",
-      "diffPct": -9.5,
-      "message": "JEPX 全国平均 が前日比 -9.5% の変動"
+      "diffPct": -7.2,
+      "message": "JEPX 全国平均 が前日比 -7.2% の変動"
+    },
+    {
+      "indicatorId": "jepx-spot-tokyo",
+      "label": "JEPX 東京",
+      "diffPct": 3.8,
+      "message": "JEPX 東京 が前日比 +3.8% の変動"
     }
   ],
   "relatedInsights": [
