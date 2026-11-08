@@ -40,7 +40,7 @@ sys.path.insert(0, str(ROOT))
 import yaml  # noqa: E402
 
 from scripts.common.http import get  # noqa: E402
-from scripts.common.io import append_log, save_raw, write_processed  # noqa: E402
+from scripts.common.io import FRED_REALTIME_RE, append_log, save_raw, write_processed  # noqa: E402
 from scripts.common.metadata import write_metadata_for_indicator  # noqa: E402
 
 # .env 読み込み（GitHub Actions では env: で渡される。ローカル開発時のみ有効）
@@ -104,7 +104,7 @@ def fetch_via_api(
     _reject_html(r.content, f"API {fred_id}")
 
     payload = r.json() or {}  # JSON でなければここで例外（raw には保存しない）
-    save_raw(r.content, raw_dir, f"{fred_id}_{today_tag}.json")
+    save_raw(r.content, raw_dir, f"{fred_id}_{today_tag}.json", ignore_re=FRED_REALTIME_RE)
     obs = payload.get("observations") or []
     rows: list[tuple[str, float]] = []
     for o in obs:
