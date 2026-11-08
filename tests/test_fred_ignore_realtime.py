@@ -1,6 +1,6 @@
-"""2026-11-08: FRED API の応答（JSON）は realtime_start / realtime_end（取得した日）が先頭と全観測値に入り、毎回変わる。
-save_raw の「前回と同じ中身なら書かない」で、この値だけを除いて比べる（保存する中身は受け取ったまま。値が 1 つでも
-変われば保存）。#72（e-Stat の RESULT.DATE）と同じ型。ネットに出ない・鍵はダミー。"""
+"""2026-11-08（#75）: FRED API の応答（JSON）は先頭と全観測値に realtime_start / realtime_end が入り、応答ごとに変わる
+（取得日ではなく、FRED が返した版の日付）。save_raw の「前回と同じ中身なら書かない」で、この値だけを除いて比べる
+（保存する中身は受け取ったまま。値が 1 つでも変われば保存）。#72（e-Stat の RESULT.DATE）と同じ型。ネットに出ない・鍵はダミー。"""
 from __future__ import annotations
 
 import json
@@ -33,12 +33,12 @@ class _Resp:
 
 @pytest.fixture
 def day1(fixtures_dir: Path) -> bytes:
-    # 2026-10-21 に取った UNRATE の API 応答（realtime_start / realtime_end はすべて 2026-10-21）
+    # 2026-10-23 に取った UNRATE の API 応答（raw の UNRATE_20261023.json と同じ。realtime_start / realtime_end はすべて 2026-10-21）
     return (fixtures_dir / "fred" / "unrate_api.json").read_bytes()
 
 
 def _shift(b: bytes, day: str) -> bytes:
-    """取得日だけを day に変えた「別の日の同じ応答」。"""
+    """realtime の日付だけを day に変えた「値が同じ別の応答」。"""
     out = re.sub(rb'("realtime_(?:start|end)":)"2026-10-21"',
                  lambda mm: mm.group(1) + b'"' + day.encode() + b'"', b)
     assert out != b
@@ -63,7 +63,8 @@ def _api_run(monkeypatch, tmp_path: Path, content: bytes, tag: str) -> list:
 def test_fixture_premise(day1):
     day2 = _shift(day1, "2026-10-22")
     assert day1 != day2
-    assert len(R.findall(day1)) > 2  # 先頭と全観測値
+    # 先頭の 2 つと、全観測値の 2 つずつにだけ当たる（value など、ほかの欄には当たらない）
+    assert len(R.findall(day1)) == 2 + 2 * len(json.loads(day1)["observations"])
     assert R.sub(rb'\1"-"', day1) == R.sub(rb'\1"-"', day2)
 
 
@@ -79,6 +80,21 @@ def test_next_day_value_changed_written(monkeypatch, tmp_path, day1):
     raws = _api_run(monkeypatch, tmp_path, changed, "20261022")
     assert raws == ["UNRATE_20261021.json", "UNRATE_20261022.json"]
     assert (tmp_path / "UNRATE_20261022.json").read_bytes() == changed
+
+
+def _set_last_value(b: bytes, v: str) -> bytes:
+    i = b.rindex(b'"value":"')
+    j = b.index(b'"', i + len(b'"value":"'))
+    return b[:i] + b'"value":"' + v.encode() + b[j:]
+
+
+def test_integer_value_change_written(monkeypatch, tmp_path, day1):
+    # PAYEMS（雇用者数）のように値が整数の系列でも、値の改定は保存される（正規表現が value に広がっていないこと）
+    a = _set_last_value(day1, "159044")
+    b = _set_last_value(_shift(day1, "2026-10-22"), "159128")
+    _api_run(monkeypatch, tmp_path, a, "20261021")
+    raws = _api_run(monkeypatch, tmp_path, b, "20261022")
+    assert raws == ["UNRATE_20261021.json", "UNRATE_20261022.json"]
 
 
 def test_saved_content_is_as_received(monkeypatch, tmp_path, day1):
