@@ -37,6 +37,11 @@ RAW_DATE_TOKEN_RE = re.compile(r"^(?P<stem>.+?)_(?P<date>20\d{6})(?P<ext>\.[A-Za
 # 複製で、1 日 約 2.4 MB 増えていた（A'）。STATUS が 0 以外（エラー応答）は除かない＝毎回保存される。
 ESTAT_RESULT_DATE_RE = re.compile(rb'("RESULT":\{"STATUS":0,"ERROR_MSG":"[^"]*","DATE":)"[^"]*"')
 
+# FRED API の応答（JSON）は realtime_start / realtime_end（取得した日）が先頭と全観測値に入り、毎回変わる。
+# save_raw の「同じ中身か」の判定でだけ、この値を除いて比べる（保存する中身はそのまま。値が 1 つでも変われば保存）。
+# 2026-11-08: 10/15 以降の FRED の raw 66 本のうち 42 本（3.6 MB）が、この日付だけ違う写しだった（#72 と同じ型）。
+FRED_REALTIME_RE = re.compile(rb'("realtime_(?:start|end)"\s*:\s*)"[0-9-]*"')
+
 
 def ensure_dir(path: Path) -> Path:
     """ディレクトリを（必要なら作成して）返す。"""
