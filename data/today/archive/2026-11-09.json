@@ -1,0 +1,124 @@
+{
+  "schema": "today-v1",
+  "date": "2026-11-09",
+  "weekday": "月",
+  "weekend": false,
+  "generatedAt": "2026-11-09T11:45:19+09:00",
+  "lines": [
+    {
+      "indicatorId": "derived:jepx-9-region-avg",
+      "label": "JEPX 全国平均",
+      "unit": "¥/kWh",
+      "dataDate": "2026-11-10",
+      "value": 28.34,
+      "prevDate": "2026-11-09",
+      "prevValue": 28.93,
+      "diff": -0.59,
+      "diffPct": -2.0,
+      "periodLabel": "前日比",
+      "rangePosPct": 96.06,
+      "editor": "haru",
+      "explanation": "2026-11-10 のJEPX 全国平均は 28.34¥/kWh（前日比 -0.59¥/kWh・-2.0%）。直近30日のレンジでは上位圏にある。9エリアの最高は東京 37.46、最低は九州 18.04。"
+    },
+    {
+      "indicatorId": "jepx-spot-tokyo",
+      "label": "JEPX 東京",
+      "unit": "¥/kWh",
+      "dataDate": "2026-11-10",
+      "value": 37.46,
+      "prevDate": "2026-11-09",
+      "prevValue": 40.18,
+      "diff": -2.71,
+      "diffPct": -6.7,
+      "periodLabel": "前日比",
+      "rangePosPct": 85.61,
+      "editor": "haru",
+      "explanation": "2026-11-10 のJEPX 東京は 37.46¥/kWh（前日比 -2.71¥/kWh・-6.7%）。直近30日のレンジでは上位圏にある。"
+    },
+    {
+      "indicatorId": "jepx-spot-kyushu",
+      "label": "JEPX 九州",
+      "unit": "¥/kWh",
+      "dataDate": "2026-11-10",
+      "value": 18.04,
+      "prevDate": "2026-11-09",
+      "prevValue": 19.22,
+      "diff": -1.18,
+      "diffPct": -6.2,
+      "periodLabel": "前日比",
+      "rangePosPct": 66.6,
+      "editor": "haru",
+      "explanation": "2026-11-10 のJEPX 九州は 18.04¥/kWh（前日比 -1.18¥/kWh・-6.2%）。直近30日のレンジでは中位圏にある。"
+    },
+    {
+      "indicatorId": "fuel-lng-jp-cif",
+      "label": "LNG 日本着 (CIF)",
+      "unit": "$/MMBtu",
+      "dataDate": "2026-10-01",
+      "value": 16.59,
+      "prevDate": "2026-09-01",
+      "prevValue": 16.26,
+      "diff": 0.33,
+      "diffPct": 2.0,
+      "periodLabel": "前月比",
+      "rangePosPct": 100.0,
+      "editor": "haru",
+      "explanation": "最新月（2026-10）のLNG 日本着 (CIF)は 16.59$/MMBtu（前月比 +2.0%）。直近12ヶ月のレンジでは上位圏にある。"
+    },
+    {
+      "indicatorId": "fx-usdjpy-monthly-avg",
+      "label": "USD/JPY (月中平均)",
+      "unit": "¥/USD",
+      "dataDate": "2026-10-01",
+      "value": 157.89,
+      "prevDate": "2026-09-01",
+      "prevValue": 156.23,
+      "diff": 1.66,
+      "diffPct": 1.1,
+      "periodLabel": "前月比",
+      "rangePosPct": 38.13,
+      "editor": "makoto",
+      "explanation": "最新月（2026-10）のUSD/JPY (月中平均)は 157.89¥/USD（前月比 +1.1%）。直近12ヶ月のレンジでは中位圏にある。"
+    },
+    {
+      "indicatorId": "jgb-10y-yield",
+      "label": "JGB 10年利回り",
+      "unit": "%",
+      "dataDate": "2026-11-06",
+      "value": 2.7,
+      "prevDate": "2026-11-05",
+      "prevValue": 2.81,
+      "diff": -0.11,
+      "diffPct": -3.9,
+      "periodLabel": "前日比",
+      "rangePosPct": 0.0,
+      "editor": "makoto",
+      "explanation": "2026-11-06 のJGB 10年利回りは 2.70%（前日比 -0.11%・-3.9%）。直近30日のレンジでは下位圏にある。"
+    }
+  ],
+  "alerts": [
+    {
+      "indicatorId": "jepx-spot-tokyo",
+      "label": "JEPX 東京",
+      "diffPct": -6.7,
+      "message": "JEPX 東京 が前日比 -6.7% の変動"
+    },
+    {
+      "indicatorId": "jepx-spot-kyushu",
+      "label": "JEPX 九州",
+      "diffPct": -6.2,
+      "message": "JEPX 九州 が前日比 -6.2% の変動"
+    },
+    {
+      "indicatorId": "jgb-10y-yield",
+      "label": "JGB 10年利回り",
+      "diffPct": -3.9,
+      "message": "JGB 10年利回り が前日比 -3.9% の変動"
+    }
+  ],
+  "relatedInsights": [
+    "jp-power-markets-three-layers",
+    "electricity-bill-structure",
+    "fuel-cost-adjustment"
+  ]
+}

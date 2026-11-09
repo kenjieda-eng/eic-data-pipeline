@@ -1,54 +1,54 @@
 {
   "schema": "today-v1",
-  "date": "2026-11-08",
-  "weekday": "日",
-  "weekend": true,
-  "generatedAt": "2026-11-08T11:32:36+09:00",
+  "date": "2026-11-09",
+  "weekday": "月",
+  "weekend": false,
+  "generatedAt": "2026-11-09T11:45:19+09:00",
   "lines": [
     {
       "indicatorId": "derived:jepx-9-region-avg",
       "label": "JEPX 全国平均",
       "unit": "¥/kWh",
-      "dataDate": "2026-11-09",
-      "value": 28.93,
-      "prevDate": "2026-11-08",
-      "prevValue": 16.43,
-      "diff": 12.5,
-      "diffPct": 76.1,
+      "dataDate": "2026-11-10",
+      "value": 28.34,
+      "prevDate": "2026-11-09",
+      "prevValue": 28.93,
+      "diff": -0.59,
+      "diffPct": -2.0,
       "periodLabel": "前日比",
-      "rangePosPct": 100.0,
+      "rangePosPct": 96.06,
       "editor": "haru",
-      "explanation": "2026-11-09 のJEPX 全国平均は 28.93¥/kWh（前日比 +12.50¥/kWh・+76.1%）。直近30日のレンジでは上位圏にある。9エリアの最高は東北 40.18、最低は四国 18.66。"
+      "explanation": "2026-11-10 のJEPX 全国平均は 28.34¥/kWh（前日比 -0.59¥/kWh・-2.0%）。直近30日のレンジでは上位圏にある。9エリアの最高は東京 37.46、最低は九州 18.04。"
     },
     {
       "indicatorId": "jepx-spot-tokyo",
       "label": "JEPX 東京",
       "unit": "¥/kWh",
-      "dataDate": "2026-11-09",
-      "value": 40.18,
-      "prevDate": "2026-11-08",
-      "prevValue": 25.76,
-      "diff": 14.41,
-      "diffPct": 56.0,
+      "dataDate": "2026-11-10",
+      "value": 37.46,
+      "prevDate": "2026-11-09",
+      "prevValue": 40.18,
+      "diff": -2.71,
+      "diffPct": -6.7,
       "periodLabel": "前日比",
-      "rangePosPct": 100.0,
+      "rangePosPct": 85.61,
       "editor": "haru",
-      "explanation": "2026-11-09 のJEPX 東京は 40.18¥/kWh（前日比 +14.41¥/kWh・+56.0%）。直近30日のレンジでは上位圏にある。"
+      "explanation": "2026-11-10 のJEPX 東京は 37.46¥/kWh（前日比 -2.71¥/kWh・-6.7%）。直近30日のレンジでは上位圏にある。"
     },
     {
       "indicatorId": "jepx-spot-kyushu",
       "label": "JEPX 九州",
       "unit": "¥/kWh",
-      "dataDate": "2026-11-09",
-      "value": 19.22,
-      "prevDate": "2026-11-08",
-      "prevValue": 13.85,
-      "diff": 5.37,
-      "diffPct": 38.8,
+      "dataDate": "2026-11-10",
+      "value": 18.04,
+      "prevDate": "2026-11-09",
+      "prevValue": 19.22,
+      "diff": -1.18,
+      "diffPct": -6.2,
       "periodLabel": "前日比",
-      "rangePosPct": 75.66,
+      "rangePosPct": 66.6,
       "editor": "haru",
-      "explanation": "2026-11-09 のJEPX 九州は 19.22¥/kWh（前日比 +5.37¥/kWh・+38.8%）。直近30日のレンジでは中位圏にある。"
+      "explanation": "2026-11-10 のJEPX 九州は 18.04¥/kWh（前日比 -1.18¥/kWh・-6.2%）。直近30日のレンジでは中位圏にある。"
     },
     {
       "indicatorId": "fuel-lng-jp-cif",
@@ -84,36 +84,36 @@
       "indicatorId": "jgb-10y-yield",
       "label": "JGB 10年利回り",
       "unit": "%",
-      "dataDate": "2026-11-05",
-      "value": 2.81,
-      "prevDate": "2026-11-04",
-      "prevValue": 2.85,
-      "diff": -0.05,
-      "diffPct": -1.7,
+      "dataDate": "2026-11-06",
+      "value": 2.7,
+      "prevDate": "2026-11-05",
+      "prevValue": 2.81,
+      "diff": -0.11,
+      "diffPct": -3.9,
       "periodLabel": "前日比",
       "rangePosPct": 0.0,
       "editor": "makoto",
-      "explanation": "2026-11-05 のJGB 10年利回りは 2.81%（前日比 -0.05%・-1.7%）。直近30日のレンジでは下位圏にある。"
+      "explanation": "2026-11-06 のJGB 10年利回りは 2.70%（前日比 -0.11%・-3.9%）。直近30日のレンジでは下位圏にある。"
     }
   ],
   "alerts": [
     {
-      "indicatorId": "derived:jepx-9-region-avg",
-      "label": "JEPX 全国平均",
-      "diffPct": 76.1,
-      "message": "JEPX 全国平均 が前日比 +76.1% の変動"
-    },
-    {
       "indicatorId": "jepx-spot-tokyo",
       "label": "JEPX 東京",
-      "diffPct": 56.0,
-      "message": "JEPX 東京 が前日比 +56.0% の変動"
+      "diffPct": -6.7,
+      "message": "JEPX 東京 が前日比 -6.7% の変動"
     },
     {
       "indicatorId": "jepx-spot-kyushu",
       "label": "JEPX 九州",
-      "diffPct": 38.8,
-      "message": "JEPX 九州 が前日比 +38.8% の変動"
+      "diffPct": -6.2,
+      "message": "JEPX 九州 が前日比 -6.2% の変動"
+    },
+    {
+      "indicatorId": "jgb-10y-yield",
+      "label": "JGB 10年利回り",
+      "diffPct": -3.9,
+      "message": "JGB 10年利回り が前日比 -3.9% の変動"
     }
   ],
   "relatedInsights": [
