@@ -1,4 +1,4 @@
-"""2026-11-08（#75）: FRED API の応答（JSON）は先頭と全観測値に realtime_start / realtime_end が入り、応答ごとに変わる
+"""2026-11-08（#75）: FRED API の応答（JSON）は先頭と全観測値に realtime_start / realtime_end が入り、応答によって変わる
 （取得日ではなく、FRED が返した版の日付）。save_raw の「前回と同じ中身なら書かない」で、この値だけを除いて比べる
 （保存する中身は受け取ったまま。値が 1 つでも変われば保存）。#72（e-Stat の RESULT.DATE）と同じ型。ネットに出ない・鍵はダミー。"""
 from __future__ import annotations
@@ -45,11 +45,16 @@ def _shift(b: bytes, day: str) -> bytes:
     return out
 
 
-def _change_last_value(b: bytes) -> bytes:
-    """最後の観測値を 1 つだけ変える（FRED が値を改定した日）。"""
+def _set_last_value(b: bytes, v: str) -> bytes:
+    """最後の観測値を v にする。"""
     i = b.rindex(b'"value":"')
     j = b.index(b'"', i + len(b'"value":"'))
-    return b[:i] + b'"value":"99.9' + b[j:]
+    return b[:i] + b'"value":"' + v.encode() + b[j:]
+
+
+def _change_last_value(b: bytes) -> bytes:
+    """最後の観測値を 1 つだけ変える（FRED が値を改定した日）。"""
+    return _set_last_value(b, "99.9")
 
 
 def _api_run(monkeypatch, tmp_path: Path, content: bytes, tag: str) -> list:
@@ -63,7 +68,8 @@ def _api_run(monkeypatch, tmp_path: Path, content: bytes, tag: str) -> list:
 def test_fixture_premise(day1):
     day2 = _shift(day1, "2026-10-22")
     assert day1 != day2
-    # 先頭の 2 つと、全観測値の 2 つずつにだけ当たる（value など、ほかの欄には当たらない）
+    # 先頭の 2 つと、全観測値の 2 つずつに当たる（数が増えたら、ほかの欄にも当たっている。正規表現が整数の value に
+    # まで広がったときはこの数では分からないので、test_integer_value_change_written が見る）
     assert len(R.findall(day1)) == 2 + 2 * len(json.loads(day1)["observations"])
     assert R.sub(rb'\1"-"', day1) == R.sub(rb'\1"-"', day2)
 
@@ -80,12 +86,6 @@ def test_next_day_value_changed_written(monkeypatch, tmp_path, day1):
     raws = _api_run(monkeypatch, tmp_path, changed, "20261022")
     assert raws == ["UNRATE_20261021.json", "UNRATE_20261022.json"]
     assert (tmp_path / "UNRATE_20261022.json").read_bytes() == changed
-
-
-def _set_last_value(b: bytes, v: str) -> bytes:
-    i = b.rindex(b'"value":"')
-    j = b.index(b'"', i + len(b'"value":"'))
-    return b[:i] + b'"value":"' + v.encode() + b[j:]
 
 
 def test_integer_value_change_written(monkeypatch, tmp_path, day1):
