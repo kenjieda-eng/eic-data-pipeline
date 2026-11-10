@@ -87,7 +87,8 @@ jobs:
         #   これは無駄ではなく proof-of-life（＝サイレント停滞の逆）として機能する。
         #
         # ここは他系列と同居しない独立ワークフローなので continue-on-error は付けない
-        # （＝ index の構造変更やファイル名規約の変更でランが赤くなって気付ける。L-064）。
+        # （＝ index が取れない・約定結果のリンクが 1 本も拾えないときは exit 1 で赤くなる。ファイル名の型が変わったときは
+        #   リンクの文言から年度を拾って WARNING を出す。2026-11-10 より前は、どの場合も緑のまま終わっていた。L-064）。
         run: |
           if [ "${{ inputs.backfill }}" = "true" ]; then
             echo "backfill mode: re-fetching all main auctions from FY2024"

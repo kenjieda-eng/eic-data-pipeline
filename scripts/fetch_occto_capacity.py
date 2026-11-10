@@ -95,6 +95,11 @@ EXCLUDE_PATTERNS = [
     re.compile(r"_tsuika_", re.IGNORECASE),  # 追加オークション
 ]
 
+# ファイル名の型が上のどちらにも合わない ZIP は、リンクの文言から年度を拾う（2026-11-10。保険）。
+# 一覧ページのリンクの文言は「容量市場メインオークション約定結果（対象実需給年度：2029年度）(1KB)」の形。
+# ファイル名は FY2028 だけ {fy}_main_…、置き場所は FY2029 だけ別、と変わってきたため。
+MAIN_AUCTION_LINK_TEXT_RE = re.compile(r"メインオークション約定結果.*?対象実需給年度\s*[：:]\s*(\d{4})\s*年度")
+
 
 # ---------------------------------------------------------------------------
 # source_map.yaml 読み込み
@@ -132,6 +137,25 @@ def _parse_delivery_fy_from_filename(filename: str) -> Optional[int]:
         if m:
             return int(m.group(1))
     return None
+
+
+def _parse_delivery_fy_from_link_text(text: str, filename: str) -> Optional[int]:
+    """ファイル名から年度を拾えなかった ZIP について、リンクの文言
+    「…メインオークション約定結果（対象実需給年度：2030年度）」から delivery_fy を返す（保険）。
+    追加オークションのファイル名（EXCLUDE_PATTERNS）と、文言が合わないリンクは None。
+    """
+    for pat in EXCLUDE_PATTERNS:
+        if pat.search(filename):
+            return None
+    m = MAIN_AUCTION_LINK_TEXT_RE.search(text)
+    if not m:
+        return None
+    fy = int(m.group(1))
+    logger.warning(
+        "FY%d: ファイル名の型が未知（%s）。リンクの文言から年度を判定した。AUCTION_ZIP_PATTERNS に型を足すこと",
+        fy, filename,
+    )
+    return fy
 
 
 def list_auction_zips(
@@ -175,6 +199,8 @@ def list_auction_zips(
 
         filename = href.rsplit("/", 1)[-1]
         delivery_fy = _parse_delivery_fy_from_filename(filename)
+        if delivery_fy is None:
+            delivery_fy = _parse_delivery_fy_from_link_text(a.get_text(" ", strip=True), filename)
         if delivery_fy is None:
             continue
         if delivery_fy < min_delivery_fy:
@@ -445,14 +471,13 @@ def fetch_all_auctions(cfg: dict, *, backfill: bool, dry_run: bool) -> int:
 
     min_fy = int(cfg.get("min_delivery_fy") or 2024)
 
-    # index ページから ZIP リンク一覧を取得
-    try:
-        index_html = fetch_index_page(index_url)
-    except Exception as e:
-        logger.error("index fetch failed: %s", e)
-        return 0
-
+    # index ページから ZIP リンク一覧を取得。
+    # 2026-11-10: 一覧が取れない・リンクが 1 本も拾えないときは例外にする（main が exit 1 を返す）。
+    # それまでは正常終了（緑）になり、ページの作りが変わっても気づけなかった。
+    index_html = fetch_index_page(index_url)
     all_zips = list_auction_zips(index_html, base_url=index_url, min_delivery_fy=min_fy)
+    if not all_zips:
+        raise RuntimeError(f"index ページから約定結果 ZIP のリンクを 1 本も拾えません: {index_url}")
 
     # 通常モードは最新 1 年度のみ
     if not backfill:
