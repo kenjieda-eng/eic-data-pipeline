@@ -2,6 +2,43 @@
   "schema": 1,
   "days": [
     {
+      "date": "2026-11-10",
+      "base": "26818d9",
+      "head": null,
+      "summary": {
+        "series_revised": 1,
+        "points_revised": 1,
+        "max_rel_change": 0.111111
+      },
+      "series": [
+        {
+          "id": "jma-precip-shikoku",
+          "source": "jma-temp",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 1,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-11-05",
+            "2026-11-05"
+          ],
+          "max_rel_change": 0.111111,
+          "max_abs_change": 0.5,
+          "worst": {
+            "date": "2026-11-05",
+            "old": 4.5,
+            "new": 4.0
+          },
+          "revised_dates": [
+            "2026-11-05"
+          ],
+          "truncated": false
+        }
+      ]
+    },
+    {
       "date": "2026-11-07",
       "base": "349e363",
       "head": null,
@@ -8251,8 +8288,8 @@
       ]
     }
   ],
-  "generated_at": "2026-11-09T11:45:17+09:00",
-  "last_checked": "2026-11-09",
+  "generated_at": "2026-11-10T13:43:56+09:00",
+  "last_checked": "2026-11-10",
   "retention_days": 400,
   "max_dates_per_series": 500
 }
