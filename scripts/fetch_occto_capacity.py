@@ -101,6 +101,11 @@ EXCLUDE_PATTERNS = [
 MAIN_AUCTION_LINK_TEXT_RE = re.compile(r"メインオークション約定結果.*?対象実需給年度\s*[：:]\s*(\d{4})\s*年度")
 
 
+class FiscalYearMismatch(RuntimeError):
+    """ZIP の中の CSV の対象実需給年度が、処理している年度と違う（キャッシュの取り違え・年度の誤判定）。
+    別の年度の数字を出さないよう、run を失敗にする（2026-11-10、#77 のレビュー。それまでは WARNING だけ）。"""
+
+
 # ---------------------------------------------------------------------------
 # source_map.yaml 読み込み
 # ---------------------------------------------------------------------------
@@ -201,6 +206,9 @@ def list_auction_zips(
         delivery_fy = _parse_delivery_fy_from_filename(filename)
         if delivery_fy is None:
             delivery_fy = _parse_delivery_fy_from_link_text(a.get_text(" ", strip=True), filename)
+            if delivery_fy is not None and str(delivery_fy) not in filename:
+                # 年度を含まないファイル名は、raw の置き場（キャッシュ）で年度どうしがぶつからないよう年度を前に付ける
+                filename = f"{delivery_fy}_{filename}"
         if delivery_fy is None:
             continue
         if delivery_fy < min_delivery_fy:
@@ -376,9 +384,8 @@ def parse_auction_zip_csv(
         try:
             fy_in_row = int(str(row.iloc[0]).strip())
             if fy_in_row != delivery_fy:
-                logger.warning(
-                    "FY%d: CSV row の実需給年度 %d が引数 %d と不一致 (filename ベースを優先)",
-                    delivery_fy, fy_in_row, delivery_fy,
+                raise FiscalYearMismatch(
+                    f"FY{delivery_fy}: CSV の対象実需給年度が {fy_in_row}（別の年度のファイルを読んでいる）"
                 )
         except (ValueError, TypeError):
             pass
@@ -513,6 +520,8 @@ def fetch_all_auctions(cfg: dict, *, backfill: bool, dry_run: bool) -> int:
         time.sleep(SLEEP_BETWEEN_REQUESTS)
         try:
             rows = parse_auction_zip_csv(zip_bytes, cfg, fy)
+        except FiscalYearMismatch:
+            raise
         except Exception as e:
             logger.error("FY%d parse failed: %s", fy, e)
             continue
