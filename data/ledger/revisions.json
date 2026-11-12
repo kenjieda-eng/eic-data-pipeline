@@ -2,6 +2,543 @@
   "schema": 1,
   "days": [
     {
+      "date": "2026-11-12",
+      "base": "1503e91",
+      "head": null,
+      "summary": {
+        "series_revised": 21,
+        "points_revised": 21,
+        "max_rel_change": 0.142857
+      },
+      "series": [
+        {
+          "id": "jma-precip-hokkaido",
+          "source": "jma-temp",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 1,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-11-10",
+            "2026-11-10"
+          ],
+          "max_rel_change": 0.142857,
+          "max_abs_change": 0.5,
+          "worst": {
+            "date": "2026-11-10",
+            "old": 3.5,
+            "new": 3.0
+          },
+          "revised_dates": [
+            "2026-11-10"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-coal-us",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.005105,
+          "max_abs_change": 1152053.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 225693324.0,
+            "new": 226845377.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-coal-ru",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.004654,
+          "max_abs_change": 108500.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 23314735.0,
+            "new": 23206235.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-coal-ca",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.003905,
+          "max_abs_change": 845971.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 216654264.0,
+            "new": 217500235.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-coal-total",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.001927,
+          "max_abs_change": 6440306.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 3342852821.0,
+            "new": 3349293127.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-coal-au",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.001713,
+          "max_abs_change": 3821740.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 2230437191.0,
+            "new": 2234258931.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-coal-za",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.001464,
+          "max_abs_change": 100963.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 68952432.0,
+            "new": 69053395.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-lng-us",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.000938,
+          "max_abs_change": 377708.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 402677515.0,
+            "new": 402299807.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-lng-ru",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.000581,
+          "max_abs_change": 291530.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 502023948.0,
+            "new": 501732418.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-lng-my",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.000541,
+          "max_abs_change": 447402.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 826352398.0,
+            "new": 825904996.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-lng-pg",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.000496,
+          "max_abs_change": 155896.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 314211084.0,
+            "new": 314055188.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-coal-id",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.000389,
+          "max_abs_change": 196318.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 504790446.0,
+            "new": 504986764.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-lng-total",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.00035,
+          "max_abs_change": 1996804.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 5702362478.0,
+            "new": 5700365674.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-lng-au",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.000341,
+          "max_abs_change": 772495.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 2267580214.0,
+            "new": 2266807719.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-crude-kw",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.000195,
+          "max_abs_change": 113793.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 583183744.0,
+            "new": 583069951.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-lng-id",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 0.000176,
+          "max_abs_change": 59753.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 339611245.0,
+            "new": 339551492.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-lng-bn",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 7.6e-05,
+          "max_abs_change": 17319.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 228270985.0,
+            "new": 228253666.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-crude-us",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 1.9e-05,
+          "max_abs_change": 7044.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 365809097.0,
+            "new": 365802053.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-crude-total",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 1.4e-05,
+          "max_abs_change": 131107.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 9622292104.0,
+            "new": 9622160997.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-crude-sa",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 5e-06,
+          "max_abs_change": 17443.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 3808671163.0,
+            "new": 3808653720.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        },
+        {
+          "id": "jp-import-value-crude-ae",
+          "source": "estat-trade",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 0,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2025-01-01",
+            "2025-01-01"
+          ],
+          "max_rel_change": 2e-06,
+          "max_abs_change": 7173.0,
+          "worst": {
+            "date": "2025-01-01",
+            "old": 4158280439.0,
+            "new": 4158287612.0
+          },
+          "revised_dates": [
+            "2025-01-01"
+          ],
+          "truncated": false
+        }
+      ]
+    },
+    {
       "date": "2026-11-10",
       "base": "26818d9",
       "head": null,
@@ -8288,8 +8825,8 @@
       ]
     }
   ],
-  "generated_at": "2026-11-11T11:52:21+09:00",
-  "last_checked": "2026-11-11",
+  "generated_at": "2026-11-12T12:54:33+09:00",
+  "last_checked": "2026-11-12",
   "retention_days": 400,
   "max_dates_per_series": 500
 }
