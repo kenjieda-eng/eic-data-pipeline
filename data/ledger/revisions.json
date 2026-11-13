@@ -2,6 +2,53 @@
   "schema": 1,
   "days": [
     {
+      "date": "2026-11-13",
+      "base": "39cfe03",
+      "head": null,
+      "summary": {
+        "series_revised": 1,
+        "points_revised": 11,
+        "max_rel_change": 1.0
+      },
+      "series": [
+        {
+          "id": "jma-wind-dir-tohoku",
+          "source": "jma-temp",
+          "source_version": null,
+          "revised_count": 11,
+          "added": 1,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-10-01",
+            "2026-10-11"
+          ],
+          "max_rel_change": 1.0,
+          "max_abs_change": 337.5,
+          "worst": {
+            "date": "2026-10-01",
+            "old": 337.5,
+            "new": 0.0
+          },
+          "revised_dates": [
+            "2026-10-01",
+            "2026-10-02",
+            "2026-10-03",
+            "2026-10-04",
+            "2026-10-05",
+            "2026-10-06",
+            "2026-10-07",
+            "2026-10-08",
+            "2026-10-09",
+            "2026-10-10",
+            "2026-10-11"
+          ],
+          "truncated": false
+        }
+      ]
+    },
+    {
       "date": "2026-11-12",
       "base": "1503e91",
       "head": null,
@@ -8825,8 +8872,8 @@
       ]
     }
   ],
-  "generated_at": "2026-11-12T12:54:33+09:00",
-  "last_checked": "2026-11-12",
+  "generated_at": "2026-11-13T12:31:49+09:00",
+  "last_checked": "2026-11-13",
   "retention_days": 400,
   "max_dates_per_series": 500
 }
