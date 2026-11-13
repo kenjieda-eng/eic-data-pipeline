@@ -2282,6 +2282,15 @@ sources:
     publisher: Federal Reserve Bank of St. Louis
     publisher_url: https://fred.stlouisfed.org/
     source_url: https://fred.stlouisfed.org/
+    # ----- D-020⑤-1 raw ハッシュ台帳（2026-11-12 追加）-----
+    # 凍結: 7 系列はすべて月次で公表日がずれている（雇用 2 本=第 1 金曜・FF 金利=月初・CPI 3 本=10〜15 日・
+    #   鉱工業生産=15 日前後）。#75（2026-11-08）で realtime の揺れを除いたので、raw は本当に値が出た日だけ変わる。
+    #   ふだん 2 週間あかずにどれかが変わるので、30 日を超えて不変ならキー切れ・API の仕様変更・取得の停止を疑う。
+    # 変化通知: しない（月次の改定は改訂台帳 data/ledger/revisions.json が processed で見る）。
+    raw_watch:
+      dir: fred-macro
+      freeze_days: 30
+      notify_change: false
     # FRED API（公式、API キー必須・無料、120 req/min）
     api_base: "https://api.stlouisfed.org/fred/series/observations"
     # 認証不要 CSV エンドポイント（API キー未設定時のフォールバック）
