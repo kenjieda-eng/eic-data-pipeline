@@ -3218,3 +3218,4 @@ date,indicator_id,region,value,source_url
 2026-11-09,jma-precip-kyushu,kyushu,2.5,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
 2026-11-10,jma-precip-kyushu,kyushu,3.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
 2026-11-14,jma-precip-kyushu,kyushu,12.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
+2026-11-15,jma-precip-kyushu,kyushu,21.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
