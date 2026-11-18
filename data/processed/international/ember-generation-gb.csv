@@ -140,3 +140,4 @@ date,indicator_id,region,value,source_url
 2026-07-01,ember-generation-gb,gb,21.027,https://ember-energy.org/data/monthly-electricity-data/
 2026-08-01,ember-generation-gb,gb,21.392,https://ember-energy.org/data/monthly-electricity-data/
 2026-09-01,ember-generation-gb,gb,23.246,https://ember-energy.org/data/monthly-electricity-data/
+2026-10-01,ember-generation-gb,gb,24.641,https://ember-energy.org/data/monthly-electricity-data/
