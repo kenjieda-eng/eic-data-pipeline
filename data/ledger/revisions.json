@@ -9901,8 +9901,8 @@
       ]
     }
   ],
-  "generated_at": "2026-11-18T13:21:51+09:00",
-  "last_checked": "2026-11-18",
+  "generated_at": "2026-11-19T13:15:57+09:00",
+  "last_checked": "2026-11-19",
   "retention_days": 400,
   "max_dates_per_series": 500
 }
