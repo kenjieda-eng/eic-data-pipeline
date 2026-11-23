@@ -5438,3 +5438,4 @@ date,indicator_id,region,value,source_url
 2026-11-19,jma-wind-avg-kyushu,kyushu,4.4,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
 2026-11-20,jma-wind-avg-kyushu,kyushu,4.9,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
 2026-11-21,jma-wind-avg-kyushu,kyushu,3.2,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
+2026-11-22,jma-wind-avg-kyushu,kyushu,3.0,https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=82&block_no=47807&year=YYYY&month=MM&day=&view=
