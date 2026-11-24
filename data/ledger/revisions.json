@@ -2,6 +2,43 @@
   "schema": 1,
   "days": [
     {
+      "date": "2026-11-24",
+      "base": "378fc74",
+      "head": null,
+      "summary": {
+        "series_revised": 1,
+        "points_revised": 1,
+        "max_rel_change": 0.043478
+      },
+      "series": [
+        {
+          "id": "jma-precip-hokkaido",
+          "source": "jma-temp",
+          "source_version": null,
+          "revised_count": 1,
+          "added": 1,
+          "filled": 0,
+          "removed": 0,
+          "dropped": 0,
+          "range": [
+            "2026-11-21",
+            "2026-11-21"
+          ],
+          "max_rel_change": 0.043478,
+          "max_abs_change": 0.5,
+          "worst": {
+            "date": "2026-11-21",
+            "old": 11.5,
+            "new": 11.0
+          },
+          "revised_dates": [
+            "2026-11-21"
+          ],
+          "truncated": false
+        }
+      ]
+    },
+    {
       "date": "2026-11-18",
       "base": "59d4eca",
       "head": null,
@@ -9901,8 +9938,8 @@
       ]
     }
   ],
-  "generated_at": "2026-11-23T12:49:00+09:00",
-  "last_checked": "2026-11-23",
+  "generated_at": "2026-11-24T16:02:22+09:00",
+  "last_checked": "2026-11-24",
   "retention_days": 400,
   "max_dates_per_series": 500
 }
